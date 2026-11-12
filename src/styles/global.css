@@ -486,7 +486,7 @@ html.loading.open .panel-r {
 /* Block centered on the page; text inside stays left-aligned */
 .settings {
   width: 100%;
-  max-width: 760px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -1797,7 +1797,15 @@ button.note-chip[aria-pressed='true'] {
 }
 
 .instrument-group-name {
-  min-width: 11em;
+  min-width: 9em;
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+/* a group's label and its buttons stay on one row whenever the window is wide enough for them */
+@media (min-width: 1100px) {
+  .instrument-group,
+  .instrument-group .seg-group {
+    flex-wrap: nowrap;
+  }
 }

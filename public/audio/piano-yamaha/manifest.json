@@ -1,0 +1,64 @@
+{
+ "samples": [
+  {
+   "file": "piano-yamaha-G0.mp3",
+   "midi": 31.066,
+   "labelMidi": 31
+  },
+  {
+   "file": "piano-yamaha-C1.mp3",
+   "midi": 35.972,
+   "labelMidi": 36
+  },
+  {
+   "file": "piano-yamaha-G1.mp3",
+   "midi": 43.032,
+   "labelMidi": 43
+  },
+  {
+   "file": "piano-yamaha-C2.mp3",
+   "midi": 48.009,
+   "labelMidi": 48
+  },
+  {
+   "file": "piano-yamaha-G2.mp3",
+   "midi": 55.047,
+   "labelMidi": 55
+  },
+  {
+   "file": "piano-yamaha-C3.mp3",
+   "midi": 60.005,
+   "labelMidi": 60
+  },
+  {
+   "file": "piano-yamaha-G3.mp3",
+   "midi": 67.079,
+   "labelMidi": 67
+  },
+  {
+   "file": "piano-yamaha-C4.mp3",
+   "midi": 72.039,
+   "labelMidi": 72
+  },
+  {
+   "file": "piano-yamaha-G4.mp3",
+   "midi": 79.019,
+   "labelMidi": 79
+  },
+  {
+   "file": "piano-yamaha-C5.mp3",
+   "midi": 83.997,
+   "labelMidi": 84
+  },
+  {
+   "file": "piano-yamaha-G5.mp3",
+   "midi": 91.015,
+   "labelMidi": 91
+  },
+  {
+   "file": "piano-yamaha-C6.mp3",
+   "midi": 96.019,
+   "labelMidi": 96
+  }
+ ]
+}
