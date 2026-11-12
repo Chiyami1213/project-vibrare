@@ -1,41 +1,168 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import NoteSelect from '../../components/NoteSelect.astro';
-import { CHORDS } from '../../scripts/theory';
+import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
 ---
 
 <Layout title="Chord Calculator">
   <main class="calc-page">
     <h1>Chord Calculator</h1>
-    <p class="lead">Pick a root and a chord type to see the notes, correctly spelled.</p>
+    <p class="lead">
+      Pick a root and a chord to see its notes, inversions and keyboard, and to hear it. Notes are spelled the
+      way a musician would write them.
+    </p>
 
-    <div class="calc-form">
-      <NoteSelect id="root" label="Root" />
+    <div class="calc-form chord-form">
+      <div class="field">
+        <span class="field-label" id="root-label">Root</span>
+        <div class="seg-group" role="group" aria-labelledby="root-label" id="root-letters">
+          {LETTERS.map((l, i) => <button type="button" class="seg-btn" data-letter={i} aria-pressed="false">{l}</button>)}
+        </div>
+        <div class="seg-group" role="group" aria-label="Accidental" id="root-acc">
+          <button type="button" class="seg-btn" data-alter="-1" aria-pressed="false" aria-label="flat">♭</button>
+          <button type="button" class="seg-btn" data-alter="0" aria-pressed="false" aria-label="natural">♮</button>
+          <button type="button" class="seg-btn" data-alter="1" aria-pressed="false" aria-label="sharp">♯</button>
+        </div>
+      </div>
+
       <div class="field">
         <label class="field-label" for="chord">Chord type</label>
         <select id="chord">
-          {CHORDS.map((c) => <option value={c.id}>{c.name}</option>)}
+          {
+            CHORD_GROUPS.map((g) => (
+              <optgroup label={g.label}>
+                {g.chords.map((c) => <option value={c.id}>{c.name}{c.symbol ? ` (${c.symbol})` : ''}</option>)}
+              </optgroup>
+            ))
+          }
         </select>
+      </div>
+
+      <div class="field">
+        <span class="field-label" id="inv-label">Inversion</span>
+        <div class="seg-group" id="inversions" role="group" aria-labelledby="inv-label"></div>
       </div>
     </div>
 
     <div class="result" aria-live="polite">
+      <div class="chord-head">
+        <div id="symbol" class="chord-symbol"></div>
+        <div class="chord-meta">
+          <div id="fullname"></div>
+          <div id="aka" class="muted-line"></div>
+        </div>
+      </div>
+
       <div id="chips" class="note-row"></div>
-      <p id="summary" class="summary"></p>
+      <div id="keyboard" class="keyboard-wrap"></div>
+
+      <div class="btn-row">
+        <button type="button" class="btn" data-play="harmonic">▶ Harmonic</button>
+        <button type="button" class="btn" data-play="up">▶ Ascending</button>
+        <button type="button" class="btn" data-play="down">▶ Descending</button>
+        <button type="button" class="btn" id="copy">Copy link</button>
+        <span id="copy-msg" class="muted-line" role="status"></span>
+      </div>
+
+      <h2 class="section-title">Chord DNA</h2>
+      <dl class="dna">
+        <div><dt>Root</dt><dd id="dna-root"></dd></div>
+        <div><dt>Internal</dt><dd id="dna-internal"></dd></div>
+        <div><dt>Colours</dt><dd id="dna-colors"></dd></div>
+        <div><dt>Bass</dt><dd id="dna-bass"></dd></div>
+      </dl>
+      <p class="muted-line">
+        Internal notes are the third, fifth and seventh (or sixth) that define the chord. Colours are the
+        9ths, 11ths and 13ths added on top.
+      </p>
     </div>
   </main>
 
   <script>
-    import { CHORDS, noteName, spell } from '../../scripts/theory';
-    import { bind, byId, readNote, renderChips } from '../../scripts/ui';
+    import { CHORDS } from '../../scripts/theory';
+    import { chordInfo, findChord, parseRoot, rootParam } from '../../scripts/chords';
+    import { buildKeyboard } from '../../scripts/keyboard';
+    import { playChord, type PlayMode } from '../../scripts/synth';
+    import { byId, renderChips } from '../../scripts/ui';
 
-    bind(['root-letter', 'root-acc', 'chord'], () => {
-      const root = readNote('root');
-      const chord = CHORDS.find((c) => c.id === byId('chord').value) ?? CHORDS[0];
-      const notes = spell(root, chord);
-      renderChips(byId<HTMLElement>('chips'), notes);
-      byId<HTMLElement>('summary').textContent =
-        `${noteName(root)} ${chord.name.toLowerCase()}: ${notes.map((n) => n.name).join(' ')}`;
+    const state = { letter: 0, alter: 0, chordId: 'major', inversion: 0 };
+
+    // ---- read the starting state from the link: ?root=Bb&chord=half-diminished7&inversion=0
+    const q = new URLSearchParams(location.search);
+    const r0 = parseRoot(q.get('root') ?? '');
+    if (r0) Object.assign(state, r0);
+    const c0 = findChord(q.get('chord') ?? '');
+    if (c0) state.chordId = c0.id;
+    const i0 = Number(q.get('inversion'));
+    const size0 = (findChord(state.chordId) ?? CHORDS[0]).intervals.length;
+    if (Number.isInteger(i0) && i0 > 0 && i0 < size0) state.inversion = i0; // out of range: root position
+
+    const letterBtns = [...document.querySelectorAll<HTMLButtonElement>('#root-letters [data-letter]')];
+    const accBtns = [...document.querySelectorAll<HTMLButtonElement>('#root-acc [data-alter]')];
+    const chordSel = byId<HTMLSelectElement>('chord');
+    const invBox = byId<HTMLElement>('inversions');
+    const text = (id: string, v: string) => (byId<HTMLElement>(id).textContent = v);
+    const list = (notes: { name: string; interval: string }[]) =>
+      notes.length ? notes.map((n) => `${n.name} (${n.interval})`).join('  ') : '—';
+    let midis: number[] = [];
+
+    function render() {
+      const chord = findChord(state.chordId) ?? CHORDS[0];
+      const info = chordInfo(state.letter, state.alter, chord, state.inversion);
+      state.inversion = info.inversion;
+
+      letterBtns.forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.letter) === state.letter)));
+      accBtns.forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.alter) === state.alter)));
+      chordSel.value = chord.id;
+
+      // inversion buttons: one per note in the chord
+      invBox.replaceChildren(
+        ...chord.intervals.map((_, k) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'seg-btn';
+          b.textContent = k === 0 ? 'Root' : `${k}${k === 1 ? 'st' : k === 2 ? 'nd' : k === 3 ? 'rd' : 'th'}`;
+          b.title = k === 0 ? 'Root position' : `${k}${k === 1 ? 'st' : k === 2 ? 'nd' : k === 3 ? 'rd' : 'th'} inversion`;
+          b.setAttribute('aria-pressed', String(k === state.inversion));
+          b.addEventListener('click', () => {
+            state.inversion = k;
+            render();
+          });
+          return b;
+        }),
+      );
+
+      text('symbol', info.display);
+      text('fullname', `${info.fullName} · ${info.inversionLabel}`);
+      text('aka', info.aka.length ? `Also written ${info.aka.join(', ')}` : '');
+      renderChips(byId<HTMLElement>('chips'), info.notes.map((n) => ({ name: n.name, interval: n.interval })));
+      byId<HTMLElement>('keyboard').replaceChildren(buildKeyboard(info.notes.map((n) => ({ midi: n.midi, name: n.name }))));
+      text('dna-root', list([info.dna.root]));
+      text('dna-internal', list(info.dna.internal));
+      text('dna-colors', list(info.dna.colors));
+      text('dna-bass', list([info.dna.bass]));
+      midis = info.notes.map((n) => n.midi);
+
+      history.replaceState(null, '', `?root=${rootParam(state.letter, state.alter)}&chord=${chord.id}&inversion=${state.inversion}`);
+      text('copy-msg', '');
+    }
+
+    letterBtns.forEach((b) => b.addEventListener('click', () => { state.letter = Number(b.dataset.letter); render(); }));
+    accBtns.forEach((b) => b.addEventListener('click', () => { state.alter = Number(b.dataset.alter); render(); }));
+    chordSel.addEventListener('change', () => { state.chordId = chordSel.value; state.inversion = 0; render(); });
+
+    document.querySelectorAll<HTMLButtonElement>('[data-play]').forEach((b) =>
+      b.addEventListener('click', () => { void playChord(midis, b.dataset.play as PlayMode); }),
+    );
+
+    byId<HTMLButtonElement>('copy').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(location.href);
+        text('copy-msg', 'Link copied');
+      } catch {
+        text('copy-msg', 'Copy this page address to share the chord');
+      }
     });
+
+    render();
   </script>
 </Layout>
