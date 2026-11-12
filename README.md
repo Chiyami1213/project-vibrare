@@ -9,7 +9,7 @@ Live site: <https://vibrare.pages.dev/>
 
 | Section | Contents |
 | :-- | :-- |
-| **Theory** | Tonal Harmony, Partimento (Moti del Basso, Schemata, Cadences), Counterpoint, Jazz. Several of these are still being written; see [Status](#status). |
+| **Theory** | Tonal Harmony, Partimento (Moti del Basso and Schemata with playable scores; Cadences to come), Counterpoint, Jazz. Several of these are still being written; see [Status](#status). |
 | **Analysis** | *Bach's Fugue*: the 48 preludes and fugues of *The Well-Tempered Clavier* (BWV 846 to 893) with keys and fugue voice counts. *Touhou Project*: the numbered games Th06 to Th20 (15 games, 271 tracks), each with its OST and where every track is used. *Japanese Music*: not written yet. |
 | **Tools** | Interval and scale calculators that show the notes on a staff; a chord calculator with inversions, a piano keyboard, playback and shareable links; an interactive circle of fifths with a rainbow colour scheme that draws a chord's shape (triangle, square, and so on). Notes are spelled the way a musician would write them. |
 | **Works** | Arrangements by category: Anime, Commissions, Concert Band, Flute, Ghibli, Touhou Project, Vocaloid, VTubers, Miscellaneous. The lists are empty for now. |
@@ -26,6 +26,9 @@ returns to the main list.
   [thwiki.cc](https://thwiki.cc/) and the [ZUN Music Database Wiki](https://w.atwiki.jp/tohomusicdb/).
   Corrections found by comparing the sources are recorded in the data and covered by tests.
 - **The Well-Tempered Clavier list** follows the English and German Wikipedia articles (CC BY-SA 4.0).
+- **Harpsichord sound** in the partimento player: the Italian harpsichord from the
+  [Versilian Community Sample Library](https://github.com/sgossner/VCSL) (CC0), trimmed and converted to small
+  MP3 files and hosted with the site.
 - **Partimento content pack** (`content/partimento/`): 80 patterns and 118 realized examples (moti del basso,
   schemata and cadences), with the Python source that generates the JSON and checks the voice leading.
   Summaries are paraphrased and cite their sources (Gjerdingen, IJzerman, Fenaroli, essaysonmusic.com and the
@@ -35,9 +38,11 @@ returns to the main list.
 
 ## Status
 
-- Done: menu, themes, glossary, resources, About, the Touhou Project OST pages, the Bach list, the interval,
-  scale and chord calculators (with staff notation) and the circle of fifths.
-- In progress: the Partimento pages (overview pages, pattern cards and a playable score player).
+- Done: menu, themes and audio settings, glossary, resources, About, the Touhou Project OST pages, the Bach
+  list, the interval, scale and chord calculators (with staff notation), the circle of fifths, and the Partimento
+  Moti del Basso and Schemata pages: 43 patterns, each with rules, guidelines, variants and playable scores
+  (figured bass, harpsichord, step mode, transposition, exercise mode).
+- In progress: the Partimento Cadences page.
 - Not started: Tonal Harmony, Counterpoint, Jazz and Japanese Music notes; the Works lists.
 
 ## Privacy

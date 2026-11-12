@@ -1,0 +1,16 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import PatternOverview from '../../../../components/partimento/PatternOverview.astro';
+import { SCHEMATA_GROUPS, schemataPatterns } from '../../../../data/partimento';
+---
+
+<Layout title="Schemata">
+  <main class="page-block wide">
+    <h1>Schemata</h1>
+    <p class="lead">
+      Stock pairings of a bass motion and upper voices: Romanesca, Prinner, Fonte, Monte and the pedal-point
+      schemata. Choose a schema to see its rules, variants and playable scores. {schemataPatterns.length} patterns.
+    </p>
+    <PatternOverview groups={SCHEMATA_GROUPS} />
+  </main>
+</Layout>

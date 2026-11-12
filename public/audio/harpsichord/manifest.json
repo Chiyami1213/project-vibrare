@@ -1,0 +1,164 @@
+{
+ "samples": [
+  {
+   "file": "harpsichord-Fs0.mp3",
+   "midi": 30.039,
+   "labelMidi": 30
+  },
+  {
+   "file": "harpsichord-Gs0.mp3",
+   "midi": 32.028,
+   "labelMidi": 32
+  },
+  {
+   "file": "harpsichord-As0.mp3",
+   "midi": 34.038,
+   "labelMidi": 34
+  },
+  {
+   "file": "harpsichord-B0.mp3",
+   "midi": 35.045,
+   "labelMidi": 35
+  },
+  {
+   "file": "harpsichord-Cs1.mp3",
+   "midi": 37.063,
+   "labelMidi": 37
+  },
+  {
+   "file": "harpsichord-Ds1.mp3",
+   "midi": 39.043,
+   "labelMidi": 39
+  },
+  {
+   "file": "harpsichord-E1.mp3",
+   "midi": 40.028,
+   "labelMidi": 40
+  },
+  {
+   "file": "harpsichord-Fs1.mp3",
+   "midi": 42.029,
+   "labelMidi": 42
+  },
+  {
+   "file": "harpsichord-Gs1.mp3",
+   "midi": 44.067,
+   "labelMidi": 44
+  },
+  {
+   "file": "harpsichord-As1.mp3",
+   "midi": 46.02,
+   "labelMidi": 46
+  },
+  {
+   "file": "harpsichord-B1.mp3",
+   "midi": 47.089,
+   "labelMidi": 47
+  },
+  {
+   "file": "harpsichord-Cs2.mp3",
+   "midi": 49.078,
+   "labelMidi": 49
+  },
+  {
+   "file": "harpsichord-Ds2.mp3",
+   "midi": 51.131,
+   "labelMidi": 51
+  },
+  {
+   "file": "harpsichord-E2.mp3",
+   "midi": 52.139,
+   "labelMidi": 52
+  },
+  {
+   "file": "harpsichord-Fs2.mp3",
+   "midi": 54.073,
+   "labelMidi": 54
+  },
+  {
+   "file": "harpsichord-Gs2.mp3",
+   "midi": 56.103,
+   "labelMidi": 56
+  },
+  {
+   "file": "harpsichord-As2.mp3",
+   "midi": 58.126,
+   "labelMidi": 58
+  },
+  {
+   "file": "harpsichord-B2.mp3",
+   "midi": 59.104,
+   "labelMidi": 59
+  },
+  {
+   "file": "harpsichord-Cs3.mp3",
+   "midi": 61.096,
+   "labelMidi": 61
+  },
+  {
+   "file": "harpsichord-Ds3.mp3",
+   "midi": 63.094,
+   "labelMidi": 63
+  },
+  {
+   "file": "harpsichord-E3.mp3",
+   "midi": 64.054,
+   "labelMidi": 64
+  },
+  {
+   "file": "harpsichord-Fs3.mp3",
+   "midi": 66.076,
+   "labelMidi": 66
+  },
+  {
+   "file": "harpsichord-Gs3.mp3",
+   "midi": 68.148,
+   "labelMidi": 68
+  },
+  {
+   "file": "harpsichord-As3.mp3",
+   "midi": 70.091,
+   "labelMidi": 70
+  },
+  {
+   "file": "harpsichord-B3.mp3",
+   "midi": 71.061,
+   "labelMidi": 71
+  },
+  {
+   "file": "harpsichord-Cs4.mp3",
+   "midi": 73.087,
+   "labelMidi": 73
+  },
+  {
+   "file": "harpsichord-Ds4.mp3",
+   "midi": 75.133,
+   "labelMidi": 75
+  },
+  {
+   "file": "harpsichord-E4.mp3",
+   "midi": 76.053,
+   "labelMidi": 76
+  },
+  {
+   "file": "harpsichord-Fs4.mp3",
+   "midi": 78.044,
+   "labelMidi": 78
+  },
+  {
+   "file": "harpsichord-Gs4.mp3",
+   "midi": 80.011,
+   "labelMidi": 80
+  },
+  {
+   "file": "harpsichord-As4.mp3",
+   "midi": 82.12,
+   "labelMidi": 82
+  },
+  {
+   "file": "harpsichord-B4.mp3",
+   "midi": 83.046,
+   "labelMidi": 83
+  }
+ ]
+}

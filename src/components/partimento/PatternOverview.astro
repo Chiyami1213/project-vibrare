@@ -1,0 +1,106 @@
+---
+import { DIRECTION_LABEL, patternsIn, urlFor } from '../../data/partimento';
+import type { Group } from '../../data/partimento';
+
+interface Props {
+  groups: Group[];
+}
+const { groups } = Astro.props;
+const sections = groups.map((g) => ({ group: g, patterns: patternsIn(g.id) }));
+const directions = [...new Set(sections.flatMap((s) => s.patterns.map((p) => p.direction).filter(Boolean)))] as string[];
+---
+
+<div class="overview">
+  <div class="overview-tools">
+    <div class="field">
+      <label class="field-label" for="pat-search">Search by name</label>
+      <input id="pat-search" class="gloss-search" type="search" placeholder="e.g. romanesca" autocomplete="off" />
+    </div>
+    <div class="field">
+      <span class="field-label" id="dir-label">Direction</span>
+      <div class="seg-group" role="group" aria-labelledby="dir-label" id="dir-filter">
+        <button type="button" class="seg-btn" data-dir="" aria-pressed="true">All</button>
+        {directions.map((d) => <button type="button" class="seg-btn" data-dir={d} aria-pressed="false">{DIRECTION_LABEL[d] ?? d}</button>)}
+      </div>
+    </div>
+    <div class="field">
+      <span class="field-label" id="mode-label">Mode</span>
+      <div class="seg-group" role="group" aria-labelledby="mode-label" id="mode-filter">
+        <button type="button" class="seg-btn" data-mode="" aria-pressed="true">Both</button>
+        <button type="button" class="seg-btn" data-mode="major" aria-pressed="false">Major</button>
+        <button type="button" class="seg-btn" data-mode="minor" aria-pressed="false">Minor</button>
+      </div>
+    </div>
+  </div>
+
+  <p id="pat-empty" class="empty" hidden>No patterns match.</p>
+
+  {
+    sections.map(({ group, patterns }) => (
+      <section class="pat-group" id={group.id}>
+        <h2 class="section-title">{group.title}</h2>
+        <p class="group-blurb">{group.blurb}</p>
+        <ul class="pat-grid">
+          {patterns.map((p) => (
+            <li
+              class="pat-tile"
+              data-search={`${p.name} ${(p.aka ?? []).join(' ')}`.toLowerCase()}
+              data-dir={p.direction ?? ''}
+              data-modes={(p.modes ?? []).join(' ')}
+            >
+              <a href={urlFor(p.id)}>
+                <span class="pat-name">{p.name}</span>
+                {p.aka && p.aka.length > 0 && <span class="pat-aka">{p.aka.slice(0, 2).join(' · ')}</span>}
+                {p.bass && <span class="pat-bass" title="Bass">{p.bass.replace(/\s*\(.*$/, '')}</span>}
+                <span class="pat-chips">
+                  {p.direction && <span class="chip">{DIRECTION_LABEL[p.direction] ?? p.direction}</span>}
+                  {(p.modes ?? []).map((m) => <span class="chip">{m}</span>)}
+                  {p.textures && p.textures.length > 0 && <span class="chip">{p.textures.join('/')} parts</span>}
+                  {(p.examples?.length ?? 0) > 0 && <span class="chip chip-accent">{p.examples!.length} example{p.examples!.length > 1 ? 's' : ''}</span>}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+
+  <script>
+    const root = document.querySelector<HTMLElement>('.overview')!;
+    const search = root.querySelector<HTMLInputElement>('#pat-search')!;
+    const tiles = [...root.querySelectorAll<HTMLElement>('.pat-tile')];
+    const groups = [...root.querySelectorAll<HTMLElement>('.pat-group')];
+    const empty = root.querySelector<HTMLElement>('#pat-empty')!;
+    let dir = '';
+    let mode = '';
+
+    function apply() {
+      const q = search.value.trim().toLowerCase();
+      let shown = 0;
+      tiles.forEach((t) => {
+        const ok =
+          (!q || (t.dataset.search ?? '').includes(q)) &&
+          (!dir || t.dataset.dir === dir) &&
+          (!mode || (t.dataset.modes ?? '').split(' ').includes(mode));
+        t.hidden = !ok;
+        if (ok) shown++;
+      });
+      groups.forEach((g) => (g.hidden = !g.querySelector('.pat-tile:not([hidden])')));
+      empty.hidden = shown > 0;
+    }
+    function wire(boxId: string, attr: 'dir' | 'mode', set: (v: string) => void) {
+      const buttons = [...root.querySelectorAll<HTMLButtonElement>(`#${boxId} .seg-btn`)];
+      buttons.forEach((b) =>
+        b.addEventListener('click', () => {
+          set(b.dataset[attr] ?? '');
+          buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+          apply();
+        }),
+      );
+    }
+    wire('dir-filter', 'dir', (v) => (dir = v));
+    wire('mode-filter', 'mode', (v) => (mode = v));
+    search.addEventListener('input', apply);
+  </script>
+</div>

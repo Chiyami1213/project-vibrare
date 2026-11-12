@@ -1,0 +1,210 @@
+---
+import { DIRECTION_LABEL, degreeTokens, getPattern, urlFor } from '../../data/partimento';
+import type { Example, Pattern } from '../../data/partimento';
+
+interface Props {
+  pattern: Pattern;
+  backHref: string;
+  backLabel: string;
+}
+const { pattern: p, backHref, backLabel } = Astro.props;
+
+// Owner-only information (verification status, review notes) is only rendered in local dev.
+const owner = import.meta.env.DEV;
+
+const allExamples: Example[] = [...(p.examples ?? []), ...(p.variants ?? []).flatMap((v) => v.examples ?? [])];
+// Examples are passed to the player as data (the player draws and plays them in the browser).
+const exampleData = Object.fromEntries(
+  allExamples.map((e) => [
+    e.id,
+    { id: e.id, title: e.title, key: e.key, meter: e.meter, beatUnit: e.beatUnit, parts: e.parts, cross: e.cross ?? false, realized: e.realized },
+  ]),
+);
+
+const sources = p.sources ?? {};
+const host = (u: string) => {
+  try {
+    return new URL(u).hostname.replace(/^www\./, '') + new URL(u).pathname.replace(/\/$/, '');
+  } catch {
+    return u;
+  }
+};
+const hasScore = allExamples.length > 0;
+---
+
+<main class="page-block wide pattern-page">
+  <p class="crumb"><a class="btn" href={backHref}>← {backLabel}</a></p>
+
+  <h1>{p.name}</h1>
+  {p.aka && p.aka.length > 0 && <p class="lead">Also called {p.aka.join(', ')}</p>}
+
+  <div class="pat-chips big">
+    {p.direction && <span class="chip">{DIRECTION_LABEL[p.direction] ?? p.direction}</span>}
+    {(p.modes ?? []).map((m) => <span class="chip">{m}</span>)}
+    {p.textures && p.textures.length > 0 && <span class="chip">{p.textures.join(', ')} parts</span>}
+    {p.meter && <span class="chip">{p.meter}</span>}
+    {(p.function ?? []).map((f) => <span class="chip">{f}</span>)}
+  </div>
+
+  {
+    (p.bass || p.melody) && (
+      <div class="degrees" aria-label="Scale degrees">
+        {p.bass && (
+          <div class="degree-row">
+            <span class="degree-label">Bass</span>
+            <span class="degree-line">
+              {degreeTokens(p.bass).map((t) => (t.degree ? <span class="degree">{t.text}</span> : <span class="degree-text">{t.text}</span>))}
+            </span>
+          </div>
+        )}
+        {p.melody && (
+          <div class="degree-row">
+            <span class="degree-label">Melody</span>
+            <span class="degree-line">
+              {degreeTokens(p.melody).map((t) => (t.degree ? <span class="degree">{t.text}</span> : <span class="degree-text">{t.text}</span>))}
+            </span>
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  <p class="summary-text">{p.summary}</p>
+
+  {
+    p.rules && p.rules.length > 0 && (
+      <section class="rule-list">
+        <h2 class="section-title">Rules</h2>
+        <ul>
+          {p.rules.map((r) => (
+            <li><span class="badge badge-rule">Rule</span> {r}</li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    p.guidelines && p.guidelines.length > 0 && (
+      <section class="rule-list">
+        <h2 class="section-title">Guidelines</h2>
+        <ul>
+          {p.guidelines.map((g) => (
+            <li><span class="badge badge-guide">Guideline</span> {g}</li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    (p.examples?.length ?? 0) > 0 ? (
+      <section class="examples">
+        <h2 class="section-title">Examples</h2>
+        {p.examples!.map((e) => (
+          <div class="example">
+            <h3>{e.title}</h3>
+            <div class="player" data-example={e.id}></div>
+            {e.caption && <p class="caption">{e.caption}</p>}
+            {owner && e.review && <p class="owner-note">Check: {String(e.review)}</p>}
+          </div>
+        ))}
+      </section>
+    ) : (
+      !((p.variants ?? []).some((v) => (v.examples?.length ?? 0) > 0)) && (
+        <section class="examples">
+          <h2 class="section-title">Figures</h2>
+          {p.figures ? <pre class="figures-box">{p.figures}</pre> : <p class="empty">No figures recorded.</p>}
+          <p><span class="badge badge-need">Needs score</span> This pattern has no realized example yet.</p>
+        </section>
+      )
+    )
+  }
+
+  {
+    (p.variants?.length ?? 0) > 0 && (
+      <section class="variants">
+        <h2 class="section-title">Variants</h2>
+        {p.variants!.map((v) => (
+          <details class="variant">
+            <summary>{v.name}</summary>
+            <p>{v.description}</p>
+            {v.figures && <pre class="figures-box">{v.figures}</pre>}
+            {(v.examples ?? []).map((e) => (
+              <div class="example">
+                <h3>{e.title}</h3>
+                <div class="player" data-example={e.id}></div>
+                {e.caption && <p class="caption">{e.caption}</p>}
+              </div>
+            ))}
+            {owner && v.review && <p class="owner-note">Check: {String(v.review)}</p>}
+          </details>
+        ))}
+      </section>
+    )
+  }
+
+  {
+    (p.seeAlso?.length ?? 0) > 0 && (
+      <section>
+        <h2 class="section-title">See also</h2>
+        <div class="btn-row">
+          {p.seeAlso!.map((id) => {
+            const other = getPattern(id);
+            return other ? <a class="btn" href={urlFor(id)}>{other.name}</a> : null;
+          })}
+        </div>
+      </section>
+    )
+  }
+
+  <section>
+    <h2 class="section-title">Sources</h2>
+    <ul class="source-list">
+      {sources.notes && <li>Notes: {sources.notes}</li>}
+      {sources.hcp && <li>Harmony, Counterpoint, Partimento (IJzerman, 2018): {sources.hcp}</li>}
+      {sources.fenaroli && <li>Fenaroli, <em>Partimenti ossia basso numerato</em>, Book III: {sources.fenaroli}</li>}
+      {(sources.web ?? []).map((u) => <li><a href={u} target="_blank" rel="noopener noreferrer">{host(u)}</a></li>)}
+      {sources.other && <li>{sources.other}</li>}
+    </ul>
+  </section>
+
+  {
+    owner && (
+      <section class="owner-box">
+        <h2 class="section-title">Owner check (local only)</h2>
+        <p>Status: <strong>{p.verification.status}</strong></p>
+        {p.verification.checks.length > 0 && (
+          <ul>{p.verification.checks.map((c) => <li>{c}</li>)}</ul>
+        )}
+        {(p.verification.flags ?? []).length > 0 && (
+          <ul class="flags">{p.verification.flags!.map((f) => <li>{f}</li>)}</ul>
+        )}
+      </section>
+    )
+  }
+
+  {hasScore && <script type="application/json" id="examples-data" is:inline set:html={JSON.stringify(exampleData)} />}
+</main>
+
+<script>
+  // Mount each example's player when it comes into view (VexFlow and the player are loaded on demand).
+  const raw = document.getElementById('examples-data')?.textContent;
+  const data: Record<string, import('../../scripts/partimento/model').ExampleData> = raw ? JSON.parse(raw) : {};
+  const boxes = [...document.querySelectorAll<HTMLElement>('.player[data-example]')];
+  if (boxes.length) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const el = e.target as HTMLElement;
+          io.unobserve(el);
+          const ex = data[el.dataset.example ?? ''];
+          if (ex) void import('../../scripts/partimento/player').then((m) => m.mountPlayer(el, ex));
+        }
+      },
+      { rootMargin: '300px' },
+    );
+    boxes.forEach((b) => io.observe(b));
+  }
+</script>

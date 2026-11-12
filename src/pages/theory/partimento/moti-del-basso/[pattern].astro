@@ -1,0 +1,15 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import PatternPage from '../../../../components/partimento/PatternPage.astro';
+import { motiPatterns } from '../../../../data/partimento';
+
+export function getStaticPaths() {
+  return motiPatterns.map((pattern) => ({ params: { pattern: pattern.id }, props: { pattern } }));
+}
+
+const { pattern } = Astro.props;
+---
+
+<Layout title={pattern.name}>
+  <PatternPage pattern={pattern} backHref="/theory/partimento/moti-del-basso/" backLabel="Moti del Basso" />
+</Layout>
