@@ -174,7 +174,9 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
     const top = si * sysHeight + SYSTEM_TOP;
     const natural = measures.map((m, i) => measureWidth(m, i === 0, si === 0 && i === 0));
     const scale = usable / natural.reduce((a, b) => a + b, 0);
-    const factor = scale < 1 ? scale : Math.min(scale, 1.5); // fill the line, without over-stretching
+    // fill the line; only the unfinished last line of a longer score keeps its natural spacing
+    const lastOfMany = systems.length > 1 && si === systems.length - 1;
+    const factor = scale < 1 ? scale : Math.min(scale, lastOfMany ? 1.5 : 4);
     const widths = natural.map((w) => w * factor);
     let x = 12;
 

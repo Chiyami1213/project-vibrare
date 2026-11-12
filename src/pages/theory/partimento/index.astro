@@ -1,9 +1,62 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import { BASE, CADENCES, MOTI_GROUPS, SCHEMATA_GROUPS, motiPatterns, schemataPatterns } from '../../../data/partimento';
+import type { Group, Pattern } from '../../../data/partimento';
+
+const count = (groups: Group[], patterns: Pattern[]) =>
+  groups.map((g) => ({ title: g.title.replace(/^(Moti del basso|Schemata): /, ''), n: patterns.filter((p) => p.group === g.id).length }));
+
+const sections = [
+  {
+    href: `${BASE}/moti-del-basso/`,
+    title: 'Moti del Basso',
+    blurb: 'The typical motions of the bass: stepwise lines rising and falling, chromatic laments, and sequences by leap.',
+    patterns: motiPatterns.length,
+    parts: count(MOTI_GROUPS, motiPatterns),
+  },
+  {
+    href: `${BASE}/schemata/`,
+    title: 'Schemata',
+    blurb: 'Stock musical patterns, such as the Romanesca, Prinner, Folia and Monte, each pairing a bass with its upper voices.',
+    patterns: schemataPatterns.length,
+    parts: count(SCHEMATA_GROUPS, schemataPatterns),
+  },
+  {
+    href: `${BASE}/cadences/`,
+    title: 'Cadences',
+    blurb: 'The cadence types and the clausulae behind them, in two, three and four parts.',
+    patterns: CADENCES.patterns.length,
+    parts: count(CADENCES.groups, CADENCES.patterns),
+  },
+];
+const total = sections.reduce((n, s) => n + s.patterns, 0);
 ---
 
 <Layout title="Partimento">
-  <main>
+  <main class="page-block wide">
     <h1>Partimento</h1>
+    <p class="lead">
+      Partimenti were bass-line exercises, figured or unfigured, used in the Italian conservatories of the 18th
+      century to teach keyboard playing and composition together. The student realized the harmony and the upper
+      voices at the keyboard from the bass alone. This section collects the patterns that practice built on: {total}
+      in all, many with scores you can play.
+    </p>
+
+    <ul class="pat-grid">
+      {
+        sections.map((s) => (
+          <li class="pat-tile">
+            <a href={s.href}>
+              <span class="pat-name">{s.title}</span>
+              <span class="pat-aka">{s.blurb}</span>
+              <span class="pat-chips">
+                <span class="chip chip-accent">{s.patterns} patterns</span>
+              </span>
+              <span class="pat-bass">{s.parts.map((p) => `${p.title} (${p.n})`).join(' · ')}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </main>
 </Layout>

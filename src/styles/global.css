@@ -84,10 +84,34 @@ a {
   line-height: 1.2;
 }
 
-/* Home: title only, centered */
+/* Home: title and a quotation, centered */
 .home {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-inline: 16px;
+}
+
+.home-quote {
+  max-width: 34em;
+  margin: 0;
+  text-align: center;
+  color: var(--muted, inherit);
+}
+
+.home-quote p {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.home-quote footer {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  opacity: 0.8;
 }
 
 .home h1 {
@@ -537,7 +561,7 @@ html.loading.open .panel-r {
 /* ---------- Calculators ---------- */
 .calc-page {
   width: 100%;
-  max-width: 760px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -758,7 +782,7 @@ html.loading.open .panel-r {
 /* ---------- Content pages (Resources, Glossary, Works, About) ---------- */
 .page-block {
   width: 100%;
-  max-width: 760px;
+  max-width: 1680px; /* use the window: text and scores only wrap when the window is really narrow */
   margin: 0 auto;
 }
 
@@ -880,7 +904,7 @@ html.loading.open .panel-r {
 
 /* ---------- Touhou overview and game pages ---------- */
 .page-block.wide {
-  max-width: 960px;
+  max-width: 1680px;
 }
 
 .crumb {
