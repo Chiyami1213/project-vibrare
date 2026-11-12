@@ -25,15 +25,16 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
       </div>
 
       <div class="field">
-        <label class="field-label" for="chord">Chord type</label>
+        <span class="field-label" id="size-label">Number of notes</span>
+        <div class="seg-group" role="group" aria-labelledby="size-label" id="sizes">
+          {CHORD_GROUPS.map((g) => <button type="button" class="seg-btn" data-size={g.size} aria-pressed="false">{g.size}</button>)}
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="chord">Quality</label>
         <select id="chord">
-          {
-            CHORD_GROUPS.map((g) => (
-              <optgroup label={g.label}>
-                {g.chords.map((c) => <option value={c.id}>{c.name}{c.symbol ? ` (${c.symbol})` : ''}</option>)}
-              </optgroup>
-            ))
-          }
+          {CHORD_GROUPS[0].chords.map((c) => <option value={c.id}>{c.name}{c.symbol ? ` (${c.symbol})` : ''}</option>)}
         </select>
       </div>
 
@@ -78,7 +79,7 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
   </main>
 
   <script>
-    import { CHORDS } from '../../scripts/theory';
+    import { CHORDS, CHORD_GROUPS } from '../../scripts/theory';
     import { chordInfo, findChord, parseRoot, rootParam } from '../../scripts/chords';
     import { buildKeyboard } from '../../scripts/keyboard';
     import { playChord, type PlayMode } from '../../scripts/synth';
@@ -99,6 +100,20 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
     const letterBtns = [...document.querySelectorAll<HTMLButtonElement>('#root-letters [data-letter]')];
     const accBtns = [...document.querySelectorAll<HTMLButtonElement>('#root-acc [data-alter]')];
     const chordSel = byId<HTMLSelectElement>('chord');
+    const sizeBtns = [...document.querySelectorAll<HTMLButtonElement>('#sizes [data-size]')];
+
+    // the quality list only shows chords with the chosen number of notes
+    function fillQualities(size: number) {
+      const group = CHORD_GROUPS.find((g) => g.size === size) ?? CHORD_GROUPS[0];
+      chordSel.replaceChildren(
+        ...group.chords.map((c) => {
+          const o = document.createElement('option');
+          o.value = c.id;
+          o.textContent = c.symbol ? `${c.name} (${c.symbol})` : c.name;
+          return o;
+        }),
+      );
+    }
     const invBox = byId<HTMLElement>('inversions');
     const text = (id: string, v: string) => (byId<HTMLElement>(id).textContent = v);
     const list = (notes: { name: string; interval: string }[]) =>
@@ -110,6 +125,12 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
       const info = chordInfo(state.letter, state.alter, chord, state.inversion);
       state.inversion = info.inversion;
 
+      const size = chord.intervals.length;
+      if (chordSel.dataset.size !== String(size)) {
+        fillQualities(size);
+        chordSel.dataset.size = String(size);
+      }
+      sizeBtns.forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.size) === size)));
       letterBtns.forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.letter) === state.letter)));
       accBtns.forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.alter) === state.alter)));
       chordSel.value = chord.id;
@@ -149,6 +170,15 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
     letterBtns.forEach((b) => b.addEventListener('click', () => { state.letter = Number(b.dataset.letter); render(); }));
     accBtns.forEach((b) => b.addEventListener('click', () => { state.alter = Number(b.dataset.alter); render(); }));
     chordSel.addEventListener('change', () => { state.chordId = chordSel.value; state.inversion = 0; render(); });
+    sizeBtns.forEach((b) =>
+      b.addEventListener('click', () => {
+        const group = CHORD_GROUPS.find((g) => g.size === Number(b.dataset.size));
+        if (!group) return;
+        state.chordId = group.chords[0].id; // first quality of that size
+        state.inversion = 0;
+        render();
+      }),
+    );
 
     document.querySelectorAll<HTMLButtonElement>('[data-play]').forEach((b) =>
       b.addEventListener('click', () => { void playChord(midis, b.dataset.play as PlayMode); }),
