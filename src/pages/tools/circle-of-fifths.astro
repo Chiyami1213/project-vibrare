@@ -46,7 +46,7 @@ const segments = CIRCLE.flatMap((key, i) => {
     <svg class="circle" viewBox="0 0 360 360" role="group" aria-label="Circle of fifths">
       {
         segments.map((s) => (
-          <g class={`seg ${s.mode}`} data-pos={s.i} data-mode={s.mode} role="button" tabindex="0" aria-pressed="false" aria-label={s.aria}>
+          <g class={`seg ${s.mode}`} style={`--h:${s.i * 30}`} data-pos={s.i} data-mode={s.mode} role="button" tabindex="0" aria-pressed="false" aria-label={s.aria}>
             <path d={s.d} />
             <text class="seg-name" x={f(s.x)} y={f(s.y)}>{s.label}</text>
             {s.sig && <text class="seg-sig" x={f(s.sx)} y={f(s.sy)}>{s.sig}</text>}
