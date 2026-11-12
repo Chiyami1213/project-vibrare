@@ -326,10 +326,11 @@ html.loading.open .panel-r {
 }
 
 /* ---------- Settings page ---------- */
-/* Left-aligned, full content width (capped on very wide screens) */
+/* Block centered on the page; text inside stays left-aligned */
 .settings {
   width: 100%;
-  max-width: 960px;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 .section-title {
