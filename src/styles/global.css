@@ -1600,7 +1600,9 @@ button.note-chip[aria-pressed='true'] {
   text-anchor: middle;
   fill: currentColor;
   stroke: none;
-  font-family: Georgia, 'Times New Roman', serif;
+  /* lining figures: Georgia's old-style numerals sit at different heights (a 3 hangs below an 8) */
+  font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
+  font-variant-numeric: lining-nums;
 }
 
 .score .deg {

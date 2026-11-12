@@ -130,8 +130,23 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
 
   // ---- pass 1: ask VexFlow how much room each bar needs (these notes are thrown away)
   const plans: MeasurePlan[] = [];
+  // The figures sit in one row under the bass staff. The row is pushed down far enough that the lowest bass
+  // notes (ledger lines, or a stem that points down) never touch it.
+  const LETTER_STEP: Record<string, number> = { c: 0, d: 1, e: 2, f: 3, g: 4, a: 5, b: 6 };
+  const BASS_BOTTOM_STEP = 2 * 7 + 4; // G2 sits on the bottom line of the bass staff; 5px per step
+  const bassRow = rows.length - 1;
+  let lowestReach = 0; // px below the bottom bass line
   for (let m = 0; m < bars; m++) {
     const probeBar = buildMeasure(m);
+    for (const b of probeBar.built) {
+      if (b.row !== bassRow) continue;
+      for (const key of b.note.getKeys()) {
+        const [letter, octave] = key.split('/');
+        const step = Number(octave) * 7 + (LETTER_STEP[letter[0].toLowerCase()] ?? 0);
+        const stemDown = rows[bassRow].voices.length === 2 ? b.voice === 1 : step >= 3 * 7 + 1;
+        lowestReach = Math.max(lowestReach, (BASS_BOTTOM_STEP - step) * 5 + (stemDown ? 35 : 5));
+      }
+    }
     const probe = new Formatter();
     probeBar.voices.forEach((vs) => probe.joinVoices(vs));
     plans.push({ minWidth: probe.preCalculateMinTotalWidth(probeBar.voices.flat()), onsets: probeBar.onsets });
@@ -159,7 +174,8 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
   }
   if (line.length) systems.push(line);
 
-  const sysHeight = SYSTEM_TOP + (hasTreble ? STAVE_GAP : 0) + STAVE_H + 38 + figRows * FIG_ROW + 34;
+  const figDrop = Math.max(0, lowestReach - 12); // extra gap before the figure row
+  const sysHeight = SYSTEM_TOP + (hasTreble ? STAVE_GAP : 0) + STAVE_H + 38 + figDrop + figRows * FIG_ROW + 34;
   const renderer = new Renderer(container as HTMLDivElement, Renderer.Backends.SVG);
   renderer.resize(opts.width, systems.length * sysHeight + 12);
   const ctx = renderer.getContext();
@@ -263,9 +279,9 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
     if (!at) continue;
     const top = at.sys * sysHeight + SYSTEM_TOP;
     const bassBottom = top + (hasTreble ? STAVE_GAP : 0) + STAVE_H;
-    s.figures.forEach((f, i) => text(at.x, bassBottom + 30 + i * FIG_ROW, f, 'fig'));
-    if (s.degree) text(at.x, bassBottom + 30 + figRows * FIG_ROW + 16, s.degree, 'deg');
-    const bottom = bassBottom + 30 + figRows * FIG_ROW + 24;
+    s.figures.forEach((f, i) => text(at.x, bassBottom + 30 + figDrop + i * FIG_ROW, f, 'fig'));
+    if (s.degree) text(at.x, bassBottom + 30 + figDrop + figRows * FIG_ROW + 16, s.degree, 'deg');
+    const bottom = bassBottom + 30 + figDrop + figRows * FIG_ROW + 24;
     boxes.push({ tick: s.tick, beat: s.beat, x: at.x, top: top - 4, bottom });
     const r = document.createElementNS(NS, 'rect');
     r.setAttribute('x', (at.x - 17).toFixed(1));
