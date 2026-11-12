@@ -32,7 +32,16 @@ const top: MenuLink[] = [
     icon: 'columns',
     children: [{ href: '/baroque/bach/', label: 'Bach' }],
   },
-  { href: '/tools/', label: 'Tools', icon: 'tools' },
+  {
+    href: '/tools/',
+    label: 'Tools',
+    icon: 'tools',
+    children: [
+      { href: '/tools/interval-calculator/', label: 'Interval Calculator' },
+      { href: '/tools/scale-calculator/', label: 'Scale Calculator' },
+      { href: '/tools/chord-calculator/', label: 'Chord Calculator' },
+    ],
+  },
   { href: '/touhou-music/', label: 'Touhou Music', icon: 'music' },
 ];
 const bottom: MenuLink[] = [{ href: '/settings/', label: 'Settings', icon: 'settings' }];

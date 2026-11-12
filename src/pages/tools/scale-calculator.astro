@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NoteSelect from '../../components/NoteSelect.astro';
+import { SCALES } from '../../scripts/theory';
+---
+
+<Layout title="Scale Calculator">
+  <main class="calc-page">
+    <h1>Scale Calculator</h1>
+    <p class="lead">Pick a tonic and a scale type to see the notes, correctly spelled.</p>
+
+    <div class="calc-form">
+      <NoteSelect id="tonic" label="Tonic" />
+      <div class="field">
+        <label class="field-label" for="scale">Scale</label>
+        <select id="scale">
+          {SCALES.map((s) => <option value={s.id}>{s.name}</option>)}
+        </select>
+      </div>
+    </div>
+
+    <div class="result" aria-live="polite">
+      <div id="chips" class="note-row"></div>
+      <p id="summary" class="summary"></p>
+    </div>
+  </main>
+
+  <script>
+    import { SCALES, noteName, spell } from '../../scripts/theory';
+    import { bind, byId, readNote, renderChips } from '../../scripts/ui';
+
+    bind(['tonic-letter', 'tonic-acc', 'scale'], () => {
+      const tonic = readNote('tonic');
+      const scale = SCALES.find((s) => s.id === byId('scale').value) ?? SCALES[0];
+      const notes = spell(tonic, scale, true);
+      renderChips(byId<HTMLElement>('chips'), notes);
+      byId<HTMLElement>('summary').textContent =
+        `${noteName(tonic)} ${scale.name}: ${notes.map((n) => n.name).join(' ')}`;
+    });
+  </script>
+</Layout>

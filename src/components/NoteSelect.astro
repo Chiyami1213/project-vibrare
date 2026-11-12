@@ -1,0 +1,26 @@
+---
+import { LETTERS } from '../scripts/theory';
+
+interface Props {
+  id: string;
+  label: string;
+}
+const { id, label } = Astro.props;
+const accidentals = [
+  { value: -1, text: '♭' },
+  { value: 0, text: '♮' },
+  { value: 1, text: '♯' },
+];
+---
+
+<div class="field">
+  <span class="field-label" id={`${id}-label`}>{label}</span>
+  <div class="pair" role="group" aria-labelledby={`${id}-label`}>
+    <select id={`${id}-letter`} aria-label={`${label}: letter`}>
+      {LETTERS.map((l, i) => <option value={i}>{l}</option>)}
+    </select>
+    <select id={`${id}-acc`} aria-label={`${label}: accidental`}>
+      {accidentals.map((a) => <option value={a.value} selected={a.value === 0}>{a.text}</option>)}
+    </select>
+  </div>
+</div>

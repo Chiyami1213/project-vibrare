@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NoteSelect from '../../components/NoteSelect.astro';
+import { INTERVALS } from '../../scripts/theory';
+---
+
+<Layout title="Interval Calculator">
+  <main class="calc-page">
+    <h1>Interval Calculator</h1>
+    <p class="lead">Pick a starting note and an interval to find the note it lands on.</p>
+
+    <div class="calc-form">
+      <NoteSelect id="start" label="Starting note" />
+      <div class="field">
+        <label class="field-label" for="interval">Interval</label>
+        <select id="interval">
+          {INTERVALS.map((i) => <option value={i.code}>{i.name} ({i.code})</option>)}
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label" for="direction">Direction</label>
+        <select id="direction">
+          <option value="up">Above</option>
+          <option value="down">Below</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="result" aria-live="polite">
+      <div id="chips" class="note-row"></div>
+      <p id="summary" class="summary"></p>
+    </div>
+  </main>
+
+  <script>
+    import { INTERVALS, applyInterval, noteName, parseInterval } from '../../scripts/theory';
+    import { bind, byId, readNote, renderChips } from '../../scripts/ui';
+
+    bind(['start-letter', 'start-acc', 'interval', 'direction'], () => {
+      const start = readNote('start');
+      const interval = INTERVALS.find((i) => i.code === byId('interval').value) ?? parseInterval('P5');
+      const dir = byId('direction').value === 'down' ? 'down' : 'up';
+      const result = applyInterval(start, interval, dir);
+      renderChips(byId<HTMLElement>('chips'), [
+        { name: noteName(start), interval: 'start' },
+        { name: noteName(result), interval: interval.code },
+      ]);
+      const where = dir === 'up' ? 'above' : 'below';
+      const half = interval.semitones === 1 ? 'semitone' : 'semitones';
+      byId<HTMLElement>('summary').textContent =
+        `A ${interval.name.toLowerCase()} ${where} ${noteName(start)} is ${noteName(result)} (${interval.semitones} ${half}).`;
+    });
+  </script>
+</Layout>

@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NoteSelect from '../../components/NoteSelect.astro';
+import { CHORDS } from '../../scripts/theory';
+---
+
+<Layout title="Chord Calculator">
+  <main class="calc-page">
+    <h1>Chord Calculator</h1>
+    <p class="lead">Pick a root and a chord type to see the notes, correctly spelled.</p>
+
+    <div class="calc-form">
+      <NoteSelect id="root" label="Root" />
+      <div class="field">
+        <label class="field-label" for="chord">Chord type</label>
+        <select id="chord">
+          {CHORDS.map((c) => <option value={c.id}>{c.name}</option>)}
+        </select>
+      </div>
+    </div>
+
+    <div class="result" aria-live="polite">
+      <div id="chips" class="note-row"></div>
+      <p id="summary" class="summary"></p>
+    </div>
+  </main>
+
+  <script>
+    import { CHORDS, noteName, spell } from '../../scripts/theory';
+    import { bind, byId, readNote, renderChips } from '../../scripts/ui';
+
+    bind(['root-letter', 'root-acc', 'chord'], () => {
+      const root = readNote('root');
+      const chord = CHORDS.find((c) => c.id === byId('chord').value) ?? CHORDS[0];
+      const notes = spell(root, chord);
+      renderChips(byId<HTMLElement>('chips'), notes);
+      byId<HTMLElement>('summary').textContent =
+        `${noteName(root)} ${chord.name.toLowerCase()}: ${notes.map((n) => n.name).join(' ')}`;
+    });
+  </script>
+</Layout>
