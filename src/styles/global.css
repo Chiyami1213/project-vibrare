@@ -110,7 +110,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 16px 12px;
+  padding: 24px 4px 16px;
   background: var(--r-bg);
   color: var(--r-fg);
   overflow: hidden;
@@ -130,9 +130,9 @@ a {
   display: flex;
   align-items: center;
   gap: 16px;
-  height: 44px;
-  padding: 0 10px;
-  border-radius: 10px;
+  height: 54px;
+  padding: 0 18px; /* centers the 24px icon in the 68px rail */
+  border-radius: 12px;
   color: var(--r-fg);
   text-decoration: none;
   white-space: nowrap;
@@ -188,8 +188,8 @@ a {
 }
 
 .rail .sub a {
-  height: 36px;
-  padding-left: 50px; /* lines up with the parent label */
+  height: 42px;
+  padding-left: 58px; /* lines up with the parent label */
   font-size: 0.92rem;
 }
 
