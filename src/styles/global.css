@@ -262,49 +262,15 @@ html.loading #loader {
   transition: transform 0.9s cubic-bezier(0.7, 0, 0.2, 1);
 }
 
+/* thin seam where the two panels meet, so the "window" is visible */
 #loader .panel-l {
   left: 0;
+  border-right: 1px solid var(--line);
 }
 
 #loader .panel-r {
   right: 0;
-}
-
-.loader-center {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  transition: opacity 0.4s ease;
-}
-
-.loader-text {
-  margin: 0;
-  font-family: var(--serif);
-  font-size: 1.6rem;
-  letter-spacing: 0.04em;
-  color: var(--fg);
-}
-
-.loader-text .dot {
-  animation: blink 1.2s infinite both;
-}
-.loader-text .dot:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.loader-text .dot:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes blink {
-  0%,
-  20% {
-    opacity: 0;
-  }
-  50%,
-  100% {
-    opacity: 1;
-  }
+  border-left: 1px solid var(--line);
 }
 
 /* The site fades/scales in as the panels open */
@@ -340,10 +306,6 @@ html.loading.open .panel-r {
   transform: translateX(100%);
 }
 
-html.loading.open .loader-center {
-  opacity: 0;
-}
-
 @media (prefers-reduced-motion: reduce) {
   #loader .panel {
     transition: none;
@@ -361,12 +323,14 @@ html.loading.open .loader-center {
   html.loading .page {
     transform: none;
   }
-  .loader-text .dot {
-    animation: none;
-  }
 }
 
 /* ---------- Settings page ---------- */
+.section-title {
+  margin: 24px 0 4px;
+  font-size: 1.1rem;
+}
+
 .theme-tiles {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

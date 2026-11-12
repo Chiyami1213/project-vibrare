@@ -13,8 +13,7 @@ const pageTitle = title ? `${title} · ${SITE}` : SITE;
 // Menu: adding an item is one line in `top` or `bottom`.
 // `icon` must be a key of ICONS below.
 const top = [{ href: '/', label: 'Home', icon: 'home' }];
-const bottom: { href: string; label: string; icon: string }[] = [];
-// e.g. bottom: [{ href: '/settings/', label: 'Settings', icon: 'settings' }]
+const bottom = [{ href: '/settings/', label: 'Settings', icon: 'settings' }];
 
 const ICONS: Record<string, string> = {
   home: '<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/>',
@@ -37,7 +36,8 @@ const isActive = (href: string) =>
     <meta name="generator" content={Astro.generator} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <script is:inline>
-      // Runs before first paint: apply saved theme and start the loading screen.
+      // Runs before first paint: apply saved theme and start the opening animation
+      // (first visit of a browser session, and on every reload).
       (function () {
         var d = document.documentElement;
         try {
@@ -53,8 +53,8 @@ const isActive = (href: string) =>
         } catch (e) {}
         if (show) {
           d.classList.add('loading');
-          setTimeout(function () { d.classList.add('open'); }, 2000);
-          setTimeout(function () { d.classList.remove('loading', 'open'); }, 3000);
+          setTimeout(function () { d.classList.add('open'); }, 250);
+          setTimeout(function () { d.classList.remove('loading', 'open'); }, 1300);
         }
       })();
     </script>
@@ -63,11 +63,6 @@ const isActive = (href: string) =>
     <div id="loader" aria-hidden="true">
       <div class="panel panel-l"></div>
       <div class="panel panel-r"></div>
-      <div class="loader-center">
-        <p class="loader-text">
-          Now Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
-        </p>
-      </div>
     </div>
 
     <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="rail">
