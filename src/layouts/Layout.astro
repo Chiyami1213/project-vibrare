@@ -1,0 +1,122 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  noindex?: boolean;
+}
+
+const SITE = 'Vibrare';
+const { title, noindex = false } = Astro.props;
+const pageTitle = title ? `${title} · ${SITE}` : SITE;
+
+// Menu: adding an item is one line in `top` or `bottom`.
+// `icon` must be a key of ICONS below.
+const top = [{ href: '/', label: 'Home', icon: 'home' }];
+const bottom: { href: string; label: string; icon: string }[] = [];
+// e.g. bottom: [{ href: '/settings/', label: 'Settings', icon: 'settings' }]
+
+const ICONS: Record<string, string> = {
+  home: '<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/>',
+  settings:
+    '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/>',
+};
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href.replace(/\/$/, ''));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <script is:inline>
+      // Runs before first paint: apply saved theme and start the loading screen.
+      (function () {
+        var d = document.documentElement;
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+        } catch (e) {}
+        var show = false;
+        try {
+          var nav = performance.getEntriesByType('navigation')[0];
+          var reload = !!nav && nav.type === 'reload';
+          if (!sessionStorage.getItem('vibrare-seen') || reload) show = true;
+          sessionStorage.setItem('vibrare-seen', '1');
+        } catch (e) {}
+        if (show) {
+          d.classList.add('loading');
+          setTimeout(function () { d.classList.add('open'); }, 2000);
+          setTimeout(function () { d.classList.remove('loading', 'open'); }, 3000);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="loader" aria-hidden="true">
+      <div class="panel panel-l"></div>
+      <div class="panel panel-r"></div>
+      <div class="loader-center">
+        <p class="loader-text">
+          Now Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+        </p>
+      </div>
+    </div>
+
+    <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="rail">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+    </button>
+    <div class="backdrop" hidden></div>
+
+    <nav id="rail" class="rail" aria-label="Main menu">
+      <ul class="rail-top">
+        {top.map((i) => (
+          <li>
+            <a href={i.href} aria-current={isActive(i.href) ? 'page' : undefined}>
+              <svg viewBox="0 0 24 24" aria-hidden="true" set:html={ICONS[i.icon]} />
+              <span class="label">{i.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <ul class="rail-bottom">
+        {bottom.map((i) => (
+          <li>
+            <a href={i.href} aria-current={isActive(i.href) ? 'page' : undefined}>
+              <svg viewBox="0 0 24 24" aria-hidden="true" set:html={ICONS[i.icon]} />
+              <span class="label">{i.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="page">
+      <slot />
+    </div>
+
+    <script>
+      const btn = document.querySelector<HTMLButtonElement>('.menu-btn')!;
+      const backdrop = document.querySelector<HTMLElement>('.backdrop')!;
+      const rail = document.getElementById('rail')!;
+      function setOpen(open: boolean) {
+        rail.classList.toggle('drawer-open', open);
+        backdrop.hidden = !open;
+        btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      }
+      btn.addEventListener('click', () => setOpen(!rail.classList.contains('drawer-open')));
+      backdrop.addEventListener('click', () => setOpen(false));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    </script>
+  </body>
+</html>
