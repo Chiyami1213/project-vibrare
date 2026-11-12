@@ -9,6 +9,7 @@ export interface MenuLink {
 interface Props {
   item: MenuLink;
   path: string;
+  flat?: boolean; // main-menu view: show the item alone, without its sub-tabs
 }
 
 const ICONS: Record<string, string> = {
@@ -42,22 +43,23 @@ const ICONS: Record<string, string> = {
     '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/>',
 };
 
-const { item, path } = Astro.props;
+const { item, path, flat = false } = Astro.props;
 const norm = (p: string) => p.replace(/\/$/, '') || '/';
 const here = norm(path);
 const exact = (href: string) => norm(href) === here;
 // In this item's section = its own page or any page below it (Home only matches itself).
 const inSection = item.href === '/' ? here === '/' : here === norm(item.href) || here.startsWith(norm(item.href) + '/');
 const hasSub = !!item.children?.length;
+const showSub = hasSub && !flat;
 ---
 
-<li class:list={[{ 'has-sub': hasSub, open: hasSub && inSection }]}>
+<li class:list={[{ 'has-sub': showSub, open: hasSub && inSection }]}>
   <a href={item.href} aria-current={exact(item.href) ? 'page' : undefined}>
     <svg viewBox="0 0 24 24" aria-hidden="true" set:html={ICONS[item.icon]} />
     <span class="label">{item.label}</span>
   </a>
   {
-    hasSub && (
+    showSub && (
       <div class="sub-wrap">
         <ul class="sub">
           {item.children!.map((c) => <Astro.self item={c} path={path} />)}
