@@ -220,6 +220,11 @@ a {
   color: var(--r-fg-hi);
 }
 
+/* Third level: the nested list and its guide line hang off the level-2 icon column */
+.rail .sub .sub-wrap {
+  margin-left: 24px;
+}
+
 /* Desktop: hover / keyboard focus expands the rail OVER the page */
 @media (hover: hover) and (min-width: 761px) {
   .rail:hover,

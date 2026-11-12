@@ -16,29 +16,31 @@ const pageTitle = title ? `${title} · ${SITE}` : SITE;
 // (`icon` is a key of ICONS in components/MenuItem.astro; `children` makes sub-tabs).
 const top: MenuLink[] = [
   { href: '/', label: 'Home', icon: 'home' },
-  { href: '/tonal-harmony/', label: 'Tonal Harmony', icon: 'layers' },
   {
-    href: '/partimento/',
-    label: 'Partimento',
-    icon: 'score',
+    href: '/theory/',
+    label: 'Theory',
+    icon: 'theory',
     children: [
-      { href: '/partimento/moti-del-basso/', label: 'Moti del Basso', icon: 'stairs' },
-      { href: '/partimento/schemata/', label: 'Schemata', icon: 'grid' },
-      { href: '/partimento/cadences/', label: 'Cadences', icon: 'resolve' },
+      { href: '/theory/tonal-harmony/', label: 'Tonal Harmony', icon: 'layers' },
+      {
+        href: '/theory/partimento/',
+        label: 'Partimento',
+        icon: 'score',
+        children: [
+          { href: '/theory/partimento/moti-del-basso/', label: 'Moti del Basso', icon: 'stairs' },
+          { href: '/theory/partimento/schemata/', label: 'Schemata', icon: 'grid' },
+          { href: '/theory/partimento/cadences/', label: 'Cadences', icon: 'resolve' },
+        ],
+      },
+      { href: '/theory/counterpoint/', label: 'Counterpoint', icon: 'weave' },
     ],
-  },
-  {
-    href: '/counterpoint/',
-    label: 'Counterpoint',
-    icon: 'weave',
-    children: [{ href: '/counterpoint/fugue/', label: 'Fugue', icon: 'entries' }],
   },
   {
     href: '/analysis/',
     label: 'Analysis',
     icon: 'analysis',
     children: [
-      { href: '/analysis/bach/', label: 'Bach', icon: 'feather' },
+      { href: '/analysis/bach-fugue/', label: 'Bach Fugue', icon: 'entries' },
       { href: '/analysis/touhou/', label: 'Touhou', icon: 'music' },
     ],
   },

@@ -1,9 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-// Blank sub-pages of Counterpoint (linked from the menu).
+// Blank sub-pages of Theory that have no sub-tabs of their own.
 export function getStaticPaths() {
-  return [{ params: { sub: 'fugue' }, props: { title: 'Fugue' } }];
+  return [{ params: { sub: 'tonal-harmony' }, props: { title: 'Tonal Harmony' } }];
 }
 
 const { title } = Astro.props;
