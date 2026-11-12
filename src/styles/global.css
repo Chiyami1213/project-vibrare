@@ -326,6 +326,14 @@ html.loading.open .panel-r {
 }
 
 /* ---------- Settings page ---------- */
+/* Centered column */
+.settings {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .section-title {
   margin: 24px 0 4px;
   font-size: 1.1rem;
@@ -335,7 +343,6 @@ html.loading.open .panel-r {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
-  max-width: 560px;
   margin: 8px 0 32px;
 }
 
@@ -375,7 +382,6 @@ html.loading.open .panel-r {
 }
 
 .help {
-  max-width: 560px;
   color: var(--muted);
 }
 
