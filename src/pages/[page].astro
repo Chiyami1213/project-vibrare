@@ -12,7 +12,6 @@ export function getStaticPaths() {
     ['rocketry', 'Rocketry'],
     ['music', 'Music'],
     ['documents', 'Documents'],
-    ['contact', 'Contact'],
   ];
   return pages.map(([page, title]) => ({ params: { page }, props: { title } }));
 }
