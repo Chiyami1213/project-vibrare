@@ -1,0 +1,144 @@
+{
+ "samples": [
+  {
+   "file": "harpsichord-french-D0.mp3",
+   "midi": 26.004,
+   "labelMidi": 26
+  },
+  {
+   "file": "harpsichord-french-Gs0.mp3",
+   "midi": 32.025,
+   "labelMidi": 32
+  },
+  {
+   "file": "harpsichord-french-As0.mp3",
+   "midi": 34.003,
+   "labelMidi": 34
+  },
+  {
+   "file": "harpsichord-french-C1.mp3",
+   "midi": 36.047,
+   "labelMidi": 36
+  },
+  {
+   "file": "harpsichord-french-D1.mp3",
+   "midi": 38.003,
+   "labelMidi": 38
+  },
+  {
+   "file": "harpsichord-french-E1.mp3",
+   "midi": 40.0,
+   "labelMidi": 40
+  },
+  {
+   "file": "harpsichord-french-Fs1.mp3",
+   "midi": 42.017,
+   "labelMidi": 42
+  },
+  {
+   "file": "harpsichord-french-Gs1.mp3",
+   "midi": 44.031,
+   "labelMidi": 44
+  },
+  {
+   "file": "harpsichord-french-As1.mp3",
+   "midi": 46.021,
+   "labelMidi": 46
+  },
+  {
+   "file": "harpsichord-french-C2.mp3",
+   "midi": 48.036,
+   "labelMidi": 48
+  },
+  {
+   "file": "harpsichord-french-D2.mp3",
+   "midi": 50.017,
+   "labelMidi": 50
+  },
+  {
+   "file": "harpsichord-french-E2.mp3",
+   "midi": 52.054,
+   "labelMidi": 52
+  },
+  {
+   "file": "harpsichord-french-Fs2.mp3",
+   "midi": 54.037,
+   "labelMidi": 54
+  },
+  {
+   "file": "harpsichord-french-Gs2.mp3",
+   "midi": 56.049,
+   "labelMidi": 56
+  },
+  {
+   "file": "harpsichord-french-As2.mp3",
+   "midi": 58.024,
+   "labelMidi": 58
+  },
+  {
+   "file": "harpsichord-french-C3.mp3",
+   "midi": 60.044,
+   "labelMidi": 60
+  },
+  {
+   "file": "harpsichord-french-D3.mp3",
+   "midi": 62.03,
+   "labelMidi": 62
+  },
+  {
+   "file": "harpsichord-french-E3.mp3",
+   "midi": 64.064,
+   "labelMidi": 64
+  },
+  {
+   "file": "harpsichord-french-Fs3.mp3",
+   "midi": 66.026,
+   "labelMidi": 66
+  },
+  {
+   "file": "harpsichord-french-Gs3.mp3",
+   "midi": 68.037,
+   "labelMidi": 68
+  },
+  {
+   "file": "harpsichord-french-As3.mp3",
+   "midi": 70.042,
+   "labelMidi": 70
+  },
+  {
+   "file": "harpsichord-french-C4.mp3",
+   "midi": 72.049,
+   "labelMidi": 72
+  },
+  {
+   "file": "harpsichord-french-D4.mp3",
+   "midi": 74.049,
+   "labelMidi": 74
+  },
+  {
+   "file": "harpsichord-french-E4.mp3",
+   "midi": 76.06,
+   "labelMidi": 76
+  },
+  {
+   "file": "harpsichord-french-Fs4.mp3",
+   "midi": 78.034,
+   "labelMidi": 78
+  },
+  {
+   "file": "harpsichord-french-Gs4.mp3",
+   "midi": 80.025,
+   "labelMidi": 80
+  },
+  {
+   "file": "harpsichord-french-As4.mp3",
+   "midi": 81.998,
+   "labelMidi": 82
+  },
+  {
+   "file": "harpsichord-french-C5.mp3",
+   "midi": 84.04,
+   "labelMidi": 84
+  }
+ ]
+}

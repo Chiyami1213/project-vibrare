@@ -1,0 +1,109 @@
+{
+ "samples": [
+  {
+   "file": "organ-pipe-C1.mp3",
+   "midi": 35.969,
+   "labelMidi": 36
+  },
+  {
+   "file": "organ-pipe-Ds1.mp3",
+   "midi": 39.03,
+   "labelMidi": 39
+  },
+  {
+   "file": "organ-pipe-Fs1.mp3",
+   "midi": 42.185,
+   "labelMidi": 42
+  },
+  {
+   "file": "organ-pipe-A1.mp3",
+   "midi": 45.003,
+   "labelMidi": 45
+  },
+  {
+   "file": "organ-pipe-C2.mp3",
+   "midi": 48.009,
+   "labelMidi": 48
+  },
+  {
+   "file": "organ-pipe-Ds2.mp3",
+   "midi": 51.043,
+   "labelMidi": 51
+  },
+  {
+   "file": "organ-pipe-Fs2.mp3",
+   "midi": 54.052,
+   "labelMidi": 54
+  },
+  {
+   "file": "organ-pipe-A2.mp3",
+   "midi": 57.04,
+   "labelMidi": 57
+  },
+  {
+   "file": "organ-pipe-C3.mp3",
+   "midi": 60.026,
+   "labelMidi": 60
+  },
+  {
+   "file": "organ-pipe-Ds3.mp3",
+   "midi": 63.005,
+   "labelMidi": 63
+  },
+  {
+   "file": "organ-pipe-Fs3.mp3",
+   "midi": 66.004,
+   "labelMidi": 66
+  },
+  {
+   "file": "organ-pipe-A3.mp3",
+   "midi": 68.974,
+   "labelMidi": 69
+  },
+  {
+   "file": "organ-pipe-C4.mp3",
+   "midi": 71.966,
+   "labelMidi": 72
+  },
+  {
+   "file": "organ-pipe-Ds4.mp3",
+   "midi": 74.971,
+   "labelMidi": 75
+  },
+  {
+   "file": "organ-pipe-Fs4.mp3",
+   "midi": 77.999,
+   "labelMidi": 78
+  },
+  {
+   "file": "organ-pipe-A4.mp3",
+   "midi": 80.997,
+   "labelMidi": 81
+  },
+  {
+   "file": "organ-pipe-C5.mp3",
+   "midi": 83.968,
+   "labelMidi": 84
+  },
+  {
+   "file": "organ-pipe-Ds5.mp3",
+   "midi": 86.923,
+   "labelMidi": 87
+  },
+  {
+   "file": "organ-pipe-Fs5.mp3",
+   "midi": 89.964,
+   "labelMidi": 90
+  },
+  {
+   "file": "organ-pipe-A5.mp3",
+   "midi": 92.979,
+   "labelMidi": 93
+  },
+  {
+   "file": "organ-pipe-C6.mp3",
+   "midi": 95.99,
+   "labelMidi": 96
+  }
+ ]
+}

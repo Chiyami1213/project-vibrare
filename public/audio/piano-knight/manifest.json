@@ -1,0 +1,214 @@
+{
+ "samples": [
+  {
+   "file": "piano-knight-A-1.mp3",
+   "midi": 21.112,
+   "labelMidi": 21
+  },
+  {
+   "file": "piano-knight-B-1.mp3",
+   "midi": 23.372,
+   "labelMidi": 23
+  },
+  {
+   "file": "piano-knight-Cs0.mp3",
+   "midi": 25.213,
+   "labelMidi": 25
+  },
+  {
+   "file": "piano-knight-Ds0.mp3",
+   "midi": 27.084,
+   "labelMidi": 27
+  },
+  {
+   "file": "piano-knight-F0.mp3",
+   "midi": 29.069,
+   "labelMidi": 29
+  },
+  {
+   "file": "piano-knight-G0.mp3",
+   "midi": 30.996,
+   "labelMidi": 31
+  },
+  {
+   "file": "piano-knight-A0.mp3",
+   "midi": 32.979,
+   "labelMidi": 33
+  },
+  {
+   "file": "piano-knight-B0.mp3",
+   "midi": 34.987,
+   "labelMidi": 35
+  },
+  {
+   "file": "piano-knight-Cs1.mp3",
+   "midi": 36.962,
+   "labelMidi": 37
+  },
+  {
+   "file": "piano-knight-Ds1.mp3",
+   "midi": 39.034,
+   "labelMidi": 39
+  },
+  {
+   "file": "piano-knight-F1.mp3",
+   "midi": 41.085,
+   "labelMidi": 41
+  },
+  {
+   "file": "piano-knight-G1.mp3",
+   "midi": 43.054,
+   "labelMidi": 43
+  },
+  {
+   "file": "piano-knight-A1.mp3",
+   "midi": 44.956,
+   "labelMidi": 45
+  },
+  {
+   "file": "piano-knight-B1.mp3",
+   "midi": 47.003,
+   "labelMidi": 47
+  },
+  {
+   "file": "piano-knight-Cs2.mp3",
+   "midi": 49.021,
+   "labelMidi": 49
+  },
+  {
+   "file": "piano-knight-Ds2.mp3",
+   "midi": 51.049,
+   "labelMidi": 51
+  },
+  {
+   "file": "piano-knight-F2.mp3",
+   "midi": 53.036,
+   "labelMidi": 53
+  },
+  {
+   "file": "piano-knight-G2.mp3",
+   "midi": 55.018,
+   "labelMidi": 55
+  },
+  {
+   "file": "piano-knight-A2.mp3",
+   "midi": 57.043,
+   "labelMidi": 57
+  },
+  {
+   "file": "piano-knight-B2.mp3",
+   "midi": 59.025,
+   "labelMidi": 59
+  },
+  {
+   "file": "piano-knight-Cs3.mp3",
+   "midi": 61.048,
+   "labelMidi": 61
+  },
+  {
+   "file": "piano-knight-Ds3.mp3",
+   "midi": 63.07,
+   "labelMidi": 63
+  },
+  {
+   "file": "piano-knight-F3.mp3",
+   "midi": 65.04,
+   "labelMidi": 65
+  },
+  {
+   "file": "piano-knight-G3.mp3",
+   "midi": 67.049,
+   "labelMidi": 67
+  },
+  {
+   "file": "piano-knight-A3.mp3",
+   "midi": 69.061,
+   "labelMidi": 69
+  },
+  {
+   "file": "piano-knight-B3.mp3",
+   "midi": 71.091,
+   "labelMidi": 71
+  },
+  {
+   "file": "piano-knight-Cs4.mp3",
+   "midi": 73.061,
+   "labelMidi": 73
+  },
+  {
+   "file": "piano-knight-Ds4.mp3",
+   "midi": 75.029,
+   "labelMidi": 75
+  },
+  {
+   "file": "piano-knight-F4.mp3",
+   "midi": 77.06,
+   "labelMidi": 77
+  },
+  {
+   "file": "piano-knight-G4.mp3",
+   "midi": 79.065,
+   "labelMidi": 79
+  },
+  {
+   "file": "piano-knight-A4.mp3",
+   "midi": 81.089,
+   "labelMidi": 81
+  },
+  {
+   "file": "piano-knight-B4.mp3",
+   "midi": 83.1,
+   "labelMidi": 83
+  },
+  {
+   "file": "piano-knight-Cs5.mp3",
+   "midi": 85.173,
+   "labelMidi": 85
+  },
+  {
+   "file": "piano-knight-Ds5.mp3",
+   "midi": 87.066,
+   "labelMidi": 87
+  },
+  {
+   "file": "piano-knight-F5.mp3",
+   "midi": 89.133,
+   "labelMidi": 89
+  },
+  {
+   "file": "piano-knight-G5.mp3",
+   "midi": 91.107,
+   "labelMidi": 91
+  },
+  {
+   "file": "piano-knight-A5.mp3",
+   "midi": 93.154,
+   "labelMidi": 93
+  },
+  {
+   "file": "piano-knight-B5.mp3",
+   "midi": 95.136,
+   "labelMidi": 95
+  },
+  {
+   "file": "piano-knight-Cs6.mp3",
+   "midi": 97.127,
+   "labelMidi": 97
+  },
+  {
+   "file": "piano-knight-Ds6.mp3",
+   "midi": 99.262,
+   "labelMidi": 99
+  },
+  {
+   "file": "piano-knight-F6.mp3",
+   "midi": 101.289,
+   "labelMidi": 101
+  },
+  {
+   "file": "piano-knight-G6.mp3",
+   "midi": 103.442,
+   "labelMidi": 103
+  }
+ ]
+}

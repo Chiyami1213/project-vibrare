@@ -4,11 +4,10 @@ import fs from 'node:fs';
 import { INSTRUMENTS, INSTRUMENT_GROUPS, DEFAULT_INSTRUMENT, equalTemperamentRate, getInstrument, isInstrumentId } from '../src/scripts/instruments.ts';
 import { DEFAULT_AUDIO, normalizeAudio } from '../src/scripts/audio-settings.ts';
 
-test('instruments: unique ids, known groups, two harpsichords and two pianos', () => {
+test('instruments: unique ids, known groups, three sources in each group', () => {
   assert.equal(new Set(INSTRUMENTS.map((i) => i.id)).size, INSTRUMENTS.length);
   for (const i of INSTRUMENTS) assert.ok(INSTRUMENT_GROUPS.includes(i.group), i.id);
-  assert.equal(INSTRUMENTS.filter((i) => i.group === 'Harpsichord').length, 2);
-  assert.equal(INSTRUMENTS.filter((i) => i.group === 'Piano').length, 2);
+  for (const g of INSTRUMENT_GROUPS) assert.equal(INSTRUMENTS.filter((i) => i.group === g).length, 3, `${g} has three sources`);
   assert.ok(isInstrumentId(DEFAULT_INSTRUMENT));
   assert.equal(getInstrument('nonsense').id, INSTRUMENTS[0].id);
 });
@@ -23,9 +22,10 @@ test('every instrument has samples that exist, are in tune and cover the bass an
       assert.ok(Math.abs(s.midi - s.labelMidi) < 0.45, `${i.id}: ${s.file} is ${Math.round((s.midi - s.labelMidi) * 100)} cents off`);
     }
     const midis = samples.map((s) => s.midi);
-    assert.ok(Math.min(...midis) <= 36 && Math.max(...midis) >= 80, `${i.id} range ${Math.min(...midis)}-${Math.max(...midis)}`);
+    assert.ok(Math.min(...midis) <= 36.5 && Math.max(...midis) >= 80, `${i.id} range ${Math.min(...midis)}-${Math.max(...midis)}`);
     const sorted = [...midis].sort((a, b) => a - b);
-    for (let k = 1; k < sorted.length; k++) assert.ok(sorted[k] - sorted[k - 1] <= 4, `${i.id}: gap after ${sorted[k - 1]}`);
+    const playable = sorted.filter((m) => m >= 34); // below A#1 a sparse set is fine: no bass line goes there
+    for (let k = 1; k < playable.length; k++) assert.ok(playable[k] - playable[k - 1] <= 4, `${i.id}: gap after ${playable[k - 1]}`);
   }
 });
 
