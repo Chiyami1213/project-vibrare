@@ -3,7 +3,10 @@ import Layout from '../../layouts/Layout.astro';
 
 // Blank sub-pages of Baroque (linked from the menu).
 export function getStaticPaths() {
-  return [{ params: { sub: 'bach' }, props: { title: 'Bach' } }];
+  return [
+    { params: { sub: 'bach' }, props: { title: 'Bach' } },
+    { params: { sub: 'dances' }, props: { title: 'Dances' } },
+  ];
 }
 
 const { title } = Astro.props;
