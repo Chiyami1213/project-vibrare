@@ -5,6 +5,10 @@ import Layout from '../../../layouts/Layout.astro';
 export function getStaticPaths() {
   return [
     { params: { sub: 'cadences' }, props: { title: 'Cadences' } },
+    { params: { sub: 'rule-of-the-octave' }, props: { title: 'Rule of the Octave' } },
+    { params: { sub: 'suspension' }, props: { title: 'Suspension' } },
+    { params: { sub: 'diminution' }, props: { title: 'Diminution' } },
+    { params: { sub: 'fugue' }, props: { title: 'Fugue' } },
   ];
 }
 
