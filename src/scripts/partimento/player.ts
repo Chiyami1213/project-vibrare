@@ -20,6 +20,15 @@ function h<K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Attrs = {}, ...
   return e;
 }
 
+const DEGREES_KEY = 'partimento-degrees';
+const degreesWanted = (): boolean => {
+  try {
+    return localStorage.getItem(DEGREES_KEY) !== 'off';
+  } catch {
+    return true;
+  }
+};
+
 const button = (label: string, cls = 'btn', attrs: Attrs = {}) => h('button', { type: 'button', class: cls, ...attrs }, label);
 
 export async function mountPlayer(root: HTMLElement, original: ExampleData): Promise<void> {
@@ -58,6 +67,7 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
 
   const keySel = h('select', { class: 'pl-select', 'aria-label': 'Key' });
   const exerciseBtn = button('Hide upper voices (exercise)', 'seg-btn', { 'aria-pressed': 'false' });
+  const degreesBtn = button('Scale degrees', 'seg-btn', { 'aria-pressed': String(degreesWanted()) });
 
   const voiceBox = h('div', { class: 'pl-voices' });
 
@@ -68,7 +78,7 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
     score,
     h('div', { class: 'pl-row' }, playBtn, stopBtn, loopBtn, h('label', { class: 'pl-inline' }, 'Tempo ', bpmIn, ' ', bpmOut)),
     h('div', { class: 'pl-row' }, h('span', { class: 'pl-label' }, 'Step'), prevBtn, nextBtn, stepOut),
-    h('div', { class: 'pl-row' }, h('label', { class: 'pl-inline' }, 'Key ', keySel), exerciseBtn),
+    h('div', { class: 'pl-row' }, h('label', { class: 'pl-inline' }, 'Key ', keySel), exerciseBtn, degreesBtn),
     voiceBox,
     note,
     status,
@@ -205,6 +215,22 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
     exerciseBtn.setAttribute('aria-pressed', String(!state.showUpper));
     redraw();
   });
+  // the circled scale degrees under the bass can be switched off; the choice is shared by every example
+  const showDegrees = (on: boolean) => {
+    root.classList.toggle('no-degrees', !on);
+    degreesBtn.setAttribute('aria-pressed', String(on));
+  };
+  showDegrees(degreesWanted());
+  degreesBtn.addEventListener('click', () => {
+    const on = degreesBtn.getAttribute('aria-pressed') !== 'true';
+    try {
+      localStorage.setItem(DEGREES_KEY, on ? 'on' : 'off');
+    } catch {
+      /* private mode: applies to this page only */
+    }
+    window.dispatchEvent(new CustomEvent('partimento-degrees', { detail: on }));
+  });
+  window.addEventListener('partimento-degrees', (e) => showDegrees((e as CustomEvent<boolean>).detail));
   root.addEventListener('keydown', (e) => {
     const target = e.target as HTMLElement;
     if (target.matches('select, input')) return;

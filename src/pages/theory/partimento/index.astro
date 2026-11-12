@@ -29,6 +29,29 @@ const sections = [
     parts: count(CADENCES.groups, CADENCES.patterns),
   },
 ];
+// Sections added recently; their pages are being written.
+const newer = [
+  {
+    href: `${BASE}/rule-of-the-octave/`,
+    title: 'Rule of the Octave',
+    blurb: 'A standard harmonization for each step of the scale in the bass, rising and falling, so a student could accompany any bass line in any key.',
+  },
+  {
+    href: `${BASE}/suspension/`,
+    title: 'Suspension',
+    blurb: 'A note held over from the previous chord that clashes and then resolves downward, written in the figures as 7–6, 9–8 and 4–3.',
+  },
+  {
+    href: `${BASE}/diminution/`,
+    title: 'Diminution',
+    blurb: 'Breaking long notes into shorter ones, with passing notes and figures, to turn a plain bass or harmony into a lively line.',
+  },
+  {
+    href: `${BASE}/fugue/`,
+    title: 'Fugue',
+    blurb: 'Partimento fugues: a bass line that carries a fugue subject, which the student answers in the upper voices.',
+  },
+];
 const total = sections.reduce((n, s) => n + s.patterns, 0);
 ---
 
@@ -36,10 +59,10 @@ const total = sections.reduce((n, s) => n + s.patterns, 0);
   <main class="page-block wide">
     <h1>Partimento</h1>
     <p class="lead">
-      Partimenti were bass-line exercises, figured or unfigured, used in the Italian conservatories of the 18th
-      century to teach keyboard playing and composition together. The student realized the harmony and the upper
-      voices at the keyboard from the bass alone. This section collects the patterns that practice built on: {total}
-      in all, many with scores you can play.
+      A partimento is a bass line, figured or unfigured, that a student turned into a full piece at the keyboard,
+      improvising the harmony and the upper voices above it. The practice grew up in the Italian conservatories of
+      Naples in the 17th and 18th centuries and taught playing and composing together. Pupils learned it by absorbing
+      stock patterns, which this section collects: {total} in all, many with scores you can play.
     </p>
 
     <ul class="pat-grid">
@@ -52,7 +75,25 @@ const total = sections.reduce((n, s) => n + s.patterns, 0);
               <span class="pat-chips">
                 <span class="chip chip-accent">{s.patterns} patterns</span>
               </span>
-              <span class="pat-bass">{s.parts.map((p) => `${p.title} (${p.n})`).join(' · ')}</span>
+              <span class="pat-aka">{s.parts.map((p) => `${p.title} (${p.n})`).join(' · ')}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <h2 class="section-title">New sections</h2>
+    <p class="group-blurb">Recently added. These pages are still being written.</p>
+    <ul class="pat-grid">
+      {
+        newer.map((s) => (
+          <li class="pat-tile">
+            <a href={s.href}>
+              <span class="pat-name">{s.title}</span>
+              <span class="pat-aka">{s.blurb}</span>
+              <span class="pat-chips">
+                <span class="chip chip-accent">New</span>
+              </span>
             </a>
           </li>
         ))

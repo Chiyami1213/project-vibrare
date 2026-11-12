@@ -1,5 +1,5 @@
 ---
-import { DIRECTION_LABEL, degreeTokens, getPattern, urlFor } from '../../data/partimento';
+import { DIRECTION_LABEL, GALANT_LABEL, GALANT_NOTE, degreeTokens, galantOf, getPattern, urlFor } from '../../data/partimento';
 import type { Example, Pattern } from '../../data/partimento';
 
 interface Props {
@@ -39,6 +39,7 @@ const hasScore = allExamples.length > 0;
   {p.aka && p.aka.length > 0 && <p class="lead">Also called {p.aka.join(', ')}</p>}
 
   <div class="pat-chips big">
+    {galantOf(p.id) && <span class={`chip chip-galant chip-${galantOf(p.id)}`}>{GALANT_LABEL[galantOf(p.id)!]}</span>}
     {p.direction && <span class="chip">{DIRECTION_LABEL[p.direction] ?? p.direction}</span>}
     {(p.modes ?? []).map((m) => <span class="chip">{m}</span>)}
     {p.textures && p.textures.length > 0 && <span class="chip">{p.textures.join(', ')} parts</span>}
@@ -70,6 +71,7 @@ const hasScore = allExamples.length > 0;
   }
 
   <p class="summary-text">{p.summary}</p>
+  {galantOf(p.id) && <p class="galant-note muted-line">{GALANT_NOTE[galantOf(p.id)!]}</p>}
 
   {
     p.rules && p.rules.length > 0 && (

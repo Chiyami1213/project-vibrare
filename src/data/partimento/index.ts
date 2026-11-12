@@ -32,6 +32,51 @@ export function urlFor(id: string): string {
 export const motiPatterns = SCHEMATA.patterns.filter((p) => isMoti(p.group));
 export const schemataPatterns = SCHEMATA.patterns.filter((p) => !isMoti(p.group));
 
+/**
+ * Is a schema galant? Judged against Gjerdingen, Music in the Galant Style (2007), whose catalogue of galant
+ * schemata includes the Romanesca, Prinner, Do-Re-Mi, Sol-Fa-Mi, Meyer, Aprile, Pastorella, Jupiter, Fonte, Monte,
+ * Ponte, Indugio, Fenaroli and Quiescenza (also listed on Wikipedia, "Galant schemata"). This is a site-side
+ * label; the content pack itself is unchanged.
+ * - galant:   in that catalogue
+ * - variant:  a variant or combination built from galant schemata, with no entry of its own there
+ * - pregalant: a bass formula older than the galant style
+ */
+export type GalantStatus = 'galant' | 'variant' | 'pregalant';
+
+const GALANT: Record<string, GalantStatus> = {
+  'romanesca-leaping': 'galant',
+  'romanesca-stepwise': 'galant',
+  prinner: 'galant',
+  'do-re-mi': 'galant',
+  'sol-fa-mi': 'galant',
+  meyer: 'galant',
+  aprile: 'galant',
+  pastorella: 'galant',
+  jupiter: 'galant',
+  fonte: 'galant',
+  monte: 'galant',
+  ponte: 'galant',
+  indugio: 'galant',
+  fenaroli: 'galant',
+  quiescenza: 'galant',
+  'stabat-mater-prinner': 'variant',
+  'paired-do-re-mi': 'variant',
+  'monte-romanesca': 'variant',
+  'romanesca-prinner': 'variant',
+  folia: 'pregalant',
+};
+
+export const galantOf = (id: string): GalantStatus | undefined => GALANT[id];
+
+export const GALANT_LABEL: Record<GalantStatus, string> = { galant: 'Galant', variant: 'Galant variant', pregalant: 'Pre-galant' };
+
+export const GALANT_NOTE: Record<GalantStatus, string> = {
+  galant: "A galant schema: it is in the catalogue of Robert Gjerdingen's Music in the Galant Style (2007).",
+  variant:
+    "A variant or combination built from galant schemata. Gjerdingen's catalogue does not list it as an entry of its own.",
+  pregalant: "An older bass formula (from the late 15th century), not one of the galant schemata of Gjerdingen's catalogue.",
+};
+
 export const DIRECTION_LABEL: Record<string, string> = {
   ASC: 'Rising',
   DSC: 'Falling',

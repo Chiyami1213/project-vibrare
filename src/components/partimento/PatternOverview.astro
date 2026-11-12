@@ -1,5 +1,5 @@
 ---
-import { DIRECTION_LABEL, patternsIn, urlFor } from '../../data/partimento';
+import { DIRECTION_LABEL, GALANT_LABEL, galantOf, patternsIn, urlFor } from '../../data/partimento';
 import type { Group } from '../../data/partimento';
 
 interface Props {
@@ -7,6 +7,7 @@ interface Props {
 }
 const { groups } = Astro.props;
 const sections = groups.map((g) => ({ group: g, patterns: patternsIn(g.id) }));
+const hasGalant = sections.some((s) => s.patterns.some((p) => galantOf(p.id)));
 const directions = [...new Set(sections.flatMap((s) => s.patterns.map((p) => p.direction).filter(Boolean)))] as string[];
 ---
 
@@ -23,6 +24,18 @@ const directions = [...new Set(sections.flatMap((s) => s.patterns.map((p) => p.d
         {directions.map((d) => <button type="button" class="seg-btn" data-dir={d} aria-pressed="false">{DIRECTION_LABEL[d] ?? d}</button>)}
       </div>
     </div>
+    {
+      hasGalant && (
+        <div class="field">
+          <span class="field-label" id="style-label">Style</span>
+          <div class="seg-group" role="group" aria-labelledby="style-label" id="style-filter">
+            <button type="button" class="seg-btn" data-style="" aria-pressed="true">All</button>
+            <button type="button" class="seg-btn" data-style="galant" aria-pressed="false">Galant</button>
+            <button type="button" class="seg-btn" data-style="other" aria-pressed="false">Not galant</button>
+          </div>
+        </div>
+      )
+    }
     <div class="field">
       <span class="field-label" id="mode-label">Mode</span>
       <div class="seg-group" role="group" aria-labelledby="mode-label" id="mode-filter">
@@ -47,12 +60,14 @@ const directions = [...new Set(sections.flatMap((s) => s.patterns.map((p) => p.d
               data-search={`${p.name} ${(p.aka ?? []).join(' ')}`.toLowerCase()}
               data-dir={p.direction ?? ''}
               data-modes={(p.modes ?? []).join(' ')}
+              data-style={galantOf(p.id) ? (galantOf(p.id) === 'pregalant' ? 'other' : 'galant') : ''}
             >
               <a href={urlFor(p.id)}>
                 <span class="pat-name">{p.name}</span>
                 {p.aka && p.aka.length > 0 && <span class="pat-aka">{p.aka.slice(0, 2).join(' · ')}</span>}
                 {p.bass && <span class="pat-bass" title="Bass">{p.bass.replace(/\s*\(.*$/, '')}</span>}
                 <span class="pat-chips">
+                  {galantOf(p.id) && <span class={`chip chip-galant chip-${galantOf(p.id)}`}>{GALANT_LABEL[galantOf(p.id)!]}</span>}
                   {p.direction && <span class="chip">{DIRECTION_LABEL[p.direction] ?? p.direction}</span>}
                   {(p.modes ?? []).map((m) => <span class="chip">{m}</span>)}
                   {p.textures && p.textures.length > 0 && <span class="chip">{p.textures.join('/')} parts</span>}
@@ -74,6 +89,7 @@ const directions = [...new Set(sections.flatMap((s) => s.patterns.map((p) => p.d
     const empty = root.querySelector<HTMLElement>('#pat-empty')!;
     let dir = '';
     let mode = '';
+    let style = '';
 
     function apply() {
       const q = search.value.trim().toLowerCase();
@@ -82,14 +98,15 @@ const directions = [...new Set(sections.flatMap((s) => s.patterns.map((p) => p.d
         const ok =
           (!q || (t.dataset.search ?? '').includes(q)) &&
           (!dir || t.dataset.dir === dir) &&
-          (!mode || (t.dataset.modes ?? '').split(' ').includes(mode));
+          (!mode || (t.dataset.modes ?? '').split(' ').includes(mode)) &&
+          (!style || t.dataset.style === style);
         t.hidden = !ok;
         if (ok) shown++;
       });
       groups.forEach((g) => (g.hidden = !g.querySelector('.pat-tile:not([hidden])')));
       empty.hidden = shown > 0;
     }
-    function wire(boxId: string, attr: 'dir' | 'mode', set: (v: string) => void) {
+    function wire(boxId: string, attr: 'dir' | 'mode' | 'style', set: (v: string) => void) {
       const buttons = [...root.querySelectorAll<HTMLButtonElement>(`#${boxId} .seg-btn`)];
       buttons.forEach((b) =>
         b.addEventListener('click', () => {
@@ -101,6 +118,7 @@ const directions = [...new Set(sections.flatMap((s) => s.patterns.map((p) => p.d
     }
     wire('dir-filter', 'dir', (v) => (dir = v));
     wire('mode-filter', 'mode', (v) => (mode = v));
+    wire('style-filter', 'style', (v) => (style = v));
     search.addEventListener('input', apply);
   </script>
 </div>

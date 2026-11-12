@@ -95,7 +95,7 @@ a {
 }
 
 .home-quote {
-  max-width: 34em;
+  max-width: 64em; /* wide enough for one line on a desktop window; it wraps only when the window is narrow */
   margin: 0;
   text-align: center;
   color: var(--muted, inherit);
@@ -330,6 +330,10 @@ a {
   .rail:hover li.has-sub.open > .sub-wrap,
   .rail:focus-within li.has-sub.open > .sub-wrap {
     grid-template-rows: 1fr;
+  }
+  /* third level (inside a section view): open only while the mouse is over the parent, or it has keyboard focus */
+  .rail .view-section .sub li.has-sub:not(:hover):not(:focus-within) > .sub-wrap {
+    grid-template-rows: 0fr;
   }
 }
 
@@ -1313,6 +1317,20 @@ button.btn {
   font-size: 0.8rem;
 }
 
+.chip-galant {
+  border-color: #b8860b;
+  color: #b8860b;
+}
+
+.chip-variant {
+  border-style: dashed;
+}
+
+.chip-pregalant {
+  border-color: var(--muted);
+  color: var(--muted);
+}
+
 .chip-accent {
   border-color: var(--accent);
   color: var(--accent);
@@ -1585,7 +1603,7 @@ button.note-chip[aria-pressed='true'] {
 }
 
 .score-box {
-  overflow-x: auto;
+  overflow-x: hidden; /* the score is drawn to fit; it wraps onto another line instead of scrolling */
   color: var(--fg); /* VexFlow draws in currentColor */
 }
 
@@ -1603,6 +1621,10 @@ button.note-chip[aria-pressed='true'] {
   /* lining figures: Georgia's old-style numerals sit at different heights (a 3 hangs below an 8) */
   font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
   font-variant-numeric: lining-nums;
+}
+
+.no-degrees .score .deg {
+  display: none;
 }
 
 .score .deg {

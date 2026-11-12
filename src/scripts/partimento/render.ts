@@ -154,10 +154,10 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
 
   // ---- widths and the split into systems
   const modifiers = (first: boolean, withTime: boolean) => (first ? 58 + accidentals * 11 + (withTime ? 28 : 0) : 0);
-  const measureWidth = (m: number, first: boolean, withTime: boolean) =>
-    Math.max(54 + plans[m].onsets * 34, plans[m].minWidth + 34) + modifiers(first, withTime);
+  const needOf = (m: number) => Math.max(54 + plans[m].onsets * 34, plans[m].minWidth + 34); // room the notes need
+  const measureWidth = (m: number, first: boolean, withTime: boolean) => needOf(m) + modifiers(first, withTime);
   const usable = Math.max(300, opts.width - 24);
-  const systems: number[][] = [];
+  let systems: number[][] = [];
   let line: number[] = [];
   let used = 0;
   for (let m = 0; m < bars; m++) {
@@ -174,6 +174,41 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
   }
   if (line.length) systems.push(line);
 
+  // Balance the lines: 6 bars that need two lines read better as 3 + 3 than as 5 + 1.
+  if (systems.length > 1) {
+    const k = systems.length;
+    const base = Math.floor(bars / k);
+    const extra = bars % k;
+    const balanced: number[][] = [];
+    let at = 0;
+    for (let si = 0; si < k; si++) {
+      const size = base + (si < extra ? 1 : 0);
+      balanced.push(Array.from({ length: size }, (_, i) => at + i));
+      at += size;
+    }
+    const fits = balanced.every((g, si) => g.length > 0 && g.reduce((a, m, i) => a + measureWidth(m, i === 0, si === 0 && i === 0), 0) <= usable);
+    if (fits) systems = balanced;
+  }
+
+  /** Split `avail` px between bars: equal shares, except a bar with many notes keeps the room it needs. */
+  const shareWidths = (needs: number[], avail: number): number[] => {
+    const total = needs.reduce((a, b) => a + b, 0);
+    if (total >= avail) return needs.map((n) => (n * avail) / total);
+    const fixed = new Set<number>();
+    let share = avail / needs.length;
+    for (;;) {
+      const free = needs.length - fixed.size;
+      const left = avail - [...fixed].reduce((a, i) => a + needs[i], 0);
+      share = left / free;
+      const crowded = needs.findIndex((n, i) => !fixed.has(i) && n > share);
+      if (crowded < 0) break;
+      fixed.add(crowded);
+    }
+    return needs.map((n, i) => (fixed.has(i) ? n : share));
+  };
+  const firstBar = (si: number) => modifiers(true, si === 0);
+  const firstLineBar = (usable - firstBar(0)) / systems[0].length; // the width of an ordinary bar on line one
+
   const figDrop = Math.max(0, lowestReach - 12); // extra gap before the figure row
   const sysHeight = SYSTEM_TOP + (hasTreble ? STAVE_GAP : 0) + STAVE_H + 38 + figDrop + figRows * FIG_ROW + 34;
   const renderer = new Renderer(container as HTMLDivElement, Renderer.Backends.SVG);
@@ -184,16 +219,16 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
 
   // ---- pass 2: draw
   const xOf = new Map<number, { x: number; sys: number }>(); // onset tick -> x and system
-  const prev: ({ note: StaveNote } | null)[][] = rows.map((r) => r.voices.map(() => null));
+  const prev: ({ note: StaveNote; sys: number } | null)[][] = rows.map((r) => r.voices.map(() => null));
 
   systems.forEach((measures, si) => {
     const top = si * sysHeight + SYSTEM_TOP;
-    const natural = measures.map((m, i) => measureWidth(m, i === 0, si === 0 && i === 0));
-    const scale = usable / natural.reduce((a, b) => a + b, 0);
-    // fill the line; only the unfinished last line of a longer score keeps its natural spacing
+    const needs = measures.map(needOf);
     const lastOfMany = systems.length > 1 && si === systems.length - 1;
-    const factor = scale < 1 ? scale : Math.min(scale, lastOfMany ? 1.5 : 4);
-    const widths = natural.map((w) => w * factor);
+    let avail = usable - firstBar(si);
+    // an unfinished last line keeps the bar width of the lines above instead of stretching its few bars
+    if (lastOfMany) avail = Math.max(Math.min(avail, measures.length * firstLineBar), needs.reduce((a, b) => a + b, 0));
+    const widths = shareWidths(needs, avail).map((w, i) => w + (i === 0 ? firstBar(si) : 0));
     let x = 12;
 
     measures.forEach((m, mi) => {
@@ -244,12 +279,16 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
               const p = prev[ri][vi];
               if (before) {
                 new StaveTie({ firstNote: before, lastNote: note, firstIndexes: [0], lastIndexes: [0] }).setContext(ctx).draw();
+              } else if (p && p.sys === si) {
+                // across a bar line on the same line: one tie from note to note
+                new StaveTie({ firstNote: p.note, lastNote: note, firstIndexes: [0], lastIndexes: [0] }).setContext(ctx).draw();
               } else if (p) {
+                // across a line break: the tie leaves the end of one line and arrives at the start of the next
                 new StaveTie({ firstNote: p.note, lastNote: null, firstIndexes: [0], lastIndexes: [0] }).setContext(ctx).draw();
                 new StaveTie({ firstNote: null, lastNote: note, firstIndexes: [0], lastIndexes: [0] }).setContext(ctx).draw();
               }
             }
-            prev[ri][vi] = { note };
+            prev[ri][vi] = { note, sys: si };
           });
         }),
       );
