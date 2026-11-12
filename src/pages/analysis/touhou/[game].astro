@@ -15,7 +15,7 @@ const { game, prev, next } = Astro.props;
 
 <Layout title={`${gameLabel(game)} ${game.titleJa}`}>
   <main class="page-block wide">
-    <p class="crumb"><a href="/analysis/touhou/">← All games</a></p>
+    <p class="crumb"><a class="btn" href="/analysis/touhou/">← All games</a></p>
 
     <h1>
       <span class="game-num">{gameLabel(game)}</span>
@@ -42,8 +42,8 @@ const { game, prev, next } = Astro.props;
     </ol>
 
     <nav class="game-nav" aria-label="Other games">
-      {prev ? <a href={`/analysis/touhou/${prev.id}/`}>← {gameLabel(prev)} <span lang="ja">{prev.titleJa}</span></a> : <span />}
-      {next ? <a href={`/analysis/touhou/${next.id}/`}>{gameLabel(next)} <span lang="ja">{next.titleJa}</span> →</a> : <span />}
+      {prev ? <a class="btn" href={`/analysis/touhou/${prev.id}/`}>← {gameLabel(prev)} <span lang="ja">{prev.titleJa}</span></a> : <span />}
+      {next ? <a class="btn" href={`/analysis/touhou/${next.id}/`}>{gameLabel(next)} <span lang="ja">{next.titleJa}</span> →</a> : <span />}
     </nav>
   </main>
 </Layout>
