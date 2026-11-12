@@ -8,12 +8,20 @@ export function readNote(id: string) {
   return makeRoot(Number(byId(`${id}-letter`).value), Number(byId(`${id}-acc`).value));
 }
 
-/** Draw notes as chips: the note name large, its interval above the root small. */
-export function renderChips(container: HTMLElement, notes: SpelledNote[]) {
+/**
+ * Draw notes as chips: the note name large, its interval above the root small.
+ * With `onSelect`, each chip is a button that reports its index when pressed.
+ */
+export function renderChips(container: HTMLElement, notes: SpelledNote[], onSelect?: (index: number) => void) {
   container.replaceChildren(
-    ...notes.map((n) => {
-      const chip = document.createElement('div');
+    ...notes.map((n, i) => {
+      const chip = document.createElement(onSelect ? 'button' : 'div');
       chip.className = 'note-chip';
+      if (onSelect) {
+        (chip as HTMLButtonElement).type = 'button';
+        chip.setAttribute('aria-pressed', 'false');
+        chip.addEventListener('click', () => onSelect(i));
+      }
       const name = document.createElement('span');
       name.className = 'note-name';
       name.textContent = n.name;

@@ -59,3 +59,38 @@ test('neighbours and chords', () => {
   assert.equal(keyInfo(5, 'major').dominant, 'F♯ major'); // sharp side keeps F♯
   assert.equal(keyInfo(8, 'major').subdominant, 'D♭ major');
 });
+
+import { chordShape, diatonicChords, noteToPc, pcPosition } from '../src/scripts/circle.ts';
+
+test('pitch classes sit on the circle of fifths', () => {
+  assert.equal(pcPosition(0), 0); // C
+  assert.equal(pcPosition(7), 1); // G
+  assert.equal(pcPosition(2), 2); // D
+  assert.equal(pcPosition(6), 6); // F sharp
+  assert.equal(pcPosition(5), 11); // F
+  assert.equal(noteToPc(1, -1), 1); // D flat
+});
+
+test('chord shapes: triangle, square, equilateral triangle', () => {
+  const C = (...pcs) => chordShape(pcs);
+  assert.equal(C(0, 4, 7).name, 'Triangle'); // C major triad
+  assert.deepEqual(C(0, 4, 7).gaps, [1, 3, 8]);
+  assert.equal(C(0, 4, 8).name, 'Equilateral triangle'); // C augmented
+  assert.equal(C(0, 3, 6, 9).name, 'Square'); // C diminished 7th
+  assert.deepEqual(C(0, 3, 6, 9).gaps, [3, 3, 3, 3]);
+  assert.equal(C(0, 4, 7, 10).name, 'Quadrilateral'); // C7
+  assert.equal(C(0, 2, 4, 6, 8, 10).name, 'Regular hexagon'); // whole-tone set
+  assert.equal(C(0, 4, 7, 11, 2).name, 'Pentagon'); // Cmaj9
+  for (const s of [C(0, 4, 7), C(0, 3, 6, 9), C(0, 2, 4, 6, 8, 10)]) assert.equal(s.gaps.reduce((a, b) => a + b, 0), 12);
+});
+
+test('diatonic chords of a key', () => {
+  const g = diatonicChords(1, 'major'); // G major
+  assert.deepEqual(g.map((c) => c.roman), ['I', 'ii', 'iii', 'IV', 'V', 'vi', 'vii°']);
+  assert.deepEqual(g.map((c) => c.chordId), ['major', 'minor', 'minor', 'major', 'major', 'minor', 'diminished']);
+  assert.deepEqual([g[6].letter, g[6].alter], [3, 1]); // F sharp
+  const g7 = diatonicChords(1, 'major', true);
+  assert.deepEqual(g7.map((c) => c.roman), ['Imaj7', 'ii7', 'iii7', 'IVmaj7', 'V7', 'vi7', 'viiø7']);
+  const am = diatonicChords(0, 'minor', true);
+  assert.deepEqual(am.map((c) => c.roman), ['i7', 'iiø7', 'IIImaj7', 'iv7', 'v7', 'VImaj7', 'VII7']);
+});

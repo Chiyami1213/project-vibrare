@@ -1,5 +1,5 @@
 // Circle of fifths data and helpers (no DOM).
-import { SCALES, makeRoot, noteName, spell, type SpelledNote } from './theory.ts';
+import { SCALES, applyInterval, makeRoot, noteName, parseInterval, spell, type SpelledNote } from './theory.ts';
 
 export type Mode = 'major' | 'minor';
 
@@ -104,4 +104,63 @@ export function keyInfo(position: number, mode: Mode): KeyInfo {
     scale: notes.map((n, i) => ({ name: n.name, interval: String(i + 1) })),
     chords: notes.map((n, i) => ({ name: n.name + QUALITY[mode][i], interval: ROMAN[mode][i] })),
   };
+}
+
+// ---------- Chord shapes on the circle ----------
+
+const NATURAL = [0, 2, 4, 5, 7, 9, 11];
+
+/** Position (0-11, clockwise from C at the top) of a pitch class on the circle of fifths. */
+export const pcPosition = (pc: number) => (((pc % 12) + 12) * 7) % 12;
+
+export const noteToPc = (letter: number, alter: number) => (((NATURAL[letter] + alter) % 12) + 12) % 12;
+
+export interface Shape {
+  positions: number[]; // clockwise, starting from the first vertex after C
+  gaps: number[]; // steps around the circle between neighbouring vertices (they sum to 12)
+  name: string;
+}
+
+/** Join pitch classes on the circle of fifths and describe the polygon they make. */
+export function chordShape(pcs: number[]): Shape {
+  const positions = [...new Set(pcs.map(pcPosition))].sort((a, b) => a - b);
+  const n = positions.length;
+  const gaps = positions.map((p, i) => (positions[(i + 1) % n] - p + 12) % 12 || 12);
+  const regular = n > 2 && gaps.every((g) => g === gaps[0]);
+  const names: Record<number, string> = { 2: 'Line', 3: 'Triangle', 4: 'Quadrilateral', 5: 'Pentagon', 6: 'Hexagon', 7: 'Heptagon' };
+  let name = names[n] ?? `${n}-sided shape`;
+  if (regular) name = n === 3 ? 'Equilateral triangle' : n === 4 ? 'Square' : n === 6 ? 'Regular hexagon' : name;
+  return { positions, gaps, name };
+}
+
+export interface DiatonicChord {
+  roman: string;
+  letter: number;
+  alter: number;
+  chordId: string;
+}
+
+const TRIAD_IDS: Record<Mode, string[]> = {
+  major: ['major', 'minor', 'minor', 'major', 'major', 'minor', 'diminished'],
+  minor: ['minor', 'diminished', 'major', 'minor', 'minor', 'major', 'major'],
+};
+const SEVENTH_IDS: Record<Mode, string[]> = {
+  major: ['major-7', 'minor-7', 'minor-7', 'major-7', 'dominant-7', 'minor-7', 'half-diminished-7'],
+  minor: ['minor-7', 'half-diminished-7', 'major-7', 'minor-7', 'minor-7', 'major-7', 'dominant-7'],
+};
+const SEVENTH_SUFFIX: Record<string, string> = { 'major-7': 'maj7', 'minor-7': '7', 'dominant-7': '7', 'half-diminished-7': 'ø7' };
+
+/** The seven chords built on the degrees of a key, as triads or seventh chords. */
+export function diatonicChords(position: number, mode: Mode, sevenths = false): DiatonicChord[] {
+  const key = CIRCLE[wrap(position)];
+  const tonic = mode === 'major' ? key.major : key.minor;
+  const pattern = SCALES.find((s) => s.id === (mode === 'major' ? 'major' : 'natural-minor'))!;
+  const root = makeRoot(tonic.letter, tonic.alter);
+  const ids = (sevenths ? SEVENTH_IDS : TRIAD_IDS)[mode];
+  return pattern.intervals.map((code, i) => {
+    const n = applyInterval(root, parseInterval(code), 'up');
+    const roman = ROMAN[mode][i].replace('°', '');
+    const suffix = sevenths ? SEVENTH_SUFFIX[ids[i]] : ids[i] === 'diminished' ? '°' : '';
+    return { roman: roman + suffix, letter: n.letter, alter: n.alter, chordId: ids[i] };
+  });
 }

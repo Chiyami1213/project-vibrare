@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import NoteSelect from '../../components/NoteSelect.astro';
+import { CHORD_GROUPS } from '../../scripts/theory';
 import { CIRCLE, signature, tonicName } from '../../scripts/circle';
 
 // Geometry: 12 segments of 30 degrees, C at the top, clockwise.
@@ -53,6 +55,7 @@ const segments = CIRCLE.flatMap((key, i) => {
           </g>
         ))
       }
+      <g id="shape" class="shape" aria-hidden="true"></g>
       <text id="center-title" class="center-title" x="180" y="176">C major</text>
       <text id="center-sig" class="center-sig" x="180" y="194">no sharps or flats</text>
     </svg>
@@ -68,19 +71,168 @@ const segments = CIRCLE.flatMap((key, i) => {
       <h3 class="mini-title">Scale</h3>
       <div id="scale" class="note-row"></div>
       <h3 class="mini-title">Diatonic chords</h3>
+      <div class="seg-group" role="group" aria-label="Chord size" id="chord-kind">
+        <button type="button" class="seg-btn" data-sevenths="0" aria-pressed="true">Triads</button>
+        <button type="button" class="seg-btn" data-sevenths="1" aria-pressed="false">Seventh chords</button>
+      </div>
+      <p class="muted-line hint">Click a chord to see its shape on the circle.</p>
       <div id="chords" class="note-row"></div>
+    </section>
+
+    <section class="result shape-panel" aria-live="polite">
+      <h2 class="section-title">Chord shape</h2>
+      <p class="muted-line">
+        Each note of a chord has a place on the circle of fifths. Joining them draws the chord's shape: a major or
+        minor triad is a lopsided triangle, an augmented triad is an equilateral triangle, and a diminished 7th is
+        a square.
+      </p>
+      <div class="calc-form chord-form">
+        <NoteSelect id="shape-root" label="Root" />
+        <div class="field">
+          <span class="field-label" id="shape-size-label">Number of notes</span>
+          <div class="seg-group" role="group" aria-labelledby="shape-size-label" id="shape-sizes">
+            {CHORD_GROUPS.map((g) => <button type="button" class="seg-btn" data-size={g.size} aria-pressed="false">{g.size}</button>)}
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label" for="shape-chord">Quality</label>
+          <select id="shape-chord">
+            {CHORD_GROUPS[0].chords.map((c) => <option value={c.id}>{c.name}{c.symbol ? ` (${c.symbol})` : ''}</option>)}
+          </select>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button type="button" class="btn" id="shape-clear">Clear shape</button>
+      </div>
+      <p id="shape-caption" class="shape-caption"></p>
     </section>
   </main>
 
   <script>
-    import { keyInfo, type Mode } from '../../scripts/circle';
+    import { CHORDS, CHORD_GROUPS } from '../../scripts/theory';
+    import { chordInfo, findChord } from '../../scripts/chords';
+    import { chordShape, diatonicChords, keyInfo, type Mode } from '../../scripts/circle';
     import { byId, renderChips } from '../../scripts/ui';
 
     const segs = [...document.querySelectorAll<SVGGElement>('.seg')];
     const text = (id: string, value: string) => (byId<HTMLElement>(id).textContent = value);
     const wrap = (n: number) => ((n % 12) + 12) % 12;
+    const SVG = 'http://www.w3.org/2000/svg';
+
+    let current: { pos: number; mode: Mode } = { pos: 0, mode: 'major' };
+    let sevenths = false;
+    let shapeChord: { letter: number; alter: number; chordId: string } | null = null;
+
+    // ---- the chord shape drawn on the circle
+    const shapeLayer = document.getElementById('shape')!;
+    const rootLetter = byId<HTMLSelectElement>('shape-root-letter');
+    const rootAcc = byId<HTMLSelectElement>('shape-root-acc');
+    const qualitySel = byId<HTMLSelectElement>('shape-chord');
+    const sizeBtns = [...document.querySelectorAll<HTMLButtonElement>('#shape-sizes [data-size]')];
+
+    function fillQualities(size: number) {
+      const group = CHORD_GROUPS.find((g) => g.size === size) ?? CHORD_GROUPS[0];
+      qualitySel.replaceChildren(
+        ...group.chords.map((c) => {
+          const o = document.createElement('option');
+          o.value = c.id;
+          o.textContent = c.symbol ? `${c.name} (${c.symbol})` : c.name;
+          return o;
+        }),
+      );
+      qualitySel.dataset.size = String(size);
+    }
+
+    function drawShape() {
+      shapeLayer.replaceChildren();
+      if (!shapeChord) {
+        text('shape-caption', 'No chord selected. Click a chord above, or build one here.');
+        return;
+      }
+      const chord = findChord(shapeChord.chordId) ?? CHORDS[0];
+      const info = chordInfo(shapeChord.letter, shapeChord.alter, chord, 0);
+      const shape = chordShape(info.notes.map((n) => n.midi % 12));
+      const R = 118;
+      const pts = shape.positions.map((p) => {
+        const a = ((-90 + 30 * p) * Math.PI) / 180;
+        return [180 + R * Math.cos(a), 180 + R * Math.sin(a)] as const;
+      });
+      const poly = document.createElementNS(SVG, 'polygon');
+      poly.setAttribute('class', 'shape-poly');
+      poly.setAttribute('points', pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' '));
+      shapeLayer.append(poly);
+      pts.forEach(([x, y]) => {
+        const dot = document.createElementNS(SVG, 'circle');
+        dot.setAttribute('class', 'shape-dot');
+        dot.setAttribute('cx', x.toFixed(1));
+        dot.setAttribute('cy', y.toFixed(1));
+        dot.setAttribute('r', '6');
+        shapeLayer.append(dot);
+      });
+      text(
+        'shape-caption',
+        `${info.symbol} (${info.notes.map((n) => n.name).join(' ')}) makes ${/^[aeiou]/i.test(shape.name) ? 'an' : 'a'} ${shape.name.toLowerCase()}. ` +
+          `Steps around the circle between its notes: ${shape.gaps.join(' · ')}.`,
+      );
+    }
+
+    /** Show a chord in the builder controls and on the circle. */
+    function showChord(letter: number, alter: number, chordId: string) {
+      shapeChord = { letter, alter, chordId };
+      const chord = findChord(chordId) ?? CHORDS[0];
+      rootLetter.value = String(letter);
+      rootAcc.value = String(alter);
+      if (qualitySel.dataset.size !== String(chord.intervals.length)) fillQualities(chord.intervals.length);
+      qualitySel.value = chord.id;
+      sizeBtns.forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.size) === chord.intervals.length)));
+      drawShape();
+    }
+
+    function clearChipHighlight() {
+      byId<HTMLElement>('chords').querySelectorAll('[aria-pressed]').forEach((c) => c.setAttribute('aria-pressed', 'false'));
+    }
+
+    function readBuilder() {
+      clearChipHighlight();
+      showChord(Number(rootLetter.value), Number(rootAcc.value), qualitySel.value);
+    }
+    rootLetter.addEventListener('change', readBuilder);
+    rootAcc.addEventListener('change', readBuilder);
+    qualitySel.addEventListener('change', readBuilder);
+    sizeBtns.forEach((b) =>
+      b.addEventListener('click', () => {
+        const group = CHORD_GROUPS.find((g) => g.size === Number(b.dataset.size));
+        if (!group) return;
+        clearChipHighlight();
+        showChord(Number(rootLetter.value), Number(rootAcc.value), group.chords[0].id);
+      }),
+    );
+    byId<HTMLButtonElement>('shape-clear').addEventListener('click', () => {
+      shapeChord = null;
+      clearChipHighlight();
+      drawShape();
+    });
+
+    // ---- the key selected on the circle
+    function renderChords() {
+      const chords = diatonicChords(current.pos, current.mode, sevenths);
+      const labelled = chords.map((c) => {
+        const info = chordInfo(c.letter, c.alter, findChord(c.chordId)!, 0);
+        return { name: info.symbol, interval: c.roman };
+      });
+      const box = byId<HTMLElement>('chords');
+      renderChips(box, labelled, (i) => {
+        const c = chords[i];
+        showChord(c.letter, c.alter, c.chordId);
+        [...box.children].forEach((el, k) => el.setAttribute('aria-pressed', String(k === i)));
+        const circle = document.querySelector('.circle')!;
+        const r = circle.getBoundingClientRect();
+        if (r.top < 0 || r.bottom > innerHeight) circle.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
 
     function select(pos: number, mode: Mode) {
+      current = { pos, mode };
       const info = keyInfo(pos, mode);
       const other: Mode = mode === 'major' ? 'minor' : 'major';
       segs.forEach((s) => {
@@ -101,7 +253,7 @@ const segments = CIRCLE.flatMap((key, i) => {
       text('f-dom', info.dominant);
       text('f-sub', info.subdominant);
       renderChips(byId<HTMLElement>('scale'), info.scale);
-      renderChips(byId<HTMLElement>('chords'), info.chords);
+      renderChords();
     }
 
     segs.forEach((s) => {
@@ -114,6 +266,17 @@ const segments = CIRCLE.flatMap((key, i) => {
         }
       });
     });
+
+    const kindBtns = [...document.querySelectorAll<HTMLButtonElement>('#chord-kind [data-sevenths]')];
+    kindBtns.forEach((b) =>
+      b.addEventListener('click', () => {
+        sevenths = b.dataset.sevenths === '1';
+        kindBtns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        renderChords();
+      }),
+    );
+
     select(0, 'major');
+    showChord(0, 0, 'major'); // start with the tonic triad so the shape is visible straight away
   </script>
 </Layout>
