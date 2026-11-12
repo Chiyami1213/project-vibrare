@@ -1,0 +1,386 @@
+[
+ {
+  "book": 1,
+  "no": 1,
+  "bwv": 846,
+  "preludeKey": "C major",
+  "fugueKey": "C major",
+  "voices": 4
+ },
+ {
+  "book": 1,
+  "no": 2,
+  "bwv": 847,
+  "preludeKey": "C minor",
+  "fugueKey": "C minor",
+  "voices": 3
+ },
+ {
+  "book": 1,
+  "no": 3,
+  "bwv": 848,
+  "preludeKey": "C♯ major",
+  "fugueKey": "C♯ major",
+  "voices": 3
+ },
+ {
+  "book": 1,
+  "no": 4,
+  "bwv": 849,
+  "preludeKey": "C♯ minor",
+  "fugueKey": "C♯ minor",
+  "voices": 5
+ },
+ {
+  "book": 1,
+  "no": 5,
+  "bwv": 850,
+  "preludeKey": "D major",
+  "fugueKey": "D major",
+  "voices": 4
+ },
+ {
+  "book": 1,
+  "no": 6,
+  "bwv": 851,
+  "preludeKey": "D minor",
+  "fugueKey": "D minor",
+  "voices": 3
+ },
+ {
+  "book": 1,
+  "no": 7,
+  "bwv": 852,
+  "preludeKey": "E♭ major",
+  "fugueKey": "E♭ major",
+  "voices": 3
+ },
+ {
+  "book": 1,
+  "no": 8,
+  "bwv": 853,
+  "preludeKey": "E♭ minor",
+  "fugueKey": "D♯ minor",
+  "voices": 3
+ },
+ {
+  "book": 1,
+  "no": 9,
+  "bwv": 854,
+  "preludeKey": "E major",
+  "fugueKey": "E major",
+  "voices": 3
+ },
+ {
+  "book": 1,
+  "no": 10,
+  "bwv": 855,
+  "preludeKey": "E minor",
+  "fugueKey": "E minor",
+  "voices": 2
+ },
+ {
+  "book": 1,
+  "no": 11,
+  "bwv": 856,
+  "preludeKey": "F major",
+  "fugueKey": "F major",
+  "voices": 3
+ },
+ {
+  "book": 1,
+  "no": 12,
+  "bwv": 857,
+  "preludeKey": "F minor",
+  "fugueKey": "F minor",
+  "voices": 4
+ },
+ {
+  "book": 1,
+  "no": 13,
+  "bwv": 858,
+  "preludeKey": "F♯ major",
+  "fugueKey": "F♯ major",
+  "voices": 3
+ },
+ {
+  "book": 1,
+  "no": 14,
+  "bwv": 859,
+  "preludeKey": "F♯ minor",
+  "fugueKey": "F♯ minor",
+  "voices": 4
+ },
+ {
+  "book": 1,
+  "no": 15,
+  "bwv": 860,
+  "preludeKey": "G major",
+  "fugueKey": "G major",
+  "voices": 3
+ },
+ {
+  "book": 1,
+  "no": 16,
+  "bwv": 861,
+  "preludeKey": "G minor",
+  "fugueKey": "G minor",
+  "voices": 4
+ },
+ {
+  "book": 1,
+  "no": 17,
+  "bwv": 862,
+  "preludeKey": "A♭ major",
+  "fugueKey": "A♭ major",
+  "voices": 4
+ },
+ {
+  "book": 1,
+  "no": 18,
+  "bwv": 863,
+  "preludeKey": "G♯ minor",
+  "fugueKey": "G♯ minor",
+  "voices": 4
+ },
+ {
+  "book": 1,
+  "no": 19,
+  "bwv": 864,
+  "preludeKey": "A major",
+  "fugueKey": "A major",
+  "voices": 3
+ },
+ {
+  "book": 1,
+  "no": 20,
+  "bwv": 865,
+  "preludeKey": "A minor",
+  "fugueKey": "A minor",
+  "voices": 4
+ },
+ {
+  "book": 1,
+  "no": 21,
+  "bwv": 866,
+  "preludeKey": "B♭ major",
+  "fugueKey": "B♭ major",
+  "voices": 3
+ },
+ {
+  "book": 1,
+  "no": 22,
+  "bwv": 867,
+  "preludeKey": "B♭ minor",
+  "fugueKey": "B♭ minor",
+  "voices": 5
+ },
+ {
+  "book": 1,
+  "no": 23,
+  "bwv": 868,
+  "preludeKey": "B major",
+  "fugueKey": "B major",
+  "voices": 4
+ },
+ {
+  "book": 1,
+  "no": 24,
+  "bwv": 869,
+  "preludeKey": "B minor",
+  "fugueKey": "B minor",
+  "voices": 4
+ },
+ {
+  "book": 2,
+  "no": 1,
+  "bwv": 870,
+  "preludeKey": "C major",
+  "fugueKey": "C major",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 2,
+  "bwv": 871,
+  "preludeKey": "C minor",
+  "fugueKey": "C minor",
+  "voices": 4
+ },
+ {
+  "book": 2,
+  "no": 3,
+  "bwv": 872,
+  "preludeKey": "C♯ major",
+  "fugueKey": "C♯ major",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 4,
+  "bwv": 873,
+  "preludeKey": "C♯ minor",
+  "fugueKey": "C♯ minor",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 5,
+  "bwv": 874,
+  "preludeKey": "D major",
+  "fugueKey": "D major",
+  "voices": 4
+ },
+ {
+  "book": 2,
+  "no": 6,
+  "bwv": 875,
+  "preludeKey": "D minor",
+  "fugueKey": "D minor",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 7,
+  "bwv": 876,
+  "preludeKey": "E♭ major",
+  "fugueKey": "E♭ major",
+  "voices": 4
+ },
+ {
+  "book": 2,
+  "no": 8,
+  "bwv": 877,
+  "preludeKey": "D♯ minor",
+  "fugueKey": "D♯ minor",
+  "voices": 4
+ },
+ {
+  "book": 2,
+  "no": 9,
+  "bwv": 878,
+  "preludeKey": "E major",
+  "fugueKey": "E major",
+  "voices": 4
+ },
+ {
+  "book": 2,
+  "no": 10,
+  "bwv": 879,
+  "preludeKey": "E minor",
+  "fugueKey": "E minor",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 11,
+  "bwv": 880,
+  "preludeKey": "F major",
+  "fugueKey": "F major",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 12,
+  "bwv": 881,
+  "preludeKey": "F minor",
+  "fugueKey": "F minor",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 13,
+  "bwv": 882,
+  "preludeKey": "F♯ major",
+  "fugueKey": "F♯ major",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 14,
+  "bwv": 883,
+  "preludeKey": "F♯ minor",
+  "fugueKey": "F♯ minor",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 15,
+  "bwv": 884,
+  "preludeKey": "G major",
+  "fugueKey": "G major",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 16,
+  "bwv": 885,
+  "preludeKey": "G minor",
+  "fugueKey": "G minor",
+  "voices": 4
+ },
+ {
+  "book": 2,
+  "no": 17,
+  "bwv": 886,
+  "preludeKey": "A♭ major",
+  "fugueKey": "A♭ major",
+  "voices": 4
+ },
+ {
+  "book": 2,
+  "no": 18,
+  "bwv": 887,
+  "preludeKey": "G♯ minor",
+  "fugueKey": "G♯ minor",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 19,
+  "bwv": 888,
+  "preludeKey": "A major",
+  "fugueKey": "A major",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 20,
+  "bwv": 889,
+  "preludeKey": "A minor",
+  "fugueKey": "A minor",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 21,
+  "bwv": 890,
+  "preludeKey": "B♭ major",
+  "fugueKey": "B♭ major",
+  "voices": 3
+ },
+ {
+  "book": 2,
+  "no": 22,
+  "bwv": 891,
+  "preludeKey": "B♭ minor",
+  "fugueKey": "B♭ minor",
+  "voices": 4
+ },
+ {
+  "book": 2,
+  "no": 23,
+  "bwv": 892,
+  "preludeKey": "B major",
+  "fugueKey": "B major",
+  "voices": 4
+ },
+ {
+  "book": 2,
+  "no": 24,
+  "bwv": 893,
+  "preludeKey": "B minor",
+  "fugueKey": "B minor",
+  "voices": 3
+ }
+]

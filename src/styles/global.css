@@ -999,3 +999,39 @@ html.loading.open .panel-r {
     justify-content: center;
   }
 }
+
+/* ---------- Well-Tempered Clavier table ---------- */
+.table-scroll {
+  overflow-x: auto;
+  margin-bottom: 8px;
+}
+
+.wtc {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--line);
+  background: var(--tile);
+  font-variant-numeric: tabular-nums;
+}
+
+.wtc th,
+.wtc td {
+  padding: 8px 14px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.wtc thead th {
+  border-top: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.wtc tbody th {
+  font-weight: 600;
+}
+
+.wtc tbody tr:hover {
+  background: color-mix(in srgb, var(--accent) 8%, var(--tile));
+}

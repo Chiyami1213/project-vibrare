@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import wtc from '../../data/bach/wtc.json';
+
+interface Piece {
+  book: number;
+  no: number;
+  bwv: number;
+  preludeKey: string;
+  fugueKey: string;
+  voices: number;
+}
+
+const pieces = wtc as Piece[];
+const books = [
+  { id: 1, title: 'Book 1', range: 'BWV 846–869', note: 'Autograph dated 1722' },
+  { id: 2, title: 'Book 2', range: 'BWV 870–893', note: 'Compiled around 1742' },
+].map((b) => ({ ...b, pieces: pieces.filter((p) => p.book === b.id) }));
+---
+
+<Layout title="Bach's Fugue">
+  <main class="page-block wide">
+    <h1>Bach's Fugue</h1>
+    <p class="lead">
+      The 48 preludes and fugues of <em>The Well-Tempered Clavier</em>: one pair in each major and minor key, in
+      two books.
+    </p>
+    <p class="lead">
+      <strong>BWV</strong> stands for <em>Bach-Werke-Verzeichnis</em>, the standard catalogue of Bach's works, so
+      every piece below is identified by its BWV number.
+    </p>
+
+    <nav class="jump" aria-label="Books">
+      {books.map((b) => <a href={`#book-${b.id}`}>{b.title}</a>)}
+    </nav>
+
+    {
+      books.map((b) => (
+        <section id={`book-${b.id}`} class="res-section">
+          <h2 class="section-title">{b.title} · {b.range}</h2>
+          <p class="empty">{b.note}</p>
+          <div class="table-scroll">
+            <table class="wtc">
+              <thead>
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">BWV</th>
+                  <th scope="col">Prelude</th>
+                  <th scope="col">Fugue</th>
+                  <th scope="col">Voices</th>
+                </tr>
+              </thead>
+              <tbody>
+                {b.pieces.map((p) => (
+                  <tr id={`bwv-${p.bwv}`}>
+                    <td>{p.no}</td>
+                    <th scope="row">{p.bwv}</th>
+                    <td>{p.preludeKey}</td>
+                    <td>{p.fugueKey}</td>
+                    <td>{p.voices}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ))
+    }
+
+    <p class="source-note">
+      Keys and numbering follow the Wikipedia articles on
+      <a href="https://en.wikipedia.org/wiki/The_Well-Tempered_Clavier" target="_blank" rel="noopener noreferrer">The Well-Tempered Clavier</a>
+      (English and German, CC BY-SA 4.0). The voice counts are for the fugues, from the German article's table.
+      In Book 1, No. 8 pairs a prelude in E♭ minor with a fugue in D♯ minor.
+    </p>
+  </main>
+</Layout>
