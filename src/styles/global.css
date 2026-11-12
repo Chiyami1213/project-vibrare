@@ -189,8 +189,14 @@ a {
 
 .rail .sub a {
   height: 42px;
-  padding-left: 58px; /* lines up with the parent label */
   font-size: 0.92rem;
+}
+
+/* 20px icon inside the same 24px column as the parent icons, so labels line up */
+.rail .sub svg {
+  width: 20px;
+  height: 20px;
+  margin: 0 2px;
 }
 
 .rail li.open > a:not([aria-current='page']) {
