@@ -1,5 +1,6 @@
 // Circle of fifths data and helpers (no DOM).
 import { SCALES, applyInterval, makeRoot, noteName, parseInterval, spell, type SpelledNote } from './theory.ts';
+import { chordInfo, findChord } from './chords.ts';
 
 export type Mode = 'major' | 'minor';
 
@@ -163,4 +164,30 @@ export function diatonicChords(position: number, mode: Mode, sevenths = false): 
     const suffix = sevenths ? SEVENTH_SUFFIX[ids[i]] : ids[i] === 'diminished' ? '°' : '';
     return { roman: roman + suffix, letter: n.letter, alter: n.alter, chordId: ids[i] };
   });
+}
+
+// ---------- Sound ----------
+
+/** The pitches of a diatonic chord (as MIDI numbers, lowest first). */
+export function diatonicChordMidis(c: DiatonicChord): number[] {
+  return chordInfo(c.letter, c.alter, findChord(c.chordId)!, 0).notes.map((n) => n.midi);
+}
+
+/** The tonic triad of a key. */
+export function tonicMidis(position: number, mode: Mode): number[] {
+  return diatonicChordMidis(diatonicChords(position, mode, false)[0]);
+}
+
+/** The scale of a key, rising from its tonic through one octave (8 notes), in a comfortable register. */
+export function scaleMidis(position: number, mode: Mode): number[] {
+  const roots = diatonicChords(position, mode, false).map((c) => diatonicChordMidis(c)[0]);
+  const rising: number[] = [];
+  roots.forEach((m, i) => {
+    let x = m;
+    while (i > 0 && x <= rising[i - 1]) x += 12;
+    rising.push(x);
+  });
+  rising.push(rising[0] + 12);
+  const up = rising[0] + 12 > 66 ? 0 : 12; // tonic between G3 and F#4
+  return rising.map((m) => m + up);
 }

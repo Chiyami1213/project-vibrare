@@ -42,24 +42,24 @@ function note(ac: AudioContext, out: AudioNode, midi: number, start: number, dur
 }
 
 /** Play the pitches (ascending MIDI numbers). Returns how long the sound lasts, in seconds. */
-export async function playChord(midis: number[], mode: PlayMode): Promise<number> {
+export async function playChord(midis: number[], mode: PlayMode, timing?: { step?: number; dur?: number }): Promise<number> {
   try {
     await sampler.load();
   } catch {
-    return playSynthChord(midis, mode); // samples unavailable (offline?)
+    return playSynthChord(midis, mode, timing); // samples unavailable (offline?)
   }
   const ac = sampler.context;
   sampler.stop();
   const order = mode === 'down' ? [...midis].reverse() : midis;
-  const step = mode === 'harmonic' ? 0 : 0.28;
-  const dur = mode === 'harmonic' ? 2.4 : 1.8;
+  const step = timing?.step ?? (mode === 'harmonic' ? 0 : 0.28);
+  const dur = timing?.dur ?? (mode === 'harmonic' ? 2.4 : 1.8);
   const t0 = ac.currentTime + 0.05;
   const level = 0.9 / Math.sqrt(Math.max(1, midis.length) / 2);
   order.forEach((m, i) => sampler.play(m, t0 + i * step, dur, level));
   return 0.05 + (order.length - 1) * step + dur;
 }
 
-async function playSynthChord(midis: number[], mode: PlayMode): Promise<number> {
+async function playSynthChord(midis: number[], mode: PlayMode, timing?: { step?: number; dur?: number }): Promise<number> {
   const Ctor = window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
   ctx ??= new Ctor();
   if (ctx.state === 'suspended') await ctx.resume();
@@ -76,8 +76,8 @@ async function playSynthChord(midis: number[], mode: PlayMode): Promise<number> 
   current = master;
 
   const order = mode === 'down' ? [...midis].reverse() : midis;
-  const step = mode === 'harmonic' ? 0 : 0.28;
-  const dur = mode === 'harmonic' ? 2.4 : 1.8;
+  const step = timing?.step ?? (mode === 'harmonic' ? 0 : 0.28);
+  const dur = timing?.dur ?? (mode === 'harmonic' ? 2.4 : 1.8);
   const peak = 0.34 / Math.sqrt(midis.length);
   const t0 = ac.currentTime + 0.05;
   order.forEach((m, i) => note(ac, master, m, t0 + i * step, dur, peak));

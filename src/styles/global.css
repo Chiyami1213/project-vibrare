@@ -1131,8 +1131,22 @@ html.loading.open .panel-r {
   outline-offset: 2px;
 }
 
+/* each control is as wide as its buttons, so the root letters and the chord kinds stay on one row; whole
+   controls move to the next row only when the window is too narrow for them */
 .chord-form {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px 36px;
+}
+
+.chord-form .field {
+  flex: 0 1 auto;
+  max-width: 100%;
+}
+
+.chord-form select {
+  min-width: 260px;
 }
 
 .chord-head {

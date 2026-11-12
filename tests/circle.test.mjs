@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { CIRCLE, keyInfo, signature, signatureText, tonicName } from '../src/scripts/circle.ts';
+import { CIRCLE, keyInfo, scaleMidis, signature, signatureText, tonicName, tonicMidis } from '../src/scripts/circle.ts';
 
 const names = (list) => list.map((n) => n.name).join(' ');
 
@@ -93,4 +93,20 @@ test('diatonic chords of a key', () => {
   assert.deepEqual(g7.map((c) => c.roman), ['Imaj7', 'ii7', 'iii7', 'IVmaj7', 'V7', 'vi7', 'viiø7']);
   const am = diatonicChords(0, 'minor', true);
   assert.deepEqual(am.map((c) => c.roman), ['i7', 'iiø7', 'IIImaj7', 'iv7', 'v7', 'VImaj7', 'VII7']);
+});
+
+test('the tonic chord and the scale played for a key', () => {
+  assert.deepEqual(tonicMidis(0, 'major').map((m) => m % 12), [0, 4, 7]); // C E G
+  assert.deepEqual(tonicMidis(0, 'minor').map((m) => m % 12), [9, 0, 4]); // A minor: A C E
+  for (let pos = 0; pos < 12; pos++) {
+    for (const mode of ['major', 'minor']) {
+      const scale = scaleMidis(pos, mode);
+      assert.equal(scale.length, 8, `${pos} ${mode}`);
+      assert.equal(scale[7] - scale[0], 12, 'ends an octave above the tonic');
+      for (let i = 1; i < 8; i++) assert.ok(scale[i] > scale[i - 1] && scale[i] - scale[i - 1] <= 2, `${pos} ${mode} step ${i}`);
+      assert.ok(scale[0] >= 55 && scale[0] <= 66, `register ${scale[0]}`);
+    }
+  }
+  assert.deepEqual(scaleMidis(0, 'major').map((m) => m % 12), [0, 2, 4, 5, 7, 9, 11, 0]);
+  assert.deepEqual(scaleMidis(1, 'major').map((m) => m % 12), [7, 9, 11, 0, 2, 4, 6, 7]); // G major
 });

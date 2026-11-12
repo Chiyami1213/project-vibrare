@@ -41,8 +41,8 @@ const segments = CIRCLE.flatMap((key, i) => {
   <main class="calc-page">
     <h1>Circle of Fifths</h1>
     <p class="lead">
-      Select a key on the circle. Major keys are on the outer ring and their relative minors on the inner ring.
-      Each step clockwise is a fifth up.
+      Select a key on the circle to hear its tonic chord. Major keys are on the outer ring and their relative minors
+      on the inner ring. Each step clockwise is a fifth up.
     </p>
 
     <svg class="circle" viewBox="0 0 360 360" role="group" aria-label="Circle of fifths">
@@ -70,12 +70,16 @@ const segments = CIRCLE.flatMap((key, i) => {
       </dl>
       <h3 class="mini-title">Scale</h3>
       <div id="scale" class="note-row"></div>
+      <div class="btn-row">
+        <button type="button" class="btn" id="play-scale">▶ Play scale</button>
+        <button type="button" class="btn" id="play-tonic">▶ Play tonic chord</button>
+      </div>
       <h3 class="mini-title">Diatonic chords</h3>
       <div class="seg-group" role="group" aria-label="Chord size" id="chord-kind">
         <button type="button" class="seg-btn" data-sevenths="0" aria-pressed="true">Triads</button>
         <button type="button" class="seg-btn" data-sevenths="1" aria-pressed="false">Seventh chords</button>
       </div>
-      <p class="muted-line hint">Click a chord to see its shape on the circle.</p>
+      <p class="muted-line hint">Click a chord to hear it and see its shape on the circle.</p>
       <div id="chords" class="note-row"></div>
     </section>
 
@@ -102,6 +106,7 @@ const segments = CIRCLE.flatMap((key, i) => {
         </div>
       </div>
       <div class="btn-row">
+        <button type="button" class="btn" id="shape-play">▶ Play chord</button>
         <button type="button" class="btn" id="shape-clear">Clear shape</button>
       </div>
       <p id="shape-caption" class="shape-caption"></p>
@@ -111,8 +116,9 @@ const segments = CIRCLE.flatMap((key, i) => {
   <script>
     import { CHORDS, CHORD_GROUPS, chordKind } from '../../scripts/theory';
     import { chordInfo, findChord } from '../../scripts/chords';
-    import { chordShape, diatonicChords, keyInfo, type Mode } from '../../scripts/circle';
+    import { chordShape, diatonicChordMidis, diatonicChords, keyInfo, scaleMidis, tonicMidis, type Mode } from '../../scripts/circle';
     import { byId, renderChips } from '../../scripts/ui';
+    import { playChord } from '../../scripts/synth';
 
     const segs = [...document.querySelectorAll<SVGGElement>('.seg')];
     const text = (id: string, value: string) => (byId<HTMLElement>(id).textContent = value);
@@ -188,6 +194,17 @@ const segments = CIRCLE.flatMap((key, i) => {
       drawShape();
     }
 
+    // ---- sound: every chord and the scale can be played with the instrument chosen in Settings
+    const chordMidis = (letter: number, alter: number, chordId: string) =>
+      chordInfo(letter, alter, findChord(chordId) ?? CHORDS[0], 0).notes.map((n) => n.midi);
+    const hear = (midis: number[]) => void playChord(midis, 'harmonic');
+
+    byId<HTMLButtonElement>('play-tonic').addEventListener('click', () => hear(tonicMidis(current.pos, current.mode)));
+    byId<HTMLButtonElement>('play-scale').addEventListener('click', () => void playChord(scaleMidis(current.pos, current.mode), 'up', { step: 0.34, dur: 0.7 }));
+    byId<HTMLButtonElement>('shape-play').addEventListener('click', () => {
+      if (shapeChord) hear(chordMidis(shapeChord.letter, shapeChord.alter, shapeChord.chordId));
+    });
+
     function clearChipHighlight() {
       byId<HTMLElement>('chords').querySelectorAll('[aria-pressed]').forEach((c) => c.setAttribute('aria-pressed', 'false'));
     }
@@ -224,6 +241,7 @@ const segments = CIRCLE.flatMap((key, i) => {
       renderChips(box, labelled, (i) => {
         const c = chords[i];
         showChord(c.letter, c.alter, c.chordId);
+        hear(diatonicChordMidis(c));
         [...box.children].forEach((el, k) => el.setAttribute('aria-pressed', String(k === i)));
         const circle = document.querySelector('.circle')!;
         const r = circle.getBoundingClientRect();
@@ -257,7 +275,10 @@ const segments = CIRCLE.flatMap((key, i) => {
     }
 
     segs.forEach((s) => {
-      const go = () => select(Number(s.dataset.pos), s.dataset.mode === 'minor' ? 'minor' : 'major');
+      const go = () => {
+        select(Number(s.dataset.pos), s.dataset.mode === 'minor' ? 'minor' : 'major');
+        hear(tonicMidis(current.pos, current.mode));
+      };
       s.addEventListener('click', go);
       s.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
