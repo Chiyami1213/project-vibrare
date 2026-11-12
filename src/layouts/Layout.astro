@@ -34,12 +34,12 @@ const top: MenuLink[] = [
     children: [{ href: '/counterpoint/fugue/', label: 'Fugue', icon: 'entries' }],
   },
   {
-    href: '/baroque/',
-    label: 'Baroque',
-    icon: 'columns',
+    href: '/analysis/',
+    label: 'Analysis',
+    icon: 'analysis',
     children: [
-      { href: '/baroque/bach/', label: 'Bach', icon: 'feather' },
-      { href: '/baroque/dances/', label: 'Dances', icon: 'dancers' },
+      { href: '/analysis/bach/', label: 'Bach', icon: 'feather' },
+      { href: '/analysis/touhou/', label: 'Touhou', icon: 'music' },
     ],
   },
   {
@@ -50,11 +50,17 @@ const top: MenuLink[] = [
       { href: '/tools/interval-calculator/', label: 'Interval Calculator', icon: 'interval' },
       { href: '/tools/scale-calculator/', label: 'Scale Calculator', icon: 'keys' },
       { href: '/tools/chord-calculator/', label: 'Chord Calculator', icon: 'chord' },
+      { href: '/tools/circle-of-fifths/', label: 'Circle of Fifths', icon: 'cof' },
     ],
   },
-  { href: '/touhou-music/', label: 'Touhou Music', icon: 'music' },
+  { href: '/works/', label: 'Works', icon: 'disc' },
+  { href: '/glossary/', label: 'Glossary', icon: 'book' },
+  { href: '/resources/', label: 'Resources', icon: 'bookmark' },
 ];
-const bottom: MenuLink[] = [{ href: '/settings/', label: 'Settings', icon: 'settings' }];
+const bottom: MenuLink[] = [
+  { href: '/about/', label: 'About', icon: 'info' },
+  { href: '/settings/', label: 'Settings', icon: 'settings' },
+];
 
 const path = Astro.url.pathname;
 ---

@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { GLOSSARY } from '../data/glossary';
+
+const sorted = [...GLOSSARY].sort((a, b) => a.term.localeCompare(b.term, 'en', { sensitivity: 'base' }));
+const groups = new Map<string, typeof sorted>();
+for (const t of sorted) {
+  const letter = t.term[0].toUpperCase();
+  groups.set(letter, [...(groups.get(letter) ?? []), t]);
+}
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+---
+
+<Layout title="Glossary">
+  <main class="page-block">
+    <h1>Glossary</h1>
+    <p class="lead">Terms used across the site.</p>
+
+    <label class="field-label" for="gloss-search">Search terms</label>
+    <input id="gloss-search" class="gloss-search" type="search" placeholder="e.g. cadence" autocomplete="off" />
+
+    <p id="gloss-empty" class="empty" hidden>No matching terms.</p>
+
+    {
+      [...groups].map(([letter, terms]) => (
+        <section class="letter" data-letter={letter}>
+          <h2 class="letter-title">{letter}</h2>
+          {terms.map((t) => (
+            <article class="term" id={slug(t.term)} data-search={`${t.term} ${t.definition}`.toLowerCase()}>
+              <h3>{t.term}</h3>
+              <p>{t.definition}</p>
+            </article>
+          ))}
+        </section>
+      ))
+    }
+  </main>
+
+  <script>
+    const input = document.getElementById('gloss-search') as HTMLInputElement;
+    const empty = document.getElementById('gloss-empty') as HTMLElement;
+    const terms = [...document.querySelectorAll<HTMLElement>('.term')];
+    const letters = [...document.querySelectorAll<HTMLElement>('.letter')];
+
+    function filter() {
+      const q = input.value.trim().toLowerCase();
+      let shown = 0;
+      terms.forEach((t) => {
+        const match = !q || (t.dataset.search ?? '').includes(q);
+        t.hidden = !match;
+        if (match) shown++;
+      });
+      letters.forEach((l) => (l.hidden = !l.querySelector('.term:not([hidden])')));
+      empty.hidden = shown > 0;
+    }
+    input.addEventListener('input', filter);
+  </script>
+</Layout>

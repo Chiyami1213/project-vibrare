@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { WORKS } from '../data/works';
+---
+
+<Layout title="Works">
+  <main class="page-block">
+    <h1>Works</h1>
+    <p class="lead">Arrangements.</p>
+
+    {
+      WORKS.length === 0 ? (
+        <p class="empty">Nothing here yet.</p>
+      ) : (
+        <ul class="res-list">
+          {WORKS.map((w) => (
+            <li class="res-item">
+              <div class="res-title">
+                {w.title}
+                {w.year && <span class="res-by"> · {w.year}</span>}
+              </div>
+              {w.original && <div class="res-note">Original: {w.original}</div>}
+              {w.description && <div class="res-note">{w.description}</div>}
+              {w.links && w.links.length > 0 && (
+                <div class="res-note">
+                  {w.links.map((l, i) => (
+                    <>
+                      {i > 0 && ' · '}
+                      <a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>
+                    </>
+                  ))}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </main>
+</Layout>

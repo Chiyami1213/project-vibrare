@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { CIRCLE, signature, tonicName } from '../../scripts/circle';
+
+// Geometry: 12 segments of 30 degrees, C at the top, clockwise.
+const C = 180;
+const point = (r: number, deg: number): [number, number] => {
+  const a = (deg * Math.PI) / 180;
+  return [C + r * Math.cos(a), C + r * Math.sin(a)];
+};
+const f = (n: number) => n.toFixed(2);
+function sector(rOuter: number, rInner: number, i: number) {
+  const a0 = -90 + 30 * i - 14.4;
+  const a1 = -90 + 30 * i + 14.4;
+  const [x0, y0] = point(rInner, a0);
+  const [x1, y1] = point(rOuter, a0);
+  const [x2, y2] = point(rOuter, a1);
+  const [x3, y3] = point(rInner, a1);
+  return `M${f(x0)} ${f(y0)}L${f(x1)} ${f(y1)}A${rOuter} ${rOuter} 0 0 1 ${f(x2)} ${f(y2)}L${f(x3)} ${f(y3)}A${rInner} ${rInner} 0 0 0 ${f(x0)} ${f(y0)}Z`;
+}
+const segments = CIRCLE.flatMap((key, i) => {
+  const mid = -90 + 30 * i;
+  const sig = key.fifths === 0 ? '0' : `${Math.abs(key.fifths)}${key.fifths > 0 ? '♯' : '♭'}`;
+  const [mx, my] = point(146, mid);
+  const [sx, sy] = point(127, mid);
+  const [nx, ny] = point(92, mid);
+  const major = tonicName(i, 'major');
+  const minor = tonicName(i, 'minor');
+  const count = Math.abs(key.fifths);
+  const sigWords = count === 0 ? 'no sharps or flats' : `${count} ${key.fifths > 0 ? 'sharp' : 'flat'}${count > 1 ? 's' : ''}`;
+  return [
+    { i, mode: 'major', d: sector(170, 118, i), label: major, x: mx, y: my, sig, sx, sy, aria: `${major} major, ${sigWords}` },
+    { i, mode: 'minor', d: sector(114, 70, i), label: `${minor}m`, x: nx, y: ny, sig: '', sx: 0, sy: 0, aria: `${minor} minor, ${sigWords}` },
+  ];
+});
+---
+
+<Layout title="Circle of Fifths">
+  <main class="calc-page">
+    <h1>Circle of Fifths</h1>
+    <p class="lead">
+      Select a key on the circle. Major keys are on the outer ring and their relative minors on the inner ring.
+      Each step clockwise is a fifth up.
+    </p>
+
+    <svg class="circle" viewBox="0 0 360 360" role="group" aria-label="Circle of fifths">
+      {
+        segments.map((s) => (
+          <g class={`seg ${s.mode}`} data-pos={s.i} data-mode={s.mode} role="button" tabindex="0" aria-pressed="false" aria-label={s.aria}>
+            <path d={s.d} />
+            <text class="seg-name" x={f(s.x)} y={f(s.y)}>{s.label}</text>
+            {s.sig && <text class="seg-sig" x={f(s.sx)} y={f(s.sy)}>{s.sig}</text>}
+          </g>
+        ))
+      }
+      <text id="center-title" class="center-title" x="180" y="176">C major</text>
+      <text id="center-sig" class="center-sig" x="180" y="194">no sharps or flats</text>
+    </svg>
+
+    <section class="result" aria-live="polite">
+      <h2 id="key-title" class="section-title">C major</h2>
+      <dl class="facts">
+        <div><dt>Key signature</dt><dd id="f-sig"></dd></div>
+        <div><dt>Relative key</dt><dd id="f-rel"></dd></div>
+        <div><dt id="f-dom-label">Dominant (V)</dt><dd id="f-dom"></dd></div>
+        <div><dt id="f-sub-label">Subdominant (IV)</dt><dd id="f-sub"></dd></div>
+      </dl>
+      <h3 class="mini-title">Scale</h3>
+      <div id="scale" class="note-row"></div>
+      <h3 class="mini-title">Diatonic chords</h3>
+      <div id="chords" class="note-row"></div>
+    </section>
+  </main>
+
+  <script>
+    import { keyInfo, type Mode } from '../../scripts/circle';
+    import { byId, renderChips } from '../../scripts/ui';
+
+    const segs = [...document.querySelectorAll<SVGGElement>('.seg')];
+    const text = (id: string, value: string) => (byId<HTMLElement>(id).textContent = value);
+    const wrap = (n: number) => ((n % 12) + 12) % 12;
+
+    function select(pos: number, mode: Mode) {
+      const info = keyInfo(pos, mode);
+      const other: Mode = mode === 'major' ? 'minor' : 'major';
+      segs.forEach((s) => {
+        const p = Number(s.dataset.pos);
+        const m = s.dataset.mode;
+        s.classList.toggle('sel', p === pos && m === mode);
+        s.classList.toggle('rel', p === pos && m === other);
+        s.classList.toggle('nbr', m === mode && (p === wrap(pos + 1) || p === wrap(pos - 1)));
+        s.setAttribute('aria-pressed', String(p === pos && m === mode));
+      });
+      text('center-title', info.title);
+      text('center-sig', info.signature.split(':')[0]);
+      text('key-title', info.title);
+      text('f-sig', info.signature);
+      text('f-rel', info.relative);
+      text('f-dom-label', mode === 'major' ? 'Dominant (V)' : 'Minor dominant (v)');
+      text('f-sub-label', mode === 'major' ? 'Subdominant (IV)' : 'Subdominant (iv)');
+      text('f-dom', info.dominant);
+      text('f-sub', info.subdominant);
+      renderChips(byId<HTMLElement>('scale'), info.scale);
+      renderChips(byId<HTMLElement>('chords'), info.chords);
+    }
+
+    segs.forEach((s) => {
+      const go = () => select(Number(s.dataset.pos), s.dataset.mode === 'minor' ? 'minor' : 'major');
+      s.addEventListener('click', go);
+      s.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          go();
+        }
+      });
+    });
+    select(0, 'major');
+  </script>
+</Layout>

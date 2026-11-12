@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { RESOURCES } from '../data/resources';
+---
+
+<Layout title="Resources">
+  <main class="page-block">
+    <h1>Resources</h1>
+    <p class="lead">Books, websites, videos and software for further study.</p>
+
+    <nav class="jump" aria-label="Sections">
+      {RESOURCES.map((s) => <a href={`#${s.id}`}>{s.title}</a>)}
+    </nav>
+
+    {
+      RESOURCES.map((s) => (
+        <section id={s.id} class="res-section">
+          <h2 class="section-title">{s.title}</h2>
+          {s.items.length === 0 ? (
+            <p class="empty">Nothing here yet.</p>
+          ) : (
+            <ul class="res-list">
+              {s.items.map((i) => (
+                <li class="res-item">
+                  <div class="res-title">
+                    {i.href ? (
+                      <a href={i.href} target="_blank" rel="noopener noreferrer">{i.title}</a>
+                    ) : (
+                      i.title
+                    )}
+                    {i.by && <span class="res-by"> · {i.by}</span>}
+                  </div>
+                  {i.note && <div class="res-note">{i.note}</div>}
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))
+    }
+  </main>
+</Layout>

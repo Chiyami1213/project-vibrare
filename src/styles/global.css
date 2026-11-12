@@ -557,3 +557,222 @@ html.loading.open .panel-r {
     padding: 8px 10px;
   }
 }
+
+/* ---------- Circle of fifths ---------- */
+.circle {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto 28px;
+}
+
+.circle .seg {
+  cursor: pointer;
+  outline: none;
+}
+
+.circle .seg path {
+  fill: var(--tile);
+  stroke: var(--line);
+  stroke-width: 1;
+  transition: fill 0.15s ease;
+}
+
+.circle .seg:hover path {
+  fill: color-mix(in srgb, var(--accent) 14%, var(--tile));
+}
+
+.circle .seg.nbr path,
+.circle .seg.rel path {
+  fill: color-mix(in srgb, var(--accent) 22%, var(--tile));
+}
+
+.circle .seg.sel path {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.circle .seg:focus-visible path {
+  stroke: var(--fg);
+  stroke-width: 2.5;
+}
+
+.circle text {
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--fg);
+  pointer-events: none;
+}
+
+.circle .seg-name {
+  font-family: var(--serif);
+  font-size: 19px;
+}
+
+.circle .seg.minor .seg-name {
+  font-size: 14px;
+}
+
+.circle .seg-sig {
+  font-size: 9px;
+  fill: var(--muted);
+}
+
+.circle .seg.sel text {
+  fill: var(--bg);
+}
+
+.circle .center-title {
+  font-family: var(--serif);
+  font-size: 17px;
+}
+
+.circle .center-sig {
+  font-size: 7.5px;
+  fill: var(--muted);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px 24px;
+  margin: 0 0 8px;
+}
+
+.facts dt {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.facts dd {
+  margin: 2px 0 0;
+}
+
+.mini-title {
+  margin: 20px 0 10px;
+  font-size: 0.95rem;
+}
+
+/* ---------- Content pages (Resources, Glossary, Works, About) ---------- */
+.page-block {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.page-block .lead {
+  margin: 0 0 24px;
+  color: var(--muted);
+}
+
+.page-block > p {
+  margin: 0 0 14px;
+}
+
+.empty {
+  color: var(--muted);
+}
+
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+
+.jump a {
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--tile);
+  color: var(--fg);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.jump a:hover,
+.jump a:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.res-section {
+  scroll-margin-top: 24px;
+}
+
+.res-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.res-item {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--tile);
+}
+
+.res-title {
+  font-weight: 600;
+}
+
+.res-by {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.res-note {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.gloss-search {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  margin: 6px 0 20px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--tile);
+  color: var(--fg);
+  font: inherit;
+}
+
+.gloss-search:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.letter-title {
+  margin: 28px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.term {
+  margin: 14px 0;
+  scroll-margin-top: 24px;
+}
+
+.term h3 {
+  margin: 0 0 2px;
+  font-size: 1rem;
+}
+
+.term p {
+  margin: 0;
+  color: var(--muted);
+}
+
+[hidden] {
+  display: none !important;
+}
