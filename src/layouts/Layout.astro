@@ -26,7 +26,12 @@ const top: MenuLink[] = [
       { href: '/partimento/cadences/', label: 'Cadences' },
     ],
   },
-  { href: '/bach/', label: 'Bach', icon: 'feather' },
+  {
+    href: '/baroque/',
+    label: 'Baroque',
+    icon: 'columns',
+    children: [{ href: '/baroque/bach/', label: 'Bach' }],
+  },
   { href: '/tools/', label: 'Tools', icon: 'tools' },
   { href: '/touhou-music/', label: 'Touhou Music', icon: 'music' },
 ];
