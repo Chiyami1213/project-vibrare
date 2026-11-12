@@ -1,5 +1,7 @@
-// A small Web Audio synth for previewing chords (no samples, nothing downloaded).
+// Chord preview. It plays with the instrument chosen in Settings (recorded samples). If those cannot be loaded, a
+// small Web Audio synth steps in, so a chord always sounds.
 import { getAudioSettings, outputGain } from './audio-settings';
+import { sampler } from './sampler';
 
 export type PlayMode = 'harmonic' | 'up' | 'down';
 
@@ -41,6 +43,23 @@ function note(ac: AudioContext, out: AudioNode, midi: number, start: number, dur
 
 /** Play the pitches (ascending MIDI numbers). Returns how long the sound lasts, in seconds. */
 export async function playChord(midis: number[], mode: PlayMode): Promise<number> {
+  try {
+    await sampler.load();
+  } catch {
+    return playSynthChord(midis, mode); // samples unavailable (offline?)
+  }
+  const ac = sampler.context;
+  sampler.stop();
+  const order = mode === 'down' ? [...midis].reverse() : midis;
+  const step = mode === 'harmonic' ? 0 : 0.28;
+  const dur = mode === 'harmonic' ? 2.4 : 1.8;
+  const t0 = ac.currentTime + 0.05;
+  const level = 0.9 / Math.sqrt(Math.max(1, midis.length) / 2);
+  order.forEach((m, i) => sampler.play(m, t0 + i * step, dur, level));
+  return 0.05 + (order.length - 1) * step + dur;
+}
+
+async function playSynthChord(midis: number[], mode: PlayMode): Promise<number> {
   const Ctor = window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
   ctx ??= new Ctor();
   if (ctx.state === 'suspended') await ctx.resume();

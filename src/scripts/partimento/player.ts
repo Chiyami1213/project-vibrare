@@ -1,10 +1,10 @@
-// The Example Player: score with figured bass, harpsichord playback, step mode, transpose,
+// The Example Player: score with figured bass, sampled playback (the instrument is chosen in Settings), step mode, transpose,
 // mute / solo per voice, and an exercise mode that hides the upper voices.
 import { MAJOR_KEYS, MINOR_KEYS, isMajorKey, keyLabel, playableNotes, soundingAt, transposeExample } from './model';
 import type { ExampleData } from './model';
 import { drawExample } from './render';
 import type { Drawn } from './render';
-import { harpsichord } from './harpsichord';
+import { sampler } from '../sampler';
 import { fontsReady } from '../fonts';
 
 type Attrs = Record<string, string | number | boolean | undefined>;
@@ -124,21 +124,21 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
   }
 
   async function ensureSound(): Promise<boolean> {
-    if (harpsichord.ready) return true;
-    status.textContent = 'Loading the harpsichord…';
+    if (sampler.ready) return true;
+    status.textContent = `Loading the ${sampler.instrument.name.toLowerCase()}…`;
     try {
-      await harpsichord.load();
+      await sampler.load();
       status.textContent = '';
       return true;
     } catch {
-      status.textContent = 'The harpsichord sound could not be loaded. Check your connection and try again.';
+      status.textContent = 'The instrument sound could not be loaded. Check your connection and try again.';
       return false;
     }
   }
 
   function stopPlayback() {
     cancelAnimationFrame(raf);
-    harpsichord.stop();
+    sampler.stop();
     playing = false;
     playBtn.textContent = '▶ Play';
     drawn?.highlight(null);
@@ -147,12 +147,12 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
   async function play() {
     if (!(await ensureSound())) return;
     stopPlayback();
-    const ac = harpsichord.context;
+    const ac = sampler.context;
     const beat = 60 / state.bpm;
     t0 = ac.currentTime + 0.12;
     for (const n of playableNotes(current)) {
       if (!audible(n.voice)) continue;
-      harpsichord.play(n.midi, t0 + n.start * beat, n.dur * beat * 0.96, n.voice === upperCount ? 1 : 0.85);
+      sampler.play(n.midi, t0 + n.start * beat, n.dur * beat * 0.96, n.voice === upperCount ? 1 : 0.85);
     }
     playing = true;
     playBtn.textContent = '❚❚ Pause';
@@ -184,8 +184,8 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
     const s = drawn.slices[state.step];
     drawn.highlight(state.step);
     stepOut.textContent = `Sonority ${state.step + 1} of ${n}`;
-    const ac = harpsichord.context;
-    for (const nt of soundingAt(current, s.beat)) if (audible(nt.voice)) harpsichord.play(nt.midi, ac.currentTime + 0.03, 1.6, 0.9);
+    const ac = sampler.context;
+    for (const nt of soundingAt(current, s.beat)) if (audible(nt.voice)) sampler.play(nt.midi, ac.currentTime + 0.03, 1.6, 0.9);
   }
 
   // ---------- events ----------

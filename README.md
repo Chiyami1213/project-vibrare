@@ -26,9 +26,10 @@ returns to the main list.
   [thwiki.cc](https://thwiki.cc/) and the [ZUN Music Database Wiki](https://w.atwiki.jp/tohomusicdb/).
   Corrections found by comparing the sources are recorded in the data and covered by tests.
 - **The Well-Tempered Clavier list** follows the English and German Wikipedia articles (CC BY-SA 4.0).
-- **Harpsichord sound** in the partimento player: the Italian harpsichord from the
+- **Instrument sounds** for the partimento player and the chord tools, chosen in Settings: an Italian and a Flemish
+  harpsichord, a Steinway and a Kawai grand piano, and a Renaissance-style organ, all from the
   [Versilian Community Sample Library](https://github.com/sgossner/VCSL) (CC0), trimmed and converted to small
-  MP3 files and hosted with the site.
+  MP3 files and hosted with the site (see `public/audio/README.txt`).
 - **Partimento content pack** (`content/partimento/`): 80 patterns and 118 realized examples (moti del basso,
   schemata and cadences), with the Python source that generates the JSON and checks the voice leading.
   Summaries are paraphrased and cite their sources (Gjerdingen, IJzerman, Fenaroli, essaysonmusic.com and the

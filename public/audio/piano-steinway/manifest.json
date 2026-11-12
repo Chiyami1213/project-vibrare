@@ -1,0 +1,214 @@
+{
+ "samples": [
+  {
+   "file": "piano-steinway-As0.mp3",
+   "midi": 22.087,
+   "labelMidi": 22
+  },
+  {
+   "file": "piano-steinway-C1.mp3",
+   "midi": 24.13,
+   "labelMidi": 24
+  },
+  {
+   "file": "piano-steinway-D1.mp3",
+   "midi": 26.137,
+   "labelMidi": 26
+  },
+  {
+   "file": "piano-steinway-E1.mp3",
+   "midi": 27.906,
+   "labelMidi": 28
+  },
+  {
+   "file": "piano-steinway-Fs1.mp3",
+   "midi": 30.259,
+   "labelMidi": 30
+  },
+  {
+   "file": "piano-steinway-Gs1.mp3",
+   "midi": 32.195,
+   "labelMidi": 32
+  },
+  {
+   "file": "piano-steinway-As1.mp3",
+   "midi": 34.205,
+   "labelMidi": 34
+  },
+  {
+   "file": "piano-steinway-C2.mp3",
+   "midi": 36.054,
+   "labelMidi": 36
+  },
+  {
+   "file": "piano-steinway-D2.mp3",
+   "midi": 37.982,
+   "labelMidi": 38
+  },
+  {
+   "file": "piano-steinway-E2.mp3",
+   "midi": 40.066,
+   "labelMidi": 40
+  },
+  {
+   "file": "piano-steinway-Fs2.mp3",
+   "midi": 42.055,
+   "labelMidi": 42
+  },
+  {
+   "file": "piano-steinway-Gs2.mp3",
+   "midi": 44.097,
+   "labelMidi": 44
+  },
+  {
+   "file": "piano-steinway-As2.mp3",
+   "midi": 46.013,
+   "labelMidi": 46
+  },
+  {
+   "file": "piano-steinway-C3.mp3",
+   "midi": 48.047,
+   "labelMidi": 48
+  },
+  {
+   "file": "piano-steinway-D3.mp3",
+   "midi": 50.059,
+   "labelMidi": 50
+  },
+  {
+   "file": "piano-steinway-E3.mp3",
+   "midi": 52.047,
+   "labelMidi": 52
+  },
+  {
+   "file": "piano-steinway-Fs3.mp3",
+   "midi": 54.061,
+   "labelMidi": 54
+  },
+  {
+   "file": "piano-steinway-Gs3.mp3",
+   "midi": 56.027,
+   "labelMidi": 56
+  },
+  {
+   "file": "piano-steinway-As3.mp3",
+   "midi": 58.125,
+   "labelMidi": 58
+  },
+  {
+   "file": "piano-steinway-C4.mp3",
+   "midi": 60.074,
+   "labelMidi": 60
+  },
+  {
+   "file": "piano-steinway-D4.mp3",
+   "midi": 62.044,
+   "labelMidi": 62
+  },
+  {
+   "file": "piano-steinway-E4.mp3",
+   "midi": 64.05,
+   "labelMidi": 64
+  },
+  {
+   "file": "piano-steinway-Fs4.mp3",
+   "midi": 66.084,
+   "labelMidi": 66
+  },
+  {
+   "file": "piano-steinway-Gs4.mp3",
+   "midi": 68.057,
+   "labelMidi": 68
+  },
+  {
+   "file": "piano-steinway-As4.mp3",
+   "midi": 70.043,
+   "labelMidi": 70
+  },
+  {
+   "file": "piano-steinway-C5.mp3",
+   "midi": 72.109,
+   "labelMidi": 72
+  },
+  {
+   "file": "piano-steinway-D5.mp3",
+   "midi": 74.028,
+   "labelMidi": 74
+  },
+  {
+   "file": "piano-steinway-E5.mp3",
+   "midi": 76.023,
+   "labelMidi": 76
+  },
+  {
+   "file": "piano-steinway-Fs5.mp3",
+   "midi": 78.033,
+   "labelMidi": 78
+  },
+  {
+   "file": "piano-steinway-Gs5.mp3",
+   "midi": 80.008,
+   "labelMidi": 80
+  },
+  {
+   "file": "piano-steinway-As5.mp3",
+   "midi": 82.029,
+   "labelMidi": 82
+  },
+  {
+   "file": "piano-steinway-C6.mp3",
+   "midi": 84.073,
+   "labelMidi": 84
+  },
+  {
+   "file": "piano-steinway-D6.mp3",
+   "midi": 86.03,
+   "labelMidi": 86
+  },
+  {
+   "file": "piano-steinway-E6.mp3",
+   "midi": 88.025,
+   "labelMidi": 88
+  },
+  {
+   "file": "piano-steinway-Fs6.mp3",
+   "midi": 89.985,
+   "labelMidi": 90
+  },
+  {
+   "file": "piano-steinway-Gs6.mp3",
+   "midi": 92.008,
+   "labelMidi": 92
+  },
+  {
+   "file": "piano-steinway-As6.mp3",
+   "midi": 93.98,
+   "labelMidi": 94
+  },
+  {
+   "file": "piano-steinway-C7.mp3",
+   "midi": 96.12,
+   "labelMidi": 96
+  },
+  {
+   "file": "piano-steinway-D7.mp3",
+   "midi": 98.079,
+   "labelMidi": 98
+  },
+  {
+   "file": "piano-steinway-E7.mp3",
+   "midi": 100.127,
+   "labelMidi": 100
+  },
+  {
+   "file": "piano-steinway-Fs7.mp3",
+   "midi": 102.084,
+   "labelMidi": 102
+  },
+  {
+   "file": "piano-steinway-Gs7.mp3",
+   "midi": 104.099,
+   "labelMidi": 104
+  }
+ ]
+}

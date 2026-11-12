@@ -1,0 +1,144 @@
+{
+ "samples": [
+  {
+   "file": "harpsichord-flemish-Fs0.mp3",
+   "midi": 30.027,
+   "labelMidi": 30
+  },
+  {
+   "file": "harpsichord-flemish-Gs0.mp3",
+   "midi": 32.019,
+   "labelMidi": 32
+  },
+  {
+   "file": "harpsichord-flemish-As0.mp3",
+   "midi": 34.047,
+   "labelMidi": 34
+  },
+  {
+   "file": "harpsichord-flemish-C1.mp3",
+   "midi": 36.057,
+   "labelMidi": 36
+  },
+  {
+   "file": "harpsichord-flemish-D1.mp3",
+   "midi": 38.022,
+   "labelMidi": 38
+  },
+  {
+   "file": "harpsichord-flemish-E1.mp3",
+   "midi": 40.021,
+   "labelMidi": 40
+  },
+  {
+   "file": "harpsichord-flemish-Fs1.mp3",
+   "midi": 42.04,
+   "labelMidi": 42
+  },
+  {
+   "file": "harpsichord-flemish-Gs1.mp3",
+   "midi": 44.03,
+   "labelMidi": 44
+  },
+  {
+   "file": "harpsichord-flemish-As1.mp3",
+   "midi": 46.041,
+   "labelMidi": 46
+  },
+  {
+   "file": "harpsichord-flemish-C2.mp3",
+   "midi": 48.054,
+   "labelMidi": 48
+  },
+  {
+   "file": "harpsichord-flemish-D2.mp3",
+   "midi": 50.074,
+   "labelMidi": 50
+  },
+  {
+   "file": "harpsichord-flemish-E2.mp3",
+   "midi": 52.058,
+   "labelMidi": 52
+  },
+  {
+   "file": "harpsichord-flemish-Fs2.mp3",
+   "midi": 54.052,
+   "labelMidi": 54
+  },
+  {
+   "file": "harpsichord-flemish-Gs2.mp3",
+   "midi": 56.037,
+   "labelMidi": 56
+  },
+  {
+   "file": "harpsichord-flemish-As2.mp3",
+   "midi": 58.043,
+   "labelMidi": 58
+  },
+  {
+   "file": "harpsichord-flemish-C3.mp3",
+   "midi": 60.05,
+   "labelMidi": 60
+  },
+  {
+   "file": "harpsichord-flemish-D3.mp3",
+   "midi": 62.064,
+   "labelMidi": 62
+  },
+  {
+   "file": "harpsichord-flemish-E3.mp3",
+   "midi": 64.04,
+   "labelMidi": 64
+  },
+  {
+   "file": "harpsichord-flemish-Fs3.mp3",
+   "midi": 66.046,
+   "labelMidi": 66
+  },
+  {
+   "file": "harpsichord-flemish-Gs3.mp3",
+   "midi": 68.038,
+   "labelMidi": 68
+  },
+  {
+   "file": "harpsichord-flemish-As3.mp3",
+   "midi": 70.031,
+   "labelMidi": 70
+  },
+  {
+   "file": "harpsichord-flemish-C4.mp3",
+   "midi": 72.03,
+   "labelMidi": 72
+  },
+  {
+   "file": "harpsichord-flemish-D4.mp3",
+   "midi": 74.041,
+   "labelMidi": 74
+  },
+  {
+   "file": "harpsichord-flemish-E4.mp3",
+   "midi": 76.037,
+   "labelMidi": 76
+  },
+  {
+   "file": "harpsichord-flemish-Fs4.mp3",
+   "midi": 78.052,
+   "labelMidi": 78
+  },
+  {
+   "file": "harpsichord-flemish-Gs4.mp3",
+   "midi": 80.041,
+   "labelMidi": 80
+  },
+  {
+   "file": "harpsichord-flemish-As4.mp3",
+   "midi": 82.032,
+   "labelMidi": 82
+  },
+  {
+   "file": "harpsichord-flemish-C5.mp3",
+   "midi": 84.01,
+   "labelMidi": 84
+  }
+ ]
+}

@@ -1712,3 +1712,22 @@ button.note-chip[aria-pressed='true'] {
 .pl-note {
   margin: 8px 0 0;
 }
+
+/* Settings: instrument choice, in groups */
+#instrument-switch {
+  display: grid;
+  gap: 10px;
+}
+
+.instrument-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.instrument-group-name {
+  min-width: 11em;
+  color: var(--muted);
+  font-size: 0.9rem;
+}

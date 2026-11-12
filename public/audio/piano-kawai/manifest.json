@@ -1,0 +1,184 @@
+{
+ "samples": [
+  {
+   "file": "piano-kawai-C0.mp3",
+   "midi": 24.054,
+   "labelMidi": 24
+  },
+  {
+   "file": "piano-kawai-Ds0.mp3",
+   "midi": 27.054,
+   "labelMidi": 27
+  },
+  {
+   "file": "piano-kawai-Fs0.mp3",
+   "midi": 29.972,
+   "labelMidi": 30
+  },
+  {
+   "file": "piano-kawai-A0.mp3",
+   "midi": 33.025,
+   "labelMidi": 33
+  },
+  {
+   "file": "piano-kawai-C1.mp3",
+   "midi": 35.989,
+   "labelMidi": 36
+  },
+  {
+   "file": "piano-kawai-Ds1.mp3",
+   "midi": 38.966,
+   "labelMidi": 39
+  },
+  {
+   "file": "piano-kawai-Fs1.mp3",
+   "midi": 42.055,
+   "labelMidi": 42
+  },
+  {
+   "file": "piano-kawai-A1.mp3",
+   "midi": 45.004,
+   "labelMidi": 45
+  },
+  {
+   "file": "piano-kawai-C2.mp3",
+   "midi": 48.091,
+   "labelMidi": 48
+  },
+  {
+   "file": "piano-kawai-D2.mp3",
+   "midi": 50.021,
+   "labelMidi": 50
+  },
+  {
+   "file": "piano-kawai-E2.mp3",
+   "midi": 51.989,
+   "labelMidi": 52
+  },
+  {
+   "file": "piano-kawai-Fs2.mp3",
+   "midi": 54.052,
+   "labelMidi": 54
+  },
+  {
+   "file": "piano-kawai-Gs2.mp3",
+   "midi": 56.032,
+   "labelMidi": 56
+  },
+  {
+   "file": "piano-kawai-As2.mp3",
+   "midi": 58.018,
+   "labelMidi": 58
+  },
+  {
+   "file": "piano-kawai-C3.mp3",
+   "midi": 60.023,
+   "labelMidi": 60
+  },
+  {
+   "file": "piano-kawai-D3.mp3",
+   "midi": 61.993,
+   "labelMidi": 62
+  },
+  {
+   "file": "piano-kawai-E3.mp3",
+   "midi": 63.986,
+   "labelMidi": 64
+  },
+  {
+   "file": "piano-kawai-Fs3.mp3",
+   "midi": 65.968,
+   "labelMidi": 66
+  },
+  {
+   "file": "piano-kawai-Gs3.mp3",
+   "midi": 68.022,
+   "labelMidi": 68
+  },
+  {
+   "file": "piano-kawai-As3.mp3",
+   "midi": 70.026,
+   "labelMidi": 70
+  },
+  {
+   "file": "piano-kawai-C4.mp3",
+   "midi": 71.991,
+   "labelMidi": 72
+  },
+  {
+   "file": "piano-kawai-D4.mp3",
+   "midi": 74.017,
+   "labelMidi": 74
+  },
+  {
+   "file": "piano-kawai-E4.mp3",
+   "midi": 76.031,
+   "labelMidi": 76
+  },
+  {
+   "file": "piano-kawai-Fs4.mp3",
+   "midi": 78.034,
+   "labelMidi": 78
+  },
+  {
+   "file": "piano-kawai-Gs4.mp3",
+   "midi": 80.029,
+   "labelMidi": 80
+  },
+  {
+   "file": "piano-kawai-As4.mp3",
+   "midi": 82.0,
+   "labelMidi": 82
+  },
+  {
+   "file": "piano-kawai-B4.mp3",
+   "midi": 83.015,
+   "labelMidi": 83
+  },
+  {
+   "file": "piano-kawai-C5.mp3",
+   "midi": 84.004,
+   "labelMidi": 84
+  },
+  {
+   "file": "piano-kawai-Ds5.mp3",
+   "midi": 87.001,
+   "labelMidi": 87
+  },
+  {
+   "file": "piano-kawai-Fs5.mp3",
+   "midi": 90.015,
+   "labelMidi": 90
+  },
+  {
+   "file": "piano-kawai-A5.mp3",
+   "midi": 92.994,
+   "labelMidi": 93
+  },
+  {
+   "file": "piano-kawai-C6.mp3",
+   "midi": 96.005,
+   "labelMidi": 96
+  },
+  {
+   "file": "piano-kawai-Ds6.mp3",
+   "midi": 99.013,
+   "labelMidi": 99
+  },
+  {
+   "file": "piano-kawai-Fs6.mp3",
+   "midi": 102.031,
+   "labelMidi": 102
+  },
+  {
+   "file": "piano-kawai-A6.mp3",
+   "midi": 104.94,
+   "labelMidi": 105
+  },
+  {
+   "file": "piano-kawai-C7.mp3",
+   "midi": 107.948,
+   "labelMidi": 108
+  }
+ ]
+}

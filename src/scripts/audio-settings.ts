@@ -1,11 +1,13 @@
 // Audio settings shared by every page that makes sound. Stored only in the visitor's browser.
+import { DEFAULT_INSTRUMENT, isInstrumentId } from './instruments.ts';
 
 export interface AudioSettings {
   volume: number; // 0 to 100
   muted: boolean;
+  instrument: string; // id from instruments.ts
 }
 
-export const DEFAULT_AUDIO: AudioSettings = { volume: 80, muted: false };
+export const DEFAULT_AUDIO: AudioSettings = { volume: 80, muted: false, instrument: DEFAULT_INSTRUMENT };
 const KEY = 'audio-settings';
 
 /** Turn whatever was stored into valid settings (bad or missing values fall back to the defaults). */
@@ -24,6 +26,7 @@ export function normalizeAudio(raw: unknown): AudioSettings {
   return {
     volume: Number.isFinite(v) ? Math.max(0, Math.min(100, Math.round(v))) : DEFAULT_AUDIO.volume,
     muted: o.muted === true,
+    instrument: isInstrumentId(o.instrument) ? o.instrument : DEFAULT_INSTRUMENT,
   };
 }
 

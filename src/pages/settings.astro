@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { INSTRUMENTS, INSTRUMENT_GROUPS } from '../scripts/instruments';
 ---
 
 <Layout title="Settings">
@@ -39,8 +40,27 @@ import Layout from '../layouts/Layout.astro';
           <button type="button" class="seg-btn" data-muted="1" aria-pressed="false">Off</button>
         </div>
       </div>
+      <div class="field">
+        <span class="field-label" id="instrument-label">Instrument</span>
+        <div id="instrument-switch" role="group" aria-labelledby="instrument-label">
+          {
+            INSTRUMENT_GROUPS.map((g) => (
+              <div class="instrument-group">
+                <span class="instrument-group-name">{g}</span>
+                <div class="seg-group">
+                  {INSTRUMENTS.filter((i) => i.group === g).map((i) => (
+                    <button type="button" class="seg-btn" data-instrument={i.id} data-blurb={i.blurb} aria-pressed="false">{i.name}</button>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <p id="instrument-blurb" class="muted-line"></p>
+      </div>
       <div class="btn-row">
         <button type="button" class="btn" id="test-sound">▶ Play a test chord</button>
+        <span id="test-status" class="muted-line" role="status"></span>
       </div>
     </div>
 
@@ -56,8 +76,9 @@ import Layout from '../layouts/Layout.astro';
           device's light or dark mode.
         </li>
         <li>
-          The volume and the sound on/off setting apply to every chord and score you play on the site, and are
-          also saved in this browser only.
+          The volume, the sound on/off setting and the instrument apply to every chord and score you play on the site,
+          and are also saved in this browser only. The first time you play an instrument, its recordings (1 to 3 MB)
+          are downloaded.
         </li>
       </ul>
     </section>
@@ -101,12 +122,19 @@ import Layout from '../layouts/Layout.astro';
     const volume = document.getElementById('volume') as HTMLInputElement;
     const volumeOut = document.getElementById('volume-out')!;
     const switches = [...document.querySelectorAll<HTMLButtonElement>('#sound-switch [data-muted]')];
+    const instruments = [...document.querySelectorAll<HTMLButtonElement>('#instrument-switch [data-instrument]')];
+    const instrumentBlurb = document.getElementById('instrument-blurb')!;
 
     function showAudio() {
       const a = getAudioSettings();
       volume.value = String(a.volume);
       volumeOut.textContent = `${a.volume}%`;
       switches.forEach((b) => b.setAttribute('aria-pressed', String((b.dataset.muted === '1') === a.muted)));
+      instruments.forEach((b) => {
+        const on = b.dataset.instrument === a.instrument;
+        b.setAttribute('aria-pressed', String(on));
+        if (on) instrumentBlurb.textContent = b.dataset.blurb ?? '';
+      });
     }
     volume.addEventListener('input', () => {
       saveAudioSettings({ volume: Number(volume.value) });
@@ -118,8 +146,19 @@ import Layout from '../layouts/Layout.astro';
         showAudio();
       }),
     );
-    document.getElementById('test-sound')!.addEventListener('click', () => {
-      void import('../scripts/synth').then(({ playChord }) => playChord([48, 52, 55, 60], 'harmonic'));
+    instruments.forEach((b) =>
+      b.addEventListener('click', () => {
+        saveAudioSettings({ instrument: b.dataset.instrument });
+        showAudio();
+        document.getElementById('test-sound')!.click(); // let the visitor hear the choice straight away
+      }),
+    );
+    const testStatus = document.getElementById('test-status')!;
+    document.getElementById('test-sound')!.addEventListener('click', async () => {
+      testStatus.textContent = 'Loading…';
+      const { playChord } = await import('../scripts/synth');
+      await playChord([48, 52, 55, 60], 'harmonic');
+      testStatus.textContent = '';
     });
     showAudio();
   </script>

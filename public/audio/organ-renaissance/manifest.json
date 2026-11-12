@@ -1,0 +1,139 @@
+{
+ "samples": [
+  {
+   "file": "organ-renaissance-C1.mp3",
+   "midi": 35.981,
+   "labelMidi": 36
+  },
+  {
+   "file": "organ-renaissance-D1.mp3",
+   "midi": 38.003,
+   "labelMidi": 38
+  },
+  {
+   "file": "organ-renaissance-E1.mp3",
+   "midi": 40.005,
+   "labelMidi": 40
+  },
+  {
+   "file": "organ-renaissance-Fs1.mp3",
+   "midi": 41.987,
+   "labelMidi": 42
+  },
+  {
+   "file": "organ-renaissance-Gs1.mp3",
+   "midi": 44.004,
+   "labelMidi": 44
+  },
+  {
+   "file": "organ-renaissance-As1.mp3",
+   "midi": 45.994,
+   "labelMidi": 46
+  },
+  {
+   "file": "organ-renaissance-C2.mp3",
+   "midi": 48.01,
+   "labelMidi": 48
+  },
+  {
+   "file": "organ-renaissance-D2.mp3",
+   "midi": 50.004,
+   "labelMidi": 50
+  },
+  {
+   "file": "organ-renaissance-E2.mp3",
+   "midi": 51.996,
+   "labelMidi": 52
+  },
+  {
+   "file": "organ-renaissance-Fs2.mp3",
+   "midi": 53.993,
+   "labelMidi": 54
+  },
+  {
+   "file": "organ-renaissance-Gs2.mp3",
+   "midi": 56.001,
+   "labelMidi": 56
+  },
+  {
+   "file": "organ-renaissance-As2.mp3",
+   "midi": 58.002,
+   "labelMidi": 58
+  },
+  {
+   "file": "organ-renaissance-C3.mp3",
+   "midi": 59.995,
+   "labelMidi": 60
+  },
+  {
+   "file": "organ-renaissance-D3.mp3",
+   "midi": 62.001,
+   "labelMidi": 62
+  },
+  {
+   "file": "organ-renaissance-E3.mp3",
+   "midi": 63.995,
+   "labelMidi": 64
+  },
+  {
+   "file": "organ-renaissance-Fs3.mp3",
+   "midi": 65.996,
+   "labelMidi": 66
+  },
+  {
+   "file": "organ-renaissance-Gs3.mp3",
+   "midi": 68.008,
+   "labelMidi": 68
+  },
+  {
+   "file": "organ-renaissance-As3.mp3",
+   "midi": 70.006,
+   "labelMidi": 70
+  },
+  {
+   "file": "organ-renaissance-C4.mp3",
+   "midi": 71.996,
+   "labelMidi": 72
+  },
+  {
+   "file": "organ-renaissance-D4.mp3",
+   "midi": 73.998,
+   "labelMidi": 74
+  },
+  {
+   "file": "organ-renaissance-E4.mp3",
+   "midi": 75.999,
+   "labelMidi": 76
+  },
+  {
+   "file": "organ-renaissance-Fs4.mp3",
+   "midi": 77.987,
+   "labelMidi": 78
+  },
+  {
+   "file": "organ-renaissance-Gs4.mp3",
+   "midi": 79.996,
+   "labelMidi": 80
+  },
+  {
+   "file": "organ-renaissance-As4.mp3",
+   "midi": 81.999,
+   "labelMidi": 82
+  },
+  {
+   "file": "organ-renaissance-C5.mp3",
+   "midi": 83.99,
+   "labelMidi": 84
+  },
+  {
+   "file": "organ-renaissance-D5.mp3",
+   "midi": 85.999,
+   "labelMidi": 86
+  },
+  {
+   "file": "organ-renaissance-E5.mp3",
+   "midi": 88.033,
+   "labelMidi": 88
+  }
+ ]
+}
