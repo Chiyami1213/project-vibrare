@@ -61,8 +61,6 @@ interface Built {
 }
 
 interface MeasurePlan {
-  voices: Voice[][]; // per row
-  built: Built[];
   minWidth: number; // what VexFlow needs for the notes of this bar
   onsets: number;
 }
@@ -103,9 +101,9 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
   const spec = keySpec(ex.key);
   const accidentals = Math.abs(keyAccidentals(spec));
 
-  // ---- pass 1: build the notes of every bar and ask VexFlow how much room each needs
-  const plans: MeasurePlan[] = [];
-  for (let m = 0; m < bars; m++) {
+  // Build the notes of one bar. Notes must be built fresh for each use: formatting the same note objects
+  // twice would apply VexFlow's collision shifts twice and leave stems detached from their heads.
+  const buildMeasure = (m: number) => {
     const built: Built[] = [];
     const onsets = new Set<number>();
     const voices = rows.map((r, ri) => {
@@ -127,10 +125,16 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
       Accidental.applyAccidentals(vs, spec);
       return vs;
     });
+    return { voices, built, onsets: onsets.size };
+  };
+
+  // ---- pass 1: ask VexFlow how much room each bar needs (these notes are thrown away)
+  const plans: MeasurePlan[] = [];
+  for (let m = 0; m < bars; m++) {
+    const probeBar = buildMeasure(m);
     const probe = new Formatter();
-    voices.forEach((vs) => probe.joinVoices(vs));
-    const minWidth = probe.preCalculateMinTotalWidth(voices.flat());
-    plans.push({ voices, built, minWidth, onsets: onsets.size });
+    probeBar.voices.forEach((vs) => probe.joinVoices(vs));
+    plans.push({ minWidth: probe.preCalculateMinTotalWidth(probeBar.voices.flat()), onsets: probeBar.onsets });
   }
 
   // ---- widths and the split into systems
@@ -196,7 +200,7 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
         new StaveConnector(staves[0], staves[1]).setType(m === bars - 1 ? 'boldDoubleRight' : 'singleRight').setContext(ctx).draw();
       }
 
-      const { voices, built } = plans[m];
+      const { voices, built } = buildMeasure(m); // fresh notes for drawing
       const startX = Math.max(...staves.map((s) => s.getNoteStartX()));
       const formatter = new Formatter();
       voices.forEach((vs) => formatter.joinVoices(vs));
@@ -235,8 +239,9 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
     });
   });
 
-  // ---- figured bass and circled degrees under the bass staff
   const svg = container.querySelector('svg') as SVGSVGElement;
+
+  // ---- figured bass and circled degrees under the bass staff
   svg.setAttribute('class', 'score');
   svg.setAttribute('role', 'img');
   svg.setAttribute('aria-label', `Score of ${ex.title}`);

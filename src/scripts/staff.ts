@@ -1,5 +1,6 @@
 // Draws notes on a music staff (VexFlow, Bravura font embedded: no network needed).
 import { Accidental, Formatter, Renderer, Stave, StaveNote, Voice } from 'vexflow/bravura';
+import { fontsReady } from './fonts';
 import { LETTERS } from './theory';
 import type { Note } from './theory';
 
@@ -41,7 +42,12 @@ function makeNote(notes: Note[], duration: string, clef: Clef): StaveNote {
  * Show `notes` on one stave. "melodic" writes them one after another (a scale, or the two notes of an
  * interval); "harmonic" stacks them into a single chord-like note.
  */
-export function renderStaff(container: HTMLElement, notes: Note[], opts: { clef: Clef; mode: StaffMode }) {
+let latest = 0;
+
+export async function renderStaff(container: HTMLElement, notes: Note[], opts: { clef: Clef; mode: StaffMode }): Promise<void> {
+  const mine = ++latest;
+  await fontsReady(); // the music font must be loaded before VexFlow measures any notehead
+  if (mine !== latest) return; // a newer request arrived while we waited
   container.replaceChildren();
   if (notes.length === 0) return;
   const harmonic = opts.mode === 'harmonic' && notes.length > 1;

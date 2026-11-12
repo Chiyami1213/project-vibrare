@@ -5,6 +5,7 @@ import type { ExampleData } from './model';
 import { drawExample } from './render';
 import type { Drawn } from './render';
 import { harpsichord } from './harpsichord';
+import { fontsReady } from '../fonts';
 
 type Attrs = Record<string, string | number | boolean | undefined>;
 
@@ -21,7 +22,7 @@ function h<K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Attrs = {}, ...
 
 const button = (label: string, cls = 'btn', attrs: Attrs = {}) => h('button', { type: 'button', class: cls, ...attrs }, label);
 
-export function mountPlayer(root: HTMLElement, original: ExampleData): void {
+export async function mountPlayer(root: HTMLElement, original: ExampleData): Promise<void> {
   const upperCount = original.parts - 1;
   const voiceName = (i: number) => (i === upperCount ? 'Bass' : upperCount === 1 ? 'Upper voice' : `Voice ${i + 1}`);
 
@@ -232,5 +233,6 @@ export function mountPlayer(root: HTMLElement, original: ExampleData): void {
 
   buildVoiceButtons();
   lastWidth = Math.floor(score.clientWidth);
+  await fontsReady(); // the music font must be loaded before VexFlow measures any notehead
   redraw();
 }
