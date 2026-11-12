@@ -1,8 +1,17 @@
 // A small Web Audio synth for previewing chords (no samples, nothing downloaded).
+import { getAudioSettings, outputGain } from './audio-settings';
+
 export type PlayMode = 'harmonic' | 'up' | 'down';
 
 let ctx: AudioContext | null = null;
 let current: GainNode | null = null;
+
+// the volume and mute settings apply straight away, even to a chord that is already sounding
+if (typeof window !== 'undefined') {
+  window.addEventListener('audio-settings', () => {
+    if (ctx && current) current.gain.setTargetAtTime(outputGain(getAudioSettings()), ctx.currentTime, 0.03);
+  });
+}
 
 const freq = (midi: number) => 440 * Math.pow(2, (midi - 69) / 12);
 
@@ -43,7 +52,7 @@ export async function playChord(midis: number[], mode: PlayMode): Promise<number
     current = null;
   }
   const master = ac.createGain();
-  master.gain.value = 1;
+  master.gain.value = outputGain(getAudioSettings());
   master.connect(ac.destination);
   current = master;
 

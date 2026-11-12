@@ -1527,3 +1527,21 @@ button.note-chip[aria-pressed='true'] {
   gap: 12px 24px;
   margin-bottom: 16px;
 }
+
+/* ---------- Audio settings ---------- */
+.audio-settings {
+  display: grid;
+  gap: 16px;
+  margin: 8px 0 32px;
+}
+
+.volume-range {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.field-label output {
+  margin-left: 6px;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}

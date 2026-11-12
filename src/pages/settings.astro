@@ -26,6 +26,24 @@ import Layout from '../layouts/Layout.astro';
       </button>
     </div>
 
+    <h2 class="section-title">Audio</h2>
+    <div class="audio-settings">
+      <div class="field">
+        <label class="field-label" for="volume">Volume <output id="volume-out" for="volume">80%</output></label>
+        <input id="volume" class="volume-range" type="range" min="0" max="100" step="1" value="80" />
+      </div>
+      <div class="field">
+        <span class="field-label" id="sound-label">Sound</span>
+        <div class="seg-group" role="group" aria-labelledby="sound-label" id="sound-switch">
+          <button type="button" class="seg-btn" data-muted="0" aria-pressed="true">On</button>
+          <button type="button" class="seg-btn" data-muted="1" aria-pressed="false">Off</button>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button type="button" class="btn" id="test-sound">▶ Play a test chord</button>
+      </div>
+    </div>
+
     <section class="help">
       <h2>Using this site</h2>
       <ul>
@@ -36,6 +54,10 @@ import Layout from '../layouts/Layout.astro';
         <li>
           Your theme choice is saved in this browser only. "Use device settings" follows your
           device's light or dark mode.
+        </li>
+        <li>
+          The volume and the sound on/off setting apply to every chord and score you play on the site, and are
+          also saved in this browser only.
         </li>
       </ul>
     </section>
@@ -72,5 +94,33 @@ import Layout from '../layouts/Layout.astro';
 
     tiles.forEach((t) => t.addEventListener('click', () => apply(t.dataset.themeChoice!)));
     show(saved());
+
+    // ---- audio
+    import { getAudioSettings, saveAudioSettings } from '../scripts/audio-settings';
+
+    const volume = document.getElementById('volume') as HTMLInputElement;
+    const volumeOut = document.getElementById('volume-out')!;
+    const switches = [...document.querySelectorAll<HTMLButtonElement>('#sound-switch [data-muted]')];
+
+    function showAudio() {
+      const a = getAudioSettings();
+      volume.value = String(a.volume);
+      volumeOut.textContent = `${a.volume}%`;
+      switches.forEach((b) => b.setAttribute('aria-pressed', String((b.dataset.muted === '1') === a.muted)));
+    }
+    volume.addEventListener('input', () => {
+      saveAudioSettings({ volume: Number(volume.value) });
+      volumeOut.textContent = `${volume.value}%`;
+    });
+    switches.forEach((b) =>
+      b.addEventListener('click', () => {
+        saveAudioSettings({ muted: b.dataset.muted === '1' });
+        showAudio();
+      }),
+    );
+    document.getElementById('test-sound')!.addEventListener('click', () => {
+      void import('../scripts/synth').then(({ playChord }) => playChord([48, 52, 55, 60], 'harmonic'));
+    });
+    showAudio();
   </script>
 </Layout>
