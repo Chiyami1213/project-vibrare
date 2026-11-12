@@ -10,9 +10,9 @@ Live site: <https://vibrare.pages.dev/>
 | Section | Contents |
 | :-- | :-- |
 | **Theory** | Tonal Harmony, Partimento (Moti del Basso and Schemata with playable scores; Cadences to come), Counterpoint, Jazz. Several of these are still being written; see [Status](#status). |
-| **Analysis** | *Baroque*: *Bach* lists the 48 preludes and fugues of *The Well-Tempered Clavier* (BWV 846 to 893) with keys and fugue voice counts; *Quantz* and *Blavet* are not written yet. *Touhou Project*: the numbered games Th06 to Th20 (15 games, 271 tracks), each with its OST and where every track is used. *Japanese Music*: not written yet. |
+| **Analysis** | *Baroque*: *Bach* lists the 48 preludes and fugues of *The Well-Tempered Clavier* (BWV 846 to 893) with keys and fugue voice counts; *Quantz* and *Blavet* are not written yet. *Touhou Project*: the numbered games Th06 to Th20 (15 games, 271 tracks), each with its OST, where every track is used, and its BPM and key where the wiki below has them. *Japanese Music*: not written yet. |
 | **Tools** | Interval and scale calculators that show the notes on a staff; a chord calculator with inversions, a piano keyboard, playback and shareable links; an interactive circle of fifths with a rainbow colour scheme that draws a chord's shape (triangle, square, and so on). Notes are spelled the way a musician would write them. |
-| **Works** | Arrangements by category: Anime, Commissions, Concert Band, Flute, Ghibli, Touhou Project, Vocaloid, VTubers, Miscellaneous. The lists are empty for now. |
+| **Works** | Arrangements by category: Anime, Commissions, Concert Band, Flute, Ghibli, Touhou Project, Vocaloid, VTubers, Miscellaneous. Three arrangements are listed so far. |
 | **Glossary** | Searchable music-theory terms. |
 | **Resources** | Books, websites, videos and software for further study. |
 | **About, Settings** | What the site is, and the theme and audio settings. |
@@ -24,6 +24,10 @@ returns to the main list.
 
 - **Touhou track lists** are compiled from Japanese Wikipedia (CC BY-SA 4.0) and cross-checked against
   [thwiki.cc](https://thwiki.cc/) and the [ZUN Music Database Wiki](https://w.atwiki.jp/tohomusicdb/).
+- **Touhou BPM and keys** come from the BPM and key tables of that same wiki. The BPM is the maximum tempo it lists
+  (two values where it lists two) and the keys are named as the wiki names them, in the order they are heard.
+  The wiki has an entry for 163 of the 271 tracks (BPM) and 140 (key), so some tracks, mostly from Th15 onward, have
+  none. One typo in the source (a key range written "1;45") is corrected.
   Corrections found by comparing the sources are recorded in the data and covered by tests.
 - **The Well-Tempered Clavier list** follows the English and German Wikipedia articles (CC BY-SA 4.0).
 - **Instrument sounds** for the partimento player and the chord tools, chosen in Settings: an Italian and a Flemish

@@ -1,7 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import { GAMES } from '../../../data/touhou';
-import { gameLabel, roleLabel } from '../../../scripts/touhou';
+import { bpmLabel, gameLabel, keysLabel, roleLabel } from '../../../scripts/touhou';
 
 export function getStaticPaths() {
   return GAMES.map((game, i) => ({
@@ -23,6 +23,11 @@ const { game, prev, next } = Astro.props;
     </h1>
     <p class="lead">{game.titleEn} · {game.year} · {game.tracks.length} tracks</p>
 
+    <div class="track-head" aria-hidden="true">
+      <span>No.</span>
+      <span>Title</span>
+      <span class="track-info"><span>Used in</span><span>BPM</span><span>Key</span></span>
+    </div>
     <ol class="track-list">
       {
         game.tracks.map((t) => {
@@ -31,15 +36,24 @@ const { game, prev, next } = Astro.props;
             <li class="track">
               <span class="track-n">{t.n}</span>
               <span class="track-title" lang="ja">{t.title}</span>
-              <span class="track-role">
-                {r.label}
-                {r.character && <span lang="ja" class="track-char"> · {r.character}</span>}
+              <span class="track-info">
+                <span class="track-role">
+                  {r.label}
+                  {r.character && <span lang="ja" class="track-char"> · {r.character}</span>}
+                </span>
+                <span class="track-bpm" title="maximum bpm">{bpmLabel(t.bpm) || '–'}</span>
+                <span class="track-key">{keysLabel(t.keys) || '–'}</span>
               </span>
             </li>
           );
         })
       }
     </ol>
+
+    <p class="muted-line track-source">
+      BPM and key come from the Touhou Music Database wiki on atwiki. The BPM is the maximum tempo it lists (two values when it
+      lists two). Keys are named as the wiki names them, in the order they are heard; a dash means the wiki has no entry yet.
+    </p>
 
     <nav class="game-nav" aria-label="Other games">
       {prev ? <a class="btn" href={`/analysis/touhou/${prev.id}/`}>← {gameLabel(prev)} <span lang="ja">{prev.titleJa}</span></a> : <span />}

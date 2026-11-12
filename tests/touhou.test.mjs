@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { gameLabel, roleLabel } from '../src/scripts/touhou.ts';
+import { bpmLabel, gameLabel, keyLabel, keysLabel, roleLabel } from '../src/scripts/touhou.ts';
 
 const GAMES = JSON.parse(readFileSync(new URL('../src/data/touhou/games.json', import.meta.url), 'utf8'));
 
@@ -49,4 +49,64 @@ test('role labels', () => {
   assert.deepEqual(roleLabel(g('th06').tracks[15]), { label: 'Ending' });
   assert.deepEqual(roleLabel(g('th09').tracks[1]), { label: 'Character theme', character: '博麗霊夢' });
   assert.deepEqual(roleLabel(g('th09').tracks[15]), { label: '会話イベント1' });
+});
+
+// ---- BPM and keys from the Touhou Music Database wiki (atwiki)
+const KEY_CODES = ['Am', 'Bbm/A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'Ebm/D#m', 'Em', 'Fm', 'F#m', 'Gm', 'Abm/G#m', 'Chromatic', 'Major Scale'];
+
+test('BPM and key data: well-formed, and complete for the early games', () => {
+  let withBpm = 0;
+  let withKey = 0;
+  for (const g of GAMES) {
+    for (const t of g.tracks) {
+      if (t.bpm) {
+        withBpm++;
+        assert.ok(t.bpm.length >= 1 && t.bpm.length <= 3, `${g.id} #${t.n}`);
+        for (const v of t.bpm) assert.ok(typeof v === 'number' && v >= 60 && v <= 260, `${g.id} #${t.n} bpm ${v}`);
+        assert.deepEqual(t.bpm, [...t.bpm].sort((a, b) => b - a), `${g.id} #${t.n} is not largest first`);
+      }
+      if (t.keys) {
+        withKey++;
+        for (const k of t.keys) {
+          assert.ok(KEY_CODES.includes(k.key), `${g.id} #${t.n} key ${k.key}`);
+          assert.match(k.range, /^\d+:\d{2}～(\d+:\d{2})?$/, `${g.id} #${t.n} range ${k.range}`);
+        }
+      }
+    }
+  }
+  assert.equal(withBpm, 163);
+  assert.equal(withKey, 140);
+  // Th06 is complete on the wiki
+  for (const t of GAMES[0].tracks) assert.ok(t.bpm && t.keys, `th06 #${t.n}`);
+  assert.deepEqual(GAMES[0].tracks[0].bpm, [146, 143]);
+});
+
+test('BPM and key labels', () => {
+  assert.equal(bpmLabel([146, 143]), '146 / 143');
+  assert.equal(bpmLabel([160.73]), '160.73');
+  assert.equal(bpmLabel(undefined), '');
+  assert.equal(keyLabel('Am'), 'A minor');
+  assert.equal(keyLabel('Ebm/D#m'), 'E♭/D♯ minor');
+  assert.equal(keyLabel('F#m'), 'F♯ minor');
+  assert.equal(keyLabel('Chromatic'), 'Chromatic');
+  assert.equal(keyLabel('Major Scale'), 'Major');
+  assert.equal(keyLabel('???'), '???');
+  // keys come in the order they are heard, with repeats merged
+  const keys = [
+    { key: 'Dm', range: '0:00～0:46' },
+    { key: 'Dm', range: '1:13～1:26' },
+    { key: 'Fm', range: '0:46～1:12' },
+  ];
+  assert.equal(keysLabel(keys), 'D minor → F minor → D minor');
+  assert.equal(keysLabel([{ key: 'Ebm/D#m', range: '0:00～' }]), 'E♭/D♯ minor');
+  assert.equal(keysLabel(undefined), '');
+  assert.equal(keyLabel('Ebm/D#m', true), 'E♭/D♯m');
+  const long = ['Dm', 'F#m', 'Ebm/D#m', 'F#m'].map((key, i) => ({ key, range: `${i}:00～` }));
+  assert.equal(keysLabel(long), 'Dm → F♯m → E♭/D♯m → F♯m'); // four keys: short form
+});
+
+test('a typo on the wiki is corrected: Th09 #2 has a key range ending 1:45, not "1;45"', () => {
+  const t = GAMES[3].tracks[1];
+  assert.equal(t.title, '春色小径 ～ Colorful Path');
+  assert.ok(t.keys.some((k) => k.range === '1:20～1:45'));
 });

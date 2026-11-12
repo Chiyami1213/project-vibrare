@@ -1013,11 +1013,47 @@ html.loading.open .panel-r {
 
 .track {
   display: grid;
-  grid-template-columns: 2.2rem minmax(0, 1fr) 23rem; /* wide enough that no role label wraps */
+  grid-template-columns: 2.2rem minmax(0, 1fr) var(--track-info-w);
   gap: 4px 12px;
   align-items: baseline;
   padding: 10px 16px;
   border-top: 1px solid var(--line);
+}
+
+/* the columns of a track: where it is used (wide enough that no label wraps), its BPM, its key(s) */
+.track-list,
+.track-head {
+  --track-info-w: 62rem;
+}
+
+.track-info {
+  display: grid;
+  grid-template-columns: 22rem 6rem minmax(0, 1fr);
+  gap: 4px 12px;
+  align-items: baseline;
+}
+
+.track-head {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr) var(--track-info-w);
+  gap: 4px 12px;
+  padding: 0 16px 6px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.track-bpm {
+  font-variant-numeric: tabular-nums;
+}
+
+.track-bpm,
+.track-key {
+  font-size: 0.9rem;
+}
+
+.track-source {
+  margin: -8px 0 20px;
+  font-size: 0.85rem;
 }
 
 .track:first-child {
@@ -1045,12 +1081,27 @@ html.loading.open .panel-r {
   gap: 16px;
 }
 
+/* too narrow for one line per track: the details go under the title */
+@media (max-width: 1650px) {
+  .track {
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+  }
+  .track-info {
+    grid-column: 2;
+    grid-template-columns: 20rem 6rem minmax(0, 1fr);
+    gap: 2px 16px;
+  }
+  .track-head {
+    display: none;
+  }
+}
+
 @media (max-width: 760px) {
   .track {
     grid-template-columns: 2rem minmax(0, 1fr);
   }
-  .track-role {
-    grid-column: 2;
+  .track-info {
+    grid-template-columns: repeat(auto-fit, minmax(7rem, max-content));
   }
   .game-nav {
     flex-direction: column;
