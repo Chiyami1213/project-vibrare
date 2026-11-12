@@ -68,7 +68,7 @@ const GALANT: Record<string, GalantStatus> = {
 
 export const galantOf = (id: string): GalantStatus | undefined => GALANT[id];
 
-export const GALANT_LABEL: Record<GalantStatus, string> = { galant: 'Galant', variant: 'Galant variant', pregalant: 'Pre-galant' };
+export const GALANT_LABEL: Record<GalantStatus, string> = { galant: 'Galant', variant: 'Galant Variant', pregalant: 'Pre-Galant' };
 
 export const GALANT_NOTE: Record<GalantStatus, string> = {
   galant: "A galant schema: it is in the catalogue of Robert Gjerdingen's Music in the Galant Style (2007).",
@@ -80,7 +80,7 @@ export const GALANT_NOTE: Record<GalantStatus, string> = {
 export const DIRECTION_LABEL: Record<string, string> = {
   ASC: 'Rising',
   DSC: 'Falling',
-  'ASC/DSC': 'Rising and falling',
+  'ASC/DSC': 'Rising and Falling',
   static: 'Static',
   mixed: 'Mixed',
   circular: 'Circular',

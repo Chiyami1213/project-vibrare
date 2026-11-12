@@ -1225,6 +1225,11 @@ html.loading.open .panel-r {
   margin-bottom: 8px;
 }
 
+/* buttons under a row of note chips need air between the two */
+.note-row + .btn-row {
+  margin-top: 18px;
+}
+
 button.btn {
   cursor: pointer;
   font: inherit;

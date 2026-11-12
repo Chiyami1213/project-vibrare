@@ -6,6 +6,7 @@ import { drawExample } from './render';
 import type { Drawn } from './render';
 import { sampler } from '../sampler';
 import { fontsReady } from '../fonts';
+import { titleCase } from '../title-case';
 
 type Attrs = Record<string, string | number | boolean | undefined>;
 
@@ -33,7 +34,7 @@ const button = (label: string, cls = 'btn', attrs: Attrs = {}) => h('button', { 
 
 export async function mountPlayer(root: HTMLElement, original: ExampleData): Promise<void> {
   const upperCount = original.parts - 1;
-  const voiceName = (i: number) => (i === upperCount ? 'Bass' : upperCount === 1 ? 'Upper voice' : `Voice ${i + 1}`);
+  const voiceName = (i: number) => (i === upperCount ? 'Bass' : upperCount === 1 ? 'Upper Voice' : `Voice ${i + 1}`);
 
   const state = {
     key: original.key,
@@ -66,8 +67,8 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
   const stepOut = h('span', { class: 'muted-line' }, 'Step through the sonorities with the arrow keys or these buttons');
 
   const keySel = h('select', { class: 'pl-select', 'aria-label': 'Key' });
-  const exerciseBtn = button('Hide upper voices (exercise)', 'seg-btn', { 'aria-pressed': 'false' });
-  const degreesBtn = button('Scale degrees', 'seg-btn', { 'aria-pressed': String(degreesWanted()) });
+  const exerciseBtn = button('Hide Upper Voices (Exercise)', 'seg-btn', { 'aria-pressed': 'false' });
+  const degreesBtn = button('Scale Degrees', 'seg-btn', { 'aria-pressed': String(degreesWanted()) });
 
   const voiceBox = h('div', { class: 'pl-voices' });
 
@@ -86,7 +87,7 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
 
   // key choices: the keys of the example's own mode
   const keys = isMajorKey(original.key) ? MAJOR_KEYS : MINOR_KEYS;
-  for (const k of keys) keySel.append(h('option', { value: k, selected: k === state.key }, keyLabel(k)));
+  for (const k of keys) keySel.append(h('option', { value: k, selected: k === state.key }, titleCase(keyLabel(k))));
 
   // ---------- helpers ----------
   const audible = (voice: number) => {

@@ -1,4 +1,5 @@
 ---
+import { titleCase } from '../scripts/title-case';
 import Layout from '../layouts/Layout.astro';
 import { GLOSSARY } from '../data/glossary';
 
@@ -16,7 +17,7 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(
     <h1>Glossary</h1>
     <p class="lead">Terms used across the site.</p>
 
-    <label class="field-label" for="gloss-search">Search terms</label>
+    <label class="field-label" for="gloss-search">Search Terms</label>
     <input id="gloss-search" class="gloss-search" type="search" placeholder="e.g. cadence" autocomplete="off" />
 
     <p id="gloss-empty" class="empty" hidden>No matching terms.</p>
@@ -27,7 +28,7 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(
           <h2 class="letter-title">{letter}</h2>
           {terms.map((t) => (
             <article class="term" id={slug(t.term)} data-search={`${t.term} ${t.definition}`.toLowerCase()}>
-              <h3>{t.term}</h3>
+              <h3>{titleCase(t.term)}</h3>
               <p>{t.definition}</p>
             </article>
           ))}

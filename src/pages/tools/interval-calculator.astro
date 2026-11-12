@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import NoteSelect from '../../components/NoteSelect.astro';
 import { INTERVALS } from '../../scripts/theory';
+import { titleCase } from '../../scripts/title-case';
 ---
 
 <Layout title="Interval Calculator">
@@ -10,11 +11,11 @@ import { INTERVALS } from '../../scripts/theory';
     <p class="lead">Pick a starting note and an interval to find the note it lands on, and see both on the staff.</p>
 
     <div class="calc-form">
-      <NoteSelect id="start" label="Starting note" />
+      <NoteSelect id="start" label="Starting Note" />
       <div class="field">
         <label class="field-label" for="interval">Interval</label>
         <select id="interval">
-          {INTERVALS.map((i) => <option value={i.code}>{i.name} ({i.code})</option>)}
+          {INTERVALS.map((i) => <option value={i.code}>{titleCase(i.name)} ({i.code})</option>)}
         </select>
       </div>
       <div class="field">
@@ -30,11 +31,11 @@ import { INTERVALS } from '../../scripts/theory';
       <div id="staff" class="staff"></div>
       <div class="staff-controls">
         <div class="seg-group" role="group" aria-label="Clef" id="clefs">
-          <button type="button" class="seg-btn" data-clef="treble" aria-pressed="true">Treble clef</button>
-          <button type="button" class="seg-btn" data-clef="bass" aria-pressed="false">Bass clef</button>
+          <button type="button" class="seg-btn" data-clef="treble" aria-pressed="true">Treble Clef</button>
+          <button type="button" class="seg-btn" data-clef="bass" aria-pressed="false">Bass Clef</button>
         </div>
         <div class="seg-group" role="group" aria-label="Show the notes" id="modes">
-          <button type="button" class="seg-btn" data-mode="melodic" aria-pressed="true">One after the other</button>
+          <button type="button" class="seg-btn" data-mode="melodic" aria-pressed="true">One After the Other</button>
           <button type="button" class="seg-btn" data-mode="harmonic" aria-pressed="false">Together</button>
         </div>
       </div>

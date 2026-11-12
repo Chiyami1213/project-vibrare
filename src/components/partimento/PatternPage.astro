@@ -1,6 +1,7 @@
 ---
 import { DIRECTION_LABEL, GALANT_LABEL, GALANT_NOTE, degreeTokens, galantOf, getPattern, urlFor } from '../../data/partimento';
 import type { Example, Pattern } from '../../data/partimento';
+import { titleCase } from '../../scripts/title-case';
 
 interface Props {
   pattern: Pattern;
@@ -35,16 +36,16 @@ const hasScore = allExamples.length > 0;
 <main class="page-block wide pattern-page">
   <p class="crumb"><a class="btn" href={backHref}>← {backLabel}</a></p>
 
-  <h1>{p.name}</h1>
+  <h1>{titleCase(p.name)}</h1>
   {p.aka && p.aka.length > 0 && <p class="lead">Also called {p.aka.join(', ')}</p>}
 
   <div class="pat-chips big">
     {galantOf(p.id) && <span class={`chip chip-galant chip-${galantOf(p.id)}`}>{GALANT_LABEL[galantOf(p.id)!]}</span>}
     {p.direction && <span class="chip">{DIRECTION_LABEL[p.direction] ?? p.direction}</span>}
-    {(p.modes ?? []).map((m) => <span class="chip">{m}</span>)}
-    {p.textures && p.textures.length > 0 && <span class="chip">{p.textures.join(', ')} parts</span>}
+    {(p.modes ?? []).map((m) => <span class="chip">{titleCase(m)}</span>)}
+    {p.textures && p.textures.length > 0 && <span class="chip">{p.textures.join(', ')} Parts</span>}
     {p.meter && <span class="chip">{p.meter}</span>}
-    {(p.function ?? []).map((f) => <span class="chip">{f}</span>)}
+    {(p.function ?? []).map((f) => <span class="chip">{titleCase(f)}</span>)}
   </div>
 
   {
@@ -105,7 +106,7 @@ const hasScore = allExamples.length > 0;
         <h2 class="section-title">Examples</h2>
         {p.examples!.map((e) => (
           <div class="example">
-            <h3>{e.title}</h3>
+            <h3>{titleCase(e.title)}</h3>
             <div class="player" data-example={e.id}></div>
             {e.caption && <p class="caption">{e.caption}</p>}
             {owner && e.review && <p class="owner-note">Check: {String(e.review)}</p>}
@@ -129,12 +130,12 @@ const hasScore = allExamples.length > 0;
         <h2 class="section-title">Variants</h2>
         {p.variants!.map((v) => (
           <details class="variant">
-            <summary>{v.name}</summary>
+            <summary>{titleCase(v.name)}</summary>
             <p>{v.description}</p>
             {v.figures && <pre class="figures-box">{v.figures}</pre>}
             {(v.examples ?? []).map((e) => (
               <div class="example">
-                <h3>{e.title}</h3>
+                <h3>{titleCase(e.title)}</h3>
                 <div class="player" data-example={e.id}></div>
                 {e.caption && <p class="caption">{e.caption}</p>}
               </div>

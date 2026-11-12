@@ -1,6 +1,6 @@
 // Plays notes from recorded samples, using the instrument chosen in Settings (see instruments.ts).
 import { getAudioSettings, outputGain } from './audio-settings';
-import { getInstrument } from './instruments';
+import { equalTemperamentRate, getInstrument } from './instruments';
 import type { Instrument } from './instruments';
 
 interface SampleMeta {
@@ -86,7 +86,7 @@ export class Sampler {
     for (const s of samples) if (Math.abs(s.meta.midi - midi) < Math.abs(best.meta.midi - midi)) best = s;
     const src = ac.createBufferSource();
     src.buffer = best.buffer;
-    src.playbackRate.value = Math.pow(2, (midi - best.meta.midi) / 12); // exact equal temperament
+    src.playbackRate.value = equalTemperamentRate(best.meta.midi, midi); // 12-TET, whatever the recording's own tuning
     const env = ac.createGain();
     const end = when + Math.max(0.12, dur);
     env.gain.setValueAtTime(level * inst.level, when);

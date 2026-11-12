@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { INSTRUMENTS, INSTRUMENT_GROUPS, DEFAULT_INSTRUMENT, getInstrument, isInstrumentId } from '../src/scripts/instruments.ts';
+import { INSTRUMENTS, INSTRUMENT_GROUPS, DEFAULT_INSTRUMENT, equalTemperamentRate, getInstrument, isInstrumentId } from '../src/scripts/instruments.ts';
 import { DEFAULT_AUDIO, normalizeAudio } from '../src/scripts/audio-settings.ts';
 
 test('instruments: unique ids, known groups, two harpsichords and two pianos', () => {
   assert.equal(new Set(INSTRUMENTS.map((i) => i.id)).size, INSTRUMENTS.length);
   for (const i of INSTRUMENTS) assert.ok(INSTRUMENT_GROUPS.includes(i.group), i.id);
-  assert.equal(INSTRUMENTS.filter((i) => i.group === 'Historic harpsichord').length, 2);
-  assert.equal(INSTRUMENTS.filter((i) => i.group === 'Modern piano').length, 2);
+  assert.equal(INSTRUMENTS.filter((i) => i.group === 'Harpsichord').length, 2);
+  assert.equal(INSTRUMENTS.filter((i) => i.group === 'Piano').length, 2);
   assert.ok(isInstrumentId(DEFAULT_INSTRUMENT));
   assert.equal(getInstrument('nonsense').id, INSTRUMENTS[0].id);
 });
@@ -35,4 +35,18 @@ test('the instrument setting is validated like the other audio settings', () => 
   assert.equal(normalizeAudio('{"instrument":"kazoo"}').instrument, DEFAULT_INSTRUMENT);
   assert.equal(normalizeAudio('{"volume":50}').instrument, DEFAULT_INSTRUMENT);
   assert.equal(normalizeAudio(null).instrument, DEFAULT_INSTRUMENT);
+});
+
+test('every note is played in 12-TET (A = 440 Hz), whatever the tuning of its recording', () => {
+  const hz = (m) => 440 * 2 ** ((m - 69) / 12);
+  for (const i of INSTRUMENTS) {
+    const { samples } = JSON.parse(fs.readFileSync(new URL(`../public/audio/${i.dir}/manifest.json`, import.meta.url), 'utf8'));
+    for (let target = 24; target <= 96; target++) {
+      const nearest = samples.reduce((a, s) => (Math.abs(s.midi - target) < Math.abs(a.midi - target) ? s : a));
+      const sounding = hz(nearest.midi) * equalTemperamentRate(nearest.midi, target);
+      assert.ok(Math.abs(1200 * Math.log2(sounding / hz(target))) < 1e-6, `${i.id} midi ${target}`);
+    }
+  }
+  assert.equal(equalTemperamentRate(60, 72), 2);
+  assert.equal(equalTemperamentRate(60.2, 60.2), 1);
 });

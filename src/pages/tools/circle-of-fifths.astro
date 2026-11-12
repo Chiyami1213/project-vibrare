@@ -63,28 +63,28 @@ const segments = CIRCLE.flatMap((key, i) => {
     <section class="result" aria-live="polite">
       <h2 id="key-title" class="section-title">C major</h2>
       <dl class="facts">
-        <div><dt>Key signature</dt><dd id="f-sig"></dd></div>
-        <div><dt>Relative key</dt><dd id="f-rel"></dd></div>
+        <div><dt>Key Signature</dt><dd id="f-sig"></dd></div>
+        <div><dt>Relative Key</dt><dd id="f-rel"></dd></div>
         <div><dt id="f-dom-label">Dominant (V)</dt><dd id="f-dom"></dd></div>
         <div><dt id="f-sub-label">Subdominant (IV)</dt><dd id="f-sub"></dd></div>
       </dl>
       <h3 class="mini-title">Scale</h3>
       <div id="scale" class="note-row"></div>
       <div class="btn-row">
-        <button type="button" class="btn" id="play-scale">▶ Play scale</button>
-        <button type="button" class="btn" id="play-tonic">▶ Play tonic chord</button>
+        <button type="button" class="btn" id="play-scale">▶ Play Scale</button>
+        <button type="button" class="btn" id="play-tonic">▶ Play Tonic Chord</button>
       </div>
-      <h3 class="mini-title">Diatonic chords</h3>
+      <h3 class="mini-title">Diatonic Chords</h3>
       <div class="seg-group" role="group" aria-label="Chord size" id="chord-kind">
         <button type="button" class="seg-btn" data-sevenths="0" aria-pressed="true">Triads</button>
-        <button type="button" class="seg-btn" data-sevenths="1" aria-pressed="false">Seventh chords</button>
+        <button type="button" class="seg-btn" data-sevenths="1" aria-pressed="false">Seventh Chords</button>
       </div>
       <p class="muted-line hint">Click a chord to hear it and see its shape on the circle.</p>
       <div id="chords" class="note-row"></div>
     </section>
 
     <section class="result shape-panel" aria-live="polite">
-      <h2 class="section-title">Chord shape</h2>
+      <h2 class="section-title">Chord Shape</h2>
       <p class="muted-line">
         Each note of a chord has a place on the circle of fifths. Joining them draws the chord's shape: a major or
         minor triad is a lopsided triangle, an augmented triad is an equilateral triangle, and a diminished 7th is
@@ -93,7 +93,7 @@ const segments = CIRCLE.flatMap((key, i) => {
       <div class="calc-form chord-form">
         <NoteSelect id="shape-root" label="Root" />
         <div class="field">
-          <span class="field-label" id="shape-size-label">Chord kind</span>
+          <span class="field-label" id="shape-size-label">Chord Kind</span>
           <div class="seg-group" role="group" aria-labelledby="shape-size-label" id="shape-sizes">
             {CHORD_GROUPS.map((g) => <button type="button" class="seg-btn" data-kind={g.kind} aria-pressed="false">{g.label}</button>)}
           </div>
@@ -106,8 +106,8 @@ const segments = CIRCLE.flatMap((key, i) => {
         </div>
       </div>
       <div class="btn-row">
-        <button type="button" class="btn" id="shape-play">▶ Play chord</button>
-        <button type="button" class="btn" id="shape-clear">Clear shape</button>
+        <button type="button" class="btn" id="shape-play">▶ Play Chord</button>
+        <button type="button" class="btn" id="shape-clear">Clear Shape</button>
       </div>
       <p id="shape-caption" class="shape-caption"></p>
     </section>
@@ -119,6 +119,7 @@ const segments = CIRCLE.flatMap((key, i) => {
     import { chordShape, diatonicChordMidis, diatonicChords, keyInfo, scaleMidis, tonicMidis, type Mode } from '../../scripts/circle';
     import { byId, renderChips } from '../../scripts/ui';
     import { playChord } from '../../scripts/synth';
+    import { titleCase } from '../../scripts/title-case';
 
     const segs = [...document.querySelectorAll<SVGGElement>('.seg')];
     const text = (id: string, value: string) => (byId<HTMLElement>(id).textContent = value);
@@ -261,9 +262,9 @@ const segments = CIRCLE.flatMap((key, i) => {
         s.classList.toggle('nbr', m === mode && (p === wrap(pos + 1) || p === wrap(pos - 1)));
         s.setAttribute('aria-pressed', String(p === pos && m === mode));
       });
-      text('center-title', info.title);
+      text('center-title', titleCase(info.title));
       text('center-sig', info.signature.split(':')[0]);
-      text('key-title', info.title);
+      text('key-title', titleCase(info.title));
       text('f-sig', info.signature);
       text('f-rel', info.relative);
       text('f-dom-label', mode === 'major' ? 'Dominant (V)' : 'Minor dominant (v)');

@@ -2,9 +2,10 @@
 import Layout from '../../../layouts/Layout.astro';
 import { BASE, CADENCES, MOTI_GROUPS, SCHEMATA_GROUPS, motiPatterns, schemataPatterns } from '../../../data/partimento';
 import type { Group, Pattern } from '../../../data/partimento';
+import { titleCase } from '../../../scripts/title-case';
 
 const count = (groups: Group[], patterns: Pattern[]) =>
-  groups.map((g) => ({ title: g.title.replace(/^(Moti del basso|Schemata): /, ''), n: patterns.filter((p) => p.group === g.id).length }));
+  groups.map((g) => ({ title: titleCase(g.title.replace(/^(Moti del basso|Schemata): /, '')), n: patterns.filter((p) => p.group === g.id).length }));
 
 const sections = [
   {
@@ -73,7 +74,7 @@ const total = sections.reduce((n, s) => n + s.patterns, 0);
               <span class="pat-name">{s.title}</span>
               <span class="pat-aka">{s.blurb}</span>
               <span class="pat-chips">
-                <span class="chip chip-accent">{s.patterns} patterns</span>
+                <span class="chip chip-accent">{s.patterns} Patterns</span>
               </span>
               <span class="pat-aka">{s.parts.map((p) => `${p.title} (${p.n})`).join(' · ')}</span>
             </a>
@@ -82,7 +83,7 @@ const total = sections.reduce((n, s) => n + s.patterns, 0);
       }
     </ul>
 
-    <h2 class="section-title">New sections</h2>
+    <h2 class="section-title">New Sections</h2>
     <p class="group-blurb">Recently added. These pages are still being written.</p>
     <ul class="pat-grid">
       {

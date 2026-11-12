@@ -1,3 +1,4 @@
+import { titleCase } from './title-case.ts';
 // Music-theory helpers for the calculators. Pure functions, no DOM.
 // Notes are spelled correctly: a third above F# is A#, not Bb.
 
@@ -111,13 +112,13 @@ export const SCALES: Pattern[] = [
   { id: 'minor-pentatonic', name: 'Minor pentatonic', intervals: ['P1', 'm3', 'P4', 'P5', 'm7'] },
   { id: 'blues', name: 'Blues', intervals: ['P1', 'm3', 'P4', 'A4', 'P5', 'm7'] },
   { id: 'whole-tone', name: 'Whole tone', intervals: ['P1', 'M2', 'M3', 'A4', 'A5', 'm7'] },
-];
+].map((x) => ({ ...x, name: titleCase(x.name) }));
 
 // Chord catalogue. `symbol` is the suffix written after the root (C + "maj7" = Cmaj7).
 // The first four entries per size are the common ones; ids are stable (used in URLs and tests).
 const c = (id: string, name: string, symbol: string, intervals: string[], aka: string[] = []): Pattern => ({
   id,
-  name,
+  name: titleCase(name),
   symbol,
   aka,
   intervals,

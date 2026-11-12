@@ -1,7 +1,7 @@
 // The instruments the site can play with. Each is a set of recorded notes in public/audio/<dir>/ (CC0, from the
 // Versilian Community Sample Library; see public/audio/README.txt).
 
-export type InstrumentGroup = 'Historic harpsichord' | 'Modern piano' | 'Organ';
+export type InstrumentGroup = 'Harpsichord' | 'Piano' | 'Organ';
 
 export interface Instrument {
   id: string;
@@ -18,8 +18,8 @@ export interface Instrument {
 export const INSTRUMENTS: Instrument[] = [
   {
     id: 'harpsichord-italian',
-    name: 'Italian harpsichord',
-    group: 'Historic harpsichord',
+    name: 'Italian Harpsichord',
+    group: 'Harpsichord',
     dir: 'harpsichord',
     blurb: 'A recording of an Italian harpsichord on a single stop. The default, and the nearest in style to the instruments partimento was taught on.',
     release: 0.07,
@@ -27,8 +27,8 @@ export const INSTRUMENTS: Instrument[] = [
   },
   {
     id: 'harpsichord-flemish',
-    name: 'Flemish harpsichord',
-    group: 'Historic harpsichord',
+    name: 'Flemish Harpsichord',
+    group: 'Harpsichord',
     dir: 'harpsichord-flemish',
     blurb: 'A recording of a Flemish harpsichord (its low register).',
     release: 0.07,
@@ -36,8 +36,8 @@ export const INSTRUMENTS: Instrument[] = [
   },
   {
     id: 'piano-steinway',
-    name: 'Steinway grand piano',
-    group: 'Modern piano',
+    name: 'Steinway Grand Piano',
+    group: 'Piano',
     dir: 'piano-steinway',
     blurb: 'A recording of a Steinway model B grand piano.',
     release: 0.2,
@@ -45,8 +45,8 @@ export const INSTRUMENTS: Instrument[] = [
   },
   {
     id: 'piano-kawai',
-    name: 'Kawai grand piano',
-    group: 'Modern piano',
+    name: 'Kawai Grand Piano',
+    group: 'Piano',
     dir: 'piano-kawai',
     blurb: 'A recording of a Kawai grand piano.',
     release: 0.2,
@@ -54,7 +54,7 @@ export const INSTRUMENTS: Instrument[] = [
   },
   {
     id: 'organ-renaissance',
-    name: 'Chamber organ',
+    name: 'Chamber Organ',
     group: 'Organ',
     dir: 'organ-renaissance',
     blurb: 'A recording of a Renaissance-style organ on its 8-foot stop. Organ and harpsichord were the two usual keyboards for continuo.',
@@ -63,10 +63,17 @@ export const INSTRUMENTS: Instrument[] = [
   },
 ];
 
+/**
+ * Every instrument is played in twelve-tone equal temperament (12-TET, A = 440 Hz): a recording is speeded up or
+ * slowed down from its own measured pitch to the exact equal-tempered pitch of the note asked for. This is the
+ * playback rate that does it.
+ */
+export const equalTemperamentRate = (sampleMidi: number, targetMidi: number): number => Math.pow(2, (targetMidi - sampleMidi) / 12);
+
 export const DEFAULT_INSTRUMENT = 'harpsichord-italian';
 
 export const isInstrumentId = (id: unknown): id is string => typeof id === 'string' && INSTRUMENTS.some((i) => i.id === id);
 
 export const getInstrument = (id: string): Instrument => INSTRUMENTS.find((i) => i.id === id) ?? INSTRUMENTS[0];
 
-export const INSTRUMENT_GROUPS: InstrumentGroup[] = ['Historic harpsichord', 'Modern piano', 'Organ'];
+export const INSTRUMENT_GROUPS: InstrumentGroup[] = ['Harpsichord', 'Piano', 'Organ'];

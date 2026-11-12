@@ -25,7 +25,7 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
       </div>
 
       <div class="field">
-        <span class="field-label" id="size-label">Chord kind</span>
+        <span class="field-label" id="size-label">Chord Kind</span>
         <div class="seg-group" role="group" aria-labelledby="size-label" id="sizes">
           {CHORD_GROUPS.map((g) => <button type="button" class="seg-btn" data-kind={g.kind} aria-pressed="false">{g.label}</button>)}
         </div>
@@ -60,7 +60,7 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
         <button type="button" class="btn" data-play="harmonic">▶ Harmonic</button>
         <button type="button" class="btn" data-play="up">▶ Ascending</button>
         <button type="button" class="btn" data-play="down">▶ Descending</button>
-        <button type="button" class="btn" id="copy">Copy link</button>
+        <button type="button" class="btn" id="copy">Copy Link</button>
         <span id="copy-msg" class="muted-line" role="status"></span>
       </div>
 
@@ -80,7 +80,8 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
 
   <script>
     import { CHORDS, CHORD_GROUPS, chordKind } from '../../scripts/theory';
-    import { chordInfo, findChord, parseRoot, rootParam } from '../../scripts/chords';
+    import { chordInfo, findChord, inversionLabel, parseRoot, rootParam } from '../../scripts/chords';
+    import { titleCase } from '../../scripts/title-case';
     import { buildKeyboard } from '../../scripts/keyboard';
     import { playChord, type PlayMode } from '../../scripts/synth';
     import { byId, renderChips } from '../../scripts/ui';
@@ -142,7 +143,7 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
           b.type = 'button';
           b.className = 'seg-btn';
           b.textContent = k === 0 ? 'Root' : `${k}${k === 1 ? 'st' : k === 2 ? 'nd' : k === 3 ? 'rd' : 'th'}`;
-          b.title = k === 0 ? 'Root position' : `${k}${k === 1 ? 'st' : k === 2 ? 'nd' : k === 3 ? 'rd' : 'th'} inversion`;
+          b.title = inversionLabel(k).toLowerCase(); // tooltips are all lower case
           b.setAttribute('aria-pressed', String(k === state.inversion));
           b.addEventListener('click', () => {
             state.inversion = k;
@@ -153,7 +154,7 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
       );
 
       text('symbol', info.display);
-      text('fullname', `${info.fullName} · ${info.inversionLabel}`);
+      text('fullname', `${info.fullName} · ${titleCase(info.inversionLabel)}`);
       text('aka', info.aka.length ? `Also written ${info.aka.join(', ')}` : '');
       renderChips(byId<HTMLElement>('chips'), info.notes.map((n) => ({ name: n.name, interval: n.interval })));
       byId<HTMLElement>('keyboard').replaceChildren(buildKeyboard(info.notes.map((n) => ({ midi: n.midi, name: n.name }))));

@@ -43,7 +43,7 @@ export const RESOURCES: ResourceSection[] = [
   },
   {
     id: 'web',
-    title: 'Web sources',
+    title: 'Web Sources',
     items: [
       {
         title: 'musictheory.net',
