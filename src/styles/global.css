@@ -103,6 +103,7 @@ a {
   --r-fg: #a4a4b0;
   --r-fg-hi: #ffffff;
   --r-active: #26262e;
+  --r-line: #34343e;
   position: fixed;
   inset: 0 auto 0 0;
   z-index: 50;
@@ -178,9 +179,22 @@ a {
 }
 
 .rail .sub {
+  position: relative;
   min-height: 0;
   overflow: hidden;
   gap: 2px;
+}
+
+/* grey guide line, directly under the parent icon (x = 34px) */
+.rail .sub::before {
+  content: '';
+  position: absolute;
+  left: 29px;
+  top: 8px;
+  bottom: 6px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--r-line);
 }
 
 .rail .sub li:first-child {
@@ -189,6 +203,9 @@ a {
 
 .rail .sub a {
   height: 42px;
+  margin-left: 34px; /* sub-items hang off the guide line */
+  padding: 0 8px;
+  gap: 12px;
   font-size: 0.92rem;
 }
 
