@@ -1,0 +1,55 @@
+---
+export interface MenuLink {
+  href: string;
+  label: string;
+  icon: string;
+  children?: { href: string; label: string }[];
+}
+
+interface Props {
+  item: MenuLink;
+  path: string;
+}
+
+const ICONS: Record<string, string> = {
+  home: '<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/>',
+  score:
+    '<path d="M21 15V6"/><circle cx="18.5" cy="15.5" r="2.5"/><path d="M3 12h9M3 6h13M3 18h9"/>',
+  tools:
+    '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  music:
+    '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+  settings:
+    '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/>',
+};
+
+const { item, path } = Astro.props;
+const norm = (p: string) => p.replace(/\/$/, '') || '/';
+const here = norm(path);
+const exact = (href: string) => norm(href) === here;
+// In this item's section = its own page or any page below it (Home only matches itself).
+const inSection = item.href === '/' ? here === '/' : here === norm(item.href) || here.startsWith(norm(item.href) + '/');
+const hasSub = !!item.children?.length;
+---
+
+<li class:list={[{ 'has-sub': hasSub, open: hasSub && inSection }]}>
+  <a href={item.href} aria-current={exact(item.href) ? 'page' : undefined}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" set:html={ICONS[item.icon]} />
+    <span class="label">{item.label}</span>
+  </a>
+  {
+    hasSub && (
+      <div class="sub-wrap">
+        <ul class="sub">
+          {item.children!.map((c) => (
+            <li>
+              <a href={c.href} aria-current={exact(c.href) ? 'page' : undefined}>
+                <span class="label">{c.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+</li>

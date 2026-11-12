@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Blank sub-pages of Partimento (linked from the menu).
+export function getStaticPaths() {
+  return [
+    { params: { sub: 'moti-del-basso' }, props: { title: 'Moti del Basso' } },
+    { params: { sub: 'schemata' }, props: { title: 'Schemata' } },
+  ];
+}
+
+const { title } = Astro.props;
+---
+
+<Layout title={title}>
+  <main>
+    <h1>{title}</h1>
+  </main>
+</Layout>

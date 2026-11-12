@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import MenuItem from '../components/MenuItem.astro';
+import type { MenuLink } from '../components/MenuItem.astro';
 
 interface Props {
   title?: string;
@@ -10,31 +12,25 @@ const SITE = 'Vibrare';
 const { title, noindex = false } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE}` : SITE;
 
-// Menu: adding an item is one line in `top` or `bottom`.
-// `icon` must be a key of ICONS below.
-const top = [
+// Menu: adding an item is one entry in `top` or `bottom`
+// (`icon` is a key of ICONS in components/MenuItem.astro; `children` makes sub-tabs).
+const top: MenuLink[] = [
   { href: '/', label: 'Home', icon: 'home' },
-  { href: '/partimento/', label: 'Partimento', icon: 'score' },
+  {
+    href: '/partimento/',
+    label: 'Partimento',
+    icon: 'score',
+    children: [
+      { href: '/partimento/moti-del-basso/', label: 'Moti del Basso' },
+      { href: '/partimento/schemata/', label: 'Schemata' },
+    ],
+  },
   { href: '/tools/', label: 'Tools', icon: 'tools' },
   { href: '/touhou-music/', label: 'Touhou Music', icon: 'music' },
 ];
-const bottom = [{ href: '/settings/', label: 'Settings', icon: 'settings' }];
-
-const ICONS: Record<string, string> = {
-  home: '<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/>',
-  score:
-    '<path d="M21 15V6"/><circle cx="18.500" cy="15.500" r="2.500"/><path d="M3 12h9M3 6h13M3 18h9"/>',
-  tools:
-    '<path d="M14.700 6.300a1 1 0 0 0 0 1.400l1.600 1.600a1 1 0 0 0 1.400 0l3.770-3.770a6 6 0 0 1-7.940 7.940l-6.910 6.910a2.120 2.120 0 0 1-3-3l6.910-6.910a6 6 0 0 1 7.940-7.940l-3.760 3.760z"/>',
-  music:
-    '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
-  settings:
-    '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/>',
-};
+const bottom: MenuLink[] = [{ href: '/settings/', label: 'Settings', icon: 'settings' }];
 
 const path = Astro.url.pathname;
-const isActive = (href: string) =>
-  href === '/' ? path === '/' : path.startsWith(href.replace(/\/$/, ''));
 ---
 
 <!doctype html>
@@ -84,24 +80,10 @@ const isActive = (href: string) =>
 
     <nav id="rail" class="rail" aria-label="Main menu">
       <ul class="rail-top">
-        {top.map((i) => (
-          <li>
-            <a href={i.href} aria-current={isActive(i.href) ? 'page' : undefined}>
-              <svg viewBox="0 0 24 24" aria-hidden="true" set:html={ICONS[i.icon]} />
-              <span class="label">{i.label}</span>
-            </a>
-          </li>
-        ))}
+        {top.map((i) => <MenuItem item={i} path={path} />)}
       </ul>
       <ul class="rail-bottom">
-        {bottom.map((i) => (
-          <li>
-            <a href={i.href} aria-current={isActive(i.href) ? 'page' : undefined}>
-              <svg viewBox="0 0 24 24" aria-hidden="true" set:html={ICONS[i.icon]} />
-              <span class="label">{i.label}</span>
-            </a>
-          </li>
-        ))}
+        {bottom.map((i) => <MenuItem item={i} path={path} />)}
       </ul>
     </nav>
 
