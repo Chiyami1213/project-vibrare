@@ -123,10 +123,10 @@ const initialView = currentSection ? currentSection.href : 'main';
     <nav id="rail" class="rail" aria-label="Main menu">
       <div class="view" data-view-id="main" hidden={initialView !== 'main'}>
         <ul class="rail-top">
-          {top.map((i) => <MenuItem item={i} path={path} flat />)}
+          {top.map((i) => <MenuItem item={i} path={path} levels={1} />)}
         </ul>
         <ul class="rail-bottom">
-          {bottom.map((i) => <MenuItem item={i} path={path} flat />)}
+          {bottom.map((i) => <MenuItem item={i} path={path} />)}
         </ul>
       </div>
       {
@@ -145,7 +145,7 @@ const initialView = currentSection ? currentSection.href : 'main';
               <MenuItem item={s} path={path} />
             </ul>
             <ul class="rail-bottom">
-              {bottom.map((i) => <MenuItem item={i} path={path} flat />)}
+              {bottom.map((i) => <MenuItem item={i} path={path} />)}
             </ul>
           </div>
         ))
