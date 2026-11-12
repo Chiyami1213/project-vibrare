@@ -1,19 +1,26 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { WORKS } from '../data/works';
+import Layout from '../../layouts/Layout.astro';
+import { CATEGORIES, WORKS } from '../../data/works';
+
+export function getStaticPaths() {
+  return CATEGORIES.map((category) => ({ params: { category: category.id }, props: { category } }));
+}
+
+const { category } = Astro.props;
+const works = WORKS.filter((w) => w.category === category.id);
 ---
 
-<Layout title="Works">
-  <main class="page-block">
-    <h1>Works</h1>
-    <p class="lead">Arrangements.</p>
+<Layout title={`${category.label} · Works`}>
+  <main class="page-block wide">
+    <p class="crumb"><a class="btn" href="/works/">← All works</a></p>
+    <h1>{category.label}</h1>
 
     {
-      WORKS.length === 0 ? (
+      works.length === 0 ? (
         <p class="empty">Nothing here yet.</p>
       ) : (
         <ul class="res-list">
-          {WORKS.map((w) => (
+          {works.map((w) => (
             <li class="res-item">
               <div class="res-title">
                 {w.title}

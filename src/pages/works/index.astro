@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { CATEGORIES, WORKS } from '../../data/works';
+
+const counts = Object.fromEntries(CATEGORIES.map((c) => [c.id, WORKS.filter((w) => w.category === c.id).length]));
+---
+
+<Layout title="Works">
+  <main class="page-block wide">
+    <h1>Works</h1>
+    <p class="lead">Arrangements, by kind. Choose a category.</p>
+
+    <ul class="game-grid">
+      {
+        CATEGORIES.map((c) => (
+          <li>
+            <a class="game-card" href={`/works/${c.id}/`}>
+              <span class="game-ja">{c.label}</span>
+              <span class="game-meta">{counts[c.id] === 0 ? 'Nothing here yet' : `${counts[c.id]} ${counts[c.id] === 1 ? 'work' : 'works'}`}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Layout>
