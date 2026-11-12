@@ -10,7 +10,7 @@ Live site: <https://vibrare.pages.dev/>
 | Section | Contents |
 | :-- | :-- |
 | **Theory** | Tonal Harmony, Partimento (Moti del Basso and Schemata with playable scores; Cadences to come), Counterpoint, Jazz. Several of these are still being written; see [Status](#status). |
-| **Analysis** | *Bach's Fugue*: the 48 preludes and fugues of *The Well-Tempered Clavier* (BWV 846 to 893) with keys and fugue voice counts. *Touhou Project*: the numbered games Th06 to Th20 (15 games, 271 tracks), each with its OST and where every track is used. *Japanese Music*: not written yet. |
+| **Analysis** | *Baroque*: *Bach* lists the 48 preludes and fugues of *The Well-Tempered Clavier* (BWV 846 to 893) with keys and fugue voice counts; *Quantz* and *Blavet* are not written yet. *Touhou Project*: the numbered games Th06 to Th20 (15 games, 271 tracks), each with its OST and where every track is used. *Japanese Music*: not written yet. |
 | **Tools** | Interval and scale calculators that show the notes on a staff; a chord calculator with inversions, a piano keyboard, playback and shareable links; an interactive circle of fifths with a rainbow colour scheme that draws a chord's shape (triangle, square, and so on). Notes are spelled the way a musician would write them. |
 | **Works** | Arrangements by category: Anime, Commissions, Concert Band, Flute, Ghibli, Touhou Project, Vocaloid, VTubers, Miscellaneous. The lists are empty for now. |
 | **Glossary** | Searchable music-theory terms. |

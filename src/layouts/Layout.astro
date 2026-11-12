@@ -48,7 +48,16 @@ const top: MenuLink[] = [
     label: 'Analysis',
     icon: 'analysis',
     children: [
-      { href: '/analysis/bach-fugue/', label: "Bach's Fugue", icon: 'entries' },
+      {
+        href: '/analysis/baroque/',
+        label: 'Baroque',
+        icon: 'disc',
+        children: [
+          { href: '/analysis/baroque/bach/', label: 'Bach', icon: 'entries' },
+          { href: '/analysis/baroque/quantz/', label: 'Quantz', icon: 'wind' },
+          { href: '/analysis/baroque/blavet/', label: 'Blavet', icon: 'wind' },
+        ],
+      },
       { href: '/analysis/touhou/', label: 'Touhou Project', icon: 'music' },
       { href: '/analysis/japanese-music/', label: 'Japanese Music', icon: 'torii' },
     ],

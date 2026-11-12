@@ -1,6 +1,6 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import wtc from '../../data/bach/wtc.json';
+import Layout from '../../../layouts/Layout.astro';
+import wtc from '../../../data/bach/wtc.json';
 
 interface Piece {
   book: number;
@@ -18,9 +18,9 @@ const books = [
 ].map((b) => ({ ...b, pieces: pieces.filter((p) => p.book === b.id) }));
 ---
 
-<Layout title="Bach's Fugue">
+<Layout title="Bach">
   <main class="page-block wide">
-    <h1>Bach's Fugue</h1>
+    <h1>Bach</h1>
     <p class="lead">
       The 48 preludes and fugues of <em>The Well-Tempered Clavier</em>: one pair in each major and minor key, in
       two books.
