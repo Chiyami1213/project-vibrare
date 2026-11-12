@@ -32,4 +32,23 @@ export const CATEGORIES: WorkCategory[] = [
   { id: 'miscellaneous', label: 'Miscellaneous', icon: 'dots' },
 ];
 
-export const WORKS: Work[] = [];
+export const WORKS: Work[] = [
+  {
+    category: 'flute',
+    title: 'Allegro for Flute Trio from HWV 363b - Flute Sonata No. 5 Op. 1 in G Major',
+    original: 'Flute Sonata in G major, Op. 1 No. 5 (HWV 363b), George Frideric Handel',
+    links: [{ label: 'Watch on YouTube', href: 'https://www.youtube.com/watch?v=DP2FG8XdrSc' }],
+  },
+  {
+    category: 'touhou-project',
+    title: '【東方地霊殿】フーガ：少女さとり～3rd eye (呈式部)',
+    original: '少女さとり ～ 3rd eye, from Subterranean Animism (Th11), ZUN',
+    links: [{ label: 'Watch on YouTube', href: 'https://www.youtube.com/watch?v=XdbY5fPjZN0' }],
+  },
+  {
+    category: 'touhou-project',
+    title: '【東方星蓮船】幽霊客船の時空を越えた旅 ピアノアレンジ',
+    original: '幽霊客船の時空を越えた旅, from Undefined Fantastic Object (Th12), ZUN',
+    links: [{ label: 'Watch on YouTube', href: 'https://youtu.be/2Qf4FO2XgJs' }],
+  },
+];
