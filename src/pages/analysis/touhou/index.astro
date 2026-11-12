@@ -1,0 +1,39 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { GAMES } from '../../../data/touhou';
+import { gameLabel } from '../../../scripts/touhou';
+
+const totalTracks = GAMES.reduce((n, g) => n + g.tracks.length, 0);
+---
+
+<Layout title="Touhou">
+  <main class="page-block wide">
+    <h1>Touhou</h1>
+    <p class="lead">
+      Soundtracks of the numbered Touhou Project games, Th06 to Th20. Choose a game to see its OST.
+    </p>
+
+    <ul class="game-grid">
+      {
+        GAMES.map((g) => (
+          <li>
+            <a class="game-card" href={`/analysis/touhou/${g.id}/`}>
+              <span class="game-num">{gameLabel(g)}</span>
+              <span class="game-ja" lang="ja">{g.titleJa}</span>
+              <span class="game-en">{g.titleEn}</span>
+              <span class="game-meta">{g.year} · {g.tracks.length} tracks</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="source-note">
+      {GAMES.length} games and {totalTracks} tracks. Track lists are compiled from{' '}
+      <a href="https://ja.wikipedia.org/wiki/%E6%9D%B1%E6%96%B9Project" target="_blank" rel="noopener noreferrer">Japanese Wikipedia</a>{' '}
+      (CC BY-SA 4.0) and cross-checked against{' '}
+      <a href="https://thwiki.cc/" target="_blank" rel="noopener noreferrer">thwiki.cc</a>.
+      The PC-98 games (Th01 to Th05) and the spin-offs are not included yet.
+    </p>
+  </main>
+</Layout>

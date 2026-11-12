@@ -1,0 +1,49 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { GAMES } from '../../../data/touhou';
+import { gameLabel, roleLabel } from '../../../scripts/touhou';
+
+export function getStaticPaths() {
+  return GAMES.map((game, i) => ({
+    params: { game: game.id },
+    props: { game, prev: GAMES[i - 1] ?? null, next: GAMES[i + 1] ?? null },
+  }));
+}
+
+const { game, prev, next } = Astro.props;
+---
+
+<Layout title={`${gameLabel(game)} ${game.titleJa}`}>
+  <main class="page-block wide">
+    <p class="crumb"><a href="/analysis/touhou/">← All games</a></p>
+
+    <h1>
+      <span class="game-num">{gameLabel(game)}</span>
+      <span lang="ja">{game.titleJa}</span>
+    </h1>
+    <p class="lead">{game.titleEn} · {game.year} · {game.tracks.length} tracks</p>
+
+    <ol class="track-list">
+      {
+        game.tracks.map((t) => {
+          const r = roleLabel(t);
+          return (
+            <li class="track">
+              <span class="track-n">{t.n}</span>
+              <span class="track-title" lang="ja">{t.title}</span>
+              <span class="track-role">
+                {r.label}
+                {r.character && <span lang="ja" class="track-char"> · {r.character}</span>}
+              </span>
+            </li>
+          );
+        })
+      }
+    </ol>
+
+    <nav class="game-nav" aria-label="Other games">
+      {prev ? <a href={`/analysis/touhou/${prev.id}/`}>← {gameLabel(prev)} <span lang="ja">{prev.titleJa}</span></a> : <span />}
+      {next ? <a href={`/analysis/touhou/${next.id}/`}>{gameLabel(next)} <span lang="ja">{next.titleJa}</span> →</a> : <span />}
+    </nav>
+  </main>
+</Layout>

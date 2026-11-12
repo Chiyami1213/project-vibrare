@@ -1,0 +1,2555 @@
+[
+ {
+  "id": "th06",
+  "number": 6,
+  "titleJa": "東方紅魔郷",
+  "titleEn": "the Embodiment of Scarlet Devil.",
+  "year": 2002,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "赤より紅い夢",
+    "scene": "タイトル",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "ほおずきみたいに紅い魂",
+    "scene": "1面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 1
+    }
+   },
+   {
+    "n": 3,
+    "title": "妖魔夜行",
+    "scene": "1面ボス ルーミアのテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 1,
+     "character": "ルーミア"
+    }
+   },
+   {
+    "n": 4,
+    "title": "ルーネイトエルフ",
+    "scene": "2面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 2
+    }
+   },
+   {
+    "n": 5,
+    "title": "おてんば恋娘",
+    "scene": "2面ボス チルノのテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 2,
+     "character": "チルノ"
+    }
+   },
+   {
+    "n": 6,
+    "title": "上海紅茶館 ～ Chinese Tea",
+    "scene": "3面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 3
+    }
+   },
+   {
+    "n": 7,
+    "title": "明治十七年の上海アリス",
+    "scene": "3面ボス 紅美鈴のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 3,
+     "character": "紅美鈴"
+    }
+   },
+   {
+    "n": 8,
+    "title": "ヴワル魔法図書館",
+    "scene": "4面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 4
+    }
+   },
+   {
+    "n": 9,
+    "title": "ラクトガール ～ 少女密室",
+    "scene": "4面ボス パチュリー・ノーレッジのテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 4,
+     "character": "パチュリー・ノーレッジ"
+    }
+   },
+   {
+    "n": 10,
+    "title": "メイドと血の懐中時計",
+    "scene": "5面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 5
+    }
+   },
+   {
+    "n": 11,
+    "title": "月時計 ～ ルナ・ダイアル",
+    "scene": "5面ボス 十六夜咲夜のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 5,
+     "character": "十六夜咲夜"
+    }
+   },
+   {
+    "n": 12,
+    "title": "ツェペシュの幼き末裔",
+    "scene": "6面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 6
+    }
+   },
+   {
+    "n": 13,
+    "title": "亡き王女の為のセプテット",
+    "scene": "6面ボス レミリア・スカーレットのテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 6,
+     "character": "レミリア・スカーレット"
+    }
+   },
+   {
+    "n": 14,
+    "title": "魔法少女達の百年祭",
+    "scene": "Extraステージのテーマ",
+    "role": {
+     "kind": "extra-stage"
+    }
+   },
+   {
+    "n": 15,
+    "title": "U.N.オーエンは彼女なのか？",
+    "scene": "Extraステージボス フランドール・スカーレットのテーマ",
+    "role": {
+     "kind": "extra-boss",
+     "character": "フランドール・スカーレット"
+    }
+   },
+   {
+    "n": 16,
+    "title": "紅より儚い永遠",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 17,
+    "title": "紅楼 ～ Eastern Dream...",
+    "scene": "スタッフロール",
+    "role": {
+     "kind": "staff-roll"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th07",
+  "number": 7,
+  "titleJa": "東方妖々夢",
+  "titleEn": "Perfect Cherry Blossom.",
+  "year": 2003,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "妖々夢 ～ Snow or Cherry Petal",
+    "scene": "タイトル",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "無何有の郷 ～ Deep Mountain",
+    "scene": "1面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 1
+    }
+   },
+   {
+    "n": 3,
+    "title": "クリスタライズシルバー",
+    "scene": "レティ・ホワイトロックのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "レティ・ホワイトロック"
+    }
+   },
+   {
+    "n": 4,
+    "title": "遠野幻想物語",
+    "scene": "2面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 2
+    }
+   },
+   {
+    "n": 5,
+    "title": "ティアオイエツォン (withered leaf)",
+    "scene": "橙のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "橙"
+    }
+   },
+   {
+    "n": 6,
+    "title": "ブクレシュティの人形師",
+    "scene": "3面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 3
+    }
+   },
+   {
+    "n": 7,
+    "title": "人形裁判 ～ 人の形弄びし少女",
+    "scene": "アリス・マーガトロイドのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "アリス・マーガトロイド"
+    }
+   },
+   {
+    "n": 8,
+    "title": "天空の花の都",
+    "scene": "4面のテーマ(リリーホワイトのテーマとしても扱われる)",
+    "role": {
+     "kind": "stage",
+     "stage": 4
+    }
+   },
+   {
+    "n": 9,
+    "title": "幽霊楽団 ～ Phantom Ensemble",
+    "scene": "プリズムリバー三姉妹のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "プリズムリバー三姉妹"
+    }
+   },
+   {
+    "n": 10,
+    "title": "東方妖々夢 ～ Ancient Temple",
+    "scene": "5面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 5
+    }
+   },
+   {
+    "n": 11,
+    "title": "広有射怪鳥事 ～ Till When?",
+    "scene": "魂魄妖夢のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "魂魄妖夢"
+    }
+   },
+   {
+    "n": 12,
+    "title": "アルティメットトゥルース",
+    "scene": "6面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 6
+    }
+   },
+   {
+    "n": 13,
+    "title": "幽雅に咲かせ、墨染の桜 ～ Border of Life",
+    "scene": "西行寺幽々子のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "西行寺幽々子"
+    }
+   },
+   {
+    "n": 14,
+    "title": "ボーダーオブライフ",
+    "scene": "???のテーマ(西行寺幽々子を倒した後、名前が表示されない「何か」がスペルカード「反魂蝶 -一分咲-」「反魂蝶 -参分咲-」「反魂蝶 -伍分咲-」「反魂蝶 -八分咲-」を宣言する際のテーマ。「何か」の正体は西行寺幽々子)",
+    "role": {
+     "kind": "character",
+     "character": "???"
+    }
+   },
+   {
+    "n": 15,
+    "title": "妖々跋扈",
+    "scene": "Extraステージのテーマ",
+    "role": {
+     "kind": "extra-stage"
+    }
+   },
+   {
+    "n": 16,
+    "title": "少女幻葬 ～ Necro-Fantasy",
+    "scene": "八雲藍のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "八雲藍"
+    }
+   },
+   {
+    "n": 17,
+    "title": "妖々跋扈 ～ Who done it!",
+    "scene": "Phantasmステージのテーマ",
+    "role": {
+     "kind": "phantasm-stage"
+    }
+   },
+   {
+    "n": 18,
+    "title": "ネクロファンタジア",
+    "scene": "八雲紫のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "八雲紫"
+    }
+   },
+   {
+    "n": 19,
+    "title": "春風の夢",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 20,
+    "title": "さくらさくら ～ Japanize Dream...",
+    "scene": "スタッフロールテーマ",
+    "role": {
+     "kind": "staff-roll"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th08",
+  "number": 8,
+  "titleJa": "東方永夜抄",
+  "titleEn": "Imperishable Night.",
+  "year": 2004,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "永夜抄 ～ Eastern Night.",
+    "scene": "タイトル",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "幻視の夜 ～ Ghostly Eyes",
+    "scene": "1面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 1
+    }
+   },
+   {
+    "n": 3,
+    "title": "蠢々秋月 ～ Mooned Insect",
+    "scene": "リグル・ナイトバグのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "リグル・ナイトバグ"
+    }
+   },
+   {
+    "n": 4,
+    "title": "夜雀の歌声 ～ Night Bird",
+    "scene": "2面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 2
+    }
+   },
+   {
+    "n": 5,
+    "title": "もう歌しか聞こえない",
+    "scene": "ミスティア・ローレライのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "ミスティア・ローレライ"
+    }
+   },
+   {
+    "n": 6,
+    "title": "懐かしき東方の血 ～ Old World",
+    "scene": "3面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 3
+    }
+   },
+   {
+    "n": 7,
+    "title": "プレインエイジア",
+    "scene": "上白沢慧音のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "上白沢慧音"
+    }
+   },
+   {
+    "n": 8,
+    "title": "永夜の報い ～ Imperishable Night.",
+    "scene": "4面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 4
+    }
+   },
+   {
+    "n": 9,
+    "title": "少女綺想曲 ～ Dream Battle",
+    "scene": "博麗霊夢のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "博麗霊夢"
+    }
+   },
+   {
+    "n": 10,
+    "title": "恋色マスタースパーク",
+    "scene": "霧雨魔理沙のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "霧雨魔理沙"
+    }
+   },
+   {
+    "n": 11,
+    "title": "シンデレラケージ ～ Kagome-Kagome",
+    "scene": "5面のテーマ(因幡てゐのテーマとしても扱われる)",
+    "role": {
+     "kind": "stage",
+     "stage": 5
+    }
+   },
+   {
+    "n": 12,
+    "title": "狂気の瞳 ～ Invisible Full Moon",
+    "scene": "鈴仙・優曇華院・イナバのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "鈴仙・優曇華院・イナバ"
+    }
+   },
+   {
+    "n": 13,
+    "title": "ヴォヤージュ1969",
+    "scene": "6面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 6
+    }
+   },
+   {
+    "n": 14,
+    "title": "千年幻想郷 ～ History of the Moon",
+    "scene": "八意永琳のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "八意永琳"
+    }
+   },
+   {
+    "n": 15,
+    "title": "竹取飛翔 ～ Lunatic Princess",
+    "scene": "蓬莱山輝夜のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "蓬莱山輝夜"
+    }
+   },
+   {
+    "n": 16,
+    "title": "ヴォヤージュ1970",
+    "scene": "ファイナルスペルのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "ファイナルスペル"
+    }
+   },
+   {
+    "n": 17,
+    "title": "エクステンドアッシュ ～ 蓬莱人",
+    "scene": "Extraステージのテーマ",
+    "role": {
+     "kind": "extra-stage"
+    }
+   },
+   {
+    "n": 18,
+    "title": "月まで届け、不死の煙",
+    "scene": "藤原妹紅のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "藤原妹紅"
+    }
+   },
+   {
+    "n": 19,
+    "title": "月見草",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 20,
+    "title": "Eternal Dream ～ 幽玄の槭樹",
+    "scene": "スタッフロール",
+    "role": {
+     "kind": "staff-roll"
+    }
+   },
+   {
+    "n": 21,
+    "title": "東方妖怪小町",
+    "scene": "ラストワードのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "ラストワード"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th09",
+  "number": 9,
+  "titleJa": "東方花映塚",
+  "titleEn": "Phantasmagoria of Flower View.",
+  "year": 2005,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "花映塚 ～ Higan Retour",
+    "scene": "タイトル",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "春色小径 ～ Colorful Path",
+    "scene": "博麗霊夢のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "博麗霊夢"
+    }
+   },
+   {
+    "n": 3,
+    "title": "オリエンタルダークフライト",
+    "scene": "霧雨魔理沙のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "霧雨魔理沙"
+    }
+   },
+   {
+    "n": 4,
+    "title": "フラワリングナイト",
+    "scene": "十六夜咲夜のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "十六夜咲夜"
+    }
+   },
+   {
+    "n": 5,
+    "title": "東方妖々夢 ～ Ancient Temple",
+    "scene": "魂魄妖夢のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "魂魄妖夢"
+    }
+   },
+   {
+    "n": 6,
+    "title": "狂気の瞳 ～ Invisible Full Moon",
+    "scene": "鈴仙・優曇華院・イナバのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "鈴仙・優曇華院・イナバ"
+    }
+   },
+   {
+    "n": 7,
+    "title": "おてんば恋娘の冒険",
+    "scene": "チルノのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "チルノ"
+    }
+   },
+   {
+    "n": 8,
+    "title": "幽霊楽団 ～ Phantom Ensemble",
+    "scene": "プリズムリバー三姉妹のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "プリズムリバー三姉妹"
+    }
+   },
+   {
+    "n": 9,
+    "title": "もう歌しか聞こえない ～ Flower Mix",
+    "scene": "ミスティア・ローレライのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "ミスティア・ローレライ"
+    }
+   },
+   {
+    "n": 10,
+    "title": "お宇佐さまの素い幡",
+    "scene": "因幡てゐのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "因幡てゐ"
+    }
+   },
+   {
+    "n": 11,
+    "title": "風神少女 (Short Version)",
+    "scene": "射命丸文のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "射命丸文"
+    }
+   },
+   {
+    "n": 12,
+    "title": "ポイズンボディ ～ Forsaken Doll",
+    "scene": "メディスン・メランコリーのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "メディスン・メランコリー"
+    }
+   },
+   {
+    "n": 13,
+    "title": "今昔幻想郷 ～ Flower Land",
+    "scene": "風見幽香のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "風見幽香"
+    }
+   },
+   {
+    "n": 14,
+    "title": "彼岸帰航 ～ Riverside View",
+    "scene": "小野塚小町のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "小野塚小町"
+    }
+   },
+   {
+    "n": 15,
+    "title": "六十年目の東方裁判 ～ Fate of Sixty Years",
+    "scene": "四季映姫・ヤマザナドゥのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "四季映姫・ヤマザナドゥ"
+    }
+   },
+   {
+    "n": 16,
+    "title": "花の映る塚",
+    "scene": "会話イベント1",
+    "role": {
+     "kind": "other"
+    }
+   },
+   {
+    "n": 17,
+    "title": "此岸の塚",
+    "scene": "会話イベント2",
+    "role": {
+     "kind": "other"
+    }
+   },
+   {
+    "n": 18,
+    "title": "花は幻想のままに",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 19,
+    "title": "魂の花 ～ Another Dream...",
+    "scene": "スタッフロール",
+    "role": {
+     "kind": "staff-roll"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th10",
+  "number": 10,
+  "titleJa": "東方風神録",
+  "titleEn": "Mountain of Faith.",
+  "year": 2007,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "封印されし神々",
+    "scene": "タイトル画面",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "人恋し神様 ～ Romantic Fall",
+    "scene": "1面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 1
+    }
+   },
+   {
+    "n": 3,
+    "title": "稲田姫様に叱られるから",
+    "scene": "秋穣子のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "秋穣子"
+    }
+   },
+   {
+    "n": 4,
+    "title": "厄神様の通り道 ～ Dark Road",
+    "scene": "2面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 2
+    }
+   },
+   {
+    "n": 5,
+    "title": "運命のダークサイド",
+    "scene": "鍵山雛のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "鍵山雛"
+    }
+   },
+   {
+    "n": 6,
+    "title": "神々が恋した幻想郷",
+    "scene": "3面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 3
+    }
+   },
+   {
+    "n": 7,
+    "title": "芥川龍之介の河童 ～ Candid Friend",
+    "scene": "河城にとりのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "河城にとり"
+    }
+   },
+   {
+    "n": 8,
+    "title": "フォールオブフォール ～ 秋めく滝",
+    "scene": "4面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 4
+    }
+   },
+   {
+    "n": 9,
+    "title": "妖怪の山 ～ Mysterious Mountain",
+    "scene": "射命丸文のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "射命丸文"
+    }
+   },
+   {
+    "n": 10,
+    "title": "少女が見た日本の原風景",
+    "scene": "5面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 5
+    }
+   },
+   {
+    "n": 11,
+    "title": "信仰は儚き人間の為に",
+    "scene": "東風谷早苗のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "東風谷早苗"
+    }
+   },
+   {
+    "n": 12,
+    "title": "御柱の墓場 ～ Grave of Being",
+    "scene": "6面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 6
+    }
+   },
+   {
+    "n": 13,
+    "title": "神さびた古戦場 ～ Suwa Foughten Field",
+    "scene": "八坂神奈子のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "八坂神奈子"
+    }
+   },
+   {
+    "n": 14,
+    "title": "明日ハレの日、ケの昨日",
+    "scene": "Extraのテーマ",
+    "role": {
+     "kind": "extra-stage"
+    }
+   },
+   {
+    "n": 15,
+    "title": "ネイティブフェイス",
+    "scene": "洩矢諏訪子のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "洩矢諏訪子"
+    }
+   },
+   {
+    "n": 16,
+    "title": "麓の神社",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 17,
+    "title": "神は恵みの雨を降らす ～ Sylphid Dream",
+    "scene": "スタッフロール",
+    "role": {
+     "kind": "staff-roll"
+    }
+   },
+   {
+    "n": 18,
+    "title": "プレイヤーズスコア",
+    "scene": "スコア入力画面、ゲームオーバー画面",
+    "role": {
+     "kind": "other"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th11",
+  "number": 11,
+  "titleJa": "東方地霊殿",
+  "titleEn": "Subterranean Animism.",
+  "year": 2008,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "地霊達の起床",
+    "scene": "タイトル",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "暗闇の風穴",
+    "scene": "1面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 1
+    }
+   },
+   {
+    "n": 3,
+    "title": "封じられた妖怪 ～ Lost Place",
+    "scene": "黒谷ヤマメのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "黒谷ヤマメ"
+    }
+   },
+   {
+    "n": 4,
+    "title": "渡る者の途絶えた橋",
+    "scene": "2面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 2
+    }
+   },
+   {
+    "n": 5,
+    "title": "緑眼のジェラシー",
+    "scene": "水橋パルスィのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "水橋パルスィ"
+    }
+   },
+   {
+    "n": 6,
+    "title": "旧地獄街道を行く",
+    "scene": "3面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 3
+    }
+   },
+   {
+    "n": 7,
+    "title": "華のさかづき大江山",
+    "scene": "星熊勇儀のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "星熊勇儀"
+    }
+   },
+   {
+    "n": 8,
+    "title": "ハートフェルトファンシー",
+    "scene": "4面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 4
+    }
+   },
+   {
+    "n": 9,
+    "title": "少女さとり ～ 3rd eye",
+    "scene": "古明地さとりのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "古明地さとり"
+    }
+   },
+   {
+    "n": 10,
+    "title": "廃獄ララバイ",
+    "scene": "5面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 5
+    }
+   },
+   {
+    "n": 11,
+    "title": "死体旅行 ～ Be of good cheer!",
+    "scene": "火焔猫燐のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "火焔猫燐"
+    }
+   },
+   {
+    "n": 12,
+    "title": "業火マントル",
+    "scene": "6面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 6
+    }
+   },
+   {
+    "n": 13,
+    "title": "霊知の太陽信仰 ～ Nuclear Fusion",
+    "scene": "霊烏路空のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "霊烏路空"
+    }
+   },
+   {
+    "n": 14,
+    "title": "ラストリモート",
+    "scene": "Extraのテーマ",
+    "role": {
+     "kind": "extra-stage"
+    }
+   },
+   {
+    "n": 15,
+    "title": "ハルトマンの妖怪少女",
+    "scene": "古明地こいしのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "古明地こいし"
+    }
+   },
+   {
+    "n": 16,
+    "title": "地霊達の帰宅",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 17,
+    "title": "エネルギー黎明 ～ Future Dream...",
+    "scene": "スタッフロール",
+    "role": {
+     "kind": "staff-roll"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th12",
+  "number": 12,
+  "titleJa": "東方星蓮船",
+  "titleEn": "Undefined Fantastic Object.",
+  "year": 2009,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "青空の影",
+    "scene": "タイトル",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "春の湊に",
+    "scene": "1面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 1
+    }
+   },
+   {
+    "n": 3,
+    "title": "小さな小さな賢将",
+    "scene": "1面ボス ナズーリンのテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 1,
+     "character": "ナズーリン"
+    }
+   },
+   {
+    "n": 4,
+    "title": "閉ざせし雲の通い路",
+    "scene": "2面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 2
+    }
+   },
+   {
+    "n": 5,
+    "title": "万年置き傘にご注意を",
+    "scene": "2面ボス 多々良小傘のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 2,
+     "character": "多々良小傘"
+    }
+   },
+   {
+    "n": 6,
+    "title": "スカイルーイン",
+    "scene": "3面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 3
+    }
+   },
+   {
+    "n": 7,
+    "title": "時代親父とハイカラ少女",
+    "scene": "3面ボス 雲居一輪＆雲山のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 3,
+     "character": "雲居一輪＆雲山"
+    }
+   },
+   {
+    "n": 8,
+    "title": "幽霊客船の時空を越えた旅",
+    "scene": "4面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 4
+    }
+   },
+   {
+    "n": 9,
+    "title": "キャプテン・ムラサ",
+    "scene": "4面ボス 村紗水蜜のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 4,
+     "character": "村紗水蜜"
+    }
+   },
+   {
+    "n": 10,
+    "title": "魔界地方都市エソテリア",
+    "scene": "5面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 5
+    }
+   },
+   {
+    "n": 11,
+    "title": "虎柄の毘沙門天",
+    "scene": "5面ボス 寅丸星のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 5,
+     "character": "寅丸星"
+    }
+   },
+   {
+    "n": 12,
+    "title": "法界の火",
+    "scene": "6面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 6
+    }
+   },
+   {
+    "n": 13,
+    "title": "感情の摩天楼 ～ Cosmic Mind",
+    "scene": "6面ボス 聖白蓮のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 6,
+     "character": "聖白蓮"
+    }
+   },
+   {
+    "n": 14,
+    "title": "夜空のユーフォーロマンス",
+    "scene": "Extraステージのテーマ",
+    "role": {
+     "kind": "extra-stage"
+    }
+   },
+   {
+    "n": 15,
+    "title": "平安のエイリアン",
+    "scene": "Extraステージボス 封獣ぬえのテーマ",
+    "role": {
+     "kind": "extra-boss",
+     "character": "封獣ぬえ"
+    }
+   },
+   {
+    "n": 16,
+    "title": "妖怪寺",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 17,
+    "title": "空の帰り道 ～ Sky Dream",
+    "scene": "スタッフロール",
+    "role": {
+     "kind": "staff-roll"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th13",
+  "number": 13,
+  "titleJa": "東方神霊廟",
+  "titleEn": "Ten Desires.",
+  "year": 2011,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "欲深き霊魂",
+    "scene": "タイトル",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "死霊の夜桜",
+    "scene": "1面道中のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 1
+    }
+   },
+   {
+    "n": 3,
+    "title": "ゴーストリード",
+    "scene": "1面ボス 西行寺幽々子のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 1,
+     "character": "西行寺幽々子"
+    }
+   },
+   {
+    "n": 4,
+    "title": "妖怪寺へようこそ",
+    "scene": "2面道中のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 2
+    }
+   },
+   {
+    "n": 5,
+    "title": "門前の妖怪小娘",
+    "scene": "2面ボス 幽谷響子のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 2,
+     "character": "幽谷響子"
+    }
+   },
+   {
+    "n": 6,
+    "title": "素敵な墓場で暮しましょ",
+    "scene": "3面道中のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 3
+    }
+   },
+   {
+    "n": 7,
+    "title": "リジッドパラダイス",
+    "scene": "3面ボス 宮古芳香のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 3,
+     "character": "宮古芳香"
+    }
+   },
+   {
+    "n": 8,
+    "title": "デザイアドライブ",
+    "scene": "4面道中のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 4
+    }
+   },
+   {
+    "n": 9,
+    "title": "古きユアンシェン",
+    "scene": "4面ボス 霍青娥のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 4,
+     "character": "霍青娥"
+    }
+   },
+   {
+    "n": 10,
+    "title": "夢殿大祀廟",
+    "scene": "5面道中のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 5
+    }
+   },
+   {
+    "n": 11,
+    "title": "大神神話伝",
+    "scene": "5面ボス 物部布都のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 5,
+     "character": "物部布都"
+    }
+   },
+   {
+    "n": 12,
+    "title": "小さな欲望の星空",
+    "scene": "6面道中のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 6
+    }
+   },
+   {
+    "n": 13,
+    "title": "聖徳伝説 ～ True Administrator",
+    "scene": "6面ボス 豊聡耳神子のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 6,
+     "character": "豊聡耳神子"
+    }
+   },
+   {
+    "n": 14,
+    "title": "妖怪裏参道",
+    "scene": "Extraステージ道中のテーマ",
+    "role": {
+     "kind": "extra-stage"
+    }
+   },
+   {
+    "n": 15,
+    "title": "佐渡の二ッ岩",
+    "scene": "Extraステージボス 二ッ岩マミゾウのテーマ",
+    "role": {
+     "kind": "extra-boss",
+     "character": "二ッ岩マミゾウ"
+    }
+   },
+   {
+    "n": 16,
+    "title": "神社の新しい風",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 17,
+    "title": "デザイアドリーム",
+    "scene": "スタッフロール",
+    "role": {
+     "kind": "staff-roll"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th14",
+  "number": 14,
+  "titleJa": "東方輝針城",
+  "titleEn": "Double Dealing Character.",
+  "year": 2013,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "不思議なお祓い棒",
+    "scene": "タイトル",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "ミストレイク",
+    "scene": "1面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 1
+    }
+   },
+   {
+    "n": 3,
+    "title": "秘境のマーメイド",
+    "scene": "1面ボス わかさぎ姫のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 1,
+     "character": "わかさぎ姫"
+    }
+   },
+   {
+    "n": 4,
+    "title": "運河を行き交う人妖",
+    "scene": "2面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 2
+    }
+   },
+   {
+    "n": 5,
+    "title": "柳の下のデュラハン",
+    "scene": "2面ボス 赤蛮奇のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 2,
+     "character": "赤蛮奇"
+    }
+   },
+   {
+    "n": 6,
+    "title": "満月の竹林",
+    "scene": "3面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 3
+    }
+   },
+   {
+    "n": 7,
+    "title": "孤独なウェアウルフ",
+    "scene": "3面ボス 今泉影狼のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 3,
+     "character": "今泉影狼"
+    }
+   },
+   {
+    "n": 8,
+    "title": "マジカルストーム",
+    "scene": "4面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 4
+    }
+   },
+   {
+    "n": 9,
+    "title": "幻想浄瑠璃",
+    "scene": "4面ボス 九十九弁々・九十九八橋のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 4,
+     "character": "九十九弁々・九十九八橋"
+    }
+   },
+   {
+    "n": 10,
+    "title": "空中に沈む輝針城",
+    "scene": "5面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 5
+    }
+   },
+   {
+    "n": 11,
+    "title": "リバースイデオロギー",
+    "scene": "5面ボス 鬼人正邪のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 5,
+     "character": "鬼人正邪"
+    }
+   },
+   {
+    "n": 12,
+    "title": "針小棒大の天守閣",
+    "scene": "6面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 6
+    }
+   },
+   {
+    "n": 13,
+    "title": "輝く針の小人族 ～ Little Princess",
+    "scene": "6面ボス 少名針妙丸のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 6,
+     "character": "少名針妙丸"
+    }
+   },
+   {
+    "n": 14,
+    "title": "魔力の雷雲",
+    "scene": "Extraステージのテーマ",
+    "role": {
+     "kind": "extra-stage"
+    }
+   },
+   {
+    "n": 15,
+    "title": "始原のビート ～ Pristine Beat",
+    "scene": "Extraステージボス 堀川雷鼓のテーマ",
+    "role": {
+     "kind": "extra-boss",
+     "character": "堀川雷鼓"
+    }
+   },
+   {
+    "n": 16,
+    "title": "小槌の魔力",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 17,
+    "title": "不思議な不思議な道具達",
+    "scene": "スタッフロール",
+    "role": {
+     "kind": "staff-roll"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th15",
+  "number": 15,
+  "titleJa": "東方紺珠伝",
+  "titleEn": "Legacy of Lunatic Kingdom.",
+  "year": 2015,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "宇宙巫女現る",
+    "scene": "タイトル画面",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "忘れがたき、よすがの緑",
+    "scene": "1面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 1
+    }
+   },
+   {
+    "n": 3,
+    "title": "兎は舞い降りた",
+    "scene": "1面ボス 清蘭のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 1,
+     "character": "清蘭"
+    }
+   },
+   {
+    "n": 4,
+    "title": "湖は浄めの月光を映して",
+    "scene": "2面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 2
+    }
+   },
+   {
+    "n": 5,
+    "title": "九月のパンプキン",
+    "scene": "2面ボス 鈴瑚のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 2,
+     "character": "鈴瑚"
+    }
+   },
+   {
+    "n": 6,
+    "title": "宇宙を飛ぶ不思議な巫女",
+    "scene": "3面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 3
+    }
+   },
+   {
+    "n": 7,
+    "title": "永遠の春夢",
+    "scene": "3面ボス ドレミー・スイートのテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 3,
+     "character": "ドレミー・スイート"
+    }
+   },
+   {
+    "n": 8,
+    "title": "凍り付いた永遠の都",
+    "scene": "4面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 4
+    }
+   },
+   {
+    "n": 9,
+    "title": "逆転するホイールオブフォーチュン",
+    "scene": "4面ボス 稀神サグメのテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 4,
+     "character": "稀神サグメ"
+    }
+   },
+   {
+    "n": 10,
+    "title": "遥か38万キロのボヤージュ",
+    "scene": "5面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 5
+    }
+   },
+   {
+    "n": 11,
+    "title": "星条旗のピエロ",
+    "scene": "5面ボス クラウンピースのテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 5,
+     "character": "クラウンピース"
+    }
+   },
+   {
+    "n": 12,
+    "title": "故郷の星が映る海",
+    "scene": "6面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 6
+    }
+   },
+   {
+    "n": 13,
+    "title": "ピュアヒューリーズ～心の在処",
+    "scene": "6面ボス 純狐のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 6,
+     "character": "純狐"
+    }
+   },
+   {
+    "n": 14,
+    "title": "見た事も無い悪夢の世界",
+    "scene": "Extraステージ（7面）のテーマ",
+    "role": {
+     "kind": "extra-stage"
+    }
+   },
+   {
+    "n": 15,
+    "title": "パンデモニックプラネット",
+    "scene": "Extraステージ（7面）ボス ヘカーティア・ラピスラズリのテーマ",
+    "role": {
+     "kind": "extra-boss",
+     "character": "ヘカーティア・ラピスラズリ"
+    }
+   },
+   {
+    "n": 16,
+    "title": "神社から見える月",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 17,
+    "title": "宇宙巫女帰還する",
+    "scene": "スタッフロール",
+    "role": {
+     "kind": "staff-roll"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th16",
+  "number": 16,
+  "titleJa": "東方天空璋",
+  "titleEn": "Hidden Star in Four Seasons.",
+  "year": 2017,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "桜舞い散る天空",
+    "scene": "タイトル画面",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "希望の星は青霄に昇る",
+    "scene": "1面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 1
+    }
+   },
+   {
+    "n": 3,
+    "title": "真夏の妖精の夢",
+    "scene": "1面ボス エタニティラルバのテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 1,
+     "character": "エタニティラルバ"
+    }
+   },
+   {
+    "n": 4,
+    "title": "色無き風は妖怪の山に",
+    "scene": "2面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 2
+    }
+   },
+   {
+    "n": 5,
+    "title": "山奥のエンカウンター",
+    "scene": "2面ボス 坂田ネムノのテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 2,
+     "character": "坂田ネムノ"
+    }
+   },
+   {
+    "n": 6,
+    "title": "桜色の海を泳いで",
+    "scene": "3面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 3
+    }
+   },
+   {
+    "n": 7,
+    "title": "一対の神獣",
+    "scene": "3面ボス 高麗野あうんのテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 3,
+     "character": "高麗野あうん"
+    }
+   },
+   {
+    "n": 8,
+    "title": "幻想のホワイトトラベラー",
+    "scene": "4面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 4
+    }
+   },
+   {
+    "n": 9,
+    "title": "魔法の笠地蔵",
+    "scene": "4面ボス 矢田寺成美のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 4,
+     "character": "矢田寺成美"
+    }
+   },
+   {
+    "n": 10,
+    "title": "禁断の扉の向こうは、この世かあの世か",
+    "scene": "5面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 5
+    }
+   },
+   {
+    "n": 11,
+    "title": "クレイジーバックダンサーズ",
+    "scene": "5面ボス 爾子田里乃&丁礼田舞のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 5,
+     "character": "爾子田里乃&丁礼田舞"
+    }
+   },
+   {
+    "n": 12,
+    "title": "イントゥ・バックドア",
+    "scene": "6面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 6
+    }
+   },
+   {
+    "n": 13,
+    "title": "秘匿されたフォーシーズンズ",
+    "scene": "6面ボス 摩多羅隠岐奈のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 6,
+     "character": "摩多羅隠岐奈"
+    }
+   },
+   {
+    "n": 14,
+    "title": "もうドアには入れない",
+    "scene": "Extra（Revenging）ステージのテーマ",
+    "role": {
+     "kind": "extra-stage"
+    }
+   },
+   {
+    "n": 15,
+    "title": "秘神マターラ ～ Hidden Star in All Seasons.",
+    "scene": "Extra（Revenging）ステージボス 摩多羅隠岐奈のテーマ",
+    "role": {
+     "kind": "extra-boss",
+     "character": "摩多羅隠岐奈"
+    }
+   },
+   {
+    "n": 16,
+    "title": "不自然な自然",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 17,
+    "title": "白い旅人",
+    "scene": "スタッフロール",
+    "role": {
+     "kind": "staff-roll"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th17",
+  "number": 17,
+  "titleJa": "東方鬼形獣",
+  "titleEn": "Wily Beast and Weakest Creature.",
+  "year": 2019,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "物言わぬ獣の霊",
+    "scene": "タイトル画面",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "地蔵だけが知る哀嘆",
+    "scene": "1面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 1
+    }
+   },
+   {
+    "n": 3,
+    "title": "ジェリーストーン",
+    "scene": "1面ボス 戎瓔花のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 1,
+     "character": "戎瓔花"
+    }
+   },
+   {
+    "n": 4,
+    "title": "ロストリバー",
+    "scene": "2面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 2
+    }
+   },
+   {
+    "n": 5,
+    "title": "石の赤子と水中の牛",
+    "scene": "2面ボス 牛崎潤美のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 2,
+     "character": "牛崎潤美"
+    }
+   },
+   {
+    "n": 6,
+    "title": "不朽の曼珠沙華",
+    "scene": "3面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 3
+    }
+   },
+   {
+    "n": 7,
+    "title": "セラフィックチキン",
+    "scene": "3面ボス 庭渡久侘歌のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 3,
+     "character": "庭渡久侘歌"
+    }
+   },
+   {
+    "n": 8,
+    "title": "アンロケイテッドヘル",
+    "scene": "4面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 4
+    }
+   },
+   {
+    "n": 9,
+    "title": "トータスドラゴン ～ 幸運と不運",
+    "scene": "4面ボス 吉弔八千慧のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 4,
+     "character": "吉弔八千慧"
+    }
+   },
+   {
+    "n": 10,
+    "title": "ビーストメトロポリス",
+    "scene": "5面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 5
+    }
+   },
+   {
+    "n": 11,
+    "title": "セラミックスの杖刀人",
+    "scene": "5面ボス 杖刀偶磨弓のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 5,
+     "character": "杖刀偶磨弓"
+    }
+   },
+   {
+    "n": 12,
+    "title": "エレクトリックヘリテージ",
+    "scene": "6面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 6
+    }
+   },
+   {
+    "n": 13,
+    "title": "偶像に世界を委ねて ～ Idoratrize World",
+    "scene": "6面ボス 埴安神袿姫のテーマ",
+    "role": {
+     "kind": "boss",
+     "stage": 6,
+     "character": "埴安神袿姫"
+    }
+   },
+   {
+    "n": 14,
+    "title": "輝かしき弱肉強食の掟",
+    "scene": "Extraステージのテーマ",
+    "role": {
+     "kind": "extra-stage"
+    }
+   },
+   {
+    "n": 15,
+    "title": "聖徳太子のペガサス ～ Dark Pegasus",
+    "scene": "Extraステージボス 驪駒早鬼のテーマ",
+    "role": {
+     "kind": "extra-boss",
+     "character": "驪駒早鬼"
+    }
+   },
+   {
+    "n": 16,
+    "title": "畜生達の休息",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 17,
+    "title": "地下からの帰還",
+    "scene": "スタッフロール",
+    "role": {
+     "kind": "staff-roll"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th18",
+  "number": 18,
+  "titleJa": "東方虹龍洞",
+  "titleEn": "Unconnected Marketeers.",
+  "year": 2021,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "虹の架かる幻想郷",
+    "scene": "タイトル",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "妖異達の通り雨",
+    "scene": "1面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 1
+    }
+   },
+   {
+    "n": 3,
+    "title": "大吉キトゥン",
+    "scene": "豪徳寺ミケのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "豪徳寺ミケ"
+    }
+   },
+   {
+    "n": 4,
+    "title": "深緑に隠された断崖",
+    "scene": "2面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 2
+    }
+   },
+   {
+    "n": 5,
+    "title": "バンデットリィテクノロジー",
+    "scene": "山城たかねのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "山城たかね"
+    }
+   },
+   {
+    "n": 6,
+    "title": "駒草咲くパーペチュアルスノー",
+    "scene": "3面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 3
+    }
+   },
+   {
+    "n": 7,
+    "title": "スモーキングドラゴン",
+    "scene": "駒草太夫のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "駒草太夫"
+    }
+   },
+   {
+    "n": 8,
+    "title": "廃れゆく産業遺構",
+    "scene": "4面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 4
+    }
+   },
+   {
+    "n": 9,
+    "title": "神代鉱石",
+    "scene": "玉造魅須丸のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "玉造魅須丸"
+    }
+   },
+   {
+    "n": 10,
+    "title": "待ちわびた逢魔が時",
+    "scene": "5面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 5
+    }
+   },
+   {
+    "n": 11,
+    "title": "星降る天魔の山",
+    "scene": "飯綱丸龍のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "飯綱丸龍"
+    }
+   },
+   {
+    "n": 12,
+    "title": "ルナレインボー",
+    "scene": "6面のテーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 6
+    }
+   },
+   {
+    "n": 13,
+    "title": "あの賑やかな市場は今どこに ～ Immemorial Marketeers",
+    "scene": "天弓千亦のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "天弓千亦"
+    }
+   },
+   {
+    "n": 14,
+    "title": "幻想の地下大線路網",
+    "scene": "Extraステージのテーマ",
+    "role": {
+     "kind": "extra-stage"
+    }
+   },
+   {
+    "n": 15,
+    "title": "龍王殺しのプリンセス",
+    "scene": "姫虫百々世のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "姫虫百々世"
+    }
+   },
+   {
+    "n": 16,
+    "title": "嵐の後の日曜日",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 17,
+    "title": "虹色の世界",
+    "scene": "スタッフロール",
+    "role": {
+     "kind": "staff-roll"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th19",
+  "number": 19,
+  "titleJa": "東方獸王園",
+  "titleEn": "Unfinished Dream of All Living Ghost",
+  "year": 2023,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "獣の知性",
+    "scene": "タイトル画面",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "世界は可愛く出来ている",
+    "scene": "博麗霊夢＆ストーリーモード序盤のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "博麗霊夢＆ストーリーモード序盤"
+    }
+   },
+   {
+    "n": 3,
+    "title": "魔獣スクランブル",
+    "scene": "霧雨魔理沙＆ストーリーモード中盤のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "霧雨魔理沙＆ストーリーモード中盤"
+    }
+   },
+   {
+    "n": 4,
+    "title": "鬼は悠久の山に",
+    "scene": "伊吹萃香＆ストーリーモード終盤のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "伊吹萃香＆ストーリーモード終盤"
+    }
+   },
+   {
+    "n": 5,
+    "title": "タイニーシャングリラ",
+    "scene": "孫美天のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "孫美天"
+    }
+   },
+   {
+    "n": 6,
+    "title": "勇敢で有閑な妖獣",
+    "scene": "三頭慧ノ子のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "三頭慧ノ子"
+    }
+   },
+   {
+    "n": 7,
+    "title": "吸血怪獣チュパカブラ",
+    "scene": "天火人ちやりのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "天火人ちやり"
+    }
+   },
+   {
+    "n": 8,
+    "title": "振り向かない黄泉の道",
+    "scene": "豫母都日狭美のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "豫母都日狭美"
+    }
+   },
+   {
+    "n": 9,
+    "title": "逸脱者達の無礙光 ～ Kingdom of Nothingness.",
+    "scene": "日白残無のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "日白残無"
+    }
+   },
+   {
+    "n": 10,
+    "title": "少女が見た日本の原風景",
+    "scene": "東風谷早苗のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "東風谷早苗"
+    }
+   },
+   {
+    "n": 11,
+    "title": "妖々跋扈 ～ Who done it!",
+    "scene": "八雲藍のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "八雲藍"
+    }
+   },
+   {
+    "n": 12,
+    "title": "一対の神獣",
+    "scene": "高麗野あうんのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "高麗野あうん"
+    }
+   },
+   {
+    "n": 13,
+    "title": "春の湊に",
+    "scene": "ナズーリンのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "ナズーリン"
+    }
+   },
+   {
+    "n": 14,
+    "title": "忘れがたき、よすがの緑",
+    "scene": "清蘭のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "清蘭"
+    }
+   },
+   {
+    "n": 15,
+    "title": "死体旅行 ～ Be of good cheer!",
+    "scene": "火焔猫燐のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "火焔猫燐"
+    }
+   },
+   {
+    "n": 16,
+    "title": "待ちわびた逢魔が時",
+    "scene": "菅牧典のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "菅牧典"
+    }
+   },
+   {
+    "n": 17,
+    "title": "佐渡の二ッ岩",
+    "scene": "二ッ岩マミゾウのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "二ッ岩マミゾウ"
+    }
+   },
+   {
+    "n": 18,
+    "title": "トータスドラゴン ～ 幸運と不運",
+    "scene": "吉弔八千慧のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "吉弔八千慧"
+    }
+   },
+   {
+    "n": 19,
+    "title": "聖徳太子のペガサス ～ Dark Pegasus",
+    "scene": "驪駒早鬼のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "驪駒早鬼"
+    }
+   },
+   {
+    "n": 20,
+    "title": "強欲な獣のメメント",
+    "scene": "饕餮尤魔のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "饕餮尤魔"
+    }
+   },
+   {
+    "n": 21,
+    "title": "獣王達の休息",
+    "scene": "エンディング",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 22,
+    "title": "獣に知性はあるか",
+    "scene": "スタッフロール",
+    "role": {
+     "kind": "staff-roll"
+    }
+   }
+  ]
+ },
+ {
+  "id": "th20",
+  "number": 20,
+  "titleJa": "東方錦上京",
+  "titleEn": "Fossilized Wonders.",
+  "year": 2025,
+  "tracks": [
+   {
+    "n": 1,
+    "title": "錦の上の巫女",
+    "scene": "タイトル画面テーマ",
+    "role": {
+     "kind": "title"
+    }
+   },
+   {
+    "n": 2,
+    "title": "愛おしき塵の住処",
+    "scene": "1面テーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 1
+    }
+   },
+   {
+    "n": 3,
+    "title": "例え世界から忘れられても",
+    "scene": "塵塚ウバメのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "塵塚ウバメ"
+    }
+   },
+   {
+    "n": 4,
+    "title": "セイクリッドフォレスト",
+    "scene": "2面テーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 2
+    }
+   },
+   {
+    "n": 5,
+    "title": "森にはお化けがいるよ",
+    "scene": "封獣チミのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "封獣チミ"
+    }
+   },
+   {
+    "n": 6,
+    "title": "プレステ・ジョアンの黄金境",
+    "scene": "3面テーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 3
+    }
+   },
+   {
+    "n": 7,
+    "title": "どうせなら命を賭けて謎を解け",
+    "scene": "道神馴子のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "道神馴子"
+    }
+   },
+   {
+    "n": 8,
+    "title": "フォーカラーラビリンス",
+    "scene": "4面テーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 4
+    }
+   },
+   {
+    "n": 9,
+    "title": "鹿狩りのレミニセンス",
+    "scene": "ユイマン・浅間のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "ユイマン・浅間"
+    }
+   },
+   {
+    "n": 10,
+    "title": "記憶の深海に沈む少女",
+    "scene": "5面テーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 5
+    }
+   },
+   {
+    "n": 11,
+    "title": "綿月のスペルカード ～ 神海戦",
+    "scene": "綿月豊姫のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "綿月豊姫"
+    }
+   },
+   {
+    "n": 12,
+    "title": "ピラミッドの神域",
+    "scene": "6面テーマ",
+    "role": {
+     "kind": "stage",
+     "stage": 6
+    }
+   },
+   {
+    "n": 13,
+    "title": "最後の一人は慣れてるから ～ Stone Goddess",
+    "scene": "磐永阿梨夜のテーマ",
+    "role": {
+     "kind": "character",
+     "character": "磐永阿梨夜"
+    }
+   },
+   {
+    "n": 14,
+    "title": "ファンタスティックドリフト",
+    "scene": "EXテーマ",
+    "role": {
+     "kind": "extra-stage"
+    }
+   },
+   {
+    "n": 15,
+    "title": "二枚貝の上のハルシネーション",
+    "scene": "渡里ニナのテーマ",
+    "role": {
+     "kind": "character",
+     "character": "渡里ニナ"
+    }
+   },
+   {
+    "n": 16,
+    "title": "不変の日常",
+    "scene": "エンディングテーマ1",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 17,
+    "title": "愛おしき日常",
+    "scene": "エンディングテーマ2",
+    "role": {
+     "kind": "ending"
+    }
+   },
+   {
+    "n": 18,
+    "title": "生と死のある世界へ",
+    "scene": "スタッフロールテーマ",
+    "role": {
+     "kind": "staff-roll"
+    }
+   }
+  ]
+ }
+]
