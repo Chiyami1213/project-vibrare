@@ -1493,3 +1493,13 @@ button.note-chip[aria-pressed='true'] {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent);
 }
+
+/* ---------- About page ---------- */
+.page-block .about-list {
+  margin: 0 0 14px;
+  padding-left: 1.2em;
+}
+
+.about-list li {
+  margin-bottom: 8px;
+}
