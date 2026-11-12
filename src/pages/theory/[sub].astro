@@ -3,7 +3,10 @@ import Layout from '../../layouts/Layout.astro';
 
 // Blank sub-pages of Theory that have no sub-tabs of their own.
 export function getStaticPaths() {
-  return [{ params: { sub: 'tonal-harmony' }, props: { title: 'Tonal Harmony' } }];
+  return [
+    { params: { sub: 'tonal-harmony' }, props: { title: 'Tonal Harmony' } },
+    { params: { sub: 'jazz' }, props: { title: 'Jazz' } },
+  ];
 }
 
 const { title } = Astro.props;

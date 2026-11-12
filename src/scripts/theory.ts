@@ -93,6 +93,8 @@ export interface Pattern {
   id: string;
   name: string;
   intervals: string[]; // interval codes above the root
+  symbol?: string; // chords: suffix written after the root, e.g. "maj7"
+  aka?: string[]; // chords: other common spellings of the suffix
 }
 
 export const SCALES: Pattern[] = [
@@ -111,27 +113,91 @@ export const SCALES: Pattern[] = [
   { id: 'whole-tone', name: 'Whole tone', intervals: ['P1', 'M2', 'M3', 'A4', 'A5', 'm7'] },
 ];
 
+// Chord catalogue. `symbol` is the suffix written after the root (C + "maj7" = Cmaj7).
+// The first four entries per size are the common ones; ids are stable (used in URLs and tests).
+const c = (id: string, name: string, symbol: string, intervals: string[], aka: string[] = []): Pattern => ({
+  id,
+  name,
+  symbol,
+  aka,
+  intervals,
+});
+
 export const CHORDS: Pattern[] = [
-  { id: 'major', name: 'Major', intervals: ['P1', 'M3', 'P5'] },
-  { id: 'minor', name: 'Minor', intervals: ['P1', 'm3', 'P5'] },
-  { id: 'diminished', name: 'Diminished', intervals: ['P1', 'm3', 'd5'] },
-  { id: 'augmented', name: 'Augmented', intervals: ['P1', 'M3', 'A5'] },
-  { id: 'sus2', name: 'Suspended 2nd', intervals: ['P1', 'M2', 'P5'] },
-  { id: 'sus4', name: 'Suspended 4th', intervals: ['P1', 'P4', 'P5'] },
-  { id: 'major-6', name: 'Major 6th', intervals: ['P1', 'M3', 'P5', 'M6'] },
-  { id: 'minor-6', name: 'Minor 6th', intervals: ['P1', 'm3', 'P5', 'M6'] },
-  { id: 'major-7', name: 'Major 7th', intervals: ['P1', 'M3', 'P5', 'M7'] },
-  { id: 'dominant-7', name: 'Dominant 7th', intervals: ['P1', 'M3', 'P5', 'm7'] },
-  { id: 'minor-7', name: 'Minor 7th', intervals: ['P1', 'm3', 'P5', 'm7'] },
-  { id: 'minor-major-7', name: 'Minor major 7th', intervals: ['P1', 'm3', 'P5', 'M7'] },
-  { id: 'half-diminished-7', name: 'Half-diminished 7th', intervals: ['P1', 'm3', 'd5', 'm7'] },
-  { id: 'diminished-7', name: 'Diminished 7th', intervals: ['P1', 'm3', 'd5', 'd7'] },
-  { id: 'augmented-7', name: 'Augmented 7th', intervals: ['P1', 'M3', 'A5', 'm7'] },
-  { id: 'add9', name: 'Add 9', intervals: ['P1', 'M3', 'P5', 'M9'] },
-  { id: 'dominant-9', name: 'Dominant 9th', intervals: ['P1', 'M3', 'P5', 'm7', 'M9'] },
-  { id: 'major-9', name: 'Major 9th', intervals: ['P1', 'M3', 'P5', 'M7', 'M9'] },
-  { id: 'minor-9', name: 'Minor 9th', intervals: ['P1', 'm3', 'P5', 'm7', 'M9'] },
+  // ----- three notes -----
+  c('major', 'Major', '', ['P1', 'M3', 'P5'], ['maj']),
+  c('minor', 'Minor', 'm', ['P1', 'm3', 'P5'], ['min', '−']),
+  c('diminished', 'Diminished', '°', ['P1', 'm3', 'd5'], ['dim']),
+  c('augmented', 'Augmented', '+', ['P1', 'M3', 'A5'], ['aug']),
+  c('sus2', 'Suspended 2nd', 'sus2', ['P1', 'M2', 'P5']),
+  c('sus4', 'Suspended 4th', 'sus4', ['P1', 'P4', 'P5']),
+  c('major-b5', 'Major flat five', '(♭5)', ['P1', 'M3', 'd5']),
+  // ----- four notes -----
+  c('dominant-7', 'Dominant 7th', '7', ['P1', 'M3', 'P5', 'm7']),
+  c('minor-7', 'Minor 7th', 'm7', ['P1', 'm3', 'P5', 'm7'], ['min7', '−7']),
+  c('half-diminished-7', 'Half-diminished 7th', 'ø7', ['P1', 'm3', 'd5', 'm7'], ['m7(♭5)']),
+  c('diminished-7', 'Diminished 7th', '°7', ['P1', 'm3', 'd5', 'd7'], ['dim7']),
+  c('augmented-7', 'Augmented 7th', '+7', ['P1', 'M3', 'A5', 'm7'], ['7(♯5)']),
+  c('dominant-7-b5', 'Dominant 7th flat five', '7(♭5)', ['P1', 'M3', 'd5', 'm7']),
+  c('dominant-7-sus2', 'Dominant 7th sus2', '7sus2', ['P1', 'M2', 'P5', 'm7']),
+  c('dominant-7-sus4', 'Dominant 7th sus4', '7sus4', ['P1', 'P4', 'P5', 'm7']),
+  c('major-7', 'Major 7th', 'maj7', ['P1', 'M3', 'P5', 'M7'], ['△7', 'M7']),
+  c('minor-major-7', 'Minor major 7th', 'm(maj7)', ['P1', 'm3', 'P5', 'M7'], ['m△7']),
+  c('augmented-major-7', 'Augmented major 7th', '+maj7', ['P1', 'M3', 'A5', 'M7'], ['+△7']),
+  c('major-7-b5', 'Major 7th flat five', 'maj7(♭5)', ['P1', 'M3', 'd5', 'M7'], ['△7(♭5)']),
+  c('major-7-sus2', 'Major 7th sus2', 'maj7sus2', ['P1', 'M2', 'P5', 'M7']),
+  c('major-7-sus4', 'Major 7th sus4', 'maj7sus4', ['P1', 'P4', 'P5', 'M7']),
+  c('major-6', 'Major 6th', '6', ['P1', 'M3', 'P5', 'M6']),
+  c('minor-6', 'Minor 6th', 'm6', ['P1', 'm3', 'P5', 'M6']),
+  c('add9', 'Add 9', 'add9', ['P1', 'M3', 'P5', 'M9']),
+  c('minor-add9', 'Minor add 9', 'm(add9)', ['P1', 'm3', 'P5', 'M9']),
+  c('add11', 'Add 11', 'add11', ['P1', 'M3', 'P5', 'P11']),
+  c('add-sharp-11', 'Add ♯11', 'add♯11', ['P1', 'M3', 'P5', 'A11']),
+  c('minor-add11', 'Minor add 11', 'm(add11)', ['P1', 'm3', 'P5', 'P11']),
+  c('add9-b5', 'Add 9 flat five', 'add9(♭5)', ['P1', 'M3', 'd5', 'M9']),
+  c('add9-sus4', 'Add 9 sus4', 'add9sus4', ['P1', 'P4', 'P5', 'M9']),
+  c('augmented-add9', 'Augmented add 9', '+add9', ['P1', 'M3', 'A5', 'M9']),
+  // ----- five notes -----
+  c('dominant-9', 'Dominant 9th', '9', ['P1', 'M3', 'P5', 'm7', 'M9'], ['7(9)']),
+  c('minor-9', 'Minor 9th', 'm9', ['P1', 'm3', 'P5', 'm7', 'M9'], ['m7(9)']),
+  c('major-9', 'Major 9th', 'maj9', ['P1', 'M3', 'P5', 'M7', 'M9'], ['△7(9)']),
+  c('dominant-7-sharp-11', 'Dominant 7th ♯11', '7(♯11)', ['P1', 'M3', 'P5', 'm7', 'A11']),
+  c('minor-7-11', 'Minor 7th 11', 'm7(11)', ['P1', 'm3', 'P5', 'm7', 'P11']),
+  c('dominant-7-13', 'Dominant 7th 13', '7(13)', ['P1', 'M3', 'P5', 'm7', 'M13']),
+  c('six-nine', 'Six nine', '6(9)', ['P1', 'M3', 'P5', 'M6', 'M9'], ['6/9']),
+  c('minor-six-nine', 'Minor six nine', 'm6(9)', ['P1', 'm3', 'P5', 'M6', 'M9']),
+  c('major-7-13', 'Major 7th 13', 'maj7(13)', ['P1', 'M3', 'P5', 'M7', 'M13']),
+  c('major-7-9-sus4', 'Major 9th sus4', 'maj7(9)sus4', ['P1', 'P4', 'P5', 'M7', 'M9']),
+  c('dominant-7-b9', 'Dominant 7th ♭9', '7(♭9)', ['P1', 'M3', 'P5', 'm7', 'm9']),
+  c('dominant-7-sharp-9', 'Dominant 7th ♯9', '7(♯9)', ['P1', 'M3', 'P5', 'm7', 'A9']),
+  c('dominant-7-b13', 'Dominant 7th ♭13', '7(♭13)', ['P1', 'M3', 'P5', 'm7', 'm13']),
+  c('minor-major-9', 'Minor major 9th', 'm(maj9)', ['P1', 'm3', 'P5', 'M7', 'M9']),
+  c('diminished-7-9', 'Diminished 7th 9', '°7(9)', ['P1', 'm3', 'd5', 'd7', 'M9']),
+  c('diminished-7-b9', 'Diminished 7th ♭9', '°7(♭9)', ['P1', 'm3', 'd5', 'd7', 'm9']),
+  c('augmented-7-9', 'Augmented 7th 9', '+7(9)', ['P1', 'M3', 'A5', 'm7', 'M9']),
+  c('augmented-7-b9', 'Augmented 7th ♭9', '+7(♭9)', ['P1', 'M3', 'A5', 'm7', 'm9']),
+  c('augmented-7-sharp-9', 'Augmented 7th ♯9', '+7(♯9)', ['P1', 'M3', 'A5', 'm7', 'A9']),
+  c('augmented-major-9', 'Augmented major 9th', '+maj7(9)', ['P1', 'M3', 'A5', 'M7', 'M9']),
+  // ----- six notes -----
+  c('dominant-7-9-13', 'Dominant 7th 9, 13', '7(9,13)', ['P1', 'M3', 'P5', 'm7', 'M9', 'M13']),
+  c('dominant-7-9-b13', 'Dominant 7th 9, ♭13', '7(9,♭13)', ['P1', 'M3', 'P5', 'm7', 'M9', 'm13']),
+  c('dominant-7-b9-13', 'Dominant 7th ♭9, 13', '7(♭9,13)', ['P1', 'M3', 'P5', 'm7', 'm9', 'M13']),
+  c('dominant-7-b9-b13', 'Dominant 7th ♭9, ♭13', '7(♭9,♭13)', ['P1', 'M3', 'P5', 'm7', 'm9', 'm13']),
+  c('dominant-7-sharp-9-13', 'Dominant 7th ♯9, 13', '7(♯9,13)', ['P1', 'M3', 'P5', 'm7', 'A9', 'M13']),
+  c('dominant-7-sharp-9-b13', 'Dominant 7th ♯9, ♭13', '7(♯9,♭13)', ['P1', 'M3', 'P5', 'm7', 'A9', 'm13']),
+  c('major-7-9-13', 'Major 7th 9, 13', 'maj7(9,13)', ['P1', 'M3', 'P5', 'M7', 'M9', 'M13']),
+  c('minor-7-9-11', 'Minor 7th 9, 11', 'm7(9,11)', ['P1', 'm3', 'P5', 'm7', 'M9', 'P11']),
+  c('minor-major-7-9-11', 'Minor major 7th 9, 11', 'm(maj7)(9,11)', ['P1', 'm3', 'P5', 'M7', 'M9', 'P11']),
+  c('minor-6-9-11', 'Minor 6th 9, 11', 'm6(9,11)', ['P1', 'm3', 'P5', 'M6', 'M9', 'P11']),
 ];
+
+/** Chords grouped by number of notes, in catalogue order. */
+export const CHORD_GROUPS: { size: number; label: string; chords: Pattern[] }[] = [
+  { size: 3, label: 'Three notes' },
+  { size: 4, label: 'Four notes' },
+  { size: 5, label: 'Five notes' },
+  { size: 6, label: 'Six notes' },
+].map((g) => ({ ...g, chords: CHORDS.filter((x) => x.intervals.length === g.size) }));
 
 export interface SpelledNote {
   name: string;
