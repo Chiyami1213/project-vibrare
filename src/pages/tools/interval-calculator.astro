@@ -7,7 +7,7 @@ import { INTERVALS } from '../../scripts/theory';
 <Layout title="Interval Calculator">
   <main class="calc-page">
     <h1>Interval Calculator</h1>
-    <p class="lead">Pick a starting note and an interval to find the note it lands on.</p>
+    <p class="lead">Pick a starting note and an interval to find the note it lands on, and see both on the staff.</p>
 
     <div class="calc-form">
       <NoteSelect id="start" label="Starting note" />
@@ -27,6 +27,17 @@ import { INTERVALS } from '../../scripts/theory';
     </div>
 
     <div class="result" aria-live="polite">
+      <div id="staff" class="staff"></div>
+      <div class="staff-controls">
+        <div class="seg-group" role="group" aria-label="Clef" id="clefs">
+          <button type="button" class="seg-btn" data-clef="treble" aria-pressed="true">Treble clef</button>
+          <button type="button" class="seg-btn" data-clef="bass" aria-pressed="false">Bass clef</button>
+        </div>
+        <div class="seg-group" role="group" aria-label="Show the notes" id="modes">
+          <button type="button" class="seg-btn" data-mode="melodic" aria-pressed="true">One after the other</button>
+          <button type="button" class="seg-btn" data-mode="harmonic" aria-pressed="false">Together</button>
+        </div>
+      </div>
       <div id="chips" class="note-row"></div>
       <p id="summary" class="summary"></p>
     </div>
@@ -35,8 +46,12 @@ import { INTERVALS } from '../../scripts/theory';
   <script>
     import { INTERVALS, applyInterval, noteName, parseInterval } from '../../scripts/theory';
     import { bind, byId, readNote, renderChips } from '../../scripts/ui';
+    import type { Clef, StaffMode } from '../../scripts/staff';
 
-    bind(['start-letter', 'start-acc', 'interval', 'direction'], () => {
+    let clef: Clef = 'treble';
+    let mode: StaffMode = 'melodic';
+
+    function update() {
       const start = readNote('start');
       const interval = INTERVALS.find((i) => i.code === byId('interval').value) ?? parseInterval('P5');
       const dir = byId('direction').value === 'down' ? 'down' : 'up';
@@ -49,6 +64,27 @@ import { INTERVALS } from '../../scripts/theory';
       const half = interval.semitones === 1 ? 'semitone' : 'semitones';
       byId<HTMLElement>('summary').textContent =
         `A ${interval.name.toLowerCase()} ${where} ${noteName(start)} is ${noteName(result)} (${interval.semitones} ${half}).`;
-    });
+
+      // on the staff: pick an octave that keeps both notes close to the clef
+      const octave = (clef === 'bass' ? 3 : 4) + (dir === 'down' ? 1 : 0);
+      const from = { ...start, octave };
+      const to = applyInterval(from, interval, dir);
+      void import('../../scripts/staff').then(({ renderStaff }) => renderStaff(byId<HTMLElement>('staff'), [from, to], { clef, mode }));
+    }
+
+    bind(['start-letter', 'start-acc', 'interval', 'direction'], update);
+
+    function wire(boxId: string, attr: 'clef' | 'mode', set: (v: string) => void) {
+      const buttons = [...document.querySelectorAll<HTMLButtonElement>(`#${boxId} .seg-btn`)];
+      buttons.forEach((b) =>
+        b.addEventListener('click', () => {
+          set(b.dataset[attr]!);
+          buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+          update();
+        }),
+      );
+    }
+    wire('clefs', 'clef', (v) => (clef = v as Clef));
+    wire('modes', 'mode', (v) => (mode = v as StaffMode));
   </script>
 </Layout>

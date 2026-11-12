@@ -7,7 +7,7 @@ import { SCALES } from '../../scripts/theory';
 <Layout title="Scale Calculator">
   <main class="calc-page">
     <h1>Scale Calculator</h1>
-    <p class="lead">Pick a tonic and a scale type to see the notes, correctly spelled.</p>
+    <p class="lead">Pick a tonic and a scale type to see the notes, correctly spelled, and built on the staff.</p>
 
     <div class="calc-form">
       <NoteSelect id="tonic" label="Tonic" />
@@ -20,22 +20,50 @@ import { SCALES } from '../../scripts/theory';
     </div>
 
     <div class="result" aria-live="polite">
+      <div id="staff" class="staff"></div>
+      <div class="staff-controls">
+        <div class="seg-group" role="group" aria-label="Clef" id="clefs">
+          <button type="button" class="seg-btn" data-clef="treble" aria-pressed="true">Treble clef</button>
+          <button type="button" class="seg-btn" data-clef="bass" aria-pressed="false">Bass clef</button>
+        </div>
+      </div>
       <div id="chips" class="note-row"></div>
       <p id="summary" class="summary"></p>
     </div>
   </main>
 
   <script>
-    import { SCALES, noteName, spell } from '../../scripts/theory';
+    import { SCALES, noteList, noteName, parseInterval, spell } from '../../scripts/theory';
     import { bind, byId, readNote, renderChips } from '../../scripts/ui';
+    import type { Clef } from '../../scripts/staff';
 
-    bind(['tonic-letter', 'tonic-acc', 'scale'], () => {
+    let clef: Clef = 'treble';
+
+    function update() {
       const tonic = readNote('tonic');
       const scale = SCALES.find((s) => s.id === byId('scale').value) ?? SCALES[0];
       const notes = spell(tonic, scale, true);
       renderChips(byId<HTMLElement>('chips'), notes);
       byId<HTMLElement>('summary').textContent =
         `${noteName(tonic)} ${scale.name}: ${notes.map((n) => n.name).join(' ')}`;
-    });
+
+      // the same notes with their octaves, going up from the tonic and ending on the octave
+      const root = { ...tonic, octave: clef === 'bass' ? 3 : 4 };
+      const staffNotes = noteList(root, [...scale.intervals, 'P8']);
+      void import('../../scripts/staff').then(({ renderStaff }) =>
+        renderStaff(byId<HTMLElement>('staff'), staffNotes, { clef, mode: 'melodic' }),
+      );
+    }
+
+    bind(['tonic-letter', 'tonic-acc', 'scale'], update);
+
+    const buttons = [...document.querySelectorAll<HTMLButtonElement>('#clefs .seg-btn')];
+    buttons.forEach((b) =>
+      b.addEventListener('click', () => {
+        clef = b.dataset.clef as Clef;
+        buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        update();
+      }),
+    );
   </script>
 </Layout>

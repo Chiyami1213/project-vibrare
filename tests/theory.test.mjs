@@ -73,3 +73,14 @@ test('every pattern spells on every natural/flat/sharp root', () => {
     }
   }
 });
+
+import { noteList } from '../src/scripts/theory.ts';
+
+test('notes carry the right octave for drawing on a staff', () => {
+  const at = (letter, alter, octave) => ({ letter, alter, octave });
+  const show = (notes) => notes.map((n) => `${LETTERS[n.letter]}${n.alter > 0 ? '#' : n.alter < 0 ? 'b' : ''}${n.octave}`).join(' ');
+  const major = find(SCALES, 'major').intervals.concat('P8');
+  assert.equal(show(noteList(at(0, 0, 4), major)), 'C4 D4 E4 F4 G4 A4 B4 C5');
+  assert.equal(show(noteList(at(1, -1, 4), major)), 'Db4 Eb4 F4 Gb4 Ab4 Bb4 C5 Db5');
+  assert.equal(show(noteList(at(6, 0, 3), major)), 'B3 C#4 D#4 E4 F#4 G#4 A#4 B4');
+});

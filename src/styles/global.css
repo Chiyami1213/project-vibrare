@@ -1503,3 +1503,27 @@ button.note-chip[aria-pressed='true'] {
 .about-list li {
   margin-bottom: 8px;
 }
+
+/* ---------- Music staff (VexFlow) ---------- */
+.staff {
+  min-height: 200px;
+  margin-bottom: 12px;
+  padding: 4px 8px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--tile);
+  color: var(--fg); /* VexFlow draws in currentColor */
+}
+
+.staff svg {
+  display: block;
+  max-width: none;
+}
+
+.staff-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-bottom: 16px;
+}

@@ -216,3 +216,8 @@ export function spell(root: Note, pattern: Pattern, closeOctave = false): Spelle
 export function makeRoot(letter: number, alter: number): Note {
   return { letter, alter, octave: 4 };
 }
+
+/** The notes above `root` for a list of interval codes, each with its octave (for drawing on a staff). */
+export function noteList(root: Note, codes: string[]): Note[] {
+  return codes.map((code) => applyInterval(root, parseInterval(code), 'up'));
+}
