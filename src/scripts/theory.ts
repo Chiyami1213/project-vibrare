@@ -179,25 +179,50 @@ export const CHORDS: Pattern[] = [
   c('augmented-7-sharp-9', 'Augmented 7th ♯9', '+7(♯9)', ['P1', 'M3', 'A5', 'm7', 'A9']),
   c('augmented-major-9', 'Augmented major 9th', '+maj7(9)', ['P1', 'M3', 'A5', 'M7', 'M9']),
   // ----- six notes -----
-  c('dominant-7-9-13', 'Dominant 7th 9, 13', '7(9,13)', ['P1', 'M3', 'P5', 'm7', 'M9', 'M13']),
+  c('dominant-7-9-13', 'Dominant 13th', '13', ['P1', 'M3', 'P5', 'm7', 'M9', 'M13'], ['7(9,13)']),
   c('dominant-7-9-b13', 'Dominant 7th 9, ♭13', '7(9,♭13)', ['P1', 'M3', 'P5', 'm7', 'M9', 'm13']),
   c('dominant-7-b9-13', 'Dominant 7th ♭9, 13', '7(♭9,13)', ['P1', 'M3', 'P5', 'm7', 'm9', 'M13']),
   c('dominant-7-b9-b13', 'Dominant 7th ♭9, ♭13', '7(♭9,♭13)', ['P1', 'M3', 'P5', 'm7', 'm9', 'm13']),
   c('dominant-7-sharp-9-13', 'Dominant 7th ♯9, 13', '7(♯9,13)', ['P1', 'M3', 'P5', 'm7', 'A9', 'M13']),
   c('dominant-7-sharp-9-b13', 'Dominant 7th ♯9, ♭13', '7(♯9,♭13)', ['P1', 'M3', 'P5', 'm7', 'A9', 'm13']),
-  c('major-7-9-13', 'Major 7th 9, 13', 'maj7(9,13)', ['P1', 'M3', 'P5', 'M7', 'M9', 'M13']),
-  c('minor-7-9-11', 'Minor 7th 9, 11', 'm7(9,11)', ['P1', 'm3', 'P5', 'm7', 'M9', 'P11']),
-  c('minor-major-7-9-11', 'Minor major 7th 9, 11', 'm(maj7)(9,11)', ['P1', 'm3', 'P5', 'M7', 'M9', 'P11']),
+  c('major-7-9-13', 'Major 13th', 'maj13', ['P1', 'M3', 'P5', 'M7', 'M9', 'M13'], ['maj7(9,13)']),
+  c('minor-7-9-11', 'Minor 11th', 'm11', ['P1', 'm3', 'P5', 'm7', 'M9', 'P11'], ['m7(9,11)']),
+  c('minor-major-7-9-11', 'Minor major 11th', 'm(maj11)', ['P1', 'm3', 'P5', 'M7', 'M9', 'P11'], ['m(maj7)(9,11)']),
   c('minor-6-9-11', 'Minor 6th 9, 11', 'm6(9,11)', ['P1', 'm3', 'P5', 'M6', 'M9', 'P11']),
+  // ----- derived: the usual chords of each kind that were missing (built by stacking thirds) -----
+  c('dominant-9-sus4', 'Dominant 9th sus4', '9sus4', ['P1', 'P4', 'P5', 'm7', 'M9']),
+  c('dominant-9-b5', 'Dominant 9th flat five', '9(♭5)', ['P1', 'M3', 'd5', 'm7', 'M9']),
+  c('half-diminished-9', 'Half-diminished 9th', 'ø9', ['P1', 'm3', 'd5', 'm7', 'M9'], ['m9(♭5)']),
+  c('dominant-11', 'Dominant 11th', '11', ['P1', 'M3', 'P5', 'm7', 'M9', 'P11']),
+  c('major-11', 'Major 11th', 'maj11', ['P1', 'M3', 'P5', 'M7', 'M9', 'P11']),
+  c('dominant-9-sharp-11', 'Dominant 9th ♯11', '9(♯11)', ['P1', 'M3', 'P5', 'm7', 'M9', 'A11']),
+  c('major-7-sharp-11', 'Major 7th ♯11', 'maj7(♯11)', ['P1', 'M3', 'P5', 'M7', 'A11']),
+  c('major-9-sharp-11', 'Major 9th ♯11', 'maj9(♯11)', ['P1', 'M3', 'P5', 'M7', 'M9', 'A11']),
+  c('minor-13', 'Minor 13th', 'm13', ['P1', 'm3', 'P5', 'm7', 'M9', 'M13']),
+  c('dominant-13-full', 'Dominant 13th, all tones', '13(11)', ['P1', 'M3', 'P5', 'm7', 'M9', 'P11', 'M13']),
+  c('major-13-full', 'Major 13th, all tones', 'maj13(11)', ['P1', 'M3', 'P5', 'M7', 'M9', 'P11', 'M13']),
+  c('minor-13-full', 'Minor 13th, all tones', 'm13(11)', ['P1', 'm3', 'P5', 'm7', 'M9', 'P11', 'M13']),
+  c('dominant-13-sharp-11', 'Dominant 13th ♯11', '13(♯11)', ['P1', 'M3', 'P5', 'm7', 'M9', 'A11', 'M13']),
+  c('major-13-sharp-11', 'Major 13th ♯11', 'maj13(♯11)', ['P1', 'M3', 'P5', 'M7', 'M9', 'A11', 'M13']),
+  c('dominant-13-sus4', 'Dominant 13th sus4', '13sus4', ['P1', 'P4', 'P5', 'm7', 'M9', 'M13']),
 ];
 
-/** Chords grouped by number of notes, in catalogue order. */
-export const CHORD_GROUPS: { size: number; label: string; chords: Pattern[] }[] = [
-  { size: 3, label: 'Three notes' },
-  { size: 4, label: 'Four notes' },
-  { size: 5, label: 'Five notes' },
-  { size: 6, label: 'Six notes' },
-].map((g) => ({ ...g, chords: CHORDS.filter((x) => x.intervals.length === g.size) }));
+export type ChordKind = 'triad' | 'seventh' | 'ninth' | 'eleventh' | 'thirteenth';
+
+/** The kind of a chord: named by the highest chord tone it contains (a sixth chord counts as a triad). */
+export function chordKind(chord: Pattern): ChordKind {
+  const top = Math.max(...chord.intervals.map((code) => parseInterval(code).steps + 1));
+  return top >= 13 ? 'thirteenth' : top >= 11 ? 'eleventh' : top >= 9 ? 'ninth' : top >= 7 ? 'seventh' : 'triad';
+}
+
+/** Chords grouped by kind, in catalogue order. `label` is for buttons, `title` for headings. */
+export const CHORD_GROUPS: { kind: ChordKind; label: string; title: string; chords: Pattern[] }[] = [
+  { kind: 'triad', label: 'Triad', title: 'Triads' },
+  { kind: 'seventh', label: '7th', title: '7th chords' },
+  { kind: 'ninth', label: '9th', title: '9th chords' },
+  { kind: 'eleventh', label: '11th', title: '11th chords' },
+  { kind: 'thirteenth', label: '13th', title: '13th chords' },
+].map((g) => ({ ...g, kind: g.kind as ChordKind, chords: CHORDS.filter((x) => chordKind(x) === g.kind) }));
 
 export interface SpelledNote {
   name: string;

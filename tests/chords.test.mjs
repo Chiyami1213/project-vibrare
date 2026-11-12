@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { CHORDS, CHORD_GROUPS, LETTERS } from '../src/scripts/theory.ts';
+import { CHORDS, CHORD_GROUPS, LETTERS, chordKind } from '../src/scripts/theory.ts';
 import { chordInfo, findChord, parseRoot, rootParam, inversionLabel } from '../src/scripts/chords.ts';
 
 const info = (root, id, inv = 0) => {
@@ -11,7 +11,8 @@ const names = (i) => i.notes.map((n) => n.name).join(' ');
 
 test('catalogue: unique ids, grouped by size, every chord has a symbol', () => {
   assert.equal(new Set(CHORDS.map((c) => c.id)).size, CHORDS.length);
-  assert.deepEqual(CHORD_GROUPS.map((g) => [g.size, g.chords.length]), [[3, 7], [4, 24], [5, 20], [6, 10]]);
+  assert.deepEqual(CHORD_GROUPS.map((g) => [g.kind, g.chords.length]), [['triad', 9], ['seventh', 14], ['ninth', 23], ['eleventh', 13], ['thirteenth', 17]]);
+  assert.deepEqual(CHORD_GROUPS.map((g) => g.label), ['Triad', '7th', '9th', '11th', '13th']);
   assert.equal(CHORD_GROUPS.reduce((n, g) => n + g.chords.length, 0), CHORDS.length);
   for (const c of CHORDS) assert.equal(typeof c.symbol, 'string', c.id);
 });
@@ -111,4 +112,38 @@ test('DNA keeps chord order in inversions', () => {
   assert.deepEqual(d.internal.map((n) => n.name), ['C♯', 'E', 'G']);
   assert.deepEqual(d.colors.map((n) => n.name), ['B']);
   assert.equal(d.bass.name, 'E');
+});
+
+test('chords are grouped by their highest chord tone', () => {
+  const kind = (id) => chordKind(findChord(id));
+  assert.equal(kind('major'), 'triad');
+  assert.equal(kind('sus4'), 'triad');
+  assert.equal(kind('major-6'), 'triad'); // a sixth chord counts as a triad
+  assert.equal(kind('dominant-7'), 'seventh');
+  assert.equal(kind('half-diminished-7'), 'seventh');
+  assert.equal(kind('add9'), 'ninth');
+  assert.equal(kind('dominant-9'), 'ninth');
+  assert.equal(kind('six-nine'), 'ninth');
+  assert.equal(kind('add11'), 'eleventh');
+  assert.equal(kind('dominant-11'), 'eleventh');
+  assert.equal(kind('minor-7-9-11'), 'eleventh');
+  assert.equal(kind('dominant-7-13'), 'thirteenth');
+  assert.equal(kind('dominant-13-full'), 'thirteenth');
+  assert.equal(CHORD_GROUPS.reduce((n, g) => n + g.chords.length, 0), CHORDS.length); // every chord in one group
+});
+
+test('the derived 11th and 13th chords are built by stacking thirds', () => {
+  assert.equal(names(info('C', 'dominant-11')), 'C E G B♭ D F');
+  assert.equal(names(info('C', 'major-11')), 'C E G B D F');
+  assert.equal(names(info('C', 'minor-7-9-11')), 'C E♭ G B♭ D F');
+  assert.equal(names(info('C', 'dominant-13-full')), 'C E G B♭ D F A'); // all seven tones
+  assert.equal(names(info('C', 'major-13-full')), 'C E G B D F A');
+  assert.equal(names(info('C', 'minor-13')), 'C E♭ G B♭ D A');
+  assert.equal(names(info('C', 'dominant-13-sharp-11')), 'C E G B♭ D F♯ A');
+  assert.equal(names(info('C', 'major-13-sharp-11')), 'C E G B D F♯ A');
+  assert.equal(names(info('C', 'dominant-13-sus4')), 'C F G B♭ D A');
+  assert.equal(names(info('C', 'dominant-9-sus4')), 'C F G B♭ D');
+  assert.equal(names(info('C', 'half-diminished-9')), 'C E♭ G♭ B♭ D');
+  assert.equal(info('C', 'dominant-13-full').symbol, 'C13(11)');
+  assert.equal(info('B♭', 'dominant-7-9-13').symbol, 'B♭13');
 });

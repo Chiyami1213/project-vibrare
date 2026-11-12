@@ -89,9 +89,9 @@ const segments = CIRCLE.flatMap((key, i) => {
       <div class="calc-form chord-form">
         <NoteSelect id="shape-root" label="Root" />
         <div class="field">
-          <span class="field-label" id="shape-size-label">Number of notes</span>
+          <span class="field-label" id="shape-size-label">Chord kind</span>
           <div class="seg-group" role="group" aria-labelledby="shape-size-label" id="shape-sizes">
-            {CHORD_GROUPS.map((g) => <button type="button" class="seg-btn" data-size={g.size} aria-pressed="false">{g.size}</button>)}
+            {CHORD_GROUPS.map((g) => <button type="button" class="seg-btn" data-kind={g.kind} aria-pressed="false">{g.label}</button>)}
           </div>
         </div>
         <div class="field">
@@ -109,7 +109,7 @@ const segments = CIRCLE.flatMap((key, i) => {
   </main>
 
   <script>
-    import { CHORDS, CHORD_GROUPS } from '../../scripts/theory';
+    import { CHORDS, CHORD_GROUPS, chordKind } from '../../scripts/theory';
     import { chordInfo, findChord } from '../../scripts/chords';
     import { chordShape, diatonicChords, keyInfo, type Mode } from '../../scripts/circle';
     import { byId, renderChips } from '../../scripts/ui';
@@ -128,10 +128,10 @@ const segments = CIRCLE.flatMap((key, i) => {
     const rootLetter = byId<HTMLSelectElement>('shape-root-letter');
     const rootAcc = byId<HTMLSelectElement>('shape-root-acc');
     const qualitySel = byId<HTMLSelectElement>('shape-chord');
-    const sizeBtns = [...document.querySelectorAll<HTMLButtonElement>('#shape-sizes [data-size]')];
+    const sizeBtns = [...document.querySelectorAll<HTMLButtonElement>('#shape-sizes [data-kind]')];
 
-    function fillQualities(size: number) {
-      const group = CHORD_GROUPS.find((g) => g.size === size) ?? CHORD_GROUPS[0];
+    function fillQualities(kind: string) {
+      const group = CHORD_GROUPS.find((g) => g.kind === kind) ?? CHORD_GROUPS[0];
       qualitySel.replaceChildren(
         ...group.chords.map((c) => {
           const o = document.createElement('option');
@@ -140,7 +140,7 @@ const segments = CIRCLE.flatMap((key, i) => {
           return o;
         }),
       );
-      qualitySel.dataset.size = String(size);
+      qualitySel.dataset.kind = kind;
     }
 
     function drawShape() {
@@ -182,9 +182,9 @@ const segments = CIRCLE.flatMap((key, i) => {
       const chord = findChord(chordId) ?? CHORDS[0];
       rootLetter.value = String(letter);
       rootAcc.value = String(alter);
-      if (qualitySel.dataset.size !== String(chord.intervals.length)) fillQualities(chord.intervals.length);
+      if (qualitySel.dataset.kind !== chordKind(chord)) fillQualities(chordKind(chord));
       qualitySel.value = chord.id;
-      sizeBtns.forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.size) === chord.intervals.length)));
+      sizeBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.kind === chordKind(chord))));
       drawShape();
     }
 
@@ -201,7 +201,7 @@ const segments = CIRCLE.flatMap((key, i) => {
     qualitySel.addEventListener('change', readBuilder);
     sizeBtns.forEach((b) =>
       b.addEventListener('click', () => {
-        const group = CHORD_GROUPS.find((g) => g.size === Number(b.dataset.size));
+        const group = CHORD_GROUPS.find((g) => g.kind === b.dataset.kind);
         if (!group) return;
         clearChipHighlight();
         showChord(Number(rootLetter.value), Number(rootAcc.value), group.chords[0].id);
@@ -277,6 +277,10 @@ const segments = CIRCLE.flatMap((key, i) => {
     );
 
     select(0, 'major');
-    showChord(0, 0, 'major'); // start with the tonic triad so the shape is visible straight away
+    // no shape is drawn at first; the builder just starts on a C major triad
+    fillQualities('triad');
+    qualitySel.value = 'major';
+    sizeBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.kind === 'triad')));
+    drawShape();
   </script>
 </Layout>

@@ -25,9 +25,9 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
       </div>
 
       <div class="field">
-        <span class="field-label" id="size-label">Number of notes</span>
+        <span class="field-label" id="size-label">Chord kind</span>
         <div class="seg-group" role="group" aria-labelledby="size-label" id="sizes">
-          {CHORD_GROUPS.map((g) => <button type="button" class="seg-btn" data-size={g.size} aria-pressed="false">{g.size}</button>)}
+          {CHORD_GROUPS.map((g) => <button type="button" class="seg-btn" data-kind={g.kind} aria-pressed="false">{g.label}</button>)}
         </div>
       </div>
 
@@ -79,7 +79,7 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
   </main>
 
   <script>
-    import { CHORDS, CHORD_GROUPS } from '../../scripts/theory';
+    import { CHORDS, CHORD_GROUPS, chordKind } from '../../scripts/theory';
     import { chordInfo, findChord, parseRoot, rootParam } from '../../scripts/chords';
     import { buildKeyboard } from '../../scripts/keyboard';
     import { playChord, type PlayMode } from '../../scripts/synth';
@@ -100,11 +100,11 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
     const letterBtns = [...document.querySelectorAll<HTMLButtonElement>('#root-letters [data-letter]')];
     const accBtns = [...document.querySelectorAll<HTMLButtonElement>('#root-acc [data-alter]')];
     const chordSel = byId<HTMLSelectElement>('chord');
-    const sizeBtns = [...document.querySelectorAll<HTMLButtonElement>('#sizes [data-size]')];
+    const sizeBtns = [...document.querySelectorAll<HTMLButtonElement>('#sizes [data-kind]')];
 
     // the quality list only shows chords with the chosen number of notes
-    function fillQualities(size: number) {
-      const group = CHORD_GROUPS.find((g) => g.size === size) ?? CHORD_GROUPS[0];
+    function fillQualities(kind: string) {
+      const group = CHORD_GROUPS.find((g) => g.kind === kind) ?? CHORD_GROUPS[0];
       chordSel.replaceChildren(
         ...group.chords.map((c) => {
           const o = document.createElement('option');
@@ -125,12 +125,12 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
       const info = chordInfo(state.letter, state.alter, chord, state.inversion);
       state.inversion = info.inversion;
 
-      const size = chord.intervals.length;
-      if (chordSel.dataset.size !== String(size)) {
-        fillQualities(size);
-        chordSel.dataset.size = String(size);
+      const kind = chordKind(chord);
+      if (chordSel.dataset.kind !== kind) {
+        fillQualities(kind);
+        chordSel.dataset.kind = kind;
       }
-      sizeBtns.forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.size) === size)));
+      sizeBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.kind === kind)));
       letterBtns.forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.letter) === state.letter)));
       accBtns.forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.alter) === state.alter)));
       chordSel.value = chord.id;
@@ -172,9 +172,9 @@ import { CHORD_GROUPS, LETTERS } from '../../scripts/theory';
     chordSel.addEventListener('change', () => { state.chordId = chordSel.value; state.inversion = 0; render(); });
     sizeBtns.forEach((b) =>
       b.addEventListener('click', () => {
-        const group = CHORD_GROUPS.find((g) => g.size === Number(b.dataset.size));
+        const group = CHORD_GROUPS.find((g) => g.kind === b.dataset.kind);
         if (!group) return;
-        state.chordId = group.chords[0].id; // first quality of that size
+        state.chordId = group.chords[0].id; // the first quality of that kind
         state.inversion = 0;
         render();
       }),
