@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Blank sub-pages of Counterpoint (linked from the menu).
+export function getStaticPaths() {
+  return [{ params: { sub: 'fugue' }, props: { title: 'Fugue' } }];
+}
+
+const { title } = Astro.props;
+---
+
+<Layout title={title}>
+  <main>
+    <h1>{title}</h1>
+  </main>
+</Layout>
