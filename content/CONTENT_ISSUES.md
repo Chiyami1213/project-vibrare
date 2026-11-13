@@ -14,10 +14,8 @@ open questions each pack lists for the owner are in that pack's own `VERIFICATIO
 
 ## Things the pages do not do yet (so the text can promise less than it should)
 
-- **Counterpoint:** the captions of some examples speak of dissonances "in red"; the player does not colour them yet.
-  The stored result of the rule engine is shown as a sentence under each example; the engine itself
-  (`counterpoint/engine/fux-engine.js`) is not ported, so nothing is re-checked in the browser, and the seven tools and
-  fifteen workbenches are not built.
+- **Counterpoint:** built (rule engine port, checker marks on the notes, 15 workbenches, 7 tools). Still missing: voice
+  colouring, and clicking on the staff to place a note (the workbench uses a grid of pitch selectors under the score).
 - **Tonal harmony:** the `checker` overlay on the 22 deliberate-error examples is not drawn, the SATB checker is not
   ported, and none of the 30 tools exist. The Roman-numeral label is printed as plain text (`V6/5`), not stacked.
 - **Fugue:** the nine theory tools and two analysis tools are not built.

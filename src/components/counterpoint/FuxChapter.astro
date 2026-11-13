@@ -56,26 +56,38 @@ const refs = (x: Parameters<typeof toItem>[0]) => toItem(x).refs;
         const e = FUX.examples[b.id];
         if (!e) return null;
         const issues = e.engineResult ?? [];
+        const shown = e.check !== false && e.autoCheck;
         return (
-          <div class="example">
-            <h4 class="mini-title">{e.fig}: {e.title}</h4>
-            <div class="player" data-example={b.id}></div>
+          <div class="example fux-example" data-fux={b.id}>
+            <h4 class="mini-title">{e.fig}: {titleCase(e.title)}</h4>
+            <div class="fux-controls pl-row"></div>
+            <div class="fux-stage"><div class="player"></div></div>
             <p class="caption"><Fragment set:html={safeHtml(e.caption)} /></p>
-            {
-              e.check !== false && (
-                <p class="muted-line table-note">
-                  {issues.length === 0 ? 'The rule engine finds no fault in this example.' : `The rule engine finds ${issues.length} point${issues.length > 1 ? 's' : ''} to note: ${issues.map((i) => `${i.level === 'error' ? 'rule' : i.level === 'warn' ? 'guideline' : 'note'} “${i.rule}” in voice ${i.v + 1}, bar ${Math.floor(i.t) + 1}`).join('; ')}.`}
-                </p>
-              )
-            }
+            <div class="fux-result" aria-live="polite">
+              {
+                shown && (
+                  <p class="muted-line table-note">
+                    {issues.length === 0 ? 'The rule engine finds no fault in this example.' : `The rule engine finds ${issues.length} point${issues.length > 1 ? 's' : ''} to note.`}
+                  </p>
+                )
+              }
+            </div>
           </div>
         );
       }
       if (b.type === 'workbench') {
         const w = FUX.workbenches[b.id];
-        return <p class="tool-todo">Workbench, still to come: {w?.title ?? b.id}.</p>;
+        return (
+          <div class="wb" data-wb={b.id}>
+            <h4 class="mini-title">Workbench: {titleCase(w?.title ?? b.id)}</h4>
+          </div>
+        );
       }
-      return <p class="tool-todo">Interactive tool, still to come: {titleCase(b.id.replace(/-/g, ' '))}.</p>;
+      return (
+        <div class="tool-box" data-tool={b.id}>
+          <h4 class="mini-title">{titleCase(b.id.replace(/-/g, ' '))}</h4>
+        </div>
+      );
     })
   }
 

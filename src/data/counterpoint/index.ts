@@ -50,3 +50,42 @@ export function exampleData(id: string, e: Example): ExampleData {
     intervals: voices.length === 2,
   };
 }
+
+/** What the page script needs to run an example live: the score, its alternative, the voices for the checker. */
+export interface FuxExampleData {
+  main: ExampleData;
+  alt?: ExampleData;
+  voices: Example['voices'];
+  altVoices?: Example['voices'];
+  only?: string[];
+  auto: boolean;
+  check: boolean;
+  toggleLabel?: string;
+  figures: boolean;
+}
+
+/** Everything the interactive parts of some chapters need, as JSON for the page: examples and workbench specs. */
+export function pageData(chapters: Chapter[]) {
+  const examples: Record<string, FuxExampleData> = {};
+  const workbenches: Record<string, (typeof FUX.workbenches)[string]> = {};
+  for (const c of chapters) {
+    for (const b of c.blocks ?? []) {
+      if (b.type === 'example' && FUX.examples[b.id]) {
+        const e = FUX.examples[b.id];
+        examples[b.id] = {
+          main: exampleData(b.id, e),
+          alt: e.toggle ? exampleData(b.id + '-alt', { ...e, voices: e.toggle.alt }) : undefined,
+          voices: e.voices,
+          altVoices: e.toggle?.alt,
+          only: e.only,
+          auto: !!e.autoCheck && e.check !== false,
+          check: e.check !== false,
+          toggleLabel: e.toggle?.label,
+          figures: e.figures === 'bass',
+        };
+      }
+      if (b.type === 'workbench' && FUX.workbenches[b.id]) workbenches[b.id] = FUX.workbenches[b.id];
+    }
+  }
+  return { examples, workbenches };
+}

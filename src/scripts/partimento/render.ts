@@ -1,6 +1,6 @@
 // Draws an example as a grand staff with figured bass and circled bass degrees (VexFlow).
 import { Accidental, Beam, BarlineType, Dot, Formatter, Fraction, Renderer, Stave, StaveConnector, StaveNote, StaveTie, Stem, Voice } from 'vexflow/bravura';
-import { barTicks, keySpec, layoutVoice, slicesOf, totalBarsOf } from './model';
+import { barTicks, keySpec, layoutVoice, slicesOf, ticksPerBeat, totalBarsOf } from './model';
 import type { ExampleData, NoteSpec } from './model';
 
 export interface SliceBox {
@@ -31,7 +31,10 @@ function keyOf(pitch: string): string {
   return `${m[1].toLowerCase()}${acc}/${m[3]}`;
 }
 
-function makeNote(spec: NoteSpec, clef: Clef, stem: number | null): StaveNote {
+/** Colours of the noteheads the rule checker marks (the same in light and dark). */
+export const MARK_COLOR = { error: '#d1432f', warn: '#d98a1c', info: '#3b82c4' } as const;
+
+function makeNote(spec: NoteSpec, clef: Clef, stem: number | null, mark?: keyof typeof MARK_COLOR): StaveNote {
   const rest = spec.pitch === null;
   const sn = new StaveNote({
     keys: [rest ? (clef === 'treble' ? 'b/4' : 'd/3') : keyOf(spec.pitch!)],
@@ -41,10 +44,12 @@ function makeNote(spec: NoteSpec, clef: Clef, stem: number | null): StaveNote {
     stemDirection: stem ?? undefined,
   });
   if (spec.dotted) Dot.buildAndAttach([sn], { all: true });
-  sn.setStyle(STYLE);
-  sn.setStemStyle(STYLE);
-  sn.setLedgerLineStyle(STYLE);
-  sn.setFlagStyle(STYLE);
+  const style = mark ? { fillStyle: MARK_COLOR[mark], strokeStyle: MARK_COLOR[mark] } : STYLE;
+  sn.setStyle(style);
+  if (mark) sn.setKeyStyle(0, style); // the notehead has a style of its own
+  sn.setStemStyle(style);
+  sn.setLedgerLineStyle(style);
+  sn.setFlagStyle(style);
   return sn;
 }
 
@@ -93,7 +98,7 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
     // a single line (a scale or a melody): one staff, in the clef that fits its range
     const octaves = all[0].filter((e) => e.pitch).map((e) => Number(/(-?\d)$/.exec(e.pitch!)![1]));
     const mean = octaves.reduce((a, b) => a + b, 0) / Math.max(1, octaves.length);
-    rows.push({ clef: mean >= 4 ? 'treble' : 'bass', voices: [lay(bassVoice)] });
+    rows.push({ clef: mean >= 4 ? 'treble' : 'bass', first: 0, voices: [lay(bassVoice)] });
   } else if (opts.showUpper) {
     // each staff takes the clef that fits the range of its voices (a cantus on D4 sits on a treble staff)
     const meanOctave = (vs: ExampleData['realized']['voices']) => {
@@ -102,16 +107,21 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
     };
     const top = upper.slice(0, 2);
     const bottom = [...upper.slice(2), bassVoice];
-    rows.push({ clef: meanOctave(top) < 3 ? 'bass' : 'treble', voices: top.map(lay) });
-    rows.push({ clef: meanOctave(bottom) >= 4 ? 'treble' : 'bass', voices: bottom.map(lay) });
+    rows.push({ clef: meanOctave(top) < 3 ? 'bass' : 'treble', first: 0, voices: top.map(lay) });
+    rows.push({ clef: meanOctave(bottom) >= 4 ? 'treble' : 'bass', first: top.length, voices: bottom.map(lay) });
   } else {
-    rows.push({ clef: 'bass', voices: [lay(bassVoice)] });
+    rows.push({ clef: 'bass', first: all.length - 1, voices: [lay(bassVoice)] });
   }
   const hasTreble = rows.length === 2;
   const slices = slicesOf(ex);
   const figRows = Math.max(1, ...slices.map((s) => s.figures.length));
   const spec = keySpec(ex.key);
   const accidentals = Math.abs(keyAccidentals(spec));
+
+  // a note the checker marked: the mark's onset falls inside the note
+  const tpb = ticksPerBeat(ex.beatUnit);
+  const markOf = (voice: number, n: NoteSpec) =>
+    n.pitch === null ? undefined : ex.marks?.find((k) => k.voice === voice && n.start <= k.t * tpb + 1e-6 && k.t * tpb < n.start + n.ticks - 1e-6)?.level;
 
   // Build the notes of one bar. Notes must be built fresh for each use: formatting the same note objects
   // twice would apply VexFlow's collision shifts twice and leave stems detached from their heads.
@@ -124,7 +134,7 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
       const vs = r.voices.map((vm, vi) => {
         const stem = two ? (vi === 0 ? Stem.UP : Stem.DOWN) : null;
         const notes = vm[m].map((n) => {
-          const note = makeNote(n, r.clef, stem);
+          const note = makeNote(n, r.clef, stem, markOf(r.first + vi, n));
           built.push({ note, spec: n, row: ri, voice: vi });
           onsets.add(n.start);
           return note;
