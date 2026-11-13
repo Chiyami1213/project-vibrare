@@ -91,3 +91,10 @@ Your handwritten notes set the outline and the order of every pattern. Each patt
 
 ## Limits of the automatic voicings
 The realizer turns your figures into concrete octaves using nearest-note voice leading. It checks parallel 5ths and 8ves, ties, and leading-tone doubling. It does **not** judge dissonance treatment, spacing, or style. Spot-check a few examples by ear in the finished site.
+
+
+## History background (merged from the History page)
+- **Source.** Christensen (ed.), *The Cambridge History of Western Music Theory* (CUP 2002). Each chapter was read at survey level (headings, topic sentences, opening and closing paragraphs). Names, dates and treatise years were checked against the book's text.
+- **Content.** Only the overlapping technical content moved here: Thoroughbass and partimento in the history of theory. The narrative stays on the History tab.
+- **Rules.** Rules are precepts stated by the named historical writer. They are paraphrased, not quoted.
+- **Tools.** The tools are models written by the pack author, not figures from the book.

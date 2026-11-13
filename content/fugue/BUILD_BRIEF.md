@@ -75,3 +75,20 @@ Every score must support **colouring each voice consistently**, the way the owne
 - Don't change musical or textual content silently. Put questions in `CONTENT_ISSUES.md`.
 - Keep the page references visible; the owner uses them to check against the book.
 - The text is paraphrased. Don't add longer quotations from the books.
+
+
+## History background (added: merged from the History page)
+The site has a new **History** tab, built from Christensen (ed.), *The Cambridge History of Western Music Theory* (2002). Where its technical content overlaps this tab, the technique now lives **here**, in `data/history-background.json` (types at the end of `schema/types.ts`). The History tab keeps the narrative and links to this tab.
+
+**What to build**
+- **Where each topic goes.** Render each topic as a collapsible "History background" panel at its `attachTo.ref`. Show its points, then the rules and guidelines under the usual Rule and Guideline badges with the `who` line, then the terms and tools. Finish with the quiz items, using the same quiz component as the rest of the tab.
+- **Links.** Each panel ends with "Read the history →" links to `/history#<historyArticle>`, one for each id in `historyArticles`.
+- **Sources.** Source refs are to the printed book (chapter and pages).
+
+**Topics**
+  - `bg-fugue`: Imitation, double counterpoint and fugue in the history of theory. Attach to `theory-tab` (Context for the Theory tab (Mann); show on the tab intro.) · 0 rules, 0 guidelines, 1 terms, 0 quiz items.
+
+**Tools**
+  - none
+
+Do not duplicate content that this tab already has. If a background rule restates one of this tab's own rules (for example Fux's four rules of motion), show it as historical lineage ("first stated by…") rather than as a second rule. Log any conflicts in `CONTENT_ISSUES.md`.

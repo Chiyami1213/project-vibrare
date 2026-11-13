@@ -23,3 +23,19 @@ open questions each pack lists for the owner are in that pack's own `VERIFICATIO
   engraved staves, because triplet values do not fit the staff renderer's grid. The seven tools are not built, and the
   Written / Performed toggle is a set of play buttons.
 - **All score pages:** voice colouring (`VOICE_COLORS.md`) is not built.
+
+## Music History pack and the history-background panels (added with the second delivery of the packs)
+
+- **Built:** the History page (era map, ten threads, 32 articles with their people, terms, rules and quick checks), the
+  timeline, people, glossary and quiz indexes, and the "History Background" panels at their places in the five other
+  tabs (counterpoint, tonal harmony, partimento, fugue, HIP). Links run both ways; `tests/history.test.mjs` checks that
+  every reference resolves.
+- **Not built yet:** the nine tools of this delivery. On the History page `mensural` and `row-matrix`; in the panels
+  `modes` (extends the mode explorer), `gamut`, `organum`, `tuning-lab` (extends the tonal tuning lab),
+  `fundamental-bass`, `tonnetz` and `ursatz`. Their specs and tests are in each pack's `history-background.json`
+  (`content/history/data/history.json` for the first two) and the working code in each pack's `tools/history-tools.js`.
+- **`tools/validate.py` is not wired into the build** (there is no Python in the site's toolchain); the JavaScript tests
+  check the same references instead.
+- **The articles' address** is `/theory/music-history/<id>/`, not `/history#<id>` as the brief suggests; the ids are the
+  pack's, so the links from the other tabs are the same ones.
+- **The pack's intro text** (`scope`) begins "The History page." It is shown as written.

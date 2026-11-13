@@ -44,3 +44,25 @@ Each chapter renders, in this order:
 
 ## Voice colouring (owner request, all score pages)
 Every score must support **colouring each voice consistently**, the way the owner does in their handwritten notes, so that voice crossing and overlap are visible at a glance. Full spec: `VOICE_COLORS.md`, which covers the palette, voice paths, crossing markers, the per-pack voice mapping and acceptance tests. Build it into the shared Example player once, so the tonal, counterpoint, partimento and fugue pages all get it.
+
+
+## History background (added: merged from the History page)
+The site has a new **History** tab, built from Christensen (ed.), *The Cambridge History of Western Music Theory* (2002). Where its technical content overlaps this tab, the technique now lives **here**, in `data/history-background.json` (types at the end of `schema/types.ts`). The History tab keeps the narrative and links to this tab.
+
+**What to build**
+- **Where each topic goes.** Render each topic as a collapsible "History background" panel at its `attachTo.ref`. Show its points, then the rules and guidelines under the usual Rule and Guideline badges with the `who` line, then the terms and tools. Finish with the quiz items, using the same quiz component as the rest of the tab.
+- **Links.** Each panel ends with "Read the history →" links to `/history#<historyArticle>`, one for each id in `historyArticles`.
+- **Sources.** Source refs are to the printed book (chapter and pages).
+
+**Topics**
+  - `bg-modes`: The church modes, hexachords and the road to major/minor. Attach to `prelim` (Fux writes in the modes (fux.json → modes). Show this as background beside the mode list.) · 6 rules, 1 guidelines, 8 terms, 2 quiz items, tools: `modes`, `gamut`.
+  - `bg-organum`: Before species: organum, discant and contrapunctus. Attach to `p1c1` (Background to note-against-note counterpoint.) · 4 rules, 0 guidelines, 5 terms, 3 quiz items, tools: `organum`.
+  - `bg-renaissance`: Renaissance counterpoint teaching. Attach to `intro` (What Fux inherited.) · 2 rules, 1 guidelines, 4 terms, 1 quiz items.
+  - `bg-gradus`: The Gradus in history: precursors and successors. Attach to `prelim` (The four rules of motion predate Fux (Zarlino 1558).) · 5 rules, 0 guidelines, 3 terms, 2 quiz items.
+
+**Tools**
+  - `modes`: Mode explorer (8 and 12 modes). **Extend the existing `mode-explorer` tool** with this spec rather than adding a second tool. Reference: `tools/history-tools.js → modeTool()`. Tests: Mode 1: final D, ambitus D–d, tenor A; Mode 2: final D, ambitus A–a, tenor F; Mode 3: tenor C; Mode 8: final G, tenor C
+  - `gamut`: Gamut & hexachord solmizer. Reference: `tools/history-tools.js → gamutTool()`. Tests: C D E F G A → ut re mi fa sol la (natural); G A B C D E F (b♮) → mutation to natural hexachord on D or E: ut re mi fa (hard) … la in natural; F G A Bb → ut re mi fa (soft)
+  - `organum`: Organum & contrapunctus lab. Reference: `tools/history-tools.js → organumTool()`. Tests: Organum at the fourth never goes below the boundary tone; Last vertical is a unison; P5 → P5 in parallel motion is flagged in contrapunctus mode
+
+Do not duplicate content that this tab already has. If a background rule restates one of this tab's own rules (for example Fux's four rules of motion), show it as historical lineage ("first stated by…") rather than as a second rule. Log any conflicts in `CONTENT_ISSUES.md`.

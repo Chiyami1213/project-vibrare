@@ -1,0 +1,610 @@
+{
+ "version": 1,
+ "pack": "tonal",
+ "from": {
+  "source": "cht",
+  "title": "The Cambridge History of Western Music Theory",
+  "editor": "Thomas Christensen",
+  "year": 2002
+ },
+ "historyTab": "history",
+ "topics": [
+  {
+   "id": "bg-tuning",
+   "title": "Tuning, temperament and consonance in history",
+   "attachTo": {
+    "ref": "ch0",
+    "note": "Extends the tools tuning-lab, overtone-player and consonance-ladder."
+   },
+   "historyArticles": [
+    "greek",
+    "canonics",
+    "tuning",
+    "acoustics"
+   ],
+   "points": [],
+   "rules": [
+    {
+     "text": "Consonances are the ratios of the tetractys: 2:1 octave, 3:2 fifth, 4:3 fourth (plus 3:1 and 4:1).",
+     "who": "Pythagorean tradition (Division of the Canon; Nicomachus)"
+    },
+    {
+     "text": "The tone is the difference between fifth and fourth (9:8) and cannot be divided into two equal rational halves.",
+     "who": "Division of the Canon"
+    },
+    {
+     "text": "The ear, not number, judges intervals; a tetrachord spans a fourth of 2½ tones and is divided by two movable notes.",
+     "who": "Aristoxenus"
+    },
+    {
+     "text": "In the Pythagorean diatonic division every tone is 9:8 and every semitone within the tetrachord 256:243.",
+     "who": "Magadis in utraque parte (by c. 1100); Guido"
+    },
+    {
+     "text": "Pure thirds require a just division: major third 5:4, minor third 6:5.",
+     "who": "Ramis de Pareia, Musica practica (1482)"
+    },
+    {
+     "text": "In ¼-comma meantone each fifth is narrowed by ¼ of the syntonic comma so that four fifths give a pure major third.",
+     "who": "meantone practice (Aron 1523; Salinas 1577)"
+    },
+    {
+     "text": "In equal temperament each semitone is the twelfth root of 2 (100 cents).",
+     "who": "Stevin; Mersenne"
+    },
+    {
+     "text": "Dissonance is roughness produced by beats between the partials of two tones.",
+     "who": "Helmholtz (1863)"
+    },
+    {
+     "text": "Consonance is the degree to which two tones fuse into one impression.",
+     "who": "Stumpf, Tonpsychologie (1883–90)"
+    }
+   ],
+   "guidelines": [],
+   "terms": [
+    {
+     "term": "tetrachord",
+     "def": "Four notes spanning a fourth; outer notes fixed, inner two movable by genus."
+    },
+    {
+     "term": "genus (pl. genera)",
+     "def": "Enharmonic, chromatic or diatonic tuning of the tetrachord's inner notes."
+    },
+    {
+     "term": "Greater Perfect System",
+     "def": "Two-octave scale of four tetrachords plus proslambanomenos; mese is the centre."
+    },
+    {
+     "term": "tonos / harmonia",
+     "def": "Tonos: a transposition level of the system. Harmonia: an older scale-type with ethical character (Dorian, Phrygian…)."
+    },
+    {
+     "term": "limma / apotome",
+     "def": "The Pythagorean minor (256:243) and major (2187:2048) semitones."
+    },
+    {
+     "term": "canon / monochord",
+     "def": "One-string instrument with a movable bridge for measuring intervals."
+    },
+    {
+     "term": "Pythagorean tuning",
+     "def": "Tuning built from pure fifths (3:2) and octaves only."
+    },
+    {
+     "term": "just tuning",
+     "def": "Tuning with pure fifths and pure thirds (5:4, 6:5)."
+    },
+    {
+     "term": "ditone",
+     "def": "Pythagorean major third of two 9:8 tones (81:64), 22 cents sharper than 5:4."
+    },
+    {
+     "term": "syntonic comma",
+     "def": "81:80, about 21.5 cents: the difference between the Pythagorean and the just major third."
+    },
+    {
+     "term": "Pythagorean comma",
+     "def": "About 23.5 cents: twelve pure fifths minus seven octaves."
+    },
+    {
+     "term": "wolf",
+     "def": "The one badly out-of-tune fifth that collects the error of a temperament."
+    },
+    {
+     "term": "cent",
+     "def": "1/1200 of an octave (Ellis)."
+    },
+    {
+     "term": "harmonic series",
+     "def": "Partials at whole-number multiples of a fundamental frequency."
+    },
+    {
+     "term": "corps sonore",
+     "def": "Rameau's sounding body, whose partials generate the major triad."
+    },
+    {
+     "term": "tonal fusion (Verschmelzung)",
+     "def": "Stumpf's measure of how far two tones are heard as one."
+    },
+    {
+     "term": "difference tone",
+     "def": "A third sound heard at the frequency difference of two loud tones (Tartini)."
+    }
+   ],
+   "tools": [
+    "tuning-lab"
+   ],
+   "quiz": [
+    {
+     "q": "What is the Pythagorean ratio of the tone?",
+     "options": [
+      "3:2",
+      "9:8",
+      "256:243",
+      "81:80"
+     ],
+     "answer": 1,
+     "why": "The difference between the fifth (3:2) and the fourth (4:3).",
+     "id": "greek-1"
+    },
+    {
+     "q": "Why were thirds treated as imperfect or dissonant in Pythagorean tuning?",
+     "options": [
+      "They were too flat",
+      "The ditone 81:64 is wider than the pure 5:4",
+      "They were not in the gamut",
+      "Boethius forbade them"
+     ],
+     "answer": 1,
+     "why": "The ditone is about 22 cents wide.",
+     "id": "canonics-1"
+    },
+    {
+     "q": "What does ¼-comma meantone make pure?",
+     "options": [
+      "fifths",
+      "major thirds",
+      "minor sevenths",
+      "all intervals"
+     ],
+     "answer": 1,
+     "why": "Four narrowed fifths give a 5:4 third.",
+     "id": "tuning-1"
+    },
+    {
+     "q": "The difference between a Pythagorean and a just major third is the…",
+     "options": [
+      "Pythagorean comma",
+      "syntonic comma",
+      "diesis",
+      "schisma"
+     ],
+     "answer": 1,
+     "why": "81:80.",
+     "id": "tuning-2"
+    },
+    {
+     "q": "Helmholtz explained dissonance as…",
+     "options": [
+      "tonal fusion",
+      "roughness from beating partials",
+      "mathematical complexity of ratios",
+      "cultural habit"
+     ],
+     "answer": 1,
+     "why": "Die Lehre von den Tonempfindungen (1863).",
+     "id": "acoustics-1"
+    }
+   ],
+   "sourceRefs": [
+    {
+     "source": "cht",
+     "chapter": 4,
+     "pages": "109–135",
+     "author": "Thomas J. Mathiesen",
+     "historyArticle": "greek"
+    },
+    {
+     "source": "cht",
+     "chapter": 6,
+     "pages": "168–192",
+     "author": "Jan Herlinger",
+     "historyArticle": "canonics"
+    },
+    {
+     "source": "cht",
+     "chapter": 7,
+     "pages": "193–222",
+     "author": "Rudolf Rasch",
+     "historyArticle": "tuning"
+    },
+    {
+     "source": "cht",
+     "chapter": 9,
+     "pages": "246–271",
+     "author": "Burdette Green & David Butler",
+     "historyArticle": "acoustics"
+    }
+   ]
+  },
+  {
+   "id": "bg-keys",
+   "title": "From modes to keys",
+   "attachTo": {
+    "ref": "ch1",
+    "note": "Background to keys, scales and modes."
+   },
+   "historyArticles": [
+    "seventeenth"
+   ],
+   "points": [],
+   "rules": [
+    {
+     "text": "Every key has either a major or a minor third above its final; the third decides the mode.",
+     "who": "Campion (1618); Masson (1697)"
+    }
+   ],
+   "guidelines": [],
+   "terms": [],
+   "tools": [],
+   "quiz": [],
+   "sourceRefs": [
+    {
+     "source": "cht",
+     "chapter": 13,
+     "pages": "407–455",
+     "author": "Gregory Barnett",
+     "historyArticle": "seventeenth"
+    }
+   ]
+  },
+  {
+   "id": "bg-rameau",
+   "title": "Rameau: roots, inversion and the fundamental bass",
+   "attachTo": {
+    "ref": "ch7",
+    "note": "Background to chords and their inversions (ch4, ch7)."
+   },
+   "historyArticles": [
+    "rameau"
+   ],
+   "points": [],
+   "rules": [
+    {
+     "text": "Every chord has a fundamental (root); its inversions keep the same fundamental.",
+     "who": "Rameau, Traité (1722)"
+    },
+    {
+     "text": "The fundamental bass should move by consonant intervals, chiefly fifths and thirds.",
+     "who": "Rameau"
+    },
+    {
+     "text": "A dissonant seventh must resolve down by step.",
+     "who": "Rameau (after contrapuntal tradition)"
+    }
+   ],
+   "guidelines": [
+    {
+     "text": "A chord such as F–A–C–D may be heard as IV with added sixth (going to I) or as ii7 (going to V): double emploi.",
+     "who": "Rameau"
+    }
+   ],
+   "terms": [
+    {
+     "term": "basse fondamentale",
+     "def": "The succession of chord roots underlying the actual bass."
+    },
+    {
+     "term": "renversement",
+     "def": "Inversion: the same chord with another chord member in the bass."
+    },
+    {
+     "term": "sixte ajoutée",
+     "def": "Added sixth, characterizing the subdominant."
+    },
+    {
+     "term": "double emploi",
+     "def": "Double use: one chord with two possible fundamentals."
+    },
+    {
+     "term": "supposition",
+     "def": "A note \"supposed\" below the fundamental, explaining ninth and eleventh chords."
+    }
+   ],
+   "tools": [
+    "fundamental-bass"
+   ],
+   "quiz": [
+    {
+     "q": "Rameau's fundamental bass ideally moves by…",
+     "options": [
+      "steps",
+      "fifths and thirds",
+      "tritones",
+      "octaves only"
+     ],
+     "answer": 1,
+     "why": "Intervals generated by the string.",
+     "id": "rameau-1"
+    },
+    {
+     "q": "What is double emploi?",
+     "options": [
+      "two cadences in a row",
+      "one chord read with two fundamentals",
+      "parallel fifths",
+      "a doubled bass"
+     ],
+     "answer": 1,
+     "why": "IV add6 or ii7.",
+     "id": "rameau-2"
+    }
+   ],
+   "sourceRefs": [
+    {
+     "source": "cht",
+     "chapter": 24,
+     "pages": "753–777",
+     "author": "Joel Lester",
+     "historyArticle": "rameau"
+    }
+   ]
+  },
+  {
+   "id": "bg-functions",
+   "title": "Roman numerals, functions and dualism",
+   "attachTo": {
+    "ref": "ch4",
+    "note": "Where Roman numerals (Weber) and function labels (Riemann) come from."
+   },
+   "historyArticles": [
+    "harm19",
+    "dualism"
+   ],
+   "points": [],
+   "rules": [
+    {
+     "text": "Chords are named by the scale degree of their root (I–VII); upper case for major, lower case for minor.",
+     "who": "Weber (1817–21)"
+    },
+    {
+     "text": "Every root progression is ultimately by fifth or third; an apparent step implies a hidden intermediate root.",
+     "who": "Sechter (1853–54)"
+    },
+    {
+     "text": "The minor triad is the inversion of the major: generated downward from its \"root\" (the fifth in ordinary terms).",
+     "who": "Hauptmann; Oettingen; Riemann"
+    }
+   ],
+   "guidelines": [
+    {
+     "text": "Function labels need not map neatly onto dualist chord roots; critics who reject Riemann on this ground overstate the case.",
+     "who": "Klumpenhouwer"
+    }
+   ],
+   "terms": [
+    {
+     "term": "Mehrdeutigkeit",
+     "def": "Multiple meaning: a chord or pitch interpretable in several keys."
+    },
+    {
+     "term": "Stufe",
+     "def": "Scale degree; also a harmonic span governed by one degree (Schenker)."
+    },
+    {
+     "term": "Zwitterakkord",
+     "def": "\"Hybrid chord\" (Sechter/Mayrberger), mixing elements of two keys."
+    },
+    {
+     "term": "harmonic dualism",
+     "def": "The view that major and minor are generated in opposite directions and are equal in status."
+    },
+    {
+     "term": "Klang",
+     "def": "Riemann's term for a triad as a unit with a principal tone."
+    },
+    {
+     "term": "Schritt / Wechsel",
+     "def": "Riemann's chord transformations: a move that keeps the mode / one that changes it."
+    },
+    {
+     "term": "P, L, R",
+     "def": "Neo-Riemannian Parallel, Leading-tone exchange, Relative."
+    }
+   ],
+   "tools": [
+    "tonnetz"
+   ],
+   "quiz": [
+    {
+     "q": "Sechter explains stepwise root motion by…",
+     "options": [
+      "a hidden intermediate root",
+      "double emploi",
+      "mixture",
+      "parallel fifths"
+     ],
+     "answer": 0,
+     "why": "All roots move by fifths or thirds.",
+     "id": "harm19-2"
+    },
+    {
+     "q": "In Riemann's dualism the principal tone of a minor triad is…",
+     "options": [
+      "its root",
+      "its third",
+      "its top note (fifth)",
+      "its bass"
+     ],
+     "answer": 2,
+     "why": "The Unterklang hangs downward from it.",
+     "id": "dualism-1"
+    },
+    {
+     "q": "Which neo-Riemannian operation turns C major into A minor?",
+     "options": [
+      "P",
+      "L",
+      "R",
+      "S"
+     ],
+     "answer": 2,
+     "why": "Relative: keep C and E, move G to A.",
+     "id": "dualism-2"
+    }
+   ],
+   "sourceRefs": [
+    {
+     "source": "cht",
+     "chapter": 25,
+     "pages": "778–811",
+     "author": "David W. Bernstein",
+     "historyArticle": "harm19"
+    },
+    {
+     "source": "cht",
+     "chapter": 14,
+     "pages": "456–476",
+     "author": "Henry Klumpenhouwer",
+     "historyArticle": "dualism"
+    }
+   ]
+  },
+  {
+   "id": "bg-schenker",
+   "title": "Schenker: levels and the Ursatz",
+   "attachTo": {
+    "ref": "ch5",
+    "note": "Background to voice leading."
+   },
+   "historyArticles": [
+    "schenker"
+   ],
+   "points": [],
+   "rules": [
+    {
+     "text": "The fundamental line descends stepwise to ① from ③, ⑤ or ⑧; the bass arpeggiates I–V–I beneath it.",
+     "who": "Schenker, Der freie Satz (1935)"
+    },
+    {
+     "text": "A dissonant passing tone cannot itself be prolonged; only a consonance can be composed out.",
+     "who": "Schenker (paraphrase)"
+    }
+   ],
+   "guidelines": [],
+   "terms": [
+    {
+     "term": "Ursatz",
+     "def": "Fundamental structure: Urlinie plus Bassbrechung."
+    },
+    {
+     "term": "Urlinie",
+     "def": "Fundamental line descending to the tonic."
+    },
+    {
+     "term": "Bassbrechung",
+     "def": "Bass arpeggiation I–V–I."
+    },
+    {
+     "term": "Prolongation",
+     "def": "Elaboration that keeps a structural event in force across a span."
+    },
+    {
+     "term": "Unterbrechung",
+     "def": "Interruption: ③–② ‖ ③–②–①."
+    }
+   ],
+   "tools": [
+    "ursatz"
+   ],
+   "quiz": [
+    {
+     "q": "The Urlinie may begin on…",
+     "options": [
+      "②, ④ or ⑥",
+      "③, ⑤ or ⑧",
+      "any degree",
+      "only ⑤"
+     ],
+     "answer": 1,
+     "why": "Then descends to ①.",
+     "id": "schenker-1"
+    },
+    {
+     "q": "Interruption produces the pattern…",
+     "options": [
+      "③–②–① ‖ ③–②–①",
+      "③–② ‖ ③–②–①",
+      "⑤–④ ‖ ③",
+      "①–② ‖ ③"
+     ],
+     "answer": 1,
+     "why": "The first descent stops on ②.",
+     "id": "schenker-2"
+    }
+   ],
+   "sourceRefs": [
+    {
+     "source": "cht",
+     "chapter": 26,
+     "pages": "812–846",
+     "author": "William Drabkin",
+     "historyArticle": "schenker"
+    }
+   ]
+  }
+ ],
+ "tools": [
+  {
+   "id": "tuning-lab",
+   "title": "Monochord & tuning lab",
+   "spec": "Pick a system: Pythagorean (fifths E♭–G♯), just (C major, Ramis/Salinas type), ¼-comma meantone, 2/7-comma (Zarlino), ⅙-comma, Werckmeister III, equal. Show a 12-note table of cents relative to C, plus the size of every fifth and major third with its deviation from pure (colour scale; the wolf flagged). Play: scale, chosen triad, the wolf fifth. Playback detunes the harpsichord by fractional MIDI (cents/100). Second panel: Greek tetrachord genera in Aristoxenian parts (fourth = 30 parts): enharmonic 3+3+24, soft chromatic 4+4+22, hemiolic 4½+4½+21, tonic chromatic 6+6+18, soft diatonic 6+9+15, intense diatonic 6+12+12; play descending as the Greeks listed them.",
+   "tests": [
+    "¼-comma meantone: C–E = 386.3 c, every fifth 696.6 c, G♯–E♭ wolf ≈ 737.6 c",
+    "Pythagorean: C–E = 407.8 c; fifth G♯–E♭ ≈ 678.5 c",
+    "Equal: every interval a multiple of 100 c"
+   ],
+   "extends": "tuning-lab",
+   "reference": "tools/history-tools.js → tuningLab()"
+  },
+  {
+   "id": "fundamental-bass",
+   "title": "Rameau's fundamental bass",
+   "spec": "Input chords as pitch-letter groups separated by \"|\" (e.g., C E G | F A C D | G B D F | C E G). For each chord find the root by stacking thirds; for F–A–C–D show both readings (IV add6 / ii7, double emploi). Draw the actual bass and the fundamental bass on two staves; label each root move as 5th/4th (cadential), 3rd, or step (flag: Rameau/Sechter would explain with a hidden root). Play actual and fundamental bass.",
+   "tests": [
+    "C–E–G → root C; E–G–C → root C (inversion)",
+    "G–B–D–F → root G, seventh F resolves down",
+    "F–A–C–D → double emploi"
+   ],
+   "extends": null,
+   "reference": "tools/history-tools.js → fbTool()"
+  },
+  {
+   "id": "tonnetz",
+   "title": "Tonnetz & Riemann transformations",
+   "spec": "A triangular lattice of pitch classes (fifths horizontal, major thirds diagonal). Triangles are triads. Buttons P, L, R (and chains like LR, PL) move the current triad; show its name, the dualist reading (Oberklang from root / Unterklang from fifth) and the path. Play each triad.",
+   "tests": [
+    "C+ R → a−",
+    "C+ L → e−",
+    "C+ P → c−",
+    "C+ R then L → F+",
+    "Alternating P and L returns to C+ after 6 moves (hexatonic cycle)"
+   ],
+   "extends": null,
+   "reference": "tools/history-tools.js → tonnetzTool()"
+  },
+  {
+   "id": "ursatz",
+   "title": "Ursatz viewer",
+   "spec": "Choose 3-, 5- or 8-line, major/minor, and interruption on/off. Show the Ursatz in two voices: Urlinie (open noteheads with ^ degree numbers and a beam) over Bassbrechung I–V–I. Play it; then optionally play a simple middleground (e.g., ③–②–① with a neighbour or an initial ascent).",
+   "tests": [
+    "3-line in C: E–D–C over C–G–C",
+    "5-line: G–F–E–D–C, with V under ②",
+    "Interruption: E–D ‖ E–D–C"
+   ],
+   "extends": null,
+   "reference": "tools/history-tools.js → ursatzTool()"
+  }
+ ]
+}

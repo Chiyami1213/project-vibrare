@@ -96,3 +96,20 @@ Added from the Neapolitan rule books (`tools/napoli.py`). They are all `textbook
   - Examples whose `source` starts with "Durante, Partimenti diminuiti" are Durante's own diminutions, transposed. Show that attribution in full under the score.
   - **Tool suggestion:** "Plain ↔ diminished". `dim-plain` and `dim-lt-tonic` share the same bass ⑦→①. Offer a toggle that plays the plain realization, then Style 1, then Style 2.
 - The two `doubledLT` info lines on `dd1-s1` and `dd1-s2` are melodic leading tones inside Durante's own figuration, not voice-leading errors. Do not flag them in the UI.
+
+
+## History background (added: merged from the History page)
+The site has a new **History** tab, built from Christensen (ed.), *The Cambridge History of Western Music Theory* (2002). Where its technical content overlaps this tab, the technique now lives **here**, in `data/history-background.json` (types at the end of `schema/types.ts`). The History tab keeps the narrative and links to this tab.
+
+**What to build**
+- **Where each topic goes.** Render each topic as a collapsible "History background" panel at its `attachTo.ref`. Show its points, then the rules and guidelines under the usual Rule and Guideline badges with the `who` line, then the terms and tools. Finish with the quiz items, using the same quiz component as the rest of the tab.
+- **Links.** Each panel ends with "Read the history →" links to `/history#<historyArticle>`, one for each id in `historyArticles`.
+- **Sources.** Source refs are to the printed book (chapter and pages).
+
+**Topics**
+  - `bg-thoroughbass`: Thoroughbass and partimento in the history of theory. Attach to `rule-of-octave` (Context for the schemata and the rule of the octave.) · 0 rules, 0 guidelines, 6 terms, 1 quiz items.
+
+**Tools**
+  - none
+
+Do not duplicate content that this tab already has. If a background rule restates one of this tab's own rules (for example Fux's four rules of motion), show it as historical lineage ("first stated by…") rather than as a second rule. Log any conflicts in `CONTENT_ISSUES.md`.

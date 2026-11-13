@@ -1,0 +1,33 @@
+---
+import { H, MAP, eraLabel, layoutEraMap } from '../../data/history';
+
+const { rows, height } = layoutEraMap();
+const { W, ROW } = MAP;
+const ew = W / H.eras.length;
+---
+
+<div class="table-scroll era-scroll">
+  <svg viewBox={`0 0 ${W} ${height}`} class="eramap" role="group" aria-label="Map of the articles by era and thread" style={`min-width:760px`}>
+    {
+      H.eras.map((e, i) => (
+        <>
+          <rect x={i * ew} y="0" width={ew} height={height} class={i % 2 ? 'era-bg alt' : 'era-bg'} />
+          <text x={i * ew + ew / 2} y="16" class="era-l">{eraLabel(e)}</text>
+        </>
+      ))
+    }
+    {
+      rows.map((r, ti) => (
+        <>
+          <text x="4" y={r.y + 9} class="thr-l">{r.thread.title}</text>
+          {r.bars.map((b) => (
+            <a href={`/theory/music-history/${b.id}/`}>
+              <rect x={b.x1} y={r.y + 12 + b.lane * ROW} width={b.x2 - b.x1} height={ROW - 6} rx="4" class={`bar t${ti % 5}`} />
+              <text x={b.x1 + 4} y={r.y + 24 + b.lane * ROW} class="bar-l">{b.label}</text>
+            </a>
+          ))}
+        </>
+      ))
+    }
+  </svg>
+</div>

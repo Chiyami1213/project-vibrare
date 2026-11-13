@@ -1,0 +1,54 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SubNav from '../../../components/content/SubNav.astro';
+import { ARTICLES, BASE, H, PEOPLE, articleUrl } from '../../../data/history';
+import { INDEXES } from '../../../data/history/nav';
+
+const nav = [{ href: `${BASE}/`, label: 'Overview' }, ...INDEXES];
+const eraOf = (year: number) => H.eras.find((e) => year >= e.from && year < e.to)?.id ?? H.eras[H.eras.length - 1].id;
+const entries = [
+  ...H.works.map((w) => ({ id: w.id, sort: w.sort, year: w.year, title: w.title, kind: 'Work', who: w.author ? PEOPLE.get(w.author)?.name ?? '' : '', articles: w.articles })),
+  ...H.events.map((e) => ({ id: e.id, sort: e.sort, year: e.year, title: e.title, kind: 'Event', who: '', articles: e.articles })),
+].sort((a, b) => a.sort - b.sort);
+---
+
+<Layout title="Music History: Timeline" description="A timeline of treatises, editions and events in the history of Western music theory, from the Greeks to the twentieth century. Filter by era or search by title or author.">
+  <main class="page-block wide">
+    <h1>Music History</h1>
+    <SubNav items={nav} current={`${BASE}/timeline/`} label="Parts of the music history guide" />
+    <h2 class="section-title">Timeline</h2>
+    <p class="muted-line">Treatises, editions and events, in date order. Each entry links to the article that discusses it.</p>
+
+    <div class="field">
+      <label for="tl-search" class="pl-label">Search</label>
+      <input id="tl-search" type="search" class="pl-select" data-filter-input placeholder="title, author or year" autocomplete="off" />
+    </div>
+    <div class="chip-row" role="group" aria-label="Era">
+      <button type="button" class="seg-btn" data-filter-group="era" data-value="all" aria-pressed="true">All Eras</button>
+      {H.eras.map((e) => <button type="button" class="seg-btn" data-filter-group="era" data-value={e.id} aria-pressed="false">{e.title}</button>)}
+    </div>
+    <p class="muted-line" data-filter-count></p>
+
+    <ol class="timeline-list">
+      {
+        entries.map((e) => (
+          <li data-filter-item data-era={eraOf(e.sort)} data-search={`${e.year} ${e.title} ${e.who} ${e.kind}`}>
+            <span class="tl-year">{e.year}</span>
+            <span class="tl-main">
+              <b>{e.title}</b>{e.who && <> <span class="muted-line">{e.who}</span></>}
+              <span class="tl-links">
+                {e.articles.map((id) => ARTICLES.get(id) && <a href={articleUrl(id)}>{ARTICLES.get(id)!.short}</a>)}
+              </span>
+            </span>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="muted-line" data-filter-empty hidden>Nothing matches.</p>
+  </main>
+</Layout>
+
+<script>
+  import { mountFilter } from '../../../scripts/filter-list';
+  mountFilter();
+</script>

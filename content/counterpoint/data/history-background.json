@@ -1,0 +1,443 @@
+{
+ "version": 1,
+ "pack": "fux",
+ "from": {
+  "source": "cht",
+  "title": "The Cambridge History of Western Music Theory",
+  "editor": "Thomas Christensen",
+  "year": 2002
+ },
+ "historyTab": "history",
+ "topics": [
+  {
+   "id": "bg-modes",
+   "title": "The church modes, hexachords and the road to major/minor",
+   "attachTo": {
+    "ref": "prelim",
+    "note": "Fux writes in the modes (fux.json → modes). Show this as background beside the mode list."
+   },
+   "historyArticles": [
+    "earlymodes",
+    "renmodes",
+    "seventeenth"
+   ],
+   "points": [],
+   "rules": [
+    {
+     "text": "The four finals are D, E, F, G (protus, deuterus, tritus, tetrardus); each has an authentic and a plagal mode.",
+     "who": "Carolingian modal theory; Dialogus"
+    },
+    {
+     "text": "Authentic modes range about an octave above the final; plagal modes from a fourth below to a fifth above.",
+     "who": "Dialogus de musica; Guido"
+    },
+    {
+     "text": "Mi–fa is always the semitone; the syllables ut re mi fa sol la name a hexachord T–T–S–T–T.",
+     "who": "Guido, Epistola ad Michahelem"
+    },
+    {
+     "text": "The mode of a polyphonic work is judged chiefly from its tenor: final, range, species and cadences.",
+     "who": "Tinctoris (1476); Aron (1525)"
+    },
+    {
+     "text": "There are twelve modes: the eight church modes plus Aeolian and Hypoaeolian on A, Ionian and Hypoionian on C.",
+     "who": "Glarean, Dodecachordon (1547)"
+    },
+    {
+     "text": "A hexachord has the pattern ut re mi fa sol la (T–T–S–T–T) and stands on C (natural), G (hard, with b♮) or F (soft, with b♭).",
+     "who": "Guidonian tradition"
+    }
+   ],
+   "guidelines": [
+    {
+     "text": "Each mode suits certain words and affects (e.g., mode 2 tearful, mode 5 joyful).",
+     "who": "Vanneus, Recanetum (1533); widely repeated"
+    }
+   ],
+   "terms": [
+    {
+     "term": "tonus / modus / tropus",
+     "def": "Names for the eight melodic categories of chant."
+    },
+    {
+     "term": "final (finalis)",
+     "def": "The note on which a chant ends; defines the mode."
+    },
+    {
+     "term": "ambitus",
+     "def": "The range of a melody relative to its final (authentic vs plagal)."
+    },
+    {
+     "term": "tonary",
+     "def": "A list of chants arranged by mode."
+    },
+    {
+     "term": "oktoechos",
+     "def": "The Byzantine system of eight modes."
+    },
+    {
+     "term": "psalm tone",
+     "def": "Recitation formula for each mode; its reciting tone (tenor) helps identify the mode."
+    },
+    {
+     "term": "species of fifth / fourth",
+     "def": "The arrangement of tones and semitones within a fifth or fourth; together they form the octave species of a mode."
+    },
+    {
+     "term": "Ionian / Aeolian",
+     "def": "Glarean's added modes on C and A."
+    }
+   ],
+   "tools": [
+    "modes",
+    "gamut"
+   ],
+   "quiz": [
+    {
+     "q": "The finals of the four maneriae are…",
+     "options": [
+      "C D E F",
+      "D E F G",
+      "A B C D",
+      "G A B C"
+     ],
+     "answer": 1,
+     "why": "Protus D, deuterus E, tritus F, tetrardus G.",
+     "id": "earlymodes-1"
+    },
+    {
+     "q": "Cantus mollis means a piece with…",
+     "options": [
+      "no flat",
+      "one flat",
+      "two sharps",
+      "a minor third"
+     ],
+     "answer": 1,
+     "why": "The soft (b♭) system.",
+     "id": "seventeenth-1"
+    }
+   ],
+   "sourceRefs": [
+    {
+     "source": "cht",
+     "chapter": 11,
+     "pages": "307–363",
+     "author": "David E. Cohen",
+     "historyArticle": "earlymodes"
+    },
+    {
+     "source": "cht",
+     "chapter": 12,
+     "pages": "364–406",
+     "author": "Cristle Collins Judd",
+     "historyArticle": "renmodes"
+    },
+    {
+     "source": "cht",
+     "chapter": 13,
+     "pages": "407–455",
+     "author": "Gregory Barnett",
+     "historyArticle": "seventeenth"
+    }
+   ]
+  },
+  {
+   "id": "bg-organum",
+   "title": "Before species: organum, discant and contrapunctus",
+   "attachTo": {
+    "ref": "p1c1",
+    "note": "Background to note-against-note counterpoint."
+   },
+   "historyArticles": [
+    "organum"
+   ],
+   "points": [],
+   "rules": [
+    {
+     "text": "In organum at the fourth, the organal voice may not descend below the boundary tone; it holds that tone and converges to the unison at phrase ends.",
+     "who": "Musica enchiriadis (late 9th c.)"
+    },
+    {
+     "text": "Concords: perfect = unison, octave; medial = fifth, fourth; imperfect = major and minor third.",
+     "who": "Johannes de Garlandia, De mensurabili musica (c. 1250)"
+    },
+    {
+     "text": "Begin and end on a perfect consonance; never move in parallel perfect consonances of the same kind.",
+     "who": "14th-c. contrapunctus manuals"
+    },
+    {
+     "text": "An imperfect consonance must move to the nearest perfect consonance: major sixth to octave, major third to fifth, minor third to unison.",
+     "who": "14th-c. contrapunctus; Prosdocimo (1412)"
+    }
+   ],
+   "guidelines": [],
+   "terms": [
+    {
+     "term": "organum",
+     "def": "Early polyphony: a voice added to chant by rule."
+    },
+    {
+     "term": "occursus",
+     "def": "The convergence of the organal voice onto the principal voice at a cadence."
+    },
+    {
+     "term": "discantus",
+     "def": "Measured note-against-note polyphony of the 13th century."
+    },
+    {
+     "term": "contrapunctus",
+     "def": "\"Note against note\": the 14th-century system of consonant two-voice writing."
+    },
+    {
+     "term": "musica ficta",
+     "def": "Notes outside the gamut (added sharps and flats), e.g., to perfect a cadence."
+    }
+   ],
+   "tools": [
+    "organum"
+   ],
+   "quiz": [
+    {
+     "q": "In Garlandia's scheme, the fifth and fourth are…",
+     "options": [
+      "perfect concords",
+      "medial concords",
+      "imperfect concords",
+      "discords"
+     ],
+     "answer": 1,
+     "why": "Perfect = unison and octave.",
+     "id": "organum-1"
+    },
+    {
+     "q": "A major sixth in 14th-century counterpoint resolves to…",
+     "options": [
+      "a fifth",
+      "an octave",
+      "a unison",
+      "a third"
+     ],
+     "answer": 1,
+     "why": "Nearest perfect consonance.",
+     "id": "organum-2"
+    },
+    {
+     "q": "What is the occursus?",
+     "options": [
+      "a rhythmic mode",
+      "the convergence to a unison at the cadence",
+      "a kind of motet",
+      "a monochord division"
+     ],
+     "answer": 1,
+     "why": "In organum.",
+     "id": "organum-3"
+    }
+   ],
+   "sourceRefs": [
+    {
+     "source": "cht",
+     "chapter": 15,
+     "pages": "477–502",
+     "author": "Sarah Fuller",
+     "historyArticle": "organum"
+    }
+   ]
+  },
+  {
+   "id": "bg-renaissance",
+   "title": "Renaissance counterpoint teaching",
+   "attachTo": {
+    "ref": "intro",
+    "note": "What Fux inherited."
+   },
+   "historyArticles": [
+    "renpoint"
+   ],
+   "points": [],
+   "rules": [
+    {
+     "text": "All concords must be used; begin and end with perfect concords; avoid successive perfect concords of the same kind; prefer contrary motion; seek variety.",
+     "who": "Tinctoris, Liber de arte contrapuncti (1477), general rules (paraphrase)"
+    },
+    {
+     "text": "Dissonance is allowed in florid counterpoint only on unaccented parts of the beat or as a syncopation prepared and resolved down by step.",
+     "who": "Tinctoris; Zarlino (1558)"
+    }
+   ],
+   "guidelines": [
+    {
+     "text": "Learn short memorized progressions (e.g., third–fifth, sixth–octave) to improvise against a cantus firmus.",
+     "who": "15th-c. teachers (Ugolino, Tinctoris)"
+    }
+   ],
+   "terms": [
+    {
+     "term": "soggetto",
+     "def": "The given or chosen subject that the counterpoint elaborates."
+    },
+    {
+     "term": "contrapunctus simplex / diminutus",
+     "def": "Note-against-note / florid counterpoint."
+    },
+    {
+     "term": "double (invertible) counterpoint",
+     "def": "Counterpoint that still works when the voices are exchanged at a given interval."
+    },
+    {
+     "term": "cantare super librum",
+     "def": "Improvised counterpoint sung over a chant from the book."
+    }
+   ],
+   "tools": [],
+   "quiz": [
+    {
+     "q": "Contrapunctus simplex means…",
+     "options": [
+      "florid counterpoint",
+      "note-against-note consonant counterpoint",
+      "invertible counterpoint",
+      "canon"
+     ],
+     "answer": 1,
+     "why": "As opposed to diminutus.",
+     "id": "renpoint-1"
+    }
+   ],
+   "sourceRefs": [
+    {
+     "source": "cht",
+     "chapter": 16,
+     "pages": "503–533",
+     "author": "Peter Schubert",
+     "historyArticle": "renpoint"
+    }
+   ]
+  },
+  {
+   "id": "bg-gradus",
+   "title": "The Gradus in history: precursors and successors",
+   "attachTo": {
+    "ref": "prelim",
+    "note": "The four rules of motion predate Fux (Zarlino 1558)."
+   },
+   "historyArticles": [
+    "gradus"
+   ],
+   "points": [],
+   "rules": [
+    {
+     "text": "From perfect to perfect consonance: contrary or oblique motion.",
+     "who": "Fux, Gradus (1725)"
+    },
+    {
+     "text": "From perfect to imperfect consonance: any motion.",
+     "who": "Fux"
+    },
+    {
+     "text": "From imperfect to perfect consonance: contrary or oblique motion.",
+     "who": "Fux"
+    },
+    {
+     "text": "From imperfect to imperfect consonance: any motion.",
+     "who": "Fux"
+    },
+    {
+     "text": "Two perfect consonances of the same kind in succession are forbidden.",
+     "who": "Zarlino (1558), restated by Fux"
+    }
+   ],
+   "guidelines": [],
+   "terms": [
+    {
+     "term": "species counterpoint",
+     "def": "Graded exercises against a cantus firmus: five species of rhythmic relation."
+    },
+    {
+     "term": "cantus firmus",
+     "def": "The given chant-like line in whole notes."
+    },
+    {
+     "term": "ligature (4th species)",
+     "def": "Syncopation producing suspensions."
+    }
+   ],
+   "tools": [],
+   "quiz": [
+    {
+     "q": "Moving from an imperfect to a perfect consonance, Fux allows…",
+     "options": [
+      "any motion",
+      "contrary or oblique motion",
+      "only parallel motion",
+      "only oblique motion"
+     ],
+     "answer": 1,
+     "why": "Rule 3.",
+     "id": "gradus-1"
+    },
+    {
+     "q": "Fux's fourth species is…",
+     "options": [
+      "four notes against one",
+      "syncopation (ligatures)",
+      "florid",
+      "note against note"
+     ],
+     "answer": 1,
+     "why": "Ligatures produce suspensions.",
+     "id": "gradus-2"
+    }
+   ],
+   "sourceRefs": [
+    {
+     "source": "cht",
+     "chapter": 18,
+     "pages": "554–602",
+     "author": "Ian Bent",
+     "historyArticle": "gradus"
+    }
+   ]
+  }
+ ],
+ "tools": [
+  {
+   "id": "modes",
+   "title": "Mode explorer (8 and 12 modes)",
+   "spec": "Choose a mode (1–8, or Glarean 9–12). Show final, ambitus, reciting tone (tenor of the psalm tone), species of fifth + fourth, Greek name (Alia musica tradition) and Zarlino's 1571 renumbering. Draw the octave with final and tenor marked; play the scale and a short typical cadence.",
+   "tests": [
+    "Mode 1: final D, ambitus D–d, tenor A",
+    "Mode 2: final D, ambitus A–a, tenor F",
+    "Mode 3: tenor C",
+    "Mode 8: final G, tenor C"
+   ],
+   "extends": "mode-explorer",
+   "reference": "tools/history-tools.js → modeTool()"
+  },
+  {
+   "id": "gamut",
+   "title": "Gamut & hexachord solmizer",
+   "spec": "Draw the Guidonian gamut Γ-ut to e-la (G2–E5) with all syllables per step. Input a melody of letter names (with b for b♭). Output syllables with mutations marked: stay in the current hexachord when possible; mutate at the latest common note before leaving its range; b♭ forces the soft (F) hexachord, b♮ the hard (G). Show cantus durus/mollis. Play the melody.",
+   "tests": [
+    "C D E F G A → ut re mi fa sol la (natural)",
+    "G A B C D E F (b♮) → mutation to natural hexachord on D or E: ut re mi fa (hard) … la in natural",
+    "F G A Bb → ut re mi fa (soft)"
+   ],
+   "extends": null,
+   "reference": "tools/history-tools.js → gamutTool()"
+  },
+  {
+   "id": "organum",
+   "title": "Organum & contrapunctus lab",
+   "spec": "Input a chant (letters). Modes: parallel organum at the octave / fifth / composite (four voices); organum at the fourth with boundary tone (organal voice may not go below the tritus C below; holds it; converges to the unison at the end — occursus). Under every vertical interval show Garlandia's class (perfect / medial / imperfect concord or discord). A \"contrapunctus check\" flags parallel perfect consonances and imperfect→perfect moves that do not go to the nearest perfect consonance.",
+   "tests": [
+    "Organum at the fourth never goes below the boundary tone",
+    "Last vertical is a unison",
+    "P5 → P5 in parallel motion is flagged in contrapunctus mode"
+   ],
+   "extends": null,
+   "reference": "tools/history-tools.js → organumTool()"
+  }
+ ]
+}

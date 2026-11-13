@@ -23,3 +23,7 @@ Built from your handwritten notes, cross-checked against IJzerman (HCP), Fenarol
 
 ## Already built the partimento pages? Add the new groups only
 > Read §9 of `BUILD_BRIEF.md` in this content folder. The schemata data now has two new groups, `suspensions` and `diminution`, plus two new Rule of the Octave patterns. Render them with the existing components, add the "textbook" tag, and build the tool suggestions in §9 if they fit our UI. The realizer's mini-notation also gained `<`/`>` on upper voices (§4). Don't change musical content. Show me a plan first.
+
+
+## Already built this tab? Add the History background only
+> Read the "History background" section at the end of `BUILD_BRIEF.md` and the `HistoryBackgroundFile` types at the end of `schema/types.ts`, then `data/history-background.json`. Add the History background panels at each topic's `attachTo.ref` in the Partimento tab, with "Read the history →" links to the History tab. Don't change existing content; log conflicts in `CONTENT_ISSUES.md`. Show me a plan first.

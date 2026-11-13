@@ -52,3 +52,10 @@ These are shown side by side rather than resolved:
 2. **Modern or baroque flute?** Quantz's trill fingerings (Tab. VII) are for the one-keyed flute and were not transcribed. Do you want a baroque-flute fingering table? If you play a modern Boehm flute, the topic already says to use modern trill fingerings.
 3. **C. P. E. Bach on the turn, mordent and fermata.** These chapters were not read in detail, so the `small-graces` topic is marked *partly*. Should I add them?
 4. **Piano as a sound option.** Playback is harpsichord by default, as you asked. Is an optional piano sound for the dynamics demos acceptable?
+
+
+## History background (merged from the History page)
+- **Source.** Christensen (ed.), *The Cambridge History of Western Music Theory* (CUP 2002). Each chapter was read at survey level (headings, topic sentences, opening and closing paragraphs). Names, dates and treatise years were checked against the book's text.
+- **Content.** Only the overlapping technical content moved here: Performance, meter and rhetoric in the history of theory. The narrative stays on the History tab.
+- **Rules.** Rules are precepts stated by the named historical writer. They are paraphrased, not quoted.
+- **Tools.** The tools are models written by the pack author, not figures from the book.

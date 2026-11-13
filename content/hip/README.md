@@ -28,3 +28,7 @@ L. Mozart's violin *Treatise* is used only for cross-checking, and to map bowing
 - `VOICE_COLORS.md`: the shared voice-colouring spec, with a new HIP row.
 - `tools/build_hip.py`: the content source. Run `python3 tools/build_hip.py` to regenerate the data and rerun the checks.
 - `tools/notes/`: reading notes with page references.
+
+
+## Already built this tab? Add the History background only
+> Read the "History background" section at the end of `BUILD_BRIEF.md` and the `HistoryBackgroundFile` types at the end of `schema/types.ts`, then `data/history-background.json`. Add the History background panels at each topic's `attachTo.ref` in the HIP tab, with "Read the history →" links to the History tab. Don't change existing content; log conflicts in `CONTENT_ISSUES.md`. Show me a plan first.

@@ -1,0 +1,29 @@
+---
+import { safeHtml } from '../../scripts/content';
+
+interface Props {
+  items: { id: string; q: string; options: string[]; answer: number; why: string }[];
+}
+const { items } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <div class="quiz">
+      {items.map((it, n) => (
+        <div class="quiz-item" data-answer={it.answer}>
+          <p class="quiz-q"><b>{n + 1}.</b> <Fragment set:html={safeHtml(it.q)} /></p>
+          <div class="quiz-options" role="group" aria-label={`Question ${n + 1}`}>
+            {it.options.map((o, i) => <button type="button" class="seg-btn" data-i={i}><Fragment set:html={safeHtml(o)} /></button>)}
+          </div>
+          <p class="quiz-why muted-line" hidden><Fragment set:html={safeHtml(it.why)} /></p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+<script>
+  import { mountQuiz } from '../../scripts/quiz';
+  mountQuiz();
+</script>

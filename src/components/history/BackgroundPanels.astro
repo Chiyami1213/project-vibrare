@@ -1,0 +1,50 @@
+---
+// "History background": the technique that came from the History tab, as collapsible panels at the place in this tab
+// where it belongs. Each ends with links back to the narrative.
+import Rules from '../content/Rules.astro';
+import Terms from '../content/Terms.astro';
+import Quiz from './Quiz.astro';
+import { articleUrl, ARTICLES, panelsAt } from '../../data/history';
+import type { TabId } from '../../data/history';
+import { safeHtml } from '../../scripts/content';
+import { titleCase } from '../../scripts/title-case';
+
+interface Props {
+  tab: TabId;
+  at: string;
+}
+const { tab, at } = Astro.props;
+const topics = panelsAt(tab, at);
+const withWho = (xs: { text: string; who: string }[]) => xs.map((x) => ({ html: `${x.text} <i>(${x.who.replace(/[<>]/g, '')})</i>` }));
+---
+
+{
+  topics.map((t) => (
+    <details class="bg-panel" id={t.id}>
+      <summary><span class="bg-tag">History Background</span> {titleCase(t.title)}</summary>
+      <div class="bg-body">
+        {t.attachTo.note && <p class="muted-line">{t.attachTo.note}</p>}
+        {t.points.length > 0 && <ul class="bg-points">{t.points.map((p) => <li><Fragment set:html={safeHtml(p)} /></li>)}</ul>}
+        <Rules rules={withWho(t.rules)} guidelines={withWho(t.guidelines)} columns />
+        <Terms terms={t.terms} />
+        <Quiz items={t.quiz} />
+        <p class="bg-links">
+          {t.historyArticles.map((id) => ARTICLES.get(id) && <a href={articleUrl(id)}>Read the history: {ARTICLES.get(id)!.short} →</a>)}
+        </p>
+      </div>
+    </details>
+  ))
+}
+
+<script>
+  // a link to #bg-… opens the panel it points at
+  const open = () => {
+    const el = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+    if (el instanceof HTMLDetailsElement) {
+      el.open = true;
+      el.scrollIntoView();
+    }
+  };
+  open();
+  window.addEventListener('hashchange', open);
+</script>

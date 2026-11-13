@@ -1,0 +1,50 @@
+{
+ "version": 1,
+ "pack": "fugue",
+ "from": {
+  "source": "cht",
+  "title": "The Cambridge History of Western Music Theory",
+  "editor": "Thomas Christensen",
+  "year": 2002
+ },
+ "historyTab": "history",
+ "topics": [
+  {
+   "id": "bg-fugue",
+   "title": "Imitation, double counterpoint and fugue in the history of theory",
+   "attachTo": {
+    "ref": "theory-tab",
+    "note": "Context for the Theory tab (Mann); show on the tab intro."
+   },
+   "historyArticles": [
+    "renpoint"
+   ],
+   "points": [
+    "16th-century teachers moved from note-against-note formulas to motives and imitation (contrapunto fugato); Lusitano (1553) taught improvised canon.",
+    "Double counterpoint at the octave, tenth and twelfth was codified by Zarlino (1558) and Chiodino (1610).",
+    "Fux's Gradus (1725) continues past the species to imitation, fugue and double counterpoint, all in the modes. Martini (1774–75) and Albrechtsberger (1790) carried the tradition on.",
+    "Halm (1913) contrasted fugue and sonata as \"two cultures\"; Kurth (1917) heard Bach's lines as kinetic energy."
+   ],
+   "rules": [],
+   "guidelines": [],
+   "terms": [
+    {
+     "term": "double (invertible) counterpoint",
+     "def": "Counterpoint that still works when the voices are exchanged at a given interval."
+    }
+   ],
+   "tools": [],
+   "quiz": [],
+   "sourceRefs": [
+    {
+     "source": "cht",
+     "chapter": 16,
+     "pages": "503–533",
+     "author": "Peter Schubert",
+     "historyArticle": "renpoint"
+    }
+   ]
+  }
+ ],
+ "tools": []
+}

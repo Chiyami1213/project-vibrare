@@ -150,3 +150,27 @@ The TypeScript port must reproduce the build's results: zero issues for every `m
 
 ## Voice colouring (owner request, all score pages)
 Every score must support **colouring each voice consistently**, the way the owner does in their handwritten notes, so that voice crossing and overlap are visible at a glance. Full spec: `VOICE_COLORS.md`, which covers the palette, voice paths, crossing markers, the per-pack voice mapping and acceptance tests. Build it into the shared Example player once, so the tonal, counterpoint, partimento and fugue pages all get it.
+
+
+## History background (added: merged from the History page)
+The site has a new **History** tab, built from Christensen (ed.), *The Cambridge History of Western Music Theory* (2002). Where its technical content overlaps this tab, the technique now lives **here**, in `data/history-background.json` (types at the end of `schema/types.ts`). The History tab keeps the narrative and links to this tab.
+
+**What to build**
+- **Where each topic goes.** Render each topic as a collapsible "History background" panel at its `attachTo.ref`. Show its points, then the rules and guidelines under the usual Rule and Guideline badges with the `who` line, then the terms and tools. Finish with the quiz items, using the same quiz component as the rest of the tab.
+- **Links.** Each panel ends with "Read the history →" links to `/history#<historyArticle>`, one for each id in `historyArticles`.
+- **Sources.** Source refs are to the printed book (chapter and pages).
+
+**Topics**
+  - `bg-tuning`: Tuning, temperament and consonance in history. Attach to `ch0` (Extends the tools tuning-lab, overtone-player and consonance-ladder.) · 9 rules, 0 guidelines, 17 terms, 5 quiz items, tools: `tuning-lab`.
+  - `bg-keys`: From modes to keys. Attach to `ch1` (Background to keys, scales and modes.) · 1 rules, 0 guidelines, 0 terms, 0 quiz items.
+  - `bg-rameau`: Rameau: roots, inversion and the fundamental bass. Attach to `ch7` (Background to chords and their inversions (ch4, ch7).) · 3 rules, 1 guidelines, 5 terms, 2 quiz items, tools: `fundamental-bass`.
+  - `bg-functions`: Roman numerals, functions and dualism. Attach to `ch4` (Where Roman numerals (Weber) and function labels (Riemann) come from.) · 3 rules, 1 guidelines, 7 terms, 3 quiz items, tools: `tonnetz`.
+  - `bg-schenker`: Schenker: levels and the Ursatz. Attach to `ch5` (Background to voice leading.) · 2 rules, 0 guidelines, 5 terms, 2 quiz items, tools: `ursatz`.
+
+**Tools**
+  - `tuning-lab`: Monochord & tuning lab. **Extend the existing `tuning-lab` tool** with this spec rather than adding a second tool. Reference: `tools/history-tools.js → tuningLab()`. Tests: ¼-comma meantone: C–E = 386.3 c, every fifth 696.6 c, G♯–E♭ wolf ≈ 737.6 c; Pythagorean: C–E = 407.8 c; fifth G♯–E♭ ≈ 678.5 c; Equal: every interval a multiple of 100 c
+  - `fundamental-bass`: Rameau's fundamental bass. Reference: `tools/history-tools.js → fbTool()`. Tests: C–E–G → root C; E–G–C → root C (inversion); G–B–D–F → root G, seventh F resolves down; F–A–C–D → double emploi
+  - `tonnetz`: Tonnetz & Riemann transformations. Reference: `tools/history-tools.js → tonnetzTool()`. Tests: C+ R → a−; C+ L → e−; C+ P → c−; C+ R then L → F+; Alternating P and L returns to C+ after 6 moves (hexatonic cycle)
+  - `ursatz`: Ursatz viewer. Reference: `tools/history-tools.js → ursatzTool()`. Tests: 3-line in C: E–D–C over C–G–C; 5-line: G–F–E–D–C, with V under ②; Interruption: E–D ‖ E–D–C
+
+Do not duplicate content that this tab already has. If a background rule restates one of this tab's own rules (for example Fux's four rules of motion), show it as historical lineage ("first stated by…") rather than as a second rule. Log any conflicts in `CONTENT_ISSUES.md`.

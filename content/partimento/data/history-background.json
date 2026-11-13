@@ -1,0 +1,92 @@
+{
+ "version": 1,
+ "pack": "partimento",
+ "from": {
+  "source": "cht",
+  "title": "The Cambridge History of Western Music Theory",
+  "editor": "Thomas Christensen",
+  "year": 2002
+ },
+ "historyTab": "history",
+ "topics": [
+  {
+   "id": "bg-thoroughbass",
+   "title": "Thoroughbass and partimento in the history of theory",
+   "attachTo": {
+    "ref": "rule-of-octave",
+    "note": "Context for the schemata and the rule of the octave."
+   },
+   "historyArticles": [
+    "performance",
+    "practica"
+   ],
+   "points": [
+    "Thoroughbass appears in print with Viadana (1602). Agazzari (1607) divides continuo instruments into those of foundation and those of ornament.",
+    "Partimento and \"preluding\" join bass-based improvisation to composition, above all in Naples.",
+    "Heinichen (1728) turns thoroughbass into a complete composition course, teaching styles through the figured bass.",
+    "Before Rameau, harmony was taught as patterns over the bass: Campion's rule (1618) and the rule of the octave.",
+    "Around 1800 three national traditions blend: French fundamental bass, Italian species counterpoint and partimento, and German thoroughbass."
+   ],
+   "rules": [],
+   "guidelines": [],
+   "terms": [
+    {
+     "term": "thoroughbass",
+     "def": "Accompaniment improvised over a figured bass."
+    },
+    {
+     "term": "divisions / diminutions",
+     "def": "Ornamental elaboration of a simple line into faster notes."
+    },
+    {
+     "term": "partimento",
+     "def": "A bass (often unfigured) used to teach improvisation and composition, especially in Naples."
+    },
+    {
+     "term": "thoroughbass (Generalbass)",
+     "def": "Improvised accompaniment from a bass line with figures; in Germany the core of composition teaching."
+    },
+    {
+     "term": "fundamental bass",
+     "def": "Rameau's bass of chord roots, the French analytical tradition."
+    },
+    {
+     "term": "Kompositionslehre",
+     "def": "A comprehensive \"doctrine of composition\" (Marx), including forms."
+    }
+   ],
+   "tools": [],
+   "quiz": [
+    {
+     "q": "Agazzari (1607) divided continuo instruments into…",
+     "options": [
+      "strings and winds",
+      "foundation and ornament",
+      "loud and soft",
+      "solo and tutti"
+     ],
+     "answer": 1,
+     "why": "Del sonare sopra'l basso.",
+     "id": "performance-1"
+    }
+   ],
+   "sourceRefs": [
+    {
+     "source": "cht",
+     "chapter": 17,
+     "pages": "534–553",
+     "author": "Albert Cohen",
+     "historyArticle": "performance"
+    },
+    {
+     "source": "cht",
+     "chapter": 2,
+     "pages": "46–77",
+     "author": "Robert W. Wason",
+     "historyArticle": "practica"
+    }
+   ]
+  }
+ ],
+ "tools": []
+}

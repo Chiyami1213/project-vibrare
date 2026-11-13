@@ -1,0 +1,48 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SubNav from '../../../components/content/SubNav.astro';
+import EraMap from '../../../components/history/EraMap.astro';
+import { ARTICLES, BASE, H, articleUrl, spanLabel } from '../../../data/history';
+import { INDEXES } from '../../../data/history/nav';
+import { safeHtml } from '../../../scripts/content';
+import { titleCase } from '../../../scripts/title-case';
+
+const nav = [{ href: `${BASE}/`, label: 'Overview' }, ...INDEXES];
+const src = H.sources[0];
+---
+
+<Layout title="Music History" description="A history of Western music theory in 32 articles, from the Greeks to the twentieth century, with a map by era, a timeline, people, a glossary and a quiz. After Christensen, The Cambridge History of Western Music Theory.">
+  <main class="page-block wide">
+    <h1>Music History</h1>
+    <SubNav items={nav} current={`${BASE}/`} label="Parts of the music history guide" />
+    <p class="lead"><Fragment set:html={safeHtml(H.scope)} /></p>
+    <p class="muted-line">
+      First source: {src.editor ?? src.author} (ed.), <i>{src.title}</i> ({src.publisher}, {src.year}). {H.articles.length} articles in {H.threads.length} threads
+      across {H.eras.length} eras. Technique that belongs to another tab lives there and is linked from the articles.
+    </p>
+
+    <h2 class="section-title">Map of the Articles</h2>
+    <p class="muted-line">Each bar is an article, placed under the eras it covers (every era has the same width) and grouped by thread. Select a bar to open the article.</p>
+    <EraMap />
+
+    {
+      H.threads.map((t) => (
+        <section id={t.id} class="chapter">
+          <h2 class="section-title">{titleCase(t.title)}</h2>
+          <p class="muted-line">{t.blurb}</p>
+          <ul class="pat-grid">
+            {H.articles.filter((a) => a.thread === t.id).map((a) => (
+              <li class="pat-tile">
+                <a href={articleUrl(a.id)}>
+                  <span class="pat-name">{titleCase(a.short)}</span>
+                  <span class="pat-aka">{spanLabel(a.span)}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+    <p class="muted-line table-note">{ARTICLES.size} articles. Summaries are paraphrased from a survey reading of the book (chapter headings, topic sentences and the opening and closing paragraphs), not a full reading.</p>
+  </main>
+</Layout>

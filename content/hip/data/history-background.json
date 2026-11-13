@@ -1,0 +1,107 @@
+{
+ "version": 1,
+ "pack": "hip",
+ "from": {
+  "source": "cht",
+  "title": "The Cambridge History of Western Music Theory",
+  "editor": "Thomas Christensen",
+  "year": 2002
+ },
+ "historyTab": "history",
+ "topics": [
+  {
+   "id": "bg-performance",
+   "title": "Performance, meter and rhetoric in the history of theory",
+   "attachTo": {
+    "ref": "foundations",
+    "note": "Background to the Foundations and Rhythm groups."
+   },
+   "historyArticles": [
+    "rhythm1819",
+    "rhetoric"
+   ],
+   "points": [
+    "Improvised counterpoint and divisions were already described in the 16th century (Lusitano 1553, Vicentino 1555, Zarlino 1558; Ortiz 1553).",
+    "Mersenne (1636–37) recorded what Parisian performers actually did.",
+    "The 18th-century treatises of Couperin, Quantz, C. P. E. Bach and L. Mozart made performance itself a subject of theory."
+   ],
+   "rules": [
+    {
+     "text": "In common time the first and third beats are good (accented), the second and fourth bad; dissonance belongs on good parts only when prepared.",
+     "who": "18th-c. German theory (Walther; Kirnberger)"
+    }
+   ],
+   "guidelines": [
+    {
+     "text": "Phrases are measured in bars like lines of verse; four-bar units are the norm, which may be extended or compressed.",
+     "who": "Koch, Versuch (1782–93)"
+    },
+    {
+     "text": "Motives are upbeat-oriented: the weak beat leads into the strong one.",
+     "who": "Riemann (1884, 1903)"
+    },
+    {
+     "text": "Arrange a piece like an oration: exordium, narratio, propositio, confirmatio, confutatio, peroratio.",
+     "who": "Mattheson, Der vollkommene Capellmeister (1739)"
+    },
+    {
+     "text": "Musical figures depart from simple composition for expressive purposes, as rhetorical figures depart from plain speech.",
+     "who": "Burmeister, Musica poetica (1606)"
+    }
+   ],
+   "terms": [
+    {
+     "term": "Klangfuß (sound-foot)",
+     "def": "Mattheson's musical analogue of a poetic foot."
+    },
+    {
+     "term": "Einschnitt / Absatz / Periode",
+     "def": "Koch's phrase units, from smallest to largest."
+    },
+    {
+     "term": "Auftaktigkeit",
+     "def": "Riemann's principle that motives begin with an upbeat."
+    },
+    {
+     "term": "agogics",
+     "def": "Expressive timing (Riemann)."
+    },
+    {
+     "term": "musica poetica",
+     "def": "Composition as the making of a finished work (Listenius 1537)."
+    },
+    {
+     "term": "Figurenlehre",
+     "def": "Doctrine of musical-rhetorical figures."
+    },
+    {
+     "term": "inventio / dispositio / elocutio",
+     "def": "Finding ideas / arranging them / decorating them (with figures)."
+    },
+    {
+     "term": "Affektenlehre",
+     "def": "Doctrine of the affections that music arouses."
+    }
+   ],
+   "tools": [],
+   "quiz": [],
+   "sourceRefs": [
+    {
+     "source": "cht",
+     "chapter": 21,
+     "pages": "657–694",
+     "author": "William E. Caplin",
+     "historyArticle": "rhythm1819"
+    },
+    {
+     "source": "cht",
+     "chapter": 27,
+     "pages": "847–879",
+     "author": "Patrick McCreless",
+     "historyArticle": "rhetoric"
+    }
+   ]
+  }
+ ],
+ "tools": []
+}

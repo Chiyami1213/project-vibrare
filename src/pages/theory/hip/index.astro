@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import HipTopic from '../../../components/hip/HipTopic.astro';
+import BackgroundPanels from '../../../components/history/BackgroundPanels.astro';
 import { HIP, playable } from '../../../data/hip';
 import { safeHtml } from '../../../scripts/content';
 import { titleCase } from '../../../scripts/title-case';
@@ -40,6 +41,7 @@ const guides = HIP.topics.reduce((n, t) => n + t.guidelines.length, 0);
             <h2>{titleCase(g.title)}</h2>
             <p class="muted-line"><Fragment set:html={safeHtml(g.blurb)} /></p>
           </header>
+          <BackgroundPanels tab="hip" at={g.id} />
           {HIP.topics.filter((t) => t.group === g.id).map((t) => <HipTopic topic={t} />)}
         </section>
       ))

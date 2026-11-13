@@ -13,3 +13,7 @@ Theory is built from Alfred Mann's *The Study of Fugue*. Analysis is compiled fr
 - `VERIFICATION.md`: what was read and checked, plus questions for you.
 - `VOICE_COLORS.md`: the shared voice-colouring spec.
 - `tools/`: the guide source and the scripts that regenerate `data/`.
+
+
+## Already built this tab? Add the History background only
+> Read the "History background" section at the end of `BUILD_BRIEF.md` and the `HistoryBackgroundFile` types at the end of `schema/types.ts`, then `data/history-background.json`. Add the History background panels at each topic's `attachTo.ref` in the Fugue tab, with "Read the history →" links to the History tab. Don't change existing content; log conflicts in `CONTENT_ISSUES.md`. Show me a plan first.

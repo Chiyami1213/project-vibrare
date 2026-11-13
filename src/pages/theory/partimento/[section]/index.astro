@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../../layouts/Layout.astro';
 import PatternOverview from '../../../../components/partimento/PatternOverview.astro';
+import BackgroundPanels from '../../../../components/history/BackgroundPanels.astro';
 import { SECTIONS, groupsOf, patternsOf } from '../../../../data/partimento';
 
 export function getStaticPaths() {
@@ -16,5 +17,6 @@ const count = patternsOf(section).length;
     <h1>{section.title}</h1>
     <p class="lead">{section.lead} {count} {count === 1 ? 'pattern' : 'patterns'}.</p>
     <PatternOverview groups={groupsOf(section)} />
+    {section.slug === 'rule-of-the-octave' && <BackgroundPanels tab="partimento" at="rule-of-octave" />}
   </main>
 </Layout>

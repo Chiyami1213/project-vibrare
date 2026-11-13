@@ -1,0 +1,42 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SubNav from '../../../components/content/SubNav.astro';
+import { ARTICLES, BASE, H, articleUrl } from '../../../data/history';
+import { INDEXES } from '../../../data/history/nav';
+import { safeHtml } from '../../../scripts/content';
+
+const nav = [{ href: `${BASE}/`, label: 'Overview' }, ...INDEXES];
+const people = [...H.people].sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<Layout title="Music History: People" description="125 theorists, composers and writers in the history of Western music theory, with their dates, their ideas and the articles that discuss them.">
+  <main class="page-block wide">
+    <h1>Music History</h1>
+    <SubNav items={nav} current={`${BASE}/people/`} label="Parts of the music history guide" />
+    <h2 class="section-title">People</h2>
+    <p class="muted-line">{people.length} people, in alphabetical order, with the articles that discuss them.</p>
+    <div class="field">
+      <label for="pp-search" class="pl-label">Search</label>
+      <input id="pp-search" type="search" class="pl-select" data-filter-input placeholder="name, date or idea" autocomplete="off" />
+    </div>
+    <p class="muted-line" data-filter-count></p>
+
+    <ul class="people-list">
+      {
+        people.map((p) => (
+          <li data-filter-item data-search={`${p.name} ${p.dates} ${p.ideas.join(' ')}`}>
+            <h3 class="mini-title">{p.name} <span class="muted-line">{p.dates}</span></h3>
+            <ul>{p.ideas.map((i) => <li><Fragment set:html={safeHtml(i)} /></li>)}</ul>
+            <p class="tl-links">{p.articles.map((id) => ARTICLES.get(id) && <a href={articleUrl(id)}>{ARTICLES.get(id)!.short}</a>)}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="muted-line" data-filter-empty hidden>Nobody matches.</p>
+  </main>
+</Layout>
+
+<script>
+  import { mountFilter } from '../../../scripts/filter-list';
+  mountFilter();
+</script>

@@ -2,6 +2,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import SubNav from '../../../components/content/SubNav.astro';
 import TonalTopic from '../../../components/tonal/TonalTopic.astro';
+import BackgroundPanels from '../../../components/history/BackgroundPanels.astro';
 import { BASE, PARTS, PLAYLIST, exampleData, lessonByNum } from '../../../data/tonal-harmony';
 import { titleCase } from '../../../scripts/title-case';
 
@@ -47,6 +48,7 @@ const examples = Object.fromEntries(part.file.topics.flatMap((t) => (t.examples 
             }
           </header>
           {part.file.topics.filter((t) => t.chapter === c.id).map((t) => <TonalTopic topic={t} />)}
+          <BackgroundPanels tab="tonal" at={c.id} />
         </section>
       ))
     }

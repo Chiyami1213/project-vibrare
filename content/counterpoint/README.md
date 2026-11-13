@@ -16,3 +16,7 @@ The Fux *Gradus ad Parnassum* study guide, converted into website content: chapt
 
 ## Already built these pages? Add voice colouring only
 > Read `VOICE_COLORS.md` in this content folder. Add the voice-colouring option it describes to our shared Example player, so it works on every score page (harmony, counterpoint, partimento, fugue). That means the `Plain | Voices | …` control, a fixed colour per voice, voice-path lines, crossing/overlap markers, a legend and the tests in §6. Don't change musical content. Show me a plan first.
+
+
+## Already built this tab? Add the History background only
+> Read the "History background" section at the end of `BUILD_BRIEF.md` and the `HistoryBackgroundFile` types at the end of `schema/types.ts`, then `data/history-background.json`. Add the History background panels at each topic's `attachTo.ref` in the Counterpoint (Fux) tab, with "Read the history →" links to the History tab. Port or extend the tools listed there from `tools/history-tools.js` and make them pass their tests. Don't change existing content; log conflicts in `CONTENT_ISSUES.md`. Show me a plan first.

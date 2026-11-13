@@ -1,0 +1,45 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SubNav from '../../../components/content/SubNav.astro';
+import { ARTICLES, BASE, H, TAB_NAMES, articleUrl, topicUrl } from '../../../data/history';
+import { INDEXES } from '../../../data/history/nav';
+import { safeHtml } from '../../../scripts/content';
+
+const nav = [{ href: `${BASE}/`, label: 'Overview' }, ...INDEXES];
+const terms = [...H.terms].sort((a, b) => a.term.localeCompare(b.term, 'en', { sensitivity: 'base' }));
+---
+
+<Layout title="Music History: Glossary" description="119 terms from the history of Western music theory, from ‘aeolian’ to ‘Ursatz’, with a link to the tab where each one is taught.">
+  <main class="page-block wide">
+    <h1>Music History</h1>
+    <SubNav items={nav} current={`${BASE}/glossary/`} label="Parts of the music history guide" />
+    <h2 class="section-title">Glossary</h2>
+    <p class="muted-line">{terms.length} terms. A green chip names the tab where the term is taught.</p>
+    <div class="field">
+      <label for="gl-search" class="pl-label">Search</label>
+      <input id="gl-search" type="search" class="pl-select" data-filter-input placeholder="term or meaning" autocomplete="off" />
+    </div>
+    <p class="muted-line" data-filter-count></p>
+
+    <dl class="def-list glossary-list">
+      {
+        terms.map((t) => (
+          <div class="gl-item" data-filter-item data-search={`${t.term} ${t.def}`}>
+            <dt>{t.term}</dt>
+            <dd>
+              <Fragment set:html={safeHtml(t.def)} />
+              {t.taughtIn.map((x) => <a class="tab-chip" href={topicUrl(x.tab, x.topic)} title={`taught in ${TAB_NAMES[x.tab].toLowerCase()}`}>{TAB_NAMES[x.tab]}</a>)}
+              <span class="tl-links">{t.articles.map((id) => ARTICLES.get(id) && <a href={articleUrl(id)}>{ARTICLES.get(id)!.short}</a>)}</span>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+    <p class="muted-line" data-filter-empty hidden>No term matches.</p>
+  </main>
+</Layout>
+
+<script>
+  import { mountFilter } from '../../../scripts/filter-list';
+  mountFilter();
+</script>

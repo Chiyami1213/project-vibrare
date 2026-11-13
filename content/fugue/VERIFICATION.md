@@ -29,3 +29,10 @@
   - Marpurg's five elements now appear in the checks on `elements`;
   - new topic `historical-analysis` covers Marpurg's seven-exposition analysis, Martini's numbered annotations, and Mann's critique of textbook form analysis;
   - new topic `pedal-point` shows that C. P. E. Bach, Marpurg, Martini and Gedalge agree.
+
+
+## History background (merged from the History page)
+- **Source.** Christensen (ed.), *The Cambridge History of Western Music Theory* (CUP 2002). Each chapter was read at survey level (headings, topic sentences, opening and closing paragraphs). Names, dates and treatise years were checked against the book's text.
+- **Content.** Only the overlapping technical content moved here: Imitation, double counterpoint and fugue in the history of theory. The narrative stays on the History tab.
+- **Rules.** Rules are precepts stated by the named historical writer. They are paraphrased, not quoted.
+- **Tools.** The tools are models written by the pack author, not figures from the book.

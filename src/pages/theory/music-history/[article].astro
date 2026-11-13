@@ -1,0 +1,120 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SubNav from '../../../components/content/SubNav.astro';
+import Rules from '../../../components/content/Rules.astro';
+import Quiz from '../../../components/history/Quiz.astro';
+import { ERAS, H, PEOPLE, TAB_NAMES, THREADS, TERMS, WORKS, BASE, articleUrl, backgroundTopic, spanLabel, topicUrl } from '../../../data/history';
+import { INDEXES } from '../../../data/history/nav';
+import { safeHtml } from '../../../scripts/content';
+import { titleCase } from '../../../scripts/title-case';
+
+export function getStaticPaths() {
+  return H.articles.map((a, i) => ({ params: { article: a.id }, props: { a, prev: H.articles[i - 1], next: H.articles[i + 1] } }));
+}
+
+const { a, prev, next } = Astro.props;
+const nav = [{ href: `${BASE}/`, label: 'Overview' }, ...INDEXES];
+const thread = THREADS.get(a.thread);
+const source = (id: string) => H.sources.find((s) => s.id === id);
+const people = a.people.map((id) => PEOPLE.get(id)).filter((p) => p !== undefined);
+const works = a.works.map((id) => WORKS.get(id)).filter((w) => w !== undefined);
+const terms = a.terms.map((id) => TERMS.get(id)).filter((t) => t !== undefined);
+const quiz = H.quiz.filter((q) => q.article === a.id);
+const withWho = (xs: { text: string; who: string }[]) => xs.map((x) => ({ html: `${x.text} <i>(${x.who.replace(/[<>]/g, '')})</i>` }));
+const plain = a.summary.replace(/<[^>]+>/g, '');
+const intro = plain.length > 155 ? plain.slice(0, 152).replace(/\s+\S*$/, '') + '…' : plain;
+---
+
+<Layout title={a.title} description={intro}>
+  <main class="page-block wide">
+    <h1>Music History</h1>
+    <SubNav items={nav} current="" label="Parts of the music history guide" />
+
+    <article class="history-article">
+      <p class="eyebrow">{titleCase(thread?.title ?? '')} · {spanLabel(a.span)}</p>
+      <h2 class="section-title">{a.title}</h2>
+      <p class="chip-row">
+        {a.eras.map((e) => <span class="era-chip">{ERAS.get(e)?.title}</span>)}
+      </p>
+      <p class="muted-line">
+        Source:{' '}
+        {a.sourceRefs.map((r, i) => (
+          <>
+            {i > 0 && '; '}
+            {source(r.source)?.short ?? r.source}{r.chapter ? `, chapter ${r.chapter}` : ''}{r.author ? ` (${r.author})` : ''}{r.pages ? `, pp. ${r.pages}` : ''}
+          </>
+        ))}
+        · {a.status === 'survey' ? 'summarized from a survey reading' : a.status === 'full' ? 'read in full' : 'placeholder'}
+      </p>
+
+      <p class="lead"><Fragment set:html={safeHtml(a.summary)} /></p>
+
+      <h3 class="mini-title">Key Points</h3>
+      <ul class="bg-points">{a.points.map((p) => <li><Fragment set:html={safeHtml(p)} /></li>)}</ul>
+
+      {
+        a.seeAlso.length > 0 && (
+          <>
+            <h3 class="mini-title">Technique on Other Tabs</h3>
+            <p class="chip-row">
+              {a.seeAlso.map((s) => (
+                <a class="tab-chip" href={topicUrl(s.tab, s.topic)} title={`taught in ${TAB_NAMES[s.tab].toLowerCase()}`}>
+                  {TAB_NAMES[s.tab]}: {titleCase(backgroundTopic(s.tab, s.topic)?.title ?? s.label)}
+                </a>
+              ))}
+            </p>
+          </>
+        )
+      }
+
+      {
+        (a.rules.length > 0 || a.guidelines.length > 0) && (
+          <>
+            <h3 class="mini-title">Rules as Stated</h3>
+            <Rules rules={withWho(a.rules)} guidelines={withWho(a.guidelines)} columns />
+          </>
+        )
+      }
+
+      {
+        (people.length > 0 || works.length > 0) && (
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr><th scope="col">People and Treatises</th><th scope="col">Dates</th><th scope="col">Ideas</th></tr></thead>
+              <tbody>
+                {people.map((p) => <tr><th scope="row">{p!.name}</th><td>{p!.dates}</td><td><Fragment set:html={safeHtml(p!.ideas.join(' '))} /></td></tr>)}
+                {works.map((w) => <tr><th scope="row"><i>{w!.title}</i></th><td>{w!.year}</td><td>{w!.author ? (PEOPLE.get(w!.author)?.name ?? '') : ''}</td></tr>)}
+              </tbody>
+            </table>
+          </div>
+        )
+      }
+
+      {
+        terms.length > 0 && (
+          <>
+            <h3 class="mini-title">Terms</h3>
+            <dl class="def-list">
+              {terms.map((t) => (
+                <>
+                  <dt>{t!.term}</dt>
+                  <dd>
+                    <Fragment set:html={safeHtml(t!.def)} />
+                    {t!.taughtIn.map((x) => <a class="tab-chip" href={topicUrl(x.tab, x.topic)} title={`taught in ${TAB_NAMES[x.tab].toLowerCase()}`}>{TAB_NAMES[x.tab]}</a>)}
+                  </dd>
+                </>
+              ))}
+            </dl>
+          </>
+        )
+      }
+
+      {quiz.length > 0 && (<><h3 class="mini-title">Quick Check</h3><Quiz items={quiz} /></>)}
+    </article>
+
+    <nav class="history-pager" aria-label="Articles">
+      {prev ? <a href={articleUrl(prev.id)}>← {prev.short}</a> : <span />}
+      {next ? <a href={articleUrl(next.id)}>{next.short} →</a> : <span />}
+    </nav>
+  </main>
+</Layout>

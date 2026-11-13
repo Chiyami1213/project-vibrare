@@ -1,0 +1,56 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SubNav from '../../../components/content/SubNav.astro';
+import Quiz from '../../../components/history/Quiz.astro';
+import { BASE, H } from '../../../data/history';
+import { INDEXES } from '../../../data/history/nav';
+import { titleCase } from '../../../scripts/title-case';
+
+const nav = [{ href: `${BASE}/`, label: 'Overview' }, ...INDEXES];
+const byThread = H.threads
+  .map((t) => ({ t, items: H.quiz.filter((q) => H.articles.find((a) => a.id === q.article)?.thread === t.id) }))
+  .filter((g) => g.items.length > 0);
+---
+
+<Layout title="Music History: Quiz" description="45 review questions on the history of Western music theory, with an explanation after each answer. Filter by thread.">
+  <main class="page-block wide">
+    <h1>Music History</h1>
+    <SubNav items={nav} current={`${BASE}/quiz/`} label="Parts of the music history guide" />
+    <h2 class="section-title">Quiz</h2>
+    <p class="muted-line">{H.quiz.length} questions. Choose an answer to see the right one and why. Questions on technique are with the tabs that teach it.</p>
+    <div class="chip-row" role="group" aria-label="Thread">
+      <button type="button" class="seg-btn" data-filter-group="thread" data-value="all" aria-pressed="true">All Threads</button>
+      {byThread.map((g) => <button type="button" class="seg-btn" data-filter-group="thread" data-value={g.t.id} aria-pressed="false">{titleCase(g.t.title)}</button>)}
+    </div>
+    <p class="verdict meh" id="quiz-score" hidden></p>
+
+    <div id="quiz-all">
+      {
+        byThread.map((g) => (
+          <section data-filter-section>
+            <h3 class="mini-title">{titleCase(g.t.title)}</h3>
+            <Fragment>
+              <div data-filter-item data-thread={g.t.id} data-search="">
+                <Quiz items={g.items} />
+              </div>
+            </Fragment>
+          </section>
+        ))
+      }
+    </div>
+  </main>
+</Layout>
+
+<script>
+  import { mountFilter } from '../../../scripts/filter-list';
+  mountFilter();
+  const score = document.getElementById('quiz-score')!;
+  let right = 0;
+  let total = 0;
+  document.getElementById('quiz-all')!.addEventListener('quiz-answer', (e) => {
+    total++;
+    if ((e as CustomEvent<{ right: boolean }>).detail.right) right++;
+    score.hidden = false;
+    score.textContent = `${right} right out of ${total} answered`;
+  });
+</script>

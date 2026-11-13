@@ -131,3 +131,31 @@ export interface CheckIssue {
   voices: string | string[] | null;   // 'S' | ['S','B'] …
   detail: string;
 }
+
+/* ---------- data/history-background.json (added from the History page source) ---------- */
+// Technical content from The Cambridge History of Western Music Theory (ed. Christensen, 2002) that overlaps this tab.
+// The History tab keeps the narrative; this tab now owns the rules, tools and technical quiz items.
+export interface HistoryBackgroundFile {
+  version: 1; pack: string;
+  from: { source: 'cht'; title: string; editor: string; year: number };
+  historyTab: 'history';                         // route of the History tab, for "Read the history →" links
+  topics: BackgroundTopic[];
+  tools: BackgroundTool[];
+}
+export interface BackgroundTopic {
+  id: string; title: string;
+  attachTo: { ref: string; note: string };      // an id in THIS pack (chapter / group / topic / tab) where the topic is shown
+  historyArticles: string[];                     // History-tab article ids: link "Read the history →"
+  points: string[];                              // may contain <i>, <b>
+  rules: { text: string; who: string }[];        // Rule badge (precept stated by the named historical writer)
+  guidelines: { text: string; who: string }[];   // Guideline badge
+  terms: { term: string; def: string }[];
+  tools: string[];                               // ids in tools[]
+  quiz: { id: string; q: string; options: string[]; answer: number; why: string }[];
+  sourceRefs: { source: 'cht'; chapter: number; pages: string; author: string; historyArticle: string }[];
+}
+export interface BackgroundTool {
+  id: string; title: string; spec: string; tests: string[];
+  extends: string | null;                        // id of an existing tool in this pack to extend instead of adding a new one
+  reference: string;                             // working implementation: tools/history-tools.js → function()
+}

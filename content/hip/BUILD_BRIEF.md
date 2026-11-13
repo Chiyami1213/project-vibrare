@@ -96,3 +96,20 @@ Each tool's `spec` and `reference` are in `tools[]`. Build them as components th
 - The 7 tools pass their acceptance tests.
 - Light and dark mode both work, with no horizontal page scroll at 360 px.
 - `CONTENT_ISSUES.md` lists anything unclear.
+
+
+## History background (added: merged from the History page)
+The site has a new **History** tab, built from Christensen (ed.), *The Cambridge History of Western Music Theory* (2002). Where its technical content overlaps this tab, the technique now lives **here**, in `data/history-background.json` (types at the end of `schema/types.ts`). The History tab keeps the narrative and links to this tab.
+
+**What to build**
+- **Where each topic goes.** Render each topic as a collapsible "History background" panel at its `attachTo.ref`. Show its points, then the rules and guidelines under the usual Rule and Guideline badges with the `who` line, then the terms and tools. Finish with the quiz items, using the same quiz component as the rest of the tab.
+- **Links.** Each panel ends with "Read the history →" links to `/history#<historyArticle>`, one for each id in `historyArticles`.
+- **Sources.** Source refs are to the printed book (chapter and pages).
+
+**Topics**
+  - `bg-performance`: Performance, meter and rhetoric in the history of theory. Attach to `foundations` (Background to the Foundations and Rhythm groups.) · 1 rules, 4 guidelines, 8 terms, 0 quiz items.
+
+**Tools**
+  - none
+
+Do not duplicate content that this tab already has. If a background rule restates one of this tab's own rules (for example Fux's four rules of motion), show it as historical lineage ("first stated by…") rather than as a second rule. Log any conflicts in `CONTENT_ISSUES.md`.

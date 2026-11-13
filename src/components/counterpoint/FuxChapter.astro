@@ -1,6 +1,7 @@
 ---
 import RuleBoxes from '../content/RuleBoxes.astro';
 import DataTable from '../content/DataTable.astro';
+import BackgroundPanels from '../history/BackgroundPanels.astro';
 import { safeHtml, toItem } from '../../scripts/content';
 import { titleCase } from '../../scripts/title-case';
 import { FUX } from '../../data/counterpoint';
@@ -91,6 +92,7 @@ const refs = (x: Parameters<typeof toItem>[0]) => toItem(x).refs;
     })
   }
 
+  <BackgroundPanels tab="fux" at={c.id} />
   {c.table && <DataTable columns={c.table.columns} rows={c.table.rows} stickyFirst />}
   {(c.notes ?? []).map((n) => <p class="muted-line table-note"><Fragment set:html={html(n)} /></p>)}
 </section>

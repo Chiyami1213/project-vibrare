@@ -2,6 +2,7 @@
 import Layout from '../../../../layouts/Layout.astro';
 import SubNav from '../../../../components/content/SubNav.astro';
 import FugueChapter from '../../../../components/fugue/FugueChapter.astro';
+import BackgroundPanels from '../../../../components/history/BackgroundPanels.astro';
 import { ANALYSIS, BASE, FRONT, GROUPS, THEORY } from '../../../../data/fugue';
 import { toItem } from '../../../../scripts/content';
 import { titleCase } from '../../../../scripts/title-case';
@@ -49,5 +50,6 @@ const chapters = THEORY.chapters.length;
     <h2 class="section-title">{THEORY.intro.title}</h2>
     {THEORY.intro.paragraphs.map((p) => <p><Fragment set:html={toItem(p).html} /></p>)}
     {FRONT.map((c) => <FugueChapter chapter={c} />)}
+    <BackgroundPanels tab="fugue" at="theory-tab" />
   </main>
 </Layout>

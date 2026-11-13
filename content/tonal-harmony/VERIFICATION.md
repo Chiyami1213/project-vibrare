@@ -79,3 +79,10 @@ Your notes on Dr. B's video series set the outline, the order and the chapter nu
 ## Limits
 - The checker judges four-part chorale style. It does not judge melody quality, rhythm, or style beyond the listed rules, and it reads chord function from the Roman-numeral label you see under each chord.
 - Builder-voiced examples follow the notes' chord progressions but are not transcriptions of the videos. Spot-check a few by ear on the finished site.
+
+
+## History background (merged from the History page)
+- **Source.** Christensen (ed.), *The Cambridge History of Western Music Theory* (CUP 2002). Each chapter was read at survey level (headings, topic sentences, opening and closing paragraphs). Names, dates and treatise years were checked against the book's text.
+- **Content.** Only the overlapping technical content moved here: Tuning, temperament and consonance in history, From modes to keys, Rameau: roots, inversion and the fundamental bass, Roman numerals, functions and dualism, Schenker: levels and the Ursatz. The narrative stays on the History tab.
+- **Rules.** Rules are precepts stated by the named historical writer. They are paraphrased, not quoted.
+- **Tools.** The tools are models written by the pack author, not figures from the book.
