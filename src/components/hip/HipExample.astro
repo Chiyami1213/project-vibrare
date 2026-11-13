@@ -1,0 +1,81 @@
+---
+import { safeHtml, refSource } from '../../scripts/content';
+import { titleCase } from '../../scripts/title-case';
+import { annotationStrip, playable } from '../../data/hip';
+import type { Example } from '../../data/hip';
+
+interface Props {
+  example: Example;
+}
+const { example: e } = Astro.props;
+const p = playable(e);
+const strip = annotationStrip(e);
+const hasStrip = strip.some((s) => s.syllable || s.bow || s.breath);
+const chords = p.chords;
+---
+
+<div class="hip-ex example" data-ex={e.id}>
+  <h4 class="mini-title">{titleCase(e.title)} <span class="muted-line">{e.key}, {e.meter}</span></h4>
+  <p class="caption"><Fragment set:html={safeHtml(e.caption)} /></p>
+
+  <div class="hip-controls">
+    {
+      chords ? (
+        <button type="button" class="btn" data-hip-play="all">▶ Play the Chords</button>
+      ) : (
+        <>
+          {p.layers.map((l, i) => <button type="button" class="btn" data-hip-play={String(i)}>▶ {l.name}</button>)}
+          {p.layers.length > 1 && <button type="button" class="btn" data-hip-play="all">▶ All in Turn</button>}
+        </>
+      )
+    }
+    <label class="pl-inline">Tempo <input type="range" min="40" max="100" step="1" value="60" class="pl-range" aria-label="Tempo in crotchets a minute" /> <span class="muted-line">crotchet = 60</span></label>
+  </div>
+
+  {
+    chords ? (
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead><tr><th>Bass</th><th>Figures</th><th>Chord</th><th>Class</th></tr></thead>
+          <tbody>
+            {(e.written as { chords: { bass: string; fig: string; notes: string[]; class: string }[] }).chords.map((c) => (
+              <tr><td>{c.bass}</td><td>{c.fig}</td><td>{c.notes.join(' ')}</td><td>{c.class}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : (
+      p.layers.map((l) => (
+        <div class="hip-layer">
+          <span class="hip-layer-name">{l.name}</span>
+          <pre class="figures-box">{Object.entries(l.voices).map(([k, v]) => `${k.padEnd(6)} ${v}`).join('\n')}</pre>
+        </div>
+      ))
+    )
+  }
+
+  {
+    hasStrip && (
+      <div class="hip-strip" role="group" aria-label="Annotations on the sounding notes of the upper voice">
+        {
+          strip.map((s) => (
+            <span class="hip-cell">
+              <span class="hip-note">{s.note}</span>
+              {s.syllable && <span class="hip-syl" title="flute tonguing">{s.syllable}</span>}
+              {s.bow && <span class="hip-bow" title="L. Mozart bowing (cross-reference)">{s.bow}</span>}
+              {s.breath && <span class={`hip-breath hip-${s.breath}`} title={s.why}>{s.breath === 'main' ? '✓ breathe' : '(,) if needed'}</span>}
+            </span>
+          ))
+        }
+      </div>
+    )
+  }
+  {e.bows && <p class="muted-line table-note">Bowing signs are L. Mozart’s, shown as a cross-reference only.</p>}
+  {
+    e.performed.rule && (
+      <p class="muted-line table-note">Harpsichord texture: {e.performed.rule}.</p>
+    )
+  }
+  {e.note && <p class="muted-line table-note">{e.note}</p>}
+  <p class="topic-sources">{e.refs.map((r) => <span class={`ref-chip ref-${refSource(r).toLowerCase()}`}>{r}</span>)}</p>
+</div>

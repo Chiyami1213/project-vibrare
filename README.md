@@ -9,7 +9,7 @@ Live site: <https://vibrare.pages.dev/>
 
 | Section | Contents |
 | :-- | :-- |
-| **Theory** | Tonal Harmony, Partimento (Moti del Basso and Schemata with playable scores; Cadences to come), Counterpoint, Jazz. Several of these are still being written; see [Status](#status). |
+| **Theory** | *Tonal Harmony* (74 topics and 154 playable scores, from the owner's notes on Dr. B's lessons), *Partimento* (96 patterns and 156 playable scores in six pages: Moti del Basso, Schemata, Cadences, Rule of the Octave, Suspension and Diminution; and *Fugue*, with Mann's theory and an analysis guide), *Counterpoint* (Fux's *Gradus ad Parnassum*, with 22 playable examples), *HIP* (historically informed performance for flute and keyboard, with 17 playable examples), *Jazz* and *Music History* (not written yet). Each rule and guideline is badged apart. See [Status](#status). |
 | **Analysis** | *Baroque*: *Bach* lists the 48 preludes and fugues of *The Well-Tempered Clavier* (BWV 846 to 893) with keys and fugue voice counts; *Quantz* and *Blavet* are not written yet. *Touhou Project*: the numbered games Th06 to Th20 (15 games, 271 tracks), each with its OST, where every track is used, and its BPM and key where the wiki below has them. *Japanese Music*: not written yet. |
 | **Tools** | Interval and scale calculators that show the notes on a staff; a chord calculator with inversions, a piano keyboard, playback and shareable links; an interactive circle of fifths with a rainbow colour scheme that draws a chord's shape (triangle, square, and so on). Notes are spelled the way a musician would write them. |
 | **Works** | Arrangements by category: Anime, Commissions, Concert Band, Flute, Ghibli, Touhou Project, Vocaloid, VTubers, Miscellaneous. Three arrangements are listed so far. |
@@ -31,13 +31,21 @@ returns to the main list.
   Corrections found by comparing the sources are recorded in the data and covered by tests.
 - **The Well-Tempered Clavier list** follows the English and German Wikipedia articles (CC BY-SA 4.0).
 - **Instrument sounds** for the partimento player and the chord tools, chosen in Settings: an Italian and a Flemish
-  harpsichord, a Steinway and a Kawai grand piano, and a Renaissance-style organ, all from the
+  harpsichord and a French one, a Steinway and a Kawai grand piano and a Yamaha upright, and three organs, all from the
   [Versilian Community Sample Library](https://github.com/sgossner/VCSL) (CC0), trimmed and converted to small
   MP3 files and hosted with the site (see `public/audio/README.txt`).
-- **Partimento content pack** (`content/partimento/`): 80 patterns and 118 realized examples (moti del basso,
-  schemata and cadences), with the Python source that generates the JSON and checks the voice leading.
-  Summaries are paraphrased and cite their sources (Gjerdingen, IJzerman, Fenaroli, essaysonmusic.com and the
-  author's own notes).
+- **Content packs** in `content/`, each with its brief, its verification notes and the source that generates its data.
+  Summaries are paraphrased and cite their sources.
+  - `partimento/`: 96 patterns and 156 realized examples (moti del basso, schemata, cadences, rule of the octave,
+    suspensions, diminution), after the author's notes, Gjerdingen, IJzerman, Fenaroli, Sanguinetti, Durante, Furno
+    and essaysonmusic.com.
+  - `tonal-harmony/`: 74 topics and 154 notated examples, after the author's notes on Dr. B's lessons, checked
+    against Aldwell, Schachter and Cadwallader and Burstein and Straus.
+  - `counterpoint/`: Fux's *Gradus ad Parnassum* in Mann's translation, with its rule engine.
+  - `fugue/`: Mann's *The Study of Fugue*, and an analysis guide after Roberts, Badura-Skoda, Bodky, Gedalge and
+    C. P. E. Bach.
+  - `hip/`: Quantz, C. P. E. Bach, Badura-Skoda and Bodky, with L. Mozart as a cross-reference only.
+  - `CONTENT_ISSUES.md` lists what looked wrong in the data and what the pages do not do yet.
 - The calculators are modelled on the features of [musictheory.net](https://www.musictheory.net/tools) and
   [ToneGym](https://www.tonegym.co/); the code and data here are original.
 

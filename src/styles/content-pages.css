@@ -90,3 +90,108 @@
 .theorists dt {
   font-weight: 600;
 }
+
+/* HIP */
+.hip-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 8px 0;
+}
+
+.hip-layer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 4px 12px;
+}
+
+.hip-layer-name {
+  min-width: 7rem;
+  padding-top: 12px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.hip-layer pre {
+  flex: 1 1 22rem;
+  margin: 4px 0 8px;
+}
+
+.hip-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.hip-cell {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3.2rem;
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.hip-note {
+  font-weight: 600;
+}
+
+.hip-syl {
+  color: var(--accent);
+}
+
+.hip-bow {
+  color: var(--muted);
+  border-top: 1px dashed var(--line);
+}
+
+.hip-breath {
+  margin-top: 2px;
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.hip-main {
+  background: var(--accent);
+  color: #fff;
+}
+
+.hip-emergency {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.crossref-grid {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+@media (min-width: 1000px) {
+  .crossref-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.crossref {
+  padding: 10px 14px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--muted) 6%, transparent);
+}
+
+.crossref p {
+  margin: 0 0 6px;
+}
+
+.hip-topic[hidden],
+.hip-group[hidden] {
+  display: none;
+}

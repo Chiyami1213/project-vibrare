@@ -1,0 +1,70 @@
+---
+import Rules from '../content/Rules.astro';
+import Terms from '../content/Terms.astro';
+import Steps from '../content/Steps.astro';
+import DataTable from '../content/DataTable.astro';
+import HipExample from './HipExample.astro';
+import { safeHtml, refSource } from '../../scripts/content';
+import { titleCase } from '../../scripts/title-case';
+import { DISAGREEMENT_TOPICS, HIP, sourceById, toolById } from '../../data/hip';
+import type { Topic } from '../../data/hip';
+
+interface Props {
+  topic: Topic;
+}
+const { topic: t } = Astro.props;
+const owner = import.meta.env.DEV; // verification notes are for the owner, in local development only
+const INSTRUMENT: Record<string, string> = { flute: 'Flute', keyboard: 'Keyboard', both: 'Flute and Keyboard' };
+const examples = (t.examples ?? []).map((id) => HIP.examples[id]).filter(Boolean);
+---
+
+<article class="topic-card hip-topic" id={t.id} data-instruments={t.instruments.join(' ')}>
+  <h3>
+    {titleCase(t.title)}
+    {t.instruments.map((i) => <span class="chip">{INSTRUMENT[i]}</span>)}
+  </h3>
+  <p class="summary-text"><Fragment set:html={safeHtml(t.summary)} /></p>
+  <Rules rules={t.rules} guidelines={t.guidelines} />
+  <Steps steps={t.steps} />
+  <Terms terms={t.terms} />
+  {(t.tables ?? []).map((tb) => <DataTable title={tb.title} columns={tb.columns} rows={tb.rows} note={tb.note} stickyFirst />)}
+
+  {
+    (t.crossRefs ?? []).length > 0 && (
+      <div class="crossref-grid">
+        {(t.crossRefs ?? []).map((c) => (
+          <div class="crossref">
+            <p><span class="chip">Violin (L. Mozart)</span> <Fragment set:html={safeHtml(c.point)} /></p>
+            <p class="muted-line">Analogue on the flute and the keyboard: <Fragment set:html={safeHtml(c.analogue)} /></p>
+            <span class="ref-chip ref-lm">{c.ref} (cross-reference)</span>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  {examples.map((e) => <HipExample example={e} />)}
+
+  {
+    (t.tools ?? []).length > 0 && (
+      <p class="tool-todo">Interactive tools for this topic, still to come: {(t.tools ?? []).map((id) => toolById(id)?.title ?? id).join(', ')}.</p>
+    )
+  }
+
+  {DISAGREEMENT_TOPICS.has(t.id) && <p class="see-also"><a href="#disagreements">Sources disagree →</a></p>}
+
+  <footer class="topic-sources">
+    {t.sources.map((id) => <a href={`#source-${id}`} title={sourceById(id)?.title}>{sourceById(id)?.short ?? id}</a>)}
+  </footer>
+
+  {
+    owner && (
+      <section class="owner-box">
+        <h4 class="mini-title">Owner Check (Local Only)</h4>
+        <p>Status: <strong>{t.verification.status}</strong></p>
+        {t.verification.checks.length > 0 && <ul>{t.verification.checks.map((c) => <li>{c}</li>)}</ul>}
+        {(t.verification.flags ?? []).length > 0 && <ul class="flags">{t.verification.flags!.map((f) => <li>{f}</li>)}</ul>}
+      </section>
+    )
+  }
+</article>

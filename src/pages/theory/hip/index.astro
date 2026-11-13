@@ -1,0 +1,102 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HipTopic from '../../../components/hip/HipTopic.astro';
+import { HIP, playable } from '../../../data/hip';
+import { safeHtml } from '../../../scripts/content';
+import { titleCase } from '../../../scripts/title-case';
+
+const examples = Object.fromEntries(Object.values(HIP.examples).map((e) => [e.id, playable(e)]));
+const rules = HIP.topics.reduce((n, t) => n + t.rules.length, 0);
+const guides = HIP.topics.reduce((n, t) => n + t.guidelines.length, 0);
+---
+
+<Layout title="Historically Informed Performance (HIP)">
+  <main class="page-block wide hip-page">
+    <h1>Historically Informed Performance (HIP)</h1>
+    <p class="lead"><Fragment set:html={safeHtml(HIP.scope)} /></p>
+    <p class="muted-line">
+      {HIP.topics.length} topics, {rules} rules and {guides} guidelines, each with page references, and {Object.keys(HIP.examples).length} examples
+      you can play.
+    </p>
+
+    <div class="field">
+      <span class="field-label" id="inst-label">Instrument</span>
+      <div class="seg-group" role="group" aria-labelledby="inst-label" id="hip-filter">
+        <button type="button" class="seg-btn" data-inst="" aria-pressed="true">All</button>
+        <button type="button" class="seg-btn" data-inst="flute" aria-pressed="false">Flute</button>
+        <button type="button" class="seg-btn" data-inst="keyboard" aria-pressed="false">Keyboard</button>
+      </div>
+    </div>
+
+    <nav class="chapter-jump" aria-label="Groups of topics">
+      {HIP.groups.map((g) => <a class="seg-btn" href={`#group-${g.id}`}>{titleCase(g.title)}</a>)}
+      <a class="seg-btn" href="#sources">Sources</a>
+    </nav>
+
+    {
+      HIP.groups.map((g) => (
+        <section id={`group-${g.id}`} class="hip-group">
+          <header class="chapter-head">
+            <h2>{titleCase(g.title)}</h2>
+            <p class="muted-line"><Fragment set:html={safeHtml(g.blurb)} /></p>
+          </header>
+          {HIP.topics.filter((t) => t.group === g.id).map((t) => <HipTopic topic={t} />)}
+        </section>
+      ))
+    }
+
+    <section id="sources">
+      <header class="chapter-head"><h2>Sources</h2></header>
+      <p class="muted-line">L. Mozart’s violin treatise is a cross-reference only: its bowing is the analogue of breathing and tonguing on the flute and of touch on the keyboard.</p>
+      <ul class="source-list">
+        {
+          HIP.sources.map((s) => (
+            <li id={`source-${s.id}`}>
+              <strong>{s.short}</strong>: {s.title}, {s.edition}.
+              <span class="chip">{titleCase(s.role)}</span>
+              <br /><span class="muted-line">{s.note}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <script type="application/json" id="hip-examples" is:inline set:html={JSON.stringify(examples)} />
+  </main>
+</Layout>
+
+<script>
+  import { initHip } from '../../../scripts/hip/player';
+  initHip();
+
+  // The instrument filter: a topic tagged "both" shows under each choice. The choice is remembered in this browser.
+  const KEY = 'hip-instrument';
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('#hip-filter [data-inst]')];
+  const topics = [...document.querySelectorAll<HTMLElement>('.hip-topic')];
+  const groups = [...document.querySelectorAll<HTMLElement>('.hip-group')];
+  function apply(inst: string) {
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.inst === inst)));
+    topics.forEach((t) => {
+      const has = (t.dataset.instruments ?? '').split(' ');
+      t.hidden = !!inst && !has.includes(inst) && !has.includes('both');
+    });
+    groups.forEach((g) => (g.hidden = !g.querySelector('.hip-topic:not([hidden])')));
+  }
+  let saved = '';
+  try {
+    saved = localStorage.getItem(KEY) ?? '';
+  } catch {
+    /* no storage: the filter simply starts on All */
+  }
+  apply(['flute', 'keyboard'].includes(saved) ? saved : '');
+  buttons.forEach((b) =>
+    b.addEventListener('click', () => {
+      apply(b.dataset.inst ?? '');
+      try {
+        localStorage.setItem(KEY, b.dataset.inst ?? '');
+      } catch {
+        /* ignore */
+      }
+    }),
+  );
+</script>
