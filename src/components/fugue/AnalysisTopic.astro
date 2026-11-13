@@ -10,8 +10,10 @@ import type { Topic } from '../../data/fugue';
 
 interface Props {
   topic: Topic;
+  /** the topic that holds each tool (a tool is built once on the page) */
+  toolHome?: Record<string, { id: string; title: string }>;
 }
-const { topic: t } = Astro.props;
+const { topic: t, toolHome = {} } = Astro.props;
 const owner = import.meta.env.DEV; // verification notes are for the owner, in local development only
 const toolTitle = (id: string) => ANALYSIS.tools.find((x) => x.id === id)?.title ?? id;
 ---
@@ -41,7 +43,13 @@ const toolTitle = (id: string) => ANALYSIS.tools.find((x) => x.id === id)?.title
     ))
   }
 
-  {(t.tools ?? []).length > 0 && <p class="tool-todo">Interactive tool, still to come: {(t.tools ?? []).map(toolTitle).join(', ')}.</p>}
+  {(t.tools ?? []).map((id) =>
+      toolHome[id] && toolHome[id].id !== t.id ? (
+        <p class="muted-line">Tool: {toolTitle(id)}, under <a href={`#${toolHome[id].id}`}>{titleCase(toolHome[id].title)}</a>.</p>
+      ) : (
+        <div class="tool-box" data-ftool={id}><h4 class="mini-title">{toolTitle(id)}</h4></div>
+      ),
+    )}
 
   {
     (t.seeAlso ?? []).length > 0 && (
@@ -70,3 +78,8 @@ const toolTitle = (id: string) => ANALYSIS.tools.find((x) => x.id === id)?.title
     )
   }
 </article>
+
+<script>
+  import { mountFugueTools } from '../../scripts/fugue/mount';
+  mountFugueTools();
+</script>

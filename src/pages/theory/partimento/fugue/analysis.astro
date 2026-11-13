@@ -6,6 +6,9 @@ import { ANALYSIS, BASE, GROUPS } from '../../../../data/fugue';
 import { safeHtml } from '../../../../scripts/content';
 import { titleCase } from '../../../../scripts/title-case';
 
+// each tool appears once, under the first topic that names it; the other topics link to it
+const toolHome = new Map<string, { id: string; title: string }>();
+for (const t of ANALYSIS.topics) for (const id of t.tools ?? []) if (!toolHome.has(id)) toolHome.set(id, { id: t.id, title: t.title });
 const nav = [
   { href: `${BASE}/`, label: 'Overview' },
   ...GROUPS.map((g) => ({ href: `${BASE}/${g.slug}/`, label: g.title })),
@@ -31,7 +34,7 @@ const nav = [
             <h2>{titleCase(g.title)}</h2>
             <p class="muted-line"><Fragment set:html={safeHtml(g.blurb)} /></p>
           </header>
-          {ANALYSIS.topics.filter((t) => t.group === g.id).map((t) => <AnalysisTopic topic={t} />)}
+          {ANALYSIS.topics.filter((t) => t.group === g.id).map((t) => <AnalysisTopic topic={t} toolHome={Object.fromEntries(toolHome)} />)}
         </section>
       ))
     }

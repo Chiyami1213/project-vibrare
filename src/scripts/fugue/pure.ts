@@ -446,3 +446,78 @@ export function proportions(lengths: number[]) {
   });
   return { steps, growing, shrinking, palindrome, ratios };
 }
+
+/** Section lengths typed as "2, 3, 3.5, 5, 8.5" (or separated by spaces); null if anything is not a positive number. */
+export function parseLengths(text: string): number[] | null {
+  const parts = text.trim().split(/[\s,;]+/).filter(Boolean);
+  const nums = parts.map(Number);
+  if (nums.length < 2 || nums.some((n) => !Number.isFinite(n) || n <= 0)) return null;
+  return nums;
+}
+
+export const PROPORTION_DEMOS: [string, string][] = [
+  ['BWV 578 digressions', '2, 3, 3.5, 5, 8.5'],
+  ['BWV 533 spacing of entries', '2, 3.5, 3.5, 5, 5, 3.5, 3.5, 2'],
+];
+
+// ---------- analysis tools: the worksheet ----------
+
+/** The six kinds of notable property in the exposition (Roberts, step 2). */
+export const ROBERTS_TYPES = [
+  'Linear ascents or descents',
+  'Blocked ascents or descents',
+  'Rhythmic and melodic patterns (cells)',
+  'Suspended scale degrees',
+  'Contrasting material (active against static)',
+  'Structural units (a subject that is a period)',
+];
+
+export interface Worksheet {
+  work: string;
+  key: string;
+  voices: string;
+  entries: { bar: string; voice: string; key: string; device: string }[];
+  episodes: string;
+  properties: { type: string; checked: boolean; note: string }[];
+  lengths: string;
+  verdict: 'rhetorical' | 'literal' | 'not stated';
+  reasons: string;
+}
+
+/** The demonstration of the pack: WTC I, Fugue in C minor (Roberts' case study). Voices and keys of the entries are left blank: the case study gives bars only. */
+export function worksheetDemo(): Worksheet {
+  return {
+    work: 'WTC I/2, Fugue in C minor, BWV 847',
+    key: 'C minor',
+    voices: '3',
+    entries: [1, 3, 7, 11, 15, 20, 26].map((bar) => ({ bar: String(bar), voice: '', key: '', device: '' })),
+    episodes: 'Episodes between the entries; episode 4 is an inversion of episode 1; coda with a final subject statement. Roberts calls the codetta in bars 5–6 “Episode 1”.',
+    properties: [
+      { type: ROBERTS_TYPES[0], checked: true, note: 'Episode 1 (bars 5–6): an ascent 5̂→1̂ through every half step of the combined minor-scale forms' },
+      { type: ROBERTS_TYPES[1], checked: true, note: 'Prominent descent 6̂–5̂–4̂–3̂ in the subject that never reaches 1̂' },
+      { type: ROBERTS_TYPES[2], checked: true, note: 'Rhythmic cells 4+4+3+3+2 eighth notes (repeated, interrupted, then mirrored)' },
+      { type: ROBERTS_TYPES[3], checked: false, note: '' },
+      { type: ROBERTS_TYPES[4], checked: false, note: '' },
+      { type: ROBERTS_TYPES[5], checked: false, note: '' },
+    ],
+    lengths: '',
+    verdict: 'rhetorical',
+    reasons: 'Bars 27–29: the descent reaches 1̂ (soprano and bass), the 5̂→1̂ ascent goes straight up the melodic minor, and the cells shrink to 4+4+3+3+3+3+2+1, all at once, and then the fugue ends.',
+  };
+}
+
+export function worksheetMarkdown(w: Worksheet): string {
+  const out: string[] = [`# Fugue analysis: ${w.work || 'untitled'}`, '', `- Key: ${w.key || '—'}`, `- Voices: ${w.voices || '—'}`, '', '## Entries', '', '| Bar | Voice | Key | Device |', '|---|---|---|---|'];
+  for (const e of w.entries) out.push(`| ${e.bar || ''} | ${e.voice || ''} | ${e.key || ''} | ${e.device || ''} |`);
+  out.push('', '## Countersubject and episodes', '', w.episodes || '—', '', '## Notable properties', '');
+  for (const p of w.properties) out.push(`- [${p.checked ? 'x' : ' '}] ${p.type}${p.note ? `: ${p.note}` : ''}`);
+  out.push('', '## Integrants and digressions', '', w.lengths || '—');
+  const nums = parseLengths(w.lengths);
+  if (nums) {
+    const pr = proportions(nums);
+    const notes = [pr.growing ? 'successively longer' : '', pr.shrinking ? 'successively shorter' : '', pr.palindrome ? 'palindromic' : '', ...pr.ratios.filter((r) => r.name).map((r) => `${r.from} to ${r.to} is about ${r.name}`)].filter(Boolean);
+    if (notes.length) out.push('', `Patterns: ${notes.join('; ')}.`);
+  }
+  out.push('', '## Verdict', '', `${w.verdict}${w.reasons ? `: ${w.reasons}` : ''}`, '');
+  return out.join('\n');
+}

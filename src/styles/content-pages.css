@@ -1058,3 +1058,112 @@ button.tiny:hover {
     grid-column: 1 / -1;
   }
 }
+
+/* ---------- Fugue tools ---------- */
+.lane {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+.lane-l {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.lane-bar {
+  position: relative;
+  height: 28px;
+  border-radius: 6px;
+  background: rgb(127 127 127 / 0.1);
+}
+
+.seg-b {
+  display: inline-block;
+  min-width: 22%;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 6px;
+  line-height: 28px;
+  font-size: 0.82rem;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.seg-b.theme {
+  background: var(--accent);
+}
+
+.seg-b.answer {
+  background: #d98a1c;
+}
+
+.plan {
+  margin: 10px 0;
+  padding-left: 1.4em;
+}
+
+.plan li {
+  margin: 4px 0;
+}
+
+.ws-entry {
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin: 4px 0;
+}
+
+.ws-props .pl-row {
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin: 6px 0;
+}
+
+.ws-out {
+  margin: 12px 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 0.85rem;
+  max-height: 340px;
+  overflow: auto;
+}
+
+textarea.txt {
+  width: min(100%, 560px);
+  font: inherit;
+}
+
+.prop-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 170px;
+  margin: 12px 0;
+}
+
+.prop-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  min-width: 28px;
+}
+
+.prop-bar {
+  width: 28px;
+  border-radius: 4px 4px 0 0;
+  background: var(--accent);
+}
+
+.prop-v,
+.prop-i {
+  font-size: 0.75rem;
+  color: var(--muted);
+}

@@ -63,10 +63,19 @@ const toolTitle = (id: string) => THEORY.tools.find((t) => t.id === id)?.title ?
           </div>
         );
       }
-      return <p class="tool-todo">Interactive tool, still to come: {toolTitle(b.id)}.</p>;
+      return (
+        <div class="tool-box" data-ftool={b.id} data-preset={(b as { preset?: string }).preset}>
+          <h4 class="mini-title">{toolTitle(b.id)}</h4>
+        </div>
+      );
     })
   }
 
   {c.table && <DataTable columns={c.table.columns} rows={c.table.rows} stickyFirst />}
   {(c.notes ?? []).map((n) => <p class="muted-line table-note"><Fragment set:html={html(n)} /></p>)}
 </section>
+
+<script>
+  import { mountFugueTools } from '../../scripts/fugue/mount';
+  mountFugueTools();
+</script>

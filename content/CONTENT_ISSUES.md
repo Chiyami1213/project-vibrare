@@ -18,7 +18,11 @@ open questions each pack lists for the owner are in that pack's own `VERIFICATIO
   colouring, and clicking on the staff to place a note (the workbench uses a grid of pitch selectors under the score).
 - **Tonal harmony:** the `checker` overlay on the 22 deliberate-error examples is not drawn, the SATB checker is not
   ported, and none of the 30 tools exist. The Roman-numeral label is printed as plain text (`V6/5`), not stacked.
-- **Fugue:** the nine theory tools and two analysis tools are not built.
+- **Fugue:** all eleven tools are built (nine in the theory, two in the analysis). Their logic is tested against the reference
+  page's own output for the eight preset subjects (`tests/fixtures/fugue-reference.json`, generated from `tools/guide/main.js`).
+  The analysis worksheet starts with the C minor demonstration; the case study gives bars for the entries but not their voices
+  or keys, so those columns are left blank. A tool that three analysis topics name (the worksheet) is built once, under the
+  first of them, and the others link to it.
 - **HIP:** examples are played and shown as notation text with their annotations (syllables, bows, breaths), not as
   engraved staves, because triplet values do not fit the staff renderer's grid. The seven tools are not built, and the
   Written / Performed toggle is a set of play buttons.
