@@ -1340,3 +1340,64 @@ button.plan-gap:hover {
 .diss-class.bad {
   color: #d1432f;
 }
+
+/* ---------- Partimento tools ---------- */
+.morph-chips {
+  min-height: 34px;
+}
+
+.morph-chip {
+  display: inline-block;
+  padding: 4px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-weight: 600;
+  opacity: 0;
+  animation: chip-in 0.5s ease forwards;
+}
+
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.susp {
+  padding: 0 6px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.susp-4 {
+  background: var(--accent);
+}
+
+.susp-7 {
+  background: #d98a1c;
+}
+
+.susp-9 {
+  background: #2e9e5b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .morph-chip {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.deg-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}

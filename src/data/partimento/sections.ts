@@ -50,3 +50,24 @@ export const SECTIONS: Section[] = [
 export const sectionOfGroup = (groupId: string): Section => SECTIONS.find((s) => s.groupIds(groupId)) ?? SECTIONS[1];
 export const sectionBySlug = (slug: string): Section => SECTIONS.find((s) => s.slug === slug)!;
 
+/** The tools shown on each page: an id of tools.ts and, where it is needed, an argument. */
+export const SECTION_TOOLS: Record<string, { id: string; arg?: string; title: string }[]> = {
+  'moti-del-basso': [
+    { id: 'bass-motion', title: 'Bass-Motion Explorer' },
+    { id: 'recognition-quiz', arg: 'moti', title: 'Recognition Quiz' },
+  ],
+  schemata: [
+    { id: 'combination', title: 'Combination Builder' },
+    { id: 'recognition-quiz', arg: 'schemata', title: 'Recognition Quiz' },
+  ],
+  cadences: [
+    { id: 'nomenclature', title: 'Nomenclature Builder' },
+    { id: 'ptr-grid', title: 'Preparation, Tension, Resolution' },
+    { id: 'clausulae', title: 'Clausulae Mixer' },
+    { id: 'morph', title: 'Simple, Compound, Double' },
+    { id: 'ear-quiz', title: 'Ear-Training Quiz' },
+  ],
+  'rule-of-the-octave': [{ id: 'ro-table', title: 'Durante and Fenaroli' }],
+  suspension: [{ id: 'suspension-finder', title: 'Suspension Finder' }],
+  diminution: [{ id: 'plain-diminished', title: 'Plain and Diminished' }],
+};

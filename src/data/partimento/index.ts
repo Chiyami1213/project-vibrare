@@ -10,7 +10,7 @@ export const CADENCES = cadencesJson as unknown as ContentFile;
 
 export const BASE = '/theory/partimento';
 
-export { SECTIONS, sectionBySlug, sectionOfGroup } from './sections';
+export { SECTIONS, SECTION_TOOLS, sectionBySlug, sectionOfGroup } from './sections';
 export type { Section } from './sections';
 import { SECTIONS, sectionBySlug, sectionOfGroup } from './sections';
 import type { Section } from './sections';

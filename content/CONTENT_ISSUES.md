@@ -58,3 +58,21 @@ open questions each pack lists for the owner are in that pack's own `VERIFICATIO
 - **The articles' address** is `/theory/music-history/<id>/`, not `/history#<id>` as the brief suggests; the ids are the
   pack's, so the links from the other tabs are the same ones.
 - **The pack's intro text** (`scope`) begins "The History page." It is shown as written.
+
+## Partimento tools (added with the history pack)
+
+- **Built:** all eleven (`src/scripts/partimento/tools.ts`, logic in `tools-pure.ts`, tests in `tests/partimento-tools.test.mjs`): bass-motion
+  explorer, combination builder, recognition quiz (moti and schemata), nomenclature builder, P–T–R grid, clausulae mixer, simple–
+  compound–double morph, ear quiz, suspension finder, Durante and Fenaroli table, plain and diminished. They sit on the page
+  of the section they belong to; the examples they need are one file, `/theory/partimento/tools-data.json`.
+- **P–T–R:** the data does not mark preparation, tension and resolution. The tool cuts each example by its bass: the
+  resolution is the last chord, the tension the chords over the note the bass stands on before it, the preparation what
+  comes before. That is a rule of the tool, not of the notes.
+- **Durante and Fenaroli:** the brief names ascending ②, ③ and ④ and descending minor ⑥ as the degrees that differ. The
+  figures in the examples show ②, ④ and the descending minor ⑥ (and minor ② too) as different harmonies; ascending ③ is 6/3 in
+  both, and only the octave doubling in the realisations differs. The tool leaves the octave out of the comparison, so ③ is
+  not marked.
+- **Combination builder:** examples are joined when they have the same number of parts and the same mode; examples in
+  different metres are laid out on the first one's bar lines.
+- **Suspension finder:** it marks what the rules of the cards allow (which bass motions prepare a 4–3, 7–6 or 9–8), not what a
+  given harmony needs.

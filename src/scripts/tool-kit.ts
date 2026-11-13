@@ -3,6 +3,7 @@ import type { Issue, Voice } from './counterpoint/rules';
 import { marksOf } from './counterpoint/rules';
 import { scoreData, voiceNamesOf } from './counterpoint/score';
 import { mountPlayer } from './partimento/player';
+import type { ExampleData } from './partimento/model';
 import { sampler } from './sampler';
 
 
@@ -66,3 +67,11 @@ export function showScore(stage: HTMLElement, voices: Voice[], title: string, ma
 export const whole = (notes: string[], d = 1): Voice['notes'] => notes.map((p) => ({ p, d }));
 export const pill = (text: string, ok: boolean) => Object.assign(h('span', `pill ${ok ? 'ok' : 'no'}`), { textContent: text });
 
+
+/** Put an Example Player (score, play, step, transpose) for `data` into `stage`, replacing what is there. */
+export function showExample(stage: HTMLElement, data: ExampleData): void {
+  sampler.stop();
+  const fresh = h('div', 'player');
+  stage.replaceChildren(fresh);
+  void mountPlayer(fresh, data);
+}
