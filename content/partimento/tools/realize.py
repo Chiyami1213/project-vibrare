@@ -4,7 +4,8 @@ Mini-notation (one string per example; see BUILD_BRIEF.md §4):
   slices separated by spaces, bars by '|'.
   slice  = BASS ':' V1 ',' V2 [',' V3]   [ '@' dur ]
   V1..Vn = upper voices from TOP to BOTTOM, each an interval above the bass:
-           [^][#|b|n]NUM[+]   ('^' = tied from previous, '+' = augmented, exact)
+           [^][#|b|n]NUM[+][<|>]*   ('^' = tied from previous, '+' = augmented, exact,
+                              '>'/'<' = octave above/below the nearest-octave choice: leaps in diminutions)
            'a-b' / 'a-b-c'  = the slice is split equally (suspension / motion over one bass)
            '.'  = voice holds previous pitch (no re-attack)
            '_'  = rest
@@ -88,7 +89,7 @@ def interval_above(key, bass, num, acc_mod, aug):
     return p
 
 
-TOK_V = re.compile(r'^(\^)?([#bn])?(\d+)(\+)?$')
+TOK_V = re.compile(r'^(\^)?([#bn])?(\d+)(\+)?([<>]*)$')
 TOK_B = re.compile(r'^([#bn])?([1-7])([<>]*)(~)?$')
 
 
@@ -174,7 +175,7 @@ def realize(text, key='C', parts=None, cross=False):
                 m = TOK_V.match(pt)
                 if not m:
                     raise ValueError('bad voice token %r in %r' % (pt, tok))
-                tie, acc, num, aug = m.groups()
+                tie, acc, num, aug, oct_ = m.groups()
                 num = int(num)
                 p = interval_above(key, bp, num, acc, aug)
                 if prev[vi] is None:
@@ -198,6 +199,8 @@ def realize(text, key='C', parts=None, cross=False):
                         if best is None or d < best[0]:
                             best = (d, q)
                     p = best[1] if best else P(p.step + 7, p.acc)
+                for c in oct_ or '':  # '>' / '<' = octave above / below the default choice
+                    p = P(p.step + (7 if c == '>' else -7), p.acc)
                 ev = {'t': st, 'd': sub_d, 'p': p, 'tie': bool(tie), 'fig': (acc or '') + str(num) + ('+' if aug else '')}
                 if tie:
                     if prev[vi] is None or not (prev[vi] == p):

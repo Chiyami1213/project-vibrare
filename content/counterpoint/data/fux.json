@@ -1,0 +1,6989 @@
+{
+ "version": 1,
+ "source": "J. J. Fux, Gradus ad Parnassum (1725), trans. A. Mann, The Study of Counterpoint (Norton 1965)",
+ "intro": {
+  "title": "The Study of Counterpoint a guide to the five species, with scores you can hear and exercises that check themselves",
+  "paragraphs": [
+   {
+    "html": "Fux teaches counterpoint as a staircase. You climb from note against note to florid writing in two voices, then climb again in three and in four. This guide follows his table of contents. Each chapter lists the <b>rules</b> Fux treats as binding, the <b>guidelines</b> he gives as advice, and the figures and exercises of the book. Every score plays on a synthesized harpsichord. Every exercise workbench checks your notes against the rules as you write.",
+    "text": "Fux teaches counterpoint as a staircase. You climb from note against note to florid writing in two voices, then climb again in three and in four. This guide follows his table of contents. Each chapter lists the rules Fux treats as binding, the guidelines he gives as advice, and the figures and exercises of the book. Every score plays on a synthesized harpsichord. Every exercise workbench checks your notes against the rules as you write."
+   },
+   {
+    "html": "Tap any note head to hear it. Scores use modern treble, octave-treble (𝄞 with 8) and bass clefs in place of Fux’s C clefs. Fux’s own figures are labelled with their number; other scores are labelled “after Fig.” or “model” and were written for this guide and checked by the same rule engine.",
+    "text": "Tap any note head to hear it. Scores use modern treble, octave-treble (𝄞 with 8) and bass clefs in place of Fux’s C clefs. Fux’s own figures are labelled with their number; other scores are labelled “after Fig.” or “model” and were written for this guide and checked by the same rule engine."
+   }
+  ]
+ },
+ "parts": [
+  {
+   "id": "part1",
+   "title": "First Part",
+   "subtitle": "Two voices · pp. 25–67"
+  },
+  {
+   "id": "part2",
+   "title": "Second Part",
+   "subtitle": "Three voices · pp. 69–106"
+  },
+  {
+   "id": "part3",
+   "title": "Third Part",
+   "subtitle": "Four voices · pp. 107–139"
+  }
+ ],
+ "chapters": [
+  {
+   "id": "intro",
+   "part": "front",
+   "title": "Introduction (Alfred Mann)",
+   "eyebrow": "Front matter · pp. vii–xvi",
+   "pages": "vii–xvi",
+   "prose": [
+    {
+     "html": "Mann compares the study of counterpoint with the study of perspective. Both grew from the Renaissance turn toward three-dimensional thought. Medieval <i>discantus</i> stacked parts like the levels of a landscape. <i>Contrapunctus</i>, from <i>punctus contra punctum</i> (point against point, note against note), appears around 1300. By 1412 Prosdocimus speaks of <i>cantus contra cantum</i>: judging a whole melody against another.",
+     "text": "Mann compares the study of counterpoint with the study of perspective. Both grew from the Renaissance turn toward three-dimensional thought. Medieval discantus stacked parts like the levels of a landscape. Contrapunctus, from punctus contra punctum (point against point, note against note), appears around 1300. By 1412 Prosdocimus speaks of cantus contra cantum: judging a whole melody against another."
+    },
+    {
+     "html": "Tinctoris separates simple counterpoint (equal notes) from diminished or florid counterpoint (several notes against one), and prefers the second: “the variety of proportions produces the most agreeable counterpoint.” Zarlino sums up the Renaissance. Monteverdi’s “second practice” splits the old style from the new. Fux, publishing in 1725, deliberately chooses Palestrina’s style (the <i>stile antico</i>) as the basis for teaching and places three intermediate species between simple and florid counterpoint.",
+     "text": "Tinctoris separates simple counterpoint (equal notes) from diminished or florid counterpoint (several notes against one), and prefers the second: “the variety of proportions produces the most agreeable counterpoint.” Zarlino sums up the Renaissance. Monteverdi’s “second practice” splits the old style from the new. Fux, publishing in 1725, deliberately chooses Palestrina’s style (the stile antico) as the basis for teaching and places three intermediate species between simple and florid counterpoint."
+    },
+    {
+     "html": "The book’s influence runs through Haydn (who worked every exercise), Leopold and Wolfgang Mozart (Attwood’s studies), Beethoven (via Albrechtsberger, Fux’s successor at St. Stephen’s), Brahms, Strauss and Hindemith.",
+     "text": "The book’s influence runs through Haydn (who worked every exercise), Leopold and Wolfgang Mozart (Attwood’s studies), Beethoven (via Albrechtsberger, Fux’s successor at St. Stephen’s), Brahms, Strauss and Hindemith."
+    }
+   ]
+  },
+  {
+   "id": "foreword",
+   "part": "front",
+   "title": "The Author’s Foreword",
+   "eyebrow": "Front matter · pp. 17–18",
+   "pages": "17–18",
+   "prose": [
+    {
+     "html": "Fux writes for young people “who lack means and a teacher.” His method copies the way children learn letters, then syllables, then words. He gives little space to theory and much to practice, “since action is the test of excellence.”",
+     "text": "Fux writes for young people “who lack means and a teacher.” His method copies the way children learn letters, then syllables, then words. He gives little space to theory and much to practice, “since action is the test of excellence.”"
+    },
+    {
+     "html": "The book is a dialogue. <b>Aloysius</b>, the master, stands for Palestrina. <b>Josephus</b> is the pupil. Josephus writes; Aloysius corrects. Many rules appear only when a mistake prompts them, so the figures with “mistakes” are part of the teaching.",
+     "text": "The book is a dialogue. Aloysius, the master, stands for Palestrina. Josephus is the pupil. Josephus writes; Aloysius corrects. Many rules appear only when a mistake prompts them, so the figures with “mistakes” are part of the teaching."
+    }
+   ],
+   "quotes": [
+    "“Drops wear down the stone not by strength but by constant falling.” (p. 48)"
+   ]
+  },
+  {
+   "id": "prelim",
+   "part": "front",
+   "title": "Intervals, Motions and the Four Rules",
+   "eyebrow": "The Dialogue · conclusion of the First Book · pp. 19–23",
+   "pages": "19–23",
+   "lede": {
+    "html": "Before the first exercise, Josephus must know which intervals are consonant, the three kinds of motion, and four rules that govern how consonances follow each other.",
+    "text": "Before the first exercise, Josephus must know which intervals are consonant, the three kinds of motion, and four rules that govern how consonances follow each other."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "Consonance and dissonance",
+     "items": [
+      {
+       "html": "<b>Perfect consonances:</b> unison, fifth, octave (and their compounds).",
+       "text": "Perfect consonances: unison, fifth, octave (and their compounds)."
+      },
+      {
+       "html": "<b>Imperfect consonances:</b> third and sixth (and compounds such as the tenth).",
+       "text": "Imperfect consonances: third and sixth (and compounds such as the tenth)."
+      },
+      {
+       "html": "<b>Dissonances:</b> second, fourth, diminished fifth, tritone, seventh, and their compounds.",
+       "text": "Dissonances: second, fourth, diminished fifth, tritone, seventh, and their compounds.",
+       "refs": [
+        "p. 20"
+       ]
+      },
+      {
+       "html": "Consonance and dissonance are reckoned <b>from the bass</b>. Between upper voices the fourth behaves like an imperfect consonance.",
+       "text": "Consonance and dissonance are reckoned from the bass. Between upper voices the fourth behaves like an imperfect consonance.",
+       "refs": [
+        "pp. 112, 131"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "rules",
+     "title": "The four fundamental rules",
+     "items": [
+      {
+       "html": "Perfect → perfect: <b>contrary or oblique</b> motion only.",
+       "text": "Perfect → perfect: contrary or oblique motion only."
+      },
+      {
+       "html": "Perfect → imperfect: any of the three motions.",
+       "text": "Perfect → imperfect: any of the three motions."
+      },
+      {
+       "html": "Imperfect → perfect: <b>contrary or oblique</b> motion only.",
+       "text": "Imperfect → perfect: contrary or oblique motion only."
+      },
+      {
+       "html": "Imperfect → imperfect: any of the three motions.",
+       "text": "Imperfect → imperfect: any of the three motions.",
+       "refs": [
+        "p. 22"
+       ]
+      }
+     ],
+     "note": {
+      "html": "Oblique motion, used with care, is allowed in all four. Beethoven reduced the rules to two; Martini to one: never move into a perfect consonance by direct motion.",
+      "text": "Oblique motion, used with care, is allowed in all four. Beethoven reduced the rules to two; Martini to one: never move into a perfect consonance by direct motion."
+     }
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Fig. 1",
+     "html": "Direct motion: both parts move in the same direction, by step or skip.",
+     "text": "Direct motion: both parts move in the same direction, by step or skip."
+    },
+    {
+     "fig": "Fig. 2",
+     "html": "Contrary motion: one part rises while the other falls.",
+     "text": "Contrary motion: one part rises while the other falls."
+    },
+    {
+     "fig": "Fig. 3",
+     "html": "Oblique motion: one part moves while the other stays.",
+     "text": "Oblique motion: one part moves while the other stays."
+    }
+   ],
+   "blocks": [
+    {
+     "type": "tool",
+     "id": "motion-lab"
+    },
+    {
+     "type": "tool",
+     "id": "interval-explorer"
+    }
+   ]
+  },
+  {
+   "id": "p1c1",
+   "part": "part1",
+   "title": "Note against Note",
+   "eyebrow": "First Part · Chapter One · pp. 27–40",
+   "pages": "27–40",
+   "lede": {
+    "html": "The simplest species: two voices in notes of equal length (whole notes), consonances only. The given melody, the <i>cantus firmus</i>, never changes; you write a counterpoint above or below it.",
+    "text": "The simplest species: two voices in notes of equal length (whole notes), consonances only. The given melody, the cantus firmus, never changes; you write a counterpoint above or below it."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "Equal note values; <b>only consonances</b>.",
+       "text": "Equal note values; only consonances."
+      },
+      {
+       "html": "<b>Begin and end with a perfect consonance.</b> The beginning expresses perfection, the end relaxation.",
+       "text": "Begin and end with a perfect consonance. The beginning expresses perfection, the end relaxation.",
+       "refs": [
+        "p. 28"
+       ]
+      },
+      {
+       "html": "The counterpoint must be in <b>the same mode</b> as the cantus. Below the cantus, begin on the unison or octave, not the fifth.",
+       "text": "The counterpoint must be in the same mode as the cantus. Below the cantus, begin on the unison or octave, not the fifth.",
+       "refs": [
+        "Fig. 6"
+       ]
+      },
+      {
+       "html": "<b>Next-to-last bar:</b> a major sixth if the cantus is in the lower part, a minor third if it is in the upper part. The 7th degree is raised in D, G and A.",
+       "text": "Next-to-last bar: a major sixth if the cantus is in the lower part, a minor third if it is in the upper part. The 7th degree is raised in D, G and A.",
+       "refs": [
+        "p. 28 n."
+       ]
+      },
+      {
+       "html": "Obey the four rules: no parallel fifths or octaves, and <b>no direct motion into a perfect consonance</b> (hidden fifths and octaves become audible when the skip is filled in).",
+       "text": "Obey the four rules: no parallel fifths or octaves, and no direct motion into a perfect consonance (hidden fifths and octaves become audible when the skip is filled in).",
+       "refs": [
+        "Figs. 7–8"
+       ]
+      },
+      {
+       "html": "No augmented, diminished or chromatic melodic intervals; no skip larger than a fifth except the octave and the <b>ascending</b> minor sixth. The major sixth and the seventh are forbidden.",
+       "text": "No augmented, diminished or chromatic melodic intervals; no skip larger than a fifth except the octave and the ascending minor sixth. The major sixth and the seventh are forbidden.",
+       "refs": [
+        "p. 27 n.; Figs. 15, 103"
+       ]
+      },
+      {
+       "html": "<b>Mi contra fa</b>: no tritone skip (F–B).",
+       "text": "Mi contra fa: no tritone skip (F–B).",
+       "refs": [
+        "Fig. 12"
+       ]
+      },
+      {
+       "html": "The <b>unison</b> only at the beginning and the end.",
+       "text": "The unison only at the beginning and the end.",
+       "refs": [
+        "Figs. 17–18"
+       ]
+      },
+      {
+       "html": "Never approach an octave or unison by skips in contrary motion from a remote consonance, even in more than two parts.",
+       "text": "Never approach an octave or unison by skips in contrary motion from a remote consonance, even in more than two parts.",
+       "refs": [
+        "Figs. 19–20"
+       ]
+      },
+      {
+       "html": "Modes may end only on D, E, F, G, A, C. B has no perfect fifth.",
+       "text": "Modes may end only on D, E, F, G, A, C. B has no perfect fifth.",
+       "refs": [
+        "Fig. 9"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "Use <b>contrary and oblique motion as often as possible</b>; they make mistakes easier to avoid.",
+       "text": "Use contrary and oblique motion as often as possible; they make mistakes easier to avoid."
+      },
+      {
+       "html": "Use <b>more imperfect than perfect</b> consonances; imperfect ones are more harmonious.",
+       "text": "Use more imperfect than perfect consonances; imperfect ones are more harmonious."
+      },
+      {
+       "html": "Repeat a tone only occasionally, and never more than once.",
+       "text": "Repeat a tone only occasionally, and never more than once.",
+       "refs": [
+        "Fig. 5 n."
+       ]
+      },
+      {
+       "html": "Not more than three or four parallel thirds or sixths in a row.",
+       "text": "Not more than three or four parallel thirds or sixths in a row.",
+       "refs": [
+        "p. 21 n."
+       ]
+      },
+      {
+       "html": "Avoid skips that follow each other in the same direction, and compensate a skip by turning back. Stay within a comfortable register.",
+       "text": "Avoid skips that follow each other in the same direction, and compensate a skip by turning back. Stay within a comfortable register.",
+       "refs": [
+        "p. 27 n."
+       ]
+      },
+      {
+       "html": "Even stepwise, avoid outlining a tritone unless the line continues in the same direction.",
+       "text": "Even stepwise, avoid outlining a tritone unless the line continues in the same direction.",
+       "refs": [
+        "p. 35 n."
+       ]
+      },
+      {
+       "html": "The <i>ottava battuta</i> (a tenth to an octave by contrary steps on the downbeat) is left to your discretion.",
+       "text": "The ottava battuta (a tenth to an octave by contrary steps on the downbeat) is left to your discretion.",
+       "refs": [
+        "Fig. 16"
+       ]
+      },
+      {
+       "html": "Leaving a unison by skip is bad in itself.",
+       "text": "Leaving a unison by skip is bad in itself.",
+       "refs": [
+        "Fig. 21 N.B."
+       ]
+      },
+      {
+       "html": "<i>Fa</i> leads down, <i>mi</i> leads up: a sharp can underline an ascent and avoid a harsh F/F♯ relation.",
+       "text": "Fa leads down, mi leads up: a sharp can underline an ascent and avoid a harsh F/F♯ relation.",
+       "refs": [
+        "Fig. 21"
+       ]
+      },
+      {
+       "html": "Voice crossing is a permitted expedient. Keep the voices close (neighbouring clefs).",
+       "text": "Voice crossing is a permitted expedient. Keep the voices close (neighbouring clefs).",
+       "refs": [
+        "Figs. 13–14"
+       ]
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Fig. 4",
+     "html": "The cantus firmus in D: D F E D G F A G F E D.",
+     "text": "The cantus firmus in D: D F E D G F A G F E D."
+    },
+    {
+     "fig": "Fig. 5",
+     "html": "Josephus’s first counterpoint, above. Aloysius: “You have done excellently.”",
+     "text": "Josephus’s first counterpoint, above. Aloysius: “You have done excellently.”"
+    },
+    {
+     "fig": "Fig. 6",
+     "html": "Counterpoint below, with two marked mistakes: it starts on a fifth below (wrong mode), and moves from a third to a fifth in direct motion.",
+     "text": "Counterpoint below, with two marked mistakes: it starts on a fifth below (wrong mode), and moves from a third to a fifth in direct motion."
+    },
+    {
+     "fig": "Figs. 7–8",
+     "html": "Why direct motion into a fifth is forbidden: fill in the skip (diminution) and the hidden fifths appear.",
+     "text": "Why direct motion into a fifth is forbidden: fill in the skip (diminution) and the hidden fifths appear."
+    },
+    {
+     "fig": "Figs. 9–10",
+     "html": "B cannot be a final; sharpening or flattening to fix its fifth leaves the natural modes.",
+     "text": "B cannot be a final; sharpening or flattening to fix its fifth leaves the natural modes."
+    },
+    {
+     "fig": "Figs. 11–12",
+     "html": "E mode, above and below. Fig. 12 contains a tritone skip, “mi against fa, the devil in music.”",
+     "text": "E mode, above and below. Fig. 12 contains a tritone skip, “mi against fa, the devil in music.”"
+    },
+    {
+     "fig": "Figs. 13–14",
+     "html": "F mode. In Fig. 14 the counterpoint crosses above the cantus to avoid direct motion.",
+     "text": "F mode. In Fig. 14 the counterpoint crosses above the cantus to avoid direct motion."
+    },
+    {
+     "fig": "Fig. 15",
+     "html": "G mode, with two mistakes: a skip of a major sixth, and an <i>ottava battuta</i>.",
+     "text": "G mode, with two mistakes: a skip of a major sixth, and an ottava battuta."
+    },
+    {
+     "fig": "Figs. 16–20",
+     "html": "Octaves and unisons approached by contrary motion, by step and by skip.",
+     "text": "Octaves and unisons approached by contrary motion, by step and by skip."
+    },
+    {
+     "fig": "Fig. 21",
+     "html": "G mode below; N.B. marks a skip out of a unison in the cantus itself.",
+     "text": "G mode below; N.B. marks a skip out of a unison in the cantus itself."
+    },
+    {
+     "fig": "Figs. 22–23",
+     "html": "A and C modes, above and below.",
+     "text": "A and C modes, above and below."
+    }
+   ],
+   "assignment": {
+    "html": "Write a counterpoint above and below each of the six cantus firmi, “going through all modes within this octave, just as they follow successively in their natural order.”",
+    "text": "Write a counterpoint above and below each of the six cantus firmi, “going through all modes within this octave, just as they follow successively in their natural order.”",
+    "refs": [
+     "p. 33"
+    ]
+   },
+   "blocks": [
+    {
+     "type": "tool",
+     "id": "mode-explorer"
+    },
+    {
+     "type": "example",
+     "id": "fig5"
+    },
+    {
+     "type": "example",
+     "id": "fig6"
+    },
+    {
+     "type": "example",
+     "id": "fig7"
+    },
+    {
+     "type": "example",
+     "id": "fig16"
+    },
+    {
+     "type": "workbench",
+     "id": "wb11"
+    },
+    {
+     "type": "tool",
+     "id": "fault-quiz"
+    }
+   ]
+  },
+  {
+   "id": "p1c2",
+   "part": "part1",
+   "title": "The Second Species",
+   "eyebrow": "First Part · Chapter Two · pp. 41–49",
+   "pages": "41–49",
+   "lede": {
+    "html": "Two half notes against each whole note, in binary meter. The first half falls on the downbeat (<i>thesis</i>), the second on the upbeat (<i>arsis</i>).",
+    "text": "Two half notes against each whole note, in binary meter. The first half falls on the downbeat (thesis), the second on the upbeat (arsis)."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "The <b>downbeat half note must be consonant</b>.",
+       "text": "The downbeat half note must be consonant."
+      },
+      {
+       "html": "The <b>upbeat</b> half may be dissonant only if it moves <b>stepwise from the previous note and to the following note</b>, filling in the space of a third (diminution). If it skips, it must be consonant.",
+       "text": "The upbeat half may be dissonant only if it moves stepwise from the previous note and to the following note, filling in the space of a third (diminution). If it skips, it must be consonant.",
+       "refs": [
+        "Fig. 24"
+       ]
+      },
+      {
+       "html": "All rules of motion and progression from the first species apply.",
+       "text": "All rules of motion and progression from the first species apply."
+      },
+      {
+       "html": "<b>Cadence:</b> in the next-to-last bar, a fifth followed by a major sixth (cantus below), or a fifth followed by a minor third (cantus above).",
+       "text": "Cadence: in the next-to-last bar, a fifth followed by a major sixth (cantus below), or a fifth followed by a minor third (cantus above).",
+       "refs": [
+        "Fig. 25"
+       ]
+      },
+      {
+       "html": "A <b>skip of a third</b> between two downbeats does <b>not</b> rescue consecutive fifths or octaves; the upbeat note is too short.",
+       "text": "A skip of a third between two downbeats does not rescue consecutive fifths or octaves; the upbeat note is too short.",
+       "refs": [
+        "Figs. 26–29"
+       ]
+      },
+      {
+       "html": "A skip of a fourth, fifth or sixth does separate them: “the ear forgets” the first downbeat.",
+       "text": "A skip of a fourth, fifth or sixth does separate them: “the ear forgets” the first downbeat.",
+       "refs": [
+        "Figs. 30–32"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "<b>Consider the ending before you start.</b>",
+       "text": "Consider the ending before you start.",
+       "refs": [
+        "p. 42"
+       ]
+      },
+      {
+       "html": "You may begin with a half rest in place of the first note.",
+       "text": "You may begin with a half rest in place of the first note.",
+       "refs": [
+        "Fig. 34"
+       ]
+      },
+      {
+       "html": "When the voices are crowded and contrary motion is impossible, a skip of a minor sixth or an octave gets you out.",
+       "text": "When the voices are crowded and contrary motion is impossible, a skip of a minor sixth or an octave gets you out.",
+       "refs": [
+        "Fig. 34"
+       ]
+      },
+      {
+       "html": "In E mode the fifth in the cadence would be mi against fa; use a sixth.",
+       "text": "In E mode the fifth in the cadence would be mi against fa; use a sixth.",
+       "refs": [
+        "Fig. 37"
+       ]
+      },
+      {
+       "html": "Pay attention not only to the measure you are writing but to the one that follows.",
+       "text": "Pay attention not only to the measure you are writing but to the one that follows.",
+       "refs": [
+        "p. 48"
+       ]
+      },
+      {
+       "html": "Ternary meter (three against one) is easy: the middle note may be dissonant if all three move stepwise.",
+       "text": "Ternary meter (three against one) is easy: the middle note may be dissonant if all three move stepwise.",
+       "refs": [
+        "Fig. 46"
+       ]
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Fig. 24",
+     "html": "Diminution: a passing half note fills in a third.",
+     "text": "Diminution: a passing half note fills in a third."
+    },
+    {
+     "fig": "Fig. 25",
+     "html": "The second-species cadence: 5–6–8 and 5–3–1.",
+     "text": "The second-species cadence: 5–6–8 and 5–3–1."
+    },
+    {
+     "fig": "Figs. 26–33",
+     "html": "Josephus’s attempt has two marked mistakes (bars 9 and 10): fifths on successive downbeats, separated only by a skip of a third. Fig. 33 is the corrected exercise.",
+     "text": "Josephus’s attempt has two marked mistakes (bars 9 and 10): fifths on successive downbeats, separated only by a skip of a third. Fig. 33 is the corrected exercise."
+    },
+    {
+     "fig": "Figs. 34–35",
+     "html": "Starting with a rest; the counterpoint below.",
+     "text": "Starting with a rest; the counterpoint below."
+    },
+    {
+     "fig": "Figs. 36–45",
+     "html": "The five remaining modes, counterpoint above and below.",
+     "text": "The five remaining modes, counterpoint above and below."
+    },
+    {
+     "fig": "Fig. 46",
+     "html": "Three notes against one.",
+     "text": "Three notes against one."
+    }
+   ],
+   "assignment": {
+    "html": "“Take all the cantus firmi which were given for the first species and go through the five remaining modes, placing the counterpoint once in the upper and once in the lower voice.”",
+    "text": "“Take all the cantus firmi which were given for the first species and go through the five remaining modes, placing the counterpoint once in the upper and once in the lower voice.”",
+    "refs": [
+     "p. 46"
+    ]
+   },
+   "blocks": [
+    {
+     "type": "example",
+     "id": "fig33"
+    },
+    {
+     "type": "example",
+     "id": "fig35"
+    },
+    {
+     "type": "example",
+     "id": "skip3"
+    },
+    {
+     "type": "workbench",
+     "id": "wb12"
+    }
+   ]
+  },
+  {
+   "id": "p1c3",
+   "part": "part1",
+   "title": "The Third Species",
+   "eyebrow": "First Part · Chapter Three · pp. 50–54",
+   "pages": "50–54",
+   "lede": {
+    "html": "Four quarter notes against each whole note.",
+    "text": "Four quarter notes against each whole note."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "The <b>first quarter must be consonant</b>.",
+       "text": "The first quarter must be consonant."
+      },
+      {
+       "html": "In five quarters moving stepwise: the 1st is consonant, the 2nd may be dissonant, the 3rd must be consonant, the 4th may be dissonant if the 5th is consonant.",
+       "text": "In five quarters moving stepwise: the 1st is consonant, the 2nd may be dissonant, the 3rd must be consonant, the 4th may be dissonant if the 5th is consonant.",
+       "refs": [
+        "Fig. 47"
+       ]
+      },
+      {
+       "html": "Exception: if the 2nd and 4th are consonant, the <b>3rd may be dissonant</b>, as a passing note filling in a third.",
+       "text": "Exception: if the 2nd and 4th are consonant, the 3rd may be dissonant, as a passing note filling in a third.",
+       "refs": [
+        "Figs. 48–49"
+       ]
+      },
+      {
+       "html": "<b>Cambiata</b> (changing note): a dissonant 2nd quarter may skip a third down to a consonant 3rd quarter, then the line turns up by step.",
+       "text": "Cambiata (changing note): a dissonant 2nd quarter may skip a third down to a consonant 3rd quarter, then the line turns up by step.",
+       "refs": [
+        "Figs. 50–52"
+       ]
+      },
+      {
+       "html": "No eighth notes yet.",
+       "text": "No eighth notes yet.",
+       "refs": [
+        "p. 52"
+       ]
+      },
+      {
+       "html": "All earlier rules of motion apply; the next-to-last bar follows the patterns of Figs. 53–54.",
+       "text": "All earlier rules of motion apply; the next-to-last bar follows the patterns of Figs. 53–54."
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "A quarter rest may replace the first note.",
+       "text": "A quarter rest may replace the first note.",
+       "refs": [
+        "p. 53 n."
+       ]
+      },
+      {
+       "html": "Avoid sequences (<i>monotonia</i>): repeating the same melodic figure.",
+       "text": "Avoid sequences (monotonia): repeating the same melodic figure.",
+       "refs": [
+        "Fig. 58 n."
+       ]
+      },
+      {
+       "html": "Flats may be used nonessentially to avoid mi contra fa.",
+       "text": "Flats may be used nonessentially to avoid mi contra fa.",
+       "refs": [
+        "Fig. 60"
+       ]
+      },
+      {
+       "html": "Skips from an accented to an unaccented quarter, especially upward, are hard to sing.",
+       "text": "Skips from an accented to an unaccented quarter, especially upward, are hard to sing.",
+       "refs": [
+        "p. 52 n."
+       ]
+      },
+      {
+       "html": "Give the utmost attention to the measures that follow.",
+       "text": "Give the utmost attention to the measures that follow."
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Fig. 47",
+     "html": "Stepwise quarters with dissonant 2nd and 4th notes.",
+     "text": "Stepwise quarters with dissonant 2nd and 4th notes."
+    },
+    {
+     "fig": "Figs. 48–49",
+     "html": "Dissonant 3rd quarter, shown as the diminution of a skip of a third.",
+     "text": "Dissonant 3rd quarter, shown as the diminution of a skip of a third."
+    },
+    {
+     "fig": "Figs. 50–52",
+     "html": "The <i>nota cambiata</i>, “the first mention ever made in musical literature” of the term.",
+     "text": "The nota cambiata, “the first mention ever made in musical literature” of the term."
+    },
+    {
+     "fig": "Figs. 53–54",
+     "html": "Cadence formulas, cantus below and above.",
+     "text": "Cadence formulas, cantus below and above."
+    },
+    {
+     "fig": "Figs. 55–60",
+     "html": "Exercises in D, E, F; flats in Fig. 60.",
+     "text": "Exercises in D, E, F; flats in Fig. 60."
+    }
+   ],
+   "assignment": {
+    "html": "Work through all the cantus firmi of the first lesson in turn; Aloysius leaves G, A and C “to you to work out by yourself.”",
+    "text": "Work through all the cantus firmi of the first lesson in turn; Aloysius leaves G, A and C “to you to work out by yourself.”",
+    "refs": [
+     "p. 54"
+    ]
+   },
+   "blocks": [
+    {
+     "type": "example",
+     "id": "fig55"
+    },
+    {
+     "type": "example",
+     "id": "cambiata"
+    },
+    {
+     "type": "workbench",
+     "id": "wb13"
+    }
+   ]
+  },
+  {
+   "id": "p1c4",
+   "part": "part1",
+   "title": "The Fourth Species",
+   "eyebrow": "First Part · Chapter Four · pp. 55–63",
+   "pages": "55–63",
+   "lede": {
+    "html": "Two half notes on the same pitch, tied over the bar line: the first on the upbeat, the second on the downbeat. This is the <i>ligature</i>, or syncopation.",
+    "text": "Two half notes on the same pitch, tied over the bar line: the first on the upbeat, the second on the downbeat. This is the ligature, or syncopation."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "The <b>upbeat half is always consonant</b>. A <b>consonant ligature</b> has both halves consonant; a <b>dissonant ligature</b> has a dissonant downbeat.",
+       "text": "The upbeat half is always consonant. A consonant ligature has both halves consonant; a dissonant ligature has a dissonant downbeat.",
+       "refs": [
+        "Figs. 61–62"
+       ]
+      },
+      {
+       "html": "A tied dissonance is the <b>retardation of the following note</b>. It must <b>resolve down by step</b> to the consonance that would stand on the downbeat if the retardation were removed.",
+       "text": "A tied dissonance is the retardation of the following note. It must resolve down by step to the consonance that would stand on the downbeat if the retardation were removed.",
+       "refs": [
+        "Figs. 63–64"
+       ]
+      },
+      {
+       "html": "<b>Cantus below:</b> 2nd → unison, 4th → 3rd, 7th → 6th, 9th → octave.",
+       "text": "Cantus below: 2nd → unison, 4th → 3rd, 7th → 6th, 9th → octave."
+      },
+      {
+       "html": "Never unison → 2nd → unison or octave → 9th → octave: without the tie these are consecutive unisons or octaves. 3–2–1 and 10–9–8 are good.",
+       "text": "Never unison → 2nd → unison or octave → 9th → octave: without the tie these are consecutive unisons or octaves. 3–2–1 and 10–9–8 are good.",
+       "refs": [
+        "Figs. 65–68"
+       ]
+      },
+      {
+       "html": "<b>Cantus above:</b> 2nd → 3rd, 4th → 5th, 9th → 10th. The seventh resolving to the octave is not used by the masters; the second resolving to the unison is.",
+       "text": "Cantus above: 2nd → 3rd, 4th → 5th, 9th → 10th. The seventh resolving to the octave is not used by the masters; the second resolving to the unison is.",
+       "refs": [
+        "Figs. 69–71"
+       ]
+      },
+      {
+       "html": "<b>Cadence:</b> 7–6 in the next-to-last bar (cantus below); 2–3 then the unison (cantus above).",
+       "text": "Cadence: 7–6 in the next-to-last bar (cantus below); 2–3 then the unison (cantus above).",
+       "refs": [
+        "p. 60"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "Resolve all dissonances <b>downward</b>; ascending resolution (Fig. 72) is left aside.",
+       "text": "Resolve all dissonances downward; ascending resolution (Fig. 72) is left aside."
+      },
+      {
+       "html": "Use a ligature <b>in every measure where possible</b>; if none can be made, write plain half notes until one can.",
+       "text": "Use a ligature in every measure where possible; if none can be made, write plain half notes until one can.",
+       "refs": [
+        "p. 60"
+       ]
+      },
+      {
+       "html": "Don’t repeat the same ligature immediately (Josephus skips one in bar 5 of Fig. 73 for that reason).",
+       "text": "Don’t repeat the same ligature immediately (Josephus skips one in bar 5 of Fig. 73 for that reason).",
+       "refs": [
+        "p. 61"
+       ]
+      },
+      {
+       "html": "Successions of fifths through syncopations are judged more indulgently than octaves.",
+       "text": "Successions of fifths through syncopations are judged more indulgently than octaves.",
+       "refs": [
+        "p. 57 n., Figs. 75, 77"
+       ]
+      },
+      {
+       "html": "Ligatures may be varied (Fig. 79) or interrupted (Fig. 80); two eighths may appear on the 2nd and 4th quarters, never on the 1st or 3rd.",
+       "text": "Ligatures may be varied (Fig. 79) or interrupted (Fig. 80); two eighths may appear on the 2nd and 4th quarters, never on the 1st or 3rd.",
+       "refs": [
+        "Fig. 81"
+       ]
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Figs. 61–62",
+     "html": "Consonant and dissonant ligatures.",
+     "text": "Consonant and dissonant ligatures."
+    },
+    {
+     "fig": "Figs. 63–68",
+     "html": "Resolution of dissonances, shown with and without the retardation.",
+     "text": "Resolution of dissonances, shown with and without the retardation."
+    },
+    {
+     "fig": "Figs. 69–72",
+     "html": "Dissonances with the cantus above; the seventh avoided; the second resolving to the unison.",
+     "text": "Dissonances with the cantus above; the seventh avoided; the second resolving to the unison."
+    },
+    {
+     "fig": "Figs. 73–78",
+     "html": "Exercises in all modes (Fig. 73 is shown below).",
+     "text": "Exercises in all modes (Fig. 73 is shown below)."
+    },
+    {
+     "fig": "Figs. 79–81",
+     "html": "Preparing for the fifth species: varied ligatures and eighth notes.",
+     "text": "Preparing for the fifth species: varied ligatures and eighth notes."
+    }
+   ],
+   "assignment": {
+    "html": "Work out the remaining cantus firmi “and also go over the others in this species again, in order to get as much experience as you can; you can almost never have enough.”",
+    "text": "Work out the remaining cantus firmi “and also go over the others in this species again, in order to get as much experience as you can; you can almost never have enough.”",
+    "refs": [
+     "p. 62"
+    ]
+   },
+   "blocks": [
+    {
+     "type": "tool",
+     "id": "suspension-lab"
+    },
+    {
+     "type": "example",
+     "id": "fig73"
+    },
+    {
+     "type": "workbench",
+     "id": "wb14"
+    }
+   ]
+  },
+  {
+   "id": "p1c5",
+   "part": "part1",
+   "title": "The Fifth Species",
+   "eyebrow": "First Part · Chapter Five · pp. 64–67",
+   "pages": "64–67",
+   "lede": {
+    "html": "Florid counterpoint. “As a garden is full of flowers,” it combines all the preceding species: whole notes excepted, any mixture of halves, quarters, ligatures and occasional eighths.",
+    "text": "Florid counterpoint. “As a garden is full of flowers,” it combines all the preceding species: whole notes excepted, any mixture of halves, quarters, ligatures and occasional eighths."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "Nothing new: each note value obeys the rules of its species (halves as in the 2nd, quarters as in the 3rd, ligatures as in the 4th).",
+       "text": "Nothing new: each note value obeys the rules of its species (halves as in the 2nd, quarters as in the 3rd, ligatures as in the 4th)."
+      },
+      {
+       "html": "Dissonance only as passing note, cambiata, or prepared suspension resolving down by step.",
+       "text": "Dissonance only as passing note, cambiata, or prepared suspension resolving down by step."
+      },
+      {
+       "html": "Eighth notes only in pairs, on the 2nd or 4th quarter, moving by step.",
+       "text": "Eighth notes only in pairs, on the 2nd or 4th quarter, moving by step.",
+       "refs": [
+        "Fig. 81"
+       ]
+      },
+      {
+       "html": "Same beginning and cadence rules (the 4th-species 7–6 or 2–3 is typical).",
+       "text": "Same beginning and cadence rules (the 4th-species 7–6 or 2–3 is typical)."
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "Above all, write a <b>singable, plastic melodic line</b> with lively movement and variety.",
+       "text": "Above all, write a singable, plastic melodic line with lively movement and variety."
+      },
+      {
+       "html": "Approach the downbeats with oblique motion or syncopations: “it brings about the greatest beauty in counterpoint.”",
+       "text": "Approach the downbeats with oblique motion or syncopations: “it brings about the greatest beauty in counterpoint.”",
+       "refs": [
+        "p. 65"
+       ]
+      },
+      {
+       "html": "Two quarters at the start of a bar make the line lag; tie them into what follows or continue with more quarters.",
+       "text": "Two quarters at the start of a bar make the line lag; tie them into what follows or continue with more quarters.",
+       "refs": [
+        "Fig. 89"
+       ]
+      },
+      {
+       "html": "Work at this species “constantly and with special diligence above all others.”",
+       "text": "Work at this species “constantly and with special diligence above all others.”"
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Figs. 82–83",
+     "html": "Aloysius’s models in D, above and below.",
+     "text": "Aloysius’s models in D, above and below."
+    },
+    {
+     "fig": "Figs. 84–88",
+     "html": "Josephus works E, F, G, A and C in the master’s presence.",
+     "text": "Josephus works E, F, G, A and C in the master’s presence."
+    },
+    {
+     "fig": "Fig. 89",
+     "html": "“Better”: quarters at the start of the bar tied over.",
+     "text": "“Better”: quarters at the start of the bar tied over."
+    }
+   ],
+   "assignment": {
+    "html": "Josephus works the remaining modes in the master’s presence. Then: “we have completed the exercises in two part counterpoint… We now return to the beginning.”",
+    "text": "Josephus works the remaining modes in the master’s presence. Then: “we have completed the exercises in two part counterpoint… We now return to the beginning.”",
+    "refs": [
+     "p. 67"
+    ]
+   },
+   "blocks": [
+    {
+     "type": "example",
+     "id": "florid2"
+    },
+    {
+     "type": "example",
+     "id": "eighths"
+    },
+    {
+     "type": "workbench",
+     "id": "wb15"
+    }
+   ]
+  },
+  {
+   "id": "p2c1",
+   "part": "part2",
+   "title": "Note against Note in Three Parts",
+   "eyebrow": "Second Part · Chapter One · pp. 71–85",
+   "pages": "71–85",
+   "lede": {
+    "html": "“Three part composition is the most perfect of all,” because it holds the complete harmonic triad. Whoever masters three parts finds more parts easy.",
+    "text": "“Three part composition is the most perfect of all,” because it holds the complete harmonic triad. Whoever masters three parts finds more parts easy."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "Three whole notes per bar; the upper two must be <b>consonant with the lowest</b>. A fourth between upper voices is acceptable.",
+       "text": "Three whole notes per bar; the upper two must be consonant with the lowest. A fourth between upper voices is acceptable.",
+       "refs": [
+        "p. 71, p. 112"
+       ]
+      },
+      {
+       "html": "No consecutive fifths or octaves between <b>any</b> pair of voices.",
+       "text": "No consecutive fifths or octaves between any pair of voices."
+      },
+      {
+       "html": "The final chord has only perfect consonances; Fux usually <b>omits the third</b>. A minor third “is not capable of giving a sense of conclusion.”",
+       "text": "The final chord has only perfect consonances; Fux usually omits the third. A minor third “is not capable of giving a sense of conclusion.”",
+       "refs": [
+        "Fig. 105"
+       ]
+      },
+      {
+       "html": "A major third may end the piece when the fifth would cause consecutive fifths.",
+       "text": "A major third may end the piece when the fifth would cause consecutive fifths.",
+       "refs": [
+        "Figs. 106–108"
+       ]
+      },
+      {
+       "html": "Skips of the major sixth and the seventh remain prohibited.",
+       "text": "Skips of the major sixth and the seventh remain prohibited.",
+       "refs": [
+        "Fig. 103"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "Use the <b>harmonic triad (third and fifth above the bass) in every bar</b> unless there is a special reason.",
+       "text": "Use the harmonic triad (third and fifth above the bass) in every bar unless there is a special reason.",
+       "refs": [
+        "p. 71"
+       ]
+      },
+      {
+       "html": "Replace the fifth by a sixth or octave for a better line, or to avoid two perfect consonances in a row.",
+       "text": "Replace the fifth by a sixth or octave for a better line, or to avoid two perfect consonances in a row.",
+       "refs": [
+        "Fig. 91"
+       ]
+      },
+      {
+       "html": "Follow the natural order and the principle of variety; when the bass has <i>mi</i>, a sixth sounds best above it.",
+       "text": "Follow the natural order and the principle of variety; when the bass has mi, a sixth sounds best above it.",
+       "refs": [
+        "Figs. 92–97"
+       ]
+      },
+      {
+       "html": "Start the upper voices far enough from the bass to leave room for contrary motion.",
+       "text": "Start the upper voices far enough from the bass to leave room for contrary motion.",
+       "refs": [
+        "p. 75"
+       ]
+      },
+      {
+       "html": "Avoid all voices moving in the same direction.",
+       "text": "Avoid all voices moving in the same direction.",
+       "refs": [
+        "Figs. 98–99"
+       ]
+      },
+      {
+       "html": "The rules apply strictly from the bass, and between other voices as far as possible; in three parts you may depart from them when there is no other way.",
+       "text": "The rules apply strictly from the bass, and between other voices as far as possible; in three parts you may depart from them when there is no other way.",
+       "refs": [
+        "Figs. 100–101"
+       ]
+      },
+      {
+       "html": "A unison is less harmonious than an octave; don’t exceed the five lines of the staff without necessity.",
+       "text": "A unison is less harmonious than an octave; don’t exceed the five lines of the staff without necessity.",
+       "refs": [
+        "p. 79"
+       ]
+      },
+      {
+       "html": "A tenth instead of the final octave is not positive enough.",
+       "text": "A tenth instead of the final octave is not positive enough.",
+       "refs": [
+        "Fig. 100"
+       ]
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Fig. 90",
+     "html": "The harmonic triad: third and fifth above the bass.",
+     "text": "The harmonic triad: third and fifth above the bass."
+    },
+    {
+     "fig": "Figs. 91–97",
+     "html": "When to give up the triad; <i>mi</i> in the bass takes the sixth.",
+     "text": "When to give up the triad; mi in the bass takes the sixth."
+    },
+    {
+     "fig": "Figs. 98–103",
+     "html": "Josephus’s attempts and their faults.",
+     "text": "Josephus’s attempts and their faults."
+    },
+    {
+     "fig": "Figs. 101, 104, 105",
+     "html": "The model, with the cantus on top, in the middle, and in the bass.",
+     "text": "The model, with the cantus on top, in the middle, and in the bass."
+    },
+    {
+     "fig": "Figs. 106–119",
+     "html": "The remaining modes; the E-mode cadence needs a major third.",
+     "text": "The remaining modes; the E-mode cadence needs a major third."
+    }
+   ],
+   "assignment": {
+    "html": "Work the remaining five modes, “setting the cantus firmus in all three voices in turn.”",
+    "text": "Work the remaining five modes, “setting the cantus firmus in all three voices in turn.”",
+    "refs": [
+     "p. 80"
+    ]
+   },
+   "blocks": [
+    {
+     "type": "example",
+     "id": "fig101"
+    },
+    {
+     "type": "workbench",
+     "id": "wb21"
+    }
+   ]
+  },
+  {
+   "id": "p2c2",
+   "part": "part2",
+   "title": "Half Notes against Whole Notes in Three Parts",
+   "eyebrow": "Second Part · Chapter Two · pp. 86–90",
+   "pages": "86–90",
+   "lede": {
+    "html": "One voice moves in half notes, the other two in whole notes.",
+    "text": "One voice moves in half notes, the other two in whole notes."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "The half notes must be concordant with <b>both</b> whole notes.",
+       "text": "The half notes must be concordant with both whole notes.",
+       "refs": [
+        "p. 88"
+       ]
+      },
+      {
+       "html": "Two half notes on the same pitch are not allowed (no ligatures in this species).",
+       "text": "Two half notes on the same pitch are not allowed (no ligatures in this species)."
+      },
+      {
+       "html": "All two-part second-species rules and three-part rules apply.",
+       "text": "All two-part second-species rules and three-part rules apply."
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "For the sake of the triad, a skip of a third may now make two fifths acceptable, which two-part writing forbids.",
+       "text": "For the sake of the triad, a skip of a third may now make two fifths acceptable, which two-part writing forbids.",
+       "refs": [
+        "Fig. 120"
+       ]
+      },
+      {
+       "html": "“Hardly any rule is without exception”: a ligature or a major third may appear in the final cadence to avoid a bad unison or empty octave.",
+       "text": "“Hardly any rule is without exception”: a ligature or a major third may appear in the final cadence to avoid a bad unison or empty octave.",
+       "refs": [
+        "pp. 87–88"
+       ]
+      },
+      {
+       "html": "Consider one or two measures in advance before deciding.",
+       "text": "Consider one or two measures in advance before deciding.",
+       "refs": [
+        "p. 90"
+       ]
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Fig. 120",
+     "html": "Fifths separated by a skip of a third, tolerable in three parts.",
+     "text": "Fifths separated by a skip of a third, tolerable in three parts."
+    },
+    {
+     "fig": "Figs. 121–123",
+     "html": "Three models in D, cantus on top, middle and bottom.",
+     "text": "Three models in D, cantus on top, middle and bottom."
+    },
+    {
+     "fig": "Figs. 124–129",
+     "html": "Josephus’s work in the other modes.",
+     "text": "Josephus’s work in the other modes."
+    }
+   ],
+   "blocks": [
+    {
+     "type": "example",
+     "id": "m3s2"
+    },
+    {
+     "type": "workbench",
+     "id": "wb22"
+    }
+   ]
+  },
+  {
+   "id": "p2c3",
+   "part": "part2",
+   "title": "Quarters against Whole Notes in Three Parts",
+   "eyebrow": "Second Part · Chapter Three · pp. 91–93",
+   "pages": "91–93",
+   "lede": {
+    "html": "One voice in quarters, the other two in whole notes.",
+    "text": "One voice in quarters, the other two in whole notes."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "The quarters must concur with the whole notes of <b>two</b> other voices.",
+       "text": "The quarters must concur with the whole notes of two other voices."
+      },
+      {
+       "html": "All third-species and three-part rules apply.",
+       "text": "All third-species and three-part rules apply."
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "Give the greatest consideration to <b>the notes on the downbeat</b>.",
+       "text": "Give the greatest consideration to the notes on the downbeat.",
+       "refs": [
+        "p. 91"
+       ]
+      },
+      {
+       "html": "If the triad cannot stand on the first quarter, place it on the 2nd or 3rd quarter.",
+       "text": "If the triad cannot stand on the first quarter, place it on the 2nd or 3rd quarter."
+      },
+      {
+       "html": "Combine species: one part in quarters, one in halves, one in whole notes (Fig. 134). “I can hardly describe how great the beauty and grace are that are given the composition by this threefold variety.”",
+       "text": "Combine species: one part in quarters, one in halves, one in whole notes (Fig. 134). “I can hardly describe how great the beauty and grace are that are given the composition by this threefold variety.”"
+      },
+      {
+       "html": "A whole note may occasionally replace the halves in the next-to-last bar.",
+       "text": "A whole note may occasionally replace the halves in the next-to-last bar.",
+       "refs": [
+        "p. 93 n."
+       ]
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Figs. 130–133",
+     "html": "Quarters in each of the three voices.",
+     "text": "Quarters in each of the three voices."
+    },
+    {
+     "fig": "Fig. 134",
+     "html": "Quarters, halves and whole notes combined.",
+     "text": "Quarters, halves and whole notes combined."
+    }
+   ],
+   "blocks": [
+    {
+     "type": "example",
+     "id": "m3s3"
+    },
+    {
+     "type": "workbench",
+     "id": "wb23"
+    }
+   ]
+  },
+  {
+   "id": "p2c4",
+   "part": "part2",
+   "title": "The Ligature in Three Parts",
+   "eyebrow": "Second Part · Chapter Four · pp. 94–103",
+   "pages": "94–103",
+   "lede": {
+    "html": "The syncopations work as in two parts. The new question is which consonance the third voice takes.",
+    "text": "The syncopations work as in two parts. The new question is which consonance the third voice takes."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "The ligature is “nothing but a delaying of the note following”: set in the third voice <b>the consonance you would use if the ligature were removed</b>.",
+       "text": "The ligature is “nothing but a delaying of the note following”: set in the third voice the consonance you would use if the ligature were removed.",
+       "refs": [
+        "Figs. 135–137"
+       ]
+      },
+      {
+       "html": "The ligature does not change the nature of the consonances: with dissonant syncopations, the essential part is the consonant upbeat.",
+       "text": "The ligature does not change the nature of the consonances: with dissonant syncopations, the essential part is the consonant upbeat.",
+       "refs": [
+        "Fig. 138 n."
+       ]
+      },
+      {
+       "html": "A ligature cannot make consecutive octaves acceptable (Fig. 139), but it can make fifths acceptable (Fig. 140): the more perfect the consonance, the less harmony it has, so a dissonance resolving to a fifth is more acceptable than one resolving to an octave.",
+       "text": "A ligature cannot make consecutive octaves acceptable (Fig. 139), but it can make fifths acceptable (Fig. 140): the more perfect the consonance, the less harmony it has, so a dissonance resolving to a fifth is more acceptable than one resolving to an octave."
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "Over a held bass (pedal point), a ligature of dissonances only is “not only correct but even very beautiful.”",
+       "text": "Over a held bass (pedal point), a ligature of dissonances only is “not only correct but even very beautiful.”",
+       "refs": [
+        "Fig. 142"
+       ]
+      },
+      {
+       "html": "The seventh should be accompanied by the third; in exercises the octave may be accepted.",
+       "text": "The seventh should be accompanied by the third; in exercises the octave may be accepted.",
+       "refs": [
+        "p. 99"
+       ]
+      },
+      {
+       "html": "If no ligature is possible, rest a whole bar, or let another voice take the bass for a measure.",
+       "text": "If no ligature is possible, rest a whole bar, or let another voice take the bass for a measure.",
+       "refs": [
+        "Figs. 144–145"
+       ]
+      },
+      {
+       "html": "Hidden fifths between the upper parts can be cured with a rest.",
+       "text": "Hidden fifths between the upper parts can be cured with a rest.",
+       "refs": [
+        "Figs. 152–153"
+       ]
+      },
+      {
+       "html": "Use a ligature in every measure where possible; ligatures are “one of the chief excellences of composition.”",
+       "text": "Use a ligature in every measure where possible; ligatures are “one of the chief excellences of composition.”"
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Figs. 135–138",
+     "html": "Without and with ligatures; a faulty example to show that the consonances stay the same.",
+     "text": "Without and with ligatures; a faulty example to show that the consonances stay the same."
+    },
+    {
+     "fig": "Figs. 139–140",
+     "html": "Octaves versus fifths through a syncopation.",
+     "text": "Octaves versus fifths through a syncopation."
+    },
+    {
+     "fig": "Figs. 141–151",
+     "html": "Exercises; the pedal point; the rest in place of an impossible ligature.",
+     "text": "Exercises; the pedal point; the rest in place of an impossible ligature."
+    }
+   ],
+   "blocks": [
+    {
+     "type": "example",
+     "id": "lig3"
+    },
+    {
+     "type": "workbench",
+     "id": "wb24"
+    }
+   ]
+  },
+  {
+   "id": "p2c5",
+   "part": "part2",
+   "title": "Florid Counterpoint in Three Parts",
+   "eyebrow": "Second Part · Chapter Five · pp. 104–106",
+   "pages": "104–106",
+   "lede": {
+    "html": "A combination of all species in one voice, made as beautiful and singable as possible, over two voices in whole notes.",
+    "text": "A combination of all species in one voice, made as beautiful and singable as possible, over two voices in whole notes."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "Everything from the two-part fifth species and from three-part writing applies; nothing new is needed.",
+       "text": "Everything from the two-part fifth species and from three-part writing applies; nothing new is needed."
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "“Oblique motion usually facilitates the work in any single measure.”",
+       "text": "“Oblique motion usually facilitates the work in any single measure.”",
+       "refs": [
+        "p. 106"
+       ]
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Figs. 154–159",
+     "html": "Florid models with the cantus in each voice.",
+     "text": "Florid models with the cantus in each voice."
+    }
+   ],
+   "blocks": [
+    {
+     "type": "example",
+     "id": "m3s5"
+    },
+    {
+     "type": "workbench",
+     "id": "wb25"
+    }
+   ]
+  },
+  {
+   "id": "p3c1",
+   "part": "part3",
+   "title": "Four Part Composition",
+   "eyebrow": "Third Part · Chapter One · pp. 109–116",
+   "pages": "109–116",
+   "lede": {
+    "html": "The triad is already complete in three parts, so the fourth voice must double one of its consonances.",
+    "text": "The triad is already complete in three parts, so the fourth voice must double one of its consonances."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "A four-part chord consists of <b>third, fifth and octave</b>. If the octave would cause bad progressions, double the third (or, more rarely, another member).",
+       "text": "A four-part chord consists of third, fifth and octave. If the octave would cause bad progressions, double the third (or, more rarely, another member).",
+       "refs": [
+        "p. 109"
+       ]
+      },
+      {
+       "html": "The rules of motion apply from the bass to the other voices <b>and between any two voices</b>, as far as possible.",
+       "text": "The rules of motion apply from the bass to the other voices and between any two voices, as far as possible.",
+       "refs": [
+        "pp. 109–110"
+       ]
+      },
+      {
+       "html": "The nature of an interval is reckoned from the bass; a fourth between inner voices is fine if fifths and octaves are avoided.",
+       "text": "The nature of an interval is reckoned from the bass; a fourth between inner voices is fine if fifths and octaves are avoided.",
+       "refs": [
+        "p. 112"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "Place consonances in their <b>natural order</b>: the fifth low, then the octave, then the third (tenth) highest, as the harmonic division produces them. The third close to the bass sounds dull.",
+       "text": "Place consonances in their natural order: the fifth low, then the octave, then the third (tenth) highest, as the harmonic division produces them. The third close to the bass sounds dull.",
+       "refs": [
+        "Figs. 161–162"
+       ]
+      },
+      {
+       "html": "Hidden fifths or octaves are sometimes forced by the melody, by imitation, or by the cantus firmus; the less one departs from the rules, the better.",
+       "text": "Hidden fifths or octaves are sometimes forced by the melody, by imitation, or by the cantus firmus; the less one departs from the rules, the better.",
+       "refs": [
+        "p. 110"
+       ]
+      },
+      {
+       "html": "“The closer the parts are led together the more perfect the sound”: <i>vis unita fortior</i>.",
+       "text": "“The closer the parts are led together the more perfect the sound”: vis unita fortior.",
+       "refs": [
+        "p. 112"
+       ]
+      },
+      {
+       "html": "Consider whether the first chord allows good progressions to the following measures.",
+       "text": "Consider whether the first chord allows good progressions to the following measures.",
+       "refs": [
+        "p. 111"
+       ]
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Fig. 160",
+     "html": "The model, cantus in the alto, with all intervals shown as simple numbers.",
+     "text": "The model, cantus in the alto, with all intervals shown as simple numbers."
+    },
+    {
+     "fig": "Figs. 161–162",
+     "html": "Natural order (5, 8, 10) versus keyboard order (3, 5, 8).",
+     "text": "Natural order (5, 8, 10) versus keyboard order (3, 5, 8)."
+    },
+    {
+     "fig": "Figs. 163–172",
+     "html": "The other modes with the cantus in each of the four voices.",
+     "text": "The other modes with the cantus in each of the four voices."
+    }
+   ],
+   "blocks": [
+    {
+     "type": "example",
+     "id": "fig160"
+    },
+    {
+     "type": "tool",
+     "id": "triad-order"
+    },
+    {
+     "type": "workbench",
+     "id": "wb31"
+    }
+   ]
+  },
+  {
+   "id": "p3c2",
+   "part": "part3",
+   "title": "Half Notes against Whole Notes",
+   "eyebrow": "Third Part · Chapter Two · pp. 117–119",
+   "pages": "117–119",
+   "lede": {
+    "html": "Two half notes must now agree with three whole notes.",
+    "text": "Two half notes must now agree with three whole notes."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "Everything from three-part half notes and from four-part note against note, as far as the restricted nature of the species permits.",
+       "text": "Everything from three-part half notes and from four-part note against note, as far as the restricted nature of the species permits."
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "Josephus finds this the hardest species, especially the next-to-last bar. Aloysius: the difficulty comes from setting two halves against three whole notes, and it trains a sure use of the consonances.",
+       "text": "Josephus finds this the hardest species, especially the next-to-last bar. Aloysius: the difficulty comes from setting two halves against three whole notes, and it trains a sure use of the consonances."
+      },
+      {
+       "html": "“These lessons are not worked out for actual use but for exercise.”",
+       "text": "“These lessons are not worked out for actual use but for exercise.”",
+       "refs": [
+        "p. 119"
+       ]
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Figs. 173–176",
+     "html": "Models with the half notes in different voices.",
+     "text": "Models with the half notes in different voices."
+    }
+   ],
+   "blocks": [
+    {
+     "type": "example",
+     "id": "m4s2"
+    },
+    {
+     "type": "workbench",
+     "id": "wb32"
+    }
+   ]
+  },
+  {
+   "id": "p3c3",
+   "part": "part3",
+   "title": "Quarters against Whole Notes",
+   "eyebrow": "Third Part · Chapter Three · pp. 120–126",
+   "pages": "120–126",
+   "lede": {
+    "html": "Four quarters concordant with three whole notes.",
+    "text": "Four quarters concordant with three whole notes."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "The rules of the species in two and three parts, applied against three whole notes.",
+       "text": "The rules of the species in two and three parts, applied against three whole notes."
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "Put a <b>complete triad on the first quarter</b>; then let the remaining quarters lead simply to the next bar.",
+       "text": "Put a complete triad on the first quarter; then let the remaining quarters lead simply to the next bar.",
+       "refs": [
+        "p. 122"
+       ]
+      },
+      {
+       "html": "A unison on the downbeat detracts from the harmony; a third that sounds only in passing is too weak.",
+       "text": "A unison on the downbeat detracts from the harmony; a third that sounds only in passing is too weak.",
+       "refs": [
+        "Figs. 177–179"
+       ]
+      },
+      {
+       "html": "Direct motion between perfect consonances may be tolerated out of necessity, better in the inner voices than the outer. Beethoven noted that the progression at B in Fig. 186 “would never be excusable for my ear.”",
+       "text": "Direct motion between perfect consonances may be tolerated out of necessity, better in the inner voices than the outer. Beethoven noted that the progression at B in Fig. 186 “would never be excusable for my ear.”",
+       "refs": [
+        "Figs. 181–182"
+       ]
+      },
+      {
+       "html": "The E mode is the most difficult, lacking its perfect fifth.",
+       "text": "The E mode is the most difficult, lacking its perfect fifth.",
+       "refs": [
+        "p. 124"
+       ]
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Figs. 177–186",
+     "html": "Models in D and E with marked licences (A, B).",
+     "text": "Models in D and E with marked licences (A, B)."
+    }
+   ],
+   "blocks": [
+    {
+     "type": "example",
+     "id": "m4s3"
+    },
+    {
+     "type": "workbench",
+     "id": "wb33"
+    }
+   ]
+  },
+  {
+   "id": "p3c4",
+   "part": "part3",
+   "title": "The Ligature in Four Parts",
+   "eyebrow": "Third Part · Chapter Four · pp. 127–134",
+   "pages": "127–134",
+   "lede": {
+    "html": "Tied notes take the same concords as untied ones, with one important exception.",
+    "text": "Tied notes take the same concords as untied ones, with one important exception."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "Accompany the ligature with the consonances that would be used if it were removed.",
+       "text": "Accompany the ligature with the consonances that would be used if it were removed.",
+       "refs": [
+        "Figs. 187–189"
+       ]
+      },
+      {
+       "html": "When the seventh would sound with the fifth in another voice, <b>divide the whole note</b> in that voice (fifth, then sixth). With the octave there is no need.",
+       "text": "When the seventh would sound with the fifth in another voice, divide the whole note in that voice (fifth, then sixth). With the octave there is no need.",
+       "refs": [
+        "Figs. 190–192"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "The rule of three undivided whole notes cannot be observed strictly here.",
+       "text": "The rule of three undivided whole notes cannot be observed strictly here.",
+       "refs": [
+        "p. 130"
+       ]
+      },
+      {
+       "html": "A fourth in the inner voices is barely prominent and acts like an imperfect consonance.",
+       "text": "A fourth in the inner voices is barely prominent and acts like an imperfect consonance.",
+       "refs": [
+        "Fig. 194"
+       ]
+      },
+      {
+       "html": "Double the second rather than the fourth, so the resolution yields a complete harmony of third, fifth and octave.",
+       "text": "Double the second rather than the fourth, so the resolution yields a complete harmony of third, fifth and octave.",
+       "refs": [
+        "Figs. 198–199"
+       ]
+      },
+      {
+       "html": "Slight lapses are allowed: the student learns how one may depart, if need be, from the strict rules.",
+       "text": "Slight lapses are allowed: the student learns how one may depart, if need be, from the strict rules.",
+       "refs": [
+        "p. 134"
+       ]
+      }
+     ]
+    }
+   ],
+   "bookFigures": [
+    {
+     "fig": "Figs. 187–199",
+     "html": "Concords for tied notes; the divided whole note; models.",
+     "text": "Concords for tied notes; the divided whole note; models."
+    }
+   ],
+   "blocks": [
+    {
+     "type": "example",
+     "id": "m4s4"
+    },
+    {
+     "type": "workbench",
+     "id": "wb34"
+    }
+   ]
+  },
+  {
+   "id": "p3c5",
+   "part": "part3",
+   "title": "Florid Counterpoint in Four Parts",
+   "eyebrow": "Third Part · Chapter Five · pp. 135–139",
+   "pages": "135–139",
+   "lede": {
+    "html": "The florid voice moves over three voices in whole notes, by the principles of four-part writing. The book ends here.",
+    "text": "The florid voice moves over three voices in whole notes, by the principles of four-part writing. The book ends here."
+   },
+   "ruleBoxes": [
+    {
+     "kind": "rules",
+     "title": "ules",
+     "items": [
+      {
+       "html": "The other voices remain in whole notes wherever possible; divide them only where necessary.",
+       "text": "The other voices remain in whole notes wherever possible; divide them only where necessary.",
+       "refs": [
+        "p. 136"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "guidelines",
+     "title": "uidelines",
+     "items": [
+      {
+       "html": "Once the species are mastered singly, combine them: halves, quarters and ligatures in different voices over the same cantus, “so that each part will have its own characteristic motion.”",
+       "text": "Once the species are mastered singly, combine them: halves, quarters and ligatures in different voices over the same cantus, “so that each part will have its own characteristic motion.”",
+       "refs": [
+        "Fig. 204"
+       ]
+      },
+      {
+       "html": "Use the fourfold interchange of the cantus; find new cantus firmi; spend “a year or two” on these exercises before free composition.",
+       "text": "Use the fourfold interchange of the cantus; find new cantus firmi; spend “a year or two” on these exercises before free composition."
+      },
+      {
+       "html": "For more than four voices, “the rules are to be less rigorously observed.”",
+       "text": "For more than four voices, “the rules are to be less rigorously observed.”"
+      }
+     ]
+    }
+   ],
+   "quotes": [
+    "“The mountain of the muses is to be reached only by a very precipitous path.” (p. 138)"
+   ],
+   "bookFigures": [
+    {
+     "fig": "Figs. 200–204",
+     "html": "Florid models; Fig. 204 combines halves, quarters and ligatures.",
+     "text": "Florid models; Fig. 204 combines halves, quarters and ligatures."
+    }
+   ],
+   "blocks": [
+    {
+     "type": "example",
+     "id": "m4s5"
+    },
+    {
+     "type": "workbench",
+     "id": "wb35"
+    }
+   ]
+  },
+  {
+   "id": "appendix",
+   "part": "part3",
+   "title": "Appendix: Harmonic and Arithmetical Division",
+   "eyebrow": "Back matter · pp. 141–143",
+   "pages": "141–143",
+   "lede": {
+    "html": "Fux derives the intervals and their ranking by dividing the octave on the monochord.",
+    "text": "Fux derives the intervals and their ranking by dividing the octave on the monochord."
+   },
+   "prose": [
+    {
+     "html": "<b>Arithmetical proportion</b> 4:3:2 (equal differences) splits the octave into a fourth below and a fifth above. Here the fourth sits on the bass and counts as a dissonance. <b>Harmonic proportion</b> 6:4:3 (equal differences of reciprocals) splits it into a fifth below and a fourth above; here the fourth is not against the bass and may be treated as an imperfect consonance.",
+     "text": "Arithmetical proportion 4:3:2 (equal differences) splits the octave into a fourth below and a fifth above. Here the fourth sits on the bass and counts as a dissonance. Harmonic proportion 6:4:3 (equal differences of reciprocals) splits it into a fifth below and a fourth above; here the fourth is not against the bass and may be treated as an imperfect consonance."
+    },
+    {
+     "html": "Dividing the fifth harmonically (15:12:10) gives a major third below and a minor third above. The sequence octave → fifth → major third is the <b>natural order</b> Fux uses for spacing chords (Fig. 161) and for the closing chords of old polyphony. Mann adds that the overtone series (C c g c′ e′ g′) shows the same order with reciprocal numbers.",
+     "text": "Dividing the fifth harmonically (15:12:10) gives a major third below and a minor third above. The sequence octave → fifth → major third is the natural order Fux uses for spacing chords (Fig. 161) and for the closing chords of old polyphony. Mann adds that the overtone series (C c g c′ e′ g′) shows the same order with reciprocal numbers."
+    }
+   ],
+   "blocks": [
+    {
+     "type": "tool",
+     "id": "monochord"
+    }
+   ]
+  },
+  {
+   "id": "cheat",
+   "part": "part3",
+   "title": "The Species at a Glance",
+   "eyebrow": "Quick reference",
+   "table": {
+    "columns": [
+     "Species",
+     "Rhythm against the cantus",
+     "Downbeat",
+     "Other beats",
+     "Typical cadence"
+    ],
+    "rows": [
+     [
+      "1st",
+      "𝅝 against 𝅝",
+      "consonant",
+      "none",
+      "6–8 (cantus below) · 3–1 (cantus above)"
+     ],
+     [
+      "2nd",
+      "𝅗𝅥 𝅗𝅥 against 𝅝, may begin with a half rest",
+      "consonant",
+      "upbeat dissonant only as a passing note filling a third",
+      "5–6–8 · 5–3–1"
+     ],
+     [
+      "3rd",
+      "♩♩♩♩ against 𝅝",
+      "consonant",
+      "passing dissonances on 2, 3 or 4; cambiata on 2",
+      "stepwise into 6–8 / 3–1 (Figs. 53–54)"
+     ],
+     [
+      "4th",
+      "𝅗𝅥 tied across the bar line",
+      "may be a suspension: 7–6, 4–3, 9–8 above; 2–3, 4–5, 9–10 below",
+      "upbeat always consonant",
+      "7–6–8 · 2–3–1"
+     ],
+     [
+      "5th",
+      "mixture; eighths only in pairs on 2 or 4",
+      "consonant or prepared suspension",
+      "as in species 2–4",
+      "usually the 4th-species cadence, often ornamented"
+     ],
+     [
+      "3 parts",
+      "as above, other voices in 𝅝",
+      "consonant with the bass; triad if possible",
+      "as above, concordant with both whole notes",
+      "final chord without the third (major third if needed)"
+     ],
+     [
+      "4 parts",
+      "as above, other voices in 𝅝",
+      "third, fifth and octave; natural order",
+      "concordant with three whole notes",
+      "perfect consonances, third allowed when needed"
+     ]
+    ]
+   },
+   "notes": [
+    {
+     "html": "About the sound: the harpsichord is synthesized in your browser with a plucked-string model (one or two 8′ choirs, a 4′ choir, and a lute stop), so nothing is downloaded. The pitch is equal-tempered at A = 440.",
+     "text": "About the sound: the harpsichord is synthesized in your browser with a plucked-string model (one or two 8′ choirs, a 4′ choir, and a lute stop), so nothing is downloaded. The pitch is equal-tempered at A = 440."
+    },
+    {
+     "html": "About the checker: it encodes the rules listed in each chapter. “Rules” stop a solution; “guidelines” are reported but allowed. Fux himself bends guidelines in his models, and in three and four parts he tolerates some direct motion when nothing better is possible. The checker reports those cases as guidelines.",
+     "text": "About the checker: it encodes the rules listed in each chapter. “Rules” stop a solution; “guidelines” are reported but allowed. Fux himself bends guidelines in his models, and in three and four parts he tolerates some direct motion when nothing better is possible. The checker reports those cases as guidelines."
+    }
+   ]
+  }
+ ],
+ "examples": {
+  "fig5": {
+   "fig": "Fig. 5",
+   "title": "Josephus’s first counterpoint, above the cantus in D",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "B4",
+       "d": 1
+      },
+      {
+       "p": "C5",
+       "d": 1
+      },
+      {
+       "p": "C5",
+       "d": 1
+      },
+      {
+       "p": "B4",
+       "d": 1
+      },
+      {
+       "p": "D5",
+       "d": 1
+      },
+      {
+       "p": "C#5",
+       "d": 1
+      },
+      {
+       "p": "D5",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 1,
+     "notes": [
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      }
+     ]
+    }
+   ],
+   "caption": "Fifth at the start; 5→3 by oblique motion (the only use of repetition); 3→3 parallel; 3→5 contrary; 6–8 at the cadence with the raised C♯. Numbers between the staves are the intervals: blue = perfect, grey = imperfect.",
+   "engineResult": []
+  },
+  "fig6": {
+   "fig": "After Fig. 6",
+   "title": "Counterpoint below: two mistakes, then the correction",
+   "voices": [
+    {
+     "role": "cf",
+     "species": 1,
+     "notes": [
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "p": "G3",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "F3",
+       "d": 1
+      },
+      {
+       "p": "E3",
+       "d": 1
+      },
+      {
+       "p": "D3",
+       "d": 1
+      },
+      {
+       "p": "F3",
+       "d": 1
+      },
+      {
+       "p": "G3",
+       "d": 1
+      },
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "C#4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      }
+     ]
+    }
+   ],
+   "autoCheck": true,
+   "toggle": {
+    "label": "Apply Aloysius’s correction",
+    "alt": [
+     {
+      "role": "cf",
+      "species": 1,
+      "notes": [
+       {
+        "p": "D4",
+        "d": 1
+       },
+       {
+        "p": "F4",
+        "d": 1
+       },
+       {
+        "p": "E4",
+        "d": 1
+       },
+       {
+        "p": "D4",
+        "d": 1
+       },
+       {
+        "p": "G4",
+        "d": 1
+       },
+       {
+        "p": "F4",
+        "d": 1
+       },
+       {
+        "p": "A4",
+        "d": 1
+       },
+       {
+        "p": "G4",
+        "d": 1
+       },
+       {
+        "p": "F4",
+        "d": 1
+       },
+       {
+        "p": "E4",
+        "d": 1
+       },
+       {
+        "p": "D4",
+        "d": 1
+       }
+      ]
+     },
+     {
+      "role": "cpt",
+      "species": 1,
+      "notes": [
+       {
+        "p": "D3",
+        "d": 1
+       },
+       {
+        "p": "D3",
+        "d": 1
+       },
+       {
+        "p": "A3",
+        "d": 1
+       },
+       {
+        "p": "F3",
+        "d": 1
+       },
+       {
+        "p": "E3",
+        "d": 1
+       },
+       {
+        "p": "D3",
+        "d": 1
+       },
+       {
+        "p": "F3",
+        "d": 1
+       },
+       {
+        "p": "G3",
+        "d": 1
+       },
+       {
+        "p": "A3",
+        "d": 1
+       },
+       {
+        "p": "C#4",
+        "d": 1
+       },
+       {
+        "p": "D4",
+        "d": 1
+       }
+      ]
+     }
+    ],
+    "autoCheck": true,
+    "engineResult": [
+     {
+      "level": "warn",
+      "rule": "battuta",
+      "v": 1,
+      "t": 7
+     }
+    ]
+   },
+   "caption": "As in Fux’s Fig. 6, the first attempt opens a fifth below (outside the mode) and moves from a third to a fifth in direct motion. The correction starts on the octave and stays on the low D, so a tenth moves to the fifth by contrary motion.",
+   "engineResult": [
+    {
+     "level": "error",
+     "rule": "begin-mode",
+     "v": 1,
+     "t": 0
+    },
+    {
+     "level": "error",
+     "rule": "direct",
+     "v": 1,
+     "t": 2
+    },
+    {
+     "level": "warn",
+     "rule": "leaps",
+     "v": 1,
+     "t": 3
+    },
+    {
+     "level": "warn",
+     "rule": "battuta",
+     "v": 1,
+     "t": 7
+    }
+   ]
+  },
+  "fig7": {
+   "fig": "After Figs. 7–8",
+   "title": "Hidden fifths revealed by diminution",
+   "check": false,
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D5",
+       "d": 1
+      },
+      {
+       "p": "E5",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      }
+     ]
+    }
+   ],
+   "toggle": {
+    "label": "Fill in the skips (diminution)",
+    "alt": [
+     {
+      "role": "cpt",
+      "species": 1,
+      "notes": [
+       {
+        "p": "F4",
+        "d": 1
+       },
+       {
+        "p": "E4",
+        "d": 1
+       },
+       {
+        "p": "D5",
+        "d": 1
+       },
+       {
+        "p": "E5",
+        "d": 1
+       }
+      ]
+     },
+     {
+      "role": "cpt",
+      "species": 1,
+      "notes": [
+       {
+        "p": "D4",
+        "d": 0.5
+       },
+       {
+        "p": "C4",
+        "d": 0.25
+       },
+       {
+        "p": "Bb3",
+        "d": 0.25
+       },
+       {
+        "p": "A3",
+        "d": 1
+       },
+       {
+        "p": "D4",
+        "d": 0.25
+       },
+       {
+        "p": "E4",
+        "d": 0.25
+       },
+       {
+        "p": "F4",
+        "d": 0.25
+       },
+       {
+        "p": "G4",
+        "d": 0.25
+       },
+       {
+        "p": "A4",
+        "d": 1
+       }
+      ]
+     }
+    ]
+   },
+   "caption": "Bars 1–2: a third moves to a fifth by direct motion (Fig. 7). Bars 3–4: an octave moves to a fifth by direct motion (Fig. 8). Fill in the skip the way a singer would ornament it, and two real fifths appear (B♭–F → A–E; G–D → A–E). “The lawgivers of an art have set down nothing pointlessly.”"
+  },
+  "fig16": {
+   "fig": "After Figs. 16–20",
+   "title": "Octaves and unisons approached by contrary motion",
+   "check": false,
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "p": "C5",
+       "d": 1
+      },
+      {
+       "p": "B4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "E5",
+       "d": 1
+      },
+      {
+       "p": "C5",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "C4",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "B3",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "G3",
+       "d": 1
+      },
+      {
+       "p": "C4",
+       "d": 1
+      },
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "C4",
+       "d": 1
+      }
+     ]
+    }
+   ],
+   "caption": "Bars 1–2: <i>ottava battuta</i>, a tenth to an octave by contrary steps. Fux “has long searched for the reason” it is forbidden and leaves it to your discretion. Bars 3–4: a unison reached from a third; the unison is avoided except at the start and end. Bars 5–6 and 7–8: an octave and a unison reached by skips from a remote consonance, “not to be tolerated even in composition for more than two voices.”"
+  },
+  "fig33": {
+   "fig": "Fig. 33",
+   "title": "Second species above the cantus, corrected",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 2,
+     "notes": [
+      {
+       "p": "A4",
+       "d": 0.5
+      },
+      {
+       "p": "D5",
+       "d": 0.5
+      },
+      {
+       "p": "A4",
+       "d": 0.5
+      },
+      {
+       "p": "B4",
+       "d": 0.5
+      },
+      {
+       "p": "C5",
+       "d": 0.5
+      },
+      {
+       "p": "G4",
+       "d": 0.5
+      },
+      {
+       "p": "A4",
+       "d": 0.5
+      },
+      {
+       "p": "D5",
+       "d": 0.5
+      },
+      {
+       "p": "B4",
+       "d": 0.5
+      },
+      {
+       "p": "C5",
+       "d": 0.5
+      },
+      {
+       "p": "D5",
+       "d": 0.5
+      },
+      {
+       "p": "A4",
+       "d": 0.5
+      },
+      {
+       "p": "C5",
+       "d": 0.5
+      },
+      {
+       "p": "D5",
+       "d": 0.5
+      },
+      {
+       "p": "E5",
+       "d": 0.5
+      },
+      {
+       "p": "B4",
+       "d": 0.5
+      },
+      {
+       "p": "D5",
+       "d": 0.5
+      },
+      {
+       "p": "A4",
+       "d": 0.5
+      },
+      {
+       "p": "B4",
+       "d": 0.5
+      },
+      {
+       "p": "C#5",
+       "d": 0.5
+      },
+      {
+       "p": "D5",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 1,
+     "notes": [
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      }
+     ]
+    }
+   ],
+   "caption": "Upbeat dissonances (red figures) are all passing notes filling a third: A–B–C in bar 2, B–C–D in bar 5 and so on. The cadence is 5–6–8.",
+   "engineResult": []
+  },
+  "fig35": {
+   "fig": "Fig. 35",
+   "title": "Second species below, beginning with a half rest",
+   "voices": [
+    {
+     "role": "cf",
+     "species": 1,
+     "notes": [
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 2,
+     "notes": [
+      {
+       "d": 0.5,
+       "rest": 1
+      },
+      {
+       "p": "D3",
+       "d": 0.5
+      },
+      {
+       "p": "D4",
+       "d": 0.5
+      },
+      {
+       "p": "A3",
+       "d": 0.5
+      },
+      {
+       "p": "C4",
+       "d": 0.5
+      },
+      {
+       "p": "A3",
+       "d": 0.5
+      },
+      {
+       "p": "B3",
+       "d": 0.5
+      },
+      {
+       "p": "A3",
+       "d": 0.5
+      },
+      {
+       "p": "G3",
+       "d": 0.5
+      },
+      {
+       "p": "B3",
+       "d": 0.5
+      },
+      {
+       "p": "D4",
+       "d": 0.5
+      },
+      {
+       "p": "E4",
+       "d": 0.5
+      },
+      {
+       "p": "F4",
+       "d": 0.5
+      },
+      {
+       "p": "C4",
+       "d": 0.5
+      },
+      {
+       "p": "E4",
+       "d": 0.5
+      },
+      {
+       "p": "B3",
+       "d": 0.5
+      },
+      {
+       "p": "D4",
+       "d": 0.5
+      },
+      {
+       "p": "D3",
+       "d": 0.5
+      },
+      {
+       "p": "A3",
+       "d": 0.5
+      },
+      {
+       "p": "C#4",
+       "d": 0.5
+      },
+      {
+       "p": "D4",
+       "d": 1
+      }
+     ]
+    }
+   ],
+   "caption": "Below the cantus the cadence becomes 5–3–1 (with C♯ as the minor third below E). Note the octave skip in bar 9 that makes room.",
+   "engineResult": [
+    {
+     "level": "warn",
+     "rule": "leaps",
+     "v": 1,
+     "t": 9.5
+    },
+    {
+     "level": "warn",
+     "rule": "comp",
+     "v": 1,
+     "t": 9.5
+    }
+   ]
+  },
+  "skip3": {
+   "fig": "After Figs. 26–32",
+   "title": "Does a skip hide fifths between downbeats?",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 2,
+     "notes": [
+      {
+       "p": "D5",
+       "d": 0.5
+      },
+      {
+       "p": "B4",
+       "d": 0.5
+      },
+      {
+       "p": "E5",
+       "d": 0.5
+      },
+      {
+       "p": "C5",
+       "d": 0.5
+      },
+      {
+       "p": "C5",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 1,
+     "notes": [
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      }
+     ]
+    }
+   ],
+   "only": [
+    "dd",
+    "par5",
+    "par8",
+    "direct",
+    "diss",
+    "acc-diss"
+   ],
+   "autoCheck": true,
+   "toggle": {
+    "label": "Skip a fourth instead",
+    "alt": [
+     {
+      "role": "cpt",
+      "species": 2,
+      "notes": [
+       {
+        "p": "D5",
+        "d": 0.5
+       },
+       {
+        "p": "G5",
+        "d": 0.5
+       },
+       {
+        "p": "E5",
+        "d": 0.5
+       },
+       {
+        "p": "C5",
+        "d": 0.5
+       },
+       {
+        "p": "C5",
+        "d": 1
+       }
+      ]
+     },
+     {
+      "role": "cf",
+      "species": 1,
+      "notes": [
+       {
+        "p": "G4",
+        "d": 1
+       },
+       {
+        "p": "A4",
+        "d": 1
+       },
+       {
+        "p": "F4",
+        "d": 1
+       }
+      ]
+     }
+    ],
+    "autoCheck": true,
+    "engineResult": []
+   },
+   "caption": "D–G and E–A are fifths on two downbeats. With a skip of a third (D–B) the ear still links them, so they count as consecutive fifths. With a skip of a fourth (D–G) the distance makes the ear “forget” the first downbeat (Figs. 30–32).",
+   "engineResult": [
+    {
+     "level": "error",
+     "rule": "dd",
+     "v": 0,
+     "t": 1
+    },
+    {
+     "level": "error",
+     "rule": "direct",
+     "v": 0,
+     "t": 1
+    }
+   ]
+  },
+  "fig55": {
+   "fig": "Fig. 55",
+   "title": "Third species above the cantus in D",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 3,
+     "notes": [
+      {
+       "p": "D4",
+       "d": 0.25
+      },
+      {
+       "p": "E4",
+       "d": 0.25
+      },
+      {
+       "p": "F4",
+       "d": 0.25
+      },
+      {
+       "p": "G4",
+       "d": 0.25
+      },
+      {
+       "p": "A4",
+       "d": 0.25
+      },
+      {
+       "p": "B4",
+       "d": 0.25
+      },
+      {
+       "p": "C5",
+       "d": 0.25
+      },
+      {
+       "p": "D5",
+       "d": 0.25
+      },
+      {
+       "p": "E5",
+       "d": 0.25
+      },
+      {
+       "p": "D5",
+       "d": 0.25
+      },
+      {
+       "p": "B4",
+       "d": 0.25
+      },
+      {
+       "p": "C5",
+       "d": 0.25
+      },
+      {
+       "p": "D5",
+       "d": 0.25
+      },
+      {
+       "p": "C5",
+       "d": 0.25
+      },
+      {
+       "p": "Bb4",
+       "d": 0.25
+      },
+      {
+       "p": "A4",
+       "d": 0.25
+      },
+      {
+       "p": "Bb4",
+       "d": 0.25
+      },
+      {
+       "p": "C5",
+       "d": 0.25
+      },
+      {
+       "p": "D5",
+       "d": 0.25
+      },
+      {
+       "p": "E5",
+       "d": 0.25
+      },
+      {
+       "p": "F5",
+       "d": 0.25
+      },
+      {
+       "p": "F4",
+       "d": 0.25
+      },
+      {
+       "p": "A4",
+       "d": 0.25
+      },
+      {
+       "p": "B4",
+       "d": 0.25
+      },
+      {
+       "p": "C5",
+       "d": 0.25
+      },
+      {
+       "p": "A4",
+       "d": 0.25
+      },
+      {
+       "p": "Bb4",
+       "d": 0.25
+      },
+      {
+       "p": "C5",
+       "d": 0.25
+      },
+      {
+       "p": "Bb4",
+       "d": 0.25
+      },
+      {
+       "p": "A4",
+       "d": 0.25
+      },
+      {
+       "p": "G4",
+       "d": 0.25
+      },
+      {
+       "p": "Bb4",
+       "d": 0.25
+      },
+      {
+       "p": "A4",
+       "d": 0.25
+      },
+      {
+       "p": "D4",
+       "d": 0.25
+      },
+      {
+       "p": "E4",
+       "d": 0.25
+      },
+      {
+       "p": "F4",
+       "d": 0.25
+      },
+      {
+       "p": "G4",
+       "d": 0.25
+      },
+      {
+       "p": "A4",
+       "d": 0.25
+      },
+      {
+       "p": "B4",
+       "d": 0.25
+      },
+      {
+       "p": "C#5",
+       "d": 0.25
+      },
+      {
+       "p": "D5",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 1,
+     "notes": [
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      }
+     ]
+    }
+   ],
+   "caption": "Bar 1 shows the stepwise pattern of Fig. 47: 1 consonant, 2 dissonant, 3 consonant, 4 dissonant. Bar 3 (8–7–5–6) is a cambiata: the dissonant seventh skips down a third to the fifth. B♭ appears where B would make mi contra fa against F.",
+   "engineResult": [
+    {
+     "level": "warn",
+     "rule": "dd",
+     "v": 0,
+     "t": 3
+    }
+   ]
+  },
+  "cambiata": {
+   "fig": "After Fig. 50",
+   "title": "The nota cambiata",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 3,
+     "notes": [
+      {
+       "p": "E5",
+       "d": 0.25
+      },
+      {
+       "p": "D5",
+       "d": 0.25
+      },
+      {
+       "p": "B4",
+       "d": 0.25
+      },
+      {
+       "p": "C5",
+       "d": 0.25
+      },
+      {
+       "p": "A4",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 1,
+     "notes": [
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      }
+     ]
+    }
+   ],
+   "only": [
+    "diss",
+    "acc-diss",
+    "susp",
+    "susp-perf"
+   ],
+   "autoCheck": true,
+   "caption": "8–7–5–6: the second quarter (D, a seventh) is dissonant and skips a third down to a consonance, then the line turns up by step. Strictly the skip belongs between the 1st and 2nd notes (Fig. 51), but filling it would need eighth notes, so the masters approved this form.",
+   "engineResult": []
+  },
+  "fig73": {
+   "fig": "Fig. 73",
+   "title": "Fourth species above the cantus in D",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 4,
+     "notes": [
+      {
+       "d": 0.5,
+       "rest": 1
+      },
+      {
+       "p": "A4",
+       "d": 0.5,
+       "tie": 1
+      },
+      {
+       "p": "A4",
+       "d": 0.5
+      },
+      {
+       "p": "D5",
+       "d": 0.5,
+       "tie": 1
+      },
+      {
+       "p": "D5",
+       "d": 0.5
+      },
+      {
+       "p": "C5",
+       "d": 0.5,
+       "tie": 1
+      },
+      {
+       "p": "C5",
+       "d": 0.5
+      },
+      {
+       "p": "Bb4",
+       "d": 0.5,
+       "tie": 1
+      },
+      {
+       "p": "Bb4",
+       "d": 0.5
+      },
+      {
+       "p": "G4",
+       "d": 0.5
+      },
+      {
+       "p": "A4",
+       "d": 0.5
+      },
+      {
+       "p": "C5",
+       "d": 0.5,
+       "tie": 1
+      },
+      {
+       "p": "C5",
+       "d": 0.5
+      },
+      {
+       "p": "F5",
+       "d": 0.5,
+       "tie": 1
+      },
+      {
+       "p": "F5",
+       "d": 0.5
+      },
+      {
+       "p": "E5",
+       "d": 0.5,
+       "tie": 1
+      },
+      {
+       "p": "E5",
+       "d": 0.5
+      },
+      {
+       "p": "D5",
+       "d": 0.5,
+       "tie": 1
+      },
+      {
+       "p": "D5",
+       "d": 0.5
+      },
+      {
+       "p": "C#5",
+       "d": 0.5
+      },
+      {
+       "p": "D5",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 1,
+     "notes": [
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      }
+     ]
+    }
+   ],
+   "caption": "Upbeats consonant; downbeat sevenths (red) resolve down to sixths. Bar 5 drops the ligature: Josephus avoided repeating the ligature of bars 3–4. The cadence is 7–6–8.",
+   "engineResult": [
+    {
+     "level": "warn",
+     "rule": "leaps",
+     "v": 0,
+     "t": 6.5
+    }
+   ]
+  },
+  "eighths": {
+   "fig": "After Fig. 81",
+   "title": "Where eighth notes may go",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 5,
+     "notes": [
+      {
+       "p": "A4",
+       "d": 0.25
+      },
+      {
+       "p": "B4",
+       "d": 0.125
+      },
+      {
+       "p": "C5",
+       "d": 0.125
+      },
+      {
+       "p": "D5",
+       "d": 0.5
+      },
+      {
+       "p": "E5",
+       "d": 0.125
+      },
+      {
+       "p": "D5",
+       "d": 0.125
+      },
+      {
+       "p": "C5",
+       "d": 0.25
+      },
+      {
+       "p": "G4",
+       "d": 0.5
+      },
+      {
+       "p": "F#4",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 1,
+     "notes": [
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "C4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      }
+     ]
+    }
+   ],
+   "only": [
+    "eighth"
+   ],
+   "autoCheck": true,
+   "caption": "Bar 1: a pair of eighths on the 2nd quarter, moving by step, is good. Bar 2: eighths on the 1st quarter are bad. They are allowed on the 2nd and 4th quarters, never on the 1st and 3rd.",
+   "engineResult": [
+    {
+     "level": "error",
+     "rule": "eighth",
+     "v": 0,
+     "t": 1
+    }
+   ]
+  },
+  "fig101": {
+   "fig": "Fig. 101",
+   "title": "Three parts, note against note: cantus on top",
+   "figures": "bass",
+   "voices": [
+    {
+     "role": "cf",
+     "species": 1,
+     "notes": [
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "p": "F3",
+       "d": 1
+      },
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "C4",
+       "d": 1
+      },
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "B3",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "C4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "C#4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "p": "D3",
+       "d": 1
+      },
+      {
+       "p": "D3",
+       "d": 1
+      },
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "F3",
+       "d": 1
+      },
+      {
+       "p": "E3",
+       "d": 1
+      },
+      {
+       "p": "D3",
+       "d": 1
+      },
+      {
+       "p": "F3",
+       "d": 1
+      },
+      {
+       "p": "C3",
+       "d": 1
+      },
+      {
+       "p": "D3",
+       "d": 1
+      },
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "D3",
+       "d": 1
+      }
+     ]
+    }
+   ],
+   "caption": "The harmonic triad stands in almost every bar (figures under the bass). Bars 7–8: the outer voices move into a fifth by direct motion, which Fux allows “if there is no other possibility, in order to avoid a worse awkwardness.” The final chord has no third.",
+   "engineResult": [
+    {
+     "level": "warn",
+     "rule": "direct",
+     "v": 2,
+     "t": 7
+    },
+    {
+     "level": "warn",
+     "rule": "direct",
+     "v": 2,
+     "t": 10
+    }
+   ]
+  },
+  "fig160": {
+   "fig": "Fig. 160",
+   "title": "Four parts: the model, cantus in the alto",
+   "figures": "bass",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "C5",
+       "d": 1
+      },
+      {
+       "p": "B4",
+       "d": 1
+      },
+      {
+       "p": "B4",
+       "d": 1
+      },
+      {
+       "p": "D5",
+       "d": 1
+      },
+      {
+       "p": "C5",
+       "d": 1
+      },
+      {
+       "p": "E5",
+       "d": 1
+      },
+      {
+       "p": "D5",
+       "d": 1
+      },
+      {
+       "p": "C#5",
+       "d": 1
+      },
+      {
+       "p": "D5",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 1,
+     "notes": [
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "A4",
+       "d": 1
+      },
+      {
+       "p": "G4",
+       "d": 1
+      },
+      {
+       "p": "F4",
+       "d": 1
+      },
+      {
+       "p": "E4",
+       "d": 1
+      },
+      {
+       "p": "D4",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "F3",
+       "d": 1
+      },
+      {
+       "p": "G3",
+       "d": 1
+      },
+      {
+       "p": "G3",
+       "d": 1
+      },
+      {
+       "p": "G3",
+       "d": 1
+      },
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "C4",
+       "d": 1
+      },
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "A3",
+       "d": 1
+      },
+      {
+       "p": "A3",
+       "d": 1
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "p": "D3",
+       "d": 1
+      },
+      {
+       "p": "D3",
+       "d": 1
+      },
+      {
+       "p": "C3",
+       "d": 1
+      },
+      {
+       "p": "G3",
+       "d": 1
+      },
+      {
+       "p": "E3",
+       "d": 1
+      },
+      {
+       "p": "D3",
+       "d": 1
+      },
+      {
+       "p": "F3",
+       "d": 1
+      },
+      {
+       "p": "C3",
+       "d": 1
+      },
+      {
+       "p": "D3",
+       "d": 1
+      },
+      {
+       "p": "A2",
+       "d": 1
+      },
+      {
+       "p": "D3",
+       "d": 1
+      }
+     ]
+    }
+   ],
+   "caption": "Each chord holds third, fifth and octave where possible. Fux numbers all intervals as simple numbers “so that the doubling of the consonances might be plainer to the eye.” Bar 4 has a fourth between inner voices, which is acceptable because intervals are reckoned from the bass.",
+   "engineResult": [
+    {
+     "level": "warn",
+     "rule": "unison-m",
+     "v": 3,
+     "t": 3
+    },
+    {
+     "level": "warn",
+     "rule": "rep",
+     "v": 2,
+     "t": 4
+    },
+    {
+     "level": "warn",
+     "rule": "direct",
+     "v": 0,
+     "t": 10
+    },
+    {
+     "level": "warn",
+     "rule": "rep",
+     "v": 2,
+     "t": 10
+    }
+   ]
+  },
+  "florid2": {
+   "fig": "Model",
+   "title": "Florid counterpoint over the cantus in D (compare Figs. 82–83)",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 5,
+     "notes": [
+      {
+       "d": 0.5,
+       "rest": 1
+      },
+      {
+       "d": 0.5,
+       "p": "D5",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "F5"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.5,
+       "p": "C5",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "Bb4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "G4"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.5,
+       "p": "A4"
+      },
+      {
+       "d": 0.5,
+       "p": "C5",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "E5"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.125,
+       "p": "A4"
+      },
+      {
+       "d": 0.125,
+       "p": "B4"
+      },
+      {
+       "d": 0.5,
+       "p": "D5"
+      },
+      {
+       "d": 0.5,
+       "p": "A4"
+      },
+      {
+       "d": 0.5,
+       "p": "D5",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "D5"
+      },
+      {
+       "d": 0.5,
+       "p": "C#5"
+      },
+      {
+       "d": 1,
+       "p": "D5"
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 0,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "A4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      }
+     ]
+    }
+   ],
+   "toggle": {
+    "label": "Cantus above instead",
+    "alt": [
+     {
+      "role": "cf",
+      "species": 0,
+      "notes": [
+       {
+        "d": 1,
+        "p": "D4"
+       },
+       {
+        "d": 1,
+        "p": "F4"
+       },
+       {
+        "d": 1,
+        "p": "E4"
+       },
+       {
+        "d": 1,
+        "p": "D4"
+       },
+       {
+        "d": 1,
+        "p": "G4"
+       },
+       {
+        "d": 1,
+        "p": "F4"
+       },
+       {
+        "d": 1,
+        "p": "A4"
+       },
+       {
+        "d": 1,
+        "p": "G4"
+       },
+       {
+        "d": 1,
+        "p": "F4"
+       },
+       {
+        "d": 1,
+        "p": "E4"
+       },
+       {
+        "d": 1,
+        "p": "D4"
+       }
+      ]
+     },
+     {
+      "role": "cpt",
+      "species": 5,
+      "notes": [
+       {
+        "d": 0.5,
+        "rest": 1
+       },
+       {
+        "d": 0.5,
+        "p": "D3",
+        "tie": 1
+       },
+       {
+        "d": 0.5,
+        "p": "D3"
+       },
+       {
+        "d": 0.25,
+        "p": "E3"
+       },
+       {
+        "d": 0.25,
+        "p": "F3"
+       },
+       {
+        "d": 0.25,
+        "p": "G3"
+       },
+       {
+        "d": 0.25,
+        "p": "A3"
+       },
+       {
+        "d": 0.5,
+        "p": "G3",
+        "tie": 1
+       },
+       {
+        "d": 0.5,
+        "p": "G3"
+       },
+       {
+        "d": 0.25,
+        "p": "A3"
+       },
+       {
+        "d": 0.25,
+        "p": "B3"
+       },
+       {
+        "d": 0.25,
+        "p": "E4"
+       },
+       {
+        "d": 0.25,
+        "p": "D4"
+       },
+       {
+        "d": 0.25,
+        "p": "C4"
+       },
+       {
+        "d": 0.25,
+        "p": "E4"
+       },
+       {
+        "d": 0.5,
+        "p": "D4"
+       },
+       {
+        "d": 0.5,
+        "p": "F4",
+        "tie": 1
+       },
+       {
+        "d": 0.5,
+        "p": "F4"
+       },
+       {
+        "d": 0.25,
+        "p": "E4"
+       },
+       {
+        "d": 0.25,
+        "p": "D4"
+       },
+       {
+        "d": 0.25,
+        "p": "E4"
+       },
+       {
+        "d": 0.125,
+        "p": "D4"
+       },
+       {
+        "d": 0.125,
+        "p": "E4"
+       },
+       {
+        "d": 0.5,
+        "p": "C4"
+       },
+       {
+        "d": 0.5,
+        "p": "D4"
+       },
+       {
+        "d": 0.5,
+        "p": "A3",
+        "tie": 1
+       },
+       {
+        "d": 0.5,
+        "p": "A3"
+       },
+       {
+        "d": 0.5,
+        "p": "C#4"
+       },
+       {
+        "d": 1,
+        "p": "D4"
+       }
+      ]
+     }
+    ],
+    "engineResult": []
+   },
+   "caption": "Halves, quarters, ligatures and a pair of eighths. Written for this guide and checked by the rule engine; play it, then compare with Fux’s models on pp. 64–65.",
+   "engineResult": []
+  },
+  "m3s2": {
+   "fig": "Model",
+   "title": "Half notes in the middle voice, cantus on top (compare Fig. 121)",
+   "figures": "bass",
+   "voices": [
+    {
+     "role": "cf",
+     "species": 0,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "A4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 2,
+     "notes": [
+      {
+       "d": 0.5,
+       "rest": 1
+      },
+      {
+       "d": 0.5,
+       "p": "B3"
+      },
+      {
+       "d": 0.5,
+       "p": "A3"
+      },
+      {
+       "d": 0.5,
+       "p": "B3"
+      },
+      {
+       "d": 0.5,
+       "p": "C4"
+      },
+      {
+       "d": 0.5,
+       "p": "B3"
+      },
+      {
+       "d": 0.5,
+       "p": "A3"
+      },
+      {
+       "d": 0.5,
+       "p": "Bb3"
+      },
+      {
+       "d": 0.5,
+       "p": "C4"
+      },
+      {
+       "d": 0.5,
+       "p": "Bb3"
+      },
+      {
+       "d": 0.5,
+       "p": "A3"
+      },
+      {
+       "d": 0.5,
+       "p": "B3"
+      },
+      {
+       "d": 0.5,
+       "p": "E4"
+      },
+      {
+       "d": 0.5,
+       "p": "C4"
+      },
+      {
+       "d": 0.5,
+       "p": "B3"
+      },
+      {
+       "d": 0.5,
+       "p": "G3"
+      },
+      {
+       "d": 0.5,
+       "p": "B3"
+      },
+      {
+       "d": 0.5,
+       "p": "D4"
+      },
+      {
+       "d": 0.5,
+       "p": "A3"
+      },
+      {
+       "d": 0.5,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "C3"
+      },
+      {
+       "d": 1,
+       "p": "F3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "C3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "C#3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      }
+     ]
+    }
+   ],
+   "caption": "The half notes agree with both whole notes. Generated for this guide and checked by the rule engine.",
+   "engineResult": []
+  },
+  "m3s3": {
+   "fig": "Model",
+   "title": "Quarters on top, cantus in the middle (compare Fig. 130)",
+   "figures": "bass",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 3,
+     "notes": [
+      {
+       "d": 0.25,
+       "p": "Bb4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "Bb4"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "Bb4"
+      },
+      {
+       "d": 0.25,
+       "p": "G4"
+      },
+      {
+       "d": 0.25,
+       "p": "F4"
+      },
+      {
+       "d": 0.25,
+       "p": "E4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "F4"
+      },
+      {
+       "d": 0.25,
+       "p": "D4"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "Bb4"
+      },
+      {
+       "d": 0.25,
+       "p": "G4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "E5"
+      },
+      {
+       "d": 0.25,
+       "p": "F5"
+      },
+      {
+       "d": 0.25,
+       "p": "E5"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "E5"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "G4"
+      },
+      {
+       "d": 0.25,
+       "p": "F4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "E5"
+      },
+      {
+       "d": 0.25,
+       "p": "C#5"
+      },
+      {
+       "d": 1,
+       "p": "D5"
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 0,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "A4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "G3"
+      },
+      {
+       "d": 1,
+       "p": "F3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "F3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "F3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      }
+     ]
+    }
+   ],
+   "caption": "Watch the downbeats: each first quarter completes the harmony with the two whole notes.",
+   "engineResult": []
+  },
+  "lig3": {
+   "fig": "Model",
+   "title": "Ligatures on top, cantus in the middle (compare Figs. 135–136)",
+   "figures": "bass",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 4,
+     "notes": [
+      {
+       "d": 0.5,
+       "rest": 1
+      },
+      {
+       "d": 0.5,
+       "p": "F4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "C5"
+      },
+      {
+       "d": 0.5,
+       "p": "A4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "Bb4"
+      },
+      {
+       "d": 0.5,
+       "p": "A4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "G4"
+      },
+      {
+       "d": 0.5,
+       "p": "F4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "Bb4"
+      },
+      {
+       "d": 0.5,
+       "p": "G4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "C5"
+      },
+      {
+       "d": 0.5,
+       "p": "A4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "A4"
+      },
+      {
+       "d": 0.5,
+       "p": "C5",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "B4"
+      },
+      {
+       "d": 0.5,
+       "p": "C5",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "D5"
+      },
+      {
+       "d": 0.5,
+       "p": "B4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "B4"
+      },
+      {
+       "d": 0.5,
+       "p": "A4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 0,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "A4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "G3"
+      },
+      {
+       "d": 1,
+       "p": "Bb3"
+      },
+      {
+       "d": 1,
+       "p": "G3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "F3"
+      },
+      {
+       "d": 1,
+       "p": "G3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "C#3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      }
+     ]
+    }
+   ],
+   "toggle": {
+    "label": "Remove the ligatures",
+    "alt": [
+     {
+      "role": "cpt",
+      "species": 1,
+      "notes": [
+       {
+        "p": "F4",
+        "d": 1
+       },
+       {
+        "p": "A4",
+        "d": 1
+       },
+       {
+        "p": "A4",
+        "d": 1
+       },
+       {
+        "p": "F4",
+        "d": 1
+       },
+       {
+        "p": "G4",
+        "d": 1
+       },
+       {
+        "p": "A4",
+        "d": 1
+       },
+       {
+        "p": "C5",
+        "d": 1
+       },
+       {
+        "p": "C5",
+        "d": 1
+       },
+       {
+        "p": "B4",
+        "d": 1
+       },
+       {
+        "p": "A4",
+        "d": 1
+       },
+       {
+        "p": "D4",
+        "d": 1
+       }
+      ]
+     },
+     {
+      "role": "cf",
+      "species": 0,
+      "notes": [
+       {
+        "d": 1,
+        "p": "D4"
+       },
+       {
+        "d": 1,
+        "p": "F4"
+       },
+       {
+        "d": 1,
+        "p": "E4"
+       },
+       {
+        "d": 1,
+        "p": "D4"
+       },
+       {
+        "d": 1,
+        "p": "G4"
+       },
+       {
+        "d": 1,
+        "p": "F4"
+       },
+       {
+        "d": 1,
+        "p": "A4"
+       },
+       {
+        "d": 1,
+        "p": "G4"
+       },
+       {
+        "d": 1,
+        "p": "F4"
+       },
+       {
+        "d": 1,
+        "p": "E4"
+       },
+       {
+        "d": 1,
+        "p": "D4"
+       }
+      ]
+     },
+     {
+      "role": "cpt",
+      "species": 1,
+      "notes": [
+       {
+        "d": 1,
+        "p": "D3"
+       },
+       {
+        "d": 1,
+        "p": "A3"
+       },
+       {
+        "d": 1,
+        "p": "G3"
+       },
+       {
+        "d": 1,
+        "p": "Bb3"
+       },
+       {
+        "d": 1,
+        "p": "G3"
+       },
+       {
+        "d": 1,
+        "p": "A3"
+       },
+       {
+        "d": 1,
+        "p": "F3"
+       },
+       {
+        "d": 1,
+        "p": "G3"
+       },
+       {
+        "d": 1,
+        "p": "D3"
+       },
+       {
+        "d": 1,
+        "p": "C#3"
+       },
+       {
+        "d": 1,
+        "p": "D3"
+       }
+      ]
+     }
+    ],
+    "engineResult": [
+     {
+      "level": "warn",
+      "rule": "direct",
+      "v": 0,
+      "t": 1
+     },
+     {
+      "level": "warn",
+      "rule": "triad",
+      "v": 2,
+      "t": 1
+     },
+     {
+      "level": "error",
+      "rule": "acc-diss",
+      "v": 0,
+      "t": 2
+     },
+     {
+      "level": "warn",
+      "rule": "triad",
+      "v": 2,
+      "t": 2
+     },
+     {
+      "level": "warn",
+      "rule": "triad",
+      "v": 2,
+      "t": 4
+     },
+     {
+      "level": "warn",
+      "rule": "unison-m",
+      "v": 0,
+      "t": 4
+     },
+     {
+      "level": "error",
+      "rule": "par8",
+      "v": 0,
+      "t": 5
+     },
+     {
+      "level": "warn",
+      "rule": "triad",
+      "v": 2,
+      "t": 5
+     },
+     {
+      "level": "error",
+      "rule": "acc-diss",
+      "v": 0,
+      "t": 7
+     },
+     {
+      "level": "warn",
+      "rule": "triad",
+      "v": 2,
+      "t": 7
+     }
+    ]
+   },
+   "caption": "Toggle to remove the ties: each upbeat note moves to the downbeat it delays. The bass keeps exactly the same consonances, as Fux says. Check the plain version: any fifths it contains are the ones the syncopation makes acceptable (Fig. 138).",
+   "engineResult": []
+  },
+  "m3s5": {
+   "fig": "Model",
+   "title": "Florid voice on top, cantus in the middle (compare Figs. 154–159)",
+   "figures": "bass",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 5,
+     "notes": [
+      {
+       "d": 0.5,
+       "rest": 1
+      },
+      {
+       "d": 0.5,
+       "p": "B4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "B4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "Bb4"
+      },
+      {
+       "d": 0.5,
+       "p": "G4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "G4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "E5"
+      },
+      {
+       "d": 0.5,
+       "p": "F5"
+      },
+      {
+       "d": 0.5,
+       "p": "D5",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "F5"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.125,
+       "p": "B4"
+      },
+      {
+       "d": 0.125,
+       "p": "A4"
+      },
+      {
+       "d": 0.5,
+       "p": "G4"
+      },
+      {
+       "d": 0.5,
+       "p": "Bb4"
+      },
+      {
+       "d": 0.5,
+       "p": "A4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "A4"
+      },
+      {
+       "d": 0.5,
+       "p": "E5"
+      },
+      {
+       "d": 1,
+       "p": "A4"
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 0,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "A4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "B3"
+      },
+      {
+       "d": 1,
+       "p": "B3"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "C#3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      }
+     ]
+    }
+   ],
+   "caption": "All species combined over two voices in whole notes.",
+   "engineResult": [
+    {
+     "level": "warn",
+     "rule": "triad",
+     "v": 2,
+     "t": 2
+    },
+    {
+     "level": "warn",
+     "rule": "triad",
+     "v": 2,
+     "t": 6
+    }
+   ]
+  },
+  "m4s2": {
+   "fig": "Model",
+   "title": "Half notes in the tenor, cantus in the soprano (compare Fig. 173)",
+   "figures": "bass",
+   "voices": [
+    {
+     "role": "cf",
+     "species": 0,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "A4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "d": 1,
+       "p": "B3"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "C4"
+      },
+      {
+       "d": 1,
+       "p": "B3"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "B3"
+      },
+      {
+       "d": 1,
+       "p": "C4"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 2,
+     "notes": [
+      {
+       "d": 0.5,
+       "rest": 1
+      },
+      {
+       "d": 0.5,
+       "p": "B3"
+      },
+      {
+       "d": 0.5,
+       "p": "A3"
+      },
+      {
+       "d": 0.5,
+       "p": "Bb3"
+      },
+      {
+       "d": 0.5,
+       "p": "G3"
+      },
+      {
+       "d": 0.5,
+       "p": "E3"
+      },
+      {
+       "d": 0.5,
+       "p": "G3"
+      },
+      {
+       "d": 0.5,
+       "p": "A3"
+      },
+      {
+       "d": 0.5,
+       "p": "B3"
+      },
+      {
+       "d": 0.5,
+       "p": "G3"
+      },
+      {
+       "d": 0.5,
+       "p": "Bb3"
+      },
+      {
+       "d": 0.5,
+       "p": "F3"
+      },
+      {
+       "d": 0.5,
+       "p": "E3"
+      },
+      {
+       "d": 0.5,
+       "p": "C3"
+      },
+      {
+       "d": 0.5,
+       "p": "D3"
+      },
+      {
+       "d": 0.5,
+       "p": "G3"
+      },
+      {
+       "d": 0.5,
+       "p": "C3"
+      },
+      {
+       "d": 0.5,
+       "p": "D3"
+      },
+      {
+       "d": 0.5,
+       "p": "E3"
+      },
+      {
+       "d": 0.5,
+       "p": "C#3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "B2"
+      },
+      {
+       "d": 1,
+       "p": "B2"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "C3"
+      },
+      {
+       "d": 1,
+       "p": "B2"
+      },
+      {
+       "d": 1,
+       "p": "A2"
+      },
+      {
+       "d": 1,
+       "p": "C#3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      }
+     ]
+    }
+   ],
+   "caption": "Two half notes against three whole notes.",
+   "engineResult": []
+  },
+  "m4s3": {
+   "fig": "Model",
+   "title": "Quarters in the soprano, cantus in the alto (compare Fig. 177)",
+   "figures": "bass",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 3,
+     "notes": [
+      {
+       "d": 0.25,
+       "p": "F4"
+      },
+      {
+       "d": 0.25,
+       "p": "G4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "F4"
+      },
+      {
+       "d": 0.25,
+       "p": "F5"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "F5"
+      },
+      {
+       "d": 0.25,
+       "p": "E5"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "E5"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "G4"
+      },
+      {
+       "d": 0.25,
+       "p": "Bb4"
+      },
+      {
+       "d": 0.25,
+       "p": "G4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "Bb4"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "F5"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "E5"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "E5"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "G4"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "Bb4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "F4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "E4"
+      },
+      {
+       "d": 0.25,
+       "p": "E5"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 1,
+       "p": "A4"
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 0,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "A4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "G3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "F3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "G3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "Bb2"
+      },
+      {
+       "d": 1,
+       "p": "C3"
+      },
+      {
+       "d": 1,
+       "p": "B2"
+      },
+      {
+       "d": 1,
+       "p": "G2"
+      },
+      {
+       "d": 1,
+       "p": "A2"
+      },
+      {
+       "d": 1,
+       "p": "C3"
+      },
+      {
+       "d": 1,
+       "p": "B2"
+      },
+      {
+       "d": 1,
+       "p": "A2"
+      },
+      {
+       "d": 1,
+       "p": "C#3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      }
+     ]
+    }
+   ],
+   "caption": "A complete triad on each first quarter where possible.",
+   "engineResult": []
+  },
+  "m4s4": {
+   "fig": "Model",
+   "title": "Ligatures in the soprano, cantus in the alto (compare Fig. 193)",
+   "figures": "bass",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 4,
+     "notes": [
+      {
+       "d": 0.5,
+       "rest": 1
+      },
+      {
+       "d": 0.5,
+       "p": "F4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "F4"
+      },
+      {
+       "d": 0.5,
+       "p": "A4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "B4"
+      },
+      {
+       "d": 0.5,
+       "p": "G4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "D5"
+      },
+      {
+       "d": 0.5,
+       "p": "A4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "A4"
+      },
+      {
+       "d": 0.5,
+       "p": "G4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "A4"
+      },
+      {
+       "d": 0.5,
+       "p": "D5",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "D5"
+      },
+      {
+       "d": 0.5,
+       "p": "C5",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "B4"
+      },
+      {
+       "d": 0.5,
+       "p": "C5",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "C5"
+      },
+      {
+       "d": 0.5,
+       "p": "Bb4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "A4"
+      },
+      {
+       "d": 0.5,
+       "p": "C#5"
+      },
+      {
+       "d": 1,
+       "p": "D5"
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 0,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "A4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "d": 1,
+       "p": "F3"
+      },
+      {
+       "d": 1,
+       "p": "C4"
+      },
+      {
+       "d": 1,
+       "p": "B3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "B3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "F3"
+      },
+      {
+       "d": 1,
+       "p": "G3"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "C#4"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "G3"
+      },
+      {
+       "d": 1,
+       "p": "F3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "F3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      }
+     ]
+    }
+   ],
+   "toggle": {
+    "label": "Remove the ligatures",
+    "alt": [
+     {
+      "role": "cpt",
+      "species": 1,
+      "notes": [
+       {
+        "p": "F4",
+        "d": 1
+       },
+       {
+        "p": "A4",
+        "d": 1
+       },
+       {
+        "p": "G4",
+        "d": 1
+       },
+       {
+        "p": "A4",
+        "d": 1
+       },
+       {
+        "p": "G4",
+        "d": 1
+       },
+       {
+        "p": "D5",
+        "d": 1
+       },
+       {
+        "p": "C5",
+        "d": 1
+       },
+       {
+        "p": "C5",
+        "d": 1
+       },
+       {
+        "p": "Bb4",
+        "d": 1
+       },
+       {
+        "p": "C#5",
+        "d": 1
+       },
+       {
+        "p": "D5",
+        "d": 1
+       }
+      ]
+     },
+     {
+      "role": "cf",
+      "species": 0,
+      "notes": [
+       {
+        "d": 1,
+        "p": "D4"
+       },
+       {
+        "d": 1,
+        "p": "F4"
+       },
+       {
+        "d": 1,
+        "p": "E4"
+       },
+       {
+        "d": 1,
+        "p": "D4"
+       },
+       {
+        "d": 1,
+        "p": "G4"
+       },
+       {
+        "d": 1,
+        "p": "F4"
+       },
+       {
+        "d": 1,
+        "p": "A4"
+       },
+       {
+        "d": 1,
+        "p": "G4"
+       },
+       {
+        "d": 1,
+        "p": "F4"
+       },
+       {
+        "d": 1,
+        "p": "E4"
+       },
+       {
+        "d": 1,
+        "p": "D4"
+       }
+      ]
+     },
+     {
+      "role": "cpt",
+      "species": 1,
+      "notes": [
+       {
+        "d": 1,
+        "p": "F3"
+       },
+       {
+        "d": 1,
+        "p": "C4"
+       },
+       {
+        "d": 1,
+        "p": "B3"
+       },
+       {
+        "d": 1,
+        "p": "A3"
+       },
+       {
+        "d": 1,
+        "p": "B3"
+       },
+       {
+        "d": 1,
+        "p": "A3"
+       },
+       {
+        "d": 1,
+        "p": "F3"
+       },
+       {
+        "d": 1,
+        "p": "G3"
+       },
+       {
+        "d": 1,
+        "p": "D4"
+       },
+       {
+        "d": 1,
+        "p": "C#4"
+       },
+       {
+        "d": 1,
+        "p": "A3"
+       }
+      ]
+     },
+     {
+      "role": "cpt",
+      "species": 1,
+      "notes": [
+       {
+        "d": 1,
+        "p": "D3"
+       },
+       {
+        "d": 1,
+        "p": "A3"
+       },
+       {
+        "d": 1,
+        "p": "G3"
+       },
+       {
+        "d": 1,
+        "p": "F3"
+       },
+       {
+        "d": 1,
+        "p": "E3"
+       },
+       {
+        "d": 1,
+        "p": "F3"
+       },
+       {
+        "d": 1,
+        "p": "D3"
+       },
+       {
+        "d": 1,
+        "p": "E3"
+       },
+       {
+        "d": 1,
+        "p": "D3"
+       },
+       {
+        "d": 1,
+        "p": "A3"
+       },
+       {
+        "d": 1,
+        "p": "D3"
+       }
+      ]
+     }
+    ],
+    "engineResult": [
+     {
+      "level": "warn",
+      "rule": "direct",
+      "v": 0,
+      "t": 1
+     },
+     {
+      "level": "error",
+      "rule": "par8",
+      "v": 0,
+      "t": 2
+     },
+     {
+      "level": "warn",
+      "rule": "unison-m",
+      "v": 0,
+      "t": 4
+     },
+     {
+      "level": "error",
+      "rule": "acc-diss",
+      "v": 0,
+      "t": 6
+     },
+     {
+      "level": "error",
+      "rule": "mel",
+      "v": 0,
+      "t": 9
+     }
+    ]
+   },
+   "caption": "The tied notes take the consonances they would have without the ties.",
+   "engineResult": []
+  },
+  "m4s5": {
+   "fig": "Model",
+   "title": "Florid soprano over three whole-note voices (compare Fig. 200)",
+   "figures": "bass",
+   "voices": [
+    {
+     "role": "cpt",
+     "species": 5,
+     "notes": [
+      {
+       "d": 0.5,
+       "rest": 1
+      },
+      {
+       "d": 0.5,
+       "p": "F5",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "F5"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "Bb4"
+      },
+      {
+       "d": 0.25,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "G4"
+      },
+      {
+       "d": 0.5,
+       "p": "G5",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "G5"
+      },
+      {
+       "d": 0.25,
+       "p": "F5"
+      },
+      {
+       "d": 0.25,
+       "p": "E5"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "D5"
+      },
+      {
+       "d": 0.25,
+       "p": "E5"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.5,
+       "p": "B4"
+      },
+      {
+       "d": 0.5,
+       "p": "A4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "A4"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.25,
+       "p": "C5"
+      },
+      {
+       "d": 0.25,
+       "p": "B4"
+      },
+      {
+       "d": 0.125,
+       "p": "A4"
+      },
+      {
+       "d": 0.125,
+       "p": "G4"
+      },
+      {
+       "d": 0.5,
+       "p": "B4"
+      },
+      {
+       "d": 0.5,
+       "p": "D5"
+      },
+      {
+       "d": 0.5,
+       "p": "A4",
+       "tie": 1
+      },
+      {
+       "d": 0.5,
+       "p": "A4"
+      },
+      {
+       "d": 0.5,
+       "p": "A4"
+      },
+      {
+       "d": 1,
+       "p": "A4"
+      }
+     ]
+    },
+    {
+     "role": "cf",
+     "species": 0,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "A4"
+      },
+      {
+       "d": 1,
+       "p": "G4"
+      },
+      {
+       "d": 1,
+       "p": "F4"
+      },
+      {
+       "d": 1,
+       "p": "E4"
+      },
+      {
+       "d": 1,
+       "p": "D4"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "d": 1,
+       "p": "F3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "F3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "F3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "G3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "A3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      }
+     ]
+    },
+    {
+     "role": "cpt",
+     "species": 1,
+     "notes": [
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "Bb2"
+      },
+      {
+       "d": 1,
+       "p": "C3"
+      },
+      {
+       "d": 1,
+       "p": "Bb2"
+      },
+      {
+       "d": 1,
+       "p": "C3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "C3"
+      },
+      {
+       "d": 1,
+       "p": "E3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      },
+      {
+       "d": 1,
+       "p": "C#3"
+      },
+      {
+       "d": 1,
+       "p": "D3"
+      }
+     ]
+    }
+   ],
+   "caption": "The fifth species in four parts, the last step of the Gradus.",
+   "engineResult": [
+    {
+     "level": "warn",
+     "rule": "rep",
+     "v": 0,
+     "t": 10
+    }
+   ]
+  }
+ },
+ "workbenches": {
+  "wb11": {
+   "nv": 2,
+   "species": 1,
+   "cfPos": 1,
+   "title": "Note against note, two voices"
+  },
+  "wb12": {
+   "nv": 2,
+   "species": 2,
+   "cfPos": 1,
+   "title": "Second species, two voices"
+  },
+  "wb13": {
+   "nv": 2,
+   "species": 3,
+   "cfPos": 1,
+   "title": "Third species, two voices"
+  },
+  "wb14": {
+   "nv": 2,
+   "species": 4,
+   "cfPos": 1,
+   "title": "Fourth species, two voices"
+  },
+  "wb15": {
+   "nv": 2,
+   "species": 5,
+   "cfPos": 1,
+   "title": "Florid counterpoint, two voices",
+   "demo": true
+  },
+  "wb21": {
+   "nv": 3,
+   "species": 1,
+   "cfPos": 0,
+   "title": "Note against note, three voices",
+   "demo": true
+  },
+  "wb22": {
+   "nv": 3,
+   "species": 2,
+   "cfPos": 0,
+   "florid": 1,
+   "title": "Half notes in three voices",
+   "demo": true
+  },
+  "wb23": {
+   "nv": 3,
+   "species": 3,
+   "cfPos": 1,
+   "florid": 0,
+   "title": "Quarters in three voices",
+   "demo": true
+  },
+  "wb24": {
+   "nv": 3,
+   "species": 4,
+   "cfPos": 1,
+   "florid": 0,
+   "title": "Ligatures in three voices",
+   "demo": true
+  },
+  "wb25": {
+   "nv": 3,
+   "species": 5,
+   "cfPos": 1,
+   "florid": 0,
+   "title": "Florid counterpoint, three voices",
+   "demo": true
+  },
+  "wb31": {
+   "nv": 4,
+   "species": 1,
+   "cfPos": 1,
+   "title": "Note against note, four voices",
+   "demo": true
+  },
+  "wb32": {
+   "nv": 4,
+   "species": 2,
+   "cfPos": 0,
+   "florid": 2,
+   "title": "Half notes in four voices",
+   "demo": true
+  },
+  "wb33": {
+   "nv": 4,
+   "species": 3,
+   "cfPos": 1,
+   "florid": 0,
+   "title": "Quarters in four voices",
+   "demo": true
+  },
+  "wb34": {
+   "nv": 4,
+   "species": 4,
+   "cfPos": 1,
+   "florid": 0,
+   "title": "Ligatures in four voices",
+   "demo": true
+  },
+  "wb35": {
+   "nv": 4,
+   "species": 5,
+   "cfPos": 1,
+   "florid": 0,
+   "title": "Florid counterpoint, four voices",
+   "demo": true
+  }
+ },
+ "modes": {
+  "D": {
+   "name": "Dorian (D)",
+   "final": "D",
+   "cf": [
+    "D4",
+    "F4",
+    "E4",
+    "D4",
+    "G4",
+    "F4",
+    "A4",
+    "G4",
+    "F4",
+    "E4",
+    "D4"
+   ],
+   "lt": "C#",
+   "flat": true
+  },
+  "E": {
+   "name": "Phrygian (E)",
+   "final": "E",
+   "cf": [
+    "E4",
+    "C4",
+    "D4",
+    "C4",
+    "A3",
+    "A4",
+    "G4",
+    "E4",
+    "F4",
+    "E4"
+   ],
+   "lt": null,
+   "flat": false
+  },
+  "F": {
+   "name": "Lydian (F)",
+   "final": "F",
+   "cf": [
+    "F4",
+    "G4",
+    "A4",
+    "F4",
+    "D4",
+    "E4",
+    "F4",
+    "C5",
+    "A4",
+    "F4",
+    "G4",
+    "F4"
+   ],
+   "lt": null,
+   "flat": true
+  },
+  "G": {
+   "name": "Mixolydian (G)",
+   "final": "G",
+   "cf": [
+    "G3",
+    "C4",
+    "B3",
+    "G3",
+    "C4",
+    "E4",
+    "D4",
+    "G4",
+    "E4",
+    "C4",
+    "D4",
+    "B3",
+    "A3",
+    "G3"
+   ],
+   "lt": "F#",
+   "flat": false
+  },
+  "A": {
+   "name": "Aeolian (A)",
+   "final": "A",
+   "cf": [
+    "A3",
+    "C4",
+    "B3",
+    "D4",
+    "C4",
+    "E4",
+    "F4",
+    "E4",
+    "D4",
+    "C4",
+    "B3",
+    "A3"
+   ],
+   "lt": "G#",
+   "flat": false
+  },
+  "C": {
+   "name": "Ionian (C)",
+   "final": "C",
+   "cf": [
+    "C4",
+    "E4",
+    "F4",
+    "G4",
+    "E4",
+    "A4",
+    "G4",
+    "E4",
+    "F4",
+    "E4",
+    "D4",
+    "C4"
+   ],
+   "lt": null,
+   "flat": false
+  }
+ }
+}

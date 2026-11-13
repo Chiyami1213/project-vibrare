@@ -1,0 +1,610 @@
+#!/usr/bin/env python3
+"""Builds data/hip.json (Historically Informed Performance tab).
+
+Sources (all paraphrased; quotations kept to a few words):
+  Q   = J. J. Quantz, On Playing the Flute (1752), trans. E. R. Reilly (1966). Refs: chapter (§ only where checked), Reilly page.
+  CPE = C. P. E. Bach, Essay on the True Art of Playing Keyboard Instruments (1753/62), trans. W. J. Mitchell (1949).
+  BS  = P. Badura-Skoda, Interpreting Bach at the Keyboard (1993).
+  BO  = E. Bodky, The Interpretation of Bach's Keyboard Works (1960).
+  LM  = L. Mozart, Treatise on the Fundamental Principles of Violin Playing (1756), trans. E. Knocker.
+        CROSS-REFERENCE ONLY: bowing is used as the analogue of flute breathing/tonguing and keyboard
+        touch/"breathing". No topic is built on LM alone.
+
+Run:  python3 tools/build_hip.py   -> writes data/hip.json and prints counts + checks.
+"""
+import json, os, re, sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(HERE, '..', 'data', 'hip.json')
+
+def R(text, *refs):
+    return {'text': text, 'refs': list(refs)}
+
+SOURCES = [
+    {'id': 'Q', 'short': 'Quantz', 'title': 'On Playing the Flute (Versuch einer Anweisung die Flöte traversiere zu spielen, 1752)',
+     'edition': 'trans. Edward R. Reilly, Faber 1966', 'role': 'primary', 'instruments': ['flute', 'keyboard'],
+     'note': 'Flute treatise that is also a general guide to performance, ensemble playing and the keyboard accompanist (Ch. XVII sec. VI).'},
+    {'id': 'CPE', 'short': 'C. P. E. Bach', 'title': 'Essay on the True Art of Playing Keyboard Instruments (1753/1762)',
+     'edition': 'trans. William J. Mitchell, Norton 1949', 'role': 'primary', 'instruments': ['keyboard'],
+     'note': 'The keyboard counterpart to Quantz; both worked at Frederick II\'s court in Berlin and disagree on several points.'},
+    {'id': 'BS', 'short': 'Badura-Skoda', 'title': 'Interpreting Bach at the Keyboard', 'edition': 'Clarendon 1993',
+     'role': 'secondary', 'instruments': ['keyboard'], 'note': 'Applies the 18th-century sources to J. S. Bach on harpsichord and piano.'},
+    {'id': 'BO', 'short': 'Bodky', 'title': "The Interpretation of Bach's Keyboard Works", 'edition': 'Harvard 1960',
+     'role': 'secondary', 'instruments': ['keyboard'], 'note': 'Instrument choice, tempo groups, articulation and dynamics in Bach.'},
+    {'id': 'LM', 'short': 'L. Mozart', 'title': 'A Treatise on the Fundamental Principles of Violin Playing (1756)',
+     'edition': 'trans. Editha Knocker, 2nd ed. OUP 1951 (repr. 1985)', 'role': 'cross-reference', 'instruments': ['strings'],
+     'note': 'Used only to cross-check and to map bowing onto flute breath/tonguing and keyboard touch.'},
+]
+
+GROUPS = [
+    ('foundations', 'Foundations', 'What "good execution" meant to these authors: the orator analogy, affect, and the faults to avoid.'),
+    ('tempo', 'Tempo', "Quantz's pulse system, Bodky's tempo groups, and how to choose a tempo from the notes themselves."),
+    ('rhythm', 'Rhythm', 'Dotted notes, Lombard rhythm, unequal quick notes, dotted notes against triplets, rests and rubato.'),
+    ('articulation', 'Articulation & breathing', 'Flute tonguing and breathing, keyboard touch, and the bowing analogy that links them.'),
+    ('ornaments', 'Ornaments', 'Appoggiaturas, trills, small graces, how much to ornament, and cadenzas.'),
+    ('dynamics', 'Dynamics', 'Light and shade, dissonance-based dynamics, messa di voce, and what each keyboard can do.'),
+    ('instruments', 'Instruments', 'Flute specifics; harpsichord, clavichord and piano; choosing an instrument for Bach.'),
+    ('ensemble', 'Accompanying & ensemble', 'The keyboard as timekeeper, accompanying a soloist, and rubato over a steady bass.'),
+    ('compare', 'Where the sources disagree', 'A single table of the points on which Quantz, C. P. E. Bach, L. Mozart and the modern authors differ.'),
+]
+
+# ---------------------------------------------------------------------------
+# Examples. Mini-notation (one string per voice, tokens separated by spaces):
+#   [g]PITCH:DUR[@VEL][.|_]     PITCH = scientific (C4 = middle C) or r (rest); DUR in crotchets (quarter notes)
+#   g  = grace / small note (display only; DUR ignored in the "written" layer, shown as a small note)
+#   @VEL = 0..1 loudness (keyboard: map to touch or registration; harpsichord sample: map to gain only when the
+#          example says dynamics are shown, otherwise ignore)
+#   .  = staccato/detached (sound ~50%), _ = slurred into the next note (sound 100%)
+#   Default sounding length for plain notes = 90% (ordinary "half-detached" touch is NOT the default; see topic)
+# Each example: written (what the score shows) and performed (what the source says it means), plus optional
+# syllables (flute tonguing), bows (L. Mozart cross-ref), breaths (indices after which to breathe), labels.
+# ---------------------------------------------------------------------------
+EX = {}
+def ex(id, title, key, meter, caption, written, performed, refs, **kw):
+    EX[id] = dict(id=id, title=title, key=key, meter=meter, caption=caption,
+                  written=written, performed=performed, refs=list(refs), **kw)
+
+ex('app-plain', 'Accented appoggiatura on a plain note', 'C major', '4/4',
+   'The small F takes half of the E (a 4th resolving to a 3rd over C). Louder appoggiatura, softer resolution, slurred.',
+   {'upper': 'G5:1 gF5:0 E5:2 r:1', 'bass': 'C3:4'},
+   {'upper': 'G5:1 F5:1@0.85_ E5:1@0.5 r:1', 'bass': 'C3:4'},
+   ['Q VIII, p. 95', 'CPE II.2, p. 90', 'LM IX (cross-ref)'])
+ex('app-dotted', 'Appoggiatura before a dotted note', 'C major', '3/4',
+   'Before a dotted note the appoggiatura takes two thirds; the main note keeps only the value of the dot.',
+   {'upper': 'gF5:0 E5:3', 'bass': 'C3:3'},
+   {'upper': 'F5:2@0.85_ E5:1@0.5', 'bass': 'C3:3'},
+   ['Q VIII, p. 95', 'CPE II.2, p. 90'])
+ex('app-rest', 'Appoggiatura before a note followed by a rest (Quantz)', 'C major', '4/4',
+   'The appoggiatura takes the note\'s time and the note takes the rest\'s time, unless you need the rest to breathe.',
+   {'upper': 'gF5:0 E5:1 r:1 G5:2', 'bass': 'C3:4'},
+   {'upper': 'F5:1@0.85_ E5:1@0.5 G5:2', 'bass': 'C3:4'},
+   ['Q VIII, p. 96'])
+ex('app-passing', 'Falling thirds with small notes: Quantz vs C. P. E. Bach', 'C major', '2/4',
+   'Quantz (French coulé): the small notes are tipped BEFORE the beat, in the time of the previous note. C. P. E. Bach rejects this and puts them short ON the beat.',
+   {'upper': 'E5:0.5 gD5:0 C5:0.5 gB4:0 A4:1'},
+   {'Quantz': 'E5:0.375 D5:0.125_ C5:0.375 B4:0.125_ A4:1',
+    'C. P. E. Bach': 'E5:0.5 D5:0.125_ C5:0.375 B4:0.125_ A4:0.875'},
+   ['Q VIII, pp. 93–94', 'CPE II.2, pp. 97–98'])
+ex('app-before-dissonant-trill', 'Short appoggiatura before a trill on a dissonance', 'C major', '4/4',
+   'Over B in the bass, the trilled F is a diminished 5th. A long G would turn it into a 6th, a consonance, so the appoggiatura is very short.',
+   {'upper': 'gG5:0 F5:2 E5:2', 'bass': 'B2:2 C3:2', 'marks': {'0': 'tr'}},
+   {'upper': 'G5:0.125 F5:0.125 G5:0.125 F5:0.125 G5:0.125 F5:0.125 G5:0.125 F5:0.125 G5:0.125 F5:0.125 G5:0.125 F5:0.125 G5:0.125 F5:0.125 E5:0.125 F5:0.125 E5:2', 'bass': 'B2:2 C3:2'},
+   ['Q VIII, p. 96'], note='Example chosen by the pack author (Quantz\'s own figures are not transcribed). Speed: eight notes per pulse at crotchet ≈ 80 (Q IX, p. 102).')
+ex('trill-cadential-q', 'Cadential trill (Quantz)', 'C major', '4/4',
+   'Begins with its appoggiatura (here from above, held half the note), ends with a two-note termination at trill speed. No appoggiatura between the termination and the closing note.',
+   {'upper': 'D5:2 C5:2', 'bass': 'G2:2 C3:2', 'marks': {'0': 'tr'}},
+   {'upper': 'E5:1@0.8 D5:0.125 E5:0.125 D5:0.125 E5:0.125 D5:0.125 E5:0.125 C5:0.125 D5:0.125 C5:2', 'bass': 'G2:2 C3:2'},
+   ['Q IX, pp. 102–103', 'Q IX, p. 108'])
+ex('trill-cpe', 'Trill from the upper note with suffix (C. P. E. Bach)', 'C major', '4/4',
+   'Every normal trill starts on the upper note; rapid rather than slow; the suffix (two notes from below) joins it to the next note.',
+   {'upper': 'D5:2 C5:2', 'bass': 'G2:2 C3:2', 'marks': {'0': 'tr'}},
+   {'upper': 'E5:0.125 D5:0.125 E5:0.125 D5:0.125 E5:0.125 D5:0.125 E5:0.125 D5:0.125 E5:0.125 D5:0.125 E5:0.125 D5:0.125 E5:0.125 D5:0.125 C5:0.125 D5:0.125 C5:2', 'bass': 'G2:2 C3:2'},
+   ['CPE II.3, pp. 100–101'])
+ex('pralltriller', 'Short trill (Pralltriller) on a falling second', 'C major', '2/4',
+   'Only on a descending second, joined to the previous note; upper tone snapped at the end.',
+   {'upper': 'E5:0.5 D5:0.5 C5:1', 'marks': {'1': 'short tr'}},
+   {'upper': 'E5:0.5_ D5:0.0625_ E5:0.0625_ D5:0.375 C5:1'},
+   ['CPE II.3, pp. 110–112'])
+ex('overdot', 'Dotted quavers: the short note is played shorter', 'D major', '4/4',
+   'The note after the dot is as short as the shortest note in the piece, whatever the tempo; the dot is held longer.',
+   {'upper': 'D5:0.75 E5:0.25 F#5:0.75 G5:0.25 A5:2'},
+   {'upper': 'D5:0.875 E5:0.125 F#5:0.875 G5:0.125 A5:2'},
+   ['Q V §21, pp. 67–68', 'CPE III §23, p. 157', 'LM I.iii (cross-ref)'])
+ex('lombard', 'Lombard rhythm (short–long)', 'D major', '2/4',
+   'The first note is as short as possible; the shorter it is, the bolder the effect.',
+   {'upper': 'D5:0.25 E5:0.75 F#5:0.25 G5:0.75'},
+   {'upper': 'D5:0.125 E5:0.875 F#5:0.125 G5:0.875'},
+   ['Q V §23, p. 68', 'Q XII, p. 134', 'CPE III §23, p. 158'])
+ex('inequality', 'Slight inequality of the quickest notes (Quantz)', 'C major', '4/4',
+   'In moderate and slow pieces the "good" notes (1st, 3rd, 5th, 7th) are held a little longer and played a little stronger, but much less than dotted.',
+   {'upper': 'C5:0.25 D5:0.25 E5:0.25 F5:0.25 G5:0.25 F5:0.25 E5:0.25 D5:0.25 C5:2'},
+   {'upper': 'C5:0.29@0.75 D5:0.21@0.55 E5:0.29@0.7 F5:0.21@0.55 G5:0.29@0.75 F5:0.21@0.55 E5:0.29@0.7 D5:0.21@0.55 C5:2'},
+   ['Q XI §12, pp. 123–124', 'BS ch. 2, pp. 68–69'],
+   note='The 0.29/0.21 split is the pack author\'s illustration of "slightly"; Quantz gives no ratio.')
+ex('dot-vs-triplet', 'Dotted figure against triplets', 'C major', '2/4',
+   'Quantz: the short note comes after the third triplet note. C. P. E. Bach: assimilate it to the triplet.',
+   {'upper': 'G5:0.75 A5:0.25 G5:1', 'lower': 'C5:0.3333 E5:0.3333 G4:0.3334 C5:1'},
+   {'Quantz': 'G5:0.85 A5:0.15 G5:1', 'C. P. E. Bach': 'G5:0.6667 A5:0.3333 G5:1', 'lower': 'C5:0.3333 E5:0.3333 G4:0.3334 C5:1'},
+   ['Q V §22, p. 68', 'CPE III §27, p. 160', 'BO ch. 6, pp. 186–188'])
+ex('rest-delay', 'Short rest on the beat (Quantz)', 'C major', '2/4',
+   'Wait about half as long again as the rest seems to last; the following note is then shorter.',
+   {'upper': 'r:0.25 D5:0.25 E5:0.25 F5:0.25 G5:1'},
+   {'upper': 'r:0.375 D5:0.125 E5:0.25 F5:0.25 G5:1'},
+   ['Q XII, p. 131', 'CPE Intro I, p. 32 (Mitchell\'s note)'])
+ex('breath-q', 'Where to breathe in a semiquaver passage (flute)', 'G major', '4/4',
+   'Breathe between a long note and a short one, never after a short note or the last note of a bar. If you must breathe inside running semiquavers, do it after the first note of a group, where the notes leap; shorten that note and catch up so the beat does not slow.',
+   {'upper': 'B4:2 D5:0.25 C5:0.25 B4:0.25 A4:0.25 G4:0.25 B4:0.25 D5:0.25 G5:0.25 | F#5:2 E5:0.25 D5:0.25 C5:0.25 B4:0.25 A4:0.25 C5:0.25 E5:0.25 C5:0.25 | B4:4'},
+   {'upper': 'same'},
+   ['Q VII, pp. 87–89'], breaths=[{'after': 0, 'why': 'long → short: the best breath, taken before the passage-work starts', 'kind': 'main'},
+                                 {'after': 5, 'why': 'only if needed: after the first note of a group, inside the leap G4→B4', 'kind': 'emergency'},
+                                 {'after': 9, 'why': 'long → short again', 'kind': 'main'}])
+ex('tongue-q', 'Tonguing syllables (Quantz)', 'D major', '4/4',
+   'ti for short lively notes and leaps; di for slow and stepwise notes; tiri for dotted notes (ri on the strong note, start ti ti); did\'ll for the quickest passage-work.',
+   {'upper': 'D5:0.5 A4:0.5 F#5:0.5 D5:0.5 E5:0.5 F#5:0.5 G5:0.5 A5:0.5 | A5:0.75 G5:0.25 F#5:0.75 E5:0.25 D5:2'},
+   {'upper': 'same'},
+   ['Q VI.i, pp. 71–73', 'Q VI.ii, p. 76', 'Q VI.iii, pp. 79–80'],
+   syllables=['ti', 'ti', 'ti', 'ti', 'di', 'di', 'di', 'di', 'ti', 'ti', 'ri', 'ti', 'ri'])
+ex('bow-map', 'One passage, three instruments (L. Mozart cross-reference)', 'G major', '3/4',
+   'Down-bow on the first of the bar, up-bow on the upbeat (L. Mozart) ↔ firm "ti"/weight on the strong note and a lighter "di" on the weak one (Quantz) ↔ keyboard: weight into the downbeat, lift (a "breath") before the upbeat.',
+   {'upper': 'D5:1 G5:1 B5:1 | A5:0.75 G5:0.25 F#5:1 r:1'},
+   {'upper': 'D5:1@0.6 G5:1@0.85 B5:1@0.6 | A5:0.875@0.8 G5:0.125@0.5 F#5:1@0.6_ r:1'},
+   ['LM IV, pp. 73–76 (cross-ref)', 'Q VI.i, p. 74', 'CPE III §18, p. 154', 'BS ch. 4, pp. 93–94'],
+   bows=['∨', '⊓', '∨', '⊓', '⊓', '∨'], syllables=['ti', 'ti', 'di', 'ti', 'ri', 'di'],
+   note='Mozart\'s upbeat rule: the upbeat note is taken up-bow, the bar\'s first note down-bow.')
+ex('diss-dyn', 'Dissonance dynamics on the harpsichord (Quantz)', 'A minor', '4/4',
+   'Consonant chords mezzo piano with few parts; louder dissonances use more parts, bass in octaves and finally a quick arpeggio. The labels are Quantz\'s three classes.',
+   {'chords': [
+       {'bass': 'A2', 'fig': '5/3', 'notes': ['A3', 'C4', 'E4'], 'class': 'consonant'},
+       {'bass': 'G#2', 'fig': '6/5', 'notes': ['B3', 'D4', 'E4'], 'class': 'f'},
+       {'bass': 'A2', 'fig': '5/3', 'notes': ['A3', 'C4', 'E4'], 'class': 'consonant'},
+       {'bass': 'F2', 'fig': '♯6/4/3', 'notes': ['A3', 'B3', 'D#4'], 'class': 'ff'},
+       {'bass': 'E2', 'fig': '5/♯3', 'notes': ['G#3', 'B3', 'E4'], 'class': 'consonant'},
+       {'bass': 'C3', 'fig': '7 (major)', 'notes': ['E3', 'G3', 'B3'], 'class': 'mf'},
+       {'bass': 'D2', 'fig': '6/♯4/3', 'notes': ['F3', 'G#3', 'B3'], 'class': 'ff'},
+       {'bass': 'E2', 'fig': '5/♯3', 'notes': ['G#3', 'B3', 'E4'], 'class': 'consonant'}]},
+   {'rule': 'consonant: 3 upper parts, light touch | mf: + bass doubled at the lower octave | f: + extra chord tones in the left hand | ff: as f, quick arpeggio from below, firmer touch'},
+   ['Q XVII.vi, pp. 254–259'])
+
+# ---------------------------------------------------------------------------
+TOPICS = []
+def topic(id, group, title, instruments, summary, sources, rules=(), guidelines=(), **kw):
+    t = dict(id=id, group=group, title=title, instruments=list(instruments), summary=summary,
+             rules=list(rules), guidelines=list(guidelines), sources=list(sources))
+    t.update(kw)
+    t.setdefault('verification', {'status': 'verified', 'checks': []})
+    TOPICS.append(t)
+
+# ---- foundations -----------------------------------------------------------
+topic('execution', 'foundations', 'Good execution: the orator analogy', ['both'],
+      'Quantz compares the performer to an orator: the same speech, or piece, can move or bore depending on delivery. Execution is half the work; a mediocre piece well played beats a good piece badly played.',
+      ['Q XI, pp. 119–120', 'CPE III §§1–4, pp. 147–149', 'LM XII (cross-ref)'],
+      rules=[R('Execution must be <b>true and distinct</b>: every note heard, in tune, articulated as marked.', 'Q XI, p. 122'),
+             R('It must be <b>rounded and complete</b>: each note gets its true value; the tempo is kept.', 'Q XI, p. 123'),
+             R('It must be <b>easy and flowing</b>: no visible effort, no grimaces.', 'Q XI, p. 124', 'CPE III §13, p. 152'),
+             R('It must be <b>varied</b>: light and shade, a constant alternation of piano and forte.', 'Q XI, p. 124', 'CPE III §29, p. 163'),
+             R('It must be <b>expressive</b>: fitted to each passion, which may change from phrase to phrase.', 'Q XI, pp. 124–125')],
+      guidelines=[R('Separate ideas that do not belong together even where there is no rest, especially when one phrase ends and the next begins on the same pitch.', 'Q XI, p. 122'),
+                  R('Learn to play well in an ensemble part before playing solos; L. Mozart says the same for violinists.', 'Q XI, p. 121', 'LM XII (cross-ref)'),
+                  R('"Play from the soul, not like a trained bird": you can only move listeners if you are moved yourself.', 'CPE III §§7, 13, pp. 150, 152')],
+      terms=[{'term': 'Vortrag', 'def': 'Execution, delivery: the manner of performance (Quantz\'s key term).'},
+             {'term': 'Affect / passion', 'def': 'The emotional character a passage expresses; the performer must identify and convey it.'}])
+topic('affect-clues', 'foundations', 'Reading the affect from the notes', ['both'],
+      'Quantz gives four clues to the dominant sentiment of a piece. They decide tempo, articulation, ornaments and dynamics.',
+      ['Q XI, pp. 125–126', 'Q XII, pp. 133–134', 'CPE III §§2, 10, pp. 148, 151'],
+      steps=['Mode: major usually gay, bold, serious or sublime; minor usually flattering, melancholy or tender (with exceptions).',
+             'Intervals and articulation: slurred close intervals → flattering, sad, tender; short detached notes and wide leaps → gay, bold; dotted and sustained notes → serious, pathetic; long notes mixed with quick ones → majestic.',
+             'Dissonances: their kind and density (see Dissonance dynamics).',
+             'The tempo word: Allegro, Affettuoso, Mesto… which also names a character, not just a speed.'],
+      tables=[{'id': 'allegro-affects', 'title': 'Affects in quick movements (Quantz XII, pp. 133–134)', 'columns': ['Affect', 'Written as', 'Execution'],
+               'rows': [['Gaiety', 'short notes by step and leap', 'lively tonguing / light detached touch; neat trills, mordents'],
+                        ['Majesty', 'long notes over moving parts; dotted notes', 'dots sharp and long, short notes very short; few ornaments, elevated'],
+                        ['Boldness', 'Lombard rhythm (short–long)', 'do not hurry or it sounds like dance music'],
+                        ['Flattery (charm)', 'slurred steps; syncopations', 'appoggiaturas, slurs; second half of a syncopation reinforced']]}],
+      guidelines=[R('In most pieces the passion changes; adopt a new sentiment almost bar by bar.', 'Q XI, p. 126'),
+                  R('A temperament that is too hot should cool itself in the Adagio; a melancholy one should borrow fire for the Allegro.', 'Q XI, p. 126')])
+topic('poor-execution', 'foundations', 'Checklist: faults of poor execution', ['both'],
+      'Quantz closes his chapter with a list of faults. It works as a self-review checklist after recording yourself.',
+      ['Q XI, pp. 127–128', 'CPE III §§6–9, pp. 149–151', 'CPE Intro I, p. 30'],
+      steps=['Out of tune, forced tone.', 'Indistinct, unarticulated, sluggish or dry notes; everything slurred, or everything attacked the same way.',
+             'Tempo not kept; notes not given their value.', 'Adagio graces too long or against the harmony; graces badly finished or rushed; dissonances not resolved.',
+             'Passage-work heavy, anxious or blundering; grimaces.', 'Everything at one level, no piano and forte; contradicting the affect; playing "on commission" without feeling.',
+             'Keyboard: notes held too long ("sticky") or let go "as if the keys burned"; hacking and thumping.'])
+
+# ---- tempo -----------------------------------------------------------------
+topic('quantz-pulse', 'tempo', "Quantz's pulse system", ['both'],
+      'Quantz uses a healthy pulse of about 80 beats per minute as a pocket metronome and sorts tempo words into four classes, each twice as slow as the one before.',
+      ['Q XVII.vii §§45–59, pp. 282–289', 'BS ch. 3, pp. 75–76'],
+      rules=[R('Common time: Allegro assai = one pulse per minim; Allegretto = per crotchet; Adagio cantabile = per quaver; Adagio assai = two pulses per quaver.', 'Q XVII.vii, p. 285'),
+             R('Alla breve (¢): every value is taken twice as fast as in common time.', 'Q XVII.vii, pp. 285–286'),
+             R('A plain "Allegro" (also Poco allegro, Vivace) sits between the first two classes: one pulse per three quavers.', 'Q XVII.vii, p. 286'),
+             R('No more than eight very fast notes fit in one pulse, whether double-tongued or bowed: the fastest notes in the piece limit the tempo.', 'Q XVII.vii, p. 285')],
+      guidelines=[R('Set the Allegro by its hardest passage so you never have to slow down for it.', 'Q XII, p. 130'),
+                  R('Treat the classes as a guide, not a law: C. P. E. Bach says Berlin played adagios slower and allegros faster than elsewhere.', 'CPE p. 414 (cited Reilly p. 286 n.)'),
+                  R('A repeated fast piece may be taken a little faster the second time.', 'Q XVII.vii, p. 289'),
+                  R('Arias and church music: somewhat more moderate than instrumental pieces.', 'Q XVII.vii, p. 287')],
+      tables=[{'id': 'quantz-classes', 'title': 'The four classes (pulse ≈ 80)', 'columns': ['Class', 'Includes', 'Common time', 'Alla breve'],
+               'rows': [['Allegro assai', 'Allegro di molto, Presto', 'minim = 80', 'semibreve = 80'],
+                        ['Allegretto', 'Allegro ma non tanto / non troppo / non presto / moderato', 'crotchet = 80', 'minim = 80'],
+                        ['Adagio cantabile', 'Cantabile, Arioso, Larghetto, Soave, Dolce, Poco andante, Affettuoso, Pomposo, Maestoso, Alla siciliana, Adagio spiritoso', 'quaver = 80', 'crotchet = 80'],
+                        ['Adagio assai', 'Adagio pesante, Lento, Largo assai, Mesto, Grave', 'quaver = 40', 'crotchet = 40']],
+               'note': 'Plain Allegro: crotchet ≈ 120. Metronome equivalents follow Reilly\'s note (p. 286).'},
+              {'id': 'quantz-triple', 'title': 'Triple and compound metres', 'columns': ['Case', 'Pulse falls on'],
+               'rows': [['2/4 or quick 6/8, Allegro', 'each bar'], ['12/8 Allegro without semiquavers', 'two per bar'],
+                        ['3/4 Allegro with semiquavers or quaver triplets', '3 pulses per 2 bars (beats 1 & 3, then 2)'],
+                        ['Very fast 3/4 or 3/8, six quick notes per bar', 'each bar (a real Presto is faster)'],
+                        ['Adagio cantabile 3/4, bass in quavers', 'each quaver'], ['Arioso 3/4, bass in crotchets', 'each crotchet'],
+                        ['Arioso 3/8', 'each quaver'], ['Siciliana 12/8', '1st and 3rd quaver of each group of three (quaver ≈ 120)'],
+                        ['Fast pieces entirely in triplets', 'may go a little faster than the pulse']]}],
+      tools=['quantz-tempo'], examples=[])
+topic('bodky-groups', 'tempo', "Bodky's tempo groups for Bach", ['keyboard'],
+      'Bodky argues that Bach\'s tempos fall into a small number of groups tied to affect and rhythmic organisation, and proposes five, centred on the heartbeat.',
+      ['BO ch. 4, pp. 100–145'],
+      tables=[{'id': 'bodky', 'title': 'Five groups', 'columns': ['Group', 'Approx. MM of the inner beat'],
+               'rows': [['Adagio', '40'], ['Andante', '60'], ['Moderato', '80'], ['Allegro', '100'], ['Presto', '120']],
+               'note': '80 ≈ heartbeat, the pivot. The upper limit reflects the historical harpsichord action. Bodky admits the scheme rests on internal evidence.'}],
+      guidelines=[R('The same inner beat can run across different time signatures.', 'BO ch. 4, p. 144'),
+                  R('Metre and note values alone do not fix the tempo: Bach notated the same piece in different metres.', 'BO ch. 4, p. 143')],
+      verification={'status': 'partly', 'checks': ['Compared with Quantz\'s four classes: both pivot on ≈80.'], 'flags': ['Bodky\'s figures are his own hypothesis, not an 18th-century rule.']},
+      tools=['quantz-tempo'])
+topic('tempo-bach', 'tempo', 'Choosing a tempo for Bach', ['keyboard'],
+      'Bach rarely marked tempos. Badura-Skoda and Bodky reconstruct them from metre, note values, dance type and character.',
+      ['BS ch. 3, pp. 71–91', 'BS ch. 2, pp. 15–21', 'CPE III §10, p. 151'],
+      steps=['Identify the dance or the kind of motion (some fugues are gigue-like; chorale preludes may be in dance style).',
+             'Find the fastest notes and the hardest passage; the tempo must let them sound clearly.',
+             'Check the metre: alla breve and compound metres change the counting unit (Quantz tables).',
+             'Choose a beat you can keep steady: strict time was a chief virtue (Muffat, Quantz; Bach\'s own conducting described as fast and very steady).',
+             'Let slow movements be "in one breath" rather than too slow.'],
+      guidelines=[R('18th-century tempos were generally faster and lighter than many 20th-century habits.', 'BS ch. 3, pp. 73–74'),
+                  R('Little ritardando except in toccatas, fantasias and recitatives; final ritardandos smaller than today.', 'BS ch. 2, p. 17'),
+                  R('Allegros not rushed, adagios not dragged: the general content and the quickest notes decide.', 'CPE III §10, p. 151')])
+
+# ---- rhythm ----------------------------------------------------------------
+topic('dotted', 'rhythm', 'Dotted notes and over-dotting', ['both'],
+      'All three primary sources shorten the note after a dot in lively or majestic music. Quantz applies it to dotted quavers and shorter values.',
+      ['Q V §§21–22, pp. 67–68', 'Q XII, p. 133', 'CPE III §23, pp. 157–158', 'BO ch. 6, pp. 186–188', 'BS ch. 2, pp. 63–69', 'LM I.iii (cross-ref)'],
+      rules=[R('After a dotted quaver (or shorter), the short note is as short as the shortest notes in the piece, whatever the tempo; the dot is lengthened.', 'Q V §21, p. 67'),
+             R('Short notes after dots are always shorter than written; four or more short notes after a dot are played rapidly.', 'CPE III §23, p. 157')],
+      guidelines=[R('Long dots in slow, tender music sound more flattering; sharp dots with very short notes sound majestic.', 'Q V §23, p. 69'),
+                  R('In rapid tempos a long succession of dots may be played almost as rests; dots after long notes or in slow tempos are held.', 'CPE III §23, p. 157'),
+                  R('French overtures (Partita 4, the Overture in the French Manner, Goldberg Var. 16) take sharp dotting; elsewhere in Bach decide case by case, and line up dotted figures with other voices.', 'BO ch. 6, pp. 186–188', 'BS ch. 2, pp. 63–69')],
+      examples=['overdot'], tools=['rhythm-lab'])
+topic('lombard', 'rhythm', 'Lombard rhythm', ['both'],
+      'Short–long figures (the "Lombard snap") are played with the first note as short as possible.',
+      ['Q V §23, p. 68', 'Q XII, p. 134', 'CPE III §23, p. 158', 'BS ch. 2, p. 64'],
+      rules=[R('The short note before the long one is played faster than written.', 'CPE III §23, p. 158', 'Q V §23, p. 68')],
+      guidelines=[R('The shorter the first note, the livelier and bolder the effect; but do not hurry, or it sounds like common dance music.', 'Q V §23, p. 69', 'Q XII, p. 134')],
+      examples=['lombard'], tools=['rhythm-lab'])
+topic('inequality', 'rhythm', 'Unequal quick notes (inégales)', ['both'],
+      'Quantz asks for a slight lengthening of the "good" notes among the quickest values in moderate and slow pieces. The modern Bach authors are cautious about applying this to Bach.',
+      ['Q XI §12, pp. 123–124', 'BO ch. 6, pp. 183–186', 'BS ch. 2, pp. 68–69'],
+      rules=[R('Applies to the quickest notes of a moderate or slow piece: crotchets in 3/2, quavers in 3/4 and ¢, semiquavers in 3/8, semiquavers or demisemiquavers in 2/4 and common time.', 'Q XI §12, p. 123'),
+             R('The 1st, 3rd, 5th and 7th notes are held slightly longer and played slightly stronger; never as much as dotted.', 'Q XI §12, p. 123'),
+             R('Exceptions: very fast passage-work; vocal coloratura; notes with strokes or dots; repeated notes; slurs over more than two notes; gigue quavers.', 'Q XI §12, p. 124')],
+      guidelines=[R('Bodky sets French inégalité aside for Bach until better evidence appears.', 'BO ch. 6, p. 186'),
+                  R('Badura-Skoda treats Quantz\'s inequality as a "mini-rubato" of emphasis, not a stammering long–short.', 'BS ch. 2, pp. 68–69'),
+                  R('On flute the single tongue makes quick notes too even; tiri and did\'ll produce the slight inequality naturally.', 'Q VI.i, p. 74')],
+      verification={'status': 'verified', 'checks': ['Q XI read in full; exception list matches BS p. 69.']},
+      examples=['inequality'], tools=['rhythm-lab'])
+topic('triplets', 'rhythm', 'Dotted notes against triplets', ['both'],
+      'When one part has triplets and another a dotted figure, Quantz and C. P. E. Bach give opposite answers.',
+      ['Q V §22, p. 68', 'CPE III §27, p. 160', 'BO ch. 6, pp. 186–188'],
+      rules=[R('Quantz: play the short note after the third triplet note, not with it, or it sounds like 6/8.', 'Q V §22, p. 68'),
+             R('C. P. E. Bach: dotted figures and duplets against triplets are assimilated to the triplet.', 'CPE III §27, p. 160')],
+      guidelines=[R('Mitchell cites the E minor Partita Gavotte and the E minor fugue of WTC II for the assimilating practice; decide by the style of the piece.', 'CPE p. 160 n.')],
+      examples=['dot-vs-triplet'], tools=['rhythm-lab'], verification={'status': 'verified', 'checks': ['Disagreement listed in Reilly\'s note to Q V §22.']})
+topic('rests-time', 'rhythm', 'Rests, syncopations and keeping time', ['both'],
+      'Short rests, syncopations and slow notes inside fast passages are where players most often lose the beat.',
+      ['Q XII, pp. 129–131', 'CPE Intro I, pp. 32–33', 'BS ch. 2, pp. 16–17'],
+      rules=[R('After a short rest on the beat, enter late: wait about half as long again as the rest, then make the next note shorter.', 'Q XII, p. 131'),
+             R('Keep the tempo at every crotchet, not just at the start and end of the bar.', 'Q XII, p. 130'),
+             R('On flute, move the fingers with the withdrawal of the tongue, not before it, or passages rush.', 'Q XII, p. 130')],
+      guidelines=[R('Hold the first note of quick figures slightly to stop ascending passages from rushing.', 'Q XII, p. 130'),
+                  R('Play triplets round and even; hold the first a fraction rather than rushing the first two.', 'Q XII, p. 131'),
+                  R('Syncopations should sound as displaced downbeats, not glued to the beat.', 'BS ch. 2, p. 64')],
+      examples=['rest-delay'])
+topic('rubato', 'rhythm', 'Tempo rubato over a steady beat', ['both'],
+      'Eighteenth-century rubato is a melody that moves freely against an accompaniment that keeps strict time.',
+      ['CPE III §28, pp. 160–162', 'Q XVII.vi n., p. 253', 'Q XIV, p. 172', 'BS ch. 2, pp. 63–68', 'LM XII (cross-ref)'],
+      rules=[R('One hand (or the soloist) plays against the bar; the other (or the accompanist) keeps strict time; they meet together over the bass at the end.', 'CPE III §28, p. 161'),
+             R('The accompanist must not follow or hurry when the soloist delays or anticipates notes.', 'Q XVII.vi, p. 253', 'LM XII (cross-ref)')],
+      guidelines=[R('Rubato suits slow, caressing or sad melodies and dissonant chords; avoid frequent ritardandos in affettuoso music.', 'CPE III §28, pp. 160–161'),
+                  R('Italian Concerto, Andante: a written-out Italian rubato; on harpsichord a note played a shade early sounds longer and more singing.', 'BS ch. 2, p. 66'),
+                  R('A solo keyboardist may vary the bass but not the harmony.', 'CPE III §28, p. 162')])
+
+# ---- articulation & breathing ---------------------------------------------
+topic('tonguing', 'articulation', 'Flute tonguing: ti, di, tiri, did\'ll', ['flute'],
+      'For Quantz the tongue does for the flute what the bow does for the violin. Three kinds of articulation, with many shades between a firm and a gentle stroke.',
+      ['Q VI.i–iii, pp. 71–85', 'Q XII, p. 133', 'LM IV, VII (cross-ref)'],
+      rules=[R('<b>ti</b>: short, equal, lively or quick notes; leaps in an Allegro; notes with strokes; dotted notes even in an Adagio.', 'Q VI.i, pp. 71–73'),
+             R('<b>di</b>: slow, sustained, pleasing notes; stepwise motion; always in the Adagio except dotted notes.', 'Q VI.i, pp. 72–73'),
+             R('Under a slur, tongue only the first note (usually with di).', 'Q VI.i, p. 74'),
+             R('<b>tiri</b>: dotted notes and moderately quick passages. The accent is on <i>ri</i> (long, on the strong note), <i>ti</i> short on the weak; begin with ti ti.', 'Q VI.ii, p. 76'),
+             R('<b>did\'ll</b> (double tongue): only for the quickest passage-work; accent on the first syllable, on the good note.', 'Q VI.iii, pp. 79–80')],
+      guidelines=[R('The sound comes from the air released when the tongue tip withdraws, not from striking; move the stroke forward on the palate as you rise in pitch.', 'Q VI.i, p. 72'),
+                  R('Leave a tiny separation before an appoggiatura so it is heard clearly.', 'Q VI.i, pp. 73–74'),
+                  R('Repeated notes under a slur are "huffed" from the chest; with dots too, more sharply.', 'Q VI.i, p. 75'),
+                  R('Faster than tiri allows: slur pairs (ti ri ti ti pattern) so the tongue rests.', 'Q VI.ii, p. 78'),
+                  R('Bowing analogue: ti ≈ a short separate stroke; di ≈ a gentle stroke on the string; a slur is one bow (L. Mozart).', 'LM IV, VII (cross-ref)')],
+      examples=['tongue-q', 'bow-map'], tools=['breath-planner'])
+topic('breathing', 'articulation', 'Where to breathe (flute)', ['flute'],
+      'Breath is phrasing: breathing in the wrong place is like a breath in the middle of a word.',
+      ['Q VII, pp. 87–90', 'Q XII, p. 131', 'Q XIV, p. 166', 'Q XV, pp. 185, 188', 'LM V (cross-ref)'],
+      rules=[R('Breathe between a long note and a short one; never after a short note, still less after the last note of a bar.', 'Q VII, p. 87'),
+             R('Exception: in quick stepwise triplets you may breathe after the bar\'s last note; with a leap of a third, breathe inside the leap.', 'Q VII, p. 87'),
+             R('Before a restated theme or a new idea (also after a cadence), breathe to separate the ideas.', 'Q VII, p. 88'),
+             R('Tied notes: split a tied quaver into two semiquavers on the same pitch and breathe between them.', 'Q VII, p. 88'),
+             R('A solo cadenza for wind instrument or voice must fit in one breath.', 'Q XV, p. 185')],
+      guidelines=[R('In a bar of semiquavers the best breath is after the first note of a group, preferably where the notes leap.', 'Q VII, p. 89'),
+                  R('If forced to breathe in quick notes: make the note before the breath very short and catch up over the next few notes so the beat does not slow.', 'Q VII, pp. 88–89'),
+                  R('Breathe in good time and only when needed; in public you will need more breaths than when practising alone.', 'Q VII, pp. 89–90'),
+                  R('At a rest, hold the last note slightly rather than leaving it at once.', 'Q XIV, p. 166'),
+                  R('Bowing analogue: L. Mozart wants many notes in one stroke and a break only where the phrase\'s incisions demand it, mocking the singer who breathes after every short phrase.', 'LM V (cross-ref)'),
+                  R('Keyboard analogue: wind solo works show breathing pauses most plainly, but every line needs them (see Keyboard "breathing").', 'BS ch. 2, p. 17')],
+      examples=['breath-q'], tools=['breath-planner'])
+topic('keyboard-touch', 'articulation', 'Keyboard touch: detached, legato, ordinary', ['keyboard'],
+      'C. P. E. Bach gives the norms; Badura-Skoda and Bodky test them on Bach.',
+      ['CPE III §§5–6, 17–22, pp. 149–157', 'BS ch. 4, pp. 92–99', 'BS ch. 7, pp. 186–187', 'BO ch. 7, pp. 221–222'],
+      rules=[R('Notes with strokes or dots are held a little less than half their written length.', 'CPE III §17, p. 154'),
+             R('Notes under a slur are held for their full length; in slurred groups of 2 or 4, slightly more pressure on the 1st and 3rd; in groups of 3, on the first.', 'CPE III §18, pp. 154–155'),
+             R('Passing notes and appoggiaturas against the bass are played legato even without a slur.', 'CPE III §18, p. 155'),
+             R('The first note of a slur is slightly accented; when a slur ends, the last note is released.', 'CPE III §21, p. 157')],
+      guidelines=[R('In general Allegros take detached notes and Adagios broad slurred ones, but every kind of touch occurs in every tempo.', 'CPE III §5, p. 149'),
+                  R('Avoid both "sticky" holding and leaving the keys "as if they burned".', 'CPE III §6, p. 149'),
+                  R('Unmarked notes "are held for half their value" is C. P. E. Bach\'s ordinary touch; Badura-Skoda calls this an extreme and prefers a slight shortening.', 'CPE III §22, p. 157', 'BS ch. 4, pp. 97–98'),
+                  R('Bodky\'s rule of thumb: Allegro → non-legato to staccato; Adagio → legato; Moderato → steps (and often thirds) slurred, larger leaps detached.', 'BO ch. 7, p. 222'),
+                  R('Walking basses: slightly detached like a cellist, not choppy; the faster the tempo, the shorter.', 'BS ch. 4, pp. 97–99'),
+                  R('Figura corta: legato in a gentle Adagio; detached and energetic in quick tempos.', 'BS ch. 4, p. 99'),
+                  R('Legato technique: release one finger as the next strikes; in an "articulated legato" release just before, letting the string resonance bridge.', 'BS ch. 7, pp. 186–187')],
+      tools=['breath-planner'])
+topic('keyboard-breathing', 'articulation', 'Keyboard "breathing": phrasing pauses', ['keyboard'],
+      'A keyboard needs no air, but its lines still need breaths. Badura-Skoda asks teachers to mark breathing in every voice, the way a string quartet marks bowings.',
+      ['BS ch. 2, pp. 17–21', 'BS ch. 4, pp. 92–94', 'CPE III §§8, 12, pp. 150–152', 'Q VII, p. 90', 'LM IV, V, XII (cross-ref)'],
+      steps=['Sing the line, as C. P. E. Bach advises, and mark where a singer or flautist would breathe (Quantz\'s rules).',
+             'Turn each breath into a small lift taken from the end of the note before it, not a delay of the next beat.',
+             'Mark the metrical weight: in 4/4 beats 1 and 3 strong (3 less), 2 and 4 weak; in triple time the first beat strongest. Show it by weight and length.',
+             'Map L. Mozart\'s bowing: a down-bow downbeat = weight into the key; an up-bow upbeat = lighter, often after a lift.',
+             'Mark breaths independently in each voice of polyphony so the entries can be heard.'],
+      guidelines=[R('"Even the strongest lungs have to breathe somewhere": breathing pauses sit between the pillars of a steady beat.', 'BS ch. 2, p. 17'),
+                  R('On harpsichord, unstressed notes can only be made shorter (timing, articulation), since finger pressure gives no dynamics.', 'BS ch. 2, p. 20'),
+                  R('No articulation, or the same articulation everywhere, is like text with no punctuation.', 'BS ch. 4, pp. 92–93')],
+      crossRefs=[{'source': 'LM', 'point': 'First note of the bar down-bow; upbeat and last note of the bar up-bow.', 'analogue': 'Keyboard: weight on the downbeat, lift before it. Flute: firm tongue on the strong note, breathe before the upbeat, not after it.', 'ref': 'LM IV, pp. 73–76'},
+                 {'source': 'LM', 'point': 'Every tone, even the strongest, starts and ends with a little softness.', 'analogue': 'Flute: begin with the tongue, not a push of air. Keyboard: release cleanly, never a thump.', 'ref': 'LM V, p. 97'},
+                 {'source': 'LM', 'point': 'Slurred pairs: first louder and a little longer, second quietly and slightly late.', 'analogue': 'CPE\'s pressure on the first of a slur; Quantz\'s ti–di pairing.', 'ref': 'LM XII (cross-ref)'}],
+      examples=['bow-map'], tools=['breath-planner'])
+
+# ---- ornaments --------------------------------------------------------------
+topic('appoggiatura', 'ornaments', 'Appoggiaturas', ['both'],
+      'Appoggiaturas turn consonances into dissonances that resolve, binding the melody together. All three primary sources agree on the core proportions.',
+      ['Q VIII, pp. 91–97', 'CPE II.2, pp. 87–98', 'LM IX (cross-ref)'],
+      rules=[R('The small note takes its time from the FOLLOWING note; the previous note is never shortened (C. P. E. Bach).', 'CPE II.1, pp. 84–85', 'Q VIII, p. 91'),
+             R('Before a plain note: half its value.', 'Q VIII, p. 95', 'CPE II.2, p. 90'),
+             R('Before a dotted note: two thirds; the main note keeps only the dot.', 'Q VIII, p. 95', 'CPE II.2, p. 90'),
+             R('Quantz: in 6/8 and 6/4 with a dotted note tied to the next, the appoggiatura takes the whole first dotted note.', 'Q VIII, pp. 95–96'),
+             R('Before a trill on a dissonance (aug. 4th, dim. 5th, 7th, 2nd) the appoggiatura is very short, so the dissonance is not turned into a consonance.', 'Q VIII, p. 96'),
+             R('The appoggiatura is louder than its resolution and joined to it; the resolution is light.', 'CPE II.2, p. 88', 'Q VIII, p. 93'),
+             R('Taken from the side of the preceding note: from above if that note is higher, from below if lower.', 'Q VIII, p. 92')],
+      guidelines=[R('Quantz: before a note followed by a rest the appoggiatura takes the note\'s value and the note takes the rest\'s (unless you need the breath).', 'Q VIII, p. 96'),
+                  R('Short (invariable) appoggiaturas: before quick notes, repeated notes, syncopations, triplets; ones that fill in falling thirds.', 'CPE II.2, pp. 91–92'),
+                  R('Add unmarked appoggiaturas where a long consonant note follows short ones.', 'Q VIII, p. 97'),
+                  R('Swell the appoggiatura if time allows and slur the resolution more softly (the Abzug).', 'Q VIII, p. 93'),
+                  R('Lengthen for affect; shorten if the accompaniment would make fifths or harsh sevenths. Never spoil the voice leading.', 'CPE II.2, pp. 94–96'),
+                  R('L. Mozart: never separate the appoggiatura from its note: one bow (flute: one tongue stroke; keyboard: legato into the resolution).', 'LM IX (cross-ref)')],
+      examples=['app-plain', 'app-dotted', 'app-rest', 'app-before-dissonant-trill', 'app-passing'], tools=['appoggiatura-lab'])
+topic('trill', 'ornaments', 'Trills (shakes)', ['both'],
+      'Trills begin from the upper note or an appoggiatura, keep an even speed, and usually end with a termination.',
+      ['Q IX, pp. 101–108', 'CPE II.3, pp. 99–112', 'LM X (cross-ref)'],
+      rules=[R('A trill alternates the note with its upper second, a whole or half step as the key requires; never a trill in thirds.', 'Q IX, p. 102', 'LM X (cross-ref)'),
+             R('C. P. E. Bach: the normal trill always starts on the upper note.', 'CPE II.3, p. 100'),
+             R('Quantz: every shake starts with its appoggiatura (from above or below) and ends with a two-note termination at the same speed; if only "tr" is written, both are implied.', 'Q IX, p. 103'),
+             R('The appoggiatura is tongued; shake and termination are slurred to it (flute).', 'Q IX, p. 104'),
+             R('A trill must be even; never faster than you can play evenly.', 'Q IX, p. 102', 'CPE II.3, p. 101')],
+      guidelines=[R('Quantz\'s speed: a long cadential trill ≈ four finger movements (eight notes) per pulse (≈80/min); quicker in gay pieces, slower in sad ones and low registers.', 'Q IX, pp. 101–103'),
+                  R('Slower in a resonant hall, quicker in a small or carpeted room.', 'Q IX, p. 101'),
+                  R('C. P. E. Bach prefers a rapid trill, broadened slightly in sad pieces; the trill lasts the whole note (except short trills).', 'CPE II.3, pp. 101, 107'),
+                  R('No suffix in descending chains of trills, on short notes or triplets, or when the following notes already supply it.', 'CPE II.3, pp. 103–105'),
+                  R('Pralltriller (short trill): only on a falling second, joined to the previous note, snapped.', 'CPE II.3, pp. 110–112'),
+                  R('Avoid trills on augmented seconds and trills that create forbidden fifths.', 'CPE II.3, pp. 105, 109', 'LM X (cross-ref)'),
+                  R('L. Mozart lists four speeds: slow (sad pieces), medium, rapid, and accelerating (cadenzas).', 'LM X (cross-ref)')],
+      examples=['trill-cadential-q', 'trill-cpe', 'pralltriller'], tools=['trill-builder'])
+topic('small-graces', 'ornaments', 'Small graces: mordent, turn, half-shake, battement', ['both'],
+      'Quantz groups these French "brilliants" with the appoggiatura: plain appoggiaturas express tenderness, the brilliants gaiety.',
+      ['Q VIII, pp. 97–99', 'Q XII, p. 132', 'CPE II.4–II.5 (turn, mordent)'],
+      rules=[R('Half-shakes may replace the plain Abzug on upper appoggiaturas; pincés (mordents) and doublés (turns) go with lower appoggiaturas.', 'Q VIII, p. 98'),
+             R('Battements may be used on leaps, where appoggiaturas are not allowed.', 'Q VIII, p. 98')],
+      guidelines=[R('In descending passage-work, half-shakes on the 1st or 3rd notes; in ascending passages, battements — sparingly.', 'Q XII, p. 132')],
+      verification={'status': 'partly', 'checks': ['Quantz VIII read in full.'], 'flags': ['C. P. E. Bach\'s chapters on the turn and mordent were not read in detail; specific CPE rules are not included.']})
+topic('ornament-taste', 'ornaments', 'How much to ornament', ['both'],
+      'Every source warns against over-ornamenting: ornaments are seasoning, not the meal.',
+      ['Q VIII, pp. 99–100', 'Q XI, p. 127', 'CPE II.1, pp. 79–82', 'LM IX (cross-ref)'],
+      rules=[R('Ornaments must never contradict the prevailing sentiment of the melody.', 'Q XI, p. 125'),
+             R('Ornament tones follow the key signature and any modulation.', 'CPE II.1, p. 83')],
+      guidelines=[R('Use embellishments sparingly, especially in quick passages.', 'Q XI, p. 127', 'CPE II.1, p. 81'),
+                  R('Vary ornaments on repeats (caressing, then brilliant, or plain).', 'CPE II.1, p. 82'),
+                  R('French composers write their ornaments; in Italian Adagios the player adds them. Learn the French manner first.', 'Q XIV, pp. 162–163'),
+                  R('Play a lesson first without ornaments, then with them.', 'CPE Intro I, p. 38'),
+                  R('Thorough-bass knowledge is needed to ornament well.', 'CPE II.1, p. 82', 'Q XIV, p. 163')])
+topic('cadenza', 'ornaments', 'Cadenzas and fermatas', ['both'],
+      'A cadenza is made on the penultimate bass note (the dominant) at a fermata. Short, surprising, and grown from the piece itself.',
+      ['Q XV, pp. 179–195', 'CPE III §30, pp. 164–165'],
+      rules=[R('A cadenza for a wind instrument or voice must fit in one breath; a string player may be longer.', 'Q XV, p. 185'),
+             R('A short cadenza stays in the key; a longer one goes naturally to the subdominant; a still longer one to the subdominant and the dominant. No remote keys.', 'Q XV, p. 184'),
+             R('Dissonances in a cadenza are prepared and resolved correctly.', 'Q XV, p. 183'),
+             R('Two-part cadenzas follow the rules of composition and imitation, and may be a little longer.', 'Q XV, pp. 186–188')],
+      guidelines=[R('Take the principal sentiment and, if you like, repeat or imitate the most pleasing phrase of the piece.', 'Q XV, pp. 181–182'),
+                  R('Short and fresh "like a bon mot"; it must sound improvised; avoid regular metre.', 'Q XV, pp. 182, 185'),
+                  R('Unmeasured, like an improvisation, with pauses between statements like conversation.', 'CPE III §30, p. 164')],
+      tools=['breath-planner'])
+
+# ---- dynamics ---------------------------------------------------------------
+topic('light-shade', 'dynamics', 'Light and shade: principles', ['both'],
+      'Forte and piano alternate constantly; the music itself tells you where.',
+      ['Q XI, p. 124', 'Q XII, pp. 132–133', 'CPE III §29, pp. 162–164', 'LM XII (cross-ref)'],
+      rules=[R('In general dissonances are played louder and consonances softer.', 'CPE III §29, p. 163', 'Q XVII.vi, p. 254'),
+             R('Notes outside the key (raised by sharps or naturals) are stressed; notes within the key softer.', 'CPE III §29, p. 163', 'LM XII (cross-ref)'),
+             R('Deceptive progressions and unexpected turns are brought out.', 'CPE III §29, p. 163', 'Q XVII.vi, p. 254')],
+      guidelines=[R('Repetitions and sequences can go forte then piano.', 'CPE III §29, p. 163', 'Q XII, p. 133'),
+                  R('A long note that interrupts quick notes gets particular emphasis; deep notes in leaps are played stronger.', 'Q XII, p. 132'),
+                  R('Avoid constant changes of level.', 'CPE III §29, p. 164'),
+                  R('L. Mozart: a minim among short notes is accented and then relaxed; notes tied over the barline get no accent at the barline.', 'LM XII (cross-ref)')])
+topic('dissonance-dynamics', 'dynamics', 'Dissonance dynamics (Quantz)', ['keyboard'],
+      'For the keyboard accompanist Quantz grades the dissonances into three classes of loudness. C. P. E. Bach accepted the principle only broadly.',
+      ['Q XVII.vi, pp. 254–259', 'CPE III §29, p. 164 n.'],
+      rules=[R('Consonant chords in a solo Adagio: mezzo piano, leaving room above and below.', 'Q XVII.vi, p. 256'),
+             R('Mezzo forte: 4/2, 6/5, 6 with minor 3rd, minor 7th with minor 3rd, major 7th.', 'Q XVII.vi, p. 256'),
+             R('Forte: 4♯/2 (second with augmented fourth), diminished 5th with minor 6th.', 'Q XVII.vi, p. 256'),
+             R('Fortissimo: ♯2/♯4, minor 3rd with augmented 4th, diminished 5th with major 6th, augmented 6th, diminished 7th, 7/4/2.', 'Q XVII.vi, p. 256'),
+             R('In piano or pianissimo passages, scale the classes down (pp: the strongest gets only mf).', 'Q XVII.vi, p. 256')],
+      guidelines=[R('9ths, 9/4, 9/7, 5/4, and a 7th over a passing note need no special emphasis.', 'Q XVII.vi, p. 258'),
+                  R('Close spacing makes dissonances harsher than wide spacing.', 'Q XVII.vi, pp. 258–259'),
+                  R('Harpsichord means: piano = lighter touch and fewer parts; mf = bass in octaves; f = also chord tones in the left hand; ff = also quick arpeggios from below and a firmer touch; a second manual gives pp.', 'Q XVII.vi, p. 259')],
+      verification={'status': 'partly', 'checks': ['Q XVII.vi read in full (OCR).'], 'flags': ['The OCR of the mf list is ambiguous ("major sixth with minor third"); check against the printed table (Tab. XXIV).']},
+      examples=['diss-dyn'], tools=['dissonance-dynamics'])
+topic('messa-di-voce', 'dynamics', 'Swelling a long note (messa di voce)', ['flute'],
+      'On a long note in an Adagio the flute swells and diminishes; the keyboard must find substitutes.',
+      ['Q XIV, pp. 165–166', 'Q XII, p. 132', 'LM V (cross-ref)', 'CPE III §§7, 19–20, pp. 150, 156'],
+      rules=[R('Tip the note gently, begin pianissimo, swell to the middle and diminish to the end; a finger vibrato (flattement) on the nearest open hole may be added.', 'Q XIV, pp. 165–166'),
+             R('Keep the pitch steady while swelling and diminishing (turn the flute in or out as needed).', 'Q XIV, p. 166')],
+      guidelines=[R('Bowing analogue: L. Mozart\'s first division of the bow (soft–loud–soft) is the same shape; a singer sustaining a long note without breathing.', 'LM V (cross-ref)'),
+                  R('Keyboard substitutes: on harpsichord, broken chords, trills and mordents sustain a long note; on clavichord, Bebung (vibrato) after half the note and portato.', 'CPE III §§7, 19–20, pp. 150, 156'),
+                  R('Use the flattement sparingly; it is an ornament, not a continuous vibrato.', 'Q XIV n., p. 166')],
+      tools=['messa-di-voce'])
+topic('keyboard-dynamics', 'dynamics', 'Dynamics on harpsichord, clavichord and piano', ['keyboard'],
+      'Each keyboard makes loud and soft differently. Bodky and Badura-Skoda read Bach\'s own manual markings as the model.',
+      ['BO ch. 3, pp. 89–99', 'BS ch. 5, pp. 130–143', 'CPE III §29, p. 164', 'Q XVII.vi, p. 259'],
+      rules=[R('On a two-manual harpsichord, change manuals for whole passages, not for small shadings.', 'CPE III §29, p. 164')],
+      guidelines=[R('Harpsichord: terrace dynamics. Dances usually one colour; large works two or three levels (single, octave-doubled, full), changed after rests or fermatas.', 'BO ch. 3, pp. 89–90'),
+                  R('Bach\'s models: Italian Concerto (tutti/solo on forte and piano manuals), French Overture (fugal sections forte, episodes piano), Goldberg (manual indications).', 'BS ch. 5, pp. 136–138'),
+                  R('Clavichord: range about ppp–mf; intimate, "a lyric poem read to oneself"; don\'t overuse Bebung.', 'BO ch. 3, p. 90'),
+                  R('Contrasting themes should not be rattled off at one level.', 'BS ch. 5, p. 138')])
+
+# ---- instruments -------------------------------------------------------------
+topic('flute-specifics', 'instruments', 'The one-keyed flute: practical points', ['flute'],
+      'Points from Quantz that are specific to the baroque flute and still useful on a modern one.',
+      ['Q IX, pp. 104–108', 'Q XII, pp. 129–132', 'Q XIV, p. 166'],
+      rules=[R('Semitone trills: moderate the breath and strike the finger close to the hole so the upper note does not become a whole tone.', 'Q IX, p. 104')],
+      guidelines=[R('Low notes in leaps need more strength: they cut less than high notes.', 'Q XII, p. 132'),
+                  R('Raise all fingers equally and not too high; tongue and fingers together.', 'Q XII, p. 129'),
+                  R('Quantz\'s trill fingerings (Tab. VII) are for the one-keyed flute; on a Boehm flute use modern trill fingerings but keep the principle of true intonation.', 'Q IX, pp. 105–108')],
+      verification={'status': 'partly', 'checks': ['Q IX read in full.'], 'flags': ['Individual trill fingerings were not transcribed (they are for the one-keyed flute).']})
+topic('keyboard-instruments', 'instruments', 'Harpsichord, clavichord or piano', ['keyboard'],
+      'C. P. E. Bach wanted players to own both harpsichord and clavichord; the modern authors accept the piano for Bach with care.',
+      ['CPE Intro I, pp. 35–38', 'Q XVII.vi, p. 259', 'BO ch. 2, pp. 31–88', 'BS ch. 6, pp. 170–176'],
+      rules=[R('Harpsichord for ensembles; clavichord for solo playing and for judging a player; the pianoforte, if well made, fine alone and in small ensembles.', 'CPE Intro I, pp. 35–37')],
+      guidelines=[R('Practise on both: clavichord for expressive touch, harpsichord for strength; harpsichord-only players play in one colour.', 'CPE Intro I, pp. 37–38'),
+                  R('Quantz thought the pianoforte the best accompanying keyboard, the clavichord lacking only the fortissimo.', 'Q XVII.vi, p. 259'),
+                  R('Piano for Bach: avoid dynamic extremes and "Busoni basses"; use the pedal discreetly to imitate harpsichord resonance, never long pedals.', 'BS ch. 6, pp. 174–176'),
+                  R('Don\'t imitate the harpsichord on the piano, or the piano on the harpsichord.', 'BS ch. 6, p. 176'),
+                  R('Some WTC pieces suit the house organ (long sustained notes); decide the instrument piece by piece.', 'BO ch. 2, pp. 86–87'),
+                  R('Temperament: take a barely noticeable amount from most fifths so all keys are usable.', 'CPE Intro I, p. 37')])
+
+# ---- ensemble ----------------------------------------------------------------
+topic('keyboard-timekeeper', 'ensemble', 'The keyboard as timekeeper', ['keyboard'],
+      'C. P. E. Bach calls the keyboard the guardian of the beat in ensemble music.',
+      ['CPE Intro I, pp. 32–35', 'Q XVII.vi, pp. 248–259'],
+      rules=[R('Place the keyboard in the centre, with the first violinist near it; it keeps the time and makes small tempo changes possible.', 'CPE Intro I, pp. 34–35')],
+      guidelines=[R('Repeat sustained chords to mark the metre in ensemble.', 'CPE Intro I, p. 34'),
+                  R('Fast repeated bass notes with another bass instrument: C. P. E. Bach omits some and plays the rest in octaves; Quantz wants every note.', 'CPE Intro I, p. 33')],
+      verification={'status': 'verified', 'checks': ['Disagreement noted by Mitchell (CPE p. 33 n.).']})
+topic('accompanying', 'ensemble', 'Accompanying a soloist', ['keyboard', 'flute'],
+      'What the accompanist does while the soloist plays freely.',
+      ['Q XVII.vi, pp. 252–259', 'LM XII (cross-ref)'],
+      rules=[R('Keep strict time under the soloist\'s rubato; do not follow delays or anticipations.', 'Q XVII.vi n., p. 253', 'LM XII (cross-ref)'),
+             R('Strengthen the tone where the subject enters and on dissonances.', 'Q XVII.vi, p. 254')],
+      guidelines=[R('Moderate the forte; light short strokes in merry passages, long simple strokes in sad ones (L. Mozart for strings; on keyboard, touch and number of parts).', 'LM XII (cross-ref)'),
+                  R('Watch the soloist and each other.', 'LM XII (cross-ref)')])
+
+# ---- comparison -----------------------------------------------------------------
+topic('disagreements', 'compare', 'Where the sources disagree', ['both'],
+      'The same court (Berlin), the same decade, and still different answers. Show the positions side by side; let the player choose by style.',
+      ['see table'],
+      tables=[{'id': 'disagree', 'title': 'Points of disagreement', 'columns': ['Issue', 'Quantz', 'C. P. E. Bach', 'L. Mozart (cross-ref)', 'Modern authors'],
+               'rows': [
+                   ['Small notes before falling thirds', 'Before the beat, in the previous note\'s time (French coulé) — VIII, pp. 93–94', 'On the beat, short; the "unaccented" kind is "repulsive" — II.2, pp. 97–98', 'Some examples agree with Quantz (cited by Reilly, Q p. 93 n.)', '—'],
+                   ['How a trill begins', 'With its appoggiatura, from above or below — IX, p. 103', 'Always from the upper note — II.3, p. 100', 'Upper note, or a longer appoggiatura, or from below — X, pp. 186–202', '—'],
+                   ['Appoggiatura before the closing note after a cadential trill', 'Not allowed — IX, p. 108', 'Allowed — II.2 (cited Reilly, Q p. 108 n.)', 'Not allowed (cited Reilly)', '—'],
+                   ['Trill speed', 'Even and moderate; ≈ 8 notes per pulse', 'Rapid preferred; slightly broader in sad pieces', 'Four speeds, incl. accelerating', '—'],
+                   ['Dotted figure against triplets', 'Short note after the third triplet note — V §22', 'Assimilate to the triplet — III §27', '—', 'Bodky: decide by context'],
+                   ['Dynamics by dissonance', 'Three graded classes (mf, f, ff) — XVII.vi, p. 256', 'Dissonances louder in general; the graded scheme accepted only broadly', 'Raised notes stronger', '—'],
+                   ['Repeated quick bass notes in continuo', 'Play every note', 'Omit some, octaves, heavy touch', '—', '—'],
+                   ['Inequality in Bach', 'Slight inequality of good notes — XI §12', '—', '—', 'Bodky: set aside; Badura-Skoda: only a "mini-rubato"'],
+                   ['Ordinary (unmarked) touch', '—', 'Half the value — III §22', '—', 'Badura-Skoda: too extreme; slight shortening'],
+                   ['Tempo norms', 'Four classes, pulse 80', 'Berlin adagios slower, allegros faster than elsewhere', '—', 'Bodky: five groups 40–120']]}],
+      verification={'status': 'verified', 'checks': ['Each cell traced to the cited section; L. Mozart cells marked cross-ref.']})
+
+# ---------------------------------------------------------------------------
+TOOLS = [
+    {'id': 'quantz-tempo', 'title': 'Quantz tempo calculator', 'priority': 1, 'instruments': ['both'],
+     'spec': 'Inputs: metre (C, ¢, 2/4, 3/4, 3/8, 6/8, 9/8, 12/8), tempo word (dropdown grouped by Quantz class + plain Allegro), fastest note value, optional pulse (default 80, slider 60–100). Output: MM for the counting unit, the pulse placement (text + a bar diagram with dots where pulses fall), the Quantz class, and Bodky\'s nearest group for comparison. "Tap pulse" button measures the user\'s own pulse/tempo by taps. Play: harpsichord click on pulses plus a soft tick on the counting unit for 2 bars.',
+     'reference': 'quantz-pulse tables quantz-classes and quantz-triple; bodky-groups'},
+    {'id': 'appoggiatura-lab', 'title': 'Appoggiatura length lab', 'priority': 2, 'instruments': ['both'],
+     'spec': 'Pick a case (plain note, dotted note, 6/8 tied, before a rest, before a trill on a dissonance, falling thirds) and a source (Quantz / C. P. E. Bach / L. Mozart where given). Shows written vs performed in two staves, highlights the dissonance against the bass, and plays both (harpsichord). When the sources disagree (falling thirds), show both realisations with a toggle.',
+     'reference': 'examples app-*'},
+    {'id': 'rhythm-lab', 'title': 'Rhythm lab: dots, Lombard, inequality, triplets', 'priority': 3, 'instruments': ['both'],
+     'spec': 'One short passage per mode. Dotted: slider from written (3:1) to sharp (7:1) and "as short as the shortest note". Lombard: slider for the first note. Inequality: slider 50:50 → 60:40 with a "Quantz exceptions" checklist that disables it (strokes, repeated notes, long slurs, very fast, gigue). Triplets: toggle Quantz vs C. P. E. Bach. Always plays written and altered versions back to back.',
+     'reference': 'examples overdot, lombard, inequality, dot-vs-triplet'},
+    {'id': 'trill-builder', 'title': 'Trill builder', 'priority': 4, 'instruments': ['both'],
+     'spec': 'Choose: start (upper note / appoggiatura from above held half the note / from below), speed (notes per pulse, default Quantz 8 at pulse 80; register adjustment), termination on/off, short trill (Pralltriller). Presets: Quantz cadential, C. P. E. Bach normal, CPE Pralltriller, L. Mozart accelerating. Shows the realised notes and plays them. Warn when the user sets a long appoggiatura before a trill on a dissonance.',
+     'reference': 'trill topic; examples trill-*'},
+    {'id': 'breath-planner', 'title': 'Breath & articulation planner', 'priority': 5, 'instruments': ['flute', 'keyboard'],
+     'spec': 'Input: a melody in the mini-notation (or pick a stored example). Flute mode: marks candidate breaths by Quantz VII (long→short, not after a bar\'s last note, before a new idea, at leaps in semiquavers, split ties) with a reason for each, and proposes syllables (ti/di/tiri/did\'ll) by note value, step/leap and tempo class. Keyboard mode: the same breaths become lifts (shown as commas), metrical weight shown (strong/weak), and an optional "bowing view" showing L. Mozart down/up bows as a cross-reference. All marks are editable by the user; the tool labels them as suggestions.',
+     'reference': 'breathing, tonguing, keyboard-breathing; examples breath-q, tongue-q, bow-map'},
+    {'id': 'dissonance-dynamics', 'title': 'Dissonance dynamics', 'priority': 6, 'instruments': ['keyboard'],
+     'spec': 'Input a bass note + figures (or pick the example progression). Output Quantz\'s class (consonant / mf / f / ff), scaled by a global level (pp/p/mp). Harpsichord playback realises the class by texture (number of parts, octave bass, arpeggio) since a harpsichord cannot change dynamic by touch; a piano option uses velocity.',
+     'reference': 'dissonance-dynamics; example diss-dyn'},
+    {'id': 'messa-di-voce', 'title': 'Messa di voce & bow divisions', 'priority': 7, 'instruments': ['flute', 'keyboard'],
+     'spec': 'Visual only (no harpsichord audio): a long note drawn as a dynamic envelope. Presets: Quantz messa di voce (pp→swell to middle→diminish), L. Mozart\'s four bow divisions (cross-ref), and keyboard substitutes (harpsichord: trill/broken chord filling; clavichord: Bebung after half the note) shown as note patterns that can be played.',
+     'reference': 'messa-di-voce'},
+]
+
+# ---------------------------------------------------------------------------
+def check():
+    ids = {t['id'] for t in TOPICS}
+    errs = []
+    for t in TOPICS:
+        for e in t.get('examples', []):
+            if e not in EX: errs.append(f"{t['id']}: missing example {e}")
+        for tl in t.get('tools', []):
+            if tl not in {x['id'] for x in TOOLS}: errs.append(f"{t['id']}: missing tool {tl}")
+        if t['group'] not in {g[0] for g in GROUPS}: errs.append(f"{t['id']}: bad group")
+        for it in t['rules'] + t['guidelines']:
+            if not it['refs']: errs.append(f"{t['id']}: item without ref: {it['text'][:40]}")
+            for ref in it['refs']:
+                if ref.startswith('LM') and 'cross-ref' not in ref: errs.append(f"{t['id']}: LM ref not marked cross-ref")
+        # LM may never be the only source of a rule
+        for it in t['rules']:
+            if all(r.startswith('LM') for r in it['refs']): errs.append(f"{t['id']}: rule rests on LM only")
+    # token grammar + durations
+    tok = re.compile(r'^(g)?([A-G][#b]?\d|r):(\d+(?:\.\d+)?)(@(0(?:\.\d+)?|1(?:\.0)?))?([._])?$')
+    def dur(s):
+        tot = 0
+        for w in s.split():
+            if w == '|': continue
+            m = tok.match(w)
+            if not m: errs.append(f'bad token {w}'); continue
+            if not m.group(1): tot += float(m.group(3))
+        return round(tot, 3)
+    for e in EX.values():
+        layers = {}
+        for k, v in list(e['written'].items()) + [('perf.' + k, v) for k, v in e['performed'].items()]:
+            if isinstance(v, str) and v != 'same' and not k.endswith('rule'):
+                layers[k] = dur(v)
+        vals = set(layers.values())
+        if len(vals) > 1: errs.append(f"{e['id']}: layer lengths differ {layers}")
+    return errs
+
+def main():
+    data = {'version': 1, 'tab': 'hip', 'title': 'Historically Informed Performance',
+            'scope': 'Flute and keyboard (harpsichord, clavichord, piano). L. Mozart\'s violin treatise is used only as a cross-reference: bowing ↔ flute breath/tonguing ↔ keyboard touch.',
+            'sources': SOURCES,
+            'groups': [{'id': a, 'title': b, 'blurb': c} for a, b, c in GROUPS],
+            'topics': TOPICS, 'examples': EX, 'tools': TOOLS}
+    errs = check()
+    os.makedirs(os.path.dirname(OUT), exist_ok=True)
+    json.dump(data, open(OUT, 'w'), ensure_ascii=False, indent=1)
+    nr = sum(len(t['rules']) for t in TOPICS); ng = sum(len(t['guidelines']) for t in TOPICS)
+    print(f'topics {len(TOPICS)}  rules {nr}  guidelines {ng}  examples {len(EX)}  tools {len(TOOLS)}')
+    for e in errs: print('CHECK:', e)
+    return 1 if errs else 0
+
+if __name__ == '__main__':
+    sys.exit(main())

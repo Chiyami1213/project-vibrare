@@ -25,3 +25,10 @@ pnpm-debug.log*
 
 # wrangler
 .wrangler/
+
+# content packs as delivered (the copies in content/ are the ones the site uses)
+/partimento-content/
+/counterpoint-fux-content/
+/fugue-content/
+/hip-content/
+/tonal-harmony-content/

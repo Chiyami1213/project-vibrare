@@ -1,0 +1,84 @@
+ugue-guide additions */
+.tools-row{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:flex-end;min-width:0}
+.tools-row > *{max-width:100%;min-width:0} .tools-row .fld{flex:1 1 180px} .tools-row .fld select{width:100%} .tools-row .btn{white-space:normal;text-align:left}
+.txt{font:14px var(--f-ui);padding:7px 9px;border:1px solid var(--rule);border-radius:5px;background:var(--paper);color:var(--ink);flex:1 1 260px;min-width:0}
+.fld.wide{display:flex;flex-direction:column;width:100%} .fld.wide .txt{width:100%;flex:0 0 auto}
+.mini-tbl{border-collapse:collapse;font:13px var(--f-ui)} .mini-tbl th,.mini-tbl td{border:1px solid var(--rule);padding:4px 8px;text-align:center;white-space:nowrap}
+.mini-tbl th{background:var(--paper);text-align:left} .mini-tbl td.mut{color:var(--rubric);font-weight:600} .mini-tbl td.bad{background:var(--rubric-bg);color:var(--rubric)} .mini-tbl tr.good td{background:var(--verd-bg)}
+.warn{color:var(--rubric)} .okmsg{color:var(--verd)}
+.orders{display:flex;flex-wrap:wrap}
+.lane{display:grid;grid-template-columns:70px 1fr;gap:8px;align-items:center;font:13px var(--f-ui);margin:3px 0}
+.lane-bar{background:var(--paper);border:1px solid var(--rule);border-radius:4px;height:24px;position:relative}
+.seg-b{display:inline-block;height:22px;line-height:22px;padding:0 8px;border-radius:3px;font:600 12px var(--f-ui);width:34%}
+.seg-b.theme{background:var(--accent-bg);color:var(--accent)} .seg-b.answer{background:var(--ochre-bg);color:var(--ochre)}
+ol.tl{list-style:none;padding:0;margin:0;display:grid;gap:4px} ol.tl li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:4px 8px;font-size:15px} ol.tl .yr{font:600 13px var(--f-ui);color:var(--accent)} ol.tl li b{grid-column:2}
+ol.tl li > span:last-child{grid-column:2;color:var(--ink-2)}
+ol.plan{margin:0;padding-left:22px} ol.plan li{margin:3px 0}
+dl.theorists{grid-template-columns:minmax(0,1fr)} dl.theorists dt{white-space:normal;font-size:13px;padding-top:8px} dl.theorists dd{padding-left:12px;border-left:2px solid var(--rule)}
+.figs dt{white-space:normal}
+@media (max-width:560px){.lane{grid-template-columns:54px 1fr}}
+</style>
+
+<div class="bar"><div class="in wrap">
+  <span class="brand">Fugue</span>
+  <button class="btn navbtn" type="button" id="navbtn" aria-expanded="false" aria-controls="toc">Contents</button>
+  <span class="sp"></span>
+  <label for="reg">Harpsichord
+    <select id="reg">
+      <option value="full">8′ + 8′ + 4′</option>
+      <option value="double">8′ + 8′</option>
+      <option value="single">single 8′</option>
+      <option value="lute">lute stop</option>
+    </select></label>
+  <label for="tempo">Tempo <input type="range" id="tempo" min="40" max="140" value="72" aria-describedby="tempo-v"><span id="tempo-v">𝅗𝅥 = 72</span></label>
+  <button class="btn" type="button" id="stopall">■ Stop sound</button>
+</div></div>
+
+<div class="page wrap">
+<nav class="toc" id="toc" aria-label="Contents">
+  <h4>Overview</h4>
+  <a href="#thesis">Mann’s thesis</a>
+  <h4>Part One · History</h4>
+  <a href="#h1">I. Texture versus form <small>p. 3</small></a>
+  <a href="#h2">II. Renaissance <small>p. 9</small></a>
+  <a href="#h3">III. Baroque <small>p. 32</small></a>
+  <a href="#h4">IV. Classic summaries <small>p. 52</small></a>
+  <a href="#h5">V. Textbook vs history <small>p. 62</small></a>
+  <h4>Part Two · Fux</h4>
+  <a href="#fux-intro">Disciple of Palestrina <small>p. 75</small></a>
+  <a href="#fux-imitation">Imitation <small>p. 78</small></a>
+  <a href="#fux-general">Fugues in general <small>p. 79</small></a>
+  <a href="#fux-two">Two parts <small>p. 81</small></a>
+  <a href="#fux-three">Three parts <small>p. 90</small></a>
+  <a href="#fux-four">Four parts <small>p. 102</small></a>
+  <a href="#fux-dc8">Double cpt. at the octave <small>p. 106</small></a>
+  <a href="#fux-dc10">… at the tenth <small>p. 114</small></a>
+  <a href="#fux-dc12">… at the twelfth; inversion <small>p. 122</small></a>
+  <a href="#fux-free">Several subjects; release <small>p. 131</small></a>
+  <h4>Part Two · Marpurg</h4>
+  <a href="#mar-intro">Interpreter of Bach <small>p. 139</small></a>
+  <a href="#mar-imitation">Imitation; classes <small>p. 142</small></a>
+  <a href="#mar-theme">The theme <small>p. 160</small></a>
+  <a href="#mar-answer">The answer <small>p. 164</small></a>
+  <a href="#mar-exposition">Exposition, development <small>p. 176</small></a>
+  <a href="#mar-double">Double fugues <small>p. 190</small></a>
+  <a href="#mar-counter">Counterparts, episodes <small>p. 199</small></a>
+  <a href="#mar-model">Model Kyrie <small>p. 204</small></a>
+  <h4>Part Two · Albrechtsberger</h4>
+  <a href="#alb-intro">Teacher of Beethoven <small>p. 213</small></a>
+  <a href="#alb-chorale">Chorale fugue <small>p. 221</small></a>
+  <a href="#alb-canon">Canon <small>p. 227</small></a>
+  <h4>Part Two · Martini</h4>
+  <a href="#mart-intro">Mentor of a new age <small>p. 263</small></a>
+  <a href="#mart-models">Duo to eight voices <small>p. 270</small></a>
+  <h4>Back matter</h4>
+  <a href="#cheat">Four teachers at a glance</a>
+</nav>
+@@BODY@@
+
+</div>
+<script id="engine-src" type="text/plain">/*ENGINE*/</script>
+<script>/*GLYPHS*/</script>
+<script>/*ENGINE*/</script>
+<script>/*UI*/</script>
+<script>/*MAIN*/</script>

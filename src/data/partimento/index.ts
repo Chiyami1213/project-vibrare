@@ -10,27 +10,35 @@ export const CADENCES = cadencesJson as unknown as ContentFile;
 
 export const BASE = '/theory/partimento';
 
-/** The five "moti del basso" groups belong to the Moti page; the rest to Schemata. */
+export { SECTIONS, sectionBySlug, sectionOfGroup } from './sections';
+export type { Section } from './sections';
+import { SECTIONS, sectionBySlug, sectionOfGroup } from './sections';
+import type { Section } from './sections';
+
+const ALL_GROUPS: Group[] = [...SCHEMATA.groups, ...CADENCES.groups];
+const ALL_PATTERNS: Pattern[] = [...SCHEMATA.patterns, ...CADENCES.patterns];
+
+export const groupsOf = (section: Section): Group[] => ALL_GROUPS.filter((g) => section.groupIds(g.id));
+export const patternsOf = (section: Section): Pattern[] => ALL_PATTERNS.filter((p) => section.groupIds(p.group));
+
+/** Kept for the pages and tests that ask for the two older sections by name. */
 export const isMoti = (g: Group | string) => (typeof g === 'string' ? g : g.id).startsWith('moti-');
+export const MOTI_GROUPS = groupsOf(sectionBySlug('moti-del-basso'));
+export const SCHEMATA_GROUPS = groupsOf(sectionBySlug('schemata'));
+export const motiPatterns = patternsOf(sectionBySlug('moti-del-basso'));
+export const schemataPatterns = patternsOf(sectionBySlug('schemata'));
 
-export const MOTI_GROUPS = SCHEMATA.groups.filter(isMoti);
-export const SCHEMATA_GROUPS = SCHEMATA.groups.filter((g) => !isMoti(g));
+export const patternsIn = (groupId: string): Pattern[] => ALL_PATTERNS.filter((p) => p.group === groupId);
 
-export const patternsIn = (groupId: string): Pattern[] => SCHEMATA.patterns.filter((p) => p.group === groupId);
-
-const ALL = new Map<string, Pattern>([...SCHEMATA.patterns, ...CADENCES.patterns].map((p) => [p.id, p]));
+const ALL = new Map<string, Pattern>(ALL_PATTERNS.map((p) => [p.id, p]));
 export const getPattern = (id: string) => ALL.get(id);
 
-/** Page for a pattern id (cadence patterns link into the Cadences page). */
+/** Page for a pattern id. */
 export function urlFor(id: string): string {
   const p = ALL.get(id);
   if (!p) return BASE + '/';
-  if (p.tab === 'cadences') return `${BASE}/cadences/#${id}`;
-  return `${BASE}/${isMoti(p.group) ? 'moti-del-basso' : 'schemata'}/${id}/`;
+  return `${BASE}/${sectionOfGroup(p.group).slug}/${id}/`;
 }
-
-export const motiPatterns = SCHEMATA.patterns.filter((p) => isMoti(p.group));
-export const schemataPatterns = SCHEMATA.patterns.filter((p) => !isMoti(p.group));
 
 /**
  * Is a schema galant? Judged against Gjerdingen, Music in the Galant Style (2007), whose catalogue of galant

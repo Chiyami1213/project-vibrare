@@ -1,0 +1,972 @@
+<meta charset="utf-8">
+<title>Study of Fugue Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Music&display=swap">
+<style>
+/* Layout: engraved-print study guide. Sticky toolbar, left contents rail on wide screens, single reading column with wider music panels. */
+:root{
+  --paper:#f6f6f2; --sheet:#ffffff; --ink:#1d1f24; --ink-2:#4a4d55; --rule:#d9d8d0; --staff:#3b3e46;
+  --rubric:#b0281c; --rubric-bg:#f8e7e3; --ochre:#9a6a00; --ochre-bg:#f6edd6; --verd:#2f6b4f; --verd-bg:#e1efe6;
+  --accent:#1f4d7a; --accent-bg:#e4ecf5; --hl:#1f6fd1;
+  --f-display:"IM Fell English SC","IM Fell English",Georgia,serif;
+  --f-fell:"IM Fell English",Georgia,serif;
+  --f-body:"Source Serif 4","Source Serif Pro",Georgia,"Times New Roman",serif;
+  --f-ui:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-music:"Noto Music","Segoe UI Symbol","Apple Symbols",serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#16171a; --sheet:#1e2024; --ink:#e9e7e1; --ink-2:#aeb0b6; --rule:#34363c; --staff:#c9c8c2;
+  --rubric:#ef7a6b; --rubric-bg:#3a201d; --ochre:#e0b450; --ochre-bg:#352b16; --verd:#7cc7a0; --verd-bg:#18302a;
+  --accent:#8fb8e8; --accent-bg:#1c2a3a; --hl:#6aa9ff; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#16171a; --sheet:#1e2024; --ink:#e9e7e1; --ink-2:#aeb0b6; --rule:#34363c; --staff:#c9c8c2;
+  --rubric:#ef7a6b; --rubric-bg:#3a201d; --ochre:#e0b450; --ochre-bg:#352b16; --verd:#7cc7a0; --verd-bg:#18302a;
+  --accent:#8fb8e8; --accent-bg:#1c2a3a; --hl:#6aa9ff; color-scheme:dark;}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--sheet)}
+a{color:var(--accent)}
+h1,h2,h3,h4{font-weight:400;text-wrap:balance;line-height:1.15;margin:0}
+p{margin:0}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* toolbar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--sheet);border-bottom:1px solid var(--rule);font-family:var(--f-ui);font-size:13px}
+.bar .in{display:flex;gap:12px 18px;align-items:center;flex-wrap:wrap;padding-block:8px;max-width:1280px;margin:0 auto}
+.brand{font-family:var(--f-display);font-size:19px;letter-spacing:.02em;white-space:nowrap}
+.bar label{display:flex;align-items:center;gap:6px;color:var(--ink-2)}
+.bar input[type=range]{width:110px;accent-color:var(--accent)}
+.bar .sp{flex:1}
+.bar select{font:inherit;padding:3px 6px;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink)}
+.navbtn{display:none}
+
+/* page grid */
+.page{display:grid;grid-template-columns:240px minmax(0,1fr);gap:40px;max-width:1280px;margin:0 auto;padding-block:28px 80px}
+.toc{position:sticky;top:64px;align-self:start;max-height:calc(100vh - 80px);overflow:auto;font-family:var(--f-ui);font-size:13px;padding-right:6px}
+.toc h4{font-family:var(--f-ui);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin:18px 0 6px}
+.toc a{display:block;color:var(--ink);text-decoration:none;padding:3px 8px;border-left:2px solid transparent;line-height:1.35}
+.toc a:hover{background:var(--accent-bg)}
+.toc a.on{border-left-color:var(--rubric);color:var(--rubric)}
+.toc a small{color:var(--ink-2)}
+main{min-width:0}
+@media (max-width:1050px){.page{grid-template-columns:minmax(0,1fr)}.toc{display:none;position:fixed;inset:auto 0 0 0;top:auto;max-height:70vh;background:var(--sheet);z-index:25;border-top:1px solid var(--rule);padding:12px max(16px,env(safe-area-inset-left,0px)) calc(16px + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 30px rgba(0,0,0,.15)}.toc.open{display:block}.navbtn{display:inline-flex}}
+
+/* hero */
+.hero{max-width:900px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px;padding-bottom:26px;border-bottom:1px solid var(--rule);margin-bottom:30px}
+.hero .kicker{font-family:var(--f-ui);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rubric)}
+.hero h1{font-family:var(--f-display);font-size:clamp(34px,6vw,58px);letter-spacing:.01em}
+.hero h1 em{font-family:var(--f-fell);font-style:italic;color:var(--ink-2);font-size:.6em;display:block;letter-spacing:0}
+.hero p{max-width:66ch;color:var(--ink-2)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-ui);font-size:13px;color:var(--ink-2)}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.mk{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:3px;font:600 11px var(--f-ui);flex:none}
+.mk.r{background:var(--rubric);color:var(--sheet)}
+.mk.g{background:var(--ochre-bg);color:var(--ochre);border:1px solid var(--ochre)}
+.mk.f{background:var(--accent-bg);color:var(--accent)}
+
+/* chapters */
+.part{margin:56px 0 8px;display:flex;align-items:baseline;gap:14px;border-top:3px double var(--ink);padding-top:14px}
+.part h2{font-family:var(--f-display);font-size:30px}
+.part span{font-family:var(--f-ui);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.chapter{padding:34px 0 10px;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.chapter>header{display:grid;gap:8px;max-width:72ch}
+.eyebrow{font-family:var(--f-ui);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.chapter h2{font-family:var(--f-display);font-size:clamp(26px,4vw,36px)}
+.chapter h3{font-family:var(--f-fell);font-style:italic;font-size:22px;margin-top:6px}
+.lede{font-size:18px;max-width:68ch}
+.prose{max-width:68ch;display:grid;gap:10px}
+.quote{font-family:var(--f-fell);font-style:italic;font-size:19px;color:var(--ink-2);border-left:2px solid var(--rubric);padding-left:14px;max-width:62ch}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.rulebox{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.rulebox h4{font-family:var(--f-ui);font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:flex;gap:8px;align-items:center}
+.rulebox.hard h4{color:var(--rubric)} .rulebox.soft h4{color:var(--ochre)}
+.rulebox ol,.rulebox ul{margin:0;padding-left:20px;display:grid;gap:7px;font-size:15.5px;line-height:1.5}
+.rulebox.hard{border-top:3px solid var(--rubric)} .rulebox.soft{border-top:3px solid var(--ochre)}
+.rulebox li::marker{color:var(--ink-2);font-family:var(--f-ui);font-size:13px}
+.ref{font-family:var(--f-ui);font-size:12px;color:var(--ink-2);white-space:nowrap}
+.figs{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:15.5px;max-width:78ch}
+.figs dt{font-family:var(--f-ui);font-size:12.5px;font-weight:600;color:var(--accent);white-space:nowrap;padding-top:2px}
+.figs dd{margin:0}
+.assign{background:var(--accent-bg);border-radius:6px;padding:12px 16px;font-size:15.5px;max-width:78ch}
+.assign b{font-family:var(--f-ui);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:2px}
+
+/* music panels */
+.ex,.widget,.wb{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:10px;min-width:0}
+.ex figcaption{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.fignum{font-family:var(--f-ui);font-size:12px;font-weight:600;color:var(--sheet);background:var(--accent);border-radius:3px;padding:1px 7px}
+.figtitle{font-family:var(--f-fell);font-size:18px}
+.cap{font-size:15px;color:var(--ink-2);max-width:78ch}
+.w-head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.w-head strong{font-family:var(--f-fell);font-weight:400;font-size:20px}
+.w-head .mini{flex-basis:100%}
+.mini{font-family:var(--f-ui);font-size:12.5px;color:var(--ink-2)}
+.ex-bar,.mot-ctr,.wb-tools,.wb-ctr{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{font-family:var(--f-ui);font-size:13px;font-weight:500;padding:6px 12px;border-radius:5px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);cursor:pointer;line-height:1.2}
+.btn:hover{border-color:var(--ink-2)}
+.btn:focus-visible,.seg button:focus-visible,select:focus-visible,.score:focus-visible{outline:2px solid var(--hl);outline-offset:2px}
+.btn.play{background:var(--ink);color:var(--sheet);border-color:var(--ink);min-width:82px}
+.btn.play.on{background:var(--rubric);border-color:var(--rubric)}
+.btn.accent{background:var(--accent);color:var(--sheet);border-color:var(--accent)}
+.btn.toggle.on{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:5px;overflow:hidden;flex-wrap:nowrap}
+.seg button{font-family:var(--f-ui),var(--f-music);font-size:13px;padding:5px 10px;border:0;border-right:1px solid var(--rule);background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--ink);color:var(--sheet)}
+.seg-scroll{overflow-x:auto;max-width:100%}
+.wb-rhythm .seg button{font-family:var(--f-music),var(--f-ui);font-size:15px}
+.fld{display:inline-flex;flex-direction:column;gap:2px;font-family:var(--f-ui);font-size:11.5px;color:var(--ink-2);letter-spacing:.04em}
+.fld select{font:13px var(--f-ui);padding:5px 8px;border:1px solid var(--rule);border-radius:5px;background:var(--paper);color:var(--ink);max-width:100%}
+.acc-wrap{display:inline-flex;gap:6px;align-items:center;margin-left:auto}
+.acc-wrap .seg button{font-family:var(--f-music),var(--f-ui);font-size:15px;padding:3px 10px}
+.wb{border-color:var(--accent);border-width:1px 1px 1px 1px}
+.wb-title{display:grid;gap:2px}
+.wb-title strong{font-family:var(--f-fell);font-weight:400;font-size:20px}
+.wb-rhythm{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.hint{font-family:var(--f-ui);font-size:12px;color:var(--ink-2)}
+
+/* score */
+.score{overflow-x:auto;display:flex;flex-direction:column;gap:6px;outline:none;border-radius:4px}
+.score svg{display:block;max-width:none;overflow:visible}
+.sl{stroke:var(--staff);stroke-width:.8;opacity:.75}
+.bl{stroke:var(--staff);stroke-width:1}
+.blk,.ink{fill:var(--ink)}
+.glyph{fill:var(--ink)}
+.bracket{stroke:var(--ink);stroke-width:2.5}
+.paper{fill:var(--sheet)}
+.stem{stroke:var(--ink);stroke-width:1.2}
+.ledger{stroke:var(--staff);stroke-width:1}
+.tie{fill:var(--ink)}
+.clef8{font:600 9px var(--f-ui);fill:var(--ink)}
+.mnum{font:10px var(--f-ui);fill:var(--ink-2)}
+.fig{font:600 11px var(--f-ui);fill:var(--ink-2);text-anchor:middle}
+.fig.fp{fill:var(--accent)} .fig.fd{fill:var(--rubric);font-style:italic}
+.fig.small{font-size:10px}
+.note .halo{opacity:.18}
+.halo.err{fill:var(--rubric)} .halo.warn{fill:var(--ochre)}
+.badge circle{stroke:none}
+.badge.err circle{fill:var(--rubric)} .badge.warn circle{fill:var(--ochre)}
+.badge text{font:600 8.5px var(--f-ui);fill:var(--sheet);text-anchor:middle}
+.note.err .ink{fill:var(--rubric)} .note.warn .ink{fill:var(--ochre)}
+.note.playing .ink{fill:var(--hl)} .note.playing .stem{stroke:var(--hl)}
+.note.sel .ink{fill:var(--accent)}
+.note .empty{fill:none;stroke:var(--ink-2);stroke-dasharray:2 2}
+.staff.editable .sl{stroke:var(--accent);opacity:1}
+.hit{fill:transparent;cursor:crosshair}
+.ghost-head{fill:var(--accent);opacity:.45}
+.ghost-l{stroke:var(--accent);opacity:.5}
+.slide svg{animation:slide .45s ease}
+@keyframes slide{from{opacity:.35;transform:translateX(-10px)}to{opacity:1;transform:none}}
+
+/* verdicts & issue lists */
+.verdict{font-family:var(--f-ui);font-size:13.5px;font-weight:600;padding:6px 10px;border-radius:5px;display:inline-block}
+.verdict.good{background:var(--verd-bg);color:var(--verd)} .verdict.bad{background:var(--rubric-bg);color:var(--rubric)} .verdict.meh{background:var(--ochre-bg);color:var(--ochre)}
+.issues{margin:8px 0 0;padding-left:22px;display:grid;gap:5px;font-size:14.5px}
+.issues li{cursor:default}
+.issues li::marker{font:600 12px var(--f-ui)}
+.issues li.error::marker{color:var(--rubric)} .issues li.warn::marker{color:var(--ochre)}
+.issues .tag{font:600 10.5px var(--f-ui);letter-spacing:.08em;text-transform:uppercase;padding:1px 6px;border-radius:3px;margin-right:4px}
+.issues .error .tag{background:var(--rubric);color:var(--sheet)} .issues .warn .tag{background:var(--ochre-bg);color:var(--ochre)}
+.issues .rn{font-weight:600}
+.pill{font:600 11px var(--f-ui);padding:2px 8px;border-radius:20px;letter-spacing:.03em;vertical-align:middle}
+.pill.pc{background:var(--accent-bg);color:var(--accent)} .pill.ic{background:var(--verd-bg);color:var(--verd)} .pill.ds{background:var(--rubric-bg);color:var(--rubric)}
+
+/* widgets */
+.kbd-wrap,.mot-wrap,.mx-wrap{overflow-x:auto;max-width:100%}
+.kbd{width:100%;min-width:420px;max-width:700px;display:block}
+.wk{fill:var(--sheet);stroke:var(--staff);stroke-width:1;cursor:pointer}
+.bk{fill:var(--ink);cursor:pointer}
+.wk.a,.bk.a{fill:var(--accent)} .wk.b,.bk.b{fill:var(--rubric)}
+.kl{font:10px var(--f-ui);fill:var(--ink-2);text-anchor:middle;pointer-events:none}
+.ivx-out{display:grid;gap:4px}
+.ivx-big{font-family:var(--f-fell);font-size:24px}
+.ivx-sub{font-size:15px;color:var(--ink-2)}
+.mot-svg{width:100%;max-width:640px;min-width:360px;display:block}
+.lad{stroke:var(--rule);stroke-width:1} .lad.c{stroke:var(--ink-2);stroke-dasharray:3 3}
+.ladl{font:10px var(--f-ui);fill:var(--ink-2);text-anchor:end}
+.col{stroke:var(--rule);stroke-width:1;stroke-dasharray:2 4}
+.vp{stroke-width:2.5;stroke-linecap:round} .vp.u{stroke:var(--accent)} .vp.l{stroke:var(--ochre)}
+.dot.u{fill:var(--accent)} .dot.l{fill:var(--ochre)} .dot.ghost{opacity:.35}
+.ivbar{stroke-width:6;stroke-linecap:round;opacity:.28} .ivbar.p{stroke:var(--accent)} .ivbar.i{stroke:var(--verd)}
+.ivbar.no{stroke:var(--rubric);opacity:.6} .ivbar.ok{opacity:.5}
+.ivlab{font:600 11px var(--f-ui);fill:var(--ink)}
+.mot-verdict{font-size:15px;padding:8px 12px;border-radius:6px;background:var(--paper);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.mot-verdict.ok{background:var(--verd-bg)} .mot-verdict.no{background:var(--rubric-bg)}
+.rules-mx{border-collapse:collapse;font-family:var(--f-ui);font-size:13px;min-width:460px}
+.rules-mx th,.rules-mx td{border:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+.rules-mx thead th{background:var(--paper);font-weight:600}
+.rules-mx td .rn{font-weight:600;margin-bottom:6px;color:var(--ink-2)}
+.chip{font:500 12px var(--f-ui);border-radius:20px;padding:3px 10px;margin:2px 4px 2px 0;border:1px solid;cursor:pointer;background:transparent}
+.chip.ok{color:var(--verd);border-color:var(--verd)} .chip.no{color:var(--rubric);border-color:var(--rubric)}
+.mono-svg{width:100%;max-width:640px;min-width:340px;display:block}
+.mono-box{fill:var(--ochre-bg);stroke:var(--ochre)} .mono-nut{fill:var(--ink)}
+.str{fill:none;stroke-width:2} .str.a{stroke:var(--accent)} .str.b{stroke:var(--rubric)}
+.bridge{fill:var(--ink)} .tick{stroke:var(--ochre)}
+.mlab{font:600 11px var(--f-ui);fill:var(--ink-2);text-anchor:middle}
+.divs{display:grid;gap:6px;font-size:14.5px}
+.div-row{display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid var(--rule);padding-top:6px}
+.dl{font-family:var(--f-ui);font-size:12.5px;color:var(--ink-2);min-width:220px}
+
+/* cheat sheet */
+.tbl-wrap{overflow-x:auto;max-width:100%}
+table.cheat{border-collapse:collapse;font-size:14.5px;min-width:720px;background:var(--sheet)}
+table.cheat th,table.cheat td{border:1px solid var(--rule);padding:8px 10px;vertical-align:top;text-align:left}
+table.cheat thead th{font-family:var(--f-ui);font-size:12px;letter-spacing:.06em;text-transform:uppercase;background:var(--paper)}
+table.cheat td:first-child{font-family:var(--f-fell);font-size:17px;white-space:nowrap}
+.foot{margin-top:40px;font-size:14px;color:var(--ink-2);max-width:78ch;display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:560px){body{font-size:16px}.acc-wrap{margin-left:0}.figs{grid-template-columns:1fr}.figs dt{padding-top:6px}}ugue-guide additions */
+.tools-row{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:flex-end;min-width:0}
+.tools-row > *{max-width:100%;min-width:0} .tools-row .fld{flex:1 1 180px} .tools-row .fld select{width:100%} .tools-row .btn{white-space:normal;text-align:left}
+.txt{font:14px var(--f-ui);padding:7px 9px;border:1px solid var(--rule);border-radius:5px;background:var(--paper);color:var(--ink);flex:1 1 260px;min-width:0}
+.fld.wide{display:flex;flex-direction:column;width:100%} .fld.wide .txt{width:100%;flex:0 0 auto}
+.mini-tbl{border-collapse:collapse;font:13px var(--f-ui)} .mini-tbl th,.mini-tbl td{border:1px solid var(--rule);padding:4px 8px;text-align:center;white-space:nowrap}
+.mini-tbl th{background:var(--paper);text-align:left} .mini-tbl td.mut{color:var(--rubric);font-weight:600} .mini-tbl td.bad{background:var(--rubric-bg);color:var(--rubric)} .mini-tbl tr.good td{background:var(--verd-bg)}
+.warn{color:var(--rubric)} .okmsg{color:var(--verd)}
+.orders{display:flex;flex-wrap:wrap}
+.lane{display:grid;grid-template-columns:70px 1fr;gap:8px;align-items:center;font:13px var(--f-ui);margin:3px 0}
+.lane-bar{background:var(--paper);border:1px solid var(--rule);border-radius:4px;height:24px;position:relative}
+.seg-b{display:inline-block;height:22px;line-height:22px;padding:0 8px;border-radius:3px;font:600 12px var(--f-ui);width:34%}
+.seg-b.theme{background:var(--accent-bg);color:var(--accent)} .seg-b.answer{background:var(--ochre-bg);color:var(--ochre)}
+ol.tl{list-style:none;padding:0;margin:0;display:grid;gap:4px} ol.tl li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:4px 8px;font-size:15px} ol.tl .yr{font:600 13px var(--f-ui);color:var(--accent)} ol.tl li b{grid-column:2}
+ol.tl li > span:last-child{grid-column:2;color:var(--ink-2)}
+ol.plan{margin:0;padding-left:22px} ol.plan li{margin:3px 0}
+dl.theorists{grid-template-columns:minmax(0,1fr)} dl.theorists dt{white-space:normal;font-size:13px;padding-top:8px} dl.theorists dd{padding-left:12px;border-left:2px solid var(--rule)}
+.figs dt{white-space:normal}
+@media (max-width:560px){.lane{grid-template-columns:54px 1fr}}
+</style>
+
+<div class="bar"><div class="in wrap">
+  <span class="brand">Fugue</span>
+  <button class="btn navbtn" type="button" id="navbtn" aria-expanded="false" aria-controls="toc">Contents</button>
+  <span class="sp"></span>
+  <label for="reg">Harpsichord
+    <select id="reg">
+      <option value="full">8′ + 8′ + 4′</option>
+      <option value="double">8′ + 8′</option>
+      <option value="single">single 8′</option>
+      <option value="lute">lute stop</option>
+    </select></label>
+  <label for="tempo">Tempo <input type="range" id="tempo" min="40" max="140" value="72" aria-describedby="tempo-v"><span id="tempo-v">𝅗𝅥 = 72</span></label>
+  <button class="btn" type="button" id="stopall">■ Stop sound</button>
+</div></div>
+
+<div class="page wrap">
+<nav class="toc" id="toc" aria-label="Contents">
+  <h4>Overview</h4>
+  <a href="#thesis">Mann’s thesis</a>
+  <h4>Part One · History</h4>
+  <a href="#h1">I. Texture versus form <small>p. 3</small></a>
+  <a href="#h2">II. Renaissance <small>p. 9</small></a>
+  <a href="#h3">III. Baroque <small>p. 32</small></a>
+  <a href="#h4">IV. Classic summaries <small>p. 52</small></a>
+  <a href="#h5">V. Textbook vs history <small>p. 62</small></a>
+  <h4>Part Two · Fux</h4>
+  <a href="#fux-intro">Disciple of Palestrina <small>p. 75</small></a>
+  <a href="#fux-imitation">Imitation <small>p. 78</small></a>
+  <a href="#fux-general">Fugues in general <small>p. 79</small></a>
+  <a href="#fux-two">Two parts <small>p. 81</small></a>
+  <a href="#fux-three">Three parts <small>p. 90</small></a>
+  <a href="#fux-four">Four parts <small>p. 102</small></a>
+  <a href="#fux-dc8">Double cpt. at the octave <small>p. 106</small></a>
+  <a href="#fux-dc10">… at the tenth <small>p. 114</small></a>
+  <a href="#fux-dc12">… at the twelfth; inversion <small>p. 122</small></a>
+  <a href="#fux-free">Several subjects; release <small>p. 131</small></a>
+  <h4>Part Two · Marpurg</h4>
+  <a href="#mar-intro">Interpreter of Bach <small>p. 139</small></a>
+  <a href="#mar-imitation">Imitation; classes <small>p. 142</small></a>
+  <a href="#mar-theme">The theme <small>p. 160</small></a>
+  <a href="#mar-answer">The answer <small>p. 164</small></a>
+  <a href="#mar-exposition">Exposition, development <small>p. 176</small></a>
+  <a href="#mar-double">Double fugues <small>p. 190</small></a>
+  <a href="#mar-counter">Counterparts, episodes <small>p. 199</small></a>
+  <a href="#mar-model">Model Kyrie <small>p. 204</small></a>
+  <h4>Part Two · Albrechtsberger</h4>
+  <a href="#alb-intro">Teacher of Beethoven <small>p. 213</small></a>
+  <a href="#alb-chorale">Chorale fugue <small>p. 221</small></a>
+  <a href="#alb-canon">Canon <small>p. 227</small></a>
+  <h4>Part Two · Martini</h4>
+  <a href="#mart-intro">Mentor of a new age <small>p. 263</small></a>
+  <a href="#mart-models">Duo to eight voices <small>p. 270</small></a>
+  <h4>Back matter</h4>
+  <a href="#cheat">Four teachers at a glance</a>
+</nav>
+<main>
+<section class="hero">
+  <span class="kicker">Study guide · Alfred Mann, <i>The Study of Fugue</i> (Rutgers 1958; Dover 1987)</span>
+  <h1>The Study of Fugue <em>six centuries of fugal theory, with the teachers’ own lessons, scores you can hear, and tools that test your subjects</em></h1>
+  <p>Mann’s book has two halves. <b>Part One</b> traces what theorists meant by <i>fuga</i>, from the fourteenth-century canon to the nineteenth-century examination fugue. <b>Part Two</b> lets four teachers speak for themselves. <b>Fux</b> (1725) teaches fugue in the modes. <b>Marpurg</b> (1753) codifies Bach’s practice. <b>Albrechtsberger</b> (1790) adds the chorale fugue and canon. <b>Martini</b> (1775) teaches through annotated masterworks.</p>
+  <p>This guide follows Mann’s table of contents. For the four teachers, each chapter separates the <b>rules</b> a teacher treats as binding from the <b>guidelines</b> he gives as advice. The history chapters list the theorists and the idea each one contributed.</p>
+  <div class="legend">
+    <span><i class="mk r">R</i> Rule: stated as binding by that teacher</span>
+    <span><i class="mk g">G</i> Guideline: advice, taste, or a stated exception</span>
+    <span><i class="mk f">p.</i> Page numbers refer to the Dover edition of Mann</span>
+    <span><i class="mk f">①</i> Circled numbers are scale degrees of the key or mode</span>
+  </div>
+  <p class="mini">The scores in this guide are short models written for it and labelled as such. Mann’s own examples are cited by number so you can find them in the book. Every score plays on a synthesized harpsichord. The tools (answer generator, stretto finder, invertible-counterpoint calculator, inversion mirror, entry orders) work on any subject you type.</p>
+</section>
+
+<section class="chapter" id="thesis">
+  <header><span class="eyebrow">Preface and Part One overview · pp. v–x, 3–8</span><h2>Mann’s Thesis: Fugue Is a Procedure</h2>
+  <p class="lede">Is fugue a form, like the minuet, or a texture, like counterpoint? Mann answers: neither. It is a set of procedures for stating, answering, developing and re-establishing a theme. Every attempt to freeze it into one pattern, “<i>the</i> fugue,” has been a decline.</p></header>
+  <div class="cols">
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Key claims</h4><ol>
+      <li>The word <i>fuga</i> named a texture and a genre from its first appearance. That double meaning has “bedeviled musical theory ever since.” <span class="ref">p. 4</span></li>
+      <li>Imitation was the Renaissance’s “best manner of part writing” (Ramos: <i>optimus organisandi modus</i>). The texture was found first; the search for a form came later. <span class="ref">p. 4</span></li>
+      <li>Fugue named in turn the canon, the motet, the ricercar, tiento, fantasia, canzona, the core of the toccata and overture, and the Baroque sonata and concerto. Its structural achievements passed to the Classic sonata as “development.” <span class="ref">p. 5</span></li>
+      <li>Bukofzer: fugue is “neither a form nor a texture but a contrapuntal procedure.” Tovey: a texture whose rules do not determine the shape of the whole. <span class="ref">p. 6 n.</span></li>
+      <li>Mann’s method: study what theorists first defined and how those definitions changed, to see where theory served practice and where it drifted into an “imaginary, unreal world.” <span class="ref">p. 8</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Mann’s conclusion</h4><ol>
+      <li><b>Imitation</b>: any casual use of the imitative manner.</li>
+      <li><b>Canon</b>: the strict use of that manner.</li>
+      <li><b>Fugue</b>: “the sum of procedures by which the imitative manner was used in order to state and restate, tonally establish, develop, and re-establish thematic material.” <span class="ref">p. 72</span></li>
+      <li>Because fugal theory produced the ideas of theme, exposition and development, it mirrors the evolution of musical form. It is “a catechism of the discipline of composition in general.” <span class="ref">p. 72</span></li>
+    </ol></div>
+  </div>
+  <p class="quote">“It is true that perfect knowledge of harmony opens the roads we should take, but the choice of roads is left to our discretion.” Rameau, quoted as Mann’s epigraph (p. 52)</p>
+  <div data-w="timeline"></div>
+</section>
+
+<div class="part" id="part1"><h2>Part One</h2><span>The study of fugue: a historical outline · pp. 1–72</span></div>
+
+<section class="chapter" id="h1">
+  <header><span class="eyebrow">Part One · Chapter I · pp. 3–8</span><h2>Texture versus Form</h2>
+  <p class="lede">Polyphony grew from the octave, fifth and fourth between vocal registers. Contrary motion was its first triumph, imperfect consonances its second, imitation its third. Imitation combined “likeness and diversity,” and theory has argued ever since over whether it is a texture or a form.</p></header>
+  <div class="prose">
+    <p>Contrary motion paired with imitation balanced ascent and descent in every line, because a rising passage needed a falling continuation against the next entry (John Cotton c. 1100; Walter Odington on the rondellus). Instrumental music, “made without a ditty” (Morley), had to find its form without a text. Its genres say so in their names: <i>ricercar</i> (search), <i>tiento</i> (attempt), <i>fantasia</i>, <i>capriccio</i>, <i>inventio</i>.</p>
+    <p>In 1900 d’Indy asked when the fugue had declined into “a mere formula.” Müller-Blattau (1923) placed the end with Bach. Mann disagrees: the fugues of Mozart and Beethoven are no mere formula. But Beethoven’s titles (<i>fuga con alcune licenze</i>, Op. 106; <i>Grande Fugue, tantôt libre, tantôt recherchée</i>, Op. 133) show a new idea of “licence” that Bach never needed. Prout’s colleagues claimed there was “not a single correctly written fugue among Bach’s Forty-Eight.” That is a concept, the “fugue without exceptions,” that never existed in real music.</p>
+  </div>
+</section>
+
+<section class="chapter" id="h2">
+  <header><span class="eyebrow">Part One · Chapter II · pp. 9–31</span><h2>The Renaissance: Fuga and Imitation</h2>
+  <p class="lede">From the first theoretical use of the word to Morley, Renaissance theory moved from strict canon to free imitation, and finally to the harmonically oriented treatment of a theme. Every element of the fugal exposition was assembled.</p></header>
+  <dl class="figs theorists">
+    <dt>Jacobus of Liège, <i>Speculum musicae</i> (c. 1330)</dt><dd>First theoretical use of <i>fuga</i>, meaning the <i>caccia</i> (hunt canon). Caccia and rondellus survive in English as <i>catch</i> and <i>round</i>.</dd>
+    <dt>Trent Codices (15th c.)</dt><dd><i>Fuga</i> used for both secular and sacred works. Dufay’s <i>Et in terra ad modum tubae</i> is a canon over a trumpet-like ostinato (Mann Ex. 1).</dd>
+    <dt>Tinctoris, <i>Diffinitorium</i> (c. 1475), <i>Liber de arte contrapuncti</i> (1477)</dt><dd>First definition: “the identity of rhythmic and melodic writing in various parts.” Fuga is a means of variety. Identity of pitch and spacing hints at the difference between strict and free imitation.</dd>
+    <dt>Ramos de Pareja, <i>Musica practica</i> (1482)</dt><dd>Imitative entries at the perfect intervals (4th, 5th, 8ve). Uses <i>imitari</i> for strict and free repetition. Write freely whenever strict imitation becomes difficult. Mann calls this the key to the later concept of fugue.</dd>
+    <dt>Gafori, <i>Practica musica</i> (1496)</dt><dd>The rule of contrary motion is “an arbitrary law”; direct motion is commendable when parts move “in fugal manner.”</dd>
+    <dt>Aron, <i>Toscanello</i> (1523)</dt><dd>Compose all parts together, not one after another. Any part may be written first; soprano and bass preferred.</dd>
+    <dt>Buchner, <i>Fundamentbuch</i> (c. 1525)</dt><dd>Organ instruction in the <i>ars fugandi</i>: a separate three-part example for each opening interval, entries alternating at the 4th and 5th so the third voice enters at the octave (Mann Exx. 2–3).</dd>
+    <dt>Vicentino, <i>L’antica musica</i> (1555)</dt><dd>First full chapter on fugue. Prefers free imitation and rejects the fugue that follows a cantus firmus as “not modern.” Introduces the <i>punto</i> (the theme). Specifies the theme’s length and the spacing of entries. Pairs entries at the 4th and 5th and tells the composer to respect the mode. Gives the first description of the tonal answer.</dd>
+    <dt>Zarlino, <i>Istitutioni harmoniche</i> (1558)</dt><dd>Separates <b>fugue</b> (entries at P1/P4/P5/P8 keeping exact whole and half steps) from <b>imitation</b> (other intervals or freer following), and both from <b>canon</b>. Introduces <i>guida/consequente</i> (later dux/comes), <i>soggetto</i>, <i>thema</i>, strict vs free (<i>legate/sciolte</i>), counterfugue (<i>per arsin et thesin</i>) and double counterpoint.</dd>
+    <dt>Santa María, <i>Arte de tañer fantasía</i> (1565)</dt><dd>The answer may wait for the theme to finish or enter before it ends. Placing entries is “the most intricate and most beautiful device.” Entries are related to cadences; after all four voices enter, introduce a new <i>passo</i>.</dd>
+    <dt>Ponzio, <i>Raggionamenti</i> (1588)</dt><dd>The ricercar repeats one invention two to four times in different ways. The first statement is unaccompanied; the theme must be “clearly perceptible.”</dd>
+    <dt>Morley, <i>Plain and Easy Introduction</i> (1597)</dt><dd>Close entries are best perceived but have become stereotyped, so give the point “more scope.” “The odd rest giveth an unspeakable grace to the point.” Describes the tonal answer: the answer “riseth five notes and the plain song but four” (Mann Ex. 14). The fantasy is the “chiefest” music without words.</dd>
+  </dl>
+  <div class="cols">
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Vicentino’s practical advice (1555)</h4><ol>
+      <li>The beginning must be well written and suit all voices. <span class="ref">p. 15</span></li>
+      <li>Theme length: from a half note to four whole notes. The second voice enters after at most four rests; “more than four rests would seem too many.” <span class="ref">p. 16</span></li>
+      <li>Space the entries evenly at metrically corresponding points. For surprise they may alternate between strong and weak beats, a point still debated in the 18th century. <span class="ref">p. 16</span></li>
+      <li>Imitate at the unison or octave only “in case of necessity.” Prefer the 4th and 5th, alternated: soprano and alto at the 4th if tenor and bass are at the 5th. <span class="ref">p. 16</span></li>
+      <li>Choose a mode and stay within it. Treat the bass with particular care, since it determines the mode. <span class="ref">p. 16</span></li>
+      <li>In a counterfugue at the octave, answer a falling 5th with a rising 4th (and vice versa) so the line stays within the octave of the mode. This is the first description of the tonal answer. <span class="ref">p. 18</span></li>
+      <li>At the keyboard, once the entries are done, make the counterpart of the theme the subject of new imitation, and you will never run out of material. <span class="ref">p. 16</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Zarlino’s distinctions (1558)</h4><ol>
+      <li><b>Fugue</b> keeps the exact intervals, including whole and half steps. That is possible only with entries at the unison, 4th, 5th or octave. <span class="ref">p. 22</span></li>
+      <li><b>Imitation</b> follows the intervals only in general; any other entry interval is imitation. The tonal answer therefore counts as imitation for Zarlino, and he ignores it. <span class="ref">p. 22</span></li>
+      <li><b>Strict</b> (<i>legata</i>): canonic throughout, “written in one.” <b>Free</b> (<i>sciolta</i>): canonic at the start, then “whatever the composer likes best.” The free mixture is the basis of all later fugue. <span class="ref">p. 22</span></li>
+      <li>A melodic repetition used on purpose (<i>replica</i>, <i>thema</i>) is acceptable, “even desirable,” if varied in note values or rhythm. Consistent thematic work justifies some licences. <span class="ref">p. 20</span></li>
+      <li>Wider spacing of entries gives more originality: “of common fugues the world is full” (Vicentino). This is the first step toward the fugue on one individual theme. <span class="ref">p. 22</span></li>
+    </ol></div>
+  </div>
+  <p class="quote">“When he hath once set down a point, though it be right, yet ought he not to rest there, but should rather look more earnestly how he may bring it more artificially about.” Morley (p. 30)</p>
+</section>
+
+<section class="chapter" id="h3">
+  <header><span class="eyebrow">Part One · Chapter III · pp. 32–52</span><h2>The Baroque: Fugal Development</h2>
+  <p class="lede">The seventeenth century took the exposition and widened it to development. It found a second theme, planned cadences on several keys, gave the stretto a place, and finally defined fugue in harmonic terms (Rameau).</p></header>
+  <dl class="figs theorists">
+    <dt>Coperario, <i>Rules for Composing</i> (c. 1610)</dt><dd>“How to maintain a fugue”: connect expositions. If a point is long, “invent another point to go with him,” the <b>double fugue</b> of theme and countertheme.</dd>
+    <dt>Nucius (1613), Cerone, <i>El Melopeo</i> (1613), Zacconi (1622)</dt><dd>Fuga is the frequent recurrence of the same <i>thema</i>. “The true tiento is based on one theme.” Exhaust one cantus firmus before taking another, the principle behind the <i>Art of Fugue</i>.</dd>
+    <dt>M. Praetorius, <i>Syntagma</i> III (1619)</dt><dd>Treat a fugue by joining and interweaving it in direct and inverted, ordinary and unusual entries, which anticipates <i>Durchführung</i>. In the canzona the first fugue returns at the end: exposition, development, restatement.</dd>
+    <dt>Bernhard, <i>Tractatus</i> (c. 1650)</dt><dd><b>Consociatio modorum</b> (tonal answer: exchange 4th for 5th) belongs at the decisive beginning. <b>Aequatio modorum</b> (real answer) suits stepwise subjects and the middle of a work. Distinguishes modulation with return (<i>extensio</i>) from modulation without return (<i>alteratio</i>).</dd>
+    <dt>Reinken (Sweelinck school MS, 1670)</dt><dd>First plan of keys for a whole fugue. In the D mode the “proper cadences” fall on D, then A, then F. Stretto (<i>ins kurtze imitiren</i>) is good discipline. In the double fugue the themes are heard apart, then together.</dd>
+    <dt>Bononcini, <i>Musico prattico</i> (1673)</dt><dd>Save close entries for later, once the listener knows the theme. Calls the tonal fugue <i>fuga regolare</i> because it stays within the octave of the key. Defines strict inversion around the Dorian scale.</dd>
+    <dt>Berardi, <i>Documenti armonici</i> (1681)</dt><dd><i>Fuga reale</i> (real answer) is now the exception. Put the stretto at the end: “all’s well that ends well.” Explains double counterpoint with the two-row number table.</dd>
+    <dt>Purcell (Playford’s <i>Introduction</i>, 1694)</dt><dd>Imitation is a “diminutive sort of fugeing.” Fugue is used above all in sonatas. “A great deal of Art mixed with good Air.”</dd>
+    <dt>Walther (1708; <i>Lexikon</i> 1732)</dt><dd><i>Repercussio</i> moved from the reciting tone to the returning statement, then to the exposition and the counter-exposition.</dd>
+    <dt>Rameau, <i>Traité</i> (1722)</dt><dd>Imitation is casual; fugue is the harmonically governed imitative manner. These are the first rules for the beginning and end of entries, with tonic and dominant corresponding. Fugal structure itself “cannot be reduced to rules.”</dd>
+  </dl>
+  <div class="cols">
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Bernhard and Reinken: planning a fugue</h4><ol>
+      <li>Tonal answer (<i>consociatio</i>) at the harmonically decisive beginning, and “not easily” deviated from. Use it for subjects within a 4th or 5th with “comfortable skips.” <span class="ref">p. 38</span></li>
+      <li>Real answer (<i>aequatio</i>) for stepwise subjects, “more often in the middle than in the beginning,” because it is “less strict.” <span class="ref">p. 38</span></li>
+      <li>First full cadence on the tonic, the next on the dominant, the third on the relative major. This is not inflexible: “good musicians” also put the first cadence on the dominant. Imperfect cadences go later. <span class="ref">p. 40</span></li>
+      <li>Answer the theme at a bar, a half bar and a quarter bar: stretto as discipline. <span class="ref">p. 42</span></li>
+      <li>In a double fugue, distinguish the themes by skips or rests, or set a slow, singable line against fast notes. You need double counterpoint. <span class="ref">p. 42</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Rameau’s rules (1722)</h4><ol>
+      <li>Theme and answer correspond in tonic and dominant function at the beginning and the end. The tonal answer’s “melodic inaccuracy” is harmonic accuracy. <span class="ref">p. 50</span></li>
+      <li>The theme may begin on any beat but ends on a downbeat, unless the ending is feminine. <span class="ref">p. 50</span></li>
+      <li>A theme of more than four bars should not stay unaccompanied that long; let the answer enter before it ends. <span class="ref">p. 50</span></li>
+      <li>Before a new theme in a double fugue, halt on a deceptive cadence, or on a full cadence in another key. <span class="ref">p. 51</span></li>
+      <li>A theme reached by modulation must be transposed exactly. Use inversion often, “the essence of all harmonic variety.” <span class="ref">p. 51</span></li>
+    </ol></div>
+  </div>
+</section>
+
+<section class="chapter" id="h4">
+  <header><span class="eyebrow">Part One · Chapter IV · pp. 52–61</span><h2>The Classic Summaries</h2>
+  <p class="lede">Practice produced the great summaries (the <i>Well-Tempered Clavier</i>, the <i>Musical Offering</i>, the <i>Art of Fugue</i>). Theory produced four that this book translates: Fux, Marpurg, Albrechtsberger and Martini.</p></header>
+  <dl class="figs theorists">
+    <dt>Fux, <i>Gradus ad Parnassum</i> (1725)</dt><dd>A synthesis: the tonal fugue is confirmed, taught in the modes and in Palestrina’s style for the sake of equal voices. Fux’s “modulation” means melody within a mode, not change of key.</dd>
+    <dt>Mattheson, <i>Der vollkommene Capellmeister</i> (1739)</dt><dd>Publishes Bernhard’s terms and adds <b>conciliatio modorum</b>, a codetta between theme and answer. Writes for “connoisseurs and amateurs.” Requires duple meter for fugue, an arbitrary rule built on a historical error.</dd>
+    <dt>Marpurg, <i>Abhandlung von der Fuge</i> (1753–54)</dt><dd>The first monograph, written under the impression of Bach. It keeps Rameau’s harmonic rules but turns the fugue into a “regular” <i>form</i>: “It will always be best to take the rule literally.”</dd>
+    <dt>Albrechtsberger, <i>Gründliche Anweisung</i> (1790)</dt><dd>Fux and Marpurg in the harmony of his day. No connecting codetta in the exposition: the end of one statement coincides with the start of the next. Later, modulate to distant keys; sequences round the circle of fifths are “obsolete and trivial.”</dd>
+    <dt>Kirnberger (1774)</dt><dd>Reduces “the method of the late J. S. Bach” to principles but leaves out fugue. Bach taught fugue step by step, beginning with two parts (Forkel).</dd>
+    <dt>Martini, <i>Esemplare</i> (1774–75)</dt><dd>Teaches through annotated complete works from Willaert to Scarlatti and rejects any set fugal structure: “We have no system other than that of Fux.”</dd>
+  </dl>
+</section>
+
+<section class="chapter" id="h5">
+  <header><span class="eyebrow">Part One · Chapter V · pp. 62–72</span><h2>Textbook versus History</h2>
+  <p class="lede">The nineteenth century separated theory from practice. Conservatory textbooks taught an abstract “fugue” that, as one of them admitted, “possibly cannot be traced to any of the existing fugues.”</p></header>
+  <dl class="figs theorists">
+    <dt>Fétis (1824), Reicha, Cherubini</dt><dd>Strict rules applied to modern tonality, a compromise in a “musical no man’s land.” Fugue becomes “une production scientifique” (Reicha) and the “complement of counterpoint” (Cherubini).</dd>
+    <dt>Richter, Jadassohn, Weinlig (Leipzig)</dt><dd>Masterworks that break the rules “are not actually fugues.” Teachers use only their own examples so as not to “confuse or divert the student.”</dd>
+    <dt>André (1832–42)</dt><dd>Derives <i>Fuge</i> from German <i>Fug</i>, “rule,” and condemns Bach’s exceptions.</dd>
+    <dt>Marx, Riemann (1837–1902)</dt><dd>Fugue as a tripartite form; theme and answer forced into an eight-bar period. Formal analysis replaces stylistic analysis.</dd>
+    <dt>Sechter, Lobe (1855)</dt><dd>Sechter searches the <i>Jupiter</i> finale for the “real fugue.” Lobe: “My theory recognizes no answer, no exposition, no development.”</dd>
+    <dt>Prout, Kurth, Terry, Oldroyd</dt><dd>“Whatever Bach does systematically is correct for the student,” a new textbook rigidity.</dd>
+    <dt>Gédalge (1901), Kitson (1922)</dt><dd>The <i>fugue d’école</i> and the examination fugue. Kitson: WTC I/1 is a poor exam model because it has no episodes, and I/2 because it has no stretto.</dd>
+    <dt>Bellermann (1862), Jeppesen (1931), Mann’s editions</dt><dd>Critical history joined to teaching again, through direct study of the classic sources.</dd>
+  </dl>
+  <div class="cols">
+    <div class="rulebox soft"><h4><i class="mk g">G</i> What went wrong (Mann)</h4><ol>
+      <li>Rules treated as the definition of the art, then masterworks judged by the rules. <span class="ref">pp. 62–67</span></li>
+      <li>Baroque music explained in Classic terms (Marpurg) and Classic fugues judged by Baroque standards (Sechter). Marpurg’s distinction between Bach’s <i>strict</i> fugues and Handel’s <i>free</i> fugues was later misread as “proper” versus “improper.” <span class="ref">pp. 67–68</span></li>
+      <li>Bach’s own “irregular” writing defeats the textbook norm. The <i>Et resurrexit</i> expositions sit over a drum bass; the <i>Confiteor</i> is a double fugue around a Gregorian cantus firmus. <span class="ref">p. 68</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Mann’s remedy</h4><ol>
+      <li>Read the classic theoretical sources directly, with their history. That is why Part Two prints Fux, Marpurg, Albrechtsberger and Martini. <span class="ref">p. 71</span></li>
+      <li>Study style before form: ask what a master did in his own idiom, not whether he obeyed a later rule. <span class="ref">p. 67</span></li>
+    </ol></div>
+  </div>
+  <div data-w="terms"></div>
+</section>
+
+<div class="part" id="part2"><h2>Part Two · Fux</h2><span>From <i>Gradus ad Parnassum</i> (1725) · pp. 75–138</span></div>
+
+<section class="chapter" id="fux-intro">
+  <header><span class="eyebrow">Fux · Introduction · pp. 75–77</span><h2>Fux as Disciple of Palestrina</h2>
+  <p class="lede">Fux himself called fugue the most important part of his book. Species counterpoint was a preparation for the moment when the student, “released from his fetters,” writes free composition. In imitation, the student’s own invention then serves as a cantus firmus from bar to bar.</p></header>
+  <div class="prose">
+    <p>The <i>Gradus</i> appeared in Latin in 1725 at imperial expense and sold out within a year. Bach’s pupil Mizler translated it “under the very eyes of Bach as it were.” Haydn and Beethoven made abstracts of it, and Strauss and Hindemith still taught from it. Fux teaches fugue in the six modes. Subjects use only the “natural tones,” and sharps and flats appear only to form a cadence or avoid a tritone, so that the student learns melody before harmony. The dialogue makes Palestrina (Aloysius) the master and Fux (Josephus) the pupil.</p>
+  </div>
+  <p class="quote">“Since God is the highest perfection, the harmony composed for his praise should follow the strictest rules that perfection can claim, as far as human imperfection can realize them.” (p. 77)</p>
+</section>
+
+<section class="chapter" id="fux-imitation">
+  <header><span class="eyebrow">Fux · A Lesson on Imitation · pp. 78–79 · Exx. 26–33</span><h2>Imitation</h2>
+  <p class="lede">The first free composition: two voices, no cantus firmus. One voice follows the other after some rests with the same intervals, at any distance from the unison to the octave.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Definition</h4><ol>
+      <li>Imitation: a part follows another after rests, forming the same intervals, <b>without regard for the mode</b> or the position of whole and half steps. <span class="ref">p. 78</span></li>
+      <li>It may occur at the unison, 2nd, 3rd, 4th, 5th, 6th, 7th or octave (Exx. 26–33). <span class="ref">pp. 78–79</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ol>
+      <li>Not every note need be taken over; only a few notes need follow. Taking over every note would make a canon. <span class="ref">p. 78</span></li>
+      <li>Imitation may lead out of the mode (C to G in Ex. 29). It is also used later in a piece, where the mode matters less. <span class="ref">p. 79</span></li>
+      <li>Keep the rules of good, singable writing in both parts. <span class="ref">p. 79</span></li>
+    </ol></div>
+  </div>
+  <div class="assign"><b>Fux’s assignment</b>Take a succession of notes with whatever intervals you choose, write a second part in counterpoint against it, and complete a two-part setting imitating at various intervals. <span class="ref">p. 79</span></div>
+</section>
+
+<section class="chapter" id="fux-general">
+  <header><span class="eyebrow">Fux · Fugues in General · pp. 79–81</span><h2>Fugue, Mode, and the Exchange of Fifth and Fourth</h2>
+  <p class="lede">Fugue differs from imitation in one point: the following part takes over the subject <i>with due regard for the mode</i>, and above all for where its half steps fall.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>Fugue: a succession of notes in one part is taken over in another with regard for the mode, especially the position of whole and half steps. <span class="ref">p. 80</span></li>
+      <li>A mode is an octave divided into a fifth and a fourth. If the leading part skips a fifth, the following part must skip a fourth (and vice versa), so neither exceeds the octave of the mode. This does not apply to imitation. <span class="ref">p. 80</span></li>
+      <li>Fugal voices enter only at the unison, octave or fifth. An entry “at the fourth” is a fifth counted from the fundamental understood below. <span class="ref">pp. 80, 84</span></li>
+      <li>A subject suited to one mode will not suit another, because the half steps fall differently in each. <span class="ref">p. 81</span></li>
+      <li>No sharps or flats in the <b>subject</b>, so the nature of the modes is learnt. In the free continuation they are allowed, and needed to avoid <i>mi contra fa</i>. <span class="ref">pp. 81, 84</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ol>
+      <li>Count the six modes as D, E, F, G, A, C, in the order they appear. Their half steps fall in six different places. <span class="ref">p. 80</span></li>
+      <li>The A mode comes closest to the D mode, but the answer would need a sharp on its next-to-last note to copy the D-mode subject. <span class="ref">p. 81</span></li>
+    </ol></div>
+  </div>
+  <div data-w="answer"></div>
+  <div data-w="exD"></div>
+</section>
+
+<section class="chapter" id="fux-two">
+  <header><span class="eyebrow">Fux · Fugues in Two Parts · pp. 81–90 · Exx. 42–49</span><h2>Fugues in Two Parts</h2>
+  <p class="lede">Fux gives a fixed plan for the first fugues. It has three cadences, on the fifth, the third and the final of the mode, with the subject brought back after each one and pressed closer together at the end.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> The plan</h4><ol>
+      <li>Choose a short subject suited to the mode and place it in the part you start with. <span class="ref">p. 82</span></li>
+      <li>The second part takes the same notes at the 4th below or 5th above, unaltered unless the mode requires a change. Meanwhile the first part continues in florid counterpoint. <span class="ref">p. 82</span></li>
+      <li>After a short continuation, the <b>first cadence on the 5th</b> of the mode. <span class="ref">p. 82</span></li>
+      <li>Resume the subject, usually in the first part on another tone. Mark the entry with a rest or a large skip. The other part may enter before the subject ends. <span class="ref">p. 82</span></li>
+      <li>After free writing, the <b>second cadence on the 3rd</b> of the mode. <span class="ref">p. 82</span></li>
+      <li>Finally, subject in one part and the other part following in the very next bar, “locking the two parts as closely as possible.” End with a <b>cadence on the final</b>. <span class="ref">p. 82</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Exceptions and advice</h4><ol>
+      <li>The theme’s note values may be changed (tied, shortened) near the end, where close entries cannot otherwise be combined. It even “lends a particular charm.” <span class="ref">p. 85</span></li>
+      <li><b>E mode:</b> the first cadence falls on the 6th (C), not the 5th. A B major third would clash <i>mi contra fa</i> with the F that follows. <span class="ref">p. 86</span></li>
+      <li><b>F mode:</b> a second cadence needing two or three sharps leaves the mode. Use a 7–6 cadence instead. <span class="ref">p. 88</span></li>
+      <li><b>A mode:</b> an entry may be moved to another tone (B instead of A) when the lower part would clash. That is fine in the middle of a fugue but not at the beginning. <span class="ref">p. 88</span></li>
+      <li>Test a subject for close entries before choosing it. Diatonic subjects are simple on purpose: they teach the modes. <span class="ref">p. 89</span></li>
+      <li>These exercises are the “vestibule” of fugue, as drawing is to painting. Repeat them often. <span class="ref">p. 90</span></li>
+    </ol></div>
+  </div>
+  <div data-w="fuxplan"></div>
+  <div class="assign"><b>Fux’s assignment</b>Josephus writes two-part fugues in the E, F, G, A and C modes after the master’s model in D, each on a subject suited to that mode alone. <span class="ref">pp. 85–90</span></div>
+</section>
+
+<section class="chapter" id="fux-three">
+  <header><span class="eyebrow">Fux · Fugues in Three Parts · pp. 90–102 · Exx. 50–69</span><h2>Fugues in Three Parts</h2>
+  <p class="lede">Three-part writing is “the most perfect,” because it allows complete triads. The new questions are where the third voice enters and how cadences are handled once a full close becomes possible.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>The third part enters after the subject has appeared in the two others, with or without a short free continuation. <span class="ref">p. 90</span></li>
+      <li>Make its entry on a <b>perfect triad</b>, or better, on a <b>tied dissonance</b>, so it does not sound thin or indistinct. <span class="ref">p. 91</span></li>
+      <li>Avoid any perfect cadence (major third to octave) that does not coincide with an entry of the subject. A perfect cadence means complete rest, so it belongs only at the end or where a section closes and a new subject begins. <span class="ref">pp. 91, 94</span></li>
+      <li>After a rest a voice must bring back the subject (old or new), “if you do not want to make yourself open to the reproving words of the gospel”: “Friend, how camest thou in hither not having a wedding garment?” <span class="ref">p. 96</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ol>
+      <li>The third part usually takes the interval of the <b>first</b> part, for variety, unless the context suggests otherwise. <span class="ref">p. 91</span></li>
+      <li>When an entry coincides with it, a cadence may fall on any degree not too far from the mode, perfect or deceptive. A deceptive cadence (<i>inganno</i>) uses a minor third, or the bass leaves the octave. <span class="ref">pp. 91–92</span></li>
+      <li>Two-part “cadences” (7–6, 2–3) are only preparations; a third part turns them into full cadences. <span class="ref">p. 94</span></li>
+      <li>Under upper parts descending in 7–6 or 2–3 suspensions, a bass may move freely in alternating 5ths and 6ths. This makes it easier to prepare entries. <span class="ref">p. 94</span></li>
+      <li>Rest a voice when two others crowd it, so it can return with the subject. Entries over 5–6 motion are strong. An entry may be marked by a strong dissonance. <span class="ref">p. 95</span></li>
+      <li>Use tied notes (syncopations) as often as possible. They make each part distinct and easy to follow. <span class="ref">p. 101</span></li>
+    </ol></div>
+  </div>
+  <div class="assign"><b>Fux’s assignment</b>Write three-part fugues in the E, F, G, A and C modes on the two-part subjects (Exx. 65–69). Return to three-part writing “again and again,” since “triplicity expresses perfection.” <span class="ref">pp. 96–102</span></div>
+</section>
+
+<section class="chapter" id="fux-four">
+  <header><span class="eyebrow">Fux · Fugues in Four Parts · pp. 102–106 · Exx. 70–72</span><h2>Fugues in Four Parts</h2>
+  <p class="lede">The fourth voice brings a rule of correspondence between voices, and a warning against crowding them.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>The soprano’s entry corresponds to the tenor’s, the alto’s to the bass’s. <span class="ref">p. 102</span></li>
+      <li>Do not crowd the parts. “Just as a person walking through a dense crowd would be pushed from left, right, and front,” a voice without space cannot unfold. <span class="ref">p. 102</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ol>
+      <li>If a part has no room: rewrite, or rest it and let it return later with the subject. Better still, plan ahead. <span class="ref">pp. 102–103</span></li>
+      <li>Four parts need not always sound together. Three may move while the fourth rests before its next entry. <span class="ref">p. 104</span></li>
+    </ol></div>
+  </div>
+  <div data-w="orders"></div>
+</section>
+
+<section class="chapter" id="fux-dc8">
+  <header><span class="eyebrow">Fux · Double Counterpoint at the Octave · pp. 106–114 · Exx. 73–83</span><h2>Double Counterpoint at the Octave</h2>
+  <p class="lede">Fugues with several themes need parts that can be exchanged, the upper becoming the lower. Fux teaches three species: at the octave, the tenth and the twelfth.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>Several subjects must move differently (different note values), must not begin together (one enters after rests), and must keep within the interval limit of the species. <span class="ref">p. 108</span></li>
+      <li>At the octave, avoid the <b>fifth</b>: it inverts to a fourth, a dissonance in two parts. A tied fifth is allowed. <span class="ref">p. 108</span></li>
+      <li>Do not approach the octave by skip: it inverts to a unison reached by skip. <span class="ref">p. 109</span></li>
+      <li>Avoid the octave on a strong beat except in a syncopation, since it inverts to a unison. <span class="ref">p. 109</span></li>
+      <li>Keep the parts within an octave. Beyond it, inversion only shifts the intervals’ register without producing a new harmony. <span class="ref">p. 110</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ol>
+      <li>If every downbeat is reached by contrary or oblique motion, a third part can be added by doubling the counterpoint a tenth below. <span class="ref">p. 111</span></li>
+      <li>In a fugue with a countersubject (Ex. 81), the countersubject begins after a half-bar rest and keeps answering the subject at the octave in outer and inner voices. A compound interval (15th) counts as simple. <span class="ref">p. 112</span></li>
+      <li>Change note values so that both themes can be combined in stretto. This “will be considered much to the composer’s credit.” <span class="ref">p. 113</span></li>
+      <li>Let the countersubject enter sometimes in the second or third bar of the subject, not always in the first. <span class="ref">p. 114</span></li>
+    </ol></div>
+  </div>
+  <div data-w="dc"></div>
+</section>
+
+<section class="chapter" id="fux-dc10">
+  <header><span class="eyebrow">Fux · Double Counterpoint at the Tenth · pp. 114–122 · Exx. 84–97</span><h2>Double Counterpoint at the Tenth</h2>
+  <p class="lede">Either part may move a tenth up or down. Thirds and sixths become octaves and fifths, so parallel imperfect consonances are now forbidden.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>No two thirds or tenths in direct motion: they invert to unisons and octaves. <span class="ref">p. 114</span></li>
+      <li>No two sixths in succession: they invert to fifths. <span class="ref">p. 114</span></li>
+      <li>No tied fourth in the upper part. It would invert to a seventh resolving to an octave, which Fux does not accept. <span class="ref">p. 115</span></li>
+      <li>Do not exceed the tenth. <span class="ref">p. 115</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ol>
+      <li>Transpose either part a tenth, or raise the cantus a third and drop the counterpoint an octave. <span class="ref">p. 116</span></li>
+      <li>A third part can be added by doubling at the tenth when downbeats are reached by contrary or oblique motion. <span class="ref">p. 117</span></li>
+      <li>To stay in the mode when inverting at the start, open on the first or third degree. Inversion need not run from beginning to end; use it where judgment suggests. <span class="ref">p. 118</span></li>
+      <li>Counterpoint at the octave and at the tenth can be combined in the same theme. <span class="ref">p. 119</span></li>
+      <li>A rest may be followed by the countersubject in contrary motion: “not only permissible” but a source of variety. <span class="ref">p. 121</span></li>
+    </ol></div>
+  </div>
+</section>
+
+<section class="chapter" id="fux-dc12">
+  <header><span class="eyebrow">Fux · Double Counterpoint at the Twelfth · pp. 122–131 · Exx. 98–120</span><h2>Double Counterpoint at the Twelfth; Melodic Inversion</h2>
+  <p class="lede">At the twelfth every interval may be used except the sixth (it becomes a seventh). A counterpoint at the twelfth built mostly on fifths, octaves and thirds also inverts at the octave and the tenth, so two parts yield many three- and four-part settings.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>Avoid the sixth and the 7–6 suspension. A <b>tied</b> sixth is possible. <span class="ref">pp. 122, 127</span></li>
+      <li>Do not exceed the twelfth. <span class="ref">p. 122</span></li>
+      <li>For a three-part setting: a fifth at the beginning and at the end, contrary or oblique motion throughout, no dissonant ties. <span class="ref">p. 125</span></li>
+      <li>Melodic inversion only for settings <b>without dissonant ties</b>, because syncopated dissonances must resolve downward. <span class="ref">p. 130</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ol>
+      <li>End the upper part on the 5th so that, transposed a twelfth, it ends properly in the mode. Use B♭ where needed to keep the intervals. <span class="ref">p. 123</span></li>
+      <li>Fifths and octaves in contrary motion, and thirds by oblique motion, give the richest results. <span class="ref">p. 128</span></li>
+      <li><b>Simple (free) inversion</b> reverses direction only. <b>Strict inversion</b> keeps <i>mi–fa</i>: in the diatonic system it mirrors the Dorian scale (d↔d, e↔c, f↔b, g↔a). In the mixed system it is enough to keep the half-step relations, choosing the mirror that stays in the mode. <span class="ref">pp. 130, 134</span></li>
+      <li>Original and inverted forms may alternate. Smaller note values let them sound together, and the inversion can be saved for the middle of the piece. <span class="ref">p. 135</span></li>
+    </ol></div>
+  </div>
+  <div data-w="mirror"></div>
+</section>
+
+<section class="chapter" id="fux-free">
+  <header><span class="eyebrow">Fux · conclusion · pp. 131–138 · Exx. 121–128</span><h2>Cantus Firmus, Several Subjects, and Release</h2>
+  <p class="lede">The last lessons combine a fugue with a cantus firmus, combine a subject with its strict inversion, and write a fugue on three subjects. Then the student is released into free invention.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>With a cantus firmus, first examine every bar of it to see where the subject (original or inverted) can enter. A subject may even be drawn from the cantus itself, with changed or syncopated note values. <span class="ref">p. 132</span></li>
+      <li>In a fugue on several subjects, give each subject its own note values. Where one subject is to appear at the twelfth, the other parts must not form a sixth with it. <span class="ref">p. 137</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ol>
+      <li>Now use the mixed (chromatic) system, any meter, smaller note values and “irregular themes”, meaning those whose tonal answer needs several changes. <span class="ref">p. 134</span></li>
+      <li>A subject need not appear complete every time. Three subjects almost require a fifth voice. <span class="ref">p. 137</span></li>
+      <li>Without double counterpoint, a sacred work <i>a cappella</i> is “bare and void of distinction.” <span class="ref">p. 131</span></li>
+      <li>“To him who masters four parts, the path to composition with more than four voices is cleared; for as the number of voices increases, the rules may be less rigidly observed.” <span class="ref">p. 138</span></li>
+    </ol></div>
+  </div>
+  <p class="quote">“Farewell, and pray to God for me.” Fux, ending the Gradus because of illness (p. 138)</p>
+</section>
+
+<div class="part" id="part3"><h2>Part Two · Marpurg</h2><span>From <i>Abhandlung von der Fuge</i> (1753–54) · pp. 139–212</span></div>
+
+<section class="chapter" id="mar-intro">
+  <header><span class="eyebrow">Marpurg · Introduction · pp. 139–141</span><h2>Marpurg as Interpreter of Bach</h2>
+  <p class="lede">Marpurg wrote the preface to the second edition of the <i>Art of Fugue</i> (1752), then the first book devoted to fugue. He had talked fugue with Bach himself, and two of his rules come from that conversation.</p></header>
+  <div class="cols">
+    <div class="rulebox soft"><h4><i class="mk g">G</i> From the conversation with Bach</h4><ol>
+      <li>Bach called a fugue that “stuck continuously to its principal subject, without any change” <b>“dry and wooden”</b>. Marpurg’s rule: invent a theme that admits many changes of accompaniment. <span class="ref">p. 140</span></li>
+      <li>Bach also faulted a composer who “had not shown enough fire to reanimate the theme by interludes.” Marpurg’s rule: if no episode precedes a cadence, put an episode rather than an entry on the cadence, to raise anticipation of the next entry. <span class="ref">p. 141</span></li>
+      <li>Examine a theme thoroughly before writing. C. P. E. Bach recalled that his father could predict, after the first entries, which devices a fugue would use, and nudged his son when he was right. <span class="ref">p. 141</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Mann’s assessment</h4><ol>
+      <li>Marpurg gives the first modern frame of reference for fugal terms. He is encyclopedic, not didactic. <span class="ref">p. 141</span></li>
+      <li>He uses instrumental and keyboard thinking (G clef, keyboard score) and quotes real works, especially Bach’s, instead of writing his own models. <span class="ref">p. 57</span></li>
+      <li>His weakness: he hardens into rules what Rameau left to judgment, and he forbids progressions “even though examples … are found in the writings of the great masters.” <span class="ref">p. 56</span></li>
+    </ol></div>
+  </div>
+  <p class="quote">“To be an excellent musician and not to appreciate the virtues of the late Bach is a contradiction.” Marpurg (p. 141)</p>
+</section>
+
+<section class="chapter" id="mar-imitation">
+  <header><span class="eyebrow">Marpurg · Imitation and Fugue in General · pp. 142–160</span><h2>Imitation, Its Kinds, and the Classes of Fugue</h2>
+  <p class="lede">Marpurg sorts every way one part can follow another, then defines the fugue as periodic imitation governed by rules. It has five characteristic elements.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Definitions</h4><ol>
+      <li><b>Repetition</b>: same tones in the same part. <b>Transposition</b>: other tones in the same part. <b>Imitation</b>: either one in another part. <span class="ref">p. 142</span></li>
+      <li>Eight species by interval, from unison to octave. The upper 2nd equals the lower 7th, and so on. <span class="ref">pp. 143–146</span></li>
+      <li>Four melodic motions: direct; inverted (free, <i>al rovescio</i>, or strict, <i>al contrario riverso</i>); retrograde; inverted retrograde. Also augmentation, diminution, interrupted imitation, contrary rhythm (<i>per arsin et thesin</i>) and invertible imitation. <span class="ref">pp. 146–152</span></li>
+      <li><b>Periodic</b> imitation takes over part of the leader; <b>canonic</b> imitation takes over all of it. A canonic fugue is a canon; a periodic fugue governed by rules is a fugue. <span class="ref">pp. 152–154</span></li>
+      <li>The fugue is continuous, not divided into sections. A fugal gigue is two fugues, the second usually on the inverted theme. <span class="ref">p. 154</span></li>
+      <li><b>Five characteristic elements</b>: (1) theme (<i>dux</i>, subject); (2) answer (<i>comes</i>); (3) exposition (<i>repercussio</i>); (4) counterparts; (5) episodes. <span class="ref">pp. 154–155</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Classes and terms</h4><ol>
+      <li><b>Regular</b> fugue: the elements are arranged by the rules. <b>Irregular</b>: they are handled arbitrarily, and these are often called <i>caprice</i>. Newer irregular fugues may open with all voices in octaves (Scheibe). <span class="ref">p. 155</span></li>
+      <li><b>Strict</b> fugue (<i>fuga obbligata</i>): almost nothing but the theme, with every counterpart and episode derived from it. Long and full of artifice, it is a <b>ricercar</b>, “a master fugue,” as most of Bach’s are. <b>Free</b> fugue (<i>fuga libera</i>): episodes use a related secondary idea, as most of Handel’s do. <span class="ref">p. 156</span></li>
+      <li><i>Fuga reditta</i>: a short canonic section on the theme. <b>Stretto</b>: overlapping statements, complete or shortened, direct or inverted. <span class="ref">p. 157</span></li>
+      <li><b>Double fugue</b>: several themes (theme and countersubjects), developed together by means of double counterpoint. <span class="ref">p. 157</span></li>
+      <li>Six classes: by interval of answer; by motion (counterfugue, retrograde); by augmentation or diminution; by contrary rhythm; by interrupted imitation; mixed. <span class="ref">p. 158</span></li>
+      <li>The <b>ordinary fugue</b> is the fugue at the fifth, combining answers at the 5th, 4th and 8ve, because tonic and dominant are a key’s two main triads. Fugues at other intervals are “extraordinary” and serve as ornaments inside it. <span class="ref">pp. 158–159</span></li>
+    </ol></div>
+  </div>
+</section>
+
+<section class="chapter" id="mar-theme">
+  <header><span class="eyebrow">Marpurg · The Theme or Opening Statement · pp. 160–164</span><h2>The Theme</h2>
+  <p class="lede">Length, melody, range, and the possibility of many accompaniments: what makes a theme fit for fugue.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>Fit the theme to the medium and the number of voices. <span class="ref">p. 160</span></li>
+      <li>No lively runs, large unnatural skips or arpeggios: these belong to caprices, not fugues, at least in vocal and keyboard fugues. <span class="ref">p. 162</span></li>
+      <li>Keep the theme within an octave. Instrumental themes may reach a tenth or twelfth, but the octave is best. <span class="ref">p. 163</span></li>
+      <li>Do not end the theme with a perfect cadence. If one seems unavoidable, enter the answer on the cadence or hide it with added notes. <span class="ref">p. 163</span></li>
+      <li>Begin on any beat. End on a strong beat, except for a feminine ending in vocal fugues. <span class="ref">p. 164</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ol>
+      <li>The slower the tempo, the fewer bars. Plain unaccompanied notes in a slow tempo become “unbearable.” <span class="ref">p. 161</span></li>
+      <li>The shorter the theme, the more often it can return, and “the more often a theme is repeated, the better the fugue.” Short themes help the listener and the improviser. <span class="ref">p. 162</span></li>
+      <li>A theme is long enough “whenever it expresses a clear thought,” sometimes in a single bar. No fixed length, because variety is “the soul of all music.” <span class="ref">p. 162</span></li>
+      <li>“The melodic, natural element—simple, noble, and singable—leads to the best fugues” (Mattheson). <span class="ref">p. 162</span></li>
+      <li>Imagine the bass and other parts while inventing the theme, to see whether it can be developed. <span class="ref">p. 163</span></li>
+    </ol></div>
+  </div>
+</section>
+
+<section class="chapter" id="mar-answer">
+  <header><span class="eyebrow">Marpurg · The Answer · pp. 164–175 · Exx. 156–178</span><h2>The Answer: Similarity and Adjustment</h2>
+  <p class="lede">The answer is a transposition of the theme to the dominant, as similar as possible. The octave, however, divides into two unequal halves (C–G and G–C), so the melody sometimes has to be adjusted so as not to leave the key.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li><b>Principle 1, similarity.</b> Same rhythm and rests, same mode (no change from major to minor), same intervals with the same quality. The first note may be lengthened or shortened by half its value. <span class="ref">p. 165</span></li>
+      <li><b>Principle 2, adjustment.</b> A theme that keeps the character of the key gets an exact (<b>real</b>) transposition to the dominant. A theme that moves toward the dominant at its end has its answer adjusted back, to avoid modulating to the dominant of the dominant. Look at what follows, not only at what came before. <span class="ref">p. 166</span></li>
+      <li>Adjust by <b>skipping</b> a tone (widening, in the larger half-scale) or <b>repeating</b> one (narrowing, in the smaller half-scale). A unison becomes a second, a second a third, and so on. <span class="ref">p. 166</span></li>
+      <li><b>First note:</b> theme on ①, answer on ⑤; theme on ⑤, answer on ①. <span class="ref">p. 167</span></li>
+      <li><b>Last note:</b> ① ↔ ⑤; a theme ending on ③ of the key is answered on ③ of the dominant, and vice versa. Unusual endings (②, ④, ⑥) go to the same degree of the dominant unless the context forbids it. <span class="ref">p. 167</span></li>
+      <li>Inside the theme too, a skip between ⑤ and ① is answered by ① and ⑤. <span class="ref">p. 167</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines and exceptions</h4><ol>
+      <li>Find the correspondences by laying the dominant scale under the tonic scale so that ① meets ④ and ⑤: ②↔⑥, ③↔⑦, ④ and ⑤ → ①. Other pairings (⑥↔③, ⑤↔②) also occur. <span class="ref">p. 164</span></li>
+      <li>A theme’s end is found by seeing how far the answer reproduces it. The answer may begin before the theme has ended. <span class="ref">p. 168</span></li>
+      <li>⑤ may be answered by ② (not ①) when the theme can still be heard in the main key, or reaches ⑤ without a perfect cadence. <span class="ref">pp. 168, 175</span></li>
+      <li><b>Chromatic themes:</b> strip the accidentals, find the diatonic answer, then put the chromatic steps back on the corresponding notes (A minor c–c♯, d–d♯ → f–f♯, g–g♯). <span class="ref">p. 170</span></li>
+      <li>A Phrygian close on ⑤ in minor is answered on the ⑤ of the dominant (D minor: theme ends on A, answer on E). This is an exception to the ①/⑤ rule. <span class="ref">p. 172</span></li>
+      <li>The leap from the octave down to the 5th was forbidden by the “old masters,” yet it works well: “none of these rules is without exception” (Mattheson). <span class="ref">p. 168</span></li>
+      <li>Between two possible answers, prefer the one that changes less and keeps the theme’s characteristic (chromatic) steps (Fux, quoted). <span class="ref">p. 175</span></li>
+    </ol></div>
+  </div>
+  <div data-w="answer2"></div>
+  <div data-w="exReal"></div>
+</section>
+
+<section class="chapter" id="mar-exposition">
+  <header><span class="eyebrow">Marpurg · Exposition and Development · pp. 176–198 · Exx. 179–189</span><h2>Exposition and Development</h2>
+  <p class="lede">Rules for the order of entries in the first exposition, and a six-step plan for everything after it. An analysis of a four-part fugue in seven expositions shows the plan at work.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Order of entries</h4><ol>
+      <li>Don’t repeat the theme at once in the same register or on the same tone. <span class="ref">p. 176</span></li>
+      <li>In a two-part fugue for unequal voices (soprano and bass, as in Bach’s <i>Inventions</i>), the voices take the theme alternately. After the first or second exposition a voice may repeat it, preferably in a new key. <span class="ref">pp. 176–177</span></li>
+      <li>In three parts the third voice enters at the octave of the first (better, for variety) or of the second. It may enter on time, after a short episode, or even before the second has finished. <span class="ref">p. 177</span></li>
+      <li>In four parts the voices pair, inner with outer: soprano with tenor, alto with bass. Entries 1 and 3 have the theme, 2 and 4 the answer. The same applies to double fugues, and in five or more voices odd numbers pair with odd, even with even. <span class="ref">pp. 177–178</span></li>
+      <li>Use the accepted order in the first exposition. Of the 24 possible orders, the others are for later. <span class="ref">p. 179</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Development of a simple fugue</h4><ol>
+      <li>After the first exposition, continue with an episode and a cadence (tonic or dominant), or cadence at once if the theme suggests it. <span class="ref">p. 179</span></li>
+      <li>On the cadence, enter with theme or answer in a voice that did not just have it, or with an episode to raise expectation. <span class="ref">p. 179</span></li>
+      <li>In later expositions the answer may come closer than in the first. <span class="ref">p. 180</span></li>
+      <li>Rest the voice that will start the next exposition. Episodes lead to cadences in related keys: <b>ordinary</b> keys (V, VI, III) before <b>extraordinary</b> ones (IV and II in major, IV and VII in minor). The subdominant is saved for the end. <span class="ref">p. 180</span></li>
+      <li>In a new key keep the mode relationship: after a move from major to minor, answer in a related minor key, and vice versa. <span class="ref">p. 180</span></li>
+      <li>Present the theme in as many related keys as possible, complete or shortened. Return home by careful modulation with periodic or canonic imitation, and end with a final cadence, perhaps over a <b>pedal point</b>. <span class="ref">p. 180</span></li>
+      <li>Don’t keep the theme in the outer voices; put it in inner voices too, with full and with sparse harmony. <span class="ref">p. 179</span></li>
+      <li>Voices may rest to return with fresh effect, generally resting when another voice enters. <span class="ref">p. 185</span></li>
+    </ol></div>
+  </div>
+  <div class="cols">
+    <div class="rulebox soft"><h4><i class="mk g">G</i> The seven expositions (model analysis)</h4><ol>
+      <li>Bars 1–9: tenor and soprano have the theme, alto and bass the answer, with no episodes. The third entry comes on a tied 2nd, the fourth on a consonance. Lesson: don’t delay entries when the texture allows them. <span class="ref">p. 182</span></li>
+      <li>Bars 9–20: same order, but theme and answer change places. Short imitative interpolations cancel cadences. <span class="ref">p. 183</span></li>
+      <li>Bars 20–27: theme and answer each taken twice in succession, at the octave and closer. <span class="ref">p. 183</span></li>
+      <li>Bars 27–34: stretto at unequal distances, with double counterpoint at the octave. <span class="ref">p. 184</span></li>
+      <li>Bars 34–37: the theme in parallel thirds, answered by the other pair. <span class="ref">p. 184</span></li>
+      <li>Bars 37–44: crowded entries in double counterpoint, then an episode. <span class="ref">p. 184</span></li>
+      <li>Bars 44–end: shortened theme, stretti, answers in thirds, an extended final cadence. Entries stay on tonic and dominant: in the old style, episodes do the modulating. <span class="ref">pp. 182–184</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Two parts, counterfugue, inversion</h4><ol>
+      <li>Three parts: omit the fourth entry of each exposition. Two parts: omit two. Two-part fugues are usually double fugues with a countersubject in double counterpoint at the octave. <span class="ref">p. 185</span></li>
+      <li>A flawless two-part fugue is “a model of the art of composition”: there the melody, not the texture, carries everything. <span class="ref">p. 185</span></li>
+      <li><b>Counterfugue</b> (<i>fuga contraria</i>): the answer is inverted (freely or strictly) at the 5th, octave, 3rd or another interval. Keep the chosen manner until the stretti, though an occasional direct answer is allowed if the next entry returns to inversion. <span class="ref">p. 185</span></li>
+      <li><b>Invertible fugue</b> (<i>fuga inversa</i>): the whole fugue, counterparts included, can be read inverted, a mirror fugue (Art of Fugue, Exx. 183–184). Do not confuse it with the counterfugue. <span class="ref">p. 186</span></li>
+    </ol></div>
+  </div>
+  <div data-w="stretto"></div>
+</section>
+
+<section class="chapter" id="mar-double">
+  <header><span class="eyebrow">Marpurg · Double Fugues · pp. 190–198 · Exx. 185–189</span><h2>Double Fugues</h2>
+  <p class="lede">Several themes, developed together. Plan them in double counterpoint before writing a note.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>Distinguish the themes rhythmically and melodically. <span class="ref">p. 191</span></li>
+      <li>Themes should not end together. <span class="ref">p. 191</span></li>
+      <li>Before composing, try all the themes in double counterpoint, and test each one for imitation, stretto, augmentation, diminution, contrary rhythm and inversion. Plan the expositions from the results. <span class="ref">p. 191</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ol>
+      <li>Have one more voice than themes. It allows rests and freer imitation. <span class="ref">p. 191</span></li>
+      <li>The themes need not always be complete, nor always appear together. After the first exposition, either one may return first. <span class="ref">p. 191</span></li>
+      <li><b>Method (a):</b> develop theme 1 like a simple fugue, cadence (usually in the main key), develop theme 2, then combine them unexpectedly (Battiferri, Gottlieb Muffat). <span class="ref">p. 192</span></li>
+      <li><b>Method (b):</b> introduce all the themes at once. (i) Theme 2 enters before theme 1 is complete, as in most of Handel’s fugues. (ii) Theme 2 comes with the entry of the second voice. (iii) The first voice takes up theme 2 after a short rest while the second voice answers theme 1, as in Kuhnau and Bach. <span class="ref">p. 192</span></li>
+    </ol></div>
+  </div>
+</section>
+
+<section class="chapter" id="mar-counter">
+  <header><span class="eyebrow">Marpurg · The Counterparts and the Episodes · pp. 199–204</span><h2>Counterparts and Episodes</h2>
+  <p class="lede">Every voice that is not stating the theme is a counterpart. Every passage without the theme is an episode. Both should come from the theme.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Counterparts</h4><ol>
+      <li>The opening statement is normally unaccompanied, and always in keyboard fugues. Counterparts begin when the answer enters. <span class="ref">p. 199</span></li>
+      <li>Never forfeit an opportunity for an entry. An entry on a tied dissonance is excellent; otherwise it forms a consonance. <span class="ref">p. 200</span></li>
+      <li>All voices compete on the same level, with good melody and strict independence. <b>No unison or octave doublings</b> in a regular fugue, even though great masters have used them (instruments doubling voices excepted). <span class="ref">p. 201</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Counterparts</h4><ol>
+      <li>Write the counterpart in one basic species and keep to it. Florid writing tends to drift away from the theme. Best of all is a counterpart borrowed from the theme. <span class="ref">p. 200</span></li>
+      <li>In a fugue on several themes, one theme is the other’s counterpart. Themes that go in thirds make this easiest. <span class="ref">p. 201</span></li>
+      <li>The more voices, the less florid the counterparts. A counterpart is not a figured-bass filler; distinguish the voices by syncopations and passing or changing notes. <span class="ref">pp. 201–202</span></li>
+      <li>Keep the voices neither too close nor too far apart. Rest the voice that will soon enter with the theme. <span class="ref">p. 202</span></li>
+    </ol></div>
+  </div>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Episodes</h4><ol>
+      <li>An episode continues the counterpart until the theme returns, and must be related to the theme. <span class="ref">p. 202</span></li>
+      <li>No large leaps, arpeggios, extended runs, accompaniment figures, unisons or octaves, and no arioso or galant lines: nothing that cannot be imitated in all voices. <span class="ref">p. 202</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Episodes</h4><ol>
+      <li>Take episode ideas from the theme and its counterpart. If neither yields any, invent simple progressions in the theme’s character. <span class="ref">p. 203</span></li>
+      <li>Not too long or too frequent, or the theme is forgotten. <span class="ref">p. 203</span></li>
+      <li>Shape an episode so that an entry can break into it, or let it end in a cadence where the theme returns. <span class="ref">p. 203</span></li>
+      <li>Not all voices need take part. A voice that rests re-enters with more emphasis, especially an inner voice. <span class="ref">p. 203</span></li>
+      <li>End with a statement of the theme (better) or a short harmonic turn after it. <span class="ref">p. 204</span></li>
+    </ol></div>
+  </div>
+</section>
+
+<section class="chapter" id="mar-model">
+  <header><span class="eyebrow">Marpurg · Conclusion · pp. 204–212</span><h2>A Model Vocal Fugue: Kyrie on Three Themes</h2>
+  <p class="lede">Marpurg ends by analysing a four-voice Kyrie with doubling instruments. Its three themes are “Kyrie eleison,” “eleison” and “Christe eleison,” and its two first themes are answered in contrary motion: a double counterfugue.</p></header>
+  <div class="prose">
+    <p><b>First part:</b> tonic and dominant. Themes 1 and 2 are answered in contrary motion and exchanged by double counterpoint at the octave, with stretto diminutions of theme 2. <b>Second part:</b> theme 3 enters at successive lower fourths, like a modulating perpetual canon (“he might do this for the sake of exercise” through all twelve keys). It centres on III and VI (B minor, E minor), and full cadences are avoided by modulation, extended lines or new entries. <b>Third part:</b> A minor and D minor, stretti of theme 1 against the shortened theme 3. <b>Fourth part:</b> a dominant pedal, final entries, a tonic pedal, the end.</p>
+  </div>
+  <p class="quote">“The best and most direct way to gain competence in the composition of fugues is to adhere to the examples of the great masters.” Marpurg (p. 212)</p>
+</section>
+
+<div class="part" id="part4"><h2>Part Two · Albrechtsberger</h2><span>From <i>Gründliche Anweisung zur Komposition</i> (1790) · pp. 213–262</span></div>
+
+<section class="chapter" id="alb-intro">
+  <header><span class="eyebrow">Albrechtsberger · Introduction · pp. 213–221</span><h2>Albrechtsberger as Teacher of Beethoven</h2>
+  <p class="lede">Beethoven felt that Haydn, teaching from his own abstract of Fux, gave too little correction. He went to Albrechtsberger, and his workbooks survive. They show strict discipline applied to a chorale fugue, step by step.</p></header>
+  <div class="cols">
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Albrechtsberger’s corrections of Beethoven</h4><ol>
+      <li>Use the three-part texture to let voices rest in turn, and use rests to set off thematic entries. <span class="ref">p. 216</span></li>
+      <li>Remove a non-thematic entry that coincides with, and weakens, the most important entry of an exposition. <span class="ref">p. 216</span></li>
+      <li>Make every change with thematic material, so the motion does not slacken while the cantus firmus sounds. <span class="ref">p. 216</span></li>
+      <li>“It is not good to place the beginning of a new phrase at the distance of a seventh or ninth from the end of the preceding phrase.” <span class="ref">p. 217</span></li>
+      <li>Avoid tritone progressions and inner-voice entries without thematic reference. <span class="ref">p. 217</span></li>
+      <li>When the theme cannot be completed in a stretto, change its ending openly (marked “license”) and then exploit the change by imitation. <span class="ref">p. 218</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Context</h4><ol>
+      <li>Albrechtsberger follows Fux, “his oracle,” but in major and minor. He adds two chapters Fux lacks: the chorale fugue and the canon, the latter after Marpurg. <span class="ref">p. 214</span></li>
+      <li>He reports that Froberger avoided the fourth even in inverted triads, to keep the triad, “symbol of the Holy Trinity,” pure. <span class="ref">p. 214</span></li>
+      <li>Beethoven closes his studies: “Patience, diligence, persistence, and sincerity will lead to success.” <span class="ref">p. 218</span></li>
+    </ol></div>
+  </div>
+</section>
+
+<section class="chapter" id="alb-chorale">
+  <header><span class="eyebrow">Albrechtsberger · The Chorale Fugue · pp. 221–227 · Exx. 199–200</span><h2>The Chorale Fugue</h2>
+  <p class="lede">A fugue built from a chorale melody (or any cantus firmus), into which the chorale itself then enters in long notes.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>Take a few notes of the chorale as the fugal theme and expose it in the first three voices as in a regular fugue. The fourth voice then brings the chorale itself. <span class="ref">p. 221</span></li>
+      <li>Whenever a voice has the chorale, set the other voices against it in imitation. <span class="ref">p. 221</span></li>
+      <li>Write the chorale in whole notes, or at least in larger values than the fugal voices, so that each of its entries stands out. <span class="ref">p. 227</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ol>
+      <li>A chorale beginning on the tonic may return later at the dominant (upper 5th or lower 4th). <span class="ref">p. 221</span></li>
+      <li>Strettos and other artifices are possible against the chorale. <span class="ref">p. 221</span></li>
+      <li>An answering entry may start with a half note instead of a whole note. <span class="ref">p. 224</span></li>
+      <li>The chorale may stay in one voice while the others imitate in florid counterpoint (Johann Christoph Bach, Ex. 200). <span class="ref">p. 224</span></li>
+      <li>Most effective in sacred works and oratorios: develop a regular fugue and then suddenly bring in the chorale. <span class="ref">p. 227</span></li>
+    </ol></div>
+  </div>
+</section>
+
+<section class="chapter" id="alb-canon">
+  <header><span class="eyebrow">Albrechtsberger · The Canon · pp. 227–262 · Exx. 201–237</span><h2>The Canon</h2>
+  <p class="lede">The strictest imitation: every value, rest, tie, step and ornament of the leader reappears in the follower. Albrechtsberger shows how to write canons, how to notate them open and closed, and how to solve riddle canons.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>A canon answers the whole line in exactly the same note values. At the unison or octave it uses the same pitches. It keeps all rests (except those before the first entry), ties, syncopations, skips, half steps, appoggiaturas and ornaments. <span class="ref">p. 227</span></li>
+      <li>One canonic voice may not mix entry intervals. <span class="ref">p. 228</span></li>
+      <li>Only canons at the unison and octave can be strict in their whole and half steps. At the 2nd, 3rd, 6th, 7th or 9th that is impossible. <span class="ref">p. 228</span></li>
+      <li>Respect the registers: a unison canon must not be sung by soprano and tenor, nor an octave canon by equal voices. Men singing a canon written for SATB turn root-position chords into six-fours. <span class="ref">p. 228</span></li>
+      <li>Perpetual canon: omit the closing note, put repeat marks at bar 2 and at the end, and make the last bar lead back into bar 2. Concluded canon: add final notes (unison, octave or third). <span class="ref">p. 229</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ol>
+      <li>A two-voice canon at the unison or octave needs no double counterpoint. Write the idea in both parts, a half bar or a bar apart. <span class="ref">p. 228</span></li>
+      <li>A stepwise line may hide answers at several intervals (Ex. 201: at the upper 2nd, lower 3rd, upper 6th, lower 7th, octaves, lower 9th and 10th). <span class="ref">p. 230</span></li>
+      <li>Three or more voices at the unison: write a <b>first draft</b> (<i>inventio</i>) in equal voices with staggered starts. Each voice must be a good melody, the first two or three must make a complete harmony, and the last completes it. <span class="ref">pp. 232–236</span></li>
+      <li>Write it out as an <b>open</b> canon (full score, the voice with the bass cadence placed second) or a <b>closed</b> canon (one line with § signs at the entries; end together at any sign). <span class="ref">pp. 232–235</span></li>
+      <li>Entries at other intervals are shown by clefs, or by figures above (upward) and below (downward), always counted from the first note. <span class="ref">p. 238</span></li>
+      <li>Riddle canons give no signs at all. Try intervals, inversion, retrograde, inverted retrograde, the nine clefs, inserted rests, augmentation and diminution. Often the solution is harmonically poor (“<i>parturiunt montes</i>…”), but the search sharpens invention. <span class="ref">pp. 254–256</span></li>
+    </ol></div>
+  </div>
+  <p class="quote">“The characteristic charm of canonic writing … lies in the fact that a work of art appears before us in the act of its very creation.” (Seyfried’s addition, p. 244)</p>
+</section>
+
+<div class="part" id="part5"><h2>Part Two · Martini</h2><span>From <i>Esemplare o sia saggio fondamentale pratico di contrappunto fugato</i> (1775) · pp. 263–312</span></div>
+
+<section class="chapter" id="mart-intro">
+  <header><span class="eyebrow">Martini · Introduction · pp. 263–268</span><h2>Martini as Mentor of a New Age</h2>
+  <p class="lede">Martini teaches by annotated example, not by precept. Mann calls his book a “graduate course” and places it last, though it predates Albrechtsberger.</p></header>
+  <div class="cols">
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Teaching by example</h4><ol>
+      <li>J. C. Bach, studying with Martini, asked for advice, not rules. He defended answers entering on beat 3 after a subject on beat 1. <span class="ref">p. 264</span></li>
+      <li>Mozart’s Bologna admission test (age 14): Martini kept Mozart’s best ideas and rewrote the piece. <span class="ref">p. 265</span></li>
+      <li>He dropped Mozart’s awkward second subject and took a new one from Mozart’s bar 3, saving it for the end. <span class="ref">p. 265</span></li>
+      <li>He placed perfect cadences in F (bar 11, the structural centre) and D (the end). Reaching F a bar earlier turns the cantus firmus’s repeated notes into a purposeful pedal. <span class="ref">pp. 265–266</span></li>
+      <li>He weakened earlier cadences in F and avoided Mozart’s diminished seventh and Neapolitan sixth, for clear tonal planning and consistent thematic work. <span class="ref">p. 266</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> The <i>Esemplare</i></h4><ol>
+      <li>Vol. 1 (1774): works on a cantus firmus. Vol. 2 (1775): fugal treatment of concise subjects, from the duo to the double-choir motet in eight parts. <span class="ref">p. 268</span></li>
+      <li>One annotated example per number of voices is translated by Mann. <span class="ref">p. 268</span></li>
+      <li>“Without serious and devoted work, the young composer will never succeed in living up to the standards set by these eminent composers.” <span class="ref">p. 269</span></li>
+    </ol></div>
+  </div>
+</section>
+
+<section class="chapter" id="mart-models">
+  <header><span class="eyebrow">Martini · The annotated models · pp. 270–312 · Exx. 238–261</span><h2>From Duo to Eight Voices</h2>
+  <p class="lede">Each model teaches one principle. Together they form a short course in the practice of the great masters.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Principles Martini draws from the models</h4><ol>
+      <li><b>Duo vs duet:</b> a duo is a cappella, in long values and strict counterpoint; a duet is quicker and accompanied, admitting stylistic exceptions. <span class="ref">p. 272</span></li>
+      <li><b>True to the mode:</b> the leader skips a fourth (⑧ to ⑤) and the follower a fifth (⑤ to ①), so the answer stays in the mode. Martini’s <i>fuga del tuono</i> became the “tonal fugue.” <span class="ref">p. 272</span></li>
+      <li><b>After a rest, re-enter with the theme</b> or a portion of it, never with arbitrary progressions, or the fugue becomes a “conglomeration of divergent and thematically unrelated elements.” <span class="ref">p. 276</span></li>
+      <li>In fugues of more than four voices, the parts beyond four (<i>quinta vox</i> and so on) may answer at any convenient interval, enter early, or enter with a modified or non-thematic line. That keeps the fugue from becoming too long or forced. <span class="ref">pp. 281–282, 293</span></li>
+      <li>Sacred style differs from secular: the madrigal’s free dissonance for word-expression is replaced by contrapuntal principle, so that the music serves devotion. <span class="ref">p. 293</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Devices worth copying</h4><ol>
+      <li><b>Duo:</b> a subject that admits no stretto is closed instead by interchanging and completing the sequence of answers (double counterpoint at the upper and lower octave), and ends on the theme itself. <span class="ref">pp. 272–273</span></li>
+      <li><b>Three voices:</b> a scale (up and down the octave) as one subject against a second subject. <span class="ref">p. 275</span></li>
+      <li><b>Four voices (Predieri):</b> the subject ①–④ has a real answer, and its countersubject (① down to ⑤) a tonal answer, mixing real and tonal fugue. It ends with a stretto of subject and inverted countersubject over a three-bar pedal. Only I, IV and V are used, since entries on III or VI would allow neither a real nor a tonal answer. <span class="ref">pp. 279–280</span></li>
+      <li><b>Five voices (Ricieri):</b> the fifth voice enters 4½ bars early so the five-part texture is not delayed. A stretto is “pleasing not only to the ear but … even to the eye.” Double at the octave, never the unison. <span class="ref">pp. 281–283</span></li>
+      <li><b>Six voices (Agnus Dei, Mass <i>In illo tempore</i>):</b> extra voices first answer on the 3rds of ⑤ and ①, later on the proper degrees. A new subject begins on ②, which is acceptable later in a piece but awkward at the start of a fugue. <span class="ref">pp. 293–294</span></li>
+      <li><b>Seven voices (Costanzo Porta):</b> four strict canonic voices (direct, inverted and retrograde) with three free voices. Terms: <i>fuga</i>, <i>canon</i> (the inscription), <i>consequentia</i> (Willaert, Zarlino). Such artifices address the mind as well as the ear. <span class="ref">pp. 301–304</span></li>
+      <li><b>Eight voices (Baroni):</b> a subject that starts off the beat is preceded by a short motive so the singers find the tempo. Each choir has three entries plus one of another theme, to avoid monotony. The basses keep the main theme. Answers are narrowed to two bars, then one: a way to end a theme that does not allow stretto. <span class="ref">pp. 309–312</span></li>
+    </ol></div>
+  </div>
+  <p class="quote">“The excellence of the quoted examples will have to compensate for whatever my own modest efforts in the added text have not been able to achieve.” Martini (p. 312)</p>
+</section>
+
+<section class="chapter" id="cheat">
+  <header><span class="eyebrow">Quick reference</span><h2>Four Teachers at a Glance</h2></header>
+  <div class="tbl-wrap"><table class="cheat">
+    <thead><tr><th>Question</th><th>Fux 1725</th><th>Marpurg 1753</th><th>Albrechtsberger 1790</th><th>Martini 1775</th></tr></thead>
+    <tbody>
+      <tr><td>Tonal system</td><td>six modes, diatonic subjects</td><td>major and minor keys</td><td>major and minor</td><td>modes and keys (historical repertoire)</td></tr>
+      <tr><td>Answer</td><td>exchange 5th and 4th to stay in the mode</td><td>similarity + adjustment; real vs tonal; chromatic method</td><td>as Marpurg; no codetta in the exposition</td><td>“true to the mode”; real and tonal may mix</td></tr>
+      <tr><td>Entry order</td><td>S↔T, A↔B correspond</td><td>pairs inner + outer; 24 orders</td><td>as Marpurg</td><td>extra voices free</td></tr>
+      <tr><td>Cadences</td><td>5th, 3rd, final; no perfect cadence without an entry</td><td>ordinary keys before extraordinary; episode instead of entry to build tension</td><td>distant keys later; no circle-of-fifths sequences</td><td>perfect cadences mark the structure (Mozart test)</td></tr>
+      <tr><td>Stretto</td><td>at the end, theme values may change</td><td>later expositions; “fuga reditta”</td><td>stretto repeated to intensify</td><td>narrowing as substitute when stretto impossible</td></tr>
+      <tr><td>Several themes</td><td>double counterpoint at 8ve, 10th, 12th</td><td>methods (a) and (b i–iii); voices = themes + 1</td><td>chorale fugue</td><td>models up to eight voices</td></tr>
+      <tr><td>Rests</td><td>after a rest, the subject</td><td>rest the voice that enters next</td><td>rests accentuate entries</td><td>after a rest, theme or part of it</td></tr>
+    </tbody>
+  </table></div>
+  <div data-w="quiz"></div>
+  <div class="foot">
+    <p>About the sound: the harpsichord is synthesized in your browser with a plucked-string model (no download), equal-tempered at A = 440. Change the registration and tempo in the toolbar.</p>
+    <p>About the tools: the answer generator applies Marpurg’s rules mechanically. Real fugal practice has exceptions, which Marpurg himself lists, so treat its answer as a first suggestion. The stretto finder counts dissonances and parallel perfect intervals in two voices only; it cannot judge whether a dissonance is a good passing note.</p>
+  </div>
+</section>
+</main>
+
+
+</div>
+<script id="engine-src" type="text/plain">/*ENGINE*/</script>
+<script>/*GLYPHS*/</script>
+<script>/*ENGINE*/</script>
+<script>/*UI*/</script>
+<script>/*MAIN*/</script>

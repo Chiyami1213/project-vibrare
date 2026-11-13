@@ -1,0 +1,768 @@
+<title>Gradus Counterpoint Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Music&display=swap">
+<style>
+/* Layout: engraved-print study guide. Sticky toolbar, left contents rail on wide screens, single reading column with wider music panels. */
+:root{
+  --paper:#f6f6f2; --sheet:#ffffff; --ink:#1d1f24; --ink-2:#4a4d55; --rule:#d9d8d0; --staff:#3b3e46;
+  --rubric:#b0281c; --rubric-bg:#f8e7e3; --ochre:#9a6a00; --ochre-bg:#f6edd6; --verd:#2f6b4f; --verd-bg:#e1efe6;
+  --accent:#1f4d7a; --accent-bg:#e4ecf5; --hl:#1f6fd1;
+  --f-display:"IM Fell English SC","IM Fell English",Georgia,serif;
+  --f-fell:"IM Fell English",Georgia,serif;
+  --f-body:"Source Serif 4","Source Serif Pro",Georgia,"Times New Roman",serif;
+  --f-ui:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-music:"Noto Music","Segoe UI Symbol","Apple Symbols",serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#16171a; --sheet:#1e2024; --ink:#e9e7e1; --ink-2:#aeb0b6; --rule:#34363c; --staff:#c9c8c2;
+  --rubric:#ef7a6b; --rubric-bg:#3a201d; --ochre:#e0b450; --ochre-bg:#352b16; --verd:#7cc7a0; --verd-bg:#18302a;
+  --accent:#8fb8e8; --accent-bg:#1c2a3a; --hl:#6aa9ff; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#16171a; --sheet:#1e2024; --ink:#e9e7e1; --ink-2:#aeb0b6; --rule:#34363c; --staff:#c9c8c2;
+  --rubric:#ef7a6b; --rubric-bg:#3a201d; --ochre:#e0b450; --ochre-bg:#352b16; --verd:#7cc7a0; --verd-bg:#18302a;
+  --accent:#8fb8e8; --accent-bg:#1c2a3a; --hl:#6aa9ff; color-scheme:dark;}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--sheet)}
+a{color:var(--accent)}
+h1,h2,h3,h4{font-weight:400;text-wrap:balance;line-height:1.15;margin:0}
+p{margin:0}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* toolbar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--sheet);border-bottom:1px solid var(--rule);font-family:var(--f-ui);font-size:13px}
+.bar .in{display:flex;gap:12px 18px;align-items:center;flex-wrap:wrap;padding-block:8px;max-width:1280px;margin:0 auto}
+.brand{font-family:var(--f-display);font-size:19px;letter-spacing:.02em;white-space:nowrap}
+.bar label{display:flex;align-items:center;gap:6px;color:var(--ink-2)}
+.bar input[type=range]{width:110px;accent-color:var(--accent)}
+.bar .sp{flex:1}
+.bar select{font:inherit;padding:3px 6px;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink)}
+.navbtn{display:none}
+
+/* page grid */
+.page{display:grid;grid-template-columns:240px minmax(0,1fr);gap:40px;max-width:1280px;margin:0 auto;padding-block:28px 80px}
+.toc{position:sticky;top:64px;align-self:start;max-height:calc(100vh - 80px);overflow:auto;font-family:var(--f-ui);font-size:13px;padding-right:6px}
+.toc h4{font-family:var(--f-ui);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin:18px 0 6px}
+.toc a{display:block;color:var(--ink);text-decoration:none;padding:3px 8px;border-left:2px solid transparent;line-height:1.35}
+.toc a:hover{background:var(--accent-bg)}
+.toc a.on{border-left-color:var(--rubric);color:var(--rubric)}
+.toc a small{color:var(--ink-2)}
+main{min-width:0}
+@media (max-width:1050px){.page{grid-template-columns:minmax(0,1fr)}.toc{display:none;position:fixed;inset:auto 0 0 0;top:auto;max-height:70vh;background:var(--sheet);z-index:25;border-top:1px solid var(--rule);padding:12px max(16px,env(safe-area-inset-left,0px)) calc(16px + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 30px rgba(0,0,0,.15)}.toc.open{display:block}.navbtn{display:inline-flex}}
+
+/* hero */
+.hero{max-width:900px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px;padding-bottom:26px;border-bottom:1px solid var(--rule);margin-bottom:30px}
+.hero .kicker{font-family:var(--f-ui);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rubric)}
+.hero h1{font-family:var(--f-display);font-size:clamp(34px,6vw,58px);letter-spacing:.01em}
+.hero h1 em{font-family:var(--f-fell);font-style:italic;color:var(--ink-2);font-size:.6em;display:block;letter-spacing:0}
+.hero p{max-width:66ch;color:var(--ink-2)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-ui);font-size:13px;color:var(--ink-2)}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.mk{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:3px;font:600 11px var(--f-ui);flex:none}
+.mk.r{background:var(--rubric);color:var(--sheet)}
+.mk.g{background:var(--ochre-bg);color:var(--ochre);border:1px solid var(--ochre)}
+.mk.f{background:var(--accent-bg);color:var(--accent)}
+
+/* chapters */
+.part{margin:56px 0 8px;display:flex;align-items:baseline;gap:14px;border-top:3px double var(--ink);padding-top:14px}
+.part h2{font-family:var(--f-display);font-size:30px}
+.part span{font-family:var(--f-ui);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.chapter{padding:34px 0 10px;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.chapter>header{display:grid;gap:8px;max-width:72ch}
+.eyebrow{font-family:var(--f-ui);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.chapter h2{font-family:var(--f-display);font-size:clamp(26px,4vw,36px)}
+.chapter h3{font-family:var(--f-fell);font-style:italic;font-size:22px;margin-top:6px}
+.lede{font-size:18px;max-width:68ch}
+.prose{max-width:68ch;display:grid;gap:10px}
+.quote{font-family:var(--f-fell);font-style:italic;font-size:19px;color:var(--ink-2);border-left:2px solid var(--rubric);padding-left:14px;max-width:62ch}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.rulebox{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.rulebox h4{font-family:var(--f-ui);font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:flex;gap:8px;align-items:center}
+.rulebox.hard h4{color:var(--rubric)} .rulebox.soft h4{color:var(--ochre)}
+.rulebox ol,.rulebox ul{margin:0;padding-left:20px;display:grid;gap:7px;font-size:15.5px;line-height:1.5}
+.rulebox.hard{border-top:3px solid var(--rubric)} .rulebox.soft{border-top:3px solid var(--ochre)}
+.rulebox li::marker{color:var(--ink-2);font-family:var(--f-ui);font-size:13px}
+.ref{font-family:var(--f-ui);font-size:12px;color:var(--ink-2);white-space:nowrap}
+.figs{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:15.5px;max-width:78ch}
+.figs dt{font-family:var(--f-ui);font-size:12.5px;font-weight:600;color:var(--accent);white-space:nowrap;padding-top:2px}
+.figs dd{margin:0}
+.assign{background:var(--accent-bg);border-radius:6px;padding:12px 16px;font-size:15.5px;max-width:78ch}
+.assign b{font-family:var(--f-ui);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:2px}
+
+/* music panels */
+.ex,.widget,.wb{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:10px;min-width:0}
+.ex figcaption{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.fignum{font-family:var(--f-ui);font-size:12px;font-weight:600;color:var(--sheet);background:var(--accent);border-radius:3px;padding:1px 7px}
+.figtitle{font-family:var(--f-fell);font-size:18px}
+.cap{font-size:15px;color:var(--ink-2);max-width:78ch}
+.w-head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.w-head strong{font-family:var(--f-fell);font-weight:400;font-size:20px}
+.w-head .mini{flex-basis:100%}
+.mini{font-family:var(--f-ui);font-size:12.5px;color:var(--ink-2)}
+.ex-bar,.mot-ctr,.wb-tools,.wb-ctr{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{font-family:var(--f-ui);font-size:13px;font-weight:500;padding:6px 12px;border-radius:5px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);cursor:pointer;line-height:1.2}
+.btn:hover{border-color:var(--ink-2)}
+.btn:focus-visible,.seg button:focus-visible,select:focus-visible,.score:focus-visible{outline:2px solid var(--hl);outline-offset:2px}
+.btn.play{background:var(--ink);color:var(--sheet);border-color:var(--ink);min-width:82px}
+.btn.play.on{background:var(--rubric);border-color:var(--rubric)}
+.btn.accent{background:var(--accent);color:var(--sheet);border-color:var(--accent)}
+.btn.toggle.on{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:5px;overflow:hidden;flex-wrap:nowrap}
+.seg button{font-family:var(--f-ui),var(--f-music);font-size:13px;padding:5px 10px;border:0;border-right:1px solid var(--rule);background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--ink);color:var(--sheet)}
+.seg-scroll{overflow-x:auto;max-width:100%}
+.wb-rhythm .seg button{font-family:var(--f-music),var(--f-ui);font-size:15px}
+.fld{display:inline-flex;flex-direction:column;gap:2px;font-family:var(--f-ui);font-size:11.5px;color:var(--ink-2);letter-spacing:.04em}
+.fld select{font:13px var(--f-ui);padding:5px 8px;border:1px solid var(--rule);border-radius:5px;background:var(--paper);color:var(--ink);max-width:100%}
+.acc-wrap{display:inline-flex;gap:6px;align-items:center;margin-left:auto}
+.acc-wrap .seg button{font-family:var(--f-music),var(--f-ui);font-size:15px;padding:3px 10px}
+.wb{border-color:var(--accent);border-width:1px 1px 1px 1px}
+.wb-title{display:grid;gap:2px}
+.wb-title strong{font-family:var(--f-fell);font-weight:400;font-size:20px}
+.wb-rhythm{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.hint{font-family:var(--f-ui);font-size:12px;color:var(--ink-2)}
+
+/* score */
+.score{overflow-x:auto;display:flex;flex-direction:column;gap:6px;outline:none;border-radius:4px}
+.score svg{display:block;max-width:none;overflow:visible}
+.sl{stroke:var(--staff);stroke-width:.8;opacity:.75}
+.bl{stroke:var(--staff);stroke-width:1}
+.blk,.ink{fill:var(--ink)}
+.glyph{fill:var(--ink)}
+.bracket{stroke:var(--ink);stroke-width:2.5}
+.paper{fill:var(--sheet)}
+.stem{stroke:var(--ink);stroke-width:1.2}
+.ledger{stroke:var(--staff);stroke-width:1}
+.tie{fill:var(--ink)}
+.clef8{font:600 9px var(--f-ui);fill:var(--ink)}
+.mnum{font:10px var(--f-ui);fill:var(--ink-2)}
+.fig{font:600 11px var(--f-ui);fill:var(--ink-2);text-anchor:middle}
+.fig.fp{fill:var(--accent)} .fig.fd{fill:var(--rubric);font-style:italic}
+.fig.small{font-size:10px}
+.note .halo{opacity:.18}
+.halo.err{fill:var(--rubric)} .halo.warn{fill:var(--ochre)}
+.badge circle{stroke:none}
+.badge.err circle{fill:var(--rubric)} .badge.warn circle{fill:var(--ochre)}
+.badge text{font:600 8.5px var(--f-ui);fill:var(--sheet);text-anchor:middle}
+.note.err .ink{fill:var(--rubric)} .note.warn .ink{fill:var(--ochre)}
+.note.playing .ink{fill:var(--hl)} .note.playing .stem{stroke:var(--hl)}
+.note.sel .ink{fill:var(--accent)}
+.note .empty{fill:none;stroke:var(--ink-2);stroke-dasharray:2 2}
+.staff.editable .sl{stroke:var(--accent);opacity:1}
+.hit{fill:transparent;cursor:crosshair}
+.ghost-head{fill:var(--accent);opacity:.45}
+.ghost-l{stroke:var(--accent);opacity:.5}
+.slide svg{animation:slide .45s ease}
+@keyframes slide{from{opacity:.35;transform:translateX(-10px)}to{opacity:1;transform:none}}
+
+/* verdicts & issue lists */
+.verdict{font-family:var(--f-ui);font-size:13.5px;font-weight:600;padding:6px 10px;border-radius:5px;display:inline-block}
+.verdict.good{background:var(--verd-bg);color:var(--verd)} .verdict.bad{background:var(--rubric-bg);color:var(--rubric)} .verdict.meh{background:var(--ochre-bg);color:var(--ochre)}
+.issues{margin:8px 0 0;padding-left:22px;display:grid;gap:5px;font-size:14.5px}
+.issues li{cursor:default}
+.issues li::marker{font:600 12px var(--f-ui)}
+.issues li.error::marker{color:var(--rubric)} .issues li.warn::marker{color:var(--ochre)}
+.issues .tag{font:600 10.5px var(--f-ui);letter-spacing:.08em;text-transform:uppercase;padding:1px 6px;border-radius:3px;margin-right:4px}
+.issues .error .tag{background:var(--rubric);color:var(--sheet)} .issues .warn .tag{background:var(--ochre-bg);color:var(--ochre)}
+.issues .rn{font-weight:600}
+.pill{font:600 11px var(--f-ui);padding:2px 8px;border-radius:20px;letter-spacing:.03em;vertical-align:middle}
+.pill.pc{background:var(--accent-bg);color:var(--accent)} .pill.ic{background:var(--verd-bg);color:var(--verd)} .pill.ds{background:var(--rubric-bg);color:var(--rubric)}
+
+/* widgets */
+.kbd-wrap,.mot-wrap,.mx-wrap{overflow-x:auto;max-width:100%}
+.kbd{width:100%;min-width:420px;max-width:700px;display:block}
+.wk{fill:var(--sheet);stroke:var(--staff);stroke-width:1;cursor:pointer}
+.bk{fill:var(--ink);cursor:pointer}
+.wk.a,.bk.a{fill:var(--accent)} .wk.b,.bk.b{fill:var(--rubric)}
+.kl{font:10px var(--f-ui);fill:var(--ink-2);text-anchor:middle;pointer-events:none}
+.ivx-out{display:grid;gap:4px}
+.ivx-big{font-family:var(--f-fell);font-size:24px}
+.ivx-sub{font-size:15px;color:var(--ink-2)}
+.mot-svg{width:100%;max-width:640px;min-width:360px;display:block}
+.lad{stroke:var(--rule);stroke-width:1} .lad.c{stroke:var(--ink-2);stroke-dasharray:3 3}
+.ladl{font:10px var(--f-ui);fill:var(--ink-2);text-anchor:end}
+.col{stroke:var(--rule);stroke-width:1;stroke-dasharray:2 4}
+.vp{stroke-width:2.5;stroke-linecap:round} .vp.u{stroke:var(--accent)} .vp.l{stroke:var(--ochre)}
+.dot.u{fill:var(--accent)} .dot.l{fill:var(--ochre)} .dot.ghost{opacity:.35}
+.ivbar{stroke-width:6;stroke-linecap:round;opacity:.28} .ivbar.p{stroke:var(--accent)} .ivbar.i{stroke:var(--verd)}
+.ivbar.no{stroke:var(--rubric);opacity:.6} .ivbar.ok{opacity:.5}
+.ivlab{font:600 11px var(--f-ui);fill:var(--ink)}
+.mot-verdict{font-size:15px;padding:8px 12px;border-radius:6px;background:var(--paper);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.mot-verdict.ok{background:var(--verd-bg)} .mot-verdict.no{background:var(--rubric-bg)}
+.rules-mx{border-collapse:collapse;font-family:var(--f-ui);font-size:13px;min-width:460px}
+.rules-mx th,.rules-mx td{border:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+.rules-mx thead th{background:var(--paper);font-weight:600}
+.rules-mx td .rn{font-weight:600;margin-bottom:6px;color:var(--ink-2)}
+.chip{font:500 12px var(--f-ui);border-radius:20px;padding:3px 10px;margin:2px 4px 2px 0;border:1px solid;cursor:pointer;background:transparent}
+.chip.ok{color:var(--verd);border-color:var(--verd)} .chip.no{color:var(--rubric);border-color:var(--rubric)}
+.mono-svg{width:100%;max-width:640px;min-width:340px;display:block}
+.mono-box{fill:var(--ochre-bg);stroke:var(--ochre)} .mono-nut{fill:var(--ink)}
+.str{fill:none;stroke-width:2} .str.a{stroke:var(--accent)} .str.b{stroke:var(--rubric)}
+.bridge{fill:var(--ink)} .tick{stroke:var(--ochre)}
+.mlab{font:600 11px var(--f-ui);fill:var(--ink-2);text-anchor:middle}
+.divs{display:grid;gap:6px;font-size:14.5px}
+.div-row{display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid var(--rule);padding-top:6px}
+.dl{font-family:var(--f-ui);font-size:12.5px;color:var(--ink-2);min-width:220px}
+
+/* cheat sheet */
+.tbl-wrap{overflow-x:auto;max-width:100%}
+table.cheat{border-collapse:collapse;font-size:14.5px;min-width:720px;background:var(--sheet)}
+table.cheat th,table.cheat td{border:1px solid var(--rule);padding:8px 10px;vertical-align:top;text-align:left}
+table.cheat thead th{font-family:var(--f-ui);font-size:12px;letter-spacing:.06em;text-transform:uppercase;background:var(--paper)}
+table.cheat td:first-child{font-family:var(--f-fell);font-size:17px;white-space:nowrap}
+.foot{margin-top:40px;font-size:14px;color:var(--ink-2);max-width:78ch;display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:560px){body{font-size:16px}.acc-wrap{margin-left:0}.figs{grid-template-columns:1fr}.figs dt{padding-top:6px}}
+</style>
+
+<div class="bar"><div class="in wrap">
+  <span class="brand">Gradus</span>
+  <button class="btn navbtn" type="button" id="navbtn" aria-expanded="false" aria-controls="toc">Contents</button>
+  <span class="sp"></span>
+  <label for="reg">Harpsichord
+    <select id="reg">
+      <option value="full">8′ + 8′ + 4′</option>
+      <option value="double">8′ + 8′</option>
+      <option value="single">single 8′</option>
+      <option value="lute">lute stop</option>
+    </select></label>
+  <label for="tempo">Tempo <input type="range" id="tempo" min="40" max="140" value="84" aria-describedby="tempo-v"><span id="tempo-v">𝅗𝅥 = 84</span></label>
+  <button class="btn" type="button" id="stopall">■ Stop sound</button>
+</div></div>
+
+<div class="page wrap">
+<nav class="toc" id="toc" aria-label="Contents">
+  <h4>Front matter</h4>
+  <a href="#intro">Introduction (Mann)</a>
+  <a href="#foreword">Author’s foreword</a>
+  <a href="#prelim">Intervals, motions, the four rules</a>
+  <h4>First Part · two voices</h4>
+  <a href="#p1c1">I. Note against note <small>p. 27</small></a>
+  <a href="#p1c2">II. Second species <small>p. 41</small></a>
+  <a href="#p1c3">III. Third species <small>p. 50</small></a>
+  <a href="#p1c4">IV. Fourth species <small>p. 55</small></a>
+  <a href="#p1c5">V. Fifth species <small>p. 64</small></a>
+  <h4>Second Part · three voices</h4>
+  <a href="#p2c1">I. Note against note <small>p. 71</small></a>
+  <a href="#p2c2">II. Half notes <small>p. 86</small></a>
+  <a href="#p2c3">III. Quarters <small>p. 91</small></a>
+  <a href="#p2c4">IV. The ligature <small>p. 94</small></a>
+  <a href="#p2c5">V. Florid counterpoint <small>p. 104</small></a>
+  <h4>Third Part · four voices</h4>
+  <a href="#p3c1">I. Four-part writing <small>p. 109</small></a>
+  <a href="#p3c2">II. Half notes <small>p. 117</small></a>
+  <a href="#p3c3">III. Quarters <small>p. 120</small></a>
+  <a href="#p3c4">IV. The ligature <small>p. 127</small></a>
+  <a href="#p3c5">V. Florid counterpoint <small>p. 135</small></a>
+  <h4>Back matter</h4>
+  <a href="#appendix">Appendix: harmonic division <small>p. 141</small></a>
+  <a href="#cheat">Quick reference</a>
+</nav>
+
+<main>
+<section class="hero">
+  <span class="kicker">Study guide · J. J. Fux, <i>Gradus ad Parnassum</i> (1725) · trans. Alfred Mann (Norton, 1965)</span>
+  <h1>The Study of Counterpoint <em>a guide to the five species, with scores you can hear and exercises that check themselves</em></h1>
+  <p>Fux teaches counterpoint as a staircase. You climb from note against note to florid writing in two voices, then climb again in three and in four. This guide follows his table of contents. Each chapter lists the <b>rules</b> Fux treats as binding, the <b>guidelines</b> he gives as advice, and the figures and exercises of the book. Every score plays on a synthesized harpsichord. Every exercise workbench checks your notes against the rules as you write.</p>
+  <div class="legend">
+    <span><i class="mk r">R</i> Rule: a hard prohibition or requirement</span>
+    <span><i class="mk g">G</i> Guideline: advice, taste, or “if possible”</span>
+    <span><i class="mk f">Fig</i> Figure numbers and pages refer to the Mann translation</span>
+  </div>
+  <p class="mini">Tap any note head to hear it. Scores use modern treble, octave-treble (𝄞 with 8) and bass clefs in place of Fux’s C clefs. Fux’s own figures are labelled with their number; other scores are labelled “after Fig.” or “model” and were written for this guide and checked by the same rule engine.</p>
+</section>
+
+<section class="chapter" id="intro">
+  <header><span class="eyebrow">Front matter · pp. vii–xvi</span><h2>Introduction (Alfred Mann)</h2></header>
+  <div class="prose">
+    <p>Mann compares the study of counterpoint with the study of perspective. Both grew from the Renaissance turn toward three-dimensional thought. Medieval <i>discantus</i> stacked parts like the levels of a landscape. <i>Contrapunctus</i>, from <i>punctus contra punctum</i> (point against point, note against note), appears around 1300. By 1412 Prosdocimus speaks of <i>cantus contra cantum</i>: judging a whole melody against another.</p>
+    <p>Tinctoris separates simple counterpoint (equal notes) from diminished or florid counterpoint (several notes against one), and prefers the second: “the variety of proportions produces the most agreeable counterpoint.” Zarlino sums up the Renaissance. Monteverdi’s “second practice” splits the old style from the new. Fux, publishing in 1725, deliberately chooses Palestrina’s style (the <i>stile antico</i>) as the basis for teaching and places three intermediate species between simple and florid counterpoint.</p>
+    <p>The book’s influence runs through Haydn (who worked every exercise), Leopold and Wolfgang Mozart (Attwood’s studies), Beethoven (via Albrechtsberger, Fux’s successor at St. Stephen’s), Brahms, Strauss and Hindemith.</p>
+  </div>
+</section>
+
+<section class="chapter" id="foreword">
+  <header><span class="eyebrow">Front matter · pp. 17–18</span><h2>The Author’s Foreword</h2></header>
+  <div class="prose">
+    <p>Fux writes for young people “who lack means and a teacher.” His method copies the way children learn letters, then syllables, then words. He gives little space to theory and much to practice, “since action is the test of excellence.”</p>
+    <p>The book is a dialogue. <b>Aloysius</b>, the master, stands for Palestrina. <b>Josephus</b> is the pupil. Josephus writes; Aloysius corrects. Many rules appear only when a mistake prompts them, so the figures with “mistakes” are part of the teaching.</p>
+  </div>
+  <p class="quote">“Drops wear down the stone not by strength but by constant falling.” (p. 48)</p>
+</section>
+
+<section class="chapter" id="prelim">
+  <header><span class="eyebrow">The Dialogue · conclusion of the First Book · pp. 19–23</span><h2>Intervals, Motions and the Four Rules</h2>
+  <p class="lede">Before the first exercise, Josephus must know which intervals are consonant, the three kinds of motion, and four rules that govern how consonances follow each other.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Consonance and dissonance</h4><ol>
+      <li><b>Perfect consonances:</b> unison, fifth, octave (and their compounds).</li>
+      <li><b>Imperfect consonances:</b> third and sixth (and compounds such as the tenth).</li>
+      <li><b>Dissonances:</b> second, fourth, diminished fifth, tritone, seventh, and their compounds. <span class="ref">p. 20</span></li>
+      <li>Consonance and dissonance are reckoned <b>from the bass</b>. Between upper voices the fourth behaves like an imperfect consonance. <span class="ref">pp. 112, 131</span></li>
+    </ol></div>
+    <div class="rulebox hard"><h4><i class="mk r">R</i> The four fundamental rules</h4><ol>
+      <li>Perfect → perfect: <b>contrary or oblique</b> motion only.</li>
+      <li>Perfect → imperfect: any of the three motions.</li>
+      <li>Imperfect → perfect: <b>contrary or oblique</b> motion only.</li>
+      <li>Imperfect → imperfect: any of the three motions. <span class="ref">p. 22</span></li>
+    </ol>
+    <p class="mini">Oblique motion, used with care, is allowed in all four. Beethoven reduced the rules to two; Martini to one: never move into a perfect consonance by direct motion.</p></div>
+  </div>
+  <dl class="figs">
+    <dt>Fig. 1</dt><dd>Direct motion: both parts move in the same direction, by step or skip.</dd>
+    <dt>Fig. 2</dt><dd>Contrary motion: one part rises while the other falls.</dd>
+    <dt>Fig. 3</dt><dd>Oblique motion: one part moves while the other stays.</dd>
+  </dl>
+  <div data-w="motion"></div>
+  <div data-w="intervals"></div>
+</section>
+
+<div class="part" id="part1"><h2>First Part</h2><span>Two voices · pp. 25–67</span></div>
+
+<section class="chapter" id="p1c1">
+  <header><span class="eyebrow">First Part · Chapter One · pp. 27–40</span><h2>Note against Note</h2>
+  <p class="lede">The simplest species: two voices in notes of equal length (whole notes), consonances only. The given melody, the <i>cantus firmus</i>, never changes; you write a counterpoint above or below it.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>Equal note values; <b>only consonances</b>.</li>
+      <li><b>Begin and end with a perfect consonance.</b> The beginning expresses perfection, the end relaxation. <span class="ref">p. 28</span></li>
+      <li>The counterpoint must be in <b>the same mode</b> as the cantus. Below the cantus, begin on the unison or octave, not the fifth. <span class="ref">Fig. 6</span></li>
+      <li><b>Next-to-last bar:</b> a major sixth if the cantus is in the lower part, a minor third if it is in the upper part. The 7th degree is raised in D, G and A. <span class="ref">p. 28 n.</span></li>
+      <li>Obey the four rules: no parallel fifths or octaves, and <b>no direct motion into a perfect consonance</b> (hidden fifths and octaves become audible when the skip is filled in). <span class="ref">Figs. 7–8</span></li>
+      <li>No augmented, diminished or chromatic melodic intervals; no skip larger than a fifth except the octave and the <b>ascending</b> minor sixth. The major sixth and the seventh are forbidden. <span class="ref">p. 27 n.; Figs. 15, 103</span></li>
+      <li><b>Mi contra fa</b>: no tritone skip (F–B). <span class="ref">Fig. 12</span></li>
+      <li>The <b>unison</b> only at the beginning and the end. <span class="ref">Figs. 17–18</span></li>
+      <li>Never approach an octave or unison by skips in contrary motion from a remote consonance, even in more than two parts. <span class="ref">Figs. 19–20</span></li>
+      <li>Modes may end only on D, E, F, G, A, C. B has no perfect fifth. <span class="ref">Fig. 9</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li>Use <b>contrary and oblique motion as often as possible</b>; they make mistakes easier to avoid.</li>
+      <li>Use <b>more imperfect than perfect</b> consonances; imperfect ones are more harmonious.</li>
+      <li>Repeat a tone only occasionally, and never more than once. <span class="ref">Fig. 5 n.</span></li>
+      <li>Not more than three or four parallel thirds or sixths in a row. <span class="ref">p. 21 n.</span></li>
+      <li>Avoid skips that follow each other in the same direction, and compensate a skip by turning back. Stay within a comfortable register. <span class="ref">p. 27 n.</span></li>
+      <li>Even stepwise, avoid outlining a tritone unless the line continues in the same direction. <span class="ref">p. 35 n.</span></li>
+      <li>The <i>ottava battuta</i> (a tenth to an octave by contrary steps on the downbeat) is left to your discretion. <span class="ref">Fig. 16</span></li>
+      <li>Leaving a unison by skip is bad in itself. <span class="ref">Fig. 21 N.B.</span></li>
+      <li><i>Fa</i> leads down, <i>mi</i> leads up: a sharp can underline an ascent and avoid a harsh F/F♯ relation. <span class="ref">Fig. 21</span></li>
+      <li>Voice crossing is a permitted expedient. Keep the voices close (neighbouring clefs). <span class="ref">Figs. 13–14</span></li>
+    </ul></div>
+  </div>
+  <h3>Figures in the book</h3>
+  <dl class="figs">
+    <dt>Fig. 4</dt><dd>The cantus firmus in D: D F E D G F A G F E D.</dd>
+    <dt>Fig. 5</dt><dd>Josephus’s first counterpoint, above. Aloysius: “You have done excellently.”</dd>
+    <dt>Fig. 6</dt><dd>Counterpoint below, with two marked mistakes: it starts on a fifth below (wrong mode), and moves from a third to a fifth in direct motion.</dd>
+    <dt>Figs. 7–8</dt><dd>Why direct motion into a fifth is forbidden: fill in the skip (diminution) and the hidden fifths appear.</dd>
+    <dt>Figs. 9–10</dt><dd>B cannot be a final; sharpening or flattening to fix its fifth leaves the natural modes.</dd>
+    <dt>Figs. 11–12</dt><dd>E mode, above and below. Fig. 12 contains a tritone skip, “mi against fa, the devil in music.”</dd>
+    <dt>Figs. 13–14</dt><dd>F mode. In Fig. 14 the counterpoint crosses above the cantus to avoid direct motion.</dd>
+    <dt>Fig. 15</dt><dd>G mode, with two mistakes: a skip of a major sixth, and an <i>ottava battuta</i>.</dd>
+    <dt>Figs. 16–20</dt><dd>Octaves and unisons approached by contrary motion, by step and by skip.</dd>
+    <dt>Fig. 21</dt><dd>G mode below; N.B. marks a skip out of a unison in the cantus itself.</dd>
+    <dt>Figs. 22–23</dt><dd>A and C modes, above and below.</dd>
+  </dl>
+  <div data-w="modes"></div>
+  <div data-w="fig5"></div>
+  <div data-w="fig6"></div>
+  <div data-w="fig7"></div>
+  <div data-w="fig16"></div>
+  <div class="assign"><b>Fux’s assignment</b>Write a counterpoint above and below each of the six cantus firmi, “going through all modes within this octave, just as they follow successively in their natural order.” <span class="ref">p. 33</span></div>
+  <div data-w="wb11"></div>
+  <div data-w="quiz"></div>
+</section>
+
+<section class="chapter" id="p1c2">
+  <header><span class="eyebrow">First Part · Chapter Two · pp. 41–49</span><h2>The Second Species</h2>
+  <p class="lede">Two half notes against each whole note, in binary meter. The first half falls on the downbeat (<i>thesis</i>), the second on the upbeat (<i>arsis</i>).</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>The <b>downbeat half note must be consonant</b>.</li>
+      <li>The <b>upbeat</b> half may be dissonant only if it moves <b>stepwise from the previous note and to the following note</b>, filling in the space of a third (diminution). If it skips, it must be consonant. <span class="ref">Fig. 24</span></li>
+      <li>All rules of motion and progression from the first species apply.</li>
+      <li><b>Cadence:</b> in the next-to-last bar, a fifth followed by a major sixth (cantus below), or a fifth followed by a minor third (cantus above). <span class="ref">Fig. 25</span></li>
+      <li>A <b>skip of a third</b> between two downbeats does <b>not</b> rescue consecutive fifths or octaves; the upbeat note is too short. <span class="ref">Figs. 26–29</span></li>
+      <li>A skip of a fourth, fifth or sixth does separate them: “the ear forgets” the first downbeat. <span class="ref">Figs. 30–32</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li><b>Consider the ending before you start.</b> <span class="ref">p. 42</span></li>
+      <li>You may begin with a half rest in place of the first note. <span class="ref">Fig. 34</span></li>
+      <li>When the voices are crowded and contrary motion is impossible, a skip of a minor sixth or an octave gets you out. <span class="ref">Fig. 34</span></li>
+      <li>In E mode the fifth in the cadence would be mi against fa; use a sixth. <span class="ref">Fig. 37</span></li>
+      <li>Pay attention not only to the measure you are writing but to the one that follows. <span class="ref">p. 48</span></li>
+      <li>Ternary meter (three against one) is easy: the middle note may be dissonant if all three move stepwise. <span class="ref">Fig. 46</span></li>
+    </ul></div>
+  </div>
+  <h3>Figures in the book</h3>
+  <dl class="figs">
+    <dt>Fig. 24</dt><dd>Diminution: a passing half note fills in a third.</dd>
+    <dt>Fig. 25</dt><dd>The second-species cadence: 5–6–8 and 5–3–1.</dd>
+    <dt>Figs. 26–33</dt><dd>Josephus’s attempt has two marked mistakes (bars 9 and 10): fifths on successive downbeats, separated only by a skip of a third. Fig. 33 is the corrected exercise.</dd>
+    <dt>Figs. 34–35</dt><dd>Starting with a rest; the counterpoint below.</dd>
+    <dt>Figs. 36–45</dt><dd>The five remaining modes, counterpoint above and below.</dd>
+    <dt>Fig. 46</dt><dd>Three notes against one.</dd>
+  </dl>
+  <div data-w="fig33"></div>
+  <div data-w="fig35"></div>
+  <div data-w="skip3"></div>
+  <div class="assign"><b>Fux’s assignment</b>“Take all the cantus firmi which were given for the first species and go through the five remaining modes, placing the counterpoint once in the upper and once in the lower voice.” <span class="ref">p. 46</span></div>
+  <div data-w="wb12"></div>
+</section>
+
+<section class="chapter" id="p1c3">
+  <header><span class="eyebrow">First Part · Chapter Three · pp. 50–54</span><h2>The Third Species</h2>
+  <p class="lede">Four quarter notes against each whole note.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>The <b>first quarter must be consonant</b>.</li>
+      <li>In five quarters moving stepwise: the 1st is consonant, the 2nd may be dissonant, the 3rd must be consonant, the 4th may be dissonant if the 5th is consonant. <span class="ref">Fig. 47</span></li>
+      <li>Exception: if the 2nd and 4th are consonant, the <b>3rd may be dissonant</b>, as a passing note filling in a third. <span class="ref">Figs. 48–49</span></li>
+      <li><b>Cambiata</b> (changing note): a dissonant 2nd quarter may skip a third down to a consonant 3rd quarter, then the line turns up by step. <span class="ref">Figs. 50–52</span></li>
+      <li>No eighth notes yet. <span class="ref">p. 52</span></li>
+      <li>All earlier rules of motion apply; the next-to-last bar follows the patterns of Figs. 53–54.</li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li>A quarter rest may replace the first note. <span class="ref">p. 53 n.</span></li>
+      <li>Avoid sequences (<i>monotonia</i>): repeating the same melodic figure. <span class="ref">Fig. 58 n.</span></li>
+      <li>Flats may be used nonessentially to avoid mi contra fa. <span class="ref">Fig. 60</span></li>
+      <li>Skips from an accented to an unaccented quarter, especially upward, are hard to sing. <span class="ref">p. 52 n.</span></li>
+      <li>Give the utmost attention to the measures that follow.</li>
+    </ul></div>
+  </div>
+  <h3>Figures in the book</h3>
+  <dl class="figs">
+    <dt>Fig. 47</dt><dd>Stepwise quarters with dissonant 2nd and 4th notes.</dd>
+    <dt>Figs. 48–49</dt><dd>Dissonant 3rd quarter, shown as the diminution of a skip of a third.</dd>
+    <dt>Figs. 50–52</dt><dd>The <i>nota cambiata</i>, “the first mention ever made in musical literature” of the term.</dd>
+    <dt>Figs. 53–54</dt><dd>Cadence formulas, cantus below and above.</dd>
+    <dt>Figs. 55–60</dt><dd>Exercises in D, E, F; flats in Fig. 60.</dd>
+  </dl>
+  <div data-w="fig55"></div>
+  <div data-w="cambiata"></div>
+  <div class="assign"><b>Fux’s assignment</b>Work through all the cantus firmi of the first lesson in turn; Aloysius leaves G, A and C “to you to work out by yourself.” <span class="ref">p. 54</span></div>
+  <div data-w="wb13"></div>
+</section>
+
+<section class="chapter" id="p1c4">
+  <header><span class="eyebrow">First Part · Chapter Four · pp. 55–63</span><h2>The Fourth Species</h2>
+  <p class="lede">Two half notes on the same pitch, tied over the bar line: the first on the upbeat, the second on the downbeat. This is the <i>ligature</i>, or syncopation.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>The <b>upbeat half is always consonant</b>. A <b>consonant ligature</b> has both halves consonant; a <b>dissonant ligature</b> has a dissonant downbeat. <span class="ref">Figs. 61–62</span></li>
+      <li>A tied dissonance is the <b>retardation of the following note</b>. It must <b>resolve down by step</b> to the consonance that would stand on the downbeat if the retardation were removed. <span class="ref">Figs. 63–64</span></li>
+      <li><b>Cantus below:</b> 2nd → unison, 4th → 3rd, 7th → 6th, 9th → octave.</li>
+      <li>Never unison → 2nd → unison or octave → 9th → octave: without the tie these are consecutive unisons or octaves. 3–2–1 and 10–9–8 are good. <span class="ref">Figs. 65–68</span></li>
+      <li><b>Cantus above:</b> 2nd → 3rd, 4th → 5th, 9th → 10th. The seventh resolving to the octave is not used by the masters; the second resolving to the unison is. <span class="ref">Figs. 69–71</span></li>
+      <li><b>Cadence:</b> 7–6 in the next-to-last bar (cantus below); 2–3 then the unison (cantus above). <span class="ref">p. 60</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li>Resolve all dissonances <b>downward</b>; ascending resolution (Fig. 72) is left aside.</li>
+      <li>Use a ligature <b>in every measure where possible</b>; if none can be made, write plain half notes until one can. <span class="ref">p. 60</span></li>
+      <li>Don’t repeat the same ligature immediately (Josephus skips one in bar 5 of Fig. 73 for that reason). <span class="ref">p. 61</span></li>
+      <li>Successions of fifths through syncopations are judged more indulgently than octaves. <span class="ref">p. 57 n., Figs. 75, 77</span></li>
+      <li>Ligatures may be varied (Fig. 79) or interrupted (Fig. 80); two eighths may appear on the 2nd and 4th quarters, never on the 1st or 3rd. <span class="ref">Fig. 81</span></li>
+    </ul></div>
+  </div>
+  <h3>Figures in the book</h3>
+  <dl class="figs">
+    <dt>Figs. 61–62</dt><dd>Consonant and dissonant ligatures.</dd>
+    <dt>Figs. 63–68</dt><dd>Resolution of dissonances, shown with and without the retardation.</dd>
+    <dt>Figs. 69–72</dt><dd>Dissonances with the cantus above; the seventh avoided; the second resolving to the unison.</dd>
+    <dt>Figs. 73–78</dt><dd>Exercises in all modes (Fig. 73 is shown below).</dd>
+    <dt>Figs. 79–81</dt><dd>Preparing for the fifth species: varied ligatures and eighth notes.</dd>
+  </dl>
+  <div data-w="susp"></div>
+  <div data-w="fig73"></div>
+  <div class="assign"><b>Fux’s assignment</b>Work out the remaining cantus firmi “and also go over the others in this species again, in order to get as much experience as you can; you can almost never have enough.” <span class="ref">p. 62</span></div>
+  <div data-w="wb14"></div>
+</section>
+
+<section class="chapter" id="p1c5">
+  <header><span class="eyebrow">First Part · Chapter Five · pp. 64–67</span><h2>The Fifth Species</h2>
+  <p class="lede">Florid counterpoint. “As a garden is full of flowers,” it combines all the preceding species: whole notes excepted, any mixture of halves, quarters, ligatures and occasional eighths.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>Nothing new: each note value obeys the rules of its species (halves as in the 2nd, quarters as in the 3rd, ligatures as in the 4th).</li>
+      <li>Dissonance only as passing note, cambiata, or prepared suspension resolving down by step.</li>
+      <li>Eighth notes only in pairs, on the 2nd or 4th quarter, moving by step. <span class="ref">Fig. 81</span></li>
+      <li>Same beginning and cadence rules (the 4th-species 7–6 or 2–3 is typical).</li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li>Above all, write a <b>singable, plastic melodic line</b> with lively movement and variety.</li>
+      <li>Approach the downbeats with oblique motion or syncopations: “it brings about the greatest beauty in counterpoint.” <span class="ref">p. 65</span></li>
+      <li>Two quarters at the start of a bar make the line lag; tie them into what follows or continue with more quarters. <span class="ref">Fig. 89</span></li>
+      <li>Work at this species “constantly and with special diligence above all others.”</li>
+    </ul></div>
+  </div>
+  <h3>Figures in the book</h3>
+  <dl class="figs">
+    <dt>Figs. 82–83</dt><dd>Aloysius’s models in D, above and below.</dd>
+    <dt>Figs. 84–88</dt><dd>Josephus works E, F, G, A and C in the master’s presence.</dd>
+    <dt>Fig. 89</dt><dd>“Better”: quarters at the start of the bar tied over.</dd>
+  </dl>
+  <div data-w="florid2"></div>
+  <div data-w="eighths"></div>
+  <div class="assign"><b>Fux’s assignment</b>Josephus works the remaining modes in the master’s presence. Then: “we have completed the exercises in two part counterpoint… We now return to the beginning.” <span class="ref">p. 67</span></div>
+  <div data-w="wb15"></div>
+</section>
+
+<div class="part" id="part2"><h2>Second Part</h2><span>Three voices · pp. 69–106</span></div>
+
+<section class="chapter" id="p2c1">
+  <header><span class="eyebrow">Second Part · Chapter One · pp. 71–85</span><h2>Note against Note in Three Parts</h2>
+  <p class="lede">“Three part composition is the most perfect of all,” because it holds the complete harmonic triad. Whoever masters three parts finds more parts easy.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>Three whole notes per bar; the upper two must be <b>consonant with the lowest</b>. A fourth between upper voices is acceptable. <span class="ref">p. 71, p. 112</span></li>
+      <li>No consecutive fifths or octaves between <b>any</b> pair of voices.</li>
+      <li>The final chord has only perfect consonances; Fux usually <b>omits the third</b>. A minor third “is not capable of giving a sense of conclusion.” <span class="ref">Fig. 105</span></li>
+      <li>A major third may end the piece when the fifth would cause consecutive fifths. <span class="ref">Figs. 106–108</span></li>
+      <li>Skips of the major sixth and the seventh remain prohibited. <span class="ref">Fig. 103</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li>Use the <b>harmonic triad (third and fifth above the bass) in every bar</b> unless there is a special reason. <span class="ref">p. 71</span></li>
+      <li>Replace the fifth by a sixth or octave for a better line, or to avoid two perfect consonances in a row. <span class="ref">Fig. 91</span></li>
+      <li>Follow the natural order and the principle of variety; when the bass has <i>mi</i>, a sixth sounds best above it. <span class="ref">Figs. 92–97</span></li>
+      <li>Start the upper voices far enough from the bass to leave room for contrary motion. <span class="ref">p. 75</span></li>
+      <li>Avoid all voices moving in the same direction. <span class="ref">Figs. 98–99</span></li>
+      <li>The rules apply strictly from the bass, and between other voices as far as possible; in three parts you may depart from them when there is no other way. <span class="ref">Figs. 100–101</span></li>
+      <li>A unison is less harmonious than an octave; don’t exceed the five lines of the staff without necessity. <span class="ref">p. 79</span></li>
+      <li>A tenth instead of the final octave is not positive enough. <span class="ref">Fig. 100</span></li>
+    </ul></div>
+  </div>
+  <h3>Figures in the book</h3>
+  <dl class="figs">
+    <dt>Fig. 90</dt><dd>The harmonic triad: third and fifth above the bass.</dd>
+    <dt>Figs. 91–97</dt><dd>When to give up the triad; <i>mi</i> in the bass takes the sixth.</dd>
+    <dt>Figs. 98–103</dt><dd>Josephus’s attempts and their faults.</dd>
+    <dt>Figs. 101, 104, 105</dt><dd>The model, with the cantus on top, in the middle, and in the bass.</dd>
+    <dt>Figs. 106–119</dt><dd>The remaining modes; the E-mode cadence needs a major third.</dd>
+  </dl>
+  <div data-w="fig101"></div>
+  <div class="assign"><b>Fux’s assignment</b>Work the remaining five modes, “setting the cantus firmus in all three voices in turn.” <span class="ref">p. 80</span></div>
+  <div data-w="wb21"></div>
+</section>
+
+<section class="chapter" id="p2c2">
+  <header><span class="eyebrow">Second Part · Chapter Two · pp. 86–90</span><h2>Half Notes against Whole Notes in Three Parts</h2>
+  <p class="lede">One voice moves in half notes, the other two in whole notes.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>The half notes must be concordant with <b>both</b> whole notes. <span class="ref">p. 88</span></li>
+      <li>Two half notes on the same pitch are not allowed (no ligatures in this species).</li>
+      <li>All two-part second-species rules and three-part rules apply.</li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li>For the sake of the triad, a skip of a third may now make two fifths acceptable, which two-part writing forbids. <span class="ref">Fig. 120</span></li>
+      <li>“Hardly any rule is without exception”: a ligature or a major third may appear in the final cadence to avoid a bad unison or empty octave. <span class="ref">pp. 87–88</span></li>
+      <li>Consider one or two measures in advance before deciding. <span class="ref">p. 90</span></li>
+    </ul></div>
+  </div>
+  <dl class="figs">
+    <dt>Fig. 120</dt><dd>Fifths separated by a skip of a third, tolerable in three parts.</dd>
+    <dt>Figs. 121–123</dt><dd>Three models in D, cantus on top, middle and bottom.</dd>
+    <dt>Figs. 124–129</dt><dd>Josephus’s work in the other modes.</dd>
+  </dl>
+  <div data-w="m3s2"></div>
+  <div data-w="wb22"></div>
+</section>
+
+<section class="chapter" id="p2c3">
+  <header><span class="eyebrow">Second Part · Chapter Three · pp. 91–93</span><h2>Quarters against Whole Notes in Three Parts</h2>
+  <p class="lede">One voice in quarters, the other two in whole notes.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>The quarters must concur with the whole notes of <b>two</b> other voices.</li>
+      <li>All third-species and three-part rules apply.</li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li>Give the greatest consideration to <b>the notes on the downbeat</b>. <span class="ref">p. 91</span></li>
+      <li>If the triad cannot stand on the first quarter, place it on the 2nd or 3rd quarter.</li>
+      <li>Combine species: one part in quarters, one in halves, one in whole notes (Fig. 134). “I can hardly describe how great the beauty and grace are that are given the composition by this threefold variety.”</li>
+      <li>A whole note may occasionally replace the halves in the next-to-last bar. <span class="ref">p. 93 n.</span></li>
+    </ul></div>
+  </div>
+  <dl class="figs">
+    <dt>Figs. 130–133</dt><dd>Quarters in each of the three voices.</dd>
+    <dt>Fig. 134</dt><dd>Quarters, halves and whole notes combined.</dd>
+  </dl>
+  <div data-w="m3s3"></div>
+  <div data-w="wb23"></div>
+</section>
+
+<section class="chapter" id="p2c4">
+  <header><span class="eyebrow">Second Part · Chapter Four · pp. 94–103</span><h2>The Ligature in Three Parts</h2>
+  <p class="lede">The syncopations work as in two parts. The new question is which consonance the third voice takes.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>The ligature is “nothing but a delaying of the note following”: set in the third voice <b>the consonance you would use if the ligature were removed</b>. <span class="ref">Figs. 135–137</span></li>
+      <li>The ligature does not change the nature of the consonances: with dissonant syncopations, the essential part is the consonant upbeat. <span class="ref">Fig. 138 n.</span></li>
+      <li>A ligature cannot make consecutive octaves acceptable (Fig. 139), but it can make fifths acceptable (Fig. 140): the more perfect the consonance, the less harmony it has, so a dissonance resolving to a fifth is more acceptable than one resolving to an octave.</li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li>Over a held bass (pedal point), a ligature of dissonances only is “not only correct but even very beautiful.” <span class="ref">Fig. 142</span></li>
+      <li>The seventh should be accompanied by the third; in exercises the octave may be accepted. <span class="ref">p. 99</span></li>
+      <li>If no ligature is possible, rest a whole bar, or let another voice take the bass for a measure. <span class="ref">Figs. 144–145</span></li>
+      <li>Hidden fifths between the upper parts can be cured with a rest. <span class="ref">Figs. 152–153</span></li>
+      <li>Use a ligature in every measure where possible; ligatures are “one of the chief excellences of composition.”</li>
+    </ul></div>
+  </div>
+  <dl class="figs">
+    <dt>Figs. 135–138</dt><dd>Without and with ligatures; a faulty example to show that the consonances stay the same.</dd>
+    <dt>Figs. 139–140</dt><dd>Octaves versus fifths through a syncopation.</dd>
+    <dt>Figs. 141–151</dt><dd>Exercises; the pedal point; the rest in place of an impossible ligature.</dd>
+  </dl>
+  <div data-w="lig3"></div>
+  <div data-w="wb24"></div>
+</section>
+
+<section class="chapter" id="p2c5">
+  <header><span class="eyebrow">Second Part · Chapter Five · pp. 104–106</span><h2>Florid Counterpoint in Three Parts</h2>
+  <p class="lede">A combination of all species in one voice, made as beautiful and singable as possible, over two voices in whole notes.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol><li>Everything from the two-part fifth species and from three-part writing applies; nothing new is needed.</li></ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul><li>“Oblique motion usually facilitates the work in any single measure.” <span class="ref">p. 106</span></li></ul></div>
+  </div>
+  <dl class="figs"><dt>Figs. 154–159</dt><dd>Florid models with the cantus in each voice.</dd></dl>
+  <div data-w="m3s5"></div>
+  <div data-w="wb25"></div>
+</section>
+
+<div class="part" id="part3"><h2>Third Part</h2><span>Four voices · pp. 107–139</span></div>
+
+<section class="chapter" id="p3c1">
+  <header><span class="eyebrow">Third Part · Chapter One · pp. 109–116</span><h2>Four Part Composition</h2>
+  <p class="lede">The triad is already complete in three parts, so the fourth voice must double one of its consonances.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>A four-part chord consists of <b>third, fifth and octave</b>. If the octave would cause bad progressions, double the third (or, more rarely, another member). <span class="ref">p. 109</span></li>
+      <li>The rules of motion apply from the bass to the other voices <b>and between any two voices</b>, as far as possible. <span class="ref">pp. 109–110</span></li>
+      <li>The nature of an interval is reckoned from the bass; a fourth between inner voices is fine if fifths and octaves are avoided. <span class="ref">p. 112</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li>Place consonances in their <b>natural order</b>: the fifth low, then the octave, then the third (tenth) highest, as the harmonic division produces them. The third close to the bass sounds dull. <span class="ref">Figs. 161–162</span></li>
+      <li>Hidden fifths or octaves are sometimes forced by the melody, by imitation, or by the cantus firmus; the less one departs from the rules, the better. <span class="ref">p. 110</span></li>
+      <li>“The closer the parts are led together the more perfect the sound”: <i>vis unita fortior</i>. <span class="ref">p. 112</span></li>
+      <li>Consider whether the first chord allows good progressions to the following measures. <span class="ref">p. 111</span></li>
+    </ul></div>
+  </div>
+  <dl class="figs">
+    <dt>Fig. 160</dt><dd>The model, cantus in the alto, with all intervals shown as simple numbers.</dd>
+    <dt>Figs. 161–162</dt><dd>Natural order (5, 8, 10) versus keyboard order (3, 5, 8).</dd>
+    <dt>Figs. 163–172</dt><dd>The other modes with the cantus in each of the four voices.</dd>
+  </dl>
+  <div data-w="fig160"></div>
+  <div data-w="triad"></div>
+  <div data-w="wb31"></div>
+</section>
+
+<section class="chapter" id="p3c2">
+  <header><span class="eyebrow">Third Part · Chapter Two · pp. 117–119</span><h2>Half Notes against Whole Notes</h2>
+  <p class="lede">Two half notes must now agree with three whole notes.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol><li>Everything from three-part half notes and from four-part note against note, as far as the restricted nature of the species permits.</li></ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li>Josephus finds this the hardest species, especially the next-to-last bar. Aloysius: the difficulty comes from setting two halves against three whole notes, and it trains a sure use of the consonances.</li>
+      <li>“These lessons are not worked out for actual use but for exercise.” <span class="ref">p. 119</span></li>
+    </ul></div>
+  </div>
+  <dl class="figs"><dt>Figs. 173–176</dt><dd>Models with the half notes in different voices.</dd></dl>
+  <div data-w="m4s2"></div>
+  <div data-w="wb32"></div>
+</section>
+
+<section class="chapter" id="p3c3">
+  <header><span class="eyebrow">Third Part · Chapter Three · pp. 120–126</span><h2>Quarters against Whole Notes</h2>
+  <p class="lede">Four quarters concordant with three whole notes.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol><li>The rules of the species in two and three parts, applied against three whole notes.</li></ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li>Put a <b>complete triad on the first quarter</b>; then let the remaining quarters lead simply to the next bar. <span class="ref">p. 122</span></li>
+      <li>A unison on the downbeat detracts from the harmony; a third that sounds only in passing is too weak. <span class="ref">Figs. 177–179</span></li>
+      <li>Direct motion between perfect consonances may be tolerated out of necessity, better in the inner voices than the outer. <span class="ref">Figs. 181–182</span> Beethoven noted that the progression at B in Fig. 186 “would never be excusable for my ear.”</li>
+      <li>The E mode is the most difficult, lacking its perfect fifth. <span class="ref">p. 124</span></li>
+    </ul></div>
+  </div>
+  <dl class="figs"><dt>Figs. 177–186</dt><dd>Models in D and E with marked licences (A, B).</dd></dl>
+  <div data-w="m4s3"></div>
+  <div data-w="wb33"></div>
+</section>
+
+<section class="chapter" id="p3c4">
+  <header><span class="eyebrow">Third Part · Chapter Four · pp. 127–134</span><h2>The Ligature in Four Parts</h2>
+  <p class="lede">Tied notes take the same concords as untied ones, with one important exception.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol>
+      <li>Accompany the ligature with the consonances that would be used if it were removed. <span class="ref">Figs. 187–189</span></li>
+      <li>When the seventh would sound with the fifth in another voice, <b>divide the whole note</b> in that voice (fifth, then sixth). With the octave there is no need. <span class="ref">Figs. 190–192</span></li>
+    </ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li>The rule of three undivided whole notes cannot be observed strictly here. <span class="ref">p. 130</span></li>
+      <li>A fourth in the inner voices is barely prominent and acts like an imperfect consonance. <span class="ref">Fig. 194</span></li>
+      <li>Double the second rather than the fourth, so the resolution yields a complete harmony of third, fifth and octave. <span class="ref">Figs. 198–199</span></li>
+      <li>Slight lapses are allowed: the student learns how one may depart, if need be, from the strict rules. <span class="ref">p. 134</span></li>
+    </ul></div>
+  </div>
+  <dl class="figs"><dt>Figs. 187–199</dt><dd>Concords for tied notes; the divided whole note; models.</dd></dl>
+  <div data-w="m4s4"></div>
+  <div data-w="wb34"></div>
+</section>
+
+<section class="chapter" id="p3c5">
+  <header><span class="eyebrow">Third Part · Chapter Five · pp. 135–139</span><h2>Florid Counterpoint in Four Parts</h2>
+  <p class="lede">The florid voice moves over three voices in whole notes, by the principles of four-part writing. The book ends here.</p></header>
+  <div class="cols">
+    <div class="rulebox hard"><h4><i class="mk r">R</i> Rules</h4><ol><li>The other voices remain in whole notes wherever possible; divide them only where necessary. <span class="ref">p. 136</span></li></ol></div>
+    <div class="rulebox soft"><h4><i class="mk g">G</i> Guidelines</h4><ul>
+      <li>Once the species are mastered singly, combine them: halves, quarters and ligatures in different voices over the same cantus, “so that each part will have its own characteristic motion.” <span class="ref">Fig. 204</span></li>
+      <li>Use the fourfold interchange of the cantus; find new cantus firmi; spend “a year or two” on these exercises before free composition.</li>
+      <li>For more than four voices, “the rules are to be less rigorously observed.”</li>
+    </ul></div>
+  </div>
+  <p class="quote">“The mountain of the muses is to be reached only by a very precipitous path.” (p. 138)</p>
+  <dl class="figs"><dt>Figs. 200–204</dt><dd>Florid models; Fig. 204 combines halves, quarters and ligatures.</dd></dl>
+  <div data-w="m4s5"></div>
+  <div data-w="wb35"></div>
+</section>
+
+<section class="chapter" id="appendix">
+  <header><span class="eyebrow">Back matter · pp. 141–143</span><h2>Appendix: Harmonic and Arithmetical Division</h2>
+  <p class="lede">Fux derives the intervals and their ranking by dividing the octave on the monochord.</p></header>
+  <div class="prose">
+    <p><b>Arithmetical proportion</b> 4:3:2 (equal differences) splits the octave into a fourth below and a fifth above. Here the fourth sits on the bass and counts as a dissonance. <b>Harmonic proportion</b> 6:4:3 (equal differences of reciprocals) splits it into a fifth below and a fourth above; here the fourth is not against the bass and may be treated as an imperfect consonance.</p>
+    <p>Dividing the fifth harmonically (15:12:10) gives a major third below and a minor third above. The sequence octave → fifth → major third is the <b>natural order</b> Fux uses for spacing chords (Fig. 161) and for the closing chords of old polyphony. Mann adds that the overtone series (C c g c′ e′ g′) shows the same order with reciprocal numbers.</p>
+  </div>
+  <div data-w="mono"></div>
+</section>
+
+<section class="chapter" id="cheat">
+  <header><span class="eyebrow">Quick reference</span><h2>The Species at a Glance</h2></header>
+  <div class="tbl-wrap"><table class="cheat">
+    <thead><tr><th>Species</th><th>Rhythm against the cantus</th><th>Downbeat</th><th>Other beats</th><th>Typical cadence</th></tr></thead>
+    <tbody>
+      <tr><td>1st</td><td>𝅝 against 𝅝</td><td>consonant</td><td>none</td><td>6–8 (cantus below) · 3–1 (cantus above)</td></tr>
+      <tr><td>2nd</td><td>𝅗𝅥 𝅗𝅥 against 𝅝, may begin with a half rest</td><td>consonant</td><td>upbeat dissonant only as a passing note filling a third</td><td>5–6–8 · 5–3–1</td></tr>
+      <tr><td>3rd</td><td>♩♩♩♩ against 𝅝</td><td>consonant</td><td>passing dissonances on 2, 3 or 4; cambiata on 2</td><td>stepwise into 6–8 / 3–1 (Figs. 53–54)</td></tr>
+      <tr><td>4th</td><td>𝅗𝅥 tied across the bar line</td><td>may be a suspension: 7–6, 4–3, 9–8 above; 2–3, 4–5, 9–10 below</td><td>upbeat always consonant</td><td>7–6–8 · 2–3–1</td></tr>
+      <tr><td>5th</td><td>mixture; eighths only in pairs on 2 or 4</td><td>consonant or prepared suspension</td><td>as in species 2–4</td><td>usually the 4th-species cadence, often ornamented</td></tr>
+      <tr><td>3 parts</td><td>as above, other voices in 𝅝</td><td>consonant with the bass; triad if possible</td><td>as above, concordant with both whole notes</td><td>final chord without the third (major third if needed)</td></tr>
+      <tr><td>4 parts</td><td>as above, other voices in 𝅝</td><td>third, fifth and octave; natural order</td><td>concordant with three whole notes</td><td>perfect consonances, third allowed when needed</td></tr>
+    </tbody>
+  </table></div>
+  <div class="foot">
+    <p>About the sound: the harpsichord is synthesized in your browser with a plucked-string model (one or two 8′ choirs, a 4′ choir, and a lute stop), so nothing is downloaded. The pitch is equal-tempered at A = 440.</p>
+    <p>About the checker: it encodes the rules listed in each chapter. “Rules” stop a solution; “guidelines” are reported but allowed. Fux himself bends guidelines in his models, and in three and four parts he tolerates some direct motion when nothing better is possible. The checker reports those cases as guidelines.</p>
+  </div>
+</section>
+</main>
+</div>
+
+<script id="engine-src" type="text/plain">/*ENGINE*/</script>
+<script>/*GLYPHS*/</script>
+<script>/*ENGINE*/</script>
+<script>/*UI*/</script>
+<script>/*MAIN*/</script>

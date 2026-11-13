@@ -93,7 +93,11 @@ const hasScore = allExamples.length > 0;
         <h2 class="section-title">Guidelines</h2>
         <ul>
           {p.guidelines.map((g) => (
-            <li><span class="badge badge-guide">Guideline</span> {g}</li>
+            <li>
+              <span class="badge badge-guide">Guideline</span>
+              {/^\(Sanguinetti\)/.test(g) && <span class="badge badge-textbook">Textbook</span>}
+              {g.replace(/^\(Sanguinetti\)\s*/, '')}
+            </li>
           ))}
         </ul>
       </section>
@@ -166,6 +170,8 @@ const hasScore = allExamples.length > 0;
     <ul class="source-list">
       {sources.notes && <li>Notes: {sources.notes}</li>}
       {sources.hcp && <li>Harmony, Counterpoint, Partimento (IJzerman, 2018): {sources.hcp}</li>}
+      {sources.sanguinetti && <li>Sanguinetti, <em>The Art of Partimento</em> (2012): {sources.sanguinetti}</li>}
+      {sources.napoli && <li>Neapolitan sources: {sources.napoli}</li>}
       {sources.fenaroli && <li>Fenaroli, <em>Partimenti ossia basso numerato</em>, Book III: {sources.fenaroli}</li>}
       {(sources.web ?? []).map((u) => <li><a href={u} target="_blank" rel="noopener noreferrer">{host(u)}</a></li>)}
       {sources.other && <li>{sources.other}</li>}

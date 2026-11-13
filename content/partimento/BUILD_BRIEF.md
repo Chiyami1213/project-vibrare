@@ -9,10 +9,10 @@
 
 | Path | What it is |
 |---|---|
-| `data/schemata.json` | 10 groups, 43 patterns (moti del basso + galant schemata), 78 realized examples |
-| `data/cadences.json` | 6 groups, 37 entries (terminology, clausulae, 2/3/4-part cadences, related formulas), 40 realized examples |
+| `data/schemata.json` | 13 groups, 58 patterns (moti del basso + galant schemata + Rule of the Octave + **suspensions** + **diminution**), 115 realized examples |
+| `data/cadences.json` | 6 groups, 38 entries (terminology, clausulae, 2/3/4-part cadences, related formulas incl. Sanguinetti's cadenza lunga), 41 realized examples |
 | `schema/types.ts` | TypeScript types for both files — import these |
-| `tools/` | Python source of truth (`data_schemata.py`, `data_cadences.py`) + realizer/checker (`realize.py`) + `build.py` that regenerates `data/` |
+| `tools/` | Python source of truth (`data_schemata.py`, `data_cadences.py`, `sanguinetti.py` — cross-check notes and additions from Sanguinetti — and `napoli.py` — additions and cross-checks from Durante's Regole and Partimenti diminuiti, Fenaroli's Books I–VI and Movimenti, Furno's Movimenti; both applied at build time) + realizer/checker (`realize.py`) + `build.py` that regenerates `data/` |
 | `VERIFICATION.md` | What was cross-checked against which source, and the open questions for the owner |
 
 Regenerate the JSON after editing the Python content: `python3 tools/build.py data` (no dependencies). The build prints any voice-leading problems; it must print none except `doubledLT` info lines listed in VERIFICATION.md.
@@ -20,6 +20,8 @@ Regenerate the JSON after editing the Python content: `python3 tools/build.py da
 ## 2. Content model in one paragraph
 
 A **Group** is a section of a page (e.g. "Moti del basso: disjunct"). A **Pattern** is one card: name, aliases, bass/melody degrees, a summary, **rules** (hard requirements) and **guidelines** (soft advice), one or more **examples**, optional **variants** (with or without their own examples), cross-links (`seeAlso`), sources and a verification status. An **Example** is a short score in a fixed key (C major, A minor or D minor) with every note already realized (`realized.voices`), plus the compact `notation` string it came from.
+
+Guidelines starting with "(Sanguinetti)" come from the textbook, not the owner's notes — give them a small "textbook" tag. Patterns with `verification.status: "textbook-only"` (the Rule of the Octave group, two extra moti, cadenza lunga) were added from Sanguinetti: show a "not in notes" badge.
 
 Keep the distinction between `rules` and `guidelines` visible everywhere (e.g. red "Rule" badge vs amber "Guideline" badge). It is a core study aid for the owner.
 
@@ -53,7 +55,7 @@ Order of groups = order in the JSON (it mirrors the owner's handwritten notes). 
 ## 4. Mini-notation (`example.notation`) — only needed if you add or edit examples
 ```
 slice  = BASS ':' V1 ',' V2 [',' V3] ['@' beats]      (slices separated by spaces, bars by '|')
-V      = upper voices TOP→BOTTOM, each an interval above the bass: [^][#|b|n]NUM[+]
+V      = upper voices TOP→BOTTOM, each an interval above the bass: [^][#|b|n]NUM[+][<|>]*   ('<'/'>' = octave below/above the nearest-note choice, used for leaps in diminutions)
          '^' tied from previous · '+' exact augmented interval · 'a-b(-c)' split the slice equally
          '.' hold previous pitch · '_' rest
 BASS   = [#|b|n]DEG[<|>]*[~]    ('<'/'>' force octave, '~' tied/held display) · '.' = bass holds
@@ -79,3 +81,18 @@ Accidentals are relative to the key signature (A minor = natural minor; write `#
 - **Don't copy textbook prose.** Summaries are paraphrased; keep it that way. Cite with the `sources` fields (HCP section, Fenaroli rule, essaysonmusic.com URL, notes page).
 - Show items whose `verification.status` is `notes-only` or `flagged`, and variants with `review`, with a small "check" badge so the owner can find them.
 - Acceptance: every example renders, plays, transposes to F♯ major/E♭ minor without spelling errors, and the build prints no `par5`/`par8`/`tie` lines.
+
+## Voice colouring (owner request, all score pages)
+Every score must support **colouring each voice consistently**, the way the owner does in their handwritten notes, so that voice crossing and overlap are visible at a glance. Full spec: `VOICE_COLORS.md`, which covers the palette, voice paths, crossing markers, the per-pack voice mapping and acceptance tests. Build it into the shared Example player once, so the tonal, counterpoint, partimento and fugue pages all get it.
+
+
+## 9. New groups: Suspensions, Rule of the Octave (Durante), Diminution
+Added from the Neapolitan rule books (`tools/napoli.py`). They are all `textbook-only` (not from the owner's notes) and need the same "textbook" tag.
+- **Suspensions** (`susp-*`): one card per dissonance (4th, 7th, 9th, bass 2nd), plus a principles card. Each example letter (a, b, c…) is one way of *preparing* the dissonance. Render the examples of a card as a small gallery in which each item is labelled with its preparation (its `title`). When an example plays, highlight the tied note and its resolution: `tie: true` events, and the next event in the same voice. **Tool suggestion:** "Suspension finder". Given a bass line (choose any example or type degrees), mark every bass step where a 4–3, 7–6 or 9–8 is possible according to the bass-motion rules in `susp-4th/7th/9th.rules`. This is the use of these rules the masters intended for unfigured basses.
+- **Rule of the Octave**: the group now holds Fenaroli's scale (`ro-fenaroli`), Durante's earlier scale (`ro-durante`) and Durante's interval rules (`ro-bass-motion-rules`). **Tool suggestion:** a side-by-side "Durante vs Fenaroli" RO table, with one row per degree and a play button per cell, highlighting the degrees where they differ: ascending ②, ③, ④ and minor descending ⑥.
+- **Diminution** (`dim-*`): two-part examples where the upper voice moves in sixteenths over a slow bass.
+  - Use beams.
+  - Show the figures only where the bass moves. Use the `fig` of the first upper note in each bass slice, or hide the figures row for `parts: 2` examples.
+  - Examples whose `source` starts with "Durante, Partimenti diminuiti" are Durante's own diminutions, transposed. Show that attribution in full under the score.
+  - **Tool suggestion:** "Plain ↔ diminished". `dim-plain` and `dim-lt-tonic` share the same bass ⑦→①. Offer a toggle that plays the plain realization, then Style 1, then Style 2.
+- The two `doubledLT` info lines on `dd1-s1` and `dd1-s2` are melodic leading tones inside Durante's own figuration, not voice-leading errors. Do not flag them in the UI.

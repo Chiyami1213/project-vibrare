@@ -3,7 +3,7 @@
 
 export type Tab = 'schemata' | 'cadences';
 export type Direction = 'ASC' | 'DSC' | 'ASC/DSC' | 'static' | 'mixed' | 'circular';
-export type VerificationStatus = 'verified' | 'partly' | 'notes-only' | 'flagged';
+export type VerificationStatus = 'verified' | 'partly' | 'notes-only' | 'flagged' | 'textbook-only';  // textbook-only = added from a textbook or primary source (Sanguinetti; Durante/Fenaroli/Furno), not in the owner's notes
 
 export interface ContentFile {
   version: 1;
@@ -91,5 +91,7 @@ export interface Sources {
   hcp?: string;        // IJzerman, Harmony, Counterpoint, Partimento (OUP 2018) section
   fenaroli?: string;   // Fenaroli, Partimenti ossia basso numerato, Book III (Rules, 1775)
   web?: string[];      // essaysonmusic.com (Ewald Demeyere) pages
+  sanguinetti?: string; // G. Sanguinetti, The Art of Partimento (OUP 2012), chapter/section
+  napoli?: string;     // Neapolitan primary sources: Durante Regole (page) / Partimenti diminuiti (No.), Fenaroli Books I–VI & Movimenti, Furno Movimenti
   other?: string;
 }

@@ -1490,6 +1490,11 @@ button.btn {
   background: #b9770e;
 }
 
+.badge-textbook {
+  background: #2e6f9e;
+  margin-right: 4px;
+}
+
 .badge-need {
   background: #5d6d7e;
 }

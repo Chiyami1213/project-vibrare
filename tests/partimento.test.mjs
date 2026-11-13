@@ -16,7 +16,7 @@ for (const file of ['schemata', 'cadences']) {
 }
 const byId = (id) => EXAMPLES.find((e) => e.id === id);
 
-test('the content pack has 118 examples', () => assert.equal(EXAMPLES.length, 118));
+test('the content pack has 156 examples', () => assert.equal(EXAMPLES.length, 156));
 
 test('note values: any duration splits into writable values that add up', () => {
   assert.deepEqual(splitDuration(64).map((v) => v[1] + (v[2] ? '.' : '')), ['w']);
@@ -177,4 +177,18 @@ test('playable notes join tied events', () => {
   assert.ok(top.every((n) => n.dur >= 1));
   assert.equal(notes.filter((n) => n.voice === 2).length, 15); // the bass is struck again on every beat
   assert.ok(notes.every((n, i) => i === 0 || notes[i - 1].start <= n.start));
+});
+
+test('every pattern belongs to exactly one section page', async () => {
+  const { SECTIONS, sectionOfGroup } = await import('../src/data/partimento/sections.ts');
+  const patterns = [...read('schemata').patterns, ...read('cadences').patterns];
+  assert.equal(patterns.length, 96);
+  const counts = Object.fromEntries(SECTIONS.map((s) => [s.slug, 0]));
+  for (const p of patterns) {
+    const owners = SECTIONS.filter((s) => s.groupIds(p.group));
+    assert.equal(owners.length, 1, `${p.id} (${p.group})`);
+    assert.equal(sectionOfGroup(p.group).slug, owners[0].slug);
+    counts[owners[0].slug]++;
+  }
+  assert.deepEqual(counts, { 'moti-del-basso': 25, schemata: 20, cadences: 38, 'rule-of-the-octave': 4, suspension: 5, diminution: 4 });
 });

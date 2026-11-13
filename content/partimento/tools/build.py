@@ -1,7 +1,46 @@
 import json, sys, os
 sys.path.insert(0, os.path.dirname(__file__))
 from realize import realize, check, to_json, sounding
-import data_schemata as S, data_cadences as Cd
+import data_schemata as S, data_cadences as Cd, sanguinetti as SG
+
+# ---- Sanguinetti cross-check / additions (tools/sanguinetti.py)
+S.GROUPS = S.GROUPS + SG.NEW_GROUPS_SCHEMATA
+S.PATTERNS = S.PATTERNS + SG.NEW_SCHEMATA
+Cd.PATTERNS = Cd.PATTERNS + SG.NEW_CADENCES
+_ids = {p['id'] for p in S.PATTERNS + Cd.PATTERNS}
+for _pid, _x in SG.PATCH.items():
+    assert _pid in _ids, _pid
+for _p in S.PATTERNS + Cd.PATTERNS:
+    _x = SG.PATCH.get(_p['id'])
+    if not _x:
+        continue
+    _p['sources']['sanguinetti'] = _x['ref']
+    _v = _p['verification']
+    _v['checks'] = _v.get('checks', []) + _x.get('checks', [])
+    if _x.get('flags'):
+        _v['flags'] = _v.get('flags', []) + _x['flags']
+    if _x.get('add_guidelines'):
+        _p['guidelines'] = (_p.get('guidelines') or []) + _x['add_guidelines']
+for _p in SG.NEW_SCHEMATA + SG.NEW_CADENCES:
+    for _s in _p.get('seeAlso', []):
+        assert _s in _ids, _s
+
+# ---- Neapolitan rule books / Durante Diminuiti / Movimenti (tools/napoli.py)
+import napoli as NP
+S.GROUPS = S.GROUPS + NP.NEW_GROUPS
+S.PATTERNS = S.PATTERNS + NP.NEW_SCHEMATA
+_ids = {p['id'] for p in S.PATTERNS + Cd.PATTERNS}
+for _pid in NP.PATCH:
+    assert _pid in _ids, _pid
+for _p in S.PATTERNS + Cd.PATTERNS:
+    _x = NP.PATCH.get(_p['id'])
+    if not _x:
+        continue
+    _p['sources']['napoli'] = _x['ref']
+    _p['verification']['checks'] = _p['verification'].get('checks', []) + ['(Neapolitan sources) ' + c for c in _x.get('checks', [])]
+for _p in NP.NEW_SCHEMATA:
+    for _s in _p.get('seeAlso', []):
+        assert _s in _ids, (_p['id'], _s)
 
 def walk_examples(p):
     for e in p.get('examples', []) or []:
@@ -44,7 +83,7 @@ def process(patterns, tab):
 out = sys.argv[1] if len(sys.argv) > 1 else '../data'
 os.makedirs(out, exist_ok=True)
 n1 = process(S.PATTERNS, 'schemata'); n2 = process(Cd.PATTERNS, 'cadences')
-json.dump({'version': 1, 'tab': 'schemata', 'groups': S.GROUPS, 'patterns': S.PATTERNS}, open(f'{out}/schemata.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-json.dump({'version': 1, 'tab': 'cadences', 'groups': Cd.GROUPS, 'patterns': Cd.PATTERNS}, open(f'{out}/cadences.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+json.dump({'version': 1, 'tab': 'schemata', 'groups': S.GROUPS, 'patterns': S.PATTERNS}, open(f'{out}/schemata.json', 'w'), ensure_ascii=False, indent=1)
+json.dump({'version': 1, 'tab': 'cadences', 'groups': Cd.GROUPS, 'patterns': Cd.PATTERNS}, open(f'{out}/cadences.json', 'w'), ensure_ascii=False, indent=1)
 print('examples', n1, n2, 'patterns', len(S.PATTERNS), len(Cd.PATTERNS))
 for r in report: print(*r, sep=' | ')

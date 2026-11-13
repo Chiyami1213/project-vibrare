@@ -1,0 +1,20 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import PatternOverview from '../../../../components/partimento/PatternOverview.astro';
+import { SECTIONS, groupsOf, patternsOf } from '../../../../data/partimento';
+
+export function getStaticPaths() {
+  return SECTIONS.map((section) => ({ params: { section: section.slug }, props: { section } }));
+}
+
+const { section } = Astro.props;
+const count = patternsOf(section).length;
+---
+
+<Layout title={section.title}>
+  <main class="page-block wide">
+    <h1>{section.title}</h1>
+    <p class="lead">{section.lead} {count} {count === 1 ? 'pattern' : 'patterns'}.</p>
+    <PatternOverview groups={groupsOf(section)} />
+  </main>
+</Layout>

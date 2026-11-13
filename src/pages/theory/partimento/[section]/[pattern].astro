@@ -1,0 +1,15 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import PatternPage from '../../../../components/partimento/PatternPage.astro';
+import { SECTIONS, patternsOf } from '../../../../data/partimento';
+
+export function getStaticPaths() {
+  return SECTIONS.flatMap((section) => patternsOf(section).map((pattern) => ({ params: { section: section.slug, pattern: pattern.id }, props: { pattern, section } })));
+}
+
+const { pattern, section } = Astro.props;
+---
+
+<Layout title={pattern.name}>
+  <PatternPage pattern={pattern} backHref={`/theory/partimento/${section.slug}/`} backLabel={section.title} />
+</Layout>

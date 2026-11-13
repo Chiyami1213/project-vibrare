@@ -1,5 +1,5 @@
 // Draws an example as a grand staff with figured bass and circled bass degrees (VexFlow).
-import { Accidental, BarlineType, Dot, Formatter, Renderer, Stave, StaveConnector, StaveNote, StaveTie, Stem, Voice } from 'vexflow/bravura';
+import { Accidental, Beam, BarlineType, Dot, Formatter, Fraction, Renderer, Stave, StaveConnector, StaveNote, StaveTie, Stem, Voice } from 'vexflow/bravura';
 import { barTicks, keySpec, layoutVoice, slicesOf, totalBarsOf } from './model';
 import type { ExampleData, NoteSpec } from './model';
 
@@ -106,6 +106,7 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
   const buildMeasure = (m: number) => {
     const built: Built[] = [];
     const onsets = new Set<number>();
+    const beams: Beam[] = [];
     const voices = rows.map((r, ri) => {
       const two = r.voices.length === 2;
       const vs = r.voices.map((vm, vi) => {
@@ -120,12 +121,14 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
         const v = new Voice({ numBeats: Math.max(1, total), beatValue: 64 });
         v.setMode(Voice.Mode.SOFT);
         v.addTickables(notes);
+        // short notes are beamed in groups of one beat (without this each sixteenth would carry its own flags)
+        beams.push(...Beam.generateBeams(notes, { groups: [new Fraction(1, 4)], maintainStemDirections: true }));
         return v;
       });
       Accidental.applyAccidentals(vs, spec);
       return vs;
     });
-    return { voices, built, onsets: onsets.size };
+    return { voices, built, beams, onsets: onsets.size };
   };
 
   // ---- pass 1: ask VexFlow how much room each bar needs (these notes are thrown away)
@@ -253,12 +256,13 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
         new StaveConnector(staves[0], staves[1]).setType(m === bars - 1 ? 'boldDoubleRight' : 'singleRight').setContext(ctx).draw();
       }
 
-      const { voices, built } = buildMeasure(m); // fresh notes for drawing
+      const { voices, built, beams } = buildMeasure(m); // fresh notes for drawing
       const startX = Math.max(...staves.map((s) => s.getNoteStartX()));
       const formatter = new Formatter();
       voices.forEach((vs) => formatter.joinVoices(vs));
       formatter.format(voices.flat(), Math.max(plans[m].minWidth, x + widths[mi] - startX - 16));
       voices.forEach((vs, ri) => vs.forEach((v) => v.draw(ctx, staves[ri])));
+      beams.forEach((b) => b.setContext(ctx).draw());
 
       // where the sonorities are
       built.forEach(({ note, spec: n }) => {
@@ -313,13 +317,16 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
     t.textContent = s;
     svg.append(t);
   };
+  // In a diminution the upper voice runs in short notes over a slow bass: the figures and degrees then belong to the
+  // bass notes only, not to every short note.
+  const onlyAtBass = slices.filter((s) => !s.bassStart).length > slices.length / 2;
   for (const s of slices) {
     const at = xOf.get(s.tick);
     if (!at) continue;
     const top = at.sys * sysHeight + SYSTEM_TOP;
     const bassBottom = top + (hasTreble ? STAVE_GAP : 0) + STAVE_H;
-    s.figures.forEach((f, i) => text(at.x, bassBottom + 30 + figDrop + i * FIG_ROW, f, 'fig'));
-    if (s.degree) text(at.x, bassBottom + 30 + figDrop + figRows * FIG_ROW + 16, s.degree, 'deg');
+    if (!onlyAtBass || s.bassStart) s.figures.forEach((f, i) => text(at.x, bassBottom + 30 + figDrop + i * FIG_ROW, f, 'fig'));
+    if (s.degree && s.bassStart) text(at.x, bassBottom + 30 + figDrop + figRows * FIG_ROW + 16, s.degree, 'deg');
     const bottom = bassBottom + 30 + figDrop + figRows * FIG_ROW + 24;
     boxes.push({ tick: s.tick, beat: s.beat, x: at.x, top: top - 4, bottom });
     const r = document.createElementNS(NS, 'rect');

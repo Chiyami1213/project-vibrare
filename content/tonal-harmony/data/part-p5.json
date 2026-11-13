@@ -1,0 +1,1923 @@
+{
+ "version": 1,
+ "part": {
+  "id": "p5",
+  "num": "V",
+  "title": "Predominant Chords",
+  "notesPages": "34–36"
+ },
+ "chapters": [
+  {
+   "id": "ch14",
+   "part": "p5",
+   "num": 14,
+   "title": "Supertonic Seventh Chord: ii7 (iiø7)",
+   "notesPages": "34",
+   "video": [
+    30
+   ],
+   "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 13 — Supertonic Seventh Chords"
+  },
+  {
+   "id": "ch15",
+   "part": "p5",
+   "num": 15,
+   "title": "Uncommon Diatonic Seventh Chords & the Circle-of-Fifths Sequence",
+   "notesPages": "35–36",
+   "video": [
+    33,
+    34
+   ],
+   "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 13 — Subdominant Seventh Chords; Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 18; Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 25 — Seventh Chords in Sequence"
+  }
+ ],
+ "topics": [
+  {
+   "id": "seventh-frequency",
+   "chapter": "ch14",
+   "title": "How common are the diatonic seventh chords?",
+   "kind": "concept",
+   "summary": "V7 (Mm7) is the most frequent seventh chord, ii7 (m7) or iiø7 (dm7) the next most frequent, and viiø7 (vii°7) less frequent.",
+   "sources": {
+    "notes": "p.34",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 13",
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 18"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "Consistent with the order of treatment in A&S (Units 7, 13, 23)"
+    ]
+   },
+   "part": "p5"
+  },
+  {
+   "id": "ii7-inversions",
+   "chapter": "ch14",
+   "title": "ii7 and its inversions",
+   "kind": "table",
+   "summary": "The supertonic seventh is a predominant chord leading to V. ii6/5 is the most common position; it sounds like IV with an added 6th.",
+   "rules": [
+    "Resolve the chordal 7th down: 1̂ → 7̂.",
+    "An incomplete ii7 must keep the root and the 7th: omit the 5th of a m7 (or M7) chord, the 3rd of a ø7 (or °7) chord.",
+    "Never double the chordal 7th or the leading tone; double the root."
+   ],
+   "guidelines": [
+    "Approach the chordal 7th as a suspension (common tone) or passing tone — far more common than neighbour or appoggiatura approaches.",
+    "The 7th may be held over a cadential 6/4 and resolve when V arrives."
+   ],
+   "tables": [
+    {
+     "id": "ii7-table",
+     "title": "ii7 and inversions (notes p.34)",
+     "columns": [
+      "Position",
+      "Symbol",
+      "Bass",
+      "Intervals above bass",
+      "Progressions",
+      "≈",
+      "Note"
+     ],
+     "rows": [
+      [
+       "Root",
+       "ii7",
+       "2̂",
+       "m3, P5, m7",
+       "→ I6/4 – V, → V, or → vii°6",
+       "",
+       ""
+      ],
+      [
+       "1st inv.",
+       "ii6/5",
+       "4̂",
+       "M3, P5, M6",
+       "→ V or V4/2",
+       "IV add6",
+       "most common"
+      ],
+      [
+       "2nd inv.",
+       "ii4/3",
+       "6̂",
+       "m3, P4, m6",
+       "→ V7",
+       "",
+       ""
+      ],
+      [
+       "3rd inv.",
+       "ii4/2",
+       "1̂ → 7̂",
+       "M2, P4, M6",
+       "→ V6/5",
+       "",
+       ""
+      ]
+     ]
+    }
+   ],
+   "examples": [
+    {
+     "id": "ii7-cad",
+     "title": "ii7 – I6/4 – V – I",
+     "key": "F",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "ii7:F4,D4,Bb3,G2 I6/4:F4,C4,A3,C3 V:E4,C4,G3,C3 I:F4,C4,A3,F3@2",
+     "intent": "model",
+     "caption": "the 7th F is held over the cadential 6/4 and resolves to E on V",
+     "source": "notes p.34",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 5.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "E4",
+         "midi": 64
+        },
+        {
+         "t": 3.0,
+         "d": 2.0,
+         "pitch": "F4",
+         "midi": 65
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 3.0,
+         "d": 2.0,
+         "pitch": "C4",
+         "midi": 60
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "Bb3",
+         "midi": 58
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "A3",
+         "midi": 57
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "G3",
+         "midi": 55
+        },
+        {
+         "t": 3.0,
+         "d": 2.0,
+         "pitch": "A3",
+         "midi": 57
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G2",
+         "midi": 43
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "C3",
+         "midi": 48
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "C3",
+         "midi": 48
+        },
+        {
+         "t": 3.0,
+         "d": 2.0,
+         "pitch": "F3",
+         "midi": 53
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "ii7",
+        "figures": "7",
+        "bassDegree": "2",
+        "root": "G"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "I6/4",
+        "figures": "6/4",
+        "bassDegree": "5",
+        "root": "F"
+       },
+       {
+        "t": 2.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "V",
+        "figures": "5/3",
+        "bassDegree": "5",
+        "root": "C"
+       },
+       {
+        "t": 3.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "I",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "F"
+       }
+      ]
+     }
+    },
+    {
+     "id": "ii7-vii6",
+     "title": "ii7 – vii°6 – I6",
+     "key": "F",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "ii7:F4,D4,Bb3,G2 vii°6:E4,Bb3,G3,G2 I6:F4,C4,F3,A2@2",
+     "intent": "model",
+     "caption": "bass 2̂–2̂: vii°6 keeps the bass and doubles it",
+     "source": "notes p.34",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 4.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "E4",
+         "midi": 64
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "F4",
+         "midi": 65
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "Bb3",
+         "midi": 58
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "C4",
+         "midi": 60
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "Bb3",
+         "midi": 58
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "G3",
+         "midi": 55
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "F3",
+         "midi": 53
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G2",
+         "midi": 43
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "G2",
+         "midi": 43
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "A2",
+         "midi": 45
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "ii7",
+        "figures": "7",
+        "bassDegree": "2",
+        "root": "G"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "vii°6",
+        "figures": "6/3",
+        "bassDegree": "2",
+        "root": "E"
+       },
+       {
+        "t": 2.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "I6",
+        "figures": "6/3",
+        "bassDegree": "3",
+        "root": "F"
+       }
+      ]
+     }
+    },
+    {
+     "id": "ii65-v",
+     "title": "ii6/5 – V – I",
+     "key": "F",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "ii6/5:G4,F4,D4,Bb2 V:G4,E4,C4,C3 I:F4,F4,C4,F3@2",
+     "intent": "model",
+     "source": "notes p.34",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 4.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "F4",
+         "midi": 65
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "E4",
+         "midi": 64
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "F4",
+         "midi": 65
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "C4",
+         "midi": 60
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "Bb2",
+         "midi": 46
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "C3",
+         "midi": 48
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "F3",
+         "midi": 53
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "ii6/5",
+        "figures": "6/5",
+        "bassDegree": "4",
+        "root": "G"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "V",
+        "figures": "5/3",
+        "bassDegree": "5",
+        "root": "C"
+       },
+       {
+        "t": 2.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "I",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "F"
+       }
+      ]
+     }
+    },
+    {
+     "id": "ii65-v42",
+     "title": "ii6/5 – V4/2 – I6",
+     "key": "F",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "ii6/5:G4,F4,D4,Bb2 V4/2:G4,E4,C4,Bb2 I6:F4,F4,C4,A2@2",
+     "intent": "model",
+     "caption": "bass 4̂–4̂: the bass becomes the 7th of V4/2",
+     "source": "notes p.34",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 4.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "F4",
+         "midi": 65
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "E4",
+         "midi": 64
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "F4",
+         "midi": 65
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "C4",
+         "midi": 60
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "Bb2",
+         "midi": 46
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "Bb2",
+         "midi": 46
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "A2",
+         "midi": 45
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "ii6/5",
+        "figures": "6/5",
+        "bassDegree": "4",
+        "root": "G"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "V4/2",
+        "figures": "4/2",
+        "bassDegree": "4",
+        "root": "C"
+       },
+       {
+        "t": 2.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "I6",
+        "figures": "6/3",
+        "bassDegree": "3",
+        "root": "F"
+       }
+      ]
+     }
+    },
+    {
+     "id": "ii43-v7",
+     "title": "ii4/3 – V7 – I",
+     "key": "F",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "ii4/3:G4,F4,Bb3,D3 V7:G4,E4,Bb3,C3 I:F4,C4,A3,F3@2",
+     "intent": "model",
+     "caption": "bass 6̂–5̂",
+     "source": "notes p.34",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 4.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "F4",
+         "midi": 65
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "E4",
+         "midi": 64
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "C4",
+         "midi": 60
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "Bb3",
+         "midi": 58
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "Bb3",
+         "midi": 58
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "A3",
+         "midi": 57
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "D3",
+         "midi": 50
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "C3",
+         "midi": 48
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "F3",
+         "midi": 53
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "ii4/3",
+        "figures": "4/3",
+        "bassDegree": "6",
+        "root": "G"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "V7",
+        "figures": "7",
+        "bassDegree": "5",
+        "root": "C"
+       },
+       {
+        "t": 2.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "I",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "F"
+       }
+      ]
+     }
+    },
+    {
+     "id": "ii42-v65",
+     "title": "ii4/2 – V6/5 – I",
+     "key": "F",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "ii4/2:G4,D4,Bb3,F3 V6/5:G4,C4,Bb3,E3 I:F4,C4,A3,F3@2",
+     "intent": "model",
+     "caption": "bass 1̂–7̂–1̂",
+     "source": "notes p.34",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 4.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "F4",
+         "midi": 65
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "C4",
+         "midi": 60
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "Bb3",
+         "midi": 58
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "Bb3",
+         "midi": 58
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "A3",
+         "midi": 57
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F3",
+         "midi": 53
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "E3",
+         "midi": 52
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "F3",
+         "midi": 53
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "ii4/2",
+        "figures": "4/2",
+        "bassDegree": "1",
+        "root": "G"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "V6/5",
+        "figures": "6/5",
+        "bassDegree": "7",
+        "root": "C"
+       },
+       {
+        "t": 2.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "I",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "F"
+       }
+      ]
+     }
+    }
+   ],
+   "tools": [
+    "inversion-table",
+    "satb-checker"
+   ],
+   "sources": {
+    "notes": "p.34",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 13 — Points for Review 1–7",
+    "video": [
+     30
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 18; Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 14"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 13 PfR 1: ii6/5 is the most important position; all positions usually complete except root-position ii7 in major",
+     "PfR 2: 7th prepared as common tone or passing tone (\"prepare and resolve in the same voice\")",
+     "PfR 6: cadential 6/4 delays the resolution of the 7th",
+     "PfR 7: ii4/2 leads to V6 or V6/5",
+     "Burstein Ch. 14/18: the 7th of ii7 should be prepared by common tone and resolve down; ii° not in root position in minor"
+    ]
+   },
+   "part": "p5"
+  },
+  {
+   "id": "ivadd6",
+   "chapter": "ch14",
+   "title": "Plagal substitution: ii6/5 as IV add6",
+   "kind": "concept",
+   "summary": "ii does not go to I in the harmonic-progression chart, but ii6/5 can work as IV with an added 6th, which can go to I like a plagal cadence.",
+   "examples": [
+    {
+     "id": "ivadd6-i",
+     "title": "IV add6 → I",
+     "key": "F",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "IVadd6:G4,F4,D4,Bb2 I:A4,F4,C4,F3@2",
+     "intent": "model",
+     "caption": "heard as IV + 6th: the F is simply held into I and the added 6th G moves up to A",
+     "source": "notes p.34",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 3.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "A4",
+         "midi": 69
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "F4",
+         "midi": 65
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "C4",
+         "midi": 60
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "Bb2",
+         "midi": 46
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "F3",
+         "midi": 53
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "IVadd6",
+        "figures": "6/5",
+        "bassDegree": "4",
+        "root": "G"
+       },
+       {
+        "t": 1.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "I",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "F"
+       }
+      ]
+     }
+    }
+   ],
+   "sources": {
+    "notes": "p.34",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 25 — Apparent Seventh Chords",
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 24 — Apparent chords"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 25 PfR 8a: a 5/3 plus an added 6th becomes an \"apparent\" 6/5 — same idea"
+    ]
+   },
+   "part": "p5"
+  },
+  {
+   "id": "uncommon-sevenths",
+   "chapter": "ch15",
+   "title": "Uncommon diatonic seventh chords",
+   "kind": "table",
+   "summary": "Seventh chords on 4̂, 6̂, 1̂ and 3̂ appear mostly inside circle-of-fifths sequences. Each resolves to the chord a 5th below (or to its substitute).",
+   "tables": [
+    {
+     "id": "uncommon7",
+     "title": "Uncommon diatonic sevenths (notes p.35)",
+     "columns": [
+      "Degree",
+      "Major",
+      "Minor",
+      "Resolves to",
+      "Note"
+     ],
+     "rows": [
+      [
+       "4̂ (subdominant)",
+       "IVΔ7 (MM7)",
+       "iv7 (mm7); IV7 (Mm7) in melodic minor",
+       "V or vii°",
+       "inversions uncommon EXCEPT IV6/5 with ♮6̂ in the bass (minor): passing predominant, ♮6̂–♮7̂–1̂"
+      ],
+      [
+       "6̂ (submediant)",
+       "vi7 (mm7)",
+       "VIΔ7 (MM7); ♯viø7 (dm7) in melodic minor",
+       "major: IV or ii; minor: iv or ii°",
+       "♯viø7 has ♮6̂ in the bass and passes up to vii°"
+      ],
+      [
+       "1̂ (tonic)",
+       "IΔ7 (MM7)",
+       "i7 (mm7) or iΔ7 (mM7, jazz)",
+       "IΔ7 → IVΔ7; i7/iΔ7 → ii4/2",
+       "not a stable harmonic goal"
+      ],
+      [
+       "3̂ (mediant)",
+       "iii7 (mm7)",
+       "IIIΔ7 (MM7)",
+       "iii7 → vi or IV; IIIΔ7 → VI or iv",
+       "iii7 and vi7 are rarely inverted"
+      ]
+     ]
+    }
+   ],
+   "examples": [
+    {
+     "id": "iv65-minor",
+     "title": "IV6/5 – V6 – i (melodic minor)",
+     "key": "e",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "IV6/5:G4,E4,A3,C#3 V6:F#4,B3,F#3,D#3 i:E4,B3,G3,E3@2",
+     "intent": "model",
+     "caption": "bass C♯–D♯–E: the ascending melodic-minor scale",
+     "source": "notes p.35",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 4.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "F#4",
+         "midi": 66
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "E4",
+         "midi": 64
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "E4",
+         "midi": 64
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "B3",
+         "midi": 59
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "B3",
+         "midi": 59
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "A3",
+         "midi": 57
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "F#3",
+         "midi": 54
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "G3",
+         "midi": 55
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "C#3",
+         "midi": 49
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "D#3",
+         "midi": 51
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "E3",
+         "midi": 52
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "IV6/5",
+        "figures": "6/5",
+        "bassDegree": "#6",
+        "root": "A"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "V6",
+        "figures": "6/3",
+        "bassDegree": "#7",
+        "root": "B"
+       },
+       {
+        "t": 2.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "i",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "E"
+       }
+      ]
+     }
+    },
+    {
+     "id": "vi-half-dim",
+     "title": "V – ♯viø7 – vii° – i",
+     "key": "e",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "V:F#4,D#4,B3,B2 #viø7:G4,E4,B3,C#3 vii°:F#4,F#4,A3,D#3 i:G4,E4,G3,E3@2",
+     "intent": "model",
+     "caption": "bass 5̂–♮6̂–♮7̂–1̂; the notes use root-position vii° here. The tenor A resolves down to G (rising to B would make unequal 5ths with the bass)",
+     "allow": [
+      "viiRoot"
+     ],
+     "source": "notes p.35",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 5.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F#4",
+         "midi": 66
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "F#4",
+         "midi": 66
+        },
+        {
+         "t": 3.0,
+         "d": 2.0,
+         "pitch": "G4",
+         "midi": 67
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "D#4",
+         "midi": 63
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "E4",
+         "midi": 64
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "F#4",
+         "midi": 66
+        },
+        {
+         "t": 3.0,
+         "d": 2.0,
+         "pitch": "E4",
+         "midi": 64
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "B3",
+         "midi": 59
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "B3",
+         "midi": 59
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "A3",
+         "midi": 57
+        },
+        {
+         "t": 3.0,
+         "d": 2.0,
+         "pitch": "G3",
+         "midi": 55
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "B2",
+         "midi": 47
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "C#3",
+         "midi": 49
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "D#3",
+         "midi": 51
+        },
+        {
+         "t": 3.0,
+         "d": 2.0,
+         "pitch": "E3",
+         "midi": 52
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "V",
+        "figures": "5/3",
+        "bassDegree": "5",
+        "root": "B"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "#viø7",
+        "figures": "7",
+        "bassDegree": "#6",
+        "root": "C#"
+       },
+       {
+        "t": 2.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "vii°",
+        "figures": "5/3",
+        "bassDegree": "#7",
+        "root": "D#"
+       },
+       {
+        "t": 3.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "i",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "E"
+       }
+      ]
+     }
+    },
+    {
+     "id": "imaj7",
+     "title": "IΔ7 – IVΔ7 – V",
+     "key": "C",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "IΔ7:G4,E4,B3,C3 IVΔ7:A4,E4,A3,F3 V:G4,D4,B3,G3@2",
+     "intent": "model",
+     "caption": "each 7th steps down into the next chord",
+     "source": "notes p.35 (voiced by the builder)",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 4.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "G4",
+         "midi": 67
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "E4",
+         "midi": 64
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "E4",
+         "midi": 64
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "D4",
+         "midi": 62
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "B3",
+         "midi": 59
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "A3",
+         "midi": 57
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "B3",
+         "midi": 59
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "C3",
+         "midi": 48
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "F3",
+         "midi": 53
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "G3",
+         "midi": 55
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "IΔ7",
+        "figures": "7",
+        "bassDegree": "1",
+        "root": "C"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "IVΔ7",
+        "figures": "7",
+        "bassDegree": "4",
+        "root": "F"
+       },
+       {
+        "t": 2.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "V",
+        "figures": "5/3",
+        "bassDegree": "5",
+        "root": "G"
+       }
+      ]
+     }
+    }
+   ],
+   "tools": [
+    "diatonic-table"
+   ],
+   "sources": {
+    "notes": "p.35",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 13 — Subdominant Seventh Chords; Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 16",
+    "video": [
+     33,
+     34
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 18; Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 21; Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 22"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "IV7 with 3̂ and parallel-5ths caution: A&S Unit 13 PfR 8–9",
+     "IV6/5 – V6/5 – I with ascending bass: A&S Unit 13 PfR 9",
+     "Burstein Ch. 21 PfR: root-position vii° is not used in four-part harmony; subtonic VII/VII7 from natural minor"
+    ],
+    "flags": [
+     "The notes use a root-position vii° in the ♯viø7 example; the checklist (p.20) asks for vii° in first inversion only. A&S (Unit 16 PfR 10) also avoids raised vii°5/3 in minor. Please check which you want to teach.",
+     "Burstein (Ch. 21) also rules out root-position vii° in four parts — supports the flag on the ♯viø7 example."
+    ]
+   },
+   "part": "p5"
+  },
+  {
+   "id": "fifths-sequence",
+   "chapter": "ch15",
+   "title": "Circle-of-fifths sequence with seventh chords",
+   "kind": "progression",
+   "summary": "Seventh chords on every degree can follow each other by descending 5ths for smooth voice leading: each 7th resolves down into the 3rd of the next chord.",
+   "rules": [
+    "Root-position seventh chords in a fifths sequence MUST alternate complete and incomplete chords."
+   ],
+   "guidelines": [
+    "In minor the chord on 7̂ is the subtonic VII7 from natural minor; the raised leading tone appears only in V7.",
+    "Bass pattern: down a 5th, up a 4th (a tritone appears once in the diatonic circle: ↓P5 = ↑A4 between VI and ii° in minor).",
+    "Inverted versions: 6/5 → 4/2 and 4/3 → root position also give smooth sequences."
+   ],
+   "tables": [
+    {
+     "id": "fifths-seq",
+     "title": "Sequence in G minor (notes p.36)",
+     "columns": [
+      "Chord",
+      "i",
+      "iv7",
+      "VII7",
+      "IIIΔ7",
+      "VIΔ7",
+      "iiø7",
+      "V7",
+      "i"
+     ],
+     "rows": [
+      [
+       "Bass",
+       "G",
+       "C",
+       "F",
+       "B♭",
+       "E♭",
+       "A",
+       "D",
+       "G"
+      ],
+      [
+       "Complete?",
+       "",
+       "C",
+       "I",
+       "C",
+       "I",
+       "C",
+       "I",
+       "C"
+      ]
+     ]
+    }
+   ],
+   "examples": [
+    {
+     "id": "seq-g",
+     "title": "i – iv7 – VII7 – IIIΔ7 – VIΔ7 – iiø7 – V7 – i",
+     "key": "g",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "i:Bb4,G4,D4,G2 iv7:Bb4,G4,Eb4,C3 VII7:A4,F4,Eb4,F3 IIIΔ7:A4,F4,D4,Bb2 VIΔ7:G4,Eb4,D4,Eb3 iiø7:G4,Eb4,C4,A2 V7:F#4,D4,C4,D3 i:G4,D4,Bb3,G2@2",
+     "intent": "model",
+     "caption": "complete and incomplete chords alternate; the 7th of each chord is prepared by the previous chord",
+     "source": "notes p.36 (re-voiced)",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 9.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "Bb4",
+         "midi": 70
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "Bb4",
+         "midi": 70
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 5.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 6.0,
+         "d": 1.0,
+         "pitch": "F#4",
+         "midi": 66
+        },
+        {
+         "t": 7.0,
+         "d": 2.0,
+         "pitch": "G4",
+         "midi": 67
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "Eb4",
+         "midi": 63
+        },
+        {
+         "t": 5.0,
+         "d": 1.0,
+         "pitch": "Eb4",
+         "midi": 63
+        },
+        {
+         "t": 6.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 7.0,
+         "d": 2.0,
+         "pitch": "D4",
+         "midi": 62
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "Eb4",
+         "midi": 63
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "Eb4",
+         "midi": 63
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 5.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 6.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 7.0,
+         "d": 2.0,
+         "pitch": "Bb3",
+         "midi": 58
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G2",
+         "midi": 43
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "C3",
+         "midi": 48
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "F3",
+         "midi": 53
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "Bb2",
+         "midi": 46
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "Eb3",
+         "midi": 51
+        },
+        {
+         "t": 5.0,
+         "d": 1.0,
+         "pitch": "A2",
+         "midi": 45
+        },
+        {
+         "t": 6.0,
+         "d": 1.0,
+         "pitch": "D3",
+         "midi": 50
+        },
+        {
+         "t": 7.0,
+         "d": 2.0,
+         "pitch": "G2",
+         "midi": 43
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "i",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "G"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "iv7",
+        "figures": "7",
+        "bassDegree": "4",
+        "root": "C"
+       },
+       {
+        "t": 2.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "VII7",
+        "figures": "7",
+        "bassDegree": "7",
+        "root": "F"
+       },
+       {
+        "t": 3.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "IIIΔ7",
+        "figures": "7",
+        "bassDegree": "3",
+        "root": "Bb"
+       },
+       {
+        "t": 4.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "VIΔ7",
+        "figures": "7",
+        "bassDegree": "6",
+        "root": "Eb"
+       },
+       {
+        "t": 5.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "iiø7",
+        "figures": "7",
+        "bassDegree": "2",
+        "root": "A"
+       },
+       {
+        "t": 6.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "V7",
+        "figures": "7",
+        "bassDegree": "5",
+        "root": "D"
+       },
+       {
+        "t": 7.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "i",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "G"
+       }
+      ]
+     }
+    }
+   ],
+   "tools": [
+    "fifths-substitution",
+    "satb-checker"
+   ],
+   "sources": {
+    "notes": "p.36",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 25 — Points for Review 1–2; Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 18 — Sequences with Descending 5ths",
+    "video": [
+     34
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 22"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 25 PfR 2a (7–7 chain) and Unit 28 PfR 7: in four voices such sequences alternate complete and incomplete chords",
+     "Diminished 5th between VI and ii° in minor: A&S Unit 17 PfR 1",
+     "Burstein Ch. 22 PfR: inside a sequence the leading tone may be doubled and 7̂ need not be raised in minor; sevenths still resolve and parallels are still forbidden"
+    ]
+   },
+   "part": "p5"
+  }
+ ]
+}

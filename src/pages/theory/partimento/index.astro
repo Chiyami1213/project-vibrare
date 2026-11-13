@@ -1,58 +1,19 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { BASE, CADENCES, MOTI_GROUPS, SCHEMATA_GROUPS, motiPatterns, schemataPatterns } from '../../../data/partimento';
-import type { Group, Pattern } from '../../../data/partimento';
+import { BASE, SECTIONS, groupsOf, patternsOf } from '../../../data/partimento';
 import { titleCase } from '../../../scripts/title-case';
 
-const count = (groups: Group[], patterns: Pattern[]) =>
-  groups.map((g) => ({ title: titleCase(g.title.replace(/^(Moti del basso|Schemata): /, '')), n: patterns.filter((p) => p.group === g.id).length }));
-
-const sections = [
-  {
-    href: `${BASE}/moti-del-basso/`,
-    title: 'Moti del Basso',
-    blurb: 'The typical motions of the bass: stepwise lines rising and falling, chromatic laments, and sequences by leap.',
-    patterns: motiPatterns.length,
-    parts: count(MOTI_GROUPS, motiPatterns),
-  },
-  {
-    href: `${BASE}/schemata/`,
-    title: 'Schemata',
-    blurb: 'Stock musical patterns, such as the Romanesca, Prinner, Folia and Monte, each pairing a bass with its upper voices.',
-    patterns: schemataPatterns.length,
-    parts: count(SCHEMATA_GROUPS, schemataPatterns),
-  },
-  {
-    href: `${BASE}/cadences/`,
-    title: 'Cadences',
-    blurb: 'The cadence types and the clausulae behind them, in two, three and four parts.',
-    patterns: CADENCES.patterns.length,
-    parts: count(CADENCES.groups, CADENCES.patterns),
-  },
-];
-// Sections added recently; their pages are being written.
-const newer = [
-  {
-    href: `${BASE}/rule-of-the-octave/`,
-    title: 'Rule of the Octave',
-    blurb: 'A standard harmonization for each step of the scale in the bass, rising and falling, so a student could accompany any bass line in any key.',
-  },
-  {
-    href: `${BASE}/suspension/`,
-    title: 'Suspension',
-    blurb: 'A note held over from the previous chord that clashes and then resolves downward, written in the figures as 7–6, 9–8 and 4–3.',
-  },
-  {
-    href: `${BASE}/diminution/`,
-    title: 'Diminution',
-    blurb: 'Breaking long notes into shorter ones, with passing notes and figures, to turn a plain bass or harmony into a lively line.',
-  },
-  {
-    href: `${BASE}/fugue/`,
-    title: 'Fugue',
-    blurb: 'Partimento fugues: a bass line that carries a fugue subject, which the student answers in the upper voices.',
-  },
-];
+const sections = SECTIONS.map((s) => {
+  const patterns = patternsOf(s);
+  return {
+    href: `${BASE}/${s.slug}/`,
+    title: s.title,
+    blurb: s.lead.split('. ')[0].replace(/\.$/, '') + '.',
+    patterns: patterns.length,
+    examples: patterns.reduce((n, p) => n + (p.examples?.length ?? 0) + (p.variants ?? []).reduce((m, v) => m + (v.examples?.length ?? 0), 0), 0),
+    parts: groupsOf(s).length > 1 ? groupsOf(s).map((g) => ({ title: titleCase(g.title.replace(/^(Moti del basso|Schemata): /, '')), n: patterns.filter((p) => p.group === g.id).length })) : [],
+  };
+});
 const total = sections.reduce((n, s) => n + s.patterns, 0);
 ---
 
@@ -74,31 +35,21 @@ const total = sections.reduce((n, s) => n + s.patterns, 0);
               <span class="pat-name">{s.title}</span>
               <span class="pat-aka">{s.blurb}</span>
               <span class="pat-chips">
-                <span class="chip chip-accent">{s.patterns} Patterns</span>
+                <span class="chip chip-accent">{s.patterns} {s.patterns === 1 ? 'Pattern' : 'Patterns'}</span>
+                {s.examples > 0 && <span class="chip">{s.examples} Scores</span>}
               </span>
-              <span class="pat-aka">{s.parts.map((p) => `${p.title} (${p.n})`).join(' · ')}</span>
+              {s.parts.length > 0 && <span class="pat-aka">{s.parts.map((p) => `${p.title} (${p.n})`).join(' · ')}</span>}
             </a>
           </li>
         ))
       }
-    </ul>
-
-    <h2 class="section-title">New Sections</h2>
-    <p class="group-blurb">Recently added. These pages are still being written.</p>
-    <ul class="pat-grid">
-      {
-        newer.map((s) => (
-          <li class="pat-tile">
-            <a href={s.href}>
-              <span class="pat-name">{s.title}</span>
-              <span class="pat-aka">{s.blurb}</span>
-              <span class="pat-chips">
-                <span class="chip chip-accent">New</span>
-              </span>
-            </a>
-          </li>
-        ))
-      }
+      <li class="pat-tile">
+        <a href={`${BASE}/fugue/`}>
+          <span class="pat-name">Fugue</span>
+          <span class="pat-aka">Partimento fugues: a bass line that carries a fugue subject, which the student answers in the upper voices.</span>
+          <span class="pat-chips"><span class="chip chip-accent">New</span></span>
+        </a>
+      </li>
     </ul>
   </main>
 </Layout>

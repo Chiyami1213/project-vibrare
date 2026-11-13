@@ -1,0 +1,4236 @@
+{
+ "version": 1,
+ "part": {
+  "id": "p1",
+  "num": "I",
+  "title": "Fundamentals",
+  "notesPages": "1–14"
+ },
+ "chapters": [
+  {
+   "id": "ch0",
+   "part": "p1",
+   "num": 0,
+   "title": "Introduction & Notation",
+   "notesPages": "1–2",
+   "video": [
+    5,
+    6
+   ],
+   "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 1 — Tonal Relationships"
+  },
+  {
+   "id": "ch1",
+   "part": "p1",
+   "num": 1,
+   "title": "Keys, Scales, Modes",
+   "notesPages": "3–7",
+   "video": [
+    1,
+    2,
+    4
+   ],
+   "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 1"
+  },
+  {
+   "id": "ch2",
+   "part": "p1",
+   "num": 2,
+   "title": "Intervals",
+   "notesPages": "8–10",
+   "video": [
+    2,
+    3,
+    4
+   ],
+   "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 2"
+  },
+  {
+   "id": "ch3",
+   "part": "p1",
+   "num": 3,
+   "title": "Rhythm & Meter",
+   "notesPages": "11–12",
+   "video": [
+    5,
+    6
+   ],
+   "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 3"
+  },
+  {
+   "id": "ch4",
+   "part": "p1",
+   "num": 4,
+   "title": "Chords",
+   "notesPages": "13–14",
+   "video": [
+    7,
+    8,
+    9,
+    10,
+    15,
+    21
+   ],
+   "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 4; harmonic syntax: Units 7, 10, 14"
+  }
+ ],
+ "topics": [
+  {
+   "id": "tonal-vs-atonal",
+   "chapter": "ch0",
+   "title": "Tonal vs. atonal music",
+   "kind": "concept",
+   "summary": "Tonal music is organised around a tonal centre: a seven-note stepwise scale gives a key (tonic + mode, e.g. C major). Atonal music has no such centre.",
+   "terms": [
+    {
+     "term": "Tonic",
+     "def": "the central pitch of a key"
+    },
+    {
+     "term": "Mode",
+     "def": "the scale pattern used on the tonic (major, minor, …)"
+    },
+    {
+     "term": "Key",
+     "def": "tonic + mode"
+    }
+   ],
+   "sources": {
+    "notes": "p.1",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 1 — Tonality",
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 1"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 1 defines key and tonality the same way"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "harmonic-function",
+   "chapter": "ch0",
+   "title": "Harmonic function: T – P – D",
+   "kind": "concept",
+   "summary": "Harmony is a succession of chords. Each chord has a role: Tonic (stable), Predominant (the connection), Dominant (unstable, resolves to tonic).",
+   "tables": [
+    {
+     "id": "functions",
+     "title": "Three functions",
+     "columns": [
+      "Function",
+      "Abbrev.",
+      "Character",
+      "Typical chords (major)"
+     ],
+     "rows": [
+      [
+       "Tonic",
+       "T",
+       "stable",
+       "I (vi, I6)"
+      ],
+      [
+       "Predominant",
+       "P",
+       "connection",
+       "IV, ii (ii6, ii7)"
+      ],
+      [
+       "Dominant",
+       "D",
+       "unstable → resolves to T",
+       "V, V7, vii°6"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "progression-chart"
+   ],
+   "sources": {
+    "notes": "p.1",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 10 — Intermediate Harmonies",
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 6 — Harmonic Progression"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S calls the predominant group \"intermediate harmonies\" (Unit 10); same idea",
+     "Burstein Ch. 6: Tonic (I, I6), Subdominant (IV, ii6), Dominant (V, V7 and inversions); T–D–T and T–S–D–T — same three functions (Burstein says \"Subdominant\" for the notes' \"Predominant\")"
+    ],
+    "flags": [
+     "The \"Typical chords\" column is added from A&S Units 7–10; the notes list only the three function names."
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "tuning-systems",
+   "chapter": "ch0",
+   "title": "Acoustics & tuning systems",
+   "kind": "concept",
+   "summary": "Ways of tuning the 12-note chromatic scale, from pure ratios to equal division of the octave.",
+   "tables": [
+    {
+     "id": "tuning",
+     "title": "Tuning systems (notes order)",
+     "columns": [
+      "#",
+      "System",
+      "Idea"
+     ],
+     "rows": [
+      [
+       "1",
+       "Just intonation",
+       "pure frequency ratios from the overtone series"
+      ],
+      [
+       "1",
+       "Pythagorean tuning",
+       "stacks pure perfect fifths (3:2)"
+      ],
+      [
+       "2",
+       "Meantone temperament",
+       "narrows the fifths so major thirds sound pure"
+      ],
+      [
+       "3",
+       "Well temperament",
+       "unequal tempering; every key usable, each with its own colour"
+      ],
+      [
+       "4",
+       "Equal temperament",
+       "octave = 12 equal semitones (100 cents each, 1200 per octave)"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "tuning-lab"
+   ],
+   "sources": {
+    "notes": "pp.1, 3",
+    "textbook": "not covered in A&S (only the overtone series, Unit 2)",
+    "textbook2": "not covered in Burstein"
+   },
+   "verification": {
+    "status": "notes-only",
+    "checks": [
+     "Cents values (H = 100¢, octave = 1200¢) from notes p.3"
+    ],
+    "flags": [
+     "The \"Idea\" column is a one-line gloss added for the site; the notes list only the names."
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "music-history",
+   "chapter": "ch0",
+   "title": "Western music history (eras)",
+   "kind": "concept",
+   "summary": "Medieval → Renaissance → Baroque → Classical → Romantic → Modernism → Contemporary.",
+   "sources": {
+    "notes": "p.1",
+    "textbook2": "not covered in Burstein"
+   },
+   "verification": {
+    "status": "notes-only",
+    "checks": [
+     "Timeline only; no textbook coverage needed"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "notation-basics",
+   "chapter": "ch0",
+   "title": "Notation: staff, clefs, notes, rests, accidentals",
+   "kind": "concept",
+   "summary": "The grand staff joins a treble and a bass staff with a brace; middle C = C4. Key signature, time signature, bar lines, measures and ledger lines organise the page.",
+   "rules": [
+    "An accidental applies only to the pitch it is written on (same line/space and octave) until the bar line.",
+    "Stems on notes go up on the right of the note head, down on the left; flags always point to the right."
+   ],
+   "guidelines": [
+    "A dot adds half of the note value (× 1½).",
+    "A tie adds durations of the same pitch; a slur groups different pitches (articulation) — do not confuse them."
+   ],
+   "tables": [
+    {
+     "id": "clefs",
+     "title": "Clefs (notes p.2)",
+     "columns": [
+      "Clef",
+      "Family",
+      "Reference line"
+     ],
+     "rows": [
+      [
+       "French violin",
+       "G clef",
+       "G4 on line 1"
+      ],
+      [
+       "Treble",
+       "G clef",
+       "G4 on line 2"
+      ],
+      [
+       "Soprano",
+       "C clef",
+       "C4 on line 1"
+      ],
+      [
+       "Mezzo-soprano",
+       "C clef",
+       "C4 on line 2"
+      ],
+      [
+       "Alto",
+       "C clef",
+       "C4 on line 3"
+      ],
+      [
+       "Tenor",
+       "C clef",
+       "C4 on line 4"
+      ],
+      [
+       "Baritone",
+       "C or F clef",
+       "C4 on line 5 / F3 on line 3"
+      ],
+      [
+       "Bass",
+       "F clef",
+       "F3 on line 4"
+      ],
+      [
+       "Sub-bass",
+       "F clef",
+       "F3 on line 5"
+      ],
+      [
+       "Percussion",
+       "neutral",
+       "no pitch"
+      ]
+     ]
+    },
+    {
+     "id": "values",
+     "title": "Note values and rests",
+     "columns": [
+      "Value",
+      "Beats in 4/4"
+     ],
+     "rows": [
+      [
+       "Whole",
+       "4"
+      ],
+      [
+       "Half",
+       "2"
+      ],
+      [
+       "Quarter",
+       "1"
+      ],
+      [
+       "Eighth",
+       "½"
+      ],
+      [
+       "16th",
+       "¼"
+      ],
+      [
+       "32nd",
+       "⅛"
+      ],
+      [
+       "64th",
+       "1/16"
+      ]
+     ]
+    },
+    {
+     "id": "accidentals",
+     "title": "Accidentals",
+     "columns": [
+      "Sign",
+      "Effect"
+     ],
+     "rows": [
+      [
+       "𝄫 double flat",
+       "−2 semitones"
+      ],
+      [
+       "♭ flat",
+       "−1"
+      ],
+      [
+       "♮ natural",
+       "cancel"
+      ],
+      [
+       "♯ sharp",
+       "+1"
+      ],
+      [
+       "𝄪 double sharp",
+       "+2"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "clef-reader"
+   ],
+   "sources": {
+    "notes": "p.2",
+    "textbook": "assumed knowledge in A&S",
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 0"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "Clef reference lines checked against standard clef definitions",
+     "Burstein Ch. 0 PfR: treble clef G4 on line 2, bass clef F3 on line 4, alto/tenor C clefs on lines 3/4 — matches the clef table"
+    ],
+    "flags": [
+     "The notes sketch the clefs without naming the reference lines; the \"Reference line\" column is filled in from standard definitions."
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "steps",
+   "chapter": "ch1",
+   "title": "Half steps and whole steps",
+   "kind": "concept",
+   "summary": "A half step (semitone, m2) and a whole step (M2) are the building blocks of scales. A diatonic half step changes letter (D–E♭); a chromatic half step keeps the letter (D–D♯) and works as \"colour\".",
+   "terms": [
+    {
+     "term": "Half step",
+     "def": "= m2 = 100 cents in equal temperament"
+    },
+    {
+     "term": "Whole step",
+     "def": "= M2"
+    },
+    {
+     "term": "Diatonic half step",
+     "def": "different letter names, e.g. D–E♭"
+    },
+    {
+     "term": "Chromatic half step",
+     "def": "same letter name, e.g. D–D♯; decorative"
+    }
+   ],
+   "guidelines": [
+    "Half steps act as melodic intensifiers: they pull toward their goal more strongly than whole steps."
+   ],
+   "tools": [
+    "keyboard-steps"
+   ],
+   "sources": {
+    "notes": "p.3",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 1 — Tonal Relationships; Major Keys",
+    "video": [
+     1
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 1"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 1 distinguishes diatonic and chromatic half steps the same way"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "major-scale",
+   "chapter": "ch1",
+   "title": "The major scale, solfège and scale-degree names",
+   "kind": "concept",
+   "summary": "A diatonic (heptatonic) scale has 5 whole and 2 half steps. Major: W W H W W W H.",
+   "guidelines": [
+    "Fixed-do solfège names pitches (do = C always); movable-do names scale degrees (do = the tonic). Know which system your class uses."
+   ],
+   "tables": [
+    {
+     "id": "degrees",
+     "title": "Scale degrees (C major)",
+     "columns": [
+      "Degree",
+      "Note",
+      "Solfège",
+      "Name"
+     ],
+     "rows": [
+      [
+       "1̂",
+       "C",
+       "do",
+       "Tonic"
+      ],
+      [
+       "2̂",
+       "D",
+       "re",
+       "Supertonic"
+      ],
+      [
+       "3̂",
+       "E",
+       "mi",
+       "Mediant"
+      ],
+      [
+       "4̂",
+       "F",
+       "fa",
+       "Subdominant"
+      ],
+      [
+       "5̂",
+       "G",
+       "sol",
+       "Dominant"
+      ],
+      [
+       "6̂",
+       "A",
+       "la",
+       "Submediant"
+      ],
+      [
+       "7̂",
+       "B",
+       "si (ti)",
+       "Leading tone"
+      ],
+      [
+       "8̂",
+       "C",
+       "do",
+       "Tonic (octave)"
+      ]
+     ]
+    }
+   ],
+   "examples": [
+    {
+     "id": "c-major-scale",
+     "title": "C major scale",
+     "key": "C",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "C4 D4 E4 F4 G4 A4 B4 C5@2",
+     "intent": "line",
+     "caption": "W W H W W W H",
+     "parts": 1,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 9.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "E4",
+         "midi": 64
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 5.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69
+        },
+        {
+         "t": 6.0,
+         "d": 1.0,
+         "pitch": "B4",
+         "midi": 71
+        },
+        {
+         "t": 7.0,
+         "d": 2.0,
+         "pitch": "C5",
+         "midi": 72
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "2",
+        "root": "D"
+       },
+       {
+        "t": 2.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "3",
+        "root": "E"
+       },
+       {
+        "t": 3.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "4",
+        "root": "F"
+       },
+       {
+        "t": 4.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "5",
+        "root": "G"
+       },
+       {
+        "t": 5.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "6",
+        "root": "A"
+       },
+       {
+        "t": 6.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "7",
+        "root": "B"
+       },
+       {
+        "t": 7.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       }
+      ]
+     }
+    }
+   ],
+   "tools": [
+    "scale-builder"
+   ],
+   "sources": {
+    "notes": "p.3",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 1",
+    "video": [
+     1
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 1"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "Degree names match A&S Unit 1",
+     "Burstein Ch. 1: W–W–S–W–W–W–S and the same degree names"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "minor-scales",
+   "chapter": "ch1",
+   "title": "Minor scales: natural, harmonic, melodic",
+   "kind": "concept",
+   "summary": "Natural minor: W H W W H W W (7̂ is the subtonic, a whole step below the tonic). Harmonic minor raises 7̂ to make a leading tone (gap of 1½ steps between 6̂ and 7̂). Melodic minor raises 6̂ and 7̂ going up and returns to natural minor coming down.",
+   "rules": [
+    "In minor, raise 7̂ whenever it acts as a leading tone (e.g. in V and vii°)."
+   ],
+   "guidelines": [
+    "Use raised 6̂ when ascending 6̂–7̂–8̂ to avoid the augmented 2nd; use natural 6̂ and 7̂ when descending 8̂–7̂–6̂."
+   ],
+   "examples": [
+    {
+     "id": "c-natural-minor",
+     "title": "C natural minor",
+     "key": "c",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "C4 D4 Eb4 F4 G4 Ab4 Bb4 C5@2",
+     "intent": "line",
+     "caption": "W H W W H W W — 7̂ = subtonic",
+     "parts": 1,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 9.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "Eb4",
+         "midi": 63
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 5.0,
+         "d": 1.0,
+         "pitch": "Ab4",
+         "midi": 68
+        },
+        {
+         "t": 6.0,
+         "d": 1.0,
+         "pitch": "Bb4",
+         "midi": 70
+        },
+        {
+         "t": 7.0,
+         "d": 2.0,
+         "pitch": "C5",
+         "midi": 72
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "2",
+        "root": "D"
+       },
+       {
+        "t": 2.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "3",
+        "root": "Eb"
+       },
+       {
+        "t": 3.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "4",
+        "root": "F"
+       },
+       {
+        "t": 4.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "5",
+        "root": "G"
+       },
+       {
+        "t": 5.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "6",
+        "root": "Ab"
+       },
+       {
+        "t": 6.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "7",
+        "root": "Bb"
+       },
+       {
+        "t": 7.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       }
+      ]
+     }
+    },
+    {
+     "id": "c-harmonic-minor",
+     "title": "C harmonic minor",
+     "key": "c",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "C4 D4 Eb4 F4 G4 Ab4 Bn4 C5@2",
+     "intent": "line",
+     "caption": "raised 7̂; augmented 2nd A♭–B♮",
+     "parts": 1,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 9.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "Eb4",
+         "midi": 63
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 5.0,
+         "d": 1.0,
+         "pitch": "Ab4",
+         "midi": 68
+        },
+        {
+         "t": 6.0,
+         "d": 1.0,
+         "pitch": "B4",
+         "midi": 71,
+         "natural": true
+        },
+        {
+         "t": 7.0,
+         "d": 2.0,
+         "pitch": "C5",
+         "midi": 72
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "2",
+        "root": "D"
+       },
+       {
+        "t": 2.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "3",
+        "root": "Eb"
+       },
+       {
+        "t": 3.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "4",
+        "root": "F"
+       },
+       {
+        "t": 4.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "5",
+        "root": "G"
+       },
+       {
+        "t": 5.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "6",
+        "root": "Ab"
+       },
+       {
+        "t": 6.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "n7",
+        "root": "B"
+       },
+       {
+        "t": 7.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       }
+      ]
+     }
+    },
+    {
+     "id": "c-melodic-minor",
+     "title": "C melodic minor (up and down)",
+     "key": "c",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "C4 D4 Eb4 F4 G4 An4 Bn4 C5 Bb4 Ab4 G4 F4 Eb4 D4 C4@2",
+     "intent": "line",
+     "caption": "ascending: raised 6̂ and 7̂; descending = natural minor",
+     "parts": 1,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 16.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "Eb4",
+         "midi": 63
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 5.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69,
+         "natural": true
+        },
+        {
+         "t": 6.0,
+         "d": 1.0,
+         "pitch": "B4",
+         "midi": 71,
+         "natural": true
+        },
+        {
+         "t": 7.0,
+         "d": 1.0,
+         "pitch": "C5",
+         "midi": 72
+        },
+        {
+         "t": 8.0,
+         "d": 1.0,
+         "pitch": "Bb4",
+         "midi": 70
+        },
+        {
+         "t": 9.0,
+         "d": 1.0,
+         "pitch": "Ab4",
+         "midi": 68
+        },
+        {
+         "t": 10.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 11.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 12.0,
+         "d": 1.0,
+         "pitch": "Eb4",
+         "midi": 63
+        },
+        {
+         "t": 13.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 14.0,
+         "d": 2.0,
+         "pitch": "C4",
+         "midi": 60
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "2",
+        "root": "D"
+       },
+       {
+        "t": 2.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "3",
+        "root": "Eb"
+       },
+       {
+        "t": 3.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "4",
+        "root": "F"
+       },
+       {
+        "t": 4.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "5",
+        "root": "G"
+       },
+       {
+        "t": 5.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "n6",
+        "root": "A"
+       },
+       {
+        "t": 6.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "n7",
+        "root": "B"
+       },
+       {
+        "t": 7.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       },
+       {
+        "t": 8.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "7",
+        "root": "Bb"
+       },
+       {
+        "t": 9.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "6",
+        "root": "Ab"
+       },
+       {
+        "t": 10.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "5",
+        "root": "G"
+       },
+       {
+        "t": 11.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "4",
+        "root": "F"
+       },
+       {
+        "t": 12.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "3",
+        "root": "Eb"
+       },
+       {
+        "t": 13.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "2",
+        "root": "D"
+       },
+       {
+        "t": 14.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       }
+      ]
+     }
+    }
+   ],
+   "tools": [
+    "scale-builder"
+   ],
+   "sources": {
+    "notes": "pp.3–4",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 1 — Minor Keys",
+    "video": [
+     2
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 1"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 1: same three forms and the same reason for raising 6̂/7̂",
+     "Burstein Ch. 1: natural minor W–S–W–W–S–W–W; harmonic (raised 7̂) and ascending melodic (raised 6̂, 7̂) forms"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "chromatic-scale",
+   "chapter": "ch1",
+   "title": "Chromatic scale, enharmonics, chromatic passing tones",
+   "kind": "concept",
+   "summary": "The chromatic (12-tone) scale moves by 12 half steps. By convention it is spelled with sharps going up and flats going down. Enharmonic notes sound the same but are spelled differently (A♯/B♭).",
+   "rules": [
+    "Ascending chromatic scale: use sharps; descending: use flats."
+   ],
+   "guidelines": [
+    "In a chromatic passing motion (F–F♯–G) the chromatic step usually comes first, then the diatonic step."
+   ],
+   "examples": [
+    {
+     "id": "chromatic-up",
+     "title": "Chromatic scale up (sharps)",
+     "key": "C",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "C4 C#4 D4 D#4 E4 F4 F#4 G4 G#4 A4 A#4 B4 C5@2",
+     "intent": "line",
+     "parts": 1,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 14.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "C#4",
+         "midi": 61
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "D#4",
+         "midi": 63
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "E4",
+         "midi": 64
+        },
+        {
+         "t": 5.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 6.0,
+         "d": 1.0,
+         "pitch": "F#4",
+         "midi": 66
+        },
+        {
+         "t": 7.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 8.0,
+         "d": 1.0,
+         "pitch": "G#4",
+         "midi": 68
+        },
+        {
+         "t": 9.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69
+        },
+        {
+         "t": 10.0,
+         "d": 1.0,
+         "pitch": "A#4",
+         "midi": 70
+        },
+        {
+         "t": 11.0,
+         "d": 1.0,
+         "pitch": "B4",
+         "midi": 71
+        },
+        {
+         "t": 12.0,
+         "d": 2.0,
+         "pitch": "C5",
+         "midi": 72
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "#1",
+        "root": "C#"
+       },
+       {
+        "t": 2.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "2",
+        "root": "D"
+       },
+       {
+        "t": 3.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "#2",
+        "root": "D#"
+       },
+       {
+        "t": 4.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "3",
+        "root": "E"
+       },
+       {
+        "t": 5.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "4",
+        "root": "F"
+       },
+       {
+        "t": 6.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "#4",
+        "root": "F#"
+       },
+       {
+        "t": 7.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "5",
+        "root": "G"
+       },
+       {
+        "t": 8.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "#5",
+        "root": "G#"
+       },
+       {
+        "t": 9.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "6",
+        "root": "A"
+       },
+       {
+        "t": 10.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "#6",
+        "root": "A#"
+       },
+       {
+        "t": 11.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "7",
+        "root": "B"
+       },
+       {
+        "t": 12.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       }
+      ]
+     }
+    },
+    {
+     "id": "chromatic-down",
+     "title": "Chromatic scale down (flats)",
+     "key": "C",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "C5 B4 Bb4 A4 Ab4 G4 Gb4 F4 E4 Eb4 D4 Db4 C4@2",
+     "intent": "line",
+     "parts": 1,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 14.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "C5",
+         "midi": 72
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "B4",
+         "midi": 71
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "Bb4",
+         "midi": 70
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "Ab4",
+         "midi": 68
+        },
+        {
+         "t": 5.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 6.0,
+         "d": 1.0,
+         "pitch": "Gb4",
+         "midi": 66
+        },
+        {
+         "t": 7.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 8.0,
+         "d": 1.0,
+         "pitch": "E4",
+         "midi": 64
+        },
+        {
+         "t": 9.0,
+         "d": 1.0,
+         "pitch": "Eb4",
+         "midi": 63
+        },
+        {
+         "t": 10.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 11.0,
+         "d": 1.0,
+         "pitch": "Db4",
+         "midi": 61
+        },
+        {
+         "t": 12.0,
+         "d": 2.0,
+         "pitch": "C4",
+         "midi": 60
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "7",
+        "root": "B"
+       },
+       {
+        "t": 2.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "b7",
+        "root": "Bb"
+       },
+       {
+        "t": 3.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "6",
+        "root": "A"
+       },
+       {
+        "t": 4.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "b6",
+        "root": "Ab"
+       },
+       {
+        "t": 5.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "5",
+        "root": "G"
+       },
+       {
+        "t": 6.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "b5",
+        "root": "Gb"
+       },
+       {
+        "t": 7.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "4",
+        "root": "F"
+       },
+       {
+        "t": 8.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "3",
+        "root": "E"
+       },
+       {
+        "t": 9.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "b3",
+        "root": "Eb"
+       },
+       {
+        "t": 10.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "2",
+        "root": "D"
+       },
+       {
+        "t": 11.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "b2",
+        "root": "Db"
+       },
+       {
+        "t": 12.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       }
+      ]
+     }
+    }
+   ],
+   "tools": [
+    "scale-builder"
+   ],
+   "sources": {
+    "notes": "p.4",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 29 — Chromatic Notation",
+    "textbook2": "not covered in Burstein (chromatic notation only in Ch. 33)"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 29 summary: chromatic neighbour and passing tones notated as minor 2nds — consistent"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "pentatonic",
+   "chapter": "ch1",
+   "title": "Pentatonic scales",
+   "kind": "concept",
+   "summary": "Five-note, non-diatonic scales. Anhemitonic pentatonic scales have no half steps (major pentatonic C D E G A; minor pentatonic A C D E G); hemitonic ones contain half steps (e.g. some Japanese scales).",
+   "examples": [
+    {
+     "id": "major-pentatonic",
+     "title": "C major pentatonic",
+     "key": "C",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "C4 D4 E4 G4 A4 C5@2",
+     "intent": "line",
+     "parts": 1,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 7.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "E4",
+         "midi": 64
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69
+        },
+        {
+         "t": 5.0,
+         "d": 2.0,
+         "pitch": "C5",
+         "midi": 72
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "2",
+        "root": "D"
+       },
+       {
+        "t": 2.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "3",
+        "root": "E"
+       },
+       {
+        "t": 3.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "5",
+        "root": "G"
+       },
+       {
+        "t": 4.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "6",
+        "root": "A"
+       },
+       {
+        "t": 5.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": null,
+        "figures": "",
+        "bassDegree": "1",
+        "root": "C"
+       }
+      ]
+     }
+    }
+   ],
+   "tools": [
+    "scale-builder"
+   ],
+   "sources": {
+    "notes": "p.4",
+    "textbook2": "not covered in Burstein"
+   },
+   "verification": {
+    "status": "notes-only",
+    "checks": [
+     "Not covered by A&S"
+    ],
+    "flags": [
+     "The notes list sub-topics only (hemitonic vs anhemitonic, Japanese/Chinese scales, relation to modes, tuning, history). Content beyond the definition is left for the owner to add."
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "modes",
+   "chapter": "ch1",
+   "title": "Modes and their characteristic notes",
+   "kind": "table",
+   "summary": "Each diatonic mode starts on a different degree of the major scale. Compare each mode with Ionian (for the major-3rd modes) or Aeolian (for the minor-3rd modes); the interval that differs is its characteristic note. Ordered by their 3rd and by the number of flats relative to Ionian, the modes run from brightest (Lydian) to darkest (Locrian).",
+   "rules": [
+    "The characteristic note cannot be the root (tonic) of the mode."
+   ],
+   "guidelines": [
+    "Scale → mode → intervals: all diatonic intervals appear in the modes (P1, m2, M2, m3, M3, P4, A4/d5 (tritone), P5, m6, M6, m7, M7, P8)."
+   ],
+   "tables": [
+    {
+     "id": "modes-table",
+     "title": "Intervals above the tonic (notes p.5; ○ = characteristic note)",
+     "columns": [
+      "Mode",
+      "Starts on",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "Characteristic"
+     ],
+     "rows": [
+      [
+       "Ionian (major)",
+       "1̂",
+       "M",
+       "M",
+       "P",
+       "P",
+       "M",
+       "M",
+       "—"
+      ],
+      [
+       "Dorian",
+       "2̂",
+       "M",
+       "m",
+       "P",
+       "P",
+       "M ○",
+       "m",
+       "M6 (vs Aeolian)"
+      ],
+      [
+       "Phrygian",
+       "3̂",
+       "m ○",
+       "m",
+       "P",
+       "P",
+       "m",
+       "m",
+       "m2 (vs Aeolian)"
+      ],
+      [
+       "Lydian",
+       "4̂",
+       "M",
+       "M",
+       "A ○",
+       "P",
+       "M",
+       "M",
+       "A4 (vs Ionian)"
+      ],
+      [
+       "Mixolydian",
+       "5̂",
+       "M",
+       "M",
+       "P",
+       "P",
+       "M",
+       "m ○",
+       "m7 (vs Ionian)"
+      ],
+      [
+       "Aeolian (minor)",
+       "6̂",
+       "M",
+       "m",
+       "P",
+       "P",
+       "m",
+       "m",
+       "—"
+      ],
+      [
+       "Locrian",
+       "7̂",
+       "m",
+       "m",
+       "P",
+       "d ○",
+       "m",
+       "m",
+       "d5"
+      ]
+     ]
+    },
+    {
+     "id": "modes-brightness",
+     "title": "Modes ordered by 3rd and accidentals vs Ionian (notes p.6)",
+     "columns": [
+      "Mode",
+      "3rd",
+      "vs Ionian"
+     ],
+     "rows": [
+      [
+       "Lydian",
+       "M",
+       "♯4"
+      ],
+      [
+       "Ionian",
+       "M",
+       "—"
+      ],
+      [
+       "Mixolydian",
+       "M",
+       "♭7"
+      ],
+      [
+       "Dorian",
+       "m",
+       "♭3 ♭7 (2♭)"
+      ],
+      [
+       "Aeolian",
+       "m",
+       "♭3 ♭6 ♭7 (3♭)"
+      ],
+      [
+       "Phrygian",
+       "m",
+       "♭2 ♭3 ♭6 ♭7 (4♭)"
+      ],
+      [
+       "Locrian",
+       "d5 / m",
+       "♭2 ♭3 ♭5 ♭6 ♭7 (5♭)"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "mode-wheel"
+   ],
+   "sources": {
+    "notes": "pp.5–6",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 1 — Modes",
+    "video": [
+     1
+    ],
+    "textbook2": "not covered in Burstein"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "Interval rows verified by computing each rotation of the major scale"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "circle-of-fifths",
+   "chapter": "ch1",
+   "title": "Keys and the circle of fifths",
+   "kind": "table",
+   "summary": "Going clockwise by perfect fifths adds a sharp; going counter-clockwise adds a flat. Each major key shares its signature with the relative minor a minor 3rd below.",
+   "tables": [
+    {
+     "id": "cof",
+     "title": "Circle of fifths (notes p.7)",
+     "columns": [
+      "Signature",
+      "Major",
+      "Minor"
+     ],
+     "rows": [
+      [
+       "none",
+       "C",
+       "a"
+      ],
+      [
+       "1♯",
+       "G",
+       "e"
+      ],
+      [
+       "2♯",
+       "D",
+       "b"
+      ],
+      [
+       "3♯",
+       "A",
+       "f♯"
+      ],
+      [
+       "4♯",
+       "E",
+       "c♯"
+      ],
+      [
+       "5♯",
+       "B",
+       "g♯"
+      ],
+      [
+       "6♯ / 6♭",
+       "F♯ / G♭",
+       "d♯ / e♭"
+      ],
+      [
+       "5♭",
+       "D♭",
+       "b♭"
+      ],
+      [
+       "4♭",
+       "A♭",
+       "f"
+      ],
+      [
+       "3♭",
+       "E♭",
+       "c"
+      ],
+      [
+       "2♭",
+       "B♭",
+       "g"
+      ],
+      [
+       "1♭",
+       "F",
+       "d"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "circle-of-fifths"
+   ],
+   "sources": {
+    "notes": "p.7",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 1",
+    "video": [
+     1
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 1 — Key Signatures; Relative and Parallel Keys"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "Standard; verified"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "interval-size-quality",
+   "chapter": "ch2",
+   "title": "Interval size + quality",
+   "kind": "table",
+   "summary": "An interval has a size (count the letter names: unison, 2nd … octave) and a quality (perfect, major, minor, augmented, diminished). Even sizes go line→space; odd sizes go line→line or space→space.",
+   "rules": [
+    "Group 1 (unison, 4th, 5th, octave): d ← P → A.",
+    "Group 2 (2nd, 3rd, 6th, 7th): d ← m ← M → A."
+   ],
+   "guidelines": [
+    "Vertical (harmonic) intervals sound together; horizontal (melodic) intervals sound in succession.",
+    "Quick method: compare the upper note with the major scale of the lower note."
+   ],
+   "tables": [
+    {
+     "id": "half-steps",
+     "title": "Half steps → interval names (notes p.8; boxed = from the major scale)",
+     "columns": [
+      "Half steps",
+      "Intervals"
+     ],
+     "rows": [
+      [
+       "0",
+       "P1, d2"
+      ],
+      [
+       "1",
+       "A1, m2"
+      ],
+      [
+       "2",
+       "M2, d3"
+      ],
+      [
+       "3",
+       "A2, m3"
+      ],
+      [
+       "4",
+       "M3, d4"
+      ],
+      [
+       "5",
+       "A3, P4"
+      ],
+      [
+       "6",
+       "A4, d5"
+      ],
+      [
+       "7",
+       "P5, d6"
+      ],
+      [
+       "8",
+       "A5, m6"
+      ],
+      [
+       "9",
+       "M6, d7"
+      ],
+      [
+       "10",
+       "A6, m7"
+      ],
+      [
+       "11",
+       "M7, d8"
+      ],
+      [
+       "12",
+       "A7, P8"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "interval-lab"
+   ],
+   "sources": {
+    "notes": "p.8",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 2 — Recognizing and Constructing Intervals",
+    "video": [
+     2,
+     3,
+     4
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 2"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "Half-step table computed and checked"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "compound-inversion",
+   "chapter": "ch2",
+   "title": "Compound intervals and inversion",
+   "kind": "concept",
+   "summary": "A compound interval is larger than an octave; subtract 7 to find its simple form (m9 → m2). Inverting an interval moves the lower note up an octave.",
+   "rules": [
+    "Inversion: the sizes add up to 9 (3rd ↔ 6th, 4th ↔ 5th, 2nd ↔ 7th).",
+    "Inversion: M ↔ m, A ↔ d, P ↔ P."
+   ],
+   "tools": [
+    "interval-lab"
+   ],
+   "sources": {
+    "notes": "p.9",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 2",
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 2"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "Same rule in A&S Unit 2",
+     "Burstein Ch. 2: inversions sum to 9; d↔A, m↔M, P↔P"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "overtone-series",
+   "chapter": "ch2",
+   "title": "The overtone series",
+   "kind": "table",
+   "summary": "A sounding tone contains a fundamental plus overtones at whole-number frequency ratios. The overtones give each instrument its timbre (tone colour); real instruments show slight inharmonicity.",
+   "guidelines": [
+    "The major triad (M3 + P5 above the root) is the most stable chord because it appears in the series (partials 4:5:6).",
+    "Perfect fifths are especially significant; the stable intervals are P8, P5, M3, m3 (M3 more than m3).",
+    "The P4 above the bass does not arise from the fundamental the way P5 does; it is the less stable inversion of P5."
+   ],
+   "tables": [
+    {
+     "id": "overtones",
+     "title": "Intervals between successive partials (notes p.9)",
+     "columns": [
+      "Partials",
+      "Ratio",
+      "Interval (approx.)"
+     ],
+     "rows": [
+      [
+       "1→2",
+       "2:1",
+       "P8 (1st overtone)"
+      ],
+      [
+       "2→3",
+       "3:2",
+       "P5"
+      ],
+      [
+       "3→4",
+       "4:3",
+       "P4"
+      ],
+      [
+       "4→5",
+       "5:4",
+       "M3"
+      ],
+      [
+       "5→6",
+       "6:5",
+       "m3"
+      ],
+      [
+       "6→7",
+       "7:6",
+       "m3 (small)"
+      ],
+      [
+       "7→8",
+       "8:7",
+       "M2 (large)"
+      ],
+      [
+       "8→9",
+       "9:8",
+       "M2"
+      ],
+      [
+       "9→10",
+       "10:9",
+       "M2 (small)"
+      ],
+      [
+       "10→11",
+       "11:10",
+       "m2/M2"
+      ],
+      [
+       "11→12",
+       "12:11",
+       "m2/M2"
+      ],
+      [
+       "12→13",
+       "13:12",
+       "m2"
+      ],
+      [
+       "13→14",
+       "14:13",
+       "m2"
+      ],
+      [
+       "14→15",
+       "15:14",
+       "m2"
+      ],
+      [
+       "15→16",
+       "16:15",
+       "m2"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "overtone-player"
+   ],
+   "sources": {
+    "notes": "p.9",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 2 — The Overtone Series",
+    "video": [
+     3
+    ],
+    "textbook2": "not covered in Burstein"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "Ratios checked: partial n+1 : n"
+    ],
+    "flags": [
+     "The notes give quality labels for partials 10–16 that differ from each other (M2↓, m2↓); the table uses the approximate quality, because these intervals are not equal-tempered. Check the wording.",
+     "Notes: \"P4 does NOT belong to the overtone series\". A P4 does occur between partials 3 and 4; the point (as A&S also argues) is that it is not a stable interval above the bass. The guideline is worded that way."
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "consonance",
+   "chapter": "ch2",
+   "title": "Consonance, dissonance and stability",
+   "kind": "concept",
+   "summary": "Consonant intervals are perfect (P1, P5, P8) or imperfect (3rds, 6ths). Dissonant intervals are 2nds, 7ths and all augmented and diminished intervals. The P4 depends on context.",
+   "rules": [
+    "A P4 above the bass is dissonant (tension: it moves to 3̂, e.g. F over C → E over C); a P4 between upper voices, as the inversion of a P5, is consonant (relaxation)."
+   ],
+   "tables": [
+    {
+     "id": "stability",
+     "title": "Stability ranking (most → least stable)",
+     "columns": [
+      "Rank",
+      "Intervals"
+     ],
+     "rows": [
+      [
+       "1",
+       "P1, P8"
+      ],
+      [
+       "2",
+       "P5"
+      ],
+      [
+       "3",
+       "M3, m3, M6, m6"
+      ],
+      [
+       "4",
+       "2nds, 7ths, A, d"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "consonance-ladder"
+   ],
+   "sources": {
+    "notes": "p.10",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 2 — Consonance and Dissonance",
+    "video": [
+     3
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 2 — Consonant and Dissonant Intervals"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 2 lists the P4 as \"sometimes\" dissonant — same position as the notes",
+     "Burstein Ch. 2 PfR: \"The perfect fourth may be consonant or dissonant depending on context\" — identical"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "key-defining",
+   "chapter": "ch2",
+   "title": "Key-defining progressions (tritone and leading tone)",
+   "kind": "progression",
+   "summary": "Dissonant intervals built on the leading tone point to one key. The tritone resolves inward or outward; the d7/A2 pair comes from the leading tone and ♭6̂ in minor.",
+   "rules": [
+    "d5 → M3 (contracts); its inversion A4 → m6 (expands).",
+    "d7 → P5; its inversion A2 → P4 (a consonant P4, inversion of P5).",
+    "Chromatic resolutions: M6 → A6 → P8 (expands) and its inversion m3 → d3 → P1."
+   ],
+   "examples": [
+    {
+     "id": "d5-M3",
+     "title": "d5 → M3",
+     "key": "C",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "F4,B3 E4,C4@2",
+     "intent": "demo",
+     "caption": "B–F resolves to C–E",
+     "parts": 2,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 3.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "E4",
+         "midi": 64
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "B3",
+         "midi": 59
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "C4",
+         "midi": 60
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "5/3",
+        "bassDegree": "7",
+        "root": "B"
+       },
+       {
+        "t": 1.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": null,
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "C"
+       }
+      ]
+     }
+    },
+    {
+     "id": "A4-m6",
+     "title": "A4 → m6",
+     "key": "C",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "B4,F4 C5,E4@2",
+     "intent": "demo",
+     "parts": 2,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 3.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "B4",
+         "midi": 71
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "C5",
+         "midi": 72
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "E4",
+         "midi": 64
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "4",
+        "bassDegree": "4",
+        "root": "B"
+       },
+       {
+        "t": 1.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": null,
+        "figures": "6/3",
+        "bassDegree": "3",
+        "root": "C"
+       }
+      ]
+     }
+    },
+    {
+     "id": "d7-P5",
+     "title": "d7 → P5 (minor)",
+     "key": "a",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "F4,G#3 E4,A3@2",
+     "intent": "demo",
+     "parts": 2,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 3.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "E4",
+         "midi": 64
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G#3",
+         "midi": 56
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "A3",
+         "midi": 57
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "7",
+        "bassDegree": "#7",
+        "root": "G#"
+       },
+       {
+        "t": 1.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": null,
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "A"
+       }
+      ]
+     }
+    },
+    {
+     "id": "A2-P4",
+     "title": "A2 → P4 (minor)",
+     "key": "a",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "G#4,F4 A4,E4@2",
+     "intent": "demo",
+     "parts": 2,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 3.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G#4",
+         "midi": 68
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "A4",
+         "midi": 69
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F4",
+         "midi": 65
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "E4",
+         "midi": 64
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "4/2",
+        "bassDegree": "6",
+        "root": "G#"
+       },
+       {
+        "t": 1.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": null,
+        "figures": "4",
+        "bassDegree": "5",
+        "root": "A"
+       }
+      ]
+     }
+    },
+    {
+     "id": "A6-P8",
+     "title": "A6 → P8",
+     "key": "C",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "F#4,Ab3 G4,G3@2",
+     "intent": "demo",
+     "caption": "the interval of the augmented-sixth chords",
+     "parts": 2,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 3.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F#4",
+         "midi": 66
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "G4",
+         "midi": 67
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "Ab3",
+         "midi": 56
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "G3",
+         "midi": 55
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "6/3",
+        "bassDegree": "b6",
+        "root": "F#"
+       },
+       {
+        "t": 1.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": null,
+        "figures": "8",
+        "bassDegree": "5",
+        "root": "G"
+       }
+      ]
+     }
+    },
+    {
+     "id": "d3-P1",
+     "title": "d3 → P1",
+     "key": "C",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "Ab4,F#4 G4,G4@2",
+     "intent": "demo",
+     "parts": 2,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 3.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "Ab4",
+         "midi": 68
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "G4",
+         "midi": 67
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "F#4",
+         "midi": 66
+        },
+        {
+         "t": 1.0,
+         "d": 2.0,
+         "pitch": "G4",
+         "midi": 67
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": null,
+        "figures": "5/3",
+        "bassDegree": "#4",
+        "root": "F#"
+       },
+       {
+        "t": 1.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": null,
+        "figures": "8",
+        "bassDegree": "5",
+        "root": "G"
+       }
+      ]
+     }
+    }
+   ],
+   "tools": [
+    "interval-lab"
+   ],
+   "sources": {
+    "notes": "p.10",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 2 — Intervals in a Key",
+    "video": [
+     3
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 2 — Intervals in a Key"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "Resolutions verified by ear and by interval arithmetic",
+     "Burstein Ch. 2 PfR: d5/A4 uniquely defines a major scale; d7/A2 uniquely defines harmonic minor — the same idea as the notes' key-defining progressions"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "beat-tempo",
+   "chapter": "ch3",
+   "title": "Rhythm, beat and tempo",
+   "kind": "concept",
+   "summary": "Rhythm combines duration, pitch, accent and silence. The beat is a steady, recurring pulse; tempo is the speed of the beat. Assign a number of beats to a note value (if 𝅝 = 4, then 𝅗𝅥 = 2 and ♩ = 1).",
+   "terms": [
+    {
+     "term": "Downbeat",
+     "def": "first beat of the bar (strong)"
+    },
+    {
+     "term": "Upbeat",
+     "def": "last beat before a downbeat"
+    },
+    {
+     "term": "On-beat / off-beat",
+     "def": "on the pulse / between pulses"
+    }
+   ],
+   "tables": [
+    {
+     "id": "accents",
+     "title": "Kinds of accent",
+     "columns": [
+      "Kind",
+      "How it is made"
+     ],
+     "rows": [
+      [
+       "Dynamic",
+       "louder"
+      ],
+      [
+       "Agogic",
+       "longer note"
+      ],
+      [
+       "Pitch",
+       "high or low note"
+      ],
+      [
+       "Contour",
+       "change of melodic direction"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "meter-lab"
+   ],
+   "sources": {
+    "notes": "p.11",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 3 — Rhythmic Organization",
+    "video": [
+     5
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 0"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 3"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "meter",
+   "chapter": "ch3",
+   "title": "Meter and time signatures",
+   "kind": "table",
+   "summary": "Meter is a sense of regular beats with regular subdivision. Simple meters divide the beat in two; compound meters divide it in three. Duple, triple and quadruple count the beats per bar.",
+   "rules": [
+    "Simple meter: top number = beats per bar (2, 3, 4); bottom number = beat note (4 = quarter).",
+    "Compound meter: top number = divisions per bar (6, 9, 12); bottom = division note; three divisions make one dotted beat."
+   ],
+   "tables": [
+    {
+     "id": "meters",
+     "title": "Meter types (notes p.11)",
+     "columns": [
+      "Type",
+      "Beat note",
+      "Division",
+      "Examples"
+     ],
+     "rows": [
+      [
+       "Simple quadruple",
+       "♩",
+       "♫",
+       "4/4 = C (common time)"
+      ],
+      [
+       "Simple triple",
+       "𝅗𝅥",
+       "♩♩",
+       "3/2"
+      ],
+      [
+       "Simple duple",
+       "♪",
+       "♬",
+       "2/8; 2/2 = ¢ (cut time)"
+      ],
+      [
+       "Compound quadruple",
+       "♩.",
+       "♪♪♪",
+       "12/8"
+      ],
+      [
+       "Compound triple",
+       "♪.",
+       "♬♬♬",
+       "9/16"
+      ],
+      [
+       "Compound duple",
+       "♪.",
+       "♬♬♬",
+       "6/16"
+      ],
+      [
+       "Compound duple",
+       "𝅗𝅥.",
+       "♩♩♩",
+       "6/4"
+      ]
+     ]
+    },
+    {
+     "id": "beat-strength",
+     "title": "Beat strength",
+     "columns": [
+      "Meter",
+      "Pattern"
+     ],
+     "rows": [
+      [
+       "Quadruple (4, 12)",
+       "S w M w"
+      ],
+      [
+       "Triple (3, 9)",
+       "S w w"
+      ],
+      [
+       "Duple (2, 6)",
+       "S w"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "meter-lab"
+   ],
+   "sources": {
+    "notes": "p.11",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 3",
+    "video": [
+     5,
+     6
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 0 — Meter"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 3",
+     "Burstein Ch. 0: simple vs compound meters, top number = beats (simple) or divisions (compound)"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "tuplets-syncopation",
+   "chapter": "ch3",
+   "title": "Tuplets, syncopation, harmonic rhythm, hemiola",
+   "kind": "concept",
+   "summary": "Tuplets borrow a division from the other meter type (triplets in simple meter, duplets in compound). Syncopation places accents where the meter would not put them. Harmonic rhythm is how often the chords change.",
+   "guidelines": [
+    "Harmonic rhythm shapes the emotional effect of a passage.",
+    "A hemiola regroups two bars of triple meter as three bars of duple (common before Baroque cadences)."
+   ],
+   "tables": [
+    {
+     "id": "syncopation",
+     "title": "Kinds of syncopation (notes p.12)",
+     "columns": [
+      "Kind",
+      "Where the accent falls"
+     ],
+     "rows": [
+      [
+       "Suspension",
+       "a note tied over the strong beat — the accent arrives early (\"before\")"
+      ],
+      [
+       "Off-beat",
+       "accents on weaker beats or parts of beats"
+      ],
+      [
+       "Anticipation",
+       "a note arrives before its chord — the accent comes \"after\""
+      ]
+     ]
+    },
+    {
+     "id": "harmonic-rhythm",
+     "title": "Typical harmonic rhythm",
+     "columns": [
+      "Style",
+      "Chord change every"
+     ],
+     "rows": [
+      [
+       "Baroque",
+       "1–2 beats"
+      ],
+      [
+       "Classical",
+       "1–2 measures"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "meter-lab"
+   ],
+   "sources": {
+    "notes": "p.12",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 3 — Rhythm and Dissonance Treatment",
+    "video": [
+     5
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 0 — Dots, Ties, and Triplets"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 3 defines hemiola the same way",
+     "Burstein Ch. 0: triplets; syncopation, hemiola and harmonic rhythm are not covered"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "triad-types",
+   "chapter": "ch4",
+   "title": "Triads: four qualities",
+   "kind": "table",
+   "summary": "A triad stacks two 3rds above a root (tertian harmony).",
+   "tables": [
+    {
+     "id": "triads",
+     "title": "Triad qualities (notes p.13)",
+     "columns": [
+      "Quality",
+      "Lead-sheet",
+      "Lower 3rd",
+      "Upper 3rd",
+      "Outer 5th",
+      "Roman numeral"
+     ],
+     "rows": [
+      [
+       "Diminished",
+       "°",
+       "m3",
+       "m3",
+       "d5",
+       "lower case + °"
+      ],
+      [
+       "Minor",
+       "−/m",
+       "m3",
+       "M3",
+       "P5",
+       "lower case"
+      ],
+      [
+       "Major",
+       "M",
+       "M3",
+       "m3",
+       "P5",
+       "upper case"
+      ],
+      [
+       "Augmented",
+       "+",
+       "M3",
+       "M3",
+       "A5",
+       "upper case + +"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "chord-builder"
+   ],
+   "sources": {
+    "notes": "p.13",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 4 — Triads",
+    "video": [
+     7
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 3"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 4"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "seventh-types",
+   "chapter": "ch4",
+   "title": "Seventh chords: seven qualities",
+   "kind": "table",
+   "summary": "A seventh chord adds a 3rd above the 5th of a triad. Its name combines the triad and the 7th above the root.",
+   "guidelines": [
+    "Roman numeral case follows the triad: lower case for diminished/minor, capital for major/augmented."
+   ],
+   "tables": [
+    {
+     "id": "sevenths",
+     "title": "Seventh-chord qualities (notes p.13)",
+     "columns": [
+      "Symbol",
+      "Name",
+      "Triad",
+      "7th",
+      "Roman numeral example"
+     ],
+     "rows": [
+      [
+       "°7",
+       "fully diminished",
+       "d",
+       "d7",
+       "vii°7"
+      ],
+      [
+       "ø7 (m7♭5)",
+       "half-diminished",
+       "d",
+       "m7",
+       "viiø7"
+      ],
+      [
+       "m7 (−7)",
+       "minor 7th",
+       "m",
+       "m7",
+       "ii7"
+      ],
+      [
+       "mM7",
+       "minor-major 7th",
+       "m",
+       "M7",
+       "iΔ7"
+      ],
+      [
+       "7 (Mm7)",
+       "dominant 7th",
+       "M",
+       "m7",
+       "V7"
+      ],
+      [
+       "Δ7 (M7)",
+       "major 7th",
+       "M",
+       "M7",
+       "IVΔ7"
+      ],
+      [
+       "+Δ7",
+       "augmented major 7th",
+       "A",
+       "M7",
+       "III+Δ7"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "chord-builder"
+   ],
+   "sources": {
+    "notes": "p.13",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 4 — Seventh Chords",
+    "video": [
+     7
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 3"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 4",
+     "Burstein Ch. 3: fully diminished, half-diminished, minor, dominant, major seventh chords (Burstein lists five common qualities; mM7 and +Δ7 are extra in the notes)"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "diatonic-chords",
+   "chapter": "ch4",
+   "title": "Diatonic triads and sevenths in each scale",
+   "kind": "table",
+   "summary": "Build a chord on each scale degree. Minor keys borrow raised 6̂ and 7̂ from harmonic and melodic minor, so they have more chord options; some are rare.",
+   "rules": [
+    "The leading tone resolves up by step: 7̂ → 8̂."
+   ],
+   "tables": [
+    {
+     "id": "diatonic7",
+     "title": "Diatonic seventh chords (notes p.13; * = rare)",
+     "columns": [
+      "Scale",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+     ],
+     "rows": [
+      [
+       "Major",
+       "IΔ7",
+       "ii7",
+       "iii7",
+       "IVΔ7",
+       "V7",
+       "vi7",
+       "viiø7"
+      ],
+      [
+       "Natural minor",
+       "i7",
+       "iiø7",
+       "IIIΔ7",
+       "iv7",
+       "v7 *",
+       "VIΔ7",
+       "VII7"
+      ],
+      [
+       "Harmonic minor",
+       "iΔ7 (mM7)",
+       "iiø7",
+       "III+Δ7 *",
+       "iv7",
+       "V7",
+       "VIΔ7",
+       "vii°7"
+      ],
+      [
+       "Melodic minor",
+       "iΔ7 (mM7)",
+       "ii7 *",
+       "III+Δ7 *",
+       "IV7 *",
+       "V7",
+       "♯viø7 *",
+       "viiø7"
+      ]
+     ]
+    },
+    {
+     "id": "melodic-triads",
+     "title": "Triads changed by melodic minor",
+     "columns": [
+      "Raised note",
+      "Chords"
+     ],
+     "rows": [
+      [
+       "♮7̂",
+       "III+, V, vii°"
+      ],
+      [
+       "♮6̂",
+       "ii, IV, ♯vi°"
+      ]
+     ]
+    }
+   ],
+   "tools": [
+    "chord-builder",
+    "diatonic-table"
+   ],
+   "sources": {
+    "notes": "p.13",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 4",
+    "video": [
+     10
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 3"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "Each cell computed from the scale; matches the notes"
+    ],
+    "flags": [
+     "In the melodic-minor row the notes box ii7, III+Δ7, IV7 and ♯viø7 as rare; V7 and viiø7 are not boxed. The data follows the notes."
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "harmonic-progression",
+   "chapter": "ch4",
+   "title": "Harmonic progression chart (circle of fifths)",
+   "kind": "progression",
+   "summary": "Chords normally move toward the tonic through the circle of fifths: iii → vi → IV/ii → V/vii° → I in major; VII → III → VI → iv/ii° → V/vii° → i in minor. IV and ii (subdominant group) can go to each other (IV → ii), and V can go to vii°. Arrows that skip ahead are allowed; backward motion breaks the flow.",
+   "tables": [
+    {
+     "id": "chart",
+     "title": "Flow chart (notes p.14)",
+     "columns": [
+      "Mode",
+      "Chain"
+     ],
+     "rows": [
+      [
+       "Major",
+       "iii → vi → [IV → ii] → [V ↔ vii°] → I  (any chord can go to the right; I can go anywhere)"
+      ],
+      [
+       "Minor",
+       "VII → III → VI → [iv → ii°] → [V ↔ vii°] → i"
+      ]
+     ]
+    }
+   ],
+   "examples": [
+    {
+     "id": "prog-major",
+     "title": "Through the chart in C major",
+     "key": "C",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "I:E5,G4,C4,C3 vi:E5,A4,C4,A2 IV:F5,A4,C4,F2 ii:F5,A4,D4,D3 V:D5,G4,B3,G3 I:C5,E4,C4,C3@2",
+     "intent": "model",
+     "caption": "I – vi – IV – ii – V – I",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 7.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "E5",
+         "midi": 76
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "E5",
+         "midi": 76
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "F5",
+         "midi": 77
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "F5",
+         "midi": 77
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "D5",
+         "midi": 74
+        },
+        {
+         "t": 5.0,
+         "d": 2.0,
+         "pitch": "C5",
+         "midi": 72
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 5.0,
+         "d": 2.0,
+         "pitch": "E4",
+         "midi": 64
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "B3",
+         "midi": 59
+        },
+        {
+         "t": 5.0,
+         "d": 2.0,
+         "pitch": "C4",
+         "midi": 60
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "C3",
+         "midi": 48
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "A2",
+         "midi": 45
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "F2",
+         "midi": 41
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "D3",
+         "midi": 50
+        },
+        {
+         "t": 4.0,
+         "d": 1.0,
+         "pitch": "G3",
+         "midi": 55
+        },
+        {
+         "t": 5.0,
+         "d": 2.0,
+         "pitch": "C3",
+         "midi": 48
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "I",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "C"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "vi",
+        "figures": "5/3",
+        "bassDegree": "6",
+        "root": "A"
+       },
+       {
+        "t": 2.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "IV",
+        "figures": "5/3",
+        "bassDegree": "4",
+        "root": "F"
+       },
+       {
+        "t": 3.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "ii",
+        "figures": "5/3",
+        "bassDegree": "2",
+        "root": "D"
+       },
+       {
+        "t": 4.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "V",
+        "figures": "5/3",
+        "bassDegree": "5",
+        "root": "G"
+       },
+       {
+        "t": 5.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "I",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "C"
+       }
+      ]
+     }
+    },
+    {
+     "id": "prog-minor",
+     "title": "Through the chart in A minor",
+     "key": "a",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "i:E5,A4,C4,A2 VI:F5,A4,C4,F2 iv:F5,A4,D4,D3 V:E5,G#4,B3,E3 i:E5,A4,C4,A2@2",
+     "intent": "model",
+     "caption": "i – VI – iv – V – i",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 6.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "E5",
+         "midi": 76
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "F5",
+         "midi": 77
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "F5",
+         "midi": 77
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "E5",
+         "midi": 76
+        },
+        {
+         "t": 4.0,
+         "d": 2.0,
+         "pitch": "E5",
+         "midi": 76
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "A4",
+         "midi": 69
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "G#4",
+         "midi": 68
+        },
+        {
+         "t": 4.0,
+         "d": 2.0,
+         "pitch": "A4",
+         "midi": 69
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "C4",
+         "midi": 60
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "B3",
+         "midi": 59
+        },
+        {
+         "t": 4.0,
+         "d": 2.0,
+         "pitch": "C4",
+         "midi": 60
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 1.0,
+         "pitch": "A2",
+         "midi": 45
+        },
+        {
+         "t": 1.0,
+         "d": 1.0,
+         "pitch": "F2",
+         "midi": 41
+        },
+        {
+         "t": 2.0,
+         "d": 1.0,
+         "pitch": "D3",
+         "midi": 50
+        },
+        {
+         "t": 3.0,
+         "d": 1.0,
+         "pitch": "E3",
+         "midi": 52
+        },
+        {
+         "t": 4.0,
+         "d": 2.0,
+         "pitch": "A2",
+         "midi": 45
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "i",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "A"
+       },
+       {
+        "t": 1.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "VI",
+        "figures": "5/3",
+        "bassDegree": "6",
+        "root": "F"
+       },
+       {
+        "t": 2.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "iv",
+        "figures": "5/3",
+        "bassDegree": "4",
+        "root": "D"
+       },
+       {
+        "t": 3.0,
+        "d": 1.0,
+        "bar": 0,
+        "label": "V",
+        "figures": "5/3",
+        "bassDegree": "5",
+        "root": "E"
+       },
+       {
+        "t": 4.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "i",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "A"
+       }
+      ]
+     }
+    }
+   ],
+   "tools": [
+    "progression-chart"
+   ],
+   "sources": {
+    "notes": "p.14",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 10 — Harmonic Syntax; Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 14",
+    "video": [
+     15
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 6"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "Same syntax as A&S Units 10/14 (intermediate harmonies lead from I to V, not from V to I)",
+     "Burstein Ch. 6/14: Subdominant chords lead to Dominant and may not follow a Dominant — consistent with the chart"
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "harmonization",
+   "chapter": "ch4",
+   "title": "Harmonizing a melody: 5-step procedure",
+   "kind": "procedure",
+   "summary": "A routine for choosing chords under a given melody.",
+   "rules": [
+    "1. Start and end with I (if possible).",
+    "2. Make the penultimate chord V (if possible).",
+    "3. Write all chord options under each melody note.",
+    "4. Check the harmonic progression against the flow chart.",
+    "5. Avoid repetition: change the chord for every melody note."
+   ],
+   "tools": [
+    "harmonization-helper"
+   ],
+   "sources": {
+    "notes": "p.14",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 10",
+    "video": [
+     21
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 6 — Harmonizing Melodies"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "Procedure is the owner's/lecturer's; consistent with A&S syntax",
+     "Burstein Ch. 6 PfR: each chord must contain the melody note, obey voice leading, and follow conventional progressions"
+    ],
+    "flags": [
+     "\"Change the chord for every melody note\" is a classroom rule; A&S allows repeated chords strong→weak (Unit 7 Points for Review 12). Shown as a rule because the notes say so — consider making it a guideline."
+    ]
+   },
+   "part": "p1"
+  },
+  {
+   "id": "figured-bass",
+   "chapter": "ch4",
+   "title": "Figured bass and inversion figures",
+   "kind": "table",
+   "summary": "Figures give intervals above the bass. Only the bass is fixed; the upper voices are free to be arranged.",
+   "rules": [
+    "An accidental alone (♯, ♭, ♮) applies to the 3rd above the bass.",
+    "A slash through a figure (4̸, 6̸, 5̸) raises that note a half step.",
+    "Only the bass note is fixed; upper voices may be voiced freely."
+   ],
+   "tables": [
+    {
+     "id": "inversion-figures",
+     "title": "Inversion figures (full / abbreviated)",
+     "columns": [
+      "Position",
+      "Triad",
+      "Seventh chord"
+     ],
+     "rows": [
+      [
+       "Root",
+       "5/3 (none)",
+       "7/5/3 → 7"
+      ],
+      [
+       "1st inversion",
+       "6/3 → 6",
+       "6/5/3 → 6/5"
+      ],
+      [
+       "2nd inversion",
+       "6/4",
+       "6/4/3 → 4/3"
+      ],
+      [
+       "3rd inversion",
+       "—",
+       "6/4/2 → 4/2 or 2"
+      ]
+     ]
+    }
+   ],
+   "examples": [
+    {
+     "id": "fig-triad",
+     "title": "C major triad: 5/3, 6/3, 6/4",
+     "key": "C",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "I:E5,C5,G4,C3@2 I6:E5,C5,G4,E3@2 I6/4:E5,C5,G4,G3@2",
+     "intent": "demo",
+     "caption": "root position, first inversion, second inversion",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 6.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 2.0,
+         "pitch": "E5",
+         "midi": 76
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "E5",
+         "midi": 76
+        },
+        {
+         "t": 4.0,
+         "d": 2.0,
+         "pitch": "E5",
+         "midi": 76
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 2.0,
+         "pitch": "C5",
+         "midi": 72
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "C5",
+         "midi": 72
+        },
+        {
+         "t": 4.0,
+         "d": 2.0,
+         "pitch": "C5",
+         "midi": 72
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 2.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 4.0,
+         "d": 2.0,
+         "pitch": "G4",
+         "midi": 67
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 2.0,
+         "pitch": "C3",
+         "midi": 48
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "E3",
+         "midi": 52
+        },
+        {
+         "t": 4.0,
+         "d": 2.0,
+         "pitch": "G3",
+         "midi": 55
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "I",
+        "figures": "5/3",
+        "bassDegree": "1",
+        "root": "C"
+       },
+       {
+        "t": 2.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "I6",
+        "figures": "6/3",
+        "bassDegree": "3",
+        "root": "C"
+       },
+       {
+        "t": 4.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "I6/4",
+        "figures": "6/4",
+        "bassDegree": "5",
+        "root": "C"
+       }
+      ]
+     }
+    },
+    {
+     "id": "fig-v7",
+     "title": "G7 in C: 7, 6/5, 4/3, 4/2",
+     "key": "C",
+     "meter": "4/4",
+     "beatUnit": "quarter",
+     "notation": "V7:F5,B4,D4,G3@2 V6/5:F5,D5,G4,B3@2 V4/3:F5,B4,G4,D4@2 V4/2:D5,B4,G4,F3@2",
+     "intent": "demo",
+     "caption": "same chord, four bass notes",
+     "parts": 4,
+     "realized": {
+      "voiceOrder": "top→bottom; last = bass",
+      "lengthBeats": 8.0,
+      "voices": [
+       [
+        {
+         "t": 0.0,
+         "d": 2.0,
+         "pitch": "F5",
+         "midi": 77
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "F5",
+         "midi": 77
+        },
+        {
+         "t": 4.0,
+         "d": 2.0,
+         "pitch": "F5",
+         "midi": 77
+        },
+        {
+         "t": 6.0,
+         "d": 2.0,
+         "pitch": "D5",
+         "midi": 74
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 2.0,
+         "pitch": "B4",
+         "midi": 71
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "D5",
+         "midi": 74
+        },
+        {
+         "t": 4.0,
+         "d": 2.0,
+         "pitch": "B4",
+         "midi": 71
+        },
+        {
+         "t": 6.0,
+         "d": 2.0,
+         "pitch": "B4",
+         "midi": 71
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 2.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 4.0,
+         "d": 2.0,
+         "pitch": "G4",
+         "midi": 67
+        },
+        {
+         "t": 6.0,
+         "d": 2.0,
+         "pitch": "G4",
+         "midi": 67
+        }
+       ],
+       [
+        {
+         "t": 0.0,
+         "d": 2.0,
+         "pitch": "G3",
+         "midi": 55
+        },
+        {
+         "t": 2.0,
+         "d": 2.0,
+         "pitch": "B3",
+         "midi": 59
+        },
+        {
+         "t": 4.0,
+         "d": 2.0,
+         "pitch": "D4",
+         "midi": 62
+        },
+        {
+         "t": 6.0,
+         "d": 2.0,
+         "pitch": "F3",
+         "midi": 53
+        }
+       ]
+      ],
+      "slices": [
+       {
+        "t": 0.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "V7",
+        "figures": "7",
+        "bassDegree": "5",
+        "root": "G"
+       },
+       {
+        "t": 2.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "V6/5",
+        "figures": "6/5",
+        "bassDegree": "7",
+        "root": "G"
+       },
+       {
+        "t": 4.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "V4/3",
+        "figures": "4/3",
+        "bassDegree": "2",
+        "root": "G"
+       },
+       {
+        "t": 6.0,
+        "d": 2.0,
+        "bar": 0,
+        "label": "V4/2",
+        "figures": "4/2",
+        "bassDegree": "4",
+        "root": "G"
+       }
+      ]
+     },
+     "checker": [
+      {
+       "type": "seventhLeap",
+       "level": "orange",
+       "beat": 6.0,
+       "voices": "B",
+       "detail": "chordal 7th F3 approached by descending leap from D4"
+      }
+     ]
+    }
+   ],
+   "tools": [
+    "figured-bass-explainer",
+    "chord-builder"
+   ],
+   "sources": {
+    "notes": "p.14",
+    "textbook": "Aldwell, Schachter & Cadwallader, Harmony and Voice Leading 5e, Unit 4 — Texture and Structure",
+    "video": [
+     8,
+     9
+    ],
+    "textbook2": "Burstein & Straus, Concise Introduction to Tonal Harmony 2e, Ch. 4 — Realizing Figured Bass"
+   },
+   "verification": {
+    "status": "verified",
+    "checks": [
+     "A&S Unit 4 figures; accidental-alone → 3rd verified"
+    ]
+   },
+   "part": "p1"
+  }
+ ]
+}
