@@ -6,7 +6,7 @@ import DataTable from '../content/DataTable.astro';
 import HipExample from './HipExample.astro';
 import { safeHtml, refSource } from '../../scripts/content';
 import { titleCase } from '../../scripts/title-case';
-import { DISAGREEMENT_TOPICS, HIP, sourceById, toolById } from '../../data/hip';
+import { DISAGREEMENT_TOPICS, HIP, TOOL_HOME, sourceById, toolById } from '../../data/hip';
 import type { Topic } from '../../data/hip';
 
 interface Props {
@@ -46,8 +46,14 @@ const examples = (t.examples ?? []).map((id) => HIP.examples[id]).filter(Boolean
   {examples.map((e) => <HipExample example={e} />)}
 
   {
-    (t.tools ?? []).length > 0 && (
-      <p class="tool-todo">Interactive tools for this topic, still to come: {(t.tools ?? []).map((id) => toolById(id)?.title ?? id).join(', ')}.</p>
+    (t.tools ?? []).map((id) =>
+      TOOL_HOME.get(id) === t.id ? (
+        <div class="tool-box" id={`tool-${id}`} data-hiptool={id}>
+          <h4 class="mini-title">{titleCase(toolById(id)?.title ?? id)}</h4>
+        </div>
+      ) : (
+        <p class="muted-line">Tool: {titleCase(toolById(id)?.title ?? id)}, <a href={`#tool-${id}`}>open it</a>.</p>
+      ),
     )
   }
 
@@ -68,3 +74,8 @@ const examples = (t.examples ?? []).map((id) => HIP.examples[id]).filter(Boolean
     )
   }
 </article>
+
+<script>
+  import { mountHipTools } from '../../scripts/hip/mount';
+  mountHipTools();
+</script>

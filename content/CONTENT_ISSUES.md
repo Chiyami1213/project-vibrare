@@ -23,9 +23,22 @@ open questions each pack lists for the owner are in that pack's own `VERIFICATIO
   The analysis worksheet starts with the C minor demonstration; the case study gives bars for the entries but not their voices
   or keys, so those columns are left blank. A tool that three analysis topics name (the worksheet) is built once, under the
   first of them, and the others link to it.
-- **HIP:** examples are played and shown as notation text with their annotations (syllables, bows, breaths), not as
-  engraved staves, because triplet values do not fit the staff renderer's grid. The seven tools are not built, and the
-  Written / Performed toggle is a set of play buttons.
+- **HIP:** the seven tools are built (`src/scripts/hip/tools.ts`, logic in `tools-pure.ts`), with the acceptance tests of the
+  brief in `tests/hip-tools.test.mjs`. The examples are still shown as notation text with their annotations, not as engraved
+  staves, because triplet values do not fit the staff renderer's grid; the tools show the notes as a piano roll instead.
+  Points where the tools go beyond or differ from the pack:
+  - **Breath planner:** on `breath-q` the rules give the stored breaths (main after notes 1 and 10, emergency after 6) and one
+    more emergency breath after note 15, because the second bar repeats the shape of the first (a leap at the start of the
+    last beat group). The stored example lists only the first; the tool marks both, and the user can remove a mark.
+  - **Quantz tempo:** the tables cover common time, alla breve and some triple and compound metres. For other cases (for
+    example 9/8, a plain Allegro in alla breve) the tool applies the nearest rule and says it is by analogy.
+  - **Messa di voce:** the pack names L. Mozart's four divisions of the bow but describes only the first (soft, loud, soft), so
+    only that one is drawn. The keyboard substitutes (trill filling, broken chord, Bebung) are illustrations of the spec, not
+    transcriptions.
+  - **Trill builder:** the L. Mozart "accelerating" preset speeds up from half to one and a half times the chosen speed; the
+    pack gives no figures.
+  - **Appoggiatura lab:** only Quantz gives a rule for the tied 6/8 case, before a rest, and before a dissonant trill; the tool
+    says so instead of inventing a C. P. E. Bach version.
 - **All score pages:** voice colouring (`VOICE_COLORS.md`) is not built.
 
 ## Music History pack and the history-background panels (added with the second delivery of the packs)

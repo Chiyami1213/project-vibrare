@@ -42,3 +42,7 @@ export function annotationStrip(e: Example): { note: string; syllable?: string; 
     why: breaths.get(i)?.why,
   }));
 }
+
+/** The topic that holds each tool (a tool is built once on the page, under the first topic that names it). */
+export const TOOL_HOME = new Map<string, string>();
+for (const g of HIP.groups) for (const t of HIP.topics.filter((x) => x.group === g.id)) for (const id of t.tools ?? []) if (!TOOL_HOME.has(id)) TOOL_HOME.set(id, t.id);
