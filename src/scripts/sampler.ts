@@ -27,6 +27,8 @@ export class Sampler {
   private sets = new Map<string, Sample[]>();
   private loading = new Map<string, Promise<void>>();
   private active: GainNode[] = [];
+  private primed = false;
+  private warm = false;
 
   /** The instrument chosen in Settings right now. */
   get instrument(): Instrument {
@@ -95,12 +97,48 @@ export class Sampler {
     this.load().catch(() => {});
   }
 
+  /**
+   * Get the audio device ready before the first click on Play. A browser lets a page start sound only after a click or
+   * a key press, and the first notes after a cold start crackle (the device is still starting up). So the context is
+   * created at once, and started by the first press or touch anywhere on the page, which comes before the click on Play.
+   */
+  prime(): void {
+    if (this.primed || typeof window === 'undefined') return;
+    this.primed = true;
+    try {
+      void this.context; // created suspended: allowed without a click
+    } catch {
+      return;
+    }
+    const wake = () => void this.start().catch(() => {});
+    for (const ev of ['pointerdown', 'keydown', 'touchstart'] as const) window.addEventListener(ev, wake, { capture: true, once: true, passive: true });
+  }
+
+  /** Start the context (needs a gesture), fade the output in, and wait until the device really runs. */
+  private async start(): Promise<void> {
+    const ac = this.context;
+    if (this.warm && ac.state === 'running') return;
+    if (ac.state === 'suspended') {
+      if (this.master) {
+        // no step in the signal when the output opens: fade in
+        this.master.gain.cancelScheduledValues(0);
+        this.master.gain.setValueAtTime(0, ac.currentTime);
+        this.master.gain.linearRampToValueAtTime(outputGain(getAudioSettings()), ac.currentTime + 0.06);
+      }
+      await ac.resume();
+    }
+    // the first buffers after a cold start are the ones that crackle: let the clock run a little before any note
+    const from = ac.currentTime;
+    const t0 = performance.now();
+    while (ac.currentTime - from < 0.1 && performance.now() - t0 < 700) await new Promise((r) => setTimeout(r, 8));
+    this.warm = true;
+  }
+
   /** Make everything ready to sound: the samples, and a running audio context. Call it from a click. */
   async activate(): Promise<AudioContext> {
     await this.load();
-    const ac = this.context;
-    if (ac.state === 'suspended') await ac.resume();
-    return ac;
+    await this.start();
+    return this.context;
   }
 
   /** True when the chosen instrument is loaded. */
@@ -145,7 +183,10 @@ export const sampler = new Sampler();
 
 if (typeof window !== 'undefined') {
   const later = (fn: () => void) => ('requestIdleCallback' in window ? window.requestIdleCallback(fn, { timeout: 2500 }) : window.setTimeout(fn, 600));
-  later(() => sampler.preload()); // a page that makes sound: have the chosen instrument ready before Play
+  later(() => {
+    sampler.preload(); // a page that makes sound: have the chosen instrument ready before Play
+    sampler.prime(); // and the audio device, so that the first sound does not crackle
+  });
   let current = sampler.instrument.id;
   window.addEventListener('audio-settings', () => {
     const next = sampler.instrument.id;
