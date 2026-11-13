@@ -69,7 +69,46 @@ a {
   flex: 1;
 }
 
+/* YouTube and the personal website, at the bottom right of the footer */
+.footer-links {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  display: flex;
+  gap: 14px;
+  transform: translateY(-50%);
+}
+
+.footer-links a {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--accent);
+}
+
+.footer-links svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.footer-links svg path[fill='currentColor'] {
+  stroke: none;
+}
+
 .site-footer {
+  position: relative;
   margin-top: 48px;
   padding: 18px 0;
   border-top: 1px solid var(--line);
