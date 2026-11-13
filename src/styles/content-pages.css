@@ -1514,3 +1514,223 @@ button.plan-gap:hover {
   max-width: 320px;
   height: auto;
 }
+
+/* ---------- Colouring the voices (VOICE_COLORS.md) ---------- */
+:root {
+  --voice-1: #0072b2;
+  --voice-2: #d55e00;
+  --voice-3: #9a4f96;
+  --voice-4: #3a3a3a;
+  --voice-5: #8c6d1f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --voice-1: #56b4e9;
+    --voice-2: #f08a4b;
+    --voice-3: #cc79a7;
+    --voice-4: #e6e6e6;
+    --voice-5: #e0b84f;
+  }
+}
+
+:root[data-theme='dark'] {
+  --voice-1: #56b4e9;
+  --voice-2: #f08a4b;
+  --voice-3: #cc79a7;
+  --voice-4: #e6e6e6;
+  --voice-5: #e0b84f;
+}
+
+/* the notes, stems, flags, beams, ties, accidentals and rests of a voice take its colour; faulty notes keep the checker colour */
+.score.colour-voices .voice-1:not(.marked),
+.score.colour-voices .voice-1:not(.marked) * {
+  fill: var(--voice-1);
+}
+.score.colour-voices .voice-2:not(.marked),
+.score.colour-voices .voice-2:not(.marked) * {
+  fill: var(--voice-2);
+}
+.score.colour-voices .voice-3:not(.marked),
+.score.colour-voices .voice-3:not(.marked) * {
+  fill: var(--voice-3);
+}
+.score.colour-voices .voice-4:not(.marked),
+.score.colour-voices .voice-4:not(.marked) * {
+  fill: var(--voice-4);
+}
+.score.colour-voices .voice-5:not(.marked),
+.score.colour-voices .voice-5:not(.marked) * {
+  fill: var(--voice-5);
+}
+.score.colour-voices .voice-1:not(.marked) path,
+.score.colour-voices .voice-1:not(.marked) rect,
+.score.colour-voices .voice-1:not(.marked) line {
+  stroke: var(--voice-1);
+}
+.score.colour-voices .voice-2:not(.marked) path,
+.score.colour-voices .voice-2:not(.marked) rect,
+.score.colour-voices .voice-2:not(.marked) line {
+  stroke: var(--voice-2);
+}
+.score.colour-voices .voice-3:not(.marked) path,
+.score.colour-voices .voice-3:not(.marked) rect,
+.score.colour-voices .voice-3:not(.marked) line {
+  stroke: var(--voice-3);
+}
+.score.colour-voices .voice-4:not(.marked) path,
+.score.colour-voices .voice-4:not(.marked) rect,
+.score.colour-voices .voice-4:not(.marked) line {
+  stroke: var(--voice-4);
+}
+.score.colour-voices .voice-5:not(.marked) path,
+.score.colour-voices .voice-5:not(.marked) rect,
+.score.colour-voices .voice-5:not(.marked) line {
+  stroke: var(--voice-5);
+}
+
+/* the tonal colour mode: the chordal 7th green, the leading tone red */
+.score.colour-roles .role-seventh:not(.marked),
+.score.colour-roles .role-seventh:not(.marked) * {
+  fill: #2e9e5b;
+}
+.score.colour-roles .role-lt:not(.marked),
+.score.colour-roles .role-lt:not(.marked) * {
+  fill: #d1432f;
+}
+.score.colour-roles .role-seventh:not(.marked) path,
+.score.colour-roles .role-seventh:not(.marked) rect {
+  stroke: #2e9e5b;
+}
+.score.colour-roles .role-lt:not(.marked) path,
+.score.colour-roles .role-lt:not(.marked) rect {
+  stroke: #d1432f;
+}
+
+/* the paths through the notes of each voice, and the markers where voices cross or overlap */
+.voice-paths,
+.voice-spans {
+  display: none;
+}
+.score.colour-voices.show-paths .voice-paths {
+  display: block;
+}
+.score.colour-voices .voice-spans {
+  display: block;
+}
+.voice-path {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.vp-1 {
+  stroke: var(--voice-1);
+}
+.vp-2 {
+  stroke: var(--voice-2);
+}
+.vp-3 {
+  stroke: var(--voice-3);
+}
+.vp-4 {
+  stroke: var(--voice-4);
+}
+.vp-5 {
+  stroke: var(--voice-5);
+}
+.vband {
+  opacity: 0.16;
+}
+.vb-1 {
+  fill: var(--voice-1);
+}
+.vb-2 {
+  fill: var(--voice-2);
+}
+.vb-3 {
+  fill: var(--voice-3);
+}
+.vb-4 {
+  fill: var(--voice-4);
+}
+.vb-5 {
+  fill: var(--voice-5);
+}
+.vspan {
+  cursor: pointer;
+}
+.vspan:hover .vband,
+.vspan:focus-visible .vband {
+  opacity: 0.3;
+}
+.score .vspan .vlabel {
+  fill: var(--fg);
+  stroke: none;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* the sounding note glows in its own colour */
+.score.colour-voices .voice-1.sounding {
+  filter: drop-shadow(0 0 3px var(--voice-1));
+}
+.score.colour-voices .voice-2.sounding {
+  filter: drop-shadow(0 0 3px var(--voice-2));
+}
+.score.colour-voices .voice-3.sounding {
+  filter: drop-shadow(0 0 3px var(--voice-3));
+}
+.score.colour-voices .voice-4.sounding {
+  filter: drop-shadow(0 0 3px var(--voice-4));
+}
+.score.colour-voices .voice-5.sounding {
+  filter: drop-shadow(0 0 3px var(--voice-5));
+}
+
+/* the legend under the player: a chip for each voice; selecting one plays that voice alone */
+.pl-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0;
+}
+.pl-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: var(--fg);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.pl-chip[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: rgb(127 127 127 / 0.15);
+}
+.swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.voice-bg-1 {
+  background: var(--voice-1);
+}
+.voice-bg-2 {
+  background: var(--voice-2);
+}
+.voice-bg-3 {
+  background: var(--voice-3);
+}
+.voice-bg-4 {
+  background: var(--voice-4);
+}
+.voice-bg-5 {
+  background: var(--voice-5);
+}

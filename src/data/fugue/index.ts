@@ -61,5 +61,6 @@ export function exampleData(e: TheoryExample): ExampleData {
     realized: { voiceOrder: 'top→bottom', lengthBeats: lengthOf(voices), voices },
     voiceNames: voices.map((_, i) => `Voice ${i + 1}`),
     noDegrees: false,
+    colourDefault: 'voices',
   };
 }

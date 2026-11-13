@@ -16,6 +16,7 @@ export function scoreData(id: string, title: string, voices: Voice[], names?: st
     voiceNames: names,
     noDegrees: true,
     intervals: voices.length === 2,
+    colourDefault: 'voices',
   };
 }
 

@@ -48,6 +48,7 @@ export function exampleData(id: string, e: Example): ExampleData {
     voiceNames: e.voices.map((v) => (v.role === 'cf' ? 'Cantus Firmus' : e.voices.length === 2 ? 'Counterpoint' : 'Counterpoint ' + (e.voices.filter((x) => x.role === 'cpt').indexOf(v) + 1))),
     noDegrees: true,
     intervals: voices.length === 2,
+    colourDefault: 'voices',
   };
 }
 

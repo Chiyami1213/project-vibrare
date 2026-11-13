@@ -80,7 +80,7 @@ export function exampleData(e: Example): ExampleData {
     cross: e.intent === 'error',
     realized: e.realized as unknown as ExampleData['realized'],
     voiceNames: VOICE_NAMES[e.parts] ?? undefined,
-    analysis: e.realized.slices.map((s) => ({ t: s.t, label: s.label, figures: s.figures })),
+    analysis: e.realized.slices.map((s) => ({ t: s.t, label: s.label, figures: s.figures, root: s.root })),
     marks: e.intent === 'error' ? marksOf(e) : undefined,
   };
 }

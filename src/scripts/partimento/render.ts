@@ -2,6 +2,7 @@
 import { Accidental, Beam, BarlineType, Dot, Formatter, Fraction, Renderer, Stave, StaveConnector, StaveNote, StaveTie, Stem, Voice } from 'vexflow/bravura';
 import { barTicks, keySpec, layoutVoice, slicesOf, ticksPerBeat, totalBarsOf } from './model';
 import type { ExampleData, NoteSpec } from './model';
+import { voiceSlots, voiceSpans } from './voices';
 
 export interface SliceBox {
   tick: number;
@@ -11,10 +12,21 @@ export interface SliceBox {
   bottom: number;
 }
 
+export interface SpanMark {
+  el: SVGGElement;
+  from: number; // beats
+  to: number;
+  kind: 'crossing' | 'overlap' | 'unison';
+}
+
 export interface Drawn {
   slices: SliceBox[];
   svg: SVGSVGElement;
+  /** the crossings and overlaps of the voices, as markers on the score (shown when the voices are coloured) */
+  spans: SpanMark[];
   highlight(index: number | null): void;
+  /** a soft glow on the notes that sound at this beat (null: none) */
+  glow(beat: number | null): void;
 }
 
 const STAVE_GAP = 100; // from the top of the treble stave to the top of the bass stave
@@ -63,6 +75,8 @@ interface Built {
   spec: NoteSpec;
   row: number;
   voice: number;
+  gv: number; // index among all the voices, top to bottom
+  classes: string[]; // put on the drawn note: the colouring of the voices is done by these classes, so it needs no new layout
 }
 
 interface MeasurePlan {
@@ -123,6 +137,11 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
   const markOf = (voice: number, n: NoteSpec) =>
     n.pitch === null ? undefined : ex.marks?.find((k) => k.voice === voice && n.start <= k.t * tpb + 1e-6 && k.t * tpb < n.start + n.ticks - 1e-6)?.level;
 
+  const beamClass = new WeakMap<Beam, string>();
+  const slots = voiceSlots(all.length);
+  const voiceClass = (gv: number) => `voice-${slots[gv]}`;
+  const roleOf = (gv: number, n: NoteSpec) => (n.pitch === null ? undefined : ex.roles?.find((k) => k.voice === gv && Math.abs(k.t * tpb - n.start) < 1e-6)?.role);
+
   // Build the notes of one bar. Notes must be built fresh for each use: formatting the same note objects
   // twice would apply VexFlow's collision shifts twice and leave stems detached from their heads.
   const buildMeasure = (m: number) => {
@@ -134,8 +153,11 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
       const vs = r.voices.map((vm, vi) => {
         const stem = two ? (vi === 0 ? Stem.UP : Stem.DOWN) : null;
         const notes = vm[m].map((n) => {
-          const note = makeNote(n, r.clef, stem, markOf(r.first + vi, n));
-          built.push({ note, spec: n, row: ri, voice: vi });
+          const gv = r.first + vi;
+          const mark = markOf(gv, n);
+          const role = roleOf(gv, n);
+          const note = makeNote(n, r.clef, stem, mark);
+          built.push({ note, spec: n, row: ri, voice: vi, gv, classes: [voiceClass(gv), ...(mark ? ['marked'] : []), ...(role ? [`role-${role}`] : [])] });
           onsets.add(n.start);
           return note;
         });
@@ -144,7 +166,9 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
         v.setMode(Voice.Mode.SOFT);
         v.addTickables(notes);
         // short notes are beamed in groups of one beat (without this each sixteenth would carry its own flags)
-        beams.push(...Beam.generateBeams(notes, { groups: [new Fraction(1, 4)], maintainStemDirections: true }));
+        const bs = Beam.generateBeams(notes, { groups: [new Fraction(1, 4)], maintainStemDirections: true });
+        bs.forEach((b) => beamClass.set(b, voiceClass(r.first + vi)));
+        beams.push(...bs);
         return v;
       });
       Accidental.applyAccidentals(vs, spec);
@@ -247,6 +271,8 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
 
   // ---- pass 2: draw
   const xOf = new Map<number, { x: number; sys: number }>(); // onset tick -> x and system
+  const heads: { gv: number; tick: number; rest: boolean; x: number; y: number; sys: number }[] = []; // where each note sits, for the voice paths
+  const noteEls: { el: SVGElement; gv: number; from: number; to: number }[] = [];
   const prev: ({ note: StaveNote; sys: number } | null)[][] = rows.map((r) => r.voices.map(() => null));
 
   systems.forEach((measures, si) => {
@@ -287,11 +313,19 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
       voices.forEach((vs) => formatter.joinVoices(vs));
       formatter.format(voices.flat(), Math.max(plans[m].minWidth, x + widths[mi] - startX - 16));
       voices.forEach((vs, ri) => vs.forEach((v) => v.draw(ctx, staves[ri])));
-      beams.forEach((b) => b.setContext(ctx).draw());
+      beams.forEach((b) => {
+        b.setContext(ctx).draw();
+        const c = beamClass.get(b);
+        if (c) b.getSVGElement()?.classList.add(c);
+      });
 
       // where the sonorities are
-      built.forEach(({ note, spec: n }) => {
+      built.forEach(({ note, spec: n, gv, classes }) => {
         const nx = note.getAbsoluteX() + note.getGlyphWidth() / 2;
+        heads.push({ gv, tick: n.start, rest: n.pitch === null, x: nx, y: note.getYs()[0], sys: si });
+        const el = note.getSVGElement();
+        el?.classList.add(...classes);
+        if (el && n.pitch !== null) noteEls.push({ el, gv, from: n.start / tpb, to: (n.start + n.ticks) / tpb });
         const cur = xOf.get(n.start);
         if (!cur || nx < cur.x) xOf.set(n.start, { x: nx, sys: si });
       });
@@ -301,20 +335,26 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
       built.forEach(({ note, spec: n, row, voice }) => byKey.set(`${row}:${voice}:${n.start}`, note));
       rows.forEach((r, ri) =>
         r.voices.forEach((vm, vi) => {
+          const tieClass = voiceClass(r.first + vi);
+          const drawTie = (o: ConstructorParameters<typeof StaveTie>[0], cls: string) => {
+            const t = new StaveTie(o).setContext(ctx);
+            t.draw();
+            t.getSVGElement()?.classList.add(cls);
+          };
           vm[m].forEach((n, k) => {
             const note = byKey.get(`${ri}:${vi}:${n.start}`)!;
             if (n.tieFromPrev) {
               const before = k > 0 ? byKey.get(`${ri}:${vi}:${vm[m][k - 1].start}`) : null;
               const p = prev[ri][vi];
               if (before) {
-                new StaveTie({ firstNote: before, lastNote: note, firstIndexes: [0], lastIndexes: [0] }).setContext(ctx).draw();
+                drawTie({ firstNote: before, lastNote: note, firstIndexes: [0], lastIndexes: [0] }, tieClass);
               } else if (p && p.sys === si) {
                 // across a bar line on the same line: one tie from note to note
-                new StaveTie({ firstNote: p.note, lastNote: note, firstIndexes: [0], lastIndexes: [0] }).setContext(ctx).draw();
+                drawTie({ firstNote: p.note, lastNote: note, firstIndexes: [0], lastIndexes: [0] }, tieClass);
               } else if (p) {
                 // across a line break: the tie leaves the end of one line and arrives at the start of the next
-                new StaveTie({ firstNote: p.note, lastNote: null, firstIndexes: [0], lastIndexes: [0] }).setContext(ctx).draw();
-                new StaveTie({ firstNote: null, lastNote: note, firstIndexes: [0], lastIndexes: [0] }).setContext(ctx).draw();
+                drawTie({ firstNote: p.note, lastNote: null, firstIndexes: [0], lastIndexes: [0] }, tieClass);
+                drawTie({ firstNote: null, lastNote: note, firstIndexes: [0], lastIndexes: [0] }, tieClass);
               }
             }
             prev[ri][vi] = { note, sys: si };
@@ -382,11 +422,88 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
     hl.push(r);
   }
 
+  // ---- voice paths: a thin line through the noteheads of each voice (broken at rests), shown when the voices are coloured
+  const pathLayer = document.createElementNS(NS, 'g');
+  pathLayer.setAttribute('class', 'voice-paths');
+  for (let gv = 0; gv < all.length; gv++) {
+    const mine = heads.filter((x) => x.gv === gv).sort((p, q) => p.tick - q.tick);
+    let run: { x: number; y: number; sys: number }[] = [];
+    const flush = () => {
+      if (run.length > 1) {
+        const p = document.createElementNS(NS, 'path');
+        p.setAttribute('d', run.map((q, i) => `${i ? 'L' : 'M'}${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' '));
+        p.setAttribute('class', `voice-path vp-${slots[gv]}`);
+        pathLayer.append(p);
+      }
+      run = [];
+    };
+    for (const h of mine) {
+      if (h.rest || (run.length && run[run.length - 1].sys !== h.sys)) flush();
+      if (!h.rest) run.push(h);
+    }
+    flush();
+  }
+  svg.insertBefore(pathLayer, svg.firstChild);
+
+  // ---- crossings and overlaps: a labelled marker above the system and a band in the colours of the two voices
+  // short names on the markers: initials of a name of several words, the first three letters of a long one
+  const nameOf = (i: number) => {
+    const n = ex.voiceNames?.[i] ?? (i === all.length - 1 ? 'Bass' : String(i + 1));
+    const words = n.split(/s+/);
+    return words.length > 1 ? words.map((w) => w[0].toUpperCase()).join('') : n.length > 5 ? n.slice(0, 3) : n;
+  };
+  const xAt = (tick: number, before: boolean) => {
+    let best: { x: number; sys: number } | undefined;
+    let bestTick = before ? -Infinity : Infinity;
+    for (const [k, v] of xOf) if (before ? k <= tick && k > bestTick : k >= tick && k < bestTick) { best = v; bestTick = k; }
+    return best;
+  };
+  const spanLayer = document.createElementNS(NS, 'g');
+  spanLayer.setAttribute('class', 'voice-spans');
+  const spans: SpanMark[] = [];
+  for (const sp of voiceSpans(all)) {
+    if (sp.kind === 'unison') continue;
+    const x0 = xAt(Math.round(sp.from * tpb), true);
+    if (!x0) continue;
+    const x1 = xAt(Math.round(sp.to * tpb), false);
+    const top = x0.sys * sysHeight + SYSTEM_TOP;
+    const w = x1 && x1.sys === x0.sys && x1.x > x0.x ? x1.x - x0.x + 16 : 34;
+    const g = document.createElementNS(NS, 'g');
+    g.setAttribute('class', `vspan vs-${sp.kind}`);
+    g.setAttribute('role', 'button');
+    g.setAttribute('tabindex', '0');
+    const label = `${sp.kind === 'crossing' ? '✕ crossing' : '⇅ overlap'} ${nameOf(sp.upper)}/${nameOf(sp.lower)}`;
+    g.setAttribute('aria-label', `${label}: select to play it`);
+    const heightTotal = (hasTreble ? STAVE_GAP : 0) + STAVE_H;
+    for (const [k, v] of [[0, sp.upper], [1, sp.lower]] as const) {
+      const r = document.createElementNS(NS, 'rect');
+      r.setAttribute('x', (x0.x - 9).toFixed(1));
+      r.setAttribute('y', (top + (k * heightTotal) / 2).toFixed(1));
+      r.setAttribute('width', w.toFixed(1));
+      r.setAttribute('height', (heightTotal / 2).toFixed(1));
+      r.setAttribute('class', `vband vb-${slots[v]}`);
+      g.append(r);
+    }
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', (x0.x - 9).toFixed(1));
+    t.setAttribute('y', (top - 2).toFixed(1));
+    t.setAttribute('class', 'vlabel');
+    t.textContent = label;
+    g.append(t);
+    spanLayer.append(g);
+    spans.push({ el: g, from: sp.from, to: sp.to, kind: sp.kind });
+  }
+  svg.append(spanLayer);
+
   return {
     slices: boxes,
     svg,
+    spans,
     highlight(index) {
       hl.forEach((r, i) => r.classList.toggle('on', i === index)); // hl[i] belongs to slices[i]
+    },
+    glow(beat) {
+      for (const n of noteEls) n.el.classList.toggle('sounding', beat !== null && beat >= n.from - 1e-6 && beat < n.to - 1e-6);
     },
   };
 }

@@ -60,7 +60,7 @@ open questions each pack lists for the owner are in that pack's own `VERIFICATIO
     pack gives no figures.
   - **Appoggiatura lab:** only Quantz gives a rule for the tied 6/8 case, before a rest, and before a dissonant trill; the tool
     says so instead of inventing a C. P. E. Bach version.
-- **All score pages:** voice colouring (`VOICE_COLORS.md`) is not built.
+- **All score pages:** voice colouring is built (see the section at the end).
 
 ## Music History pack and the history-background panels (added with the second delivery of the packs)
 
@@ -97,3 +97,19 @@ open questions each pack lists for the owner are in that pack's own `VERIFICATIO
   different metres are laid out on the first one's bar lines.
 - **Suspension finder:** it marks what the rules of the cards allow (which bass motions prepare a 4–3, 7–6 or 9–8), not what a
   given harmony needs.
+
+## Voice colouring (`VOICE_COLORS.md`, all five packs)
+
+- **Built** in the shared Example Player (`src/scripts/partimento/{voices,render,player}.ts`, `tests/voices.test.mjs`): `Plain | Voices | 7th & LT`
+  (the last only where the examples carry chord roots, that is the tonal ones), voice paths, crossing and overlap markers with a
+  label and a band in both voices' colours (select one to hear it), a legend whose chips play one voice alone, and a glow on the
+  sounding notes. The colour is set by CSS classes on the drawn notes, so switching needs no new layout. The palette is
+  `--voice-1` … `--voice-5` (Okabe–Ito, with dark-mode values; each colour has at least 3:1 contrast on both backgrounds). Voices are
+  coloured at first in counterpoint and fugue, plain elsewhere; the choice is remembered in the browser.
+- **Not built:** the voice-name label at the start of each system (the legend carries the names); the fugue `Entries` mode (the
+  fugue examples carry no marks for subject, answer and countersubject); the half-and-half notehead for a unison between two voices.
+- **Two findings against the spec's acceptance tests:**
+  - Fux **Fig. 55** (third species above the cantus in D) has the counterpoint dip below the cantus firmus on beats 34 and 35 of
+    the example (D4 and E4 under F4), which is a real voice crossing; the rule engine does not report it. The detector does.
+  - Only one of the five partimento examples with `cross: true` actually crosses in its realization; the flag allows crossing
+    rather than saying it happens. No example crosses without the flag, and no tonal model example reports a crossing or overlap.

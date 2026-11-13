@@ -28,7 +28,11 @@ export interface ExampleData {
   /** Names of the voices, top to bottom (S, A, T, B); without them the player says Upper voice, Voice 2, Bass. */
   voiceNames?: string[];
   /** Optional analysis of each chord (tonal harmony): a label such as "V6/5" and the figures written under the bass. */
-  analysis?: { t: number; label?: string | null; figures?: string | null }[];
+  analysis?: { t: number; label?: string | null; figures?: string | null; root?: string | null }[];
+  /** The chordal 7th and the leading tone, for the tonal colour mode: the voice (0 = top), the onset in beats, which. */
+  roles?: { voice: number; t: number; role: 'seventh' | 'lt' }[];
+  /** How the score is coloured at first: by voice (counterpoint and fugue) or not at all. */
+  colourDefault?: 'plain' | 'voices';
 }
 
 // ---------- time ----------

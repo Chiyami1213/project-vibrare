@@ -2,6 +2,7 @@
 // mute / solo per voice, and an exercise mode that hides the upper voices.
 import { MAJOR_KEYS, MINOR_KEYS, isMajorKey, keyLabel, playableNotes, soundingAt, transposeExample } from './model';
 import type { ExampleData } from './model';
+import { roleMarks, voiceSlots } from './voices';
 import { drawExample } from './render';
 import type { Drawn } from './render';
 import { sampler } from '../sampler';
@@ -21,6 +22,18 @@ function h<K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Attrs = {}, ...
   return e;
 }
 
+const COLOUR_KEY = 'score-colour';
+type Colour = 'plain' | 'voices' | 'roles';
+const storedColour = (): Colour | null => {
+  try {
+    const v = localStorage.getItem(COLOUR_KEY);
+    return v === 'plain' || v === 'voices' || v === 'roles' ? v : null;
+  } catch {
+    return null;
+  }
+};
+const PATHS_KEY = 'score-voice-paths';
+
 const DEGREES_KEY = 'partimento-degrees';
 const degreesWanted = (): boolean => {
   try {
@@ -33,6 +46,10 @@ const degreesWanted = (): boolean => {
 const button = (label: string, cls = 'btn', attrs: Attrs = {}) => h('button', { type: 'button', class: cls, ...attrs }, label);
 
 export async function mountPlayer(root: HTMLElement, original: ExampleData): Promise<void> {
+  const roles = roleMarks(original);
+  if (roles.length > 0) original = { ...original, roles }; // the chordal 7th and the leading tone, for the colour mode
+  const canRoles = !!original.analysis?.some((a) => a.root);
+  const slots = voiceSlots(original.parts);
   const upperCount = original.parts - 1;
   const voiceName = (i: number) => original.voiceNames?.[i] ?? (i === upperCount ? 'Bass' : upperCount === 1 ? 'Upper Voice' : `Voice ${i + 1}`);
 
@@ -44,6 +61,17 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
     muted: new Set<number>(),
     solo: null as number | null,
     step: null as number | null,
+    colour: ((): Colour => {
+      const c = storedColour() ?? original.colourDefault ?? 'plain';
+      return c === 'roles' && !canRoles ? 'plain' : c;
+    })(),
+    paths: ((): boolean => {
+      try {
+        return localStorage.getItem(PATHS_KEY) !== 'off';
+      } catch {
+        return true;
+      }
+    })(),
   };
   let current = original;
   let drawn: Drawn | null = null;
@@ -71,6 +99,11 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
   const degreesBtn = button('Scale Degrees', 'seg-btn', { 'aria-pressed': String(degreesWanted()) });
 
   const voiceBox = h('div', { class: 'pl-voices' });
+  const colourBtns = (['plain', 'voices', ...(canRoles ? ['roles'] : [])] as Colour[]).map((c) =>
+    button(c === 'plain' ? 'Plain' : c === 'voices' ? 'Voices' : '7th & LT', 'seg-btn', { 'aria-pressed': String(state.colour === c), 'data-colour': c }),
+  );
+  const pathsBtn = button('Voice Paths', 'seg-btn', { 'aria-pressed': String(state.paths), title: 'a thin line through the notes of each voice' });
+  const legend = h('div', { class: 'pl-legend', 'aria-label': 'Voices and their colours' });
 
   root.classList.add('pl-ready');
   root.setAttribute('tabindex', '0');
@@ -80,6 +113,8 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
     h('div', { class: 'pl-row' }, playBtn, stopBtn, loopBtn, h('label', { class: 'pl-inline' }, 'Tempo ', bpmIn, ' ', bpmOut)),
     h('div', { class: 'pl-row' }, h('span', { class: 'pl-label' }, 'Step'), prevBtn, nextBtn, stepOut),
     h('div', { class: 'pl-row' }, ...(original.noDegrees ? [] : [h('label', { class: 'pl-inline' }, 'Key ', keySel)]), ...(original.parts > 1 && !original.noDegrees ? [exerciseBtn] : []), ...(original.noDegrees ? [] : [degreesBtn])),
+    h('div', { class: 'pl-row' }, h('span', { class: 'pl-label' }, 'Colour'), ...colourBtns, pathsBtn),
+    legend,
     voiceBox,
     note,
     status,
@@ -96,7 +131,38 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
     return !state.muted.has(voice);
   };
 
+  function applyColour() {
+    if (!drawn) return;
+    const c = drawn.svg.classList;
+    c.toggle('colour-voices', state.colour === 'voices');
+    c.toggle('colour-roles', state.colour === 'roles');
+    c.toggle('show-paths', state.colour === 'voices' && state.paths);
+    colourBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.colour === state.colour)));
+    pathsBtn.hidden = state.colour !== 'voices';
+    legend.hidden = state.colour !== 'voices';
+    for (const sp of drawn.spans) {
+      const play = () => void playSpan(sp.from, sp.to);
+      sp.el.addEventListener('click', play);
+      sp.el.addEventListener('keydown', (e) => (e as KeyboardEvent).key === 'Enter' && play());
+    }
+  }
+
+  function buildLegend() {
+    legend.replaceChildren(
+      ...Array.from({ length: original.parts }, (_, i) => {
+        const chip = h('button', { type: 'button', class: 'pl-chip', 'aria-pressed': String(state.solo === i), title: 'hear this voice alone' });
+        chip.append(h('span', { class: `swatch voice-bg-${slots[i]}` }), voiceName(i));
+        chip.addEventListener('click', () => {
+          state.solo = state.solo === i ? null : i;
+          buildVoiceButtons();
+        });
+        return chip;
+      }),
+    );
+  }
+
   function buildVoiceButtons() {
+    buildLegend();
     voiceBox.replaceChildren(
       ...Array.from({ length: original.parts }, (_, i) => {
         const mute = button('Mute', 'seg-btn', { 'aria-pressed': String(state.muted.has(i)) });
@@ -120,6 +186,7 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
     current = t.example;
     const width = Math.max(320, Math.floor(score.clientWidth || root.clientWidth || 700));
     drawn = drawExample(score, current, { width, showUpper: state.showUpper });
+    applyColour();
     note.textContent = t.overflow > 0 ? 'This key needs a triple sharp or flat in places, which the score shows as a double.' : '';
     state.step = null;
   }
@@ -146,6 +213,7 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
     playing = false;
     playBtn.textContent = '▶ Play';
     drawn?.highlight(null);
+    drawn?.glow(null);
   }
 
   async function play() {
@@ -169,6 +237,7 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
           if (s.beat <= beats + 1e-6) idx = i;
         });
         drawn.highlight(beats >= 0 && beats < total ? idx : null);
+        drawn.glow(beats >= 0 && beats < total ? beats : null);
       }
       if (beats >= total + 0.4) {
         if (state.loop) void play();
@@ -178,6 +247,21 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
+  }
+
+  /** Play the stretch of a crossing or overlap, with a beat on either side. */
+  async function playSpan(from: number, to: number) {
+    if (!(await ensureSound())) return;
+    stopPlayback();
+    const ac = sampler.context;
+    const beat = 60 / state.bpm;
+    const a = Math.max(0, from - 1);
+    const b = to + 1;
+    const at = ac.currentTime + 0.08;
+    for (const n of playableNotes(current)) {
+      if (!audible(n.voice) || n.start + n.dur <= a || n.start >= b) continue;
+      sampler.play(n.midi, at + Math.max(0, n.start - a) * beat, Math.min(n.dur, b - n.start) * beat * 0.96, n.voice === upperCount ? 1 : 0.85);
+    }
   }
 
   async function step(delta: number) {
@@ -193,6 +277,27 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
   }
 
   // ---------- events ----------
+  colourBtns.forEach((b) =>
+    b.addEventListener('click', () => {
+      state.colour = b.dataset.colour as Colour;
+      try {
+        localStorage.setItem(COLOUR_KEY, state.colour);
+      } catch {
+        /* the choice is not remembered */
+      }
+      applyColour();
+    }),
+  );
+  pathsBtn.addEventListener('click', () => {
+    state.paths = !state.paths;
+    pathsBtn.setAttribute('aria-pressed', String(state.paths));
+    try {
+      localStorage.setItem(PATHS_KEY, state.paths ? 'on' : 'off');
+    } catch {
+      /* ignore */
+    }
+    applyColour();
+  });
   playBtn.addEventListener('click', () => (playing ? stopPlayback() : void play()));
   stopBtn.addEventListener('click', stopPlayback);
   loopBtn.addEventListener('click', () => {
