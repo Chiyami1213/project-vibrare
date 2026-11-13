@@ -89,7 +89,12 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
   const lay = (v: ExampleData['realized']['voices'][number]) => layoutVoice(v, ex.beatUnit, bar, bars);
 
   const rows: Row[] = [];
-  if (opts.showUpper) {
+  if (all.length === 1) {
+    // a single line (a scale or a melody): one staff, in the clef that fits its range
+    const octaves = all[0].filter((e) => e.pitch).map((e) => Number(/(-?\d)$/.exec(e.pitch!)![1]));
+    const mean = octaves.reduce((a, b) => a + b, 0) / Math.max(1, octaves.length);
+    rows.push({ clef: mean >= 4 ? 'treble' : 'bass', voices: [lay(bassVoice)] });
+  } else if (opts.showUpper) {
     rows.push({ clef: 'treble', voices: upper.slice(0, 2).map(lay) });
     rows.push({ clef: 'bass', voices: [...upper.slice(2).map(lay), lay(bassVoice)] });
   } else {
@@ -136,8 +141,8 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
   // The figures sit in one row under the bass staff. The row is pushed down far enough that the lowest bass
   // notes (ledger lines, or a stem that points down) never touch it.
   const LETTER_STEP: Record<string, number> = { c: 0, d: 1, e: 2, f: 3, g: 4, a: 5, b: 6 };
-  const BASS_BOTTOM_STEP = 2 * 7 + 4; // G2 sits on the bottom line of the bass staff; 5px per step
   const bassRow = rows.length - 1;
+  const BASS_BOTTOM_STEP = rows[bassRow].clef === 'treble' ? 4 * 7 + 2 : 2 * 7 + 4; // E4 / G2 sit on the bottom line; 5px per step
   let lowestReach = 0; // px below the bottom bass line
   for (let m = 0; m < bars; m++) {
     const probeBar = buildMeasure(m);
@@ -146,7 +151,8 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
       for (const key of b.note.getKeys()) {
         const [letter, octave] = key.split('/');
         const step = Number(octave) * 7 + (LETTER_STEP[letter[0].toLowerCase()] ?? 0);
-        const stemDown = rows[bassRow].voices.length === 2 ? b.voice === 1 : step >= 3 * 7 + 1;
+        const middleStep = rows[bassRow].clef === 'treble' ? 4 * 7 + 6 : 3 * 7 + 1; // B4 / D3: the middle line
+        const stemDown = rows[bassRow].voices.length === 2 ? b.voice === 1 : step >= middleStep;
         lowestReach = Math.max(lowestReach, (BASS_BOTTOM_STEP - step) * 5 + (stemDown ? 35 : 5));
       }
     }
@@ -212,8 +218,10 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
   const firstBar = (si: number) => modifiers(true, si === 0);
   const firstLineBar = (usable - firstBar(0)) / systems[0].length; // the width of an ordinary bar on line one
 
+  const hasLabels = slices.some((s) => s.label);
+  const labelRow = hasLabels ? 22 : 0; // room for the analysis row under the degrees
   const figDrop = Math.max(0, lowestReach - 12); // extra gap before the figure row
-  const sysHeight = SYSTEM_TOP + (hasTreble ? STAVE_GAP : 0) + STAVE_H + 38 + figDrop + figRows * FIG_ROW + 34;
+  const sysHeight = SYSTEM_TOP + (hasTreble ? STAVE_GAP : 0) + STAVE_H + 38 + figDrop + figRows * FIG_ROW + 34 + labelRow;
   const renderer = new Renderer(container as HTMLDivElement, Renderer.Backends.SVG);
   renderer.resize(opts.width, systems.length * sysHeight + 12);
   const ctx = renderer.getContext();
@@ -326,8 +334,9 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
     const top = at.sys * sysHeight + SYSTEM_TOP;
     const bassBottom = top + (hasTreble ? STAVE_GAP : 0) + STAVE_H;
     if (!onlyAtBass || s.bassStart) s.figures.forEach((f, i) => text(at.x, bassBottom + 30 + figDrop + i * FIG_ROW, f, 'fig'));
+    if (s.label) text(at.x, bassBottom + 30 + figDrop + figRows * FIG_ROW + 38, s.label, 'lab');
     if (s.degree && s.bassStart) text(at.x, bassBottom + 30 + figDrop + figRows * FIG_ROW + 16, s.degree, 'deg');
-    const bottom = bassBottom + 30 + figDrop + figRows * FIG_ROW + 24;
+    const bottom = bassBottom + 30 + figDrop + figRows * FIG_ROW + 24 + labelRow;
     boxes.push({ tick: s.tick, beat: s.beat, x: at.x, top: top - 4, bottom });
     const r = document.createElementNS(NS, 'rect');
     r.setAttribute('x', (at.x - 17).toFixed(1));

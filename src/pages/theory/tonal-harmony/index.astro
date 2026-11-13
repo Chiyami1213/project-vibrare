@@ -1,0 +1,36 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SubNav from '../../../components/content/SubNav.astro';
+import { BASE, PARTS, countExamples, countTopics } from '../../../data/tonal-harmony';
+import { titleCase } from '../../../scripts/title-case';
+
+const nav = [{ href: `${BASE}/`, label: 'Overview' }, ...PARTS.map((p) => ({ href: `${BASE}/${p.slug}/`, label: `${p.num}: ${titleCase(p.title)}` }))];
+---
+
+<Layout title="Tonal Harmony">
+  <main class="page-block wide">
+    <h1>Tonal Harmony</h1>
+    <SubNav items={nav} current={`${BASE}/`} label="Parts of tonal harmony" />
+    <p class="lead">
+      Tonal harmony from the beginning: scales, intervals and chords, then part writing and voice leading, dominant and
+      predominant chords, and chromaticism. {countTopics()} topics with {countExamples()} scores, each with its rules
+      and guidelines kept apart, so you can see what must hold and what is advice.
+    </p>
+    <ul class="pat-grid">
+      {
+        PARTS.map((p) => (
+          <li class="pat-tile">
+            <a href={`${BASE}/${p.slug}/`}>
+              <span class="pat-name">{p.num}: {titleCase(p.title)}</span>
+              <span class="pat-aka">{p.file.chapters.map((c) => `Ch. ${c.num} ${titleCase(c.title)}`).join(' · ')}</span>
+              <span class="pat-chips">
+                <span class="chip chip-accent">{p.file.topics.length} Topics</span>
+                <span class="chip">{p.file.topics.reduce((n, t) => n + (t.examples?.length ?? 0), 0)} Scores</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Layout>

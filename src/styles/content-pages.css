@@ -1,0 +1,40 @@
+/* Extra styles for the content pages (tonal harmony, counterpoint, fugue, HIP). Imported by the layout. */
+.chapter-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+
+.chapter-jump .seg-btn {
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.chip-error {
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+.example-error {
+  border-left: 3px solid #c0392b;
+  padding-left: 12px;
+}
+
+.topic-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.see-also {
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+}
+
+.topic-card .example {
+  margin-top: 16px;
+}

@@ -197,23 +197,6 @@ const hasScore = allExamples.length > 0;
 </main>
 
 <script>
-  // Mount each example's player when it comes into view (VexFlow and the player are loaded on demand).
-  const raw = document.getElementById('examples-data')?.textContent;
-  const data: Record<string, import('../../scripts/partimento/model').ExampleData> = raw ? JSON.parse(raw) : {};
-  const boxes = [...document.querySelectorAll<HTMLElement>('.player[data-example]')];
-  if (boxes.length) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (!e.isIntersecting) continue;
-          const el = e.target as HTMLElement;
-          io.unobserve(el);
-          const ex = data[el.dataset.example ?? ''];
-          if (ex) void import('../../scripts/partimento/player').then((m) => m.mountPlayer(el, ex));
-        }
-      },
-      { rootMargin: '300px' },
-    );
-    boxes.forEach((b) => io.observe(b));
-  }
+  import { mountExamples } from '../../scripts/partimento/mount';
+  mountExamples();
 </script>

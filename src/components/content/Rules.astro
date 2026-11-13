@@ -1,0 +1,55 @@
+---
+import { refSource, toItems } from '../../scripts/content';
+import type { ItemInput } from '../../scripts/content';
+
+interface Props {
+  rules?: ItemInput[];
+  guidelines?: ItemInput[];
+  /** headings for the two lists; leave out to show the badges only */
+  titles?: { rules?: string; guidelines?: string };
+  columns?: boolean;
+}
+const { rules, guidelines, titles, columns = false } = Astro.props;
+const r = toItems(rules);
+const g = toItems(guidelines);
+const TEXTBOOK = /^\((Sanguinetti|Burstein)\)\s*/;
+---
+
+{
+  (r.length > 0 || g.length > 0) && (
+    <div class:list={['rules-block', { 'two-col': columns && r.length > 0 && g.length > 0 }]}>
+      {
+        r.length > 0 && (
+          <section class="rule-list">
+            {titles?.rules && <h4 class="mini-title">{titles.rules}</h4>}
+            <ul>
+              {r.map((it) => (
+                <li>
+                  <span class="badge badge-rule">Rule</span> <Fragment set:html={it.html} />
+                  {it.refs.map((ref) => <span class={`ref-chip ref-${refSource(ref).toLowerCase()}`}>{ref}</span>)}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+      {
+        g.length > 0 && (
+          <section class="rule-list">
+            {titles?.guidelines && <h4 class="mini-title">{titles.guidelines}</h4>}
+            <ul>
+              {g.map((it) => (
+                <li>
+                  <span class="badge badge-guide">Guideline</span>
+                  {TEXTBOOK.test(it.html) && <span class="badge badge-textbook">Textbook</span>}
+                  <Fragment set:html={it.html.replace(TEXTBOOK, ' ')} />
+                  {it.refs.map((ref) => <span class={`ref-chip ref-${refSource(ref).toLowerCase()}`}>{ref}</span>)}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+    </div>
+  )
+}

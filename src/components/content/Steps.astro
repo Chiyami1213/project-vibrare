@@ -1,0 +1,16 @@
+---
+import { safeHtml } from '../../scripts/content';
+
+interface Props {
+  steps?: string[];
+}
+const { steps } = Astro.props;
+---
+
+{
+  steps && steps.length > 0 && (
+    <ol class="steps">
+      {steps.map((s) => <li><Fragment set:html={safeHtml(s)} /></li>)}
+    </ol>
+  )
+}

@@ -1,0 +1,23 @@
+---
+import { safeHtml } from '../../scripts/content';
+
+interface Props {
+  terms?: { term: string; def: string }[];
+}
+const { terms } = Astro.props;
+---
+
+{
+  terms && terms.length > 0 && (
+    <dl class="def-list">
+      {
+        terms.map((t) => (
+          <>
+            <dt><Fragment set:html={safeHtml(t.term)} /></dt>
+            <dd><Fragment set:html={safeHtml(t.def)} /></dd>
+          </>
+        ))
+      }
+    </dl>
+  )
+}

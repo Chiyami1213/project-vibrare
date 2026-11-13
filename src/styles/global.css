@@ -1698,6 +1698,15 @@ button.note-chip[aria-pressed='true'] {
   font-variant-numeric: lining-nums;
 }
 
+.score .lab {
+  font-size: 14px;
+  text-anchor: middle;
+  fill: currentColor;
+  stroke: none;
+  font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
+  font-style: italic;
+}
+
 .no-degrees .score .deg {
   display: none;
 }
@@ -1813,4 +1822,215 @@ button.note-chip[aria-pressed='true'] {
   .instrument-group .seg-group {
     flex-wrap: nowrap;
   }
+}
+
+/* ---------- Content pages: tonal harmony, counterpoint, fugue, HIP ---------- */
+.rules-block {
+  display: grid;
+  gap: 16px;
+  margin: 12px 0;
+}
+
+@media (min-width: 1000px) {
+  .rules-block.two-col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+.rule-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.rule-list li {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--tile);
+  line-height: 1.55;
+}
+
+.ref-chip {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  vertical-align: 1px;
+}
+
+.ref-lm {
+  border-style: dashed;
+}
+
+.def-list {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 6px 18px;
+  margin: 10px 0;
+}
+
+.def-list dt {
+  font-weight: 600;
+}
+
+.def-list dd {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .def-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  .def-list dd {
+    margin-bottom: 8px;
+  }
+}
+
+.data-figure {
+  margin: 12px 0;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.data-table thead th {
+  background: var(--tile);
+  white-space: nowrap;
+}
+
+.data-table tbody th {
+  font-weight: 600;
+  background: var(--tile);
+}
+
+.data-table.sticky-first tbody th,
+.data-table.sticky-first thead th:first-child {
+  position: sticky;
+  left: 0;
+}
+
+.table-note {
+  margin: 6px 0 0;
+  font-size: 0.85rem;
+}
+
+.steps {
+  margin: 10px 0;
+  padding-left: 1.4rem;
+  display: grid;
+  gap: 6px;
+}
+
+.subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 24px;
+}
+
+.subnav .seg-btn {
+  text-decoration: none;
+}
+
+.subnav .seg-btn[aria-current='page'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.topic-card {
+  margin: 0 0 24px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--tile);
+}
+
+.topic-card > h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 12px;
+  margin: 0 0 6px;
+  font-size: 1.2rem;
+}
+
+.topic-card .summary-text {
+  margin: 8px 0 12px;
+}
+
+.topic-card .rule-list li {
+  background: var(--bg);
+}
+
+.chapter-head {
+  margin: 40px 0 14px;
+}
+
+.chapter-head h2 {
+  margin: 0;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.lesson-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 0;
+}
+
+.lesson-card {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.pull-quote {
+  margin: 14px 0;
+  padding: 4px 0 4px 16px;
+  border-left: 3px solid var(--line);
+  font-style: italic;
+}
+
+.callout {
+  margin: 14px 0;
+  padding: 12px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+}
+
+.tool-todo {
+  margin: 12px 0;
+  padding: 10px 14px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 0.9rem;
 }

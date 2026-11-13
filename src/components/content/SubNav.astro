@@ -1,0 +1,12 @@
+---
+interface Props {
+  items: { href: string; label: string }[];
+  current: string;
+  label?: string;
+}
+const { items, current, label = 'Sections' } = Astro.props;
+---
+
+<nav class="subnav" aria-label={label}>
+  {items.map((i) => <a href={i.href} class="seg-btn" aria-current={i.href === current ? 'page' : undefined}>{i.label}</a>)}
+</nav>

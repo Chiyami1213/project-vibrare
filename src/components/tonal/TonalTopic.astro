@@ -1,0 +1,88 @@
+---
+import Rules from '../content/Rules.astro';
+import Terms from '../content/Terms.astro';
+import DataTable from '../content/DataTable.astro';
+import { safeHtml } from '../../scripts/content';
+import { titleCase } from '../../scripts/title-case';
+import { getTopic, lessonByNum, toolById, topicUrl, PLAYLIST } from '../../data/tonal-harmony';
+import type { Topic } from '../../data/tonal-harmony';
+
+interface Props {
+  topic: Topic;
+}
+const { topic: t } = Astro.props;
+const owner = import.meta.env.DEV; // verification notes are for the owner, in local development only
+const flagged = (t.verification.flags ?? []).length > 0 || t.verification.status !== 'verified';
+---
+
+<article class="topic-card" id={t.id}>
+  <h3>
+    {titleCase(t.title)}
+    <span class="chip">{titleCase(t.kind)}</span>
+    {owner && flagged && <span class="chip chip-galant" title="owner check">check ⚑</span>}
+  </h3>
+  <p class="summary-text"><Fragment set:html={safeHtml(t.summary)} /></p>
+  <Terms terms={t.terms} />
+  <Rules rules={t.rules} guidelines={t.guidelines} />
+  {(t.tables ?? []).map((tb) => <DataTable title={tb.title} columns={tb.columns} rows={tb.rows} note={tb.note} />)}
+
+  {
+    (t.examples ?? []).map((e) => (
+      <div class={`example${e.intent === 'error' ? ' example-error' : ''}`}>
+        <h4 class="mini-title">
+          {titleCase(e.title)}
+          {e.intent === 'error' && <span class="chip chip-error">Faulty on Purpose</span>}
+          {e.intent === 'demo' && <span class="chip">Demonstration</span>}
+        </h4>
+        <div class="player" data-example={e.id}></div>
+        {e.caption && <p class="caption"><Fragment set:html={safeHtml(e.caption)} /></p>}
+        {e.source && e.source.includes('builder') && <p class="muted-line table-note" title="composed to illustrate the progression in the notes">Voiced by the site builder.</p>}
+      </div>
+    ))
+  }
+
+  {
+    (t.tools ?? []).length > 0 && (
+      <p class="tool-todo">
+        Interactive tools for this topic, still to come: {(t.tools ?? []).map((id) => toolById(id)?.title ?? id).join(', ')}.
+      </p>
+    )
+  }
+
+  {
+    (t.seeAlso ?? []).length > 0 && (
+      <p class="see-also">
+        See also:{' '}
+        {(t.seeAlso ?? []).map((id, i) => (
+          <>
+            {i > 0 && ' · '}
+            <a href={topicUrl(id)}>{getTopic(id) ? titleCase(getTopic(id)!.title) : id}</a>
+          </>
+        ))}
+      </p>
+    )
+  }
+
+  <footer class="topic-sources">
+    {t.sources.notes && <span>Notes: {t.sources.notes}</span>}
+    {t.sources.textbook && <span>Aldwell, Schachter and Cadwallader, 5th ed.: {t.sources.textbook}</span>}
+    {t.sources.textbook2 && <span>Burstein and Straus, 2nd ed.: {t.sources.textbook2}</span>}
+    {
+      (t.sources.video ?? []).map((n) => {
+        const l = lessonByNum(n);
+        return <a href={l?.url ?? PLAYLIST} target="_blank" rel="noopener noreferrer">Lesson {n}</a>;
+      })
+    }
+  </footer>
+
+  {
+    owner && (
+      <section class="owner-box">
+        <h4 class="mini-title">Owner Check (Local Only)</h4>
+        <p>Status: <strong>{t.verification.status}</strong></p>
+        {t.verification.checks.length > 0 && <ul>{t.verification.checks.map((c) => <li>{c}</li>)}</ul>}
+        {(t.verification.flags ?? []).length > 0 && <ul class="flags">{t.verification.flags!.map((f) => <li>{f}</li>)}</ul>}
+      </section>
+    )
+  }
+</article>

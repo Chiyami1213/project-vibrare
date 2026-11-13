@@ -1,0 +1,61 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SubNav from '../../../components/content/SubNav.astro';
+import TonalTopic from '../../../components/tonal/TonalTopic.astro';
+import { BASE, PARTS, PLAYLIST, exampleData, lessonByNum } from '../../../data/tonal-harmony';
+import { titleCase } from '../../../scripts/title-case';
+
+export function getStaticPaths() {
+  return PARTS.map((part) => ({ params: { part: part.slug }, props: { part } }));
+}
+
+const { part } = Astro.props;
+const nav = [{ href: `${BASE}/`, label: 'Overview' }, ...PARTS.map((p) => ({ href: `${BASE}/${p.slug}/`, label: `${p.num}: ${titleCase(p.title)}` }))];
+const examples = Object.fromEntries(part.file.topics.flatMap((t) => (t.examples ?? []).map((e) => [e.id, exampleData(e)])));
+---
+
+<Layout title={`Tonal Harmony: ${titleCase(part.title)}`}>
+  <main class="page-block wide">
+    <h1>Tonal Harmony</h1>
+    <SubNav items={nav} current={`${BASE}/${part.slug}/`} label="Parts of tonal harmony" />
+    <h2 class="section-title">{part.num}: {titleCase(part.title)}</h2>
+    <p class="lead">Notes pages {part.notesPages}. {part.file.topics.length} topics.</p>
+
+    <nav class="chapter-jump" aria-label="Chapters of this part">
+      {part.file.chapters.map((c) => <a class="seg-btn" href={`#${c.id}`}>Ch. {c.num} {titleCase(c.title)}</a>)}
+    </nav>
+
+    {
+      part.file.chapters.map((c) => (
+        <section id={c.id}>
+          <header class="chapter-head">
+            <p class="eyebrow">Chapter {c.num} · notes pages {c.notesPages}</p>
+            <h2>{titleCase(c.title)}</h2>
+            {
+              c.video.length > 0 && (
+                <div class="lesson-cards">
+                  {c.video.map((n) => {
+                    const l = lessonByNum(n);
+                    return (
+                      <a class="lesson-card" href={l?.url ?? PLAYLIST} target="_blank" rel="noopener noreferrer" title={l?.title ?? 'open the playlist'}>
+                        ▶ Lesson {n}
+                      </a>
+                    );
+                  })}
+                </div>
+              )
+            }
+          </header>
+          {part.file.topics.filter((t) => t.chapter === c.id).map((t) => <TonalTopic topic={t} />)}
+        </section>
+      ))
+    }
+
+    <script type="application/json" id="examples-data" is:inline set:html={JSON.stringify(examples)} />
+  </main>
+</Layout>
+
+<script>
+  import { mountExamples } from '../../../scripts/partimento/mount';
+  mountExamples();
+</script>

@@ -34,7 +34,7 @@ const button = (label: string, cls = 'btn', attrs: Attrs = {}) => h('button', { 
 
 export async function mountPlayer(root: HTMLElement, original: ExampleData): Promise<void> {
   const upperCount = original.parts - 1;
-  const voiceName = (i: number) => (i === upperCount ? 'Bass' : upperCount === 1 ? 'Upper Voice' : `Voice ${i + 1}`);
+  const voiceName = (i: number) => original.voiceNames?.[i] ?? (i === upperCount ? 'Bass' : upperCount === 1 ? 'Upper Voice' : `Voice ${i + 1}`);
 
   const state = {
     key: original.key,
@@ -79,7 +79,7 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
     score,
     h('div', { class: 'pl-row' }, playBtn, stopBtn, loopBtn, h('label', { class: 'pl-inline' }, 'Tempo ', bpmIn, ' ', bpmOut)),
     h('div', { class: 'pl-row' }, h('span', { class: 'pl-label' }, 'Step'), prevBtn, nextBtn, stepOut),
-    h('div', { class: 'pl-row' }, h('label', { class: 'pl-inline' }, 'Key ', keySel), exerciseBtn, degreesBtn),
+    h('div', { class: 'pl-row' }, h('label', { class: 'pl-inline' }, 'Key ', keySel), ...(original.parts > 1 ? [exerciseBtn] : []), degreesBtn),
     voiceBox,
     note,
     status,

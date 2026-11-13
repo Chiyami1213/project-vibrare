@@ -21,6 +21,10 @@ export interface ExampleData {
   parts: number; // voices including the bass
   cross?: boolean;
   realized: { voiceOrder: string; lengthBeats: number; voices: RealizedEvent[][] };
+  /** Names of the voices, top to bottom (S, A, T, B); without them the player says Upper voice, Voice 2, Bass. */
+  voiceNames?: string[];
+  /** Optional analysis of each chord (tonal harmony): a label such as "V6/5" and the figures written under the bass. */
+  analysis?: { t: number; label?: string | null; figures?: string | null }[];
 }
 
 // ---------- time ----------
@@ -169,6 +173,14 @@ export interface Slice {
   figures: string[]; // reduced figure stack, e.g. ["♯6", "3"]
   degree: string; // circled bass degree
   bassStart: boolean; // a new bass note starts here
+  label?: string; // analysis label (Roman numeral) when the example has an analysis
+}
+
+/** Figures of an analysed chord as a stack: "5/3" and "8/5/3" need none, "6/3" is written "6", the rest as they are. */
+export function figuresFromAnalysis(f: string | null | undefined): string[] {
+  if (!f || f === '5/3' || f === '8/5/3') return [];
+  if (f === '6/3') return ['6'];
+  return f.split('/');
 }
 
 const covers = (ev: RealizedEvent, t: number) => ev.t <= t + 1e-9 && t < ev.t + ev.d - 1e-9;
@@ -181,12 +193,14 @@ export function slicesOf(ex: ExampleData): Slice[] {
   return onsets.map((t) => {
     const bassEv = bass.find((e) => covers(e, t));
     const figs = voices.slice(0, -1).map((v) => v.find((e) => covers(e, t))).filter((e) => e && !e.rest).map((e) => e!.fig);
+    const an = ex.analysis?.find((a) => Math.abs(a.t - t) < 1e-9);
     return {
       tick: Math.round(t * tpb),
       beat: t,
-      figures: figureStack(figs),
+      figures: ex.analysis ? figuresFromAnalysis(an?.figures) : figureStack(figs),
       degree: bassEv?.pitch ? degreeLabel(bassEv.pitch, ex.key) : '',
       bassStart: bass.some((e) => Math.abs(e.t - t) < 1e-9),
+      label: an?.label ?? undefined,
     };
   });
 }

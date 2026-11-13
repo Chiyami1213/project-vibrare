@@ -1,0 +1,28 @@
+---
+import { safeHtml } from '../../scripts/content';
+import { titleCase } from '../../scripts/title-case';
+
+interface Props {
+  title?: string;
+  columns: string[];
+  rows: string[][];
+  note?: string;
+  stickyFirst?: boolean;
+}
+const { title, columns, rows, note, stickyFirst = false } = Astro.props;
+---
+
+<figure class="data-figure">
+  {title && <figcaption class="mini-title">{titleCase(title)}</figcaption>}
+  <div class="table-scroll">
+    <table class:list={['data-table', { 'sticky-first': stickyFirst }]}>
+      <thead>
+        <tr>{columns.map((c) => <th scope="col"><Fragment set:html={safeHtml(c)} /></th>)}</tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => <tr>{r.map((c, i) => (i === 0 ? <th scope="row"><Fragment set:html={safeHtml(c)} /></th> : <td><Fragment set:html={safeHtml(c)} /></td>))}</tr>)}
+      </tbody>
+    </table>
+  </div>
+  {note && <p class="muted-line table-note"><Fragment set:html={safeHtml(note)} /></p>}
+</figure>
