@@ -1,0 +1,235 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { INDEX, PARTS } from '../../data/tonal-harmony';
+import { titleCase } from '../../scripts/title-case';
+
+// A few examples from the tonal-harmony pack to start from.
+const WANTED = ['prog-major', 'open-position', 'err-par58', 'err-contrary'];
+const presets = PARTS.flatMap((p) => p.file.topics.flatMap((t) => t.examples ?? []))
+  .filter((e) => WANTED.includes(e.id) && e.parts === 4)
+  .map((e) => ({ id: e.id, title: e.title, key: e.key, notation: e.notation, intent: e.intent }));
+const KEYS = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'Db', 'Ab', 'Eb', 'Bb', 'F', 'a', 'e', 'b', 'f#', 'c#', 'g#', 'eb', 'bb', 'f', 'c', 'g', 'd'];
+const keyName = (k: string) => `${k[0].toUpperCase()}${k.slice(1).replace('#', '♯').replace(/b$/, '♭')} ${k === k.toUpperCase() ? 'major' : 'minor'}`;
+const meaning = INDEX.checks.map((c) => ({ type: c.type, level: c.level, label: c.label }));
+---
+
+<Layout title="SATB">
+  <main class="page-block wide">
+    <h1>SATB</h1>
+    <p class="lead">
+      Write a chord progression for four voices, soprano, alto, tenor and bass, and the checker marks every place where
+      it breaks a rule of part writing. The levels follow the checklist in the notes, from white (least serious) to red
+      (most serious). Type each note as a letter, an optional <strong>#</strong> or <strong>b</strong>, and the octave
+      (<code>E5</code>, <code>F#4</code>, <code>Bb3</code>). Use <code>-</code> to hold the note before and <code>_</code> for a rest.
+    </p>
+
+    <div class="calc-form">
+      <div class="field">
+        <label class="field-label" for="satb-key">Key</label>
+        <select id="satb-key">{KEYS.map((k) => <option value={k}>{keyName(k)}</option>)}</select>
+      </div>
+      <div class="field">
+        <label class="field-label" for="satb-preset">Start from</label>
+        <select id="satb-preset">
+          <option value="">An empty progression</option>
+          {presets.map((p) => <option value={p.id}>{titleCase(p.title)}{p.intent === 'error' ? ' (faulty on purpose)' : ''}</option>)}
+        </select>
+      </div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="data-table satb-grid" id="satb-grid" aria-label="The four voices, chord by chord"></table>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn" id="satb-add">Add a Chord</button>
+      <button type="button" class="btn" id="satb-remove">Remove the Last Chord</button>
+    </div>
+
+    <p id="satb-message" class="muted-line" role="status"></p>
+
+    <section class="result" aria-live="polite">
+      <h2 class="section-title">What the Checker Finds</h2>
+      <p id="satb-summary" class="muted-line"></p>
+      <ul id="satb-issues" class="checker-list"></ul>
+    </section>
+
+    <section>
+      <h2 class="section-title">The Score</h2>
+      <div id="satb-score"></div>
+    </section>
+
+    <section>
+      <h2 class="section-title">The Levels</h2>
+      <ul class="checker-list">
+        {
+          ['white', 'blue', 'green', 'yellow', 'orange', 'red'].map((lv) => (
+            <li>
+              <span class={`chip level level-${lv}`}>{titleCase(lv)} Level</span>
+              <span>{meaning.filter((m) => m.level === lv).map((m) => m.label).join(' · ')}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <script type="application/json" id="satb-data" is:inline set:html={JSON.stringify({ presets, meaning })} />
+  </main>
+</Layout>
+
+<script>
+  import { check, checkExample, realize, toPlayer, parse } from '../../scripts/harmony/satb';
+  import type { Issue } from '../../scripts/harmony/satb';
+  import type { ExampleData } from '../../scripts/partimento/model';
+
+  const data = JSON.parse(document.getElementById('satb-data')!.textContent!) as {
+    presets: { id: string; title: string; key: string; notation: string; intent: string }[];
+    meaning: { type: string; level: string; label: string }[];
+  };
+  const VOICES = ['S', 'A', 'T', 'B'];
+  interface Column {
+    label: string;
+    dur: string;
+    cells: string[];
+  }
+  let columns: Column[] = [];
+
+  const grid = document.getElementById('satb-grid') as HTMLTableElement;
+  const keySel = document.getElementById('satb-key') as HTMLSelectElement;
+  const presetSel = document.getElementById('satb-preset') as HTMLSelectElement;
+  const message = document.getElementById('satb-message')!;
+  const summary = document.getElementById('satb-summary')!;
+  const issuesEl = document.getElementById('satb-issues')!;
+  const scoreEl = document.getElementById('satb-score')!;
+
+  const blank = (): Column => ({ label: '', dur: '1', cells: ['', '', '', ''] });
+
+  function renderGrid() {
+    grid.replaceChildren();
+    const head = grid.createTHead().insertRow();
+    head.append(Object.assign(document.createElement('th'), { textContent: '' }));
+    columns.forEach((_, i) => head.append(Object.assign(document.createElement('th'), { textContent: `Chord ${i + 1}` })));
+    const body = grid.createTBody();
+    const field = (value: string, label: string, onInput: (v: string) => void, width = '4.5rem') => {
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = value;
+      input.setAttribute('aria-label', label);
+      input.autocomplete = 'off';
+      input.spellcheck = false;
+      input.style.width = width;
+      input.addEventListener('input', () => onInput(input.value.trim()));
+      return input;
+    };
+    const rowFor = (title: string, make: (c: Column, i: number) => HTMLElement) => {
+      const tr = body.insertRow();
+      tr.append(Object.assign(document.createElement('th'), { scope: 'row', textContent: title }));
+      columns.forEach((c, i) => tr.insertCell().append(make(c, i)));
+    };
+    rowFor('Roman numeral', (c, i) => field(c.label, `Chord ${i + 1}: Roman numeral`, (v) => ((c.label = v), schedule()), '5.5rem'));
+    VOICES.forEach((v, k) => rowFor(v, (c, i) => field(c.cells[k], `Chord ${i + 1}: ${v}`, (x) => ((c.cells[k] = x), schedule()))));
+    rowFor('Beats', (c, i) => field(c.dur, `Chord ${i + 1}: beats`, (v) => ((c.dur = v), schedule()), '3rem'));
+  }
+
+  const notation = () => columns.map((c) => `${c.label ? c.label + ':' : ''}${c.cells.join(',')}${c.dur && c.dur !== '1' ? '@' + c.dur : ''}`).join(' ');
+
+  let timer = 0;
+  function schedule() {
+    window.clearTimeout(timer);
+    timer = window.setTimeout(update, 350);
+  }
+
+  const levelRank = ['white', 'blue', 'green', 'yellow', 'orange', 'red'];
+  const label = (type: string) => data.meaning.find((m) => m.type === type)?.label ?? type;
+  const title = (s: string) => s[0].toUpperCase() + s.slice(1);
+
+  function showIssues(issues: Issue[]) {
+    issuesEl.replaceChildren();
+    if (issues.length === 0) {
+      summary.textContent = 'No faults found. Every rule of the checklist is kept.';
+      return;
+    }
+    summary.textContent = `${issues.length} point${issues.length > 1 ? 's' : ''} to look at, most serious first.`;
+    [...issues]
+      .sort((a, b) => levelRank.indexOf(b.level) - levelRank.indexOf(a.level) || a.beat - b.beat)
+      .forEach((i) => {
+        const li = document.createElement('li');
+        const chip = Object.assign(document.createElement('span'), { className: `chip level level-${i.level}`, textContent: `${title(i.level)} Level` });
+        const strong = Object.assign(document.createElement('strong'), { textContent: label(i.type) });
+        const where = Object.assign(document.createElement('span'), {
+          className: 'muted-line',
+          textContent: `beat ${i.beat + 1}${i.voices ? ' · ' + (Array.isArray(i.voices) ? i.voices.join(' and ') : i.voices) : ''}`,
+        });
+        li.append(chip, strong, where, Object.assign(document.createElement('span'), { textContent: i.detail }));
+        issuesEl.append(li);
+      });
+  }
+
+  async function update() {
+    const filled = columns.filter((c) => c.cells.every((x) => x !== ''));
+    message.textContent = '';
+    if (filled.length === 0) {
+      message.textContent = 'Fill in all four voices of at least one chord to see the score and the checks.';
+      issuesEl.replaceChildren();
+      summary.textContent = '';
+      scoreEl.replaceChildren();
+      return;
+    }
+    if (filled.length !== columns.length) message.textContent = 'Chords with an empty voice are left out for now.';
+    try {
+      const text = filled.map((c) => `${c.label ? c.label + ':' : ''}${c.cells.join(',')}${c.dur && c.dur !== '1' ? '@' + c.dur : ''}`).join(' ');
+      const real = realize(text);
+      const issues = check(real);
+      showIssues(issues);
+      const p = toPlayer(real);
+      const ex: ExampleData = {
+        id: 'satb',
+        title: 'Your progression',
+        key: keySel.value,
+        meter: '4/4',
+        beatUnit: 'quarter',
+        parts: 4,
+        cross: true,
+        realized: { voiceOrder: 'top→bottom', lengthBeats: real.length, voices: p.voices },
+        voiceNames: VOICES,
+        analysis: p.slices.map((s) => ({ t: s.t, label: s.label, figures: s.figures })),
+      };
+      const box = document.createElement('div');
+      box.className = 'player';
+      scoreEl.replaceChildren(box);
+      const { mountPlayer } = await import('../../scripts/partimento/player');
+      await mountPlayer(box, ex);
+    } catch (e) {
+      issuesEl.replaceChildren();
+      summary.textContent = '';
+      message.textContent = `A note could not be read: ${(e as Error).message.replace(/^Error: /, '')}`;
+    }
+  }
+
+  function load(id: string) {
+    const p = data.presets.find((x) => x.id === id);
+    if (!p) {
+      columns = [blank(), blank(), blank(), blank()];
+    } else {
+      keySel.value = p.key;
+      columns = parse(p.notation).map((s) => ({ label: s.label ?? '', dur: String(s.dur), cells: s.voices }));
+    }
+    renderGrid();
+    void update();
+  }
+
+  document.getElementById('satb-add')!.addEventListener('click', () => {
+    columns.push(blank());
+    renderGrid();
+  });
+  document.getElementById('satb-remove')!.addEventListener('click', () => {
+    if (columns.length > 1) columns.pop();
+    renderGrid();
+    schedule();
+  });
+  presetSel.addEventListener('change', () => load(presetSel.value));
+  keySel.addEventListener('change', schedule);
+  void notation; // (kept for debugging in the console)
+  presetSel.value = data.presets.some((p) => p.id === 'prog-major') ? 'prog-major' : '';
+  load(presetSel.value);
+  void checkExample;
+</script>

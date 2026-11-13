@@ -44,7 +44,7 @@ function note(ac: AudioContext, out: AudioNode, midi: number, start: number, dur
 /** Play the pitches (ascending MIDI numbers). Returns how long the sound lasts, in seconds. */
 export async function playChord(midis: number[], mode: PlayMode, timing?: { step?: number; dur?: number }): Promise<number> {
   try {
-    await sampler.load();
+    await sampler.activate();
   } catch {
     return playSynthChord(midis, mode, timing); // samples unavailable (offline?)
   }

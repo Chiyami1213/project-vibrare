@@ -150,6 +150,7 @@ import { INSTRUMENTS, INSTRUMENT_GROUPS } from '../scripts/instruments';
       b.addEventListener('click', () => {
         saveAudioSettings({ instrument: b.dataset.instrument });
         showAudio();
+        void import('../scripts/sampler').then((m) => m.sampler.preload()); // start loading it at once
         document.getElementById('test-sound')!.click(); // let the visitor hear the choice straight away
       }),
     );

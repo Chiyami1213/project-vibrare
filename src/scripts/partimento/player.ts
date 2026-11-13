@@ -60,7 +60,7 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
   const stopBtn = button('■ Stop', 'btn');
   const loopBtn = button('Loop', 'seg-btn', { 'aria-pressed': 'false' });
   const bpmIn = h('input', { type: 'range', min: 30, max: 140, step: 1, value: state.bpm, class: 'pl-range', 'aria-label': 'Tempo' });
-  const bpmOut = h('output', {}, `${state.bpm} beats/min`);
+  const bpmOut = h('output', {}, `${state.bpm} bpm`);
 
   const prevBtn = button('◀', 'btn', { 'aria-label': 'Previous chord' });
   const nextBtn = button('▶', 'btn', { 'aria-label': 'Next chord' });
@@ -125,10 +125,13 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
   }
 
   async function ensureSound(): Promise<boolean> {
-    if (sampler.ready) return true;
+    if (sampler.ready) {
+      await sampler.activate(); // the samples were preloaded: only the audio context needs starting
+      return true;
+    }
     status.textContent = `Loading the ${sampler.instrument.name.toLowerCase()}…`;
     try {
-      await sampler.load();
+      await sampler.activate();
       status.textContent = '';
       return true;
     } catch {
@@ -198,7 +201,7 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
   });
   bpmIn.addEventListener('input', () => {
     state.bpm = Number(bpmIn.value);
-    bpmOut.textContent = `${state.bpm} beats/min`;
+    bpmOut.textContent = `${state.bpm} bpm`;
   });
   bpmIn.addEventListener('change', () => {
     if (playing) void play(); // new tempo applies from the start

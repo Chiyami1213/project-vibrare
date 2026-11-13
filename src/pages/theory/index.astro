@@ -1,9 +1,29 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const topics = [
+  { href: '/theory/tonal-harmony/', name: 'Tonal Harmony', text: 'Scales, intervals and chords, part writing and voice leading, dominant and predominant chords, and chromaticism, with 154 playable scores.' },
+  { href: '/theory/partimento/', name: 'Partimento', text: 'The Neapolitan way of learning to play and compose from a bass line: moti del basso, schemata, cadences, the rule of the octave, suspensions, diminution and fugue.' },
+  { href: '/theory/counterpoint/', name: 'Counterpoint', text: 'Fux’s Gradus ad Parnassum: the five species in two, three and four voices, with the rules, the guidelines and Fux’s own examples.' },
+  { href: '/theory/hip/', name: 'Historically Informed Performance (HIP)', text: 'How to play baroque music on the flute and at the keyboard, after Quantz and C. P. E. Bach: tempo, rhythm, articulation, ornaments and dynamics.' },
+];
 ---
 
-<Layout title="Theory">
-  <main>
+<Layout title="Theory" description="Music theory study guides: tonal harmony, partimento, Fux counterpoint and fugue, and historically informed performance, with playable scores.">
+  <main class="page-block wide">
     <h1>Theory</h1>
+    <p class="lead">Study guides to the craft of composing and playing, each with its rules and its guidelines kept apart and playable scores beside them.</p>
+    <ul class="pat-grid">
+      {
+        topics.map((t) => (
+          <li class="pat-tile">
+            <a href={t.href}>
+              <span class="pat-name">{t.name}</span>
+              <span class="pat-aka">{t.text}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </main>
 </Layout>

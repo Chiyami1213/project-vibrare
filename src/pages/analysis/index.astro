@@ -1,9 +1,28 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const topics = [
+  { href: '/analysis/baroque/bach/', name: 'Bach', text: 'The 48 preludes and fugues of The Well-Tempered Clavier, BWV 846 to 893, with their keys and the number of voices in each fugue.' },
+  { href: '/analysis/touhou/', name: 'Touhou Project', text: 'The numbered games Th06 to Th20 and their soundtracks: where each of the 271 tracks is used, with its BPM and key where known.' },
+  { href: '/theory/partimento/fugue/analysis/', name: 'How to Analyse a Fugue', text: 'A method and case studies for analysing fugues, after Roberts, Badura-Skoda, Bodky, Gedalge and C. P. E. Bach.' },
+];
 ---
 
-<Layout title="Analysis">
-  <main>
+<Layout title="Analysis" description="Music analysis: Bach’s Well-Tempered Clavier, the soundtracks of the Touhou Project games, and a guide to analysing fugues.">
+  <main class="page-block wide">
     <h1>Analysis</h1>
+    <p class="lead">Looking closely at pieces and collections of music.</p>
+    <ul class="pat-grid">
+      {
+        topics.map((t) => (
+          <li class="pat-tile">
+            <a href={t.href}>
+              <span class="pat-name">{t.name}</span>
+              <span class="pat-aka">{t.text}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </main>
 </Layout>

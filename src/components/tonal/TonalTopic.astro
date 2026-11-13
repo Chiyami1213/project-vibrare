@@ -4,7 +4,7 @@ import Terms from '../content/Terms.astro';
 import DataTable from '../content/DataTable.astro';
 import { safeHtml } from '../../scripts/content';
 import { titleCase } from '../../scripts/title-case';
-import { getTopic, lessonByNum, toolById, topicUrl, PLAYLIST } from '../../data/tonal-harmony';
+import { INDEX, getTopic, lessonByNum, toolById, topicUrl, PLAYLIST } from '../../data/tonal-harmony';
 import type { Topic } from '../../data/tonal-harmony';
 
 interface Props {
@@ -36,6 +36,20 @@ const flagged = (t.verification.flags ?? []).length > 0 || t.verification.status
         </h4>
         <div class="player" data-example={e.id}></div>
         {e.caption && <p class="caption"><Fragment set:html={safeHtml(e.caption)} /></p>}
+        {
+          (e.checker ?? []).length > 0 && (
+            <ul class="checker-list" aria-label="What the part-writing checker finds">
+              {(e.checker ?? []).map((i) => (
+                <li>
+                  <span class={`chip level level-${i.level}`}>{titleCase(i.level)} Level</span>
+                  <strong>{INDEX.checks.find((c) => c.type === i.type)?.label ?? i.type}</strong>
+                  <span class="muted-line">beat {i.beat + 1}{i.voices ? ` · ${Array.isArray(i.voices) ? i.voices.join(' and ') : i.voices}` : ''}</span>
+                  <span>{i.detail}</span>
+                </li>
+              ))}
+            </ul>
+          )
+        }
         {e.source && e.source.includes('builder') && <p class="muted-line table-note" title="composed to illustrate the progression in the notes">Voiced by the site builder.</p>}
       </div>
     ))

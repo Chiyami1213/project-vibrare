@@ -7,12 +7,19 @@ import type { MenuLink } from '../components/MenuItem.astro';
 
 interface Props {
   title?: string;
+  /** one or two sentences for search results and link previews; a default is built from the title */
+  description?: string;
   noindex?: boolean;
 }
 
 const SITE = 'Vibrare';
-const { title, noindex = false } = Astro.props;
-const pageTitle = title ? `${title} · ${SITE}` : SITE;
+const SITE_DESCRIPTION =
+  'Vibrare is a music study archive: tonal harmony, partimento, counterpoint, fugue, historically informed performance, analysis and interactive music tools.';
+const { title, description, noindex = false } = Astro.props;
+const pageTitle = title ? `${title} · ${SITE}` : `${SITE}: Music Theory, Partimento, Counterpoint and Fugue`;
+const metaDescription = description ?? (title ? `${title}. ${SITE_DESCRIPTION}` : SITE_DESCRIPTION);
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://vibrare.pages.dev').href;
+const isHome = Astro.url.pathname === '/';
 
 // Menu: adding an item is one entry in `top` or `bottom`
 // (`icon` is a key of ICONS in components/MenuItem.astro; `children` makes sub-tabs).
@@ -72,6 +79,7 @@ const top: MenuLink[] = [
       { href: '/tools/scale-calculator/', label: 'Scale Calculator', icon: 'keys' },
       { href: '/tools/chord-calculator/', label: 'Chord Calculator', icon: 'chord' },
       { href: '/tools/circle-of-fifths/', label: 'Circle of Fifths', icon: 'cof' },
+      { href: '/tools/satb/', label: 'SATB', icon: 'group' },
     ],
   },
   {
@@ -94,9 +102,23 @@ const path = Astro.url.pathname;
 // tab (with its sub-tabs) instead of the main list. The back arrow returns to the main list.
 const norm = (p: string) => p.replace(/\/$/, '') || '/';
 const inside = (href: string) => norm(path) === norm(href) || norm(path).startsWith(norm(href) + '/');
-const sections = top.filter((i) => i.children?.length);
-const currentSection = sections.find((s) => inside(s.href));
-const initialView = currentSection ? currentSection.href : 'main';
+// A view for every item that has sub-tabs: the top-level tabs (back to the main list), and the sub-tabs that have
+// sub-tabs of their own, such as Partimento (back to Theory).
+interface MenuView {
+  id: string;
+  item: MenuLink;
+  parentId: string;
+  parentLabel: string;
+}
+const views: MenuView[] = top
+  .filter((i) => i.children?.length)
+  .flatMap((s) => [
+    { id: s.href, item: s, parentId: 'main', parentLabel: 'Main menu' },
+    ...s.children!.filter((c) => c.children?.length).map((c) => ({ id: c.href, item: c, parentId: s.href, parentLabel: s.label })),
+  ]);
+// the deepest view that holds the current page
+const currentView = views.filter((v) => inside(v.id)).sort((a, b) => b.id.length - a.id.length)[0];
+const initialView = currentView ? currentView.id : 'main';
 ---
 
 <!doctype html>
@@ -105,6 +127,17 @@ const initialView = currentSection ? currentSection.href : 'main';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
+    <meta name="description" content={metaDescription} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content={SITE} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    {isHome && <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebSite', name: SITE, url: canonical, description: SITE_DESCRIPTION })} />}
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
     <meta name="generator" content={Astro.generator} />
@@ -154,19 +187,19 @@ const initialView = currentSection ? currentSection.href : 'main';
         </ul>
       </div>
       {
-        sections.map((s) => (
-          <div class="view view-section" data-view-id={s.href} hidden={initialView !== s.href}>
+        views.map((v) => (
+          <div class="view view-section" data-view-id={v.id} data-parent={v.parentId} hidden={initialView !== v.id}>
             <ul class="rail-top">
               <li class="back-item">
-                <button type="button" class="back" aria-label="Back to main menu">
+                <button type="button" class="back" aria-label={`Back to ${v.parentLabel.toLowerCase()}`}>
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="m12 19-7-7 7-7" />
                     <path d="M19 12H5" />
                   </svg>
-                  <span class="label">Main menu</span>
+                  <span class="label">{v.parentLabel}</span>
                 </button>
               </li>
-              <MenuItem item={s} path={path} />
+              <MenuItem item={v.item} path={path} />
             </ul>
             <ul class="rail-bottom">
               {bottom.map((i) => <MenuItem item={i} path={path} />)}
@@ -197,10 +230,11 @@ const initialView = currentSection ? currentSection.href : 'main';
       }
       rail.querySelectorAll<HTMLButtonElement>('.back').forEach((b) =>
         b.addEventListener('click', () => {
-          const section = b.closest<HTMLElement>('.view')!.dataset.viewId!;
-          showView('main');
+          const view = b.closest<HTMLElement>('.view')!;
+          const parent = view.dataset.parent ?? 'main';
+          showView(parent);
           // keep keyboard focus in the menu: land on the tab we just left
-          rail.querySelector<HTMLAnchorElement>(`.view[data-view-id="main"] a[href="${section}"]`)?.focus();
+          rail.querySelector<HTMLAnchorElement>(`.view[data-view-id="${parent}"] a[href="${view.dataset.viewId}"]`)?.focus();
         }),
       );
       btn.addEventListener('click', () => setOpen(!rail.classList.contains('drawer-open')));

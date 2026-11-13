@@ -52,6 +52,10 @@
   }
 }
 
+.rulebox-grid.single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .rulebox-grid .rules-block {
   margin: 0 0 12px;
 }
@@ -194,4 +198,70 @@
 .hip-topic[hidden],
 .hip-group[hidden] {
   display: none;
+}
+
+/* the filter and the jump links under a heading need air between them */
+.field + .chapter-jump,
+.subnav + .chapter-jump,
+.lead + .chapter-jump,
+.section-title + .chapter-jump {
+  margin-top: 20px;
+}
+
+.chapter-jump {
+  margin-bottom: 20px;
+}
+
+/* the part-writing checker: its levels run from white (least serious) to red (most serious) */
+.checker-list {
+  margin: 8px 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.checker-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.level {
+  font-weight: 600;
+}
+
+.level-white {
+  border-color: var(--muted);
+  color: var(--fg);
+}
+
+.level-blue {
+  border-color: #4a90d9;
+  color: #4a90d9;
+}
+
+.level-green {
+  border-color: #2e9e5b;
+  color: #2e9e5b;
+}
+
+.level-yellow {
+  border-color: #b8a000;
+  color: #b8a000;
+}
+
+.level-orange {
+  border-color: #d9822b;
+  color: #d9822b;
+}
+
+.level-red {
+  border-color: #c0392b;
+  color: #c0392b;
 }

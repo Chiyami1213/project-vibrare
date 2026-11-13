@@ -1,4 +1,10 @@
 // Plays notes from recorded samples, using the instrument chosen in Settings (see instruments.ts).
+//
+// Loading is kept away from the moment of playing, so there is no lag after switching instrument:
+//  - the samples of the chosen instrument are fetched and decoded in the background as soon as a page that makes
+//    sound is open, and again whenever the choice changes (preload);
+//  - decoding uses an OfflineAudioContext, which needs no click, so it can happen before the visitor presses Play;
+//  - only the chosen instrument is kept in memory (decoded samples are large).
 import { getAudioSettings, outputGain } from './audio-settings';
 import { equalTemperamentRate, getInstrument } from './instruments';
 import type { Instrument } from './instruments';
@@ -17,6 +23,7 @@ export class Sampler {
   private ctx: AudioContext | null = null;
   private master: GainNode | null = null;
   private out: DynamicsCompressorNode | null = null;
+  private decoder: OfflineAudioContext | null = null;
   private sets = new Map<string, Sample[]>();
   private loading = new Map<string, Promise<void>>();
   private active: GainNode[] = [];
@@ -26,6 +33,7 @@ export class Sampler {
     return getInstrument(getAudioSettings().instrument);
   }
 
+  /** The audio context that plays the sound. Created on first use, which is normally inside a click. */
   get context(): AudioContext {
     if (!this.ctx) {
       const Ctor = window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
@@ -44,24 +52,35 @@ export class Sampler {
     return this.ctx;
   }
 
-  /** Download and decode the samples of the chosen instrument (1 to 3 MB, once). Call from a click so audio may start. */
+  private decode(data: ArrayBuffer): Promise<AudioBuffer> {
+    this.decoder ??= new OfflineAudioContext(1, 1, 44100);
+    return this.decoder.decodeAudioData(data);
+  }
+
+  /** Download and decode the samples of the chosen instrument (1 to 3 MB, once). Needs no click. */
   load(): Promise<void> {
     const inst = this.instrument;
     let p = this.loading.get(inst.id);
     if (!p) {
       p = (async () => {
-        const ac = this.context;
-        if (ac.state === 'suspended') await ac.resume();
         const base = `/audio/${inst.dir}/`;
         const manifest = (await (await fetch(`${base}manifest.json`)).json()) as { samples: SampleMeta[] };
         const samples = await Promise.all(
           manifest.samples.map(async (meta) => {
             const data = await (await fetch(base + meta.file)).arrayBuffer();
-            return { meta, buffer: await ac.decodeAudioData(data) };
+            return { meta, buffer: await this.decode(data) };
           }),
         );
         samples.sort((a, b) => a.meta.midi - b.meta.midi);
         this.sets.set(inst.id, samples);
+        // decoded samples are large: keep the instrument that is chosen, and let the others go
+        const keep = this.instrument.id;
+        for (const id of [...this.sets.keys()]) {
+          if (id !== keep && id !== inst.id) {
+            this.sets.delete(id);
+            this.loading.delete(id);
+          }
+        }
       })().catch((e) => {
         this.loading.delete(inst.id); // allow a retry
         throw e;
@@ -69,6 +88,19 @@ export class Sampler {
       this.loading.set(inst.id, p);
     }
     return p;
+  }
+
+  /** Start loading in the background. A failure is silent here; it shows when the visitor presses Play. */
+  preload(): void {
+    this.load().catch(() => {});
+  }
+
+  /** Make everything ready to sound: the samples, and a running audio context. Call it from a click. */
+  async activate(): Promise<AudioContext> {
+    await this.load();
+    const ac = this.context;
+    if (ac.state === 'suspended') await ac.resume();
+    return ac;
   }
 
   /** True when the chosen instrument is loaded. */
@@ -110,3 +142,16 @@ export class Sampler {
 
 /** One shared instance, so several examples on a page load the samples only once. */
 export const sampler = new Sampler();
+
+if (typeof window !== 'undefined') {
+  const later = (fn: () => void) => ('requestIdleCallback' in window ? window.requestIdleCallback(fn, { timeout: 2500 }) : window.setTimeout(fn, 600));
+  later(() => sampler.preload()); // a page that makes sound: have the chosen instrument ready before Play
+  let current = sampler.instrument.id;
+  window.addEventListener('audio-settings', () => {
+    const next = sampler.instrument.id;
+    if (next !== current) {
+      current = next;
+      sampler.preload(); // the choice changed: load the new instrument now, in the background
+    }
+  });
+}

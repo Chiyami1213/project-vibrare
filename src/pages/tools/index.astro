@@ -1,9 +1,30 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const tools = [
+  { href: '/tools/interval-calculator/', name: 'Interval Calculator', text: 'Pick a note and an interval and see the result on a staff, spelled the way a musician would write it.' },
+  { href: '/tools/scale-calculator/', name: 'Scale Calculator', text: 'Build any major, minor, modal or pentatonic scale on a staff and play it.' },
+  { href: '/tools/chord-calculator/', name: 'Chord Calculator', text: 'Chords from triads to 13ths with their inversions, a piano keyboard and playback.' },
+  { href: '/tools/circle-of-fifths/', name: 'Circle of Fifths', text: 'An interactive circle of fifths that plays each key and draws the shape of a chord.' },
+  { href: '/tools/satb/', name: 'SATB', text: 'Write a four-part progression and the checker marks every break of the rules of part writing.' },
+];
 ---
 
-<Layout title="Tools">
-  <main>
+<Layout title="Tools" description="Free interactive music theory tools: interval, scale and chord calculators, a circle of fifths and a four-part (SATB) part-writing checker.">
+  <main class="page-block wide">
     <h1>Tools</h1>
+    <p class="lead">Interactive music theory tools. They play with the instrument you choose in Settings.</p>
+    <ul class="pat-grid">
+      {
+        tools.map((t) => (
+          <li class="pat-tile">
+            <a href={t.href}>
+              <span class="pat-name">{t.name}</span>
+              <span class="pat-aka">{t.text}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </main>
 </Layout>

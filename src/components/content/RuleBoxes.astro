@@ -14,13 +14,17 @@ const guides = (boxes ?? []).filter((b) => b.kind === 'guidelines');
 
 {
   (boxes ?? []).length > 0 && (
-    <div class="rulebox-grid">
-      <div>
-        {rules.map((b) => <Rules rules={b.items} titles={{ rules: repairTitle(b.title) }} />)}
-      </div>
-      <div>
-        {guides.map((b) => <Rules guidelines={b.items} titles={{ guidelines: repairTitle(b.title) }} />)}
-      </div>
+    <div class:list={['rulebox-grid', { single: rules.length === 0 || guides.length === 0 }]}>
+      {rules.length > 0 && (
+        <div>
+          {rules.map((b) => <Rules rules={b.items} titles={{ rules: repairTitle(b.title) }} />)}
+        </div>
+      )}
+      {guides.length > 0 && (
+        <div>
+          {guides.map((b) => <Rules guidelines={b.items} titles={{ guidelines: repairTitle(b.title) }} />)}
+        </div>
+      )}
     </div>
   )
 }

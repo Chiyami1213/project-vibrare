@@ -17,7 +17,7 @@ const toolTitle = (id: string) => THEORY.tools.find((t) => t.id === id)?.title ?
 
 <section id={c.id} class="chapter">
   <header class="chapter-head">
-    <p class="eyebrow">{c.eyebrow}{c.pages && ` · ${c.pages}`}</p>
+    <p class="eyebrow">{c.eyebrow}{c.pages && !c.eyebrow.includes(c.pages) && ` · ${c.pages}`}</p>
     <h2>{titleCase(c.title)}</h2>
   </header>
 

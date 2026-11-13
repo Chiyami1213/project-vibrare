@@ -37,6 +37,13 @@ export function initHip(): void {
     activeButton = null;
   };
 
+  document.querySelectorAll<HTMLInputElement>('.hip-ex input[type=range]').forEach((r) =>
+    r.addEventListener('input', () => {
+      const out = r.parentElement?.querySelector('.hip-bpm');
+      if (out) out.textContent = `${r.value} bpm`;
+    }),
+  );
+
   document.querySelectorAll<HTMLButtonElement>('button[data-hip-play]').forEach((btn) => {
     btn.dataset.label = btn.textContent ?? '';
     btn.addEventListener('click', async () => {
@@ -49,7 +56,7 @@ export function initHip(): void {
       const tempo = Number(box.querySelector<HTMLInputElement>('input[type=range]')?.value ?? 60);
       const beat = 60 / tempo;
       try {
-        await sampler.load();
+        await sampler.activate();
       } catch {
         btn.textContent = 'The sound could not be loaded';
         return;
