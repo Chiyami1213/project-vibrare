@@ -30,10 +30,12 @@ open questions each pack lists for the owner are in that pack's own `VERIFICATIO
   timeline, people, glossary and quiz indexes, and the "History Background" panels at their places in the five other
   tabs (counterpoint, tonal harmony, partimento, fugue, HIP). Links run both ways; `tests/history.test.mjs` checks that
   every reference resolves.
-- **Not built yet:** the nine tools of this delivery. On the History page `mensural` and `row-matrix`; in the panels
-  `modes` (extends the mode explorer), `gamut`, `organum`, `tuning-lab` (extends the tonal tuning lab),
-  `fundamental-bass`, `tonnetz` and `ursatz`. Their specs and tests are in each pack's `history-background.json`
-  (`content/history/data/history.json` for the first two) and the working code in each pack's `tools/history-tools.js`.
+- **Tools:** all nine are built (`src/scripts/history-tools/`), with their tests in `tests/history-tools.test.mjs`: `mensural` and
+  `row-matrix` in the articles, and `modes`, `gamut`, `organum`, `tuning-lab`, `fundamental-bass`, `tonnetz` and `ursatz` in the
+  panels. Two differences from the packs: `modes` and `tuning-lab` are not merged into the existing `mode-explorer` (a different
+  chapter, with Fux's six cantus firmi) or a tonal tuning lab (none exists), so each stands alone in its panel; and the
+  fundamental-bass root finder prefers a perfect fifth over an augmented one, because the pack's tests need E–G–C read as C
+  (its reference code read it as E).
 - **`tools/validate.py` is not wired into the build** (there is no Python in the site's toolchain); the JavaScript tests
   check the same references instead.
 - **The articles' address** is `/theory/music-history/<id>/`, not `/history#<id>` as the brief suggests; the ids are the

@@ -27,6 +27,7 @@ const withWho = (xs: { text: string; who: string }[]) => xs.map((x) => ({ html: 
         {t.points.length > 0 && <ul class="bg-points">{t.points.map((p) => <li><Fragment set:html={safeHtml(p)} /></li>)}</ul>}
         <Rules rules={withWho(t.rules)} guidelines={withWho(t.guidelines)} columns />
         <Terms terms={t.terms} />
+        {t.tools.map((id) => <div class="tool-box" data-htool={id}><h4 class="mini-title">{titleCase(id.replace(/-/g, ' '))}</h4></div>)}
         <Quiz items={t.quiz} />
         <p class="bg-links">
           {t.historyArticles.map((id) => ARTICLES.get(id) && <a href={articleUrl(id)}>Read the history: {ARTICLES.get(id)!.short} →</a>)}
@@ -37,6 +38,8 @@ const withWho = (xs: { text: string; who: string }[]) => xs.map((x) => ({ html: 
 }
 
 <script>
+  import { mountHistoryTools } from '../../scripts/history-tools/mount';
+  mountHistoryTools();
   // a link to #bg-… opens the panel it points at
   const open = () => {
     const el = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;

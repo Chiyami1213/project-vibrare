@@ -894,3 +894,167 @@
     gap: 2px;
   }
 }
+
+/* ---------- History tools ---------- */
+.cell-bad {
+  color: #d1432f;
+  font-weight: 600;
+}
+
+.cell-pure {
+  color: #2e9e5b;
+  font-weight: 600;
+}
+
+.txt-field {
+  flex: 1 1 280px;
+}
+
+.txt-field .txt {
+  width: min(100%, 460px);
+}
+
+.subtool {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.mode-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.mode-info .kv {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.bg-more {
+  margin: 12px 0;
+}
+
+.bg-more summary {
+  cursor: pointer;
+}
+
+.rm {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 16px;
+}
+
+.rm-row {
+  display: grid;
+  grid-template-columns: 70px 110px minmax(160px, 260px) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.rm-svg {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+}
+
+.rm-l {
+  fill: var(--accent);
+}
+
+.rm-b {
+  fill: #d98a1c;
+}
+
+.mz-res {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin: 10px 0;
+}
+
+.msign {
+  stroke: var(--fg);
+  fill: var(--fg);
+}
+
+.tonnetz {
+  display: block;
+  width: 100%;
+  max-width: 620px;
+  height: auto;
+}
+
+.tri {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.tri.maj {
+  fill: rgb(91 75 219 / 0.08);
+}
+
+.tri.min {
+  fill: rgb(217 138 28 / 0.08);
+}
+
+.tri.on {
+  fill: rgb(46 158 91 / 0.45);
+}
+
+.tn {
+  fill: var(--tile);
+  stroke: var(--muted);
+}
+
+.tn.on {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.tnl {
+  text-anchor: middle;
+  fill: var(--fg);
+  font-size: 11px;
+  pointer-events: none;
+}
+
+.tn.on + .tnl {
+  fill: #fff;
+}
+
+.mtx th,
+.mtx td {
+  padding: 3px 5px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+button.tiny {
+  padding: 1px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: none;
+  color: var(--fg);
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+button.tiny:hover {
+  border-color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .rm-row {
+    grid-template-columns: 1fr auto;
+  }
+  .rm-row .rm-svg {
+    grid-column: 1 / -1;
+  }
+}

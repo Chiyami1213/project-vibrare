@@ -3,74 +3,11 @@
 import { MODES, analyze, buildExercise, cfLine, fromStep, ivl, midiOf, parse, solve } from './engine.js';
 import { RULE_NAMES } from './rules';
 import type { Issue, Voice } from './rules';
-import { marksOf } from './rules';
-import { scoreData, voiceNamesOf } from './score';
 import { getAudioSettings, outputGain } from '../audio-settings';
-import { mountPlayer } from '../partimento/player';
 import { sampler } from '../sampler';
 import { titleCase } from '../title-case';
 
-// ---------- small helpers ----------
-
-function h<K extends keyof HTMLElementTagNameMap>(tag: K, cls = '', text = ''): HTMLElementTagNameMap[K] {
-  const e = document.createElement(tag);
-  if (cls) e.className = cls;
-  if (text) e.textContent = text;
-  return e;
-}
-const NS = 'http://www.w3.org/2000/svg';
-function s<K extends keyof SVGElementTagNameMap>(tag: K, attrs: Record<string, string | number> = {}, parent?: Element): SVGElementTagNameMap[K] {
-  const e = document.createElementNS(NS, tag);
-  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, String(v));
-  parent?.append(e);
-  return e;
-}
-function button(label: string, onclick: () => void, cls = 'btn'): HTMLButtonElement {
-  const b = h('button', cls, label);
-  b.type = 'button';
-  b.addEventListener('click', onclick);
-  return b;
-}
-/** A row of exclusive choices (segmented control). */
-function choices(options: [string, string][], value: string, onpick: (v: string) => void, label: string): HTMLElement {
-  const wrap = h('div', 'chip-row');
-  wrap.setAttribute('role', 'group');
-  wrap.setAttribute('aria-label', label);
-  const bs = options.map(([v, t]) => {
-    const b = button(t, () => {
-      bs.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-      onpick(v);
-    }, 'seg-btn');
-    b.setAttribute('aria-pressed', String(v === value));
-    return b;
-  });
-  wrap.append(...bs);
-  return wrap;
-}
-const head = (box: HTMLElement, eyebrow: string, title: string, hint: string) => {
-  const hd = h('div', 'tool-head');
-  hd.append(h('span', 'eyebrow', eyebrow), h('strong', '', title), h('span', 'muted-line', hint));
-  box.replaceChildren(hd);
-};
-const flat = (p: string) => p.replace('b', '♭').replace('#', '♯');
-
-/** Sound a list of notes with the instrument chosen in Settings. */
-async function sound(notes: { midi: number; at: number; dur: number; level?: number }[]) {
-  const ac = await sampler.activate();
-  const t0 = ac.currentTime + 0.05;
-  for (const n of notes) sampler.play(n.midi, t0 + n.at, n.dur, n.level ?? 1);
-}
-
-/** Put a score (the shared Example Player) into `stage`, replacing the one there. */
-function showScore(stage: HTMLElement, voices: Voice[], title: string, marks: Issue[] = []) {
-  sampler.stop();
-  const fresh = h('div', 'player');
-  stage.replaceChildren(fresh);
-  void mountPlayer(fresh, { ...scoreData(`tool-${title}`, title, voices, voiceNamesOf(voices)), marks: marksOf(marks) });
-}
-
-const whole = (notes: string[], d = 1): Voice['notes'] => notes.map((p) => ({ p, d }));
-const pill = (text: string, ok: boolean) => Object.assign(h('span', `pill ${ok ? 'ok' : 'no'}`), { textContent: text });
+import { button, choices, flat, h, head, pill, s, showScore, sound, whole } from '../tool-kit';
 
 // ---------- motion lab ----------
 

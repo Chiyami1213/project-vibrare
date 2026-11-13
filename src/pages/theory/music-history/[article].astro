@@ -109,6 +109,8 @@ const intro = plain.length > 155 ? plain.slice(0, 152).replace(/\s+\S*$/, '') + 
         )
       }
 
+      {a.tools.map((id) => <div class="tool-box" data-htool={id}><h4 class="mini-title">{titleCase(id.replace(/-/g, ' '))}</h4></div>)}
+
       {quiz.length > 0 && (<><h3 class="mini-title">Quick Check</h3><Quiz items={quiz} /></>)}
     </article>
 
@@ -118,3 +120,8 @@ const intro = plain.length > 155 ? plain.slice(0, 152).replace(/\s+\S*$/, '') + 
     </nav>
   </main>
 </Layout>
+
+<script>
+  import { mountHistoryTools } from '../../../scripts/history-tools/mount';
+  mountHistoryTools();
+</script>
