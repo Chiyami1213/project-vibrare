@@ -1,0 +1,42 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import SubNav from '../../../../components/content/SubNav.astro';
+import FugueChapter from '../../../../components/fugue/FugueChapter.astro';
+import { BASE, GROUPS, THEORY, exampleData } from '../../../../data/fugue';
+import { titleCase } from '../../../../scripts/title-case';
+
+export function getStaticPaths() {
+  return GROUPS.map((group) => ({ params: { group: group.slug }, props: { group } }));
+}
+
+const { group } = Astro.props;
+const nav = [
+  { href: `${BASE}/`, label: 'Overview' },
+  ...GROUPS.map((g) => ({ href: `${BASE}/${g.slug}/`, label: g.title })),
+  { href: `${BASE}/analysis/`, label: 'Analysis' },
+];
+const ids = group.chapters.flatMap((c) => (c.blocks ?? []).filter((b) => b.type === 'example').map((b) => b.id));
+const examples = Object.fromEntries(ids.filter((id) => THEORY.examples[id]).map((id) => [id, exampleData(THEORY.examples[id])]));
+---
+
+<Layout title={`Fugue: ${titleCase(group.heading)}`}>
+  <main class="page-block wide">
+    <h1>Fugue</h1>
+    <SubNav items={nav} current={`${BASE}/${group.slug}/`} label="Parts of the fugue guide" />
+    <h2 class="section-title">{titleCase(group.heading)}: {titleCase(group.subtitle)}</h2>
+    <p class="muted-line">Circled numbers (① to ⑦) are scale degrees.</p>
+
+    <nav class="chapter-jump" aria-label="Chapters of this part">
+      {group.chapters.map((c) => <a class="seg-btn" href={`#${c.id}`}>{titleCase(c.title)}</a>)}
+    </nav>
+
+    {group.chapters.map((c) => <FugueChapter chapter={c} />)}
+
+    <script type="application/json" id="examples-data" is:inline set:html={JSON.stringify(examples)} />
+  </main>
+</Layout>
+
+<script>
+  import { mountExamples } from '../../../../scripts/partimento/mount';
+  mountExamples();
+</script>

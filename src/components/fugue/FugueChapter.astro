@@ -1,0 +1,72 @@
+---
+import RuleBoxes from '../content/RuleBoxes.astro';
+import DataTable from '../content/DataTable.astro';
+import { safeHtml, toItem } from '../../scripts/content';
+import { titleCase } from '../../scripts/title-case';
+import { THEORY } from '../../data/fugue';
+import type { Chapter } from '../../data/fugue';
+
+interface Props {
+  chapter: Chapter;
+}
+const { chapter: c } = Astro.props;
+const html = (x: Parameters<typeof toItem>[0]) => toItem(x).html;
+const refs = (x: Parameters<typeof toItem>[0]) => toItem(x).refs;
+const toolTitle = (id: string) => THEORY.tools.find((t) => t.id === id)?.title ?? titleCase(id.replace(/-/g, ' '));
+---
+
+<section id={c.id} class="chapter">
+  <header class="chapter-head">
+    <p class="eyebrow">{c.eyebrow}{c.pages && ` · ${c.pages}`}</p>
+    <h2>{titleCase(c.title)}</h2>
+  </header>
+
+  {c.lede && <p class="lead"><Fragment set:html={html(c.lede)} />{refs(c.lede).map((r) => <span class="ref-chip">{r}</span>)}</p>}
+  <RuleBoxes boxes={c.ruleBoxes} />
+
+  {
+    (c.theorists ?? []).length > 0 && (
+      <dl class="def-list theorists">
+        {(c.theorists ?? []).map((t) => (
+          <>
+            <dt><Fragment set:html={html(t.who)} /></dt>
+            <dd><Fragment set:html={html(t.idea)} />{refs(t.idea).map((r) => <span class="ref-chip">{r}</span>)}</dd>
+          </>
+        ))}
+      </dl>
+    )
+  }
+
+  {(c.prose ?? []).map((p) => <p><Fragment set:html={html(p)} />{refs(p).map((r) => <span class="ref-chip">{r}</span>)}</p>)}
+  {(c.quotes ?? []).map((q) => <blockquote class="pull-quote"><Fragment set:html={safeHtml(q)} /></blockquote>)}
+
+  {
+    c.assignment && (
+      <div class="callout">
+        <h3 class="mini-title">Fux’s Assignment</h3>
+        <p><Fragment set:html={html(c.assignment)} /></p>
+      </div>
+    )
+  }
+
+  {
+    (c.blocks ?? []).map((b) => {
+      if (b.type === 'example') {
+        const e = THEORY.examples[b.id];
+        if (!e) return null;
+        return (
+          <div class="example">
+            <h4 class="mini-title">{titleCase(e.title)}</h4>
+            <div class="player" data-example={b.id}></div>
+            <p class="caption"><Fragment set:html={safeHtml(e.caption)} /></p>
+            <p class="muted-line table-note">Source: {e.source}.</p>
+          </div>
+        );
+      }
+      return <p class="tool-todo">Interactive tool, still to come: {toolTitle(b.id)}.</p>;
+    })
+  }
+
+  {c.table && <DataTable columns={c.table.columns} rows={c.table.rows} stickyFirst />}
+  {(c.notes ?? []).map((n) => <p class="muted-line table-note"><Fragment set:html={html(n)} /></p>)}
+</section>

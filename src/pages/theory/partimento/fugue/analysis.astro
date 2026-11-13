@@ -1,0 +1,39 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import SubNav from '../../../../components/content/SubNav.astro';
+import AnalysisTopic from '../../../../components/fugue/AnalysisTopic.astro';
+import { ANALYSIS, BASE, GROUPS } from '../../../../data/fugue';
+import { safeHtml } from '../../../../scripts/content';
+import { titleCase } from '../../../../scripts/title-case';
+
+const nav = [
+  { href: `${BASE}/`, label: 'Overview' },
+  ...GROUPS.map((g) => ({ href: `${BASE}/${g.slug}/`, label: g.title })),
+  { href: `${BASE}/analysis/`, label: 'Analysis' },
+];
+---
+
+<Layout title="Fugue: Analysis">
+  <main class="page-block wide">
+    <h1>Fugue</h1>
+    <SubNav items={nav} current={`${BASE}/analysis/`} label="Parts of the fugue guide" />
+    <h2 class="section-title">Analysis</h2>
+    <p class="lead">How to analyse a fugue, compiled from Roberts, Badura-Skoda, Bodky, Gedalge, C. P. E. Bach and Mann. {ANALYSIS.topics.length} topics.</p>
+
+    <nav class="chapter-jump" aria-label="Groups of topics">
+      {ANALYSIS.groups.map((g) => <a class="seg-btn" href={`#${g.id}`}>{titleCase(g.title)}</a>)}
+    </nav>
+
+    {
+      ANALYSIS.groups.map((g) => (
+        <section id={g.id}>
+          <header class="chapter-head">
+            <h2>{titleCase(g.title)}</h2>
+            <p class="muted-line"><Fragment set:html={safeHtml(g.blurb)} /></p>
+          </header>
+          {ANALYSIS.topics.filter((t) => t.group === g.id).map((t) => <AnalysisTopic topic={t} />)}
+        </section>
+      ))
+    }
+  </main>
+</Layout>

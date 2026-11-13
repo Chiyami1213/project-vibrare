@@ -1,0 +1,53 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import SubNav from '../../../../components/content/SubNav.astro';
+import FugueChapter from '../../../../components/fugue/FugueChapter.astro';
+import { ANALYSIS, BASE, FRONT, GROUPS, THEORY } from '../../../../data/fugue';
+import { toItem } from '../../../../scripts/content';
+import { titleCase } from '../../../../scripts/title-case';
+
+const nav = [
+  { href: `${BASE}/`, label: 'Overview' },
+  ...GROUPS.map((g) => ({ href: `${BASE}/${g.slug}/`, label: g.title })),
+  { href: `${BASE}/analysis/`, label: 'Analysis' },
+];
+const chapters = THEORY.chapters.length;
+---
+
+<Layout title="Fugue">
+  <main class="page-block wide">
+    <h1>Fugue</h1>
+    <SubNav items={nav} current={`${BASE}/`} label="Parts of the fugue guide" />
+    <p class="lead">
+      Two guides to the fugue. <strong>Theory</strong> follows Alfred Mann’s <em>The Study of Fugue</em>: its history, then
+      the teaching of Fux, Marpurg, Albrechtsberger and Martini, {chapters} chapters with their rules and guidelines kept
+      apart and Mann’s page numbers beside each. <strong>Analysis</strong> shows how to analyse a fugue: what to label, a
+      method, case studies from the <em>Well-Tempered Clavier</em> and the organ fugues, and the plans of Gedalge and others.
+    </p>
+
+    <ul class="pat-grid">
+      {
+        GROUPS.map((g) => (
+          <li class="pat-tile">
+            <a href={`${BASE}/${g.slug}/`}>
+              <span class="pat-name">{titleCase(g.heading)}</span>
+              <span class="pat-aka">{titleCase(g.subtitle)}: {g.chapters.map((c) => titleCase(c.title)).join(' · ')}</span>
+              <span class="pat-chips"><span class="chip chip-accent">{g.chapters.length} Chapters</span></span>
+            </a>
+          </li>
+        ))
+      }
+      <li class="pat-tile">
+        <a href={`${BASE}/analysis/`}>
+          <span class="pat-name">Analysis</span>
+          <span class="pat-aka">{ANALYSIS.groups.map((g) => titleCase(g.title)).join(' · ')}</span>
+          <span class="pat-chips"><span class="chip chip-accent">{ANALYSIS.topics.length} Topics</span></span>
+        </a>
+      </li>
+    </ul>
+
+    <h2 class="section-title">{THEORY.intro.title}</h2>
+    {THEORY.intro.paragraphs.map((p) => <p><Fragment set:html={toItem(p).html} /></p>)}
+    {FRONT.map((c) => <FugueChapter chapter={c} />)}
+  </main>
+</Layout>
