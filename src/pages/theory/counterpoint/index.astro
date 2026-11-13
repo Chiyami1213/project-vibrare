@@ -1,9 +1,49 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import SubNav from '../../../components/content/SubNav.astro';
+import FuxChapter from '../../../components/counterpoint/FuxChapter.astro';
+import { BASE, FRONT, FUX, PARTS, exampleData } from '../../../data/counterpoint';
+import { safeHtml, toItem } from '../../../scripts/content';
+import { titleCase } from '../../../scripts/title-case';
+
+const nav = [{ href: `${BASE}/`, label: 'Overview' }, ...PARTS.map((p) => ({ href: `${BASE}/${p.slug}/`, label: titleCase(`${p.title}: ${p.subtitle}`) }))];
+const ids = FRONT.flatMap((c) => (c.blocks ?? []).filter((b) => b.type === 'example').map((b) => b.id));
+const examples = Object.fromEntries(ids.filter((id) => FUX.examples[id]).map((id) => [id, exampleData(id, FUX.examples[id])]));
 ---
 
 <Layout title="Counterpoint">
-  <main>
+  <main class="page-block wide">
     <h1>Counterpoint</h1>
+    <SubNav items={nav} current={`${BASE}/`} label="Parts of the counterpoint guide" />
+    <p class="lead">
+      A study guide to Fux’s <em>Gradus ad Parnassum</em> in Alfred Mann’s translation: the five species in two, three and
+      four voices, with the rules and the guidelines kept apart, Mann’s page and figure numbers beside each, and Fux’s
+      own examples to play.
+    </p>
+
+    <h2 class="section-title">{FUX.intro.title}</h2>
+    {FUX.intro.paragraphs.map((p) => <p><Fragment set:html={toItem(p).html} /></p>)}
+
+    <ul class="pat-grid">
+      {
+        PARTS.map((p) => (
+          <li class="pat-tile">
+            <a href={`${BASE}/${p.slug}/`}>
+              <span class="pat-name">{titleCase(p.title)}: {titleCase(p.subtitle)}</span>
+              <span class="pat-aka">{p.chapters.map((c) => titleCase(c.title)).join(' · ')}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    {FRONT.map((c) => <FuxChapter chapter={c} />)}
+
+    <script type="application/json" id="examples-data" is:inline set:html={JSON.stringify(examples)} />
   </main>
 </Layout>
+
+<script>
+  import { mountExamples } from '../../../scripts/partimento/mount';
+  mountExamples();
+</script>

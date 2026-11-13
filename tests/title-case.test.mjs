@@ -37,6 +37,9 @@ const cases = [
   ['Subject and answer', 'Subject and Answer'],
   ['Schema (schemata)', 'Schema (Schemata)'],
   ['Dominant (V)', 'Dominant (V)'],
+  ['i – N6 – V – i', 'i – N6 – V – i'],
+  ['vi – viiø7/V – I6/4 – V – I', 'vi – viiø7/V – I6/4 – V – I'],
+  ['ii and V in a cadence', 'ii and V in a Cadence'],
   ['YouTube', 'YouTube'],
 ];
 

@@ -21,6 +21,10 @@ export interface ExampleData {
   parts: number; // voices including the bass
   cross?: boolean;
   realized: { voiceOrder: string; lengthBeats: number; voices: RealizedEvent[][] };
+  /** Two voices on two staves: write the interval between them at every sonority (perfect ones in blue). */
+  intervals?: boolean;
+  /** Modal music (counterpoint): no key, so no circled scale degrees and no bass-and-figures exercise mode. */
+  noDegrees?: boolean;
   /** Names of the voices, top to bottom (S, A, T, B); without them the player says Upper voice, Voice 2, Bass. */
   voiceNames?: string[];
   /** Optional analysis of each chord (tonal harmony): a label such as "V6/5" and the figures written under the bass. */

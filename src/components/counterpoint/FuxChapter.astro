@@ -1,0 +1,84 @@
+---
+import RuleBoxes from '../content/RuleBoxes.astro';
+import DataTable from '../content/DataTable.astro';
+import { safeHtml, toItem } from '../../scripts/content';
+import { titleCase } from '../../scripts/title-case';
+import { FUX } from '../../data/counterpoint';
+import type { Chapter } from '../../data/counterpoint';
+
+interface Props {
+  chapter: Chapter;
+}
+const { chapter: c } = Astro.props;
+const html = (x: Parameters<typeof toItem>[0]) => toItem(x).html;
+const refs = (x: Parameters<typeof toItem>[0]) => toItem(x).refs;
+---
+
+<section id={c.id} class="chapter">
+  <header class="chapter-head">
+    <p class="eyebrow">{c.eyebrow}</p>
+    <h2>{titleCase(c.title)}</h2>
+  </header>
+
+  {c.lede && <p class="lead"><Fragment set:html={html(c.lede)} /></p>}
+  <RuleBoxes boxes={c.ruleBoxes} />
+  {(c.prose ?? []).map((p) => <p><Fragment set:html={html(p)} />{refs(p).map((r) => <span class="ref-chip">{r}</span>)}</p>)}
+  {(c.quotes ?? []).map((q) => <blockquote class="pull-quote"><Fragment set:html={safeHtml(q)} /></blockquote>)}
+
+  {
+    (c.bookFigures ?? []).length > 0 && (
+      <>
+        <h3 class="mini-title">Figures in the Book</h3>
+        <dl class="def-list">
+          {(c.bookFigures ?? []).map((f) => (
+            <>
+              <dt>{f.fig}</dt>
+              <dd><Fragment set:html={html(f)} /></dd>
+            </>
+          ))}
+        </dl>
+      </>
+    )
+  }
+
+  {
+    c.assignment && (
+      <div class="callout">
+        <h3 class="mini-title">Fux’s Assignment</h3>
+        <p><Fragment set:html={html(c.assignment)} /></p>
+      </div>
+    )
+  }
+
+  {
+    (c.blocks ?? []).map((b) => {
+      if (b.type === 'example') {
+        const e = FUX.examples[b.id];
+        if (!e) return null;
+        const issues = e.engineResult ?? [];
+        return (
+          <div class="example">
+            <h4 class="mini-title">{e.fig}: {e.title}</h4>
+            <div class="player" data-example={b.id}></div>
+            <p class="caption"><Fragment set:html={safeHtml(e.caption)} /></p>
+            {
+              e.check !== false && (
+                <p class="muted-line table-note">
+                  {issues.length === 0 ? 'The rule engine finds no fault in this example.' : `The rule engine finds ${issues.length} point${issues.length > 1 ? 's' : ''} to note: ${issues.map((i) => `${i.level === 'error' ? 'rule' : i.level === 'warn' ? 'guideline' : 'note'} “${i.rule}” in voice ${i.v + 1}, bar ${Math.floor(i.t) + 1}`).join('; ')}.`}
+                </p>
+              )
+            }
+          </div>
+        );
+      }
+      if (b.type === 'workbench') {
+        const w = FUX.workbenches[b.id];
+        return <p class="tool-todo">Workbench, still to come: {w?.title ?? b.id}.</p>;
+      }
+      return <p class="tool-todo">Interactive tool, still to come: {titleCase(b.id.replace(/-/g, ' '))}.</p>;
+    })
+  }
+
+  {c.table && <DataTable columns={c.table.columns} rows={c.table.rows} stickyFirst />}
+  {(c.notes ?? []).map((n) => <p class="muted-line table-note"><Fragment set:html={html(n)} /></p>)}
+</section>

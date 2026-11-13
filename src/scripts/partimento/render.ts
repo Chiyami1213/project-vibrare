@@ -95,8 +95,15 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
     const mean = octaves.reduce((a, b) => a + b, 0) / Math.max(1, octaves.length);
     rows.push({ clef: mean >= 4 ? 'treble' : 'bass', voices: [lay(bassVoice)] });
   } else if (opts.showUpper) {
-    rows.push({ clef: 'treble', voices: upper.slice(0, 2).map(lay) });
-    rows.push({ clef: 'bass', voices: [...upper.slice(2).map(lay), lay(bassVoice)] });
+    // each staff takes the clef that fits the range of its voices (a cantus on D4 sits on a treble staff)
+    const meanOctave = (vs: ExampleData['realized']['voices']) => {
+      const oct = vs.flat().filter((e) => e.pitch).map((e) => Number(/(-?\d)$/.exec(e.pitch!)![1]));
+      return oct.reduce((a, b) => a + b, 0) / Math.max(1, oct.length);
+    };
+    const top = upper.slice(0, 2);
+    const bottom = [...upper.slice(2), bassVoice];
+    rows.push({ clef: meanOctave(top) < 3 ? 'bass' : 'treble', voices: top.map(lay) });
+    rows.push({ clef: meanOctave(bottom) >= 4 ? 'treble' : 'bass', voices: bottom.map(lay) });
   } else {
     rows.push({ clef: 'bass', voices: [lay(bassVoice)] });
   }
@@ -325,6 +332,22 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
     t.textContent = s;
     svg.append(t);
   };
+  // Interval numbers between the two staves of a two-voice example (counterpoint)
+  if (ex.intervals && hasTreble && all.length === 2) {
+    const LETTER: Record<string, number> = { C: 0, D: 1, E: 2, F: 3, G: 4, A: 5, B: 6 };
+    const stepOf = (p: string) => Number(/(-?\d)$/.exec(p)![1]) * 7 + LETTER[p[0]];
+    for (const s of slices) {
+      const at = xOf.get(s.tick);
+      if (!at) continue;
+      const [hi, lo] = all.map((v) => v.find((e) => e.pitch && e.t <= s.beat + 1e-9 && s.beat < e.t + e.d - 1e-9));
+      if (!hi?.pitch || !lo?.pitch) continue;
+      const n = stepOf(hi.pitch) - stepOf(lo.pitch) + 1;
+      if (n < 1) continue;
+      const perfect = [0, 3, 4].includes((n - 1) % 7);
+      text(at.x, at.sys * sysHeight + SYSTEM_TOP + 80 + (STAVE_GAP - 80) / 2 + 5, String(n), perfect ? 'ivl perfect' : 'ivl');
+    }
+  }
+
   // In a diminution the upper voice runs in short notes over a slow bass: the figures and degrees then belong to the
   // bass notes only, not to every short note.
   const onlyAtBass = slices.filter((s) => !s.bassStart).length > slices.length / 2;
@@ -335,7 +358,7 @@ export function drawExample(container: HTMLElement, ex: ExampleData, opts: { wid
     const bassBottom = top + (hasTreble ? STAVE_GAP : 0) + STAVE_H;
     if (!onlyAtBass || s.bassStart) s.figures.forEach((f, i) => text(at.x, bassBottom + 30 + figDrop + i * FIG_ROW, f, 'fig'));
     if (s.label) text(at.x, bassBottom + 30 + figDrop + figRows * FIG_ROW + 38, s.label, 'lab');
-    if (s.degree && s.bassStart) text(at.x, bassBottom + 30 + figDrop + figRows * FIG_ROW + 16, s.degree, 'deg');
+    if (s.degree && s.bassStart && !ex.noDegrees) text(at.x, bassBottom + 30 + figDrop + figRows * FIG_ROW + 16, s.degree, 'deg');
     const bottom = bassBottom + 30 + figDrop + figRows * FIG_ROW + 24 + labelRow;
     boxes.push({ tick: s.tick, beat: s.beat, x: at.x, top: top - 4, bottom });
     const r = document.createElementNS(NS, 'rect');

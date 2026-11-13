@@ -79,7 +79,7 @@ export async function mountPlayer(root: HTMLElement, original: ExampleData): Pro
     score,
     h('div', { class: 'pl-row' }, playBtn, stopBtn, loopBtn, h('label', { class: 'pl-inline' }, 'Tempo ', bpmIn, ' ', bpmOut)),
     h('div', { class: 'pl-row' }, h('span', { class: 'pl-label' }, 'Step'), prevBtn, nextBtn, stepOut),
-    h('div', { class: 'pl-row' }, h('label', { class: 'pl-inline' }, 'Key ', keySel), ...(original.parts > 1 ? [exerciseBtn] : []), degreesBtn),
+    h('div', { class: 'pl-row' }, ...(original.noDegrees ? [] : [h('label', { class: 'pl-inline' }, 'Key ', keySel)]), ...(original.parts > 1 && !original.noDegrees ? [exerciseBtn] : []), ...(original.noDegrees ? [] : [degreesBtn])),
     voiceBox,
     note,
     status,

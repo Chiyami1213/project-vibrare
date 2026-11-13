@@ -36,5 +36,17 @@ export function refSource(ref: string): string {
   return m ? m[1] : '';
 }
 
+/**
+ * Some rule-box titles in the counterpoint and fugue data lost their first letter when the data was extracted
+ * ("ules" for "Rules"). They are repaired here, and the cases are listed in content/CONTENT_ISSUES.md.
+ */
+const REPAIRED_TITLES: Record<string, string> = {
+  ules: 'Rules',
+  uidelines: 'Guidelines',
+  'uidelines and exceptions': 'Guidelines and exceptions',
+  'ameau’s rules (1722)': 'Rameau’s rules (1722)',
+};
+export const repairTitle = (t: string): string => REPAIRED_TITLES[t] ?? t;
+
 /** "p1c2" -> "first-part": slug of a part for the page addresses. */
 export const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');

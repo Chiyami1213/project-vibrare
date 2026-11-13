@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { refSource, safeHtml, slug, toItem, toItems } from '../src/scripts/content.ts';
+import { refSource, repairTitle, safeHtml, slug, toItem, toItems } from '../src/scripts/content.ts';
 
 test('safeHtml keeps <b> and <i> and nothing else', () => {
   assert.equal(safeHtml('a <b>bold</b> and <i>italic</i>'), 'a <b>bold</b> and <i>italic</i>');
@@ -23,6 +23,18 @@ test('reference prefixes and slugs', () => {
   assert.equal(refSource('LM IX (cross-ref)'), 'LM');
   assert.equal(refSource('p. 80'), '');
   assert.equal(slug('Part Writing & Voice Leading'), 'part-writing-voice-leading');
+});
+
+test('rule-box titles that lost their first letter are repaired, and nothing else changes', () => {
+  assert.equal(repairTitle('ules'), 'Rules');
+  assert.equal(repairTitle('uidelines'), 'Guidelines');
+  assert.equal(repairTitle('ameau’s rules (1722)'), 'Rameau’s rules (1722)');
+  assert.equal(repairTitle('The plan'), 'The plan');
+  // after repair no rule-box title in the data starts with a lower-case letter
+  const read = (p) => JSON.parse(readFileSync(new URL(`../content/${p}`, import.meta.url), 'utf8'));
+  for (const f of ['counterpoint/data/fux.json', 'fugue/data/fugue-theory.json']) {
+    for (const c of read(f).chapters) for (const b of c.ruleBoxes ?? []) assert.match(repairTitle(b.title), /^[A-Z]/, `${f} ${c.id}: ${b.title}`);
+  }
 });
 
 test('every rule and guideline in the four packs converts to an item with text', () => {

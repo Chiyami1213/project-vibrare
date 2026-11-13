@@ -17,6 +17,7 @@ function cap(word: string, force: boolean): string {
   if (!word) return word;
   if (/[0-9§♯♭♮°ø+'’=]/.test(word)) return word; // figures, symbols, apostrophes: leave alone
   if (/^[A-Z]{2,}$/.test(word)) return word; // acronym or Roman numeral
+  if (/^(i{1,3}|iv|v|vi{1,3}|vii)$/.test(word)) return word; // a lower-case Roman numeral (a minor chord): never capitalized
   if (/[A-Z]/.test(word.slice(1))) return word; // internal capital
   if (!force && MINOR.has(word.toLowerCase())) return word.toLowerCase();
   return word[0].toUpperCase() + word.slice(1);

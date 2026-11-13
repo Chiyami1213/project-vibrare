@@ -2034,3 +2034,16 @@ button.note-chip[aria-pressed='true'] {
   color: var(--muted);
   font-size: 0.9rem;
 }
+
+.score .ivl {
+  font-size: 12px;
+  text-anchor: middle;
+  fill: var(--muted);
+  stroke: none;
+  font-family: system-ui, sans-serif;
+}
+
+.score .ivl.perfect {
+  fill: #4a90d9;
+  font-weight: 700;
+}

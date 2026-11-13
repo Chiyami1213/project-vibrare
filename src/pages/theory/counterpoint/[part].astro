@@ -1,0 +1,37 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SubNav from '../../../components/content/SubNav.astro';
+import FuxChapter from '../../../components/counterpoint/FuxChapter.astro';
+import { BASE, FUX, PARTS, exampleData } from '../../../data/counterpoint';
+import { titleCase } from '../../../scripts/title-case';
+
+export function getStaticPaths() {
+  return PARTS.map((part) => ({ params: { part: part.slug }, props: { part } }));
+}
+
+const { part } = Astro.props;
+const nav = [{ href: `${BASE}/`, label: 'Overview' }, ...PARTS.map((p) => ({ href: `${BASE}/${p.slug}/`, label: titleCase(`${p.title}: ${p.subtitle}`) }))];
+const ids = part.chapters.flatMap((c) => (c.blocks ?? []).filter((b) => b.type === 'example').map((b) => b.id));
+const examples = Object.fromEntries(ids.filter((id) => FUX.examples[id]).map((id) => [id, exampleData(id, FUX.examples[id])]));
+---
+
+<Layout title={`Counterpoint: ${titleCase(part.title)}`}>
+  <main class="page-block wide">
+    <h1>Counterpoint</h1>
+    <SubNav items={nav} current={`${BASE}/${part.slug}/`} label="Parts of the counterpoint guide" />
+    <h2 class="section-title">{titleCase(part.title)}: {titleCase(part.subtitle)}</h2>
+
+    <nav class="chapter-jump" aria-label="Chapters of this part">
+      {part.chapters.map((c) => <a class="seg-btn" href={`#${c.id}`}>{titleCase(c.title)}</a>)}
+    </nav>
+
+    {part.chapters.map((c) => <FuxChapter chapter={c} />)}
+
+    <script type="application/json" id="examples-data" is:inline set:html={JSON.stringify(examples)} />
+  </main>
+</Layout>
+
+<script>
+  import { mountExamples } from '../../../scripts/partimento/mount';
+  mountExamples();
+</script>
