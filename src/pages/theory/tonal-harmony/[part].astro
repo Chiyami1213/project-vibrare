@@ -12,6 +12,9 @@ export function getStaticPaths() {
 
 const { part } = Astro.props;
 const nav = [{ href: `${BASE}/`, label: 'Overview' }, ...PARTS.map((p) => ({ href: `${BASE}/${p.slug}/`, label: `${p.num}: ${titleCase(p.title)}` }))];
+// a tool is built once on a page, under the first topic that names it
+const toolHome: Record<string, string> = {};
+for (const t of part.file.topics) for (const id of t.tools ?? []) if (!(id in toolHome)) toolHome[id] = t.id;
 const examples = Object.fromEntries(part.file.topics.flatMap((t) => (t.examples ?? []).map((e) => [e.id, exampleData(e)])));
 ---
 
@@ -47,7 +50,7 @@ const examples = Object.fromEntries(part.file.topics.flatMap((t) => (t.examples 
               )
             }
           </header>
-          {part.file.topics.filter((t) => t.chapter === c.id).map((t) => <TonalTopic topic={t} />)}
+          {part.file.topics.filter((t) => t.chapter === c.id).map((t) => <TonalTopic topic={t} toolHome={toolHome} />)}
           <BackgroundPanels tab="tonal" at={c.id} />
         </section>
       ))
@@ -59,5 +62,7 @@ const examples = Object.fromEntries(part.file.topics.flatMap((t) => (t.examples 
 
 <script>
   import { mountExamples } from '../../../scripts/partimento/mount';
+  import { mountTonalTools } from '../../../scripts/harmony/tools-mount';
   mountExamples();
+  mountTonalTools();
 </script>

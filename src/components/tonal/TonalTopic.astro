@@ -9,8 +9,10 @@ import type { Topic } from '../../data/tonal-harmony';
 
 interface Props {
   topic: Topic;
+  /** the topic that holds each tool on this page (a tool is built once per page) */
+  toolHome?: Record<string, string>;
 }
-const { topic: t } = Astro.props;
+const { topic: t, toolHome = {} } = Astro.props;
 const owner = import.meta.env.DEV; // verification notes are for the owner, in local development only
 const flagged = (t.verification.flags ?? []).length > 0 || t.verification.status !== 'verified';
 ---
@@ -56,10 +58,14 @@ const flagged = (t.verification.flags ?? []).length > 0 || t.verification.status
   }
 
   {
-    (t.tools ?? []).length > 0 && (
-      <p class="tool-todo">
-        Interactive tools for this topic, still to come: {(t.tools ?? []).map((id) => toolById(id)?.title ?? id).join(', ')}.
-      </p>
+    (t.tools ?? []).map((id) =>
+      toolHome[id] === undefined || toolHome[id] === t.id ? (
+        <div class="tool-box" id={`tool-${id}`} data-ttool={id}>
+          <h4 class="mini-title">{titleCase(toolById(id)?.title ?? id)}</h4>
+        </div>
+      ) : (
+        <p class="muted-line">Tool: {titleCase(toolById(id)?.title ?? id)}, <a href={`#tool-${id}`}>open it</a>.</p>
+      ),
     )
   }
 

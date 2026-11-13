@@ -58,6 +58,17 @@ export const countExamples = () => PARTS.reduce((n, p) => n + p.file.topics.redu
 const VOICE_NAMES: Record<number, string[]> = { 1: ['Melody'], 2: ['S', 'B'], 3: ['S', 'A', 'B'], 4: ['S', 'A', 'T', 'B'] };
 
 /** An example in the shape of the Example Player: the same voices, plus the analysis of each chord. */
+const MARK_LEVEL: Record<string, 'error' | 'warn' | 'info'> = { red: 'error', orange: 'error', yellow: 'warn', green: 'warn', blue: 'info', white: 'info' };
+
+/** The notes the part-writing checker found faulty, for the score: the voice (S A T B) and the beat. */
+function marksOf(e: Example): NonNullable<ExampleData['marks']> {
+  const names = VOICE_NAMES[e.parts] ?? [];
+  return (e.checker ?? []).flatMap((i) => {
+    const vs = Array.isArray(i.voices) ? i.voices : i.voices == null ? [] : [i.voices];
+    return vs.map((v) => ({ voice: typeof v === 'number' ? v : names.indexOf(String(v)), t: i.beat, level: MARK_LEVEL[i.level] ?? 'info' })).filter((m) => m.voice >= 0);
+  });
+}
+
 export function exampleData(e: Example): ExampleData {
   return {
     id: e.id,
@@ -70,5 +81,6 @@ export function exampleData(e: Example): ExampleData {
     realized: e.realized as unknown as ExampleData['realized'],
     voiceNames: VOICE_NAMES[e.parts] ?? undefined,
     analysis: e.realized.slices.map((s) => ({ t: s.t, label: s.label, figures: s.figures })),
+    marks: e.intent === 'error' ? marksOf(e) : undefined,
   };
 }

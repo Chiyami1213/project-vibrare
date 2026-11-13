@@ -16,8 +16,29 @@ open questions each pack lists for the owner are in that pack's own `VERIFICATIO
 
 - **Counterpoint:** built (rule engine port, checker marks on the notes, 15 workbenches, 7 tools). Still missing: voice
   colouring, and clicking on the staff to place a note (the workbench uses a grid of pitch selectors under the score).
-- **Tonal harmony:** the `checker` overlay on the 22 deliberate-error examples is not drawn, the SATB checker is not
-  ported, and none of the 30 tools exist. The Roman-numeral label is printed as plain text (`V6/5`), not stacked.
+- **Tonal harmony:** the checker marks now colour the faulty notes of the 22 deliberate-error examples (red for the orange and
+  red levels, amber for yellow and green, blue for blue and white), and all tools are built (`src/scripts/harmony/tools.ts`, logic
+  in `tools-pure.ts`, tests in `tests/harmony-tools.test.mjs`): clef reader, half and whole steps, scale builder, mode wheel,
+  interval lab, overtone series, consonance ladder, meter lab, chord builder, diatonic table, progression chart, melody
+  harmonizer, figured-bass explainer, voicing explorer, motion classifier, error gallery, cadence player, form diagrams, NCT
+  identifier, V7 resolution lab, inversion table, secondary calculator, substitution matrix, pivot finder, mixture palette,
+  Neapolitan and augmented-sixth builder, tendency-tone map. The circle of fifths, the SATB checker and the tuning lab are
+  links to the site's own tool pages (and to the History Background tuning lab), not copies.
+  Where the tools go beyond the notes or choose for themselves:
+  - **Cadence player:** the notes call half and imperfect cadences weak and the perfect authentic cadence strong; the order of the
+    cadences between (half, Phrygian half, plagal, evaded, deceptive, imperfect authentic) is the tool's suggestion.
+  - **NCT identifier:** the nine rows of the notes' table are in the code, and it names the type from preparation, resolution and
+    beat; it does not find the non-chord tone in a score.
+  - **V7 resolution lab:** counts the voicings that resolve the 7th down and the leading tone (in an outer voice) up with no
+    parallel or hidden fifths and octaves. A complete V7 to a complete I does not work in that count; the other two do.
+  - **Progression chart:** the chart groups are those of the notes (iii, vi, IV/ii, V/vii°, I; and for minor VII, III, VI, iv/ii°,
+    V/vii°, i). `ii → IV` counts as against the chart; `IV → ii` as with it.
+  - **Mode wheel and scale builder:** solfège is movable do (chromatic syllables) or fixed do.
+  - **Melody harmonizer:** the five steps are written for the tool; the notes give the procedure only in outline.
+  - **Fifths substitution:** the third chord and the first two are varied (27 progressions); V7 – I is fixed. The leading-tone
+    chord of a minor target is half-diminished, of a major target fully diminished.
+  - **Figured bass:** figures are read against the key signature (a minor key has the natural minor scale), so # alone raises
+    the 3rd of the natural minor.
 - **Fugue:** all eleven tools are built (nine in the theory, two in the analysis). Their logic is tested against the reference
   page's own output for the eight preset subjects (`tests/fixtures/fugue-reference.json`, generated from `tools/guide/main.js`).
   The analysis worksheet starts with the C minor demonstration; the case study gives bars for the entries but not their voices

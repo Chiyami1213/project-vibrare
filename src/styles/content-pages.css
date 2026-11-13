@@ -1401,3 +1401,116 @@ button.plan-gap:hover {
   gap: 6px;
   margin: 8px 0;
 }
+
+/* ---------- Tonal harmony tools ---------- */
+.chart-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.chart-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chart-arrow {
+  color: var(--muted);
+  font-size: 1.2rem;
+}
+
+.arrow-ok {
+  color: #2e9e5b;
+  font-weight: 700;
+}
+
+.arrow-back {
+  color: #d1432f;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.harm-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 10px 0;
+}
+
+.harm-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 90px;
+}
+
+.chip.dim {
+  opacity: 0.55;
+}
+
+.chip.borrowed {
+  border-color: #d98a1c;
+}
+
+.note-7th {
+  color: #2e9e5b;
+  font-weight: 700;
+}
+
+.note-lt {
+  color: #d1432f;
+  font-weight: 700;
+}
+
+.clef-stage svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.form-card {
+  margin: 8px 0;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.form-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 6px 0;
+}
+
+.form-box {
+  min-width: 38px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  background: var(--accent);
+}
+
+.form-box.fb-b {
+  background: #d98a1c;
+}
+
+.form-box.fb-c {
+  background: #2e9e5b;
+}
+
+.form-sep {
+  align-self: center;
+  color: var(--muted);
+}
+
+.a6-svg {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
