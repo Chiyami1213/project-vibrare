@@ -71,12 +71,22 @@ returns to the main list.
 
 ## Status
 
-- Done: menu, themes and audio settings, glossary, resources, About, the Touhou Project OST pages, the Bach
-  list, the interval, scale and chord calculators (with staff notation), the circle of fifths, and the Partimento
-  Moti del Basso and Schemata pages: 43 patterns, each with rules, guidelines, variants and playable scores
-  (figured bass, harpsichord, step mode, transposition, exercise mode).
-- In progress: the Partimento Cadences page.
-- Not started: Tonal Harmony, Counterpoint, Jazz and Japanese Music notes; the Works lists.
+- **Done:**
+  - the site shell: menu, themes, audio settings, glossary, resources and About;
+  - Analysis: the Touhou Project OST pages and the Bach list;
+  - Tools: the interval, scale and chord calculators, the circle of fifths, and the SATB part-writing checker;
+  - Theory, all with playable scores: Tonal Harmony (74 topics), Partimento (six pages and the fugue pages), Counterpoint
+    (Fux), HIP and Music History (32 articles);
+  - the interactive tools of those packs: the Fux rule engine with 15 workbenches and 7 tools, 11 partimento tools,
+    27 tonal-harmony tools, 11 fugue tools, 7 HIP tools and 9 history tools;
+  - the shared score player: figured bass, step mode, transposition, exercise mode, checker marks on faulty notes and
+    colouring of voices;
+  - search-engine setup (sitemap, `robots.txt`, descriptions).
+- **In progress:** the Works lists (three arrangements so far).
+- **Not started:** the Jazz, Quantz, Blavet and Japanese Music pages (placeholders).
+- **Known gaps** (details in `content/CONTENT_ISSUES.md`): HIP examples are shown as notation text, not engraved staves;
+  Roman numerals are printed flat, not stacked; the fugue "Entries" colour mode and the voice-name labels at the start of
+  each system are not built; `tools/validate.py` of the History pack is not run by the build.
 
 ## Privacy
 
