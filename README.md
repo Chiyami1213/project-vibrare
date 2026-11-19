@@ -5,6 +5,26 @@ small interactive tools, reference lists and a collection of arrangements.
 
 Live site: <https://vibrare.pages.dev/>
 
+## Screenshots
+
+<table>
+  <tr>
+    <td><img src="docs/screenshots/home.png" alt="The Vibrare home page: the title, a quote and the dark icon menu" width="480"><br>The home page and the drill-down menu.</td>
+    <td><img src="docs/screenshots/partimento-prinner.png" alt="A playable partimento score with figured bass, a tempo slider, step mode, key choice and voice controls" width="480"><br>A Partimento pattern with a playable score, figured bass and exercise mode.</td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/counterpoint-checker.png" alt="A Fux counterpoint example with the rule checker listing guidelines" width="480"><br>The Counterpoint rule checker on one of Fux's examples.</td>
+    <td><img src="docs/screenshots/chord-calculator.png" alt="The chord calculator with a staff, a piano keyboard and inversions" width="480"><br>The chord calculator with inversions and a keyboard.</td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/circle-of-fifths.png" alt="The interactive circle of fifths in rainbow colours" width="480"><br>The interactive circle of fifths.</td>
+    <td><img src="docs/screenshots/touhou-ost.png" alt="The Touhou Project OST page listing games and tracks" width="480"><br>The Touhou Project OST pages.</td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><img src="docs/screenshots/mobile-partimento.png" alt="A partimento score on a 390 pixel wide phone screen" width="240"><br>The same score on a phone.</td>
+  </tr>
+</table>
+
 ## What is on the site
 
 | Section | Contents |
