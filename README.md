@@ -88,6 +88,16 @@ returns to the main list.
   Roman numerals are printed flat, not stacked; the fugue "Entries" colour mode and the voice-name labels at the start of
   each system are not built; `tools/validate.py` of the History pack is not run by the build.
 
+## How it was built
+
+- Built together with Claude in VS Code: 73 of the 75 commits carry a `Co-Authored-By: Claude` trailer.
+- Stack: [Astro](https://astro.build/) 7 as a static site with plain CSS and TypeScript, [VexFlow](https://www.vexflow.com/) 5 for
+  the music notation and [tonal](https://github.com/tonaljs/tonal) for note spelling and intervals (the three dependencies
+  in `package.json`). Sound comes from CC0 instrument samples played with the Web Audio API.
+- Tests: `npm test` runs `node --test tests/`, 21 test files and 218 tests (all passing at the last run), covering the data
+  files, the theory code, the rule engines and the logic of the interactive tools.
+- Deployment: a static build (`npm run build`) served from Cloudflare Pages at `vibrare.pages.dev`.
+
 ## Privacy
 
 The site has no accounts and adds no analytics or cookies of its own. The theme and audio settings are stored
