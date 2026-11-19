@@ -67,7 +67,7 @@ returns to the main list.
   - `hip/`: Quantz, C. P. E. Bach, Badura-Skoda and Bodky, with L. Mozart as a cross-reference only.
   - `CONTENT_ISSUES.md` lists what looked wrong in the data and what the pages do not do yet.
 - The calculators are modelled on the features of [musictheory.net](https://www.musictheory.net/tools) and
-  [ToneGym](https://www.tonegym.co/); the code and data here are original.
+  [ToneGym](https://www.tonegym.co/). The code is original; the data is compiled from the sources named above.
 
 ## Status
 
@@ -97,6 +97,11 @@ returns to the main list.
 - Tests: `npm test` runs `node --test tests/`, 21 test files and 218 tests (all passing at the last run), covering the data
   files, the theory code, the rule engines and the logic of the interactive tools.
 - Deployment: a static build (`npm run build`) served from Cloudflare Pages at `vibrare.pages.dev`.
+
+## License
+
+Code: MIT ([LICENSE](LICENSE)). The Wikipedia-derived data is CC BY-SA 4.0, the samples are CC0 and the author's notes are
+CC BY-NC-SA 4.0. The table is in [LICENSES.md](LICENSES.md).
 
 ## Privacy
 
