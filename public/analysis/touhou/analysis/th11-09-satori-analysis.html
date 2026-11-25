@@ -298,7 +298,7 @@ details.fold { margin-top: 10px; } details.fold summary { cursor: pointer; font-
   <h2>References &amp; Licenses</h2>
   <div class="foot" id="foot" style="padding:8px 0 0"></div>
 </section>
-<div class="foot" style="text-align:center"><span lang="ja">東方Projectの二次創作です。</span> A Touhou Project fan work. Touhou Project music © ZUN / Team Shanghai Alice. The excerpts are short and shown only to analyze them. <a href="touhou-references.html#license">Licenses</a></div>
+<div class="foot" style="text-align:center"><span lang="ja">東方Projectの二次創作です。</span> A Touhou Project fan work. Touhou Project music © ZUN / Team Shanghai Alice. The excerpts are short and shown only to analyze them. <a href="/about/#licenses">Licenses</a></div>
 
 <template id="svg-t1-c"><svg viewBox="0 0 778 253" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" overflow="visible" id="vpgpnk4">
    <defs>
@@ -116787,7 +116787,7 @@ function buildExcerpt(ids) {
     <div style="color:var(--${m.id === 'a' ? 'c-blue' : 'muted'})">${contour(m.shape)}</div>
     <p class="deg">${m.deg}</p><p>${tagify(m.text)}</p>
     <p class="where">${m.where.length ? m.where.map(w => `<a href="#fig-${w[0]}">m.${w[1]}</a>`).join('') : '<span class="muted">not engraved yet</span>'}${m.note ? ' <span class="muted">' + tagify(m.note) + '</span>' : ''}</p></div>`).join('');
-  $('#foot').innerHTML = `<p>All sources and literature for this track are on the <a href="touhou-references.html#${DATA.refId}">References &amp; Licenses</a> page.</p>`;
+  $('#foot').innerHTML = `<p>All sources and literature for this track are on the <a href="touhou-references.html#${DATA.refId}">References</a> page.</p>`;
 })();
 
 /* ---------- tooltip ---------- */

@@ -1,6 +1,6 @@
 # Licenses
 
-This repository has several kinds of material, each under its own terms.
+This repository has several kinds of material, each under its own terms. The site states the same terms on its [About page](https://vibrare.pages.dev/about/#licenses); this file is the repository's copy, with the notes for the author.
 
 | What | Where | License |
 | :-- | :-- | :-- |
@@ -25,5 +25,5 @@ any of the original recordings.
 - **First Lessons in Bach:** Walter Carroll's 1911 pieces (Forsyth / Schuberth), re-engraved; Carroll died in 1955, so the text is public domain in the EU and the US but not everywhere.
 - **Touhou analysis:** the music is (c) ZUN / Team Shanghai Alice; the pages show short excerpts, only to analyse them, as they state.
 - The organ samples used by the four organ fugue pages have no source note on the pages; ask the author before relying on them.
-- **Japanese music guides:** paraphrase Tokita and Hughes (Ashgate, 2017), Malm (Kodansha, 2000), Miki (Rochester, 2008) and Kawase, all under their authors' copyright, with short quotes and page citations. Sounds: the Nice-Steinway piano (CC BY-ND 3.0) and the Musyng Kite koto, shamisen and shakuhachi (CC BY-SA 3.0); engraving: Verovio (LGPL-3.0) with the Leipzig font (SIL OFL 1.1). The page "Resources and licenses" in that folder lists each one.
-- **Touhou references page:** `public/analysis/touhou/analysis/touhou-references.html` states the terms of the Touhou pages: a fan work under ZUN's guideline, the author's own work under CC BY-NC-SA 4.0, and the transcription by ゆきぽ (free to modify, use and redistribute with credit; commercial use needs prior notice to the author).
+- **Japanese music guides:** paraphrase Tokita and Hughes (Ashgate, 2017), Malm (Kodansha, 2000), Miki (Rochester, 2008) and Kawase, all under their authors' copyright, with short quotes and page citations. Sounds: the Nice-Steinway piano (CC BY-ND 3.0) and the Musyng Kite koto, shamisen and shakuhachi (CC BY-SA 3.0); engraving: Verovio (LGPL-3.0) with the Leipzig font (SIL OFL 1.1). The "Resources" page in that folder lists each credit.
+- **Touhou terms:** the About page states the terms of the Touhou pages (the references page no longer carries a license section): a fan work under ZUN's guideline, the author's own work under CC BY-NC-SA 4.0, and the transcription by ゆきぽ (free to modify, use and redistribute with credit; commercial use needs prior notice to the author).

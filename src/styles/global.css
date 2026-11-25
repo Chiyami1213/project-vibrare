@@ -2178,3 +2178,39 @@ button.note-chip[aria-pressed='true'] {
   flex-direction: column;
   gap: 6px;
 }
+
+/* license section of the About page */
+.sub-title {
+  margin: 26px 0 8px;
+  font-size: 1.1rem;
+}
+
+.lic-table td,
+.lic-table th {
+  vertical-align: top;
+}
+
+.lic-ja {
+  margin: 0 0 16px;
+}
+
+.lic-ja > summary {
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.lic-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.lic-table th,
+.lic-table td {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.lic-table thead th:first-child,
+.lic-table tbody th {
+  width: 30%;
+}

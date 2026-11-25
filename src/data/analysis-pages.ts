@@ -76,9 +76,9 @@ export const JAPANESE: StaticPage[] = [
 ].map(([name, note], i) => ({ href: `${JP}/chapter-${i + 1}.html`, title: `Chapter ${i + 1}: ${name}`, note }));
 
 export const JAPANESE_RESOURCES: StaticPage = {
-  href: `${JP}/resources-and-licenses.html`,
-  title: 'Resources and Licenses',
-  note: 'The books, sounds and software behind the guides, with how each is used and its license.',
+  href: `${JP}/resources.html`,
+  title: 'Resources',
+  note: 'The books, sounds and software behind the guides, with how each is used.',
 };
 
 /** Touhou tracks with analysis pages: game id, then track number (as the site's track list has it). */
