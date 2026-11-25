@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import { GAMES } from '../../../data/touhou';
+import { TOUHOU_ANALYSIS } from '../../../data/analysis-pages';
 import { bpmLabel, gameLabel, keysLabel, roleLabel } from '../../../scripts/touhou';
 
 export function getStaticPaths() {
@@ -11,6 +12,7 @@ export function getStaticPaths() {
 }
 
 const { game, prev, next } = Astro.props;
+const analyses = TOUHOU_ANALYSIS[game.id] ?? {};
 ---
 
 <Layout title={`${gameLabel(game)} ${game.titleJa}`}>
@@ -35,7 +37,14 @@ const { game, prev, next } = Astro.props;
           return (
             <li class="track">
               <span class="track-n">{t.n}</span>
-              <span class="track-title" lang="ja">{t.title}</span>
+              <span class="track-title">
+                <span lang="ja">{t.title}</span>
+                {analyses[t.n] && (
+                  <span class="track-analysis">
+                    {analyses[t.n].map((a) => <a href={a.href}>{a.label}</a>)}
+                  </span>
+                )}
+              </span>
               <span class="track-info">
                 <span class="track-role">
                   {r.label}

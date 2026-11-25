@@ -1,0 +1,48 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import PageList from '../../../../components/PageList.astro';
+import { ROBERTS, WTC_FUGUES, WTC_INDEX } from '../../../../data/analysis-pages';
+
+const books = WTC_INDEX.map((b) => ({ ...b, fugues: WTC_FUGUES.filter((f) => f.book === b.book) }));
+---
+
+<Layout title="Bach Fugue Analysis" description="Analyses of Bach’s fugues: all 48 fugues of The Well-Tempered Clavier with entries, answers, countersubjects, cadences and Busoni’s marks, and Scott Roberts’s six-step method with four organ fugues.">
+  <main class="page-block wide">
+    <p class="crumb"><a class="btn" href="/analysis/baroque/bach/">← Bach</a></p>
+    <h1>Bach Fugue Analysis</h1>
+    <p class="lead">
+      Each fugue has its own page, with an engraved score, the entries and answers found in it, its countersubjects, episodes and cadences,
+      Busoni’s tempos and marks, and playback on a piano, a harpsichord or (for the organ fugues) an organ.
+    </p>
+    <nav class="jump" aria-label="Sections">
+      {books.map((b) => <a href={`#book-${b.book}`}>Book {b.book}</a>)}
+      <a href="#roberts">Roberts’s method</a>
+    </nav>
+
+    {
+      books.map((b) => (
+        <section id={`book-${b.book}`} class="res-section">
+          <h2 class="section-title">
+            The Well-Tempered Clavier, Book {b.book} · {b.range}
+          </h2>
+          <p class="empty">
+            {b.note} <a href={b.href}>Open the index page</a>.
+          </p>
+          <nav class="jump" aria-label={`Fugues of Book ${b.book}`}>
+            {b.fugues.map((f) => <a href={f.href} title={`${f.fugueKey}, ${f.voices} voices`}>BWV {f.bwv}</a>)}
+          </nav>
+        </section>
+      ))
+    }
+
+    <section id="roberts" class="res-section">
+      <h2 class="section-title">Roberts’s method, with worked examples</h2>
+      <PageList pages={ROBERTS} />
+    </section>
+
+    <p class="source-note">
+      Scores: David Huron’s Humdrum encoding of the Bach-Gesellschaft edition (BG 14), engraved with Verovio. The pages for BWV 848–893
+      are an automatic first reading; each page says what is automatic and what was read by hand.
+    </p>
+  </main>
+</Layout>

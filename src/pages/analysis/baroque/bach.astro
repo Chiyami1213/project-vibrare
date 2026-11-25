@@ -1,6 +1,8 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import wtc from '../../../data/bach/wtc.json';
+import PageList from '../../../components/PageList.astro';
+import { FIRST_LESSONS, WTC_FUGUES } from '../../../data/analysis-pages';
 
 interface Piece {
   book: number;
@@ -12,6 +14,7 @@ interface Piece {
 }
 
 const pieces = wtc as Piece[];
+const analysis = new Map(WTC_FUGUES.map((f) => [f.bwv, f.href]));
 const books = [
   { id: 1, title: 'Book 1', range: 'BWV 846–869', note: 'Autograph dated 1722' },
   { id: 2, title: 'Book 2', range: 'BWV 870–893', note: 'Compiled around 1742' },
@@ -48,6 +51,7 @@ const books = [
                   <th scope="col">Prelude</th>
                   <th scope="col">Fugue</th>
                   <th scope="col">Voices</th>
+                  <th scope="col">Fugue analysis</th>
                 </tr>
               </thead>
               <tbody>
@@ -58,6 +62,7 @@ const books = [
                     <td>{p.preludeKey}</td>
                     <td>{p.fugueKey}</td>
                     <td>{p.voices}</td>
+                    <td><a href={analysis.get(p.bwv)}>Analysis</a></td>
                   </tr>
                 ))}
               </tbody>
@@ -66,6 +71,16 @@ const books = [
         </section>
       ))
     }
+
+    <section id="more" class="res-section">
+      <h2 class="section-title">More on Bach</h2>
+      <PageList
+        pages={[
+          { href: '/analysis/baroque/bach/fugue-analysis/', title: 'Bach fugue analysis', note: 'All 48 fugues of the Well-Tempered Clavier, and Scott Roberts’s method with four organ fugues.' },
+          FIRST_LESSONS,
+        ]}
+      />
+    </section>
 
     <p class="source-note">
       Keys and numbering follow the Wikipedia articles on

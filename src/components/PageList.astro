@@ -1,0 +1,19 @@
+---
+// A list of the analysis pages kept as delivered (public/analysis/…), each opening as its own page.
+import type { StaticPage } from '../data/analysis-pages';
+interface Props {
+  pages: StaticPage[];
+}
+const { pages } = Astro.props;
+---
+
+<ul class="res-list">
+  {
+    pages.map((p) => (
+      <li class="res-item">
+        <a class="res-title" href={p.href}>{p.title}</a>
+        {p.note && <div class="res-note">{p.note}</div>}
+      </li>
+    ))
+  }
+</ul>

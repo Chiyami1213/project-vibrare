@@ -1,9 +1,18 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import PageList from '../../../components/PageList.astro';
+import { BLAVET } from '../../../data/analysis-pages';
 ---
 
-<Layout title="Blavet">
-  <main>
+<Layout title="Blavet" description="Michel Blavet’s flute Sonata II “La Vibray”, Op. 2 No. 2: form, cadences, partimento patterns and how to play the flute part, movement by movement.">
+  <main class="page-block wide">
     <h1>Blavet</h1>
+    <p class="lead">
+      Michel Blavet (1700–1768) was the leading French flautist of his day. His Sonata II, “La Vibray”, from the
+      <em>Sonates mêlées de pièces</em>, Op. 2 (Paris, 1731), is read here movement by movement: its form, its cadences, the
+      partimento patterns under the melody, and the flute part as Quantz’s rules would have it played.
+    </p>
+    <PageList pages={BLAVET} />
+    <p class="source-note">Each page lists its own sources and the sound samples it uses.</p>
   </main>
 </Layout>

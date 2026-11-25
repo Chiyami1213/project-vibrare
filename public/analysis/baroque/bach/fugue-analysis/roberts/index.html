@@ -1,0 +1,598 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Roberts's Fugue Analysis Method</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: one reading column; a flow diagram leads into six step cards, then the worked example,
+   the four organ fugues drawn to scale, and a verdict tool. Site tokens as on the BWV 578 page. */
+:root {
+  --bg: #fbfaf7; --fg: #1c1c21; --muted: #64646e; --line: #e4e2dc; --tile: #fff; --accent: #5b4bdb;
+  --c-blue: #0072b2; --c-orange: #c27c00; --c-green: #00855f; --c-purple: #b0508f; --c-vermillion: #c4520a; --c-grey: #8a8a94;
+  --hl: rgba(91, 75, 219, .12); --radius: 12px;
+  --b-int: rgba(0, 114, 178, .16); --b-dig: rgba(194, 124, 0, .22); --b-link: rgba(100, 100, 110, .14);
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --num: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141418; --fg: #ececf1; --muted: #9d9daa; --line: #2c2c34; --tile: #1d1d23; --accent: #9d92ff;
+    --c-blue: #4fa8e0; --c-orange: #f0b030; --c-green: #3cc39a; --c-purple: #e08cc0; --c-vermillion: #f07a3a; --c-grey: #7c7c88;
+    --hl: rgba(157, 146, 255, .16);
+    --b-int: rgba(79, 168, 224, .24); --b-dig: rgba(240, 176, 48, .24); --b-link: rgba(160, 160, 170, .18);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141418; --fg: #ececf1; --muted: #9d9daa; --line: #2c2c34; --tile: #1d1d23; --accent: #9d92ff;
+  --c-blue: #4fa8e0; --c-orange: #f0b030; --c-green: #3cc39a; --c-purple: #e08cc0; --c-vermillion: #f07a3a; --c-grey: #7c7c88;
+  --hl: rgba(157, 146, 255, .16);
+  --b-int: rgba(79, 168, 224, .24); --b-dig: rgba(240, 176, 48, .24); --b-link: rgba(160, 160, 170, .18);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--sans); overflow-x: hidden;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+.wrap { max-width: 1060px; margin: 0 auto; padding-block: 0 48px; }
+section.blk { padding-top: 46px; scroll-margin-top: 56px; }
+h1 { font-size: clamp(1.8rem, 4.4vw, 2.6rem); line-height: 1.12; margin: .25em 0 .3em; letter-spacing: -.015em; text-wrap: balance; }
+h2 { font-size: 1.5rem; margin: 0 0 .35em; letter-spacing: -.01em; text-wrap: balance; }
+h3 { font-size: 1.08rem; margin: 0; text-wrap: balance; }
+p { max-width: 70ch; margin: .5em 0; }
+a { color: var(--accent); } b, strong { font-weight: 650; }
+.muted { color: var(--muted); } .lead { color: var(--muted); margin: 0 0 14px; max-width: 72ch; }
+button, select { font: inherit; color: inherit; } button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.n { font-variant-numeric: tabular-nums; }
+.deg { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sd { display: inline-block; position: relative; font-variant-numeric: tabular-nums; }
+.sd::before { content: "^"; position: absolute; left: 50%; transform: translateX(-50%); top: -.40em; font-size: .78em; font-weight: 400; line-height: 1; }
+.tag { display: inline-block; font-size: .7rem; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; padding: 0 .5em; border-radius: 5px; border: 1px solid currentColor; vertical-align: .12em; white-space: nowrap; }
+.tag.rb { color: var(--c-blue); } .tag.ours { color: var(--c-vermillion); } .tag.sp { color: var(--c-purple); }
+
+/* hero and nav */
+.hero { padding: 18px 0 4px; }
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.crumb { color: var(--muted); font-size: .8rem; letter-spacing: .07em; text-transform: uppercase; }
+#theme { background: var(--tile); border: 1px solid var(--line); border-radius: 999px; width: 36px; height: 36px; flex: none; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+.facts li { background: var(--hl); border-radius: 999px; padding: 2px 12px; font-size: .9rem; }
+.thesis { margin: 18px 0 0; padding: 16px 20px; background: var(--tile); border: 1px solid var(--line); border-radius: var(--radius); max-width: 820px; }
+.thesis .k { font: 700 .74rem/1 var(--num); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.thesis p { margin: .45em 0 0; font-size: 1.04rem; }
+nav.toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); margin-top: 22px; }
+nav.toc ul { list-style: none; margin: 0; padding: 8px 0; display: flex; gap: 4px 6px; overflow-x: auto; scrollbar-width: none; }
+nav.toc a { display: block; white-space: nowrap; color: var(--fg); text-decoration: none; font-size: .88rem; padding: 3px 10px; border-radius: 999px; }
+nav.toc a:hover { background: var(--hl); }
+
+/* two approaches */
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin: 14px 0 0; }
+.appr { border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; background: var(--tile); min-width: 0; }
+.appr h3 { display: flex; align-items: center; gap: 8px; }
+.appr .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--k); flex: none; }
+.appr p { font-size: .95rem; margin: .45em 0 0; }
+.appr .ex { font-size: .88rem; color: var(--muted); }
+
+/* flow diagram */
+.figbox { background: var(--tile); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 14px 10px; margin: 14px 0 6px; }
+.scrollx { overflow-x: auto; }
+#flow { display: block; width: 100%; min-width: 720px; height: auto; font-family: var(--sans); }
+#flow .box rect { fill: var(--bg); stroke: var(--line); stroke-width: 1.5; }
+#flow .box:hover rect, #flow .box:focus rect { stroke: var(--accent); }
+#flow .box { cursor: pointer; outline: none; }
+#flow .box .no { fill: var(--accent); font: 700 11px var(--num); letter-spacing: .06em; }
+#flow .box .t { fill: var(--fg); font-size: 12.5px; font-weight: 600; }
+#flow .box .s { fill: var(--muted); font-size: 10.5px; }
+#flow .ar { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+#flow .ar.loop { stroke: var(--accent); stroke-dasharray: 4 3; }
+#flow .lab { fill: var(--muted); font-size: 10.5px; }
+#flow .lab.acc { fill: var(--accent); }
+#flow .end rect { stroke-width: 1.5; }
+#flow .end.rh rect { fill: var(--b-int); stroke: var(--c-blue); } #flow .end.li rect { fill: var(--b-dig); stroke: var(--c-orange); }
+#flow .end text { fill: var(--fg); font-size: 12.5px; font-weight: 650; } #flow .end .sub { font-weight: 400; font-size: 11px; fill: var(--muted); }
+#flow .ah { fill: var(--muted); } #flow .ah.acc { fill: var(--accent); }
+.cap { font-size: .86rem; color: var(--muted); margin: 6px 0 0; max-width: 80ch; }
+
+/* step cards */
+.steps { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 14px; }
+.step { background: var(--tile); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px 16px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 10px 26px; scroll-margin-top: 60px; }
+.step:target, .step.flash { border-color: var(--accent); }
+.step .head { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.step .no { font: 700 .8rem/1 var(--num); color: var(--accent); letter-spacing: .06em; }
+.step .goal { margin: 0; font-size: .96rem; }
+.step h4 { margin: 4px 0 4px; font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 650; }
+.crit { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.crit li { border-left: 3px solid var(--line); padding: 1px 0 1px 10px; font-size: .93rem; }
+.crit li b { display: block; }
+.crit .seen { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3px; }
+.chip { font-size: .74rem; padding: 0 7px; border-radius: 999px; background: var(--hl); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.side { min-width: 0; }
+.side .ex { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .9rem; }
+.side .ex p { margin: .3em 0 0; }
+.side .note { font-size: .86rem; color: var(--muted); margin: 8px 0 0; }
+@media (max-width: 760px) { .step { grid-template-columns: 1fr; } }
+
+/* worked example */
+.strip { display: flex; gap: 3px; margin: 10px 0 2px; overflow-x: auto; padding-bottom: 2px; }
+.strip span { flex: 1 0 auto; min-width: 46px; text-align: center; font: 600 .8rem/1 var(--num); padding: 9px 4px; border-radius: 6px; }
+.strip .i { background: var(--b-int); } .strip .d { background: var(--b-dig); } .strip .c { background: var(--b-link); }
+.props { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; margin: 16px 0 0; }
+.prop { border: 1px solid var(--line); border-radius: var(--radius); background: var(--tile); padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.prop .kind { font-size: .74rem; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); font-weight: 650; }
+.prop dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; font-size: .9rem; }
+.prop dt { color: var(--muted); } .prop dd { margin: 0; min-width: 0; }
+.prop .ok { color: var(--c-green); font-weight: 650; }
+#cells { display: block; width: 100%; max-width: 820px; height: auto; font-family: var(--sans); margin-top: 6px; }
+#cells text { fill: var(--fg); font-size: 12px; } #cells .lab { fill: var(--muted); font-size: 11px; }
+#cells .c4 { fill: var(--c-blue); } #cells .c3 { fill: var(--c-orange); } #cells .c2 { fill: var(--c-purple); } #cells .c1 { fill: var(--c-vermillion); }
+#cells .num { fill: var(--bg); font-weight: 700; font-size: 12px; }
+#cells .tick line { stroke: var(--line); } #cells .tick text { fill: var(--muted); font-size: 10px; }
+
+/* fugue comparison */
+.fugues { display: grid; gap: 14px; margin: 16px 0 0; }
+.fg { background: var(--tile); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px 12px; min-width: 0; }
+.fg .top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 14px; }
+.fg h3 { font-size: 1.1rem; }
+.verd { font-size: .78rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 2px 10px; border-radius: 999px; }
+.verd.rh { background: var(--b-int); color: var(--c-blue); } .verd.li { background: var(--b-dig); color: var(--c-orange); }
+.fg .meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; padding: 0; list-style: none; }
+.fg .meta li { font-size: .82rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 0 9px; }
+.fg p { font-size: .94rem; }
+.fg svg { display: block; width: 100%; min-width: 640px; height: auto; font-family: var(--sans); }
+.fg svg text { fill: var(--fg); font-size: 10.5px; } .fg svg .ax text { fill: var(--muted); font-size: 10px; } .fg svg .ax line { stroke: var(--line); }
+.fg svg .i { fill: var(--b-int); } .fg svg .d { fill: var(--b-dig); } .fg svg .l { fill: var(--b-link); }
+.fg svg rect { stroke: var(--tile); stroke-width: 1.2; }
+.fg svg .dt { fill: var(--c-blue); stroke: none; } .fg svg .cut { stroke: var(--c-vermillion); stroke-width: 1.5; stroke-dasharray: 3 2; }
+.fg svg .cutl { fill: var(--c-vermillion); font-weight: 650; }
+.fg .link { font-size: .9rem; margin: 8px 0 0; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .82rem; color: var(--muted); margin: 10px 0 0; }
+.key span::before { content: ""; display: inline-block; width: 12px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; background: var(--k); }
+
+/* verdict tool */
+.tool { background: var(--tile); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; margin: 14px 0 0; }
+.tool .row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--bg); }
+.seg button { background: transparent; border: 0; padding: 5px 12px; font-size: .88rem; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--bg); font-weight: 600; }
+#plist { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
+#plist li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 14px; align-items: center; border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; background: var(--bg); }
+#plist .pn { font-weight: 600; font-size: .94rem; }
+#plist .pw { grid-column: 1 / 2; font-size: .86rem; color: var(--muted); }
+#plist .tg { grid-row: 1 / span 2; grid-column: 2; }
+#plist .tg button { font-size: .8rem; padding: 3px 10px; }
+#plist li.sup .tg { color: var(--muted); font-size: .8rem; text-align: right; max-width: 130px; }
+.out { margin: 14px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 12px 14px; border-radius: 10px; border: 1px dashed var(--line); }
+.out .big { font-size: 1.15rem; font-weight: 700; }
+.out .big.rh { color: var(--c-blue); } .out .big.li { color: var(--c-orange); } .out .big.hy { color: var(--c-purple); }
+.out p { margin: 0; font-size: .9rem; color: var(--muted); flex: 1 1 280px; }
+#reset { background: none; border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; font-size: .84rem; color: var(--accent); }
+
+/* glossary, checklist, sources */
+.gloss { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px 22px; margin: 14px 0 0; }
+.gloss div { border-top: 1px solid var(--line); padding-top: 8px; min-width: 0; }
+.gloss dt { font-weight: 650; } .gloss dd { margin: 2px 0 0; font-size: .92rem; color: var(--muted); }
+.check { counter-reset: q; list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 8px; max-width: 820px; }
+.check li { counter-increment: q; display: grid; grid-template-columns: 2.2em 1fr; gap: 8px; font-size: .95rem; }
+.check li::before { content: counter(q); font: 700 .82rem/1.9 var(--num); color: var(--accent); text-align: right; }
+.check li ul { margin: 4px 0 0; padding-left: 1.1em; color: var(--muted); font-size: .9rem; }
+table.rv { border-collapse: collapse; width: 100%; min-width: 620px; font-size: .9rem; }
+table.rv th, table.rv td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+table.rv th { font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 650; }
+footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .86rem; color: var(--muted); }
+footer p { max-width: 90ch; }
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <div class="topbar"><span class="crumb"><a href="/analysis/baroque/bach/fugue-analysis/">Fugue analysis</a> · Fugue Analysis Method · Study Guide</span>
+    <button type="button" id="theme" aria-label="Switch light or dark theme">◐</button></div>
+  <h1>Roberts's Fugue Analysis Method</h1>
+  <p class="lead">Scott Roberts, <i>Toward a Methodology for the Analysis of Fugue: An Examination of Selected Bach Organ Works</i> (PhD diss., Florida State University, 2004). A six-step method that asks what problem a fugue sets itself at the start, and whether it solves it by the end.</p>
+  <ul class="facts">
+    <li><b>6</b> steps</li><li><b>2</b> outcomes: rhetorical or literal</li><li>Demonstrated on WTC I, Fugue in C Minor</li><li>Applied to BWV 578, 533, 545, 547</li>
+  </ul>
+  <div class="thesis">
+    <span class="k">Thesis, paraphrased</span>
+    <p>The opening material of a fugue holds one or more <b>notable properties</b> in its rhythm, harmony and melody. The fugue may treat them as conflicts and work out solutions from that same material. The formal structure gives evidence for both the conflicts and the solutions. A fugue that resolves its properties is <b>rhetorical</b>; one that does not treat them as challenges is <b>literal</b>.</p>
+    <p class="muted" style="font-size:.86rem">Roberts, chapter 1. He builds on Daniel Harrison (fugue as rhetoric, conflicts called <i>statūs</i>) and Joel Lester (the opening "core" material and parallel sections).</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections"><ul>
+  <li><a href="#approaches">Two Approaches</a></li><li><a href="#flowsec">The Six Steps</a></li><li><a href="#example">Worked Example</a></li>
+  <li><a href="#organ">Four Organ Fugues</a></li><li><a href="#tool">Verdict Tool</a></li><li><a href="#terms">Terms</a></li>
+  <li><a href="#checklist">Checklist</a></li><li><a href="#rules">Rules vs Readings</a></li>
+</ul></nav>
+
+<section class="blk" id="approaches">
+  <h2>Two Compositional Approaches</h2>
+  <p class="lead">The method ends in one of two labels. Roberts treats them as two ways a fugue can relate to its own opening, not as a ranking.</p>
+  <div class="pair">
+    <div class="appr" style="--k: var(--c-blue)">
+      <h3><span class="dot"></span>Rhetorical</h3>
+      <p>The opening sets up musical "challenges." The fugue then argues them out, and each notable property comes back with the very attribute that made it notable, now completed. Roberts calls this being <b>reconciled</b>.</p>
+      <p>In every rhetorical fugue he studied, the resolutions arrive together, and the fugue ends soon after. Any coda is brief and only rounds off the piece.</p>
+      <p class="ex">Examples: WTC I C minor, BWV 578, BWV 545, BWV 547.</p>
+    </div>
+    <div class="appr" style="--k: var(--c-orange)">
+      <h3><span class="dot"></span>Literal</h3>
+      <p>The features that catch the analyst's eye are presented but never resolved. They persist to the end, so the fugue illustrates a state of affairs instead of arguing toward a goal. "Literal" here means a presentation not meant to persuade.</p>
+      <p>A mix of reconciled and unreconciled properties (a hybrid) is possible in theory, but Roberts found none.</p>
+      <p class="ex">Example: BWV 533.</p>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="flowsec">
+  <h2>The Six Steps</h2>
+  <p class="lead">The process is recursive: the significance of a property is only clear once the whole fugue has been considered. Not every analysis needs all six steps. Select a step in the diagram to jump to its card.</p>
+  <div class="figbox scrollx">
+    <svg id="flow" viewBox="0 0 760 236" role="img" aria-label="Flow diagram: steps 1 to 6, with a loop from step 5 back to step 3, ending in rhetorical or literal">
+      <defs>
+        <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0,0 L8,4 L0,8 z"/></marker>
+        <marker id="aha" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="ah acc" d="M0,0 L8,4 L0,8 z"/></marker>
+      </defs>
+      <g id="flowboxes"></g>
+      <path class="ar loop" d="M567,84 C567,30 315,30 315,84" marker-end="url(#aha)"/>
+      <text class="lab acc" x="441" y="36" text-anchor="middle">alternate structure found: look for patterns again</text>
+      <path class="ar" d="M672,150 C672,176 560,170 510,188" marker-end="url(#ah)"/>
+      <path class="ar" d="M712,150 C712,170 690,176 680,188" marker-end="url(#ah)"/>
+      <g class="end rh"><rect x="400" y="190" width="200" height="36" rx="18"/><text x="500" y="212" text-anchor="middle">Rhetorical <tspan class="sub" dx="2">all reconciled</tspan></text></g>
+      <g class="end li"><rect x="606" y="190" width="146" height="36" rx="18"/><text x="679" y="212" text-anchor="middle">Literal <tspan class="sub" dx="2">none</tspan></text></g>
+      <text class="lab" x="10" y="212">Hybrid (some reconciled): possible, not yet found</text>
+    </svg>
+  </div>
+  <p class="cap">Steps 1 to 4 collect evidence. Step 5 sends the analysis back to step 3 when step 4 has produced a better segmentation. Step 6 gives the verdict.</p>
+
+  <ol class="steps" id="steps"></ol>
+</section>
+
+<section class="blk" id="example">
+  <h2>Worked Example: WTC I, Fugue in C Minor (BWV 847)</h2>
+  <p class="lead">Roberts demonstrates the method on this 31-bar fugue because it is short, has few notable properties, shares them with the organ fugues, and is one of Lester's own examples. Steps 3, 4 and 5 find nothing here, which shows that a step can come up empty.</p>
+
+  <h3>Step 1: Traditional Structure (Roberts, Table 3)</h3>
+  <div class="strip" aria-label="Structure in order">
+    <span class="i">S/A</span><span class="i">S/A</span><span class="d">E1</span><span class="i">S/A</span><span class="d">E2</span><span class="i">S/A</span><span class="d">E3</span><span class="i">S/A</span><span class="d">E4</span><span class="i">S/A</span><span class="d">E5</span><span class="i">S/A</span><span class="c">Coda</span>
+  </div>
+  <p class="cap">Order only, not to scale. E1 (mm. 5–6) is called a codetta in some texts; Roberts follows Lester's label. E4 inverts E1.</p>
+
+  <h3 style="margin-top:22px">Step 2: Three Notable Properties, and Step 6: How Each Is Reconciled</h3>
+  <div class="props">
+    <div class="prop">
+      <span class="kind">Blocked linear descent</span>
+      <h3><span class="deg">^6–^5–^4–^3</span> in the subject</h3>
+      <dl>
+        <dt>Why notable</dt><dd>Repeated and prominent in every entry, yet it stops on <span class="deg">^3</span> and never reaches tonic.</dd>
+        <dt>Reconciled by</dt><dd class="ok">A complete descent to <span class="deg">^1</span> in soprano and bass, mm. 27–29.</dd>
+      </dl>
+    </div>
+    <div class="prop">
+      <span class="kind">Linear ascent</span>
+      <h3>Chromatic <span class="deg">^5 → ^1</span> in Episode 1</h3>
+      <dl>
+        <dt>Why notable</dt><dd>It climbs through every half step of the minor-mode upper hexachord (mm. 5–6, again mm. 17–18) instead of taking the melodic minor scale.</dd>
+        <dt>Reconciled by</dt><dd class="ok">An unhindered ascent up the melodic minor scale from dominant to tonic, mm. 27–29.</dd>
+      </dl>
+    </div>
+    <div class="prop">
+      <span class="kind">Rhythmic and melodic pattern</span>
+      <h3>Cells of 4 + 4 + 3 + 3 + 2 eighths</h3>
+      <dl>
+        <dt>Why notable</dt><dd>The subject splits into motives that shrink from 4 to 3 to 2 eighths, which sets up a missing final cell of 1.</dd>
+        <dt>Reconciled by</dt><dd class="ok">4 + 4 + 3 + 3 + 3 + 3 + 2 + 1 in all three voices, mm. 27–29: the capstone cell of one eighth.</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="figbox scrollx">
+    <svg id="cells" viewBox="0 0 820 150" role="img" aria-label="Rhythmic cells of the subject and of the resolution, to scale in eighth notes"></svg>
+    <p class="cap">Drawn to scale in eighth notes from Roberts's cell counts (Figures 8 and 12). Cells are grouped by melodic contour, so a cell of four can be three eighths and a rest.</p>
+  </div>
+  <p><a href="/analysis/baroque/bach/fugue-analysis/wtc-1/bwv847-fugue-analysis.html">Open the interactive C minor analysis with score and playback</a></p>
+  <p><b>Verdict.</b> All three properties resolve together in mm. 27–29, and only a short coda follows. The approach is <b>rhetorical</b>. Roberts takes two lessons from this that hold for every rhetorical organ fugue in the study: the resolutions are concurrent, and once they are done the fugue ends.</p>
+</section>
+
+<section class="blk" id="organ">
+  <h2>Four Organ Fugues</h2>
+  <p class="lead">Each fugue shows one main type of notable property. Organ fugues are on average about twice as long as WTC fugues, with longer subjects (Roberts, Tables 1–2), so their structure has more room to carry meaning. Each strip below is drawn to scale in bars from Roberts's tables.</p>
+  <div class="key"><span style="--k: var(--b-int)">integrant (entry, period or Exposition Block)</span><span style="--k: var(--b-dig)">digression</span><span style="--k: var(--b-link)">link, codetta or coda</span></div>
+  <div class="fugues" id="fugues"></div>
+</section>
+
+<section class="blk" id="tool">
+  <h2>Verdict Tool (Step 6)</h2>
+  <p class="lead">Pick a fugue to load the notable properties Roberts found, with his answer for each. Switch any property to see how the verdict depends on it. Properties marked as support strengthen the reading but are not conflicts in themselves, so they do not count.</p>
+  <div class="tool">
+    <div class="row"><span class="seg" id="pick" role="group" aria-label="Fugue"></span>
+      <button type="button" id="reset">Reset to Roberts</button></div>
+    <ul id="plist"></ul>
+    <div class="out" aria-live="polite"><span class="big" id="vout"></span><p id="vwhy"></p></div>
+  </div>
+</section>
+
+<section class="blk" id="terms">
+  <h2>Terms</h2>
+  <dl class="gloss">
+    <div><dt>Notable property</dt><dd>A salient feature of the opening, either an anomaly or a trait that is not required of a fugue (for example a head-and-tail subject). Step 2 only lists candidates; later steps decide which matter.</dd></div>
+    <div><dt>Core material</dt><dd>Lester's term for the opening section up to the first parallelism. Roberts widens it beyond subject, answer and countersubject to include structure and Exposition Blocks.</dd></div>
+    <div><dt>Integrant</dt><dd>The element the structure begins and ends with, and whose return is expected. Named after "integral." In a traditional reading it is the same as an entry.</dd></div>
+    <div><dt>Digression</dt><dd>Any secondary element between integrants. In a traditional reading it is the same as an episode. Roberts uses new names because step 4 can segment by other events.</dd></div>
+    <div><dt>Blocked ascent or descent</dt><dd>An incomplete scale line. Descents are complete at <span class="deg">^1</span>; ascents from below <span class="deg">^5</span> are complete at <span class="deg">^5</span>; ascents from <span class="deg">^5</span> are complete at <span class="deg">^1</span>.</dd></div>
+    <div><dt>Suspended scale degree</dt><dd>A non-tonic degree that is not linearly connected to other degrees, such as <span class="deg">^5</span> boxed in by <span class="deg">^6</span> in BWV 533.</dd></div>
+    <div><dt>Exposition Block (EB)</dt><dd>Several subject and answer entries that act as one integrant. Coined for BWV 547, whose one-bar subject cannot stand alone.</dd></div>
+    <div><dt>Reconciled</dt><dd>A property returns together with the attribute that made it notable, completed: an incomplete descent returns as a complete one.</dd></div>
+    <div><dt>Obscured entry</dt><dd>An entry hidden by voices above and below it, or placed in the middle of a continuing idea. It weakens a structure built on entries and points the analyst elsewhere.</dd></div>
+  </dl>
+</section>
+
+<section class="blk" id="checklist">
+  <h2>Checklist for Your Own Analysis</h2>
+  <p class="lead">Roberts's outline, turned into questions. Work through it in order, then go back when a later step changes an earlier answer.</p>
+  <ol class="check">
+    <li><div><b>Mark the traditional elements.</b> Where are the subject and answer entries, the end of the exposition, the countersubject, codettas, episodes and coda?<ul><li>Note voice, key and devices (augmentation, diminution, retrograde, inversion, stretto). Middle entries need not be called subject or answer.</li></ul></div></li>
+    <li><div><b>List what is unusual in the exposition.</b> Check the six kinds: linear lines, blocked lines, rhythmic or melodic patterns, suspended degrees, contrasting material, structural units.<ul><li>Only list candidates. A subject whose descent stops short is not automatically notable, since the Urlinie descent is expected.</li></ul></div></li>
+    <li><div><b>Measure the sections.</b> Label integrants and digressions and write their lengths in bars.<ul><li>Do they grow or shrink steadily? Do they mirror? Do lengths form simple ratios (1:2, 1:3, 1:4) or tuning ratios (1:1, 2:1, 3:2, 4:3, 5:4)?</li></ul></div></li>
+    <li><div><b>Ask whether the entry-based structure is the useful one.</b> Is it incoherent because entries overlap or are obscured? Are there rare rhythm changes, rare texture changes, or groups of entries acting as one block?</div></li>
+    <li><div><b>If step 4 gave a better segmentation, return to step 3</b> and look for patterns in it.</div></li>
+    <li><div><b>Follow each property to the end.</b> Does it come back completed? Do the completions arrive together, with the fugue ending soon after?<ul><li>All completed: rhetorical. None: literal. A mix would be a hybrid, which Roberts has not found.</li></ul></div></li>
+  </ol>
+</section>
+
+<section class="blk" id="rules">
+  <h2>Rules vs Readings</h2>
+  <p class="lead">Roberts separates his procedure from his interpretations, and flags several readings as speculative himself. This table keeps the two apart.</p>
+  <div class="scrollx">
+  <table class="rv">
+    <thead><tr><th>Topic</th><th>Method (Roberts's rule)</th><th>Interpretation or caution</th></tr></thead>
+    <tbody>
+      <tr><td>Notable properties</td><td>Six kinds in step 2; accept only properties supported both by the opening and by the whole fugue (chapter 8).</td><td>Which features count is the analyst's judgment. Step 2 lists candidates only.</td></tr>
+      <tr><td>Section ratios</td><td>Note simple and tuning ratios between section lengths (step 3).</td><td><span class="tag sp">Speculative</span> Roberts calls the BWV 533 ratio reading "admittedly speculative," and for BWV 545 leaves numerology to the reader. Some sections need adjustment (codettas or links ignored) to fit.</td></tr>
+      <tr><td>Expressive narrative</td><td>Not part of the method.</td><td><span class="tag sp">Speculative</span> The BWV 578 story and the two BWV 533 readings (frustration, or confidence and stability) are offered as reasonable extrapolations, not proof.</td></tr>
+      <tr><td>Verdict</td><td>Reconciled means rhetorical; not reconciled means literal (step 6).</td><td>Hybrids are possible in theory but untested.</td></tr>
+      <tr><td>Analytic tools</td><td>Traditional harmonic and formal analysis plus foreground Schenkerian graphs.</td><td>Roberts says the method is not limited to these tools or to foreground level.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<footer>
+  <p><b>Source.</b> Scott Roberts, <i>Toward a Methodology for the Analysis of Fugue: An Examination of Selected Bach Organ Works</i>, PhD diss., Florida State University, 2004 (FSU Digital Library). Chapter 3 gives the method and the C minor demonstration; chapters 4–7 apply it to BWV 578, 533, 545 and 547. Everything on this page is paraphrased; tables and numbers come from Roberts's Tables 3–10 and his chapter text.</p>
+  <p><b>Background cited by Roberts.</b> Daniel Harrison, "Rhetoric and Fugue: An Analytical Application," <i>Music Theory Spectrum</i> 12 (1990); Joel Lester, "Heightening Levels of Activity and J. S. Bach's Parallel-Section Constructions," <i>JAMS</i> 54 (2001).</p>
+  <p>Companion page: the interactive BWV 578 analysis with score, playback and all of Roberts's tables. The C minor fugue has its own interactive page too; pages for BWV 533, 545 and 547 are in progress.</p>
+</footer>
+</div>
+
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, txt) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (txt != null) e.textContent = txt; return e; };
+const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+const BWV578_URL = '/analysis/baroque/bach/fugue-analysis/roberts/bwv578.html';
+
+// theme
+const t = store.get('th-theme'); if (t) document.documentElement.dataset.theme = t;
+$('#theme').onclick = () => {
+  const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const nx = cur === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = nx; store.set('th-theme', nx);
+};
+
+// ---------- the six steps (Roberts, chapter 3) ----------
+const STEPS = [
+  { t: 'Traditional Elements', s: 'entries, episodes, coda',
+    goal: 'Identify every traditional fugue element, with the voice, the key and any device used.',
+    crit: [
+      ['Subject and answer entries', 'Including where the exposition ends. Middle entries need not be labeled subject or answer, since an answer is often not identifiable after the exposition unless it is tonal.', []],
+      ['Countersubject, codettas, episodes, coda', 'Each with its key or keys.', []],
+      ['Devices', 'Augmentation, diminution, retrograde, inversion, stretto.', ['547 augmented and inverted entries']],
+    ],
+    ex: 'C minor: 13 sections (Table 3), with Episode 4 an inversion of Episode 1.',
+    note: 'This step alone is what most fugue analyses stop at. Roberts treats it as raw material.' },
+  { t: 'Notable Properties', s: 'what is unusual at the start',
+    goal: 'Examine the exposition for anomalies and for features that set this fugue apart. Only list candidates; the later steps decide their weight.',
+    crit: [
+      ['Linear ascent or descent', 'A scale line emphasized by repetition.', ['C minor ^6–^5–^4–^3', '533 ascent ^1–^3']],
+      ['Blocked ascent or descent', 'A line that stops short of its goal: descents need ^1; ascents from below ^5 need ^5; ascents from ^5 need ^1.', ['C minor', '533 ^5 stopped by ^6', '545 nothing past ^4']],
+      ['Rhythmic and melodic patterns', 'Cells or motives that recur, for example 4 + 4 + 3 + 3 + 2 eighths.', ['C minor']],
+      ['Suspended scale degree', 'A non-tonic degree not connected linearly to the others.', ['533 ^5']],
+      ['Contrasting material', 'Contrast in rhythm or melody, in the subject or across the whole fugue (Harrison\'s active vs static).', ['578 active vs static', '545 half notes vs quarters']],
+      ['Structural units', 'The subject forms a unit such as a period.', ['578 period']],
+    ],
+    ex: 'C minor: the blocked ^6–^3 descent, the chromatic ^5–^1 ascent of Episode 1, and the shrinking rhythmic cells.',
+    note: 'An incomplete Urlinie-style descent is expected in many subjects, so it is not notable by default, but it should not be dismissed either.' },
+  { t: 'Patterns in the Structure', s: 'integrants and digressions',
+    goal: 'Label the step 1 sections as integrants and digressions, write their lengths, and look for patterns.',
+    crit: [
+      ['Successively longer or shorter', 'Integrants or digressions grow or shrink in a consistent way.', ['578 digressions 2, 3, 3½, 5, 8½']],
+      ['Mirroring', 'Lengths form an arithmetic mirror.', ['533 entry spans 2, 3½, 3½, 5 | 5, 3½, 3½, 2']],
+      ['Ratio correlation', 'Intuitive ratios (1:2, 1:3, 1:4) or tuning ratios (1:1, 2:1, 3:2, 4:3, 5:4).', ['533 3:2 and 4:3', '545 2:1, 4:3, 1:1']],
+    ],
+    ex: 'C minor: none of these patterns is present.',
+    note: 'Lengths are counted in bars. Small links and codettas may be left out, as Roberts does for BWV 578 and 533, but say so.' },
+  { t: 'Segment by Other Events', s: 'when entries are not enough',
+    goal: 'Ask whether some other phenomenon gives a more informative segmentation than entries and episodes. Both readings may be useful.',
+    crit: [
+      ['Incoherent, inconsistent or unintuitive structure', 'Entries overlap so much that boundaries blur, or they are obscured. This tells you to look elsewhere.', ['545 obscured entries', '547 about 50 overlapping entries']],
+      ['Rare changes in the prevailing rhythm', 'Unexpected and infrequent; regular alternation does not count.', ['545 quarter-note bars 18, 54, 81, 108']],
+      ['Rare changes in texture or density', 'Significant through scarcity.', ['533']],
+      ['Entries combined into one larger entry', 'An Exposition Block treated as one integrant.', ['547 EBs of 3, 2, 1']],
+    ],
+    ex: 'C minor: none applies.',
+    note: 'BWV 545 is the first fugue in the study where a property comes from the alternate structure, not from the subject.' },
+  { t: 'Repeat Step 3 if Needed', s: 'patterns in the new map',
+    goal: 'If notable properties dictate an alternate structure, examine that structure for patterns as in step 3.',
+    crit: [
+      ['Loop back', 'Apply the three step 3 pattern tests to the new segmentation.', ['545 section ratios', '547 2:1 split, 21:9 entries']],
+    ],
+    ex: 'C minor: not needed.',
+    note: 'This is what makes the method recursive: a property may only show its weight once the fugue is seen whole.' },
+  { t: 'How the Fugue Responds', s: 'reconciled or not',
+    goal: 'Follow each notable property to the end of the fugue and decide whether it is reconciled.',
+    crit: [
+      ['Reconciled', 'The property returns with the attribute that qualified it, now completed. All reconciled: rhetorical.', ['C minor', '578', '545', '547']],
+      ['Not reconciled', 'The property persists unresolved. None reconciled: literal.', ['533']],
+      ['Hybrid', 'Possible in theory; none found so far.', []],
+    ],
+    ex: 'C minor: all three resolve together in mm. 27–29, followed by a brief coda. Rhetorical.',
+    note: 'In rhetorical fugues the resolutions are concurrent, and the fugue ends once they are done.' },
+];
+const degs = s => s.replace(/\^(\d)/g, '<span class="sd">$1</span>');
+document.querySelectorAll('.deg').forEach(e => { e.innerHTML = degs(e.innerHTML); });
+const steps = $('#steps');
+STEPS.forEach((st, i) => {
+  const li = document.createElement('li'); li.className = 'step'; li.id = 'step' + (i + 1);
+  li.innerHTML = `<div class="head"><span class="no">STEP ${i + 1}</span><h3>${st.t}</h3></div>
+    <div><p class="goal">${degs(st.goal)}</p><h4>Criteria</h4><ul class="crit">${st.crit.map(c => `<li><b>${c[0]}</b>${degs(c[1])}${c[2].length ? `<span class="seen">${c[2].map(x => `<span class="chip">${degs(x)}</span>`).join('')}</span>` : ''}</li>`).join('')}</ul></div>
+    <div class="side"><h4>In the C Minor Example</h4><div class="ex"><p>${degs(st.ex)}</p></div><p class="note">${degs(st.note)}</p></div>`;
+  steps.appendChild(li);
+});
+
+// flow boxes
+const fb = $('#flowboxes'); const BW = 106, BH = 62, GAP = 20, X0 = 10, Y0 = 86;
+STEPS.forEach((st, i) => {
+  const x = X0 + i * (BW + GAP);
+  const g = el('g', { class: 'box', tabindex: '0', role: 'link', 'aria-label': `Step ${i + 1}: ${st.t}` });
+  g.appendChild(el('rect', { x, y: Y0, width: BW, height: BH, rx: 10 }));
+  g.appendChild(el('text', { class: 'no', x: x + 10, y: Y0 + 17 }, 'STEP ' + (i + 1)));
+  const words = st.t.split(' '); let l1 = '', l2 = '';
+  for (const w of words) { if ((l1 + ' ' + w).trim().length <= 14 && !l2) l1 = (l1 + ' ' + w).trim(); else l2 = (l2 + ' ' + w).trim(); }
+  g.appendChild(el('text', { class: 't', x: x + 10, y: Y0 + 34 }, l1));
+  if (l2) g.appendChild(el('text', { class: 't', x: x + 10, y: Y0 + 49 }, l2));
+  const go = () => { const c = document.getElementById('step' + (i + 1)); c.scrollIntoView({ block: 'start' }); c.classList.add('flash'); setTimeout(() => c.classList.remove('flash'), 1400); };
+  g.addEventListener('click', go); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+  fb.appendChild(g);
+  if (i < 5) fb.appendChild(el('path', { class: 'ar', d: `M${x + BW + 2},${Y0 + BH / 2} L${x + BW + GAP - 2},${Y0 + BH / 2}`, 'marker-end': 'url(#ah)' }));
+});
+
+
+// ---------- rhythmic cells ----------
+(() => {
+  const svg = $('#cells'); const U = 30, X = 150;
+  const rows = [['Subject', [4, 4, 3, 3, 2], 30], ['Resolution, mm. 27–29', [4, 4, 3, 3, 3, 3, 2, 1], 82]];
+  const tk = el('g', { class: 'tick' });
+  for (let e = 0; e <= 23; e++) { const x = X + e * U; tk.appendChild(el('line', { x1: x, x2: x, y1: 20, y2: 122 })); if (e % 4 === 0) tk.appendChild(el('text', { x, y: 138, 'text-anchor': 'middle' }, e)); }
+  tk.appendChild(el('text', { x: X + 23 * U, y: 138, 'text-anchor': 'end' }, 'eighths'));
+  svg.appendChild(tk);
+  for (const [lab, cells, y] of rows) {
+    svg.appendChild(el('text', { class: 'lab', x: 0, y: y + 21 }, lab));
+    let x = X;
+    for (const c of cells) {
+      svg.appendChild(el('rect', { class: 'c' + c, x: x + 1.5, y, width: c * U - 3, height: 32, rx: 6 }));
+      svg.appendChild(el('text', { class: 'num', x: x + c * U / 2, y: y + 21, 'text-anchor': 'middle' }, c));
+      x += c * U;
+    }
+  }
+})();
+
+// ---------- four organ fugues ----------
+const FUGUES = [
+  { bwv: '578', key: 'G minor', title: 'Expansion', verdict: 'rh', bars: 68, subj: '4½ bars', ch: 'chapter 4',
+    text: 'The subject has an active phrase and a static phrase, opens with a rising fifth, and forms a musical period. The digressions grow steadily (A 2, B 3, C 3½, D 5, E 8½ bars), and the lengths add up: D = A + B, E = C + D. The central period V widens to 8 bars and is the first integrant to leave tonic and dominant. The last digression gathers every earlier property, and the last two bass notes answer the opening rising fifth with a falling one.',
+    segs: [['i', 0, 4.5, 'I'], ['l', 4.5, 5], ['i', 5, 9.5, 'II'], ['d', 9.5, 11.5, 'A 2'], ['i', 11.5, 16, 'III'], ['l', 16, 16.5], ['i', 16.5, 21, 'IV'], ['d', 21, 24, 'B 3'], ['i', 24, 32, 'V'], ['i', 32, 36.5, 'VI'], ['d', 36.5, 40, 'C 3½'], ['i', 40, 44.5, 'VII'], ['d', 44.5, 49.5, 'D 5'], ['i', 49.5, 54, 'VIII'], ['d', 54, 62.5, 'E 8½'], ['i', 62.5, 67, 'IX']],
+    src: 'Roberts, Tables 4–6 and Figure 13.', link: '/analysis/baroque/bach/fugue-analysis/roberts/bwv578.html' },
+  { bwv: '533', key: 'E minor', title: 'Palindrome', verdict: 'li', bars: 35, nobars: true, subj: '2 bars', ch: 'chapter 5',
+    text: 'The spans between the eight entries form a palindrome: 2, 3½, 3½, 5, 5, 3½, 3½, 2 bars. Scale degree ^5 is suspended, and every stepwise attempt to rise past it is stopped by ^6. The subject rises from ^1 to ^3, but no matching stepwise descent from ^5 to ^1 ever appears, and the fugue never leaves tonic and dominant. The spans grow and shrink by 1½ bars (3:2, a fifth) and the two digressions are 4 and 3 bars (4:3, a fourth). Nothing is reconciled.',
+    segs: [['i', 0, 2, '2'], ['i', 2, 5.5, '3½'], ['i', 5.5, 9, '3½'], ['i', 9, 14, '5'], ['d', 14, 18, 'dig. 4'], ['i', 18, 23, '5'], ['i', 23, 26.5, '3½'], ['i', 26.5, 30, '3½'], ['d', 30, 32.5, 'dig. 2½'], ['i', 32.5, 34.5, '2'], ['d', 34.5, 35, '']],
+    src: 'Roberts, Table 8. The final ½ bar is the cadential extension, counted with digression 2 to make 3 bars.', link: '/analysis/baroque/bach/fugue-analysis/roberts/bwv533.html' },
+  { bwv: '545', key: 'C major', title: 'Change in the Prevailing Rhythm', verdict: 'rh', bars: 111, subj: '3 bars', ch: 'chapter 6',
+    text: 'After bar 8 the fugue moves in eighth notes on every beat except four bars, 18, 54, 81 and 108, where the rhythm drops to quarters at a cadence. Those rare bars cut the fugue into sections whose lengths make an octave (II:I = 2:1), a fourth (II:III = 4:3) and a unison (III:IV = 1:1). Several entries are obscured, so the entry-based structure is inconsequential and step 4 takes over. The subject never rises past ^4; the last three bars finally complete an ascent from ^1 to ^1, passing from bass to soprano.',
+    segs: [['i', 0, 18, 'I 18'], ['i', 18, 54, 'II 36'], ['i', 54, 81, 'III 27'], ['i', 81, 108, 'IV 27'], ['l', 108, 111, '']],
+    cuts: [18, 54, 81, 108], src: 'Roberts, Table 9. Sections are divided at the four quarter-note bars, not at entries.', link: '/analysis/baroque/bach/fugue-analysis/roberts/bwv545.html' },
+  { bwv: '547', key: 'C major', title: 'Combining Forces', verdict: 'rh', bars: 72, subj: '1 bar', ch: 'chapter 7',
+    text: 'The one-bar subject is too short and too open-ended to stand alone, so entries group into Exposition Blocks of three. The blocks shrink to two entries at bar 49, where the pedal first enters, splitting the fugue 2:1 (21 to 9 block entries). The last block is a single tonal answer. The subject\'s raised ^4 keeps pulling toward the dominant until EB 11 uses the natural ^4 and stays in C.',
+    ebs: [[1, 3], [8.5, 3], [13.5, 3], [16.75, 3], [20.5, 2], [25.5, 1], [35, 3], [43, 3], [49, 2], [56, 2], [59.5, 2], [67.5, 2], [71.25, 1]],
+    ebl: ['1', '2', '3', '4', '5a', '5b', '6', '7', '8', '9', '10', '11', '12'], cuts: [48], src: 'Roberts, Table 10. Each dot is one subject or answer entry in a block; EB 5 is split into 5a (two entries) and 5b (one).', link: '/analysis/baroque/bach/fugue-analysis/roberts/bwv547.html' },
+];
+const fwrap = $('#fugues');
+FUGUES.forEach(f => {
+  const card = document.createElement('article'); card.className = 'fg';
+  card.innerHTML = `<div class="top"><h3>BWV ${f.bwv} in ${f.key}: ${f.title}</h3><span class="verd ${f.verdict}">${f.verdict === 'rh' ? 'Rhetorical' : 'Literal'}</span></div>
+    <ul class="meta">${f.nobars ? '' : `<li>${f.bars} bars</li>`}<li>subject ${f.subj}</li><li>Roberts ${f.ch}</li></ul>
+    <p>${degs(f.text)}</p><div class="scrollx"></div><p class="cap">${f.src}</p>
+    ${f.link ? `<p class="link"><a href="${f.link}" target="_blank" rel="noopener">Open the interactive BWV ${f.bwv} analysis with score and playback</a></p>` : '<p class="link muted">Interactive score page in progress.</p>'}`;
+  const W = 760, L = 10, R = 10, sc = (W - L - R) / f.bars;
+  const H = f.ebs ? 96 : 68;
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': `BWV ${f.bwv} structure to scale in bars` });
+  const ax = el('g', { class: 'ax' }); const yA = H - 16;
+  const step = f.bars > 80 ? 10 : 5;
+  for (let b = 0; b <= f.bars; b += step) { const x = L + b * sc; ax.appendChild(el('line', { x1: x, x2: x, y1: yA - 10, y2: yA - 2 })); ax.appendChild(el('text', { x, y: H - 3, 'text-anchor': b === 0 ? 'start' : 'middle' }, b === 0 ? 'bar 1' : b + 1)); }
+  svg.appendChild(ax);
+  if (f.segs) for (const [k, a, b, lab] of f.segs) {
+    svg.appendChild(el('rect', { class: k, x: L + a * sc, y: 14, width: Math.max(1, (b - a) * sc), height: 30, rx: 4 }));
+    if (lab) svg.appendChild(el('text', { x: L + (a + b) / 2 * sc, y: 33, 'text-anchor': 'middle' }, lab));
+  }
+  if (f.ebs) {
+    f.ebs.forEach(([b, n], j) => {
+      const x = L + (b - 1) * sc;
+      for (let d = 0; d < n; d++) svg.appendChild(el('circle', { class: 'dt', cx: x + 4, cy: 62 - d * 12, r: 4.5 }));
+      svg.appendChild(el('text', { x: x + 4, y: 76, 'text-anchor': 'middle' }, f.ebl[j]));
+    });
+  }
+  if (f.cuts) for (const c of f.cuts) {
+    const x = L + c * sc; svg.appendChild(el('line', { class: 'cut', x1: x, x2: x, y1: 2, y2: yA - 2 }));
+    if (f.ebs) svg.appendChild(el('text', { class: 'cutl', x: x + 5, y: 12 }, '2 : 1 split at bar 49 (pedal enters)'));
+  }
+  card.querySelector('.scrollx').appendChild(svg);
+  fwrap.appendChild(card);
+});
+
+// ---------- verdict tool ----------
+// r: true = reconciled, false = not, null = support (not counted)
+const CASES = {
+  wtc: { name: 'C Minor (WTC I)', props: [
+    ['Blocked descent ^6–^5–^4–^3', 'Completed to ^1 in soprano and bass, mm. 27–29.', true],
+    ['Chromatic ascent ^5–^1', 'Replaced by a melodic-minor ascent, mm. 27–29.', true],
+    ['Rhythmic cells 4+4+3+3+2', 'Capped with a one-eighth cell, mm. 27–29.', true]] },
+  b578: { name: 'BWV 578', props: [
+    ['Rising fifth at the opening', 'Answered by the falling fifth of the final bass notes.', true],
+    ['Active vs static phrases; descending arpeggio', 'All gathered in digression E before the final entry.', true],
+    ['Subject as a period', 'Period V expands to 8 bars and broadens harmonically.', true],
+    ['Expansion of digressions', 'Structural support: 2, 3, 3½, 5, 8½ bars.', null]] },
+  b533: { name: 'BWV 533', props: [
+    ['Suspended ^5, blocked by ^6', 'Never rises past ^6.', false],
+    ['Ascent ^1–^3 without matching descent ^5–^1', 'The descent never appears.', false],
+    ['Palindrome of entry spans', 'Expansion followed by contraction; no goal reached.', false],
+    ['Only tonic and dominant keys; 3:2 and 4:3 ratios', 'Support for the second reading (stability).', null]] },
+  b545: { name: 'BWV 545', props: [
+    ['Static vs active rhythm in the subject', 'Part of the rhythm property that shapes the sections.', null],
+    ['Blocked ascent past ^4 (gap ^4–^5)', 'Complete ascent ^1 to ^1 in the last three bars.', true],
+    ['Rare quarter-note bars 18, 54, 81, 108', 'Alternate structure with 2:1, 4:3, 1:1 sections.', null],
+    ['Obscured entries', 'Point away from the entry-based structure.', null]] },
+  b547: { name: 'BWV 547', props: [
+    ['Entries grouped in Exposition Blocks of three', 'Blocks narrow 3 → 2 → 1, ending on one tonal answer.', true],
+    ['Raised ^4 pulls toward the dominant', 'EB 11 uses the natural ^4 and stays in C.', true],
+    ['One-bar subject', 'The cause of the blocks.', null],
+    ['2:1 split, 21:9 block entries', 'Structural support.', null]] },
+};
+let cur = 'wtc', state = [];
+const pick = $('#pick');
+Object.entries(CASES).forEach(([k, c]) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = c.name; b.dataset.k = k; b.onclick = () => load(k); pick.appendChild(b); });
+function load(k) { cur = k; state = CASES[k].props.map(p => p[2]); pick.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.k === k)); render(); }
+function render() {
+  const ul = $('#plist'); ul.innerHTML = '';
+  CASES[cur].props.forEach((p, i) => {
+    const li = document.createElement('li'); const r = state[i];
+    if (r === null) { li.className = 'sup'; li.innerHTML = `<span class="pn">${degs(p[0])}</span><span class="pw">${degs(p[1])}</span><span class="tg">Support</span>`; }
+    else {
+      li.innerHTML = `<span class="pn">${degs(p[0])}</span><span class="pw">${degs(p[1])}</span><span class="tg seg" role="group" aria-label="Reconciled?"><button type="button" aria-pressed="${r}">Reconciled</button><button type="button" aria-pressed="${!r}">Not Reconciled</button></span>`;
+      const [b1, b2] = li.querySelectorAll('button'); b1.onclick = () => { state[i] = true; render(); }; b2.onclick = () => { state[i] = false; render(); };
+    }
+    ul.appendChild(li);
+  });
+  const c = state.filter(x => x !== null), yes = c.filter(Boolean).length, no = c.length - yes;
+  const changed = state.some((x, i) => x !== CASES[cur].props[i][2]);
+  const v = $('#vout'), w = $('#vwhy');
+  if (no === 0) { v.textContent = 'Rhetorical'; v.className = 'big rh'; w.textContent = `All ${yes} conflict properties are reconciled.`; }
+  else if (yes === 0) { v.textContent = 'Literal'; v.className = 'big li'; w.textContent = `None of the ${no} conflict properties is reconciled.`; }
+  else { v.textContent = 'Hybrid'; v.className = 'big hy'; w.textContent = `${yes} reconciled, ${no} not. Roberts allows this in theory but has not found such a fugue.`; }
+  w.textContent += changed ? ' This differs from Roberts\'s reading.' : ' This matches Roberts\'s reading.';
+}
+$('#reset').onclick = () => load(cur);
+load('wtc');
+})();
+</script>
+
+</body></html>

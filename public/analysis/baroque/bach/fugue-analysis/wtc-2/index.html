@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WTC II Fugues</title><style>:root { --bg: #fbfaf7; --fg: #1c1c21; --muted: #64646e; --line: #e4e2dc; --tile: #fff; --accent: #5b4bdb; --hl: rgba(91, 75, 219, .08);
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color-scheme: light; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #141418; --fg: #ececf1; --muted: #9d9daa; --line: #2c2c34; --tile: #1d1d23; --accent: #9d92ff; --hl: rgba(157, 146, 255, .12); color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #141418; --fg: #ececf1; --muted: #9d9daa; --line: #2c2c34; --tile: #1d1d23; --accent: #9d92ff; --hl: rgba(157, 146, 255, .12); color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--sans); padding: 0 16px 48px; }
+.wrap { max-width: 1100px; margin: 0 auto; }
+.topbar { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; }
+.crumb { color: var(--muted); font-size: .9rem; }
+#theme { background: var(--tile); color: var(--fg); border: 1px solid var(--line); border-radius: 999px; width: 36px; height: 36px; font-size: 1.1rem; cursor: pointer; }
+h1 { font-size: clamp(1.7rem, 4.2vw, 2.5rem); line-height: 1.15; margin: .4em 0 .3em; letter-spacing: -.015em; text-wrap: balance; }
+.lead { color: var(--muted); font-size: 1.08rem; max-width: 70ch; }
+.note { max-width: 75ch; padding-left: 1.1em; color: var(--fg); }
+.note li { margin: .3em 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin-top: 28px; }
+.fc { display: flex; flex-direction: column; gap: 2px; padding: 16px 18px; background: var(--tile); border: 1px solid var(--line); border-radius: 12px; color: var(--fg); text-decoration: none; transition: border-color .15s, background .15s; }
+.fc:hover, .fc:focus-visible { border-color: var(--accent); background: var(--hl); outline: none; }
+.no { font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 650; }
+.ti { font-size: 1.25rem; font-weight: 650; }
+.bw { color: var(--muted); font-size: .9rem; font-variant-numeric: tabular-nums; }
+.vd { margin-top: 6px; font-weight: 600; }
+.mt, .bz { color: var(--muted); font-size: .85rem; }
+.bz { font-style: italic; }
+footer { margin-top: 36px; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); padding-top: 12px; }
+code { font-size: .9em; }
+</style></head>
+<body><div class="wrap">
+<header class="hero"><div class="topbar"><span class="crumb"><a href="/analysis/baroque/bach/">Bach</a> · Well-Tempered Clavier II · Fugue Analysis</span>
+<button type="button" id="theme" aria-label="Switch light or dark theme">◐</button></div>
+<h1>The 24 Fugues of the Well-Tempered Clavier, Book II</h1>
+<p class="lead">One page per fugue: the subject judged as fugue material, a form map, schemas and cadences, Scott Roberts’s six steps, and an open score with entry colors, an HIP articulation layer and Busoni’s marks. Playback uses recorded samples (Steinway Grand, or an Italian harpsichord at A = 415).</p>
+<ul class="note">
+<li><b>Automatic first reading:</b> all 24. A program found the entries, answers, countersubjects, cadences and sequences; it follows only the first subject of the double and triple fugues and can miss entries Bach alters, and the pages say so. Busoni’s tempos and marks were read from his edition by hand, on every entry of the subject and countersubject.</li>
+<li><b>Busoni’s swaps:</b> he moved the E♭ major and G major fugues (BWV 876, 884) into his edition of Book I; their pages take his marks from there.</li>
+</ul>
+</header>
+<main class="grid"><a class="fc" href="bwv870-fugue-analysis.html">
+  <span class="no">Fugue I</span>
+  <span class="ti">C Major</span>
+  <span class="bw">BWV 870</span>
+  <span class="vd">Running Fugue</span>
+  <span class="mt">3 voices · 2/4 · 83 bars · 8 entries · tonal answer</span>
+  <span class="bz">Busoni: Allegro</span>
+</a><a class="fc" href="bwv871-fugue-analysis.html">
+  <span class="no">Fugue II</span>
+  <span class="ti">C Minor</span>
+  <span class="bw">BWV 871</span>
+  <span class="vd">Compact Stretto</span>
+  <span class="mt">4 voices · 4/4 · 28 bars · 20 entries · tonal answer</span>
+  <span class="bz">Busoni: Andante con moto</span>
+</a><a class="fc" href="bwv872-fugue-analysis.html">
+  <span class="no">Fugue III</span>
+  <span class="ti">C♯ Major</span>
+  <span class="bw">BWV 872</span>
+  <span class="vd">Stretto From the Start</span>
+  <span class="mt">3 voices · 4/4 · 35 bars · 11 entries · tonal answer</span>
+  <span class="bz">Busoni: Sostenuto</span>
+</a><a class="fc" href="bwv873-fugue-analysis.html">
+  <span class="no">Fugue IV</span>
+  <span class="ti">C♯ Minor</span>
+  <span class="bw">BWV 873</span>
+  <span class="vd">Gigue in 12/16</span>
+  <span class="mt">3 voices · 12/16 · 71 bars · 13 entries · real answer</span>
+  <span class="bz">Busoni: Allegro risoluto</span>
+</a><a class="fc" href="bwv874-fugue-analysis.html">
+  <span class="no">Fugue V</span>
+  <span class="ti">D Major</span>
+  <span class="bw">BWV 874</span>
+  <span class="vd">Choral Fugue</span>
+  <span class="mt">4 voices · 2/2 · 50 bars · 22 entries · real answer</span>
+  <span class="bz">Busoni: Maestoso alla breve</span>
+</a><a class="fc" href="bwv875-fugue-analysis.html">
+  <span class="no">Fugue VI</span>
+  <span class="ti">D Minor</span>
+  <span class="bw">BWV 875</span>
+  <span class="vd">Chromatic Descent</span>
+  <span class="mt">3 voices · 4/4 · 27 bars · 12 entries · real answer</span>
+  <span class="bz">Busoni: Allegro moderato con slancio e sentimento</span>
+</a><a class="fc" href="bwv876-fugue-analysis.html">
+  <span class="no">Fugue VII</span>
+  <span class="ti">E♭ Major</span>
+  <span class="bw">BWV 876</span>
+  <span class="vd">Stile Antico</span>
+  <span class="mt">4 voices · 2/2 · 70 bars · 11 entries · tonal answer</span>
+  <span class="bz">Busoni: Tempo giusto</span>
+</a><a class="fc" href="bwv877-fugue-analysis.html">
+  <span class="no">Fugue VIII</span>
+  <span class="ti">D♯ Minor</span>
+  <span class="bw">BWV 877</span>
+  <span class="vd">Severe</span>
+  <span class="mt">4 voices · 4/4 · 46 bars · 16 entries · real answer</span>
+  <span class="bz">Busoni: Sostenuto e serio</span>
+</a><a class="fc" href="bwv878-fugue-analysis.html">
+  <span class="no">Fugue IX</span>
+  <span class="ti">E Major</span>
+  <span class="bw">BWV 878</span>
+  <span class="vd">Stile Antico</span>
+  <span class="mt">4 voices · 4/2 · 43 bars · 18 entries · real answer</span>
+  <span class="bz">Busoni: Largo alla breve</span>
+</a><a class="fc" href="bwv879-fugue-analysis.html">
+  <span class="no">Fugue X</span>
+  <span class="ti">E Minor</span>
+  <span class="bw">BWV 879</span>
+  <span class="vd">Long Subject</span>
+  <span class="mt">3 voices · 2/2 · 86 bars · 9 entries · real answer</span>
+  <span class="bz">Busoni: Allegro deciso</span>
+</a><a class="fc" href="bwv880-fugue-analysis.html">
+  <span class="no">Fugue XI</span>
+  <span class="ti">F Major</span>
+  <span class="bw">BWV 880</span>
+  <span class="vd">Gigue</span>
+  <span class="mt">3 voices · 6/16 · 99 bars · 7 entries · tonal answer</span>
+  <span class="bz">Busoni: Vivace moderato</span>
+</a><a class="fc" href="bwv881-fugue-analysis.html">
+  <span class="no">Fugue XII</span>
+  <span class="ti">F Minor</span>
+  <span class="bw">BWV 881</span>
+  <span class="vd">Scherzando</span>
+  <span class="mt">3 voices · 2/4 · 85 bars · 9 entries · tonal answer</span>
+  <span class="bz">Busoni: Moderato un poco scherzando</span>
+</a><a class="fc" href="bwv882-fugue-analysis.html">
+  <span class="no">Fugue XIII</span>
+  <span class="ti">F♯ Major</span>
+  <span class="bw">BWV 882</span>
+  <span class="vd">Gavotte Rhythm</span>
+  <span class="mt">3 voices · 2/2 · 84 bars · 9 entries · real answer</span>
+  <span class="bz">Busoni: Allegro fermo</span>
+</a><a class="fc" href="bwv883-fugue-analysis.html">
+  <span class="no">Fugue XIV</span>
+  <span class="ti">F♯ Minor</span>
+  <span class="bw">BWV 883</span>
+  <span class="vd">Triple Fugue</span>
+  <span class="mt">3 voices · 4/4 · 70 bars · 8 entries · tonal answer</span>
+  <span class="bz">Busoni: Sostenuto</span>
+</a><a class="fc" href="bwv884-fugue-analysis.html">
+  <span class="no">Fugue XV</span>
+  <span class="ti">G Major</span>
+  <span class="bw">BWV 884</span>
+  <span class="vd">Toccata-Like</span>
+  <span class="mt">3 voices · 3/8 · 72 bars · 6 entries · tonal answer</span>
+  <span class="bz">Busoni: Allegretto scherzoso</span>
+</a><a class="fc" href="bwv885-fugue-analysis.html">
+  <span class="no">Fugue XVI</span>
+  <span class="ti">G Minor</span>
+  <span class="bw">BWV 885</span>
+  <span class="vd">Repeated Notes</span>
+  <span class="mt">4 voices · 3/4 · 84 bars · 15 entries · tonal answer</span>
+  <span class="bz">Busoni: Allegretto maestoso</span>
+</a><a class="fc" href="bwv886-fugue-analysis.html">
+  <span class="no">Fugue XVII</span>
+  <span class="ti">A♭ Major</span>
+  <span class="bw">BWV 886</span>
+  <span class="vd">Chromatic Countersubject</span>
+  <span class="mt">4 voices · 4/4 · 50 bars · 14 entries · tonal answer</span>
+  <span class="bz">Busoni: Allegretto lusingando</span>
+</a><a class="fc" href="bwv887-fugue-analysis.html">
+  <span class="no">Fugue XVIII</span>
+  <span class="ti">G♯ Minor</span>
+  <span class="bw">BWV 887</span>
+  <span class="vd">Double Fugue</span>
+  <span class="mt">3 voices · 6/8 · 143 bars · 12 entries · real answer</span>
+  <span class="bz">Busoni: Tranquillo melodioso e meditativo</span>
+</a><a class="fc" href="bwv888-fugue-analysis.html">
+  <span class="no">Fugue XIX</span>
+  <span class="ti">A Major</span>
+  <span class="bw">BWV 888</span>
+  <span class="vd">Lively Three-Voice</span>
+  <span class="mt">3 voices · 4/4 · 29 bars · 10 entries · real answer</span>
+  <span class="bz">Busoni: Allegro ritenuto e ostinato</span>
+</a><a class="fc" href="bwv889-fugue-analysis.html">
+  <span class="no">Fugue XX</span>
+  <span class="ti">A Minor</span>
+  <span class="bw">BWV 889</span>
+  <span class="vd">Angular Subject</span>
+  <span class="mt">3 voices · 4/4 · 28 bars · 6 entries · tonal answer</span>
+  <span class="bz">Busoni: (none printed; he marks the opening “NB”)</span>
+</a><a class="fc" href="bwv890-fugue-analysis.html">
+  <span class="no">Fugue XXI</span>
+  <span class="ti">B♭ Major</span>
+  <span class="bw">BWV 890</span>
+  <span class="vd">Flowing Three-Voice</span>
+  <span class="mt">3 voices · 3/4 · 93 bars · 10 entries · tonal answer</span>
+  <span class="bz">Busoni: ♩ = ♪. del Preludio (the quarter equals the prelude’s dotted eighth)</span>
+</a><a class="fc" href="bwv891-fugue-analysis.html">
+  <span class="no">Fugue XXII</span>
+  <span class="ti">B♭ Minor</span>
+  <span class="bw">BWV 891</span>
+  <span class="vd">Inversion and Stretto</span>
+  <span class="mt">4 voices · 3/2 · 101 bars · 23 entries · tonal answer</span>
+  <span class="bz">Busoni: Largamente alla breve</span>
+</a><a class="fc" href="bwv892-fugue-analysis.html">
+  <span class="no">Fugue XXIII</span>
+  <span class="ti">B Major</span>
+  <span class="bw">BWV 892</span>
+  <span class="vd">Stile Antico</span>
+  <span class="mt">4 voices · 2/2 · 104 bars · 14 entries · real answer</span>
+  <span class="bz">Busoni: Andante alla breve</span>
+</a><a class="fc" href="bwv893-fugue-analysis.html">
+  <span class="no">Fugue XXIV</span>
+  <span class="ti">B Minor</span>
+  <span class="bw">BWV 893</span>
+  <span class="vd">Dance Fugue</span>
+  <span class="mt">3 voices · 3/8 · 100 bars · 8 entries · tonal answer</span>
+  <span class="bz">Busoni: Alla danza tedesca, dal ritmo sostenuto</span>
+</a></main>
+<footer><p>Notes from David Huron’s Humdrum encoding of the Bach-Gesellschaft edition. Keep <code>sounds.js</code> in the same folder as the pages; the pages need it for playback.</p></footer>
+</div>
+<script>
+(() => { const r = document.documentElement, b = document.getElementById('theme');
+  try { const t = localStorage.getItem('th-theme'); if (t) r.dataset.theme = t; } catch (e) {}
+  b.onclick = () => { const d = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; r.dataset.theme = d ? 'light' : 'dark'; try { localStorage.setItem('th-theme', r.dataset.theme); } catch (e) {} }; })();
+</script>
+</body></html>

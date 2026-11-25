@@ -1,9 +1,19 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import PageList from '../../../components/PageList.astro';
+import { QUANTZ } from '../../../data/analysis-pages';
 ---
 
-<Layout title="Quantz">
-  <main>
+<Layout title="Quantz" description="Johann Joachim Quantz on the flute: an interactive edition of his 100 daily exercises, a guide to his rules of articulation, phrasing and breath, and an analysis of the Flute Concerto in G, QV 5:174.">
+  <main class="page-block wide">
     <h1>Quantz</h1>
+    <p class="lead">
+      Johann Joachim Quantz (1697–1773) wrote the most detailed flute treatise of the 18th century, <em>Versuch einer Anweisung die Flöte
+      traversiere zu spielen</em> (1752). These pages apply his rules to music, with a page reference for every rule.
+    </p>
+    <PageList pages={QUANTZ} />
+    <p class="source-note">
+      Rules: Quantz, <em>On Playing the Flute</em>, trans. Edward R. Reilly (1966). Each page lists its own sources and the sound samples it uses.
+    </p>
   </main>
 </Layout>

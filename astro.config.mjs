@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -9,6 +9,17 @@ const SITE = 'https://vibrare.pages.dev';
 
 /** A page with almost no text of its own (a heading and nothing else) is a placeholder. */
 const MIN_TEXT = 200;
+
+/** Every .html file under a folder, as paths relative to the build folder (forward slashes). */
+function htmlFiles(root, dir) {
+  const found = [];
+  for (const e of readdirSync(join(root, dir), { withFileTypes: true })) {
+    const rel = `${dir}/${e.name}`;
+    if (e.isDirectory()) found.push(...htmlFiles(root, rel));
+    else if (e.name.endsWith('.html')) found.push(rel);
+  }
+  return found;
+}
 
 /**
  * After the build: write sitemap.xml with every page that has real content, and mark the placeholder pages
@@ -42,6 +53,13 @@ function searchEngines() {
           } else {
             listed.push(pathname);
           }
+        }
+        // the analysis pages kept as delivered (public/analysis/…) are whole pages: list them all
+        const bare = (/** @type {string} */ p) => p.replace(/\/$/, '');
+        const known = new Set([...listed, ...held].map(bare));
+        for (const rel of htmlFiles(root, 'analysis')) {
+          const p = rel.endsWith('/index.html') ? rel.slice(0, -'index.html'.length) : rel;
+          if (!known.has(bare(p))) listed.push(p);
         }
         const today = new Date().toISOString().slice(0, 10);
         const urls = listed

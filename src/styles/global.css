@@ -2086,3 +2086,13 @@ button.note-chip[aria-pressed='true'] {
   fill: #4a90d9;
   font-weight: 700;
 }
+
+/* links to the analysis pages under a track's title */
+.track-analysis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 2px;
+  font-size: 0.85rem;
+  font-weight: 400;
+}

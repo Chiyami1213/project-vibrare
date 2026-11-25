@@ -113,3 +113,14 @@ open questions each pack lists for the owner are in that pack's own `VERIFICATIO
     the example (D4 and E4 under F4), which is a real voice crossing; the rule engine does not report it. The detector does.
   - Only one of the five partimento examples with `cross: true` actually crosses in its realization; the flag allows crossing
     rather than saying it happens. No example crosses without the flag, and no tonal model example reports a crossing or overlap.
+
+## Analysis pages kept as delivered (`public/analysis/`)
+
+Imported from the author's HTML files (the two WTC zips, Roberts's method and four organ fugues, Bach First Lessons, the Quantz and Blavet pages, the Touhou Satori and Hartmann pages). They are not rebuilt as site components. Changes made to the delivered files, and only these: the sample data that each page carried inline (6 to 8 MB per page) is one shared script per family of pages (`sounds.js`, `sounds-organ.js`); links between the pages (claude.ai links, bare file names) point at the pages' addresses on the site; a link back to the site is added to the crumb at the top. The loose BWV 847 file was left out, as it is the same page as the one in the WTC I zip.
+
+- **Missing pages:** the Touhou pages link to `touhou-analysis-guide.html` and `touhou-references.html`, which were not delivered; both links go to the Touhou overview for now. The README files of the two WTC zips are kept next to the pages as text.
+- **Track number:** the Hartmann pages say "Th11 · No. 10" (and the files are named th11-10), but the site's track list (from atwiki) has ハルトマンの妖怪少女 as No. 15 and No. 10 is 廃獄ララバイ. The track list links the pages at No. 15. The pages' own label was not changed.
+- **Not imported:** the Touhou score PDFs, the .mscz and .mxl transcriptions and NOTES.md in `Vibrare Materials/Touhou/`, which were not asked for.
+- **Size:** the pages add about 170 MB to the repository (two editions of 24 MB each; each WTC page 1 to 2.7 MB). Cloudflare Pages accepts files up to 25 MiB; the two editions are 22.9 MiB.
+- **Theme:** the pages have their own light/dark switch, which does not follow the site's setting.
+- **Third-party request:** the Quantz articulation guide loads Inter and Source Serif from Google Fonts.
