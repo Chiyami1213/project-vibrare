@@ -106,6 +106,44 @@ export function dropOwnTheme(html: string): string {
   return html.replace(/(?:store\.get|localStorage\.getItem)\(\s*(['"])(?:th|qz|jpm|fugue|kb)-theme\1\s*\)/g, 'null');
 }
 
+/**
+ * Playback fixes for the delivered pages. Most of them fire each note from a requestAnimationFrame callback, using the time
+ * since the last frame. A hidden tab, or a window the system has covered, gets no frames, so the music stops; and the first frame
+ * after coming back finds minutes to catch up on and plays every note it missed at once. Here the same step also runs from a
+ * timer (which keeps going while a page is making sound) that takes the place of the pending frame request, so there is still one
+ * chain of steps, and one step never counts more than a quarter of a second.
+ * Quantz's pages schedule on the audio clock already; they only skip a note that is more than 0.3 s late instead of playing it
+ * at once. Each patch applies only where its anchor text is found.
+ */
+export function fixPlayback(html: string): string {
+  let out = html;
+  // pages with `const step = now => { ... st.pos += (now - st.last) ... }` (the fugue, Quantz concerto, Blavet and Touhou excerpts)
+  if (/st\.pos \+= \(now - st\.last\)/.test(out) && /let cur = null, raf = 0;/.test(out) && /\};\s*raf = requestAnimationFrame\(step\);/.test(out)) {
+    out = out
+      .replace(/let cur = null, raf = 0;/, 'let cur = null, raf = 0, timer = 0;')
+      .replace(/(function stop\(\) \{ if \(!cur\) return; cancelAnimationFrame\(raf\);)/, '$1 clearInterval(timer);')
+      .replace(/st\.pos \+= \(now - st\.last\)/, 'st.pos += Math.min(250, Math.max(0, now - st.last))')
+      .replace(/(\};\s*)raf = requestAnimationFrame\(step\);/, '$1raf = requestAnimationFrame(step); timer = setInterval(() => { cancelAnimationFrame(raf); step(performance.now()); }, 25);');
+  }
+  // the Touhou analysis page: `const tick = now => { q += (now - last) ... raf = requestAnimationFrame(tick); }`
+  if (/q \+= \(now - last\) \/ 1000/.test(out) && /let raf = 0, last = 0,/.test(out) && /\};\s*raf = requestAnimationFrame\(tick\);/.test(out)) {
+    out = out
+      .replace(/let raf = 0, last = 0,/, 'let raf = 0, timer = 0, last = 0,')
+      .replace(/const stop = \(\) => \{ cancelAnimationFrame\(raf\);/, 'const stop = () => { cancelAnimationFrame(raf); clearInterval(timer);')
+      .replace(/q \+= \(now - last\) \/ 1000/, 'q += Math.min(250, Math.max(0, now - last)) / 1000')
+      .replace(/(\};\s*)raf = requestAnimationFrame\(tick\);/, '$1raf = requestAnimationFrame(tick); timer = setInterval(() => { cancelAnimationFrame(raf); tick(performance.now()); }, 25);');
+  }
+  // Quantz exercises and First Lessons: a note that is already more than 0.3 s late is dropped, not played at once
+  if (!out.includes('AC.currentTime - 0.3) continue;')) out = out.replace(/(const at = st\.offset \+ ev\.t;)/, '$1 if (at < AC.currentTime - 0.3) continue;');
+  // The sounds are decoded when the first Play is pressed, which takes a second or more. Do it once the page is idle instead.
+  if (/const PIANO = \(\(\) => \{/.test(out) && !/\bwarmUpSamples\b/.test(out)) {
+    out += `<script>/* warmUpSamples */(function () { var done = false; function warm() { if (done) return; done = true; try { PIANO.ready(); } catch (e) {} }
+      addEventListener('pointerdown', warm, { once: true, passive: true });
+      addEventListener('load', function () { setTimeout(function () { (window.requestIdleCallback || setTimeout)(warm, { timeout: 4000 }); }, 1200); }); })();</script>`;
+  }
+  return out;
+}
+
 /** The route (with its trailing slash) a file is shown at: /analysis/…/x.html is /analysis/…/x/, and …/index.html is …/. */
 export function routeOf(url: string): string {
   const u = url.replace(/\.html$/, '');

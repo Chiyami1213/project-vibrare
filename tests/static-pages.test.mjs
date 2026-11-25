@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { dropOwnTheme, rewriteLinks, routeOf, scopeCss, splitPage } from '../src/lib/static-pages.ts';
+import { dropOwnTheme, fixPlayback, rewriteLinks, routeOf, scopeCss, splitPage } from '../src/lib/static-pages.ts';
 
 test('routeOf: a file is a folder route, an index is its folder', () => {
   assert.equal(routeOf('/analysis/a/b.html'), '/analysis/a/b/');
@@ -70,4 +70,42 @@ test('splitPage: the shell goes, page-level styles are pulled out, scripts and s
   assert.match(page.body, /<svg><style>\.k\{fill:red\}<\/style><\/svg>/);
   assert.match(page.body, /const s = "<meta x><style>q\{\}<\/style>";/);
   assert.doesNotMatch(page.body, /<html|<head|<body|<title/);
+});
+
+test('fixPlayback: a frame-driven player is also driven by a timer, and one step is at most a quarter of a second', () => {
+  const html = `const PIANO = (() => {})();
+  const PLAYER = (() => {
+    let cur = null, raf = 0;
+    function stop() { if (!cur) return; cancelAnimationFrame(raf); cur = null; }
+    async function start() {
+      const step = now => {
+        if (cur !== st) return;
+        st.pos += (now - st.last) / 1000 * tempo / 60; st.last = now;
+        if (done) { stop(); return; }
+        raf = requestAnimationFrame(step);
+      };
+      raf = requestAnimationFrame(step);
+    }
+  })();`;
+  const out = fixPlayback(html);
+  assert.match(out, /let cur = null, raf = 0, timer = 0;/);
+  assert.match(out, /cancelAnimationFrame\(raf\); clearInterval\(timer\);/);
+  assert.match(out, /st\.pos \+= Math\.min\(250, Math\.max\(0, now - st\.last\)\) \/ 1000/);
+  // the timer takes the place of the pending frame request, so there is never more than one chain of steps
+  assert.equal(out.match(/setInterval\(\(\) => \{ cancelAnimationFrame\(raf\); step\(performance\.now\(\)\); \}, 25\)/g).length, 1);
+  // the call inside step stays a plain frame request
+  assert.match(out, /stop\(\); return; }\s*raf = requestAnimationFrame\(step\);\s*};\s*raf = requestAnimationFrame\(step\); timer = setInterval/);
+});
+
+test('fixPlayback: a note more than 0.3 s late is skipped; the samples are warmed up when the page is idle', () => {
+  const html = 'const PIANO = (() => {})(); while (a) { const ev = x; const at = st.offset + ev.t; play(at); }';
+  const out = fixPlayback(html);
+  assert.match(out, /const at = st\.offset \+ ev\.t; if \(at < AC\.currentTime - 0\.3\) continue;/);
+  assert.match(out, /warmUpSamples/);
+  assert.equal(fixPlayback(out), out, 'a second pass changes nothing');
+});
+
+test('fixPlayback: a page without those players is left as it is', () => {
+  const html = '<p>Nothing to patch here.</p>';
+  assert.equal(fixPlayback(html), html);
 });

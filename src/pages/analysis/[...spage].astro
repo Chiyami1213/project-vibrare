@@ -1,7 +1,7 @@
 ---
 // The analysis pages delivered as whole HTML files (src/static-pages/), shown inside the site's layout with the site's theme.
 import Layout from '../../layouts/Layout.astro';
-import { dropOwnTheme, listStaticPages, readStaticPage, rewriteLinks, routeOf, scopeCss, splitPage } from '../../lib/static-pages';
+import { dropOwnTheme, fixPlayback, listStaticPages, readStaticPage, rewriteLinks, routeOf, scopeCss, splitPage } from '../../lib/static-pages';
 
 export function getStaticPaths() {
   return listStaticPages().map((url) => ({
@@ -12,7 +12,7 @@ export function getStaticPaths() {
 
 const { url } = Astro.props;
 const known = new Set(listStaticPages());
-const page = splitPage(dropOwnTheme(rewriteLinks(readStaticPage(url), url, known)));
+const page = splitPage(fixPlayback(dropOwnTheme(rewriteLinks(readStaticPage(url), url, known))));
 const css = scopeCss(page.css);
 ---
 
