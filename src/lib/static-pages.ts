@@ -3,6 +3,7 @@
 // The text functions have no DOM, so they are tested; the two file functions at the end run at build time only.
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, posix, relative, sep } from 'node:path';
+import { scheduleOnAudioClock } from './playback.ts';
 
 /** The colours every page of the site shares; a delivered page's own values for them are dropped, so the site's win. */
 const SHARED_TOKENS = new Set(['--bg', '--fg', '--muted', '--line', '--tile', '--accent', 'color-scheme']);
@@ -115,7 +116,7 @@ export function dropOwnTheme(html: string): string {
  * Quantz's pages schedule on the audio clock already; they only skip a note that is more than 0.3 s late instead of playing it
  * at once. Each patch applies only where its anchor text is found.
  */
-export function fixPlayback(html: string): string {
+function frameFix(html: string): string {
   let out = html;
   // pages with `const step = now => { ... st.pos += (now - st.last) ... }` (the fugue, Quantz concerto, Blavet and Touhou excerpts)
   if (/st\.pos \+= \(now - st\.last\)/.test(out) && /let cur = null, raf = 0;/.test(out) && /\};\s*raf = requestAnimationFrame\(step\);/.test(out)) {
@@ -133,11 +134,23 @@ export function fixPlayback(html: string): string {
       .replace(/q \+= \(now - last\) \/ 1000/, 'q += Math.min(250, Math.max(0, now - last)) / 1000')
       .replace(/(\};\s*)raf = requestAnimationFrame\(tick\);/, '$1raf = requestAnimationFrame(tick); timer = setInterval(() => { cancelAnimationFrame(raf); tick(performance.now()); }, 25);');
   }
-  // Quantz exercises and First Lessons: a note that is already more than 0.3 s late is dropped, not played at once
+  return out;
+}
+
+/**
+ * The playback of a delivered page, made to run on the audio clock (see playback.ts). A page whose player that does not know
+ * gets the smaller frameFix instead; Quantz's exercises and First Lessons already schedule on the audio clock, and only skip a
+ * note that is more than 0.3 s late rather than playing it at once. The sounds, which a page decodes when Play is first pressed
+ * (a second or more on a slow machine), are decoded once the page is idle, or on the first pointer press.
+ */
+export function fixPlayback(html: string): string {
+  let out = html;
+  const clock = scheduleOnAudioClock(out);
+  out = clock ?? frameFix(out);
   if (!out.includes('AC.currentTime - 0.3) continue;')) out = out.replace(/(const at = st\.offset \+ ev\.t;)/, '$1 if (at < AC.currentTime - 0.3) continue;');
-  // The sounds are decoded when the first Play is pressed, which takes a second or more. Do it once the page is idle instead.
-  if (/const PIANO = \(\(\) => \{/.test(out) && !/\bwarmUpSamples\b/.test(out)) {
-    out += `<script>/* warmUpSamples */(function () { var done = false; function warm() { if (done) return; done = true; try { PIANO.ready(); } catch (e) {} }
+  const warmable = /const PIANO = \(\(\) => \{/.test(out) || /return \{ seq, one, stop, ready, note \}/.test(out);
+  if (warmable && !/\bwarmUpSamples\b/.test(out)) {
+    out += `<script>/* warmUpSamples */(function () { var done = false; function warm() { if (done) return; done = true; try { if (typeof PIANO !== 'undefined') PIANO.ready(); else if (typeof PLAYER !== 'undefined' && PLAYER.ready) PLAYER.ready(); } catch (e) {} }
       addEventListener('pointerdown', warm, { once: true, passive: true });
       addEventListener('load', function () { setTimeout(function () { (window.requestIdleCallback || setTimeout)(warm, { timeout: 4000 }); }, 1200); }); })();</script>`;
   }
