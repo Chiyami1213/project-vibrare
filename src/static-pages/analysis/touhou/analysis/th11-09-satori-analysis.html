@@ -295,7 +295,7 @@ details.fold { margin-top: 10px; } details.fold summary { cursor: pointer; font-
 
 
 <section class="blk" id="sources">
-  <h2>References &amp; Licenses</h2>
+  <h2>References</h2>
   <div class="foot" id="foot" style="padding:8px 0 0"></div>
 </section>
 <div class="foot" style="text-align:center"><span lang="ja">東方Projectの二次創作です。</span> A Touhou Project fan work. Touhou Project music © ZUN / Team Shanghai Alice. The excerpts are short and shown only to analyze them. <a href="/about/#licenses">Licenses</a></div>
@@ -116213,7 +116213,7 @@ const bars = a => a[0] === a[1] ? 'm.' + a[0] : 'mm.' + a[0] + '–' + a[1];
 (function chrome() {
   const T = DATA.track;
   $('#chips').innerHTML = [`<span class="chip">${T.game} · ${T.gameJa}</span>`, `<span class="chip">No. ${T.no} · ${T.titleEn}</span>`, `<span class="chip">${T.role}</span>`, `<span class="chip">${T.keyPlan}</span>`, `<span class="chip">${T.duration}</span>`].join('');
-  const links = [...(DATA.comment ? [['comment', 'ZUN’s Comment']] : []), ['facts', 'Structure'], ...DATA.sections.map(s => [s.id, s.name]), ['themes', 'Themes'], ['sources', 'References & Licenses']];
+  const links = [...(DATA.comment ? [['comment', 'ZUN’s Comment']] : []), ['facts', 'Structure'], ...DATA.sections.map(s => [s.id, s.name]), ['themes', 'Themes'], ['sources', 'References']];
   $('#toc').innerHTML = links.map(l => `<a href="#${l[0]}">${l[1]}</a>`).join('');
   $('#drawer').innerHTML = `<div class="dr-head"><b>Touhou OST analysis</b><button type="button" id="menu-close" aria-label="Close menu">✕</button></div><div class="dr-sub">${T.game} · No. ${T.no}</div>` + links.map(l => `<a href="#${l[0]}">${l[1]}</a>`).join('');
   const open = o => { $('#drawer').hidden = !o; $('#scrim').hidden = !o; $('#menu-btn').setAttribute('aria-expanded', o); };

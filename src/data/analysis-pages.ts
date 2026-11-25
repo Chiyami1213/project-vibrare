@@ -1,4 +1,4 @@
-// The analysis pages that are kept as delivered, in public/analysis/…: each is one self-contained page with its own score,
+// The analysis pages that are kept as delivered (src/static-pages/, shown inside the site): each is one self-contained page with its own score,
 // tables and playback. This file only lists them, so that the hub pages can link to them.
 import wtc from './bach/wtc.json';
 
@@ -14,7 +14,7 @@ const FUGUE = '/analysis/baroque/bach/fugue-analysis';
 
 export const WTC_FUGUES = (wtc as { book: number; no: number; bwv: number; fugueKey: string; voices: number }[]).map((p) => ({
   ...p,
-  href: `${FUGUE}/wtc-${p.book}/bwv${p.bwv}-fugue-analysis.html`,
+  href: `${FUGUE}/wtc-${p.book}/bwv${p.bwv}-fugue-analysis/`,
 }));
 
 export const WTC_INDEX = [
@@ -24,11 +24,11 @@ export const WTC_INDEX = [
 
 export const ROBERTS: StaticPage[] = [
   { href: `${FUGUE}/roberts/`, title: 'Roberts’s Fugue Analysis Method', note: 'A study guide to Scott Roberts’s method (2004), with the worked examples below.' },
-  { href: `${FUGUE}/wtc-1/bwv847-fugue-analysis.html`, title: 'Fugue in C Minor, BWV 847', note: 'The demonstration piece of the six steps; a rhetorical fugue.' },
-  { href: `${FUGUE}/roberts/bwv533.html`, title: 'Fugue in E Minor, BWV 533', note: 'Organ fugue, literal (Roberts, chapter 5).' },
-  { href: `${FUGUE}/roberts/bwv545.html`, title: 'Fugue in C Major, BWV 545', note: 'Organ fugue, rhetorical (Roberts, chapter 6).' },
-  { href: `${FUGUE}/roberts/bwv547.html`, title: 'Fugue in C Major, BWV 547', note: 'Organ fugue, rhetorical (Roberts, chapter 7).' },
-  { href: `${FUGUE}/roberts/bwv578.html`, title: 'Fugue in G Minor, BWV 578', note: 'The “Little” G minor organ fugue, worked through the six steps.' },
+  { href: `${FUGUE}/wtc-1/bwv847-fugue-analysis/`, title: 'Fugue in C Minor, BWV 847', note: 'The demonstration piece of the six steps; a rhetorical fugue.' },
+  { href: `${FUGUE}/roberts/bwv533/`, title: 'Fugue in E Minor, BWV 533', note: 'Organ fugue, literal (Roberts, chapter 5).' },
+  { href: `${FUGUE}/roberts/bwv545/`, title: 'Fugue in C Major, BWV 545', note: 'Organ fugue, rhetorical (Roberts, chapter 6).' },
+  { href: `${FUGUE}/roberts/bwv547/`, title: 'Fugue in C Major, BWV 547', note: 'Organ fugue, rhetorical (Roberts, chapter 7).' },
+  { href: `${FUGUE}/roberts/bwv578/`, title: 'Fugue in G Minor, BWV 578', note: 'The “Little” G minor organ fugue, worked through the six steps.' },
 ];
 
 export const FIRST_LESSONS: StaticPage = {
@@ -45,19 +45,19 @@ export const QUANTZ: StaticPage[] = [
     title: 'Flute Concerto in G, QV 5:174',
     note: 'Three movements: form, sections, cadences, partimento patterns and the flute part.',
     children: [
-      { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-i-analysis.html', title: 'I. Allegro Assai', note: 'Form, sections, cadences, partimento patterns and the flute part.' },
-      { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-ii-analysis.html', title: 'II. Arioso e Mesto', note: 'The slow movement.' },
-      { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-iii-analysis.html', title: 'III. Presto', note: 'The finale.' },
+      { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-i-analysis/', title: 'I. Allegro Assai', note: 'Form, sections, cadences, partimento patterns and the flute part.' },
+      { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-ii-analysis/', title: 'II. Arioso e Mesto', note: 'The slow movement.' },
+      { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-iii-analysis/', title: 'III. Presto', note: 'The finale.' },
     ],
   },
 ];
 
 export const BLAVET: StaticPage[] = [
-  { href: '/analysis/baroque/blavet/la-vibray/i-andante.html', title: 'Sonata II “La Vibray”, Op. 2 No. 2 · I. Andante', note: 'Form, sections, cadences, partimento patterns, performing the flute part.' },
-  { href: '/analysis/baroque/blavet/la-vibray/ii-allemanda.html', title: 'II. Allemanda', note: '' },
-  { href: '/analysis/baroque/blavet/la-vibray/iii-gavotta.html', title: 'III. Gavotta “Les Caquets”', note: '' },
-  { href: '/analysis/baroque/blavet/la-vibray/iv-sarabanda.html', title: 'IV. Sarabanda', note: '' },
-  { href: '/analysis/baroque/blavet/la-vibray/v-allegro.html', title: 'V. Allegro', note: '' },
+  { href: '/analysis/baroque/blavet/la-vibray/i-andante/', title: 'Sonata II “La Vibray”, Op. 2 No. 2 · I. Andante', note: 'Form, sections, cadences, partimento patterns, performing the flute part.' },
+  { href: '/analysis/baroque/blavet/la-vibray/ii-allemanda/', title: 'II. Allemanda', note: '' },
+  { href: '/analysis/baroque/blavet/la-vibray/iii-gavotta/', title: 'III. Gavotta “Les Caquets”', note: '' },
+  { href: '/analysis/baroque/blavet/la-vibray/iv-sarabanda/', title: 'IV. Sarabanda', note: '' },
+  { href: '/analysis/baroque/blavet/la-vibray/v-allegro/', title: 'V. Allegro', note: '' },
 ];
 
 const JP = '/analysis/japanese-music';
@@ -73,10 +73,10 @@ export const JAPANESE: StaticPage[] = [
   ['Folk and Popular Song', 'Min’yō, enka and the folk scales.'],
   ['Ryukyu and Ainu', 'The music of Okinawa and of the Ainu.'],
   ['Modern Japan', 'Composers and styles from the Meiji era on.'],
-].map(([name, note], i) => ({ href: `${JP}/chapter-${i + 1}.html`, title: `Chapter ${i + 1}: ${name}`, note }));
+].map(([name, note], i) => ({ href: `${JP}/chapter-${i + 1}/`, title: `Chapter ${i + 1}: ${name}`, note }));
 
 export const JAPANESE_RESOURCES: StaticPage = {
-  href: `${JP}/resources.html`,
+  href: `${JP}/resources/`,
   title: 'Resources',
   note: 'The books, sounds and software behind the guides, with how each is used.',
 };
@@ -86,12 +86,12 @@ const TH = '/analysis/touhou/analysis';
 export const TOUHOU_ANALYSIS: Record<string, Record<number, { label: string; href: string }[]>> = {
   th11: {
     9: [
-      { label: 'Structure, Themes, Patterns', href: `${TH}/th11-09-satori-analysis.html` },
-      { label: 'Counterpoint and Fugue Subjects', href: `${TH}/th11-09-satori-phase4.html` },
+      { label: 'Structure, Themes, Patterns', href: `${TH}/th11-09-satori-analysis/` },
+      { label: 'Counterpoint and Fugue Subjects', href: `${TH}/th11-09-satori-phase4/` },
     ],
     15: [
-      { label: 'Structure, Themes, Patterns', href: `${TH}/th11-10-hartmann-analysis.html` },
-      { label: 'Counterpoint and Fugue Subjects', href: `${TH}/th11-10-hartmann-phase4.html` },
+      { label: 'Structure, Themes, Patterns', href: `${TH}/th11-10-hartmann-analysis/` },
+      { label: 'Counterpoint and Fugue Subjects', href: `${TH}/th11-10-hartmann-phase4/` },
     ],
   },
 };

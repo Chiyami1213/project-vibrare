@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -9,17 +9,6 @@ const SITE = 'https://vibrare.pages.dev';
 
 /** A page with almost no text of its own (a heading and nothing else) is a placeholder. */
 const MIN_TEXT = 200;
-
-/** Every .html file under a folder, as paths relative to the build folder (forward slashes). */
-function htmlFiles(root, dir) {
-  const found = [];
-  for (const e of readdirSync(join(root, dir), { withFileTypes: true })) {
-    const rel = `${dir}/${e.name}`;
-    if (e.isDirectory()) found.push(...htmlFiles(root, rel));
-    else if (e.name.endsWith('.html')) found.push(rel);
-  }
-  return found;
-}
 
 /**
  * After the build: write sitemap.xml with every page that has real content, and mark the placeholder pages
@@ -46,20 +35,14 @@ function searchEngines() {
           const main = /<main[^>]*>([\s\S]*?)<\/main>/.exec(html);
           const text = (main ? main[1] : '').replace(/<(script|style)[\s\S]*?<\/\1>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
           const alreadyHeld = /<meta name="robots" content="[^"]*noindex/.test(html);
+          const isStaticPage = html.includes('data-static-page'); // an analysis page shown as delivered: whole pages, always listed
           const isHome = pathname === '' || pathname === '/'; // the home page is short on purpose, and always listed
-          if (!isHome && (text.length < MIN_TEXT || alreadyHeld)) {
+          if (!isHome && !isStaticPage && (text.length < MIN_TEXT || alreadyHeld)) {
             if (!alreadyHeld) writeFileSync(file, html.replace('</head>', '<meta name="robots" content="noindex, follow"></head>'));
             held.push(pathname);
           } else {
             listed.push(pathname);
           }
-        }
-        // the analysis pages kept as delivered (public/analysis/…) are whole pages: list them all
-        const bare = (/** @type {string} */ p) => p.replace(/\/$/, '');
-        const known = new Set([...listed, ...held].map(bare));
-        for (const rel of htmlFiles(root, 'analysis')) {
-          const p = rel.endsWith('/index.html') ? rel.slice(0, -'index.html'.length) : rel;
-          if (!known.has(bare(p))) listed.push(p);
         }
         const today = new Date().toISOString().slice(0, 10);
         const urls = listed

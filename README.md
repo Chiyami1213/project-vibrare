@@ -73,7 +73,7 @@ returns to the main list.
 
 - **Done:**
   - the site shell: menu, themes, audio settings, glossary, resources and About;
-  - Analysis: the Touhou Project OST pages and the Bach list;
+  - Analysis: the Touhou Project OST pages and the Bach list, and the analysis pages delivered as whole HTML files (the 48 Bach fugues, Roberts's method, Quantz, Blavet, the Japanese music guides, two Touhou themes), which live in `src/static-pages/` and are shown inside the site layout with the site's theme;
   - Tools: the interval, scale and chord calculators, the circle of fifths, and the SATB part-writing checker;
   - Theory, all with playable scores: Tonal Harmony (74 topics), Partimento (six pages and the fugue pages), Counterpoint
     (Fux), HIP and Music History (32 articles);

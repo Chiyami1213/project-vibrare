@@ -2214,3 +2214,57 @@ button.note-chip[aria-pressed='true'] {
 .lic-table tbody th {
   width: 30%;
 }
+
+/* ---------- Delivered analysis pages shown inside the site (see src/lib/static-pages.ts) ---------- */
+.sp {
+  flex: 1;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+/* the site's theme (Settings) is the only one: the pages' own light/dark buttons are not shown */
+div.sp[data-static-page] #theme,
+div.sp[data-static-page] #theme-btn,
+div.sp[data-static-page] .theme {
+  display: none !important;
+}
+
+/* a page's own contents button and drawer sit at the bottom right and open from the right, clear of the site's menu */
+div.sp[data-static-page] #menu-btn {
+  top: auto;
+  bottom: 16px;
+  left: auto;
+  right: 16px;
+  z-index: 40;
+}
+
+div.sp[data-static-page] #drawer {
+  left: auto;
+  right: 0;
+  border-right: 0;
+  border-left: 1px solid var(--line);
+  box-shadow: -4px 0 30px rgba(0, 0, 0, 0.25);
+}
+
+div.sp[data-static-page] .hero {
+  padding-left: 16px;
+}
+
+/* the Japanese guides' contents column and highlight panel start to the right of the site's menu */
+div.sp[data-static-page] #toc {
+  left: var(--rail-w);
+}
+
+div.sp[data-static-page] #hl-panel {
+  left: calc(var(--rail-w) + 12px);
+}
+
+@media (max-width: 760px) {
+  div.sp[data-static-page] #toc {
+    left: 0;
+  }
+
+  div.sp[data-static-page] #hl-panel {
+    left: 12px;
+  }
+}
