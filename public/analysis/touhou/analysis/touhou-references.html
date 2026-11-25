@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Touhou References and Licenses</title>
+<style>
+/* Site tokens from vibrare global.css (same as the Bach and Quantz editions), Okabe-Ito marks */
+:root {
+  --bg: #fbfaf7; --fg: #1c1c21; --muted: #6b6b75; --line: #e4e2dc; --tile: #fff; --accent: #5b4bdb;
+  --c-blue: #0072b2; --c-orange: #c27c00; --c-green: #00855f; --c-purple: #b0508f;
+  --c-vermillion: #c4520a; --c-sky: #2f8fc4; --c-grey: #6b6b75; --c-teal: #00877f;
+  --hl: rgba(91, 75, 219, .12); --tipbg: #fff; --tipfg: #1c1c21; --radius: 12px;
+  --sat1: 55%; --lum1: 88%; --sat2: 78%; --lum2: 74%; --acc1: 62%; --acc2: 42%;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141418; --fg: #ececf1; --muted: #9a9aa6; --line: #2c2c34; --tile: #1d1d23; --accent: #9d92ff;
+    --c-blue: #4fa8e0; --c-orange: #f0b030; --c-green: #3cc39a; --c-purple: #e08cc0;
+    --c-vermillion: #f07a3a; --c-sky: #7cc6f0; --c-grey: #9a9aa6; --c-teal: #3cc3bb;
+    --hl: rgba(157,146,255,.16); --tipbg: #24242c; --tipfg: #ececf1;
+    --sat1: 30%; --lum1: 23%; --sat2: 50%; --lum2: 36%; --acc1: 45%; --acc2: 66%;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141418; --fg: #ececf1; --muted: #9a9aa6; --line: #2c2c34; --tile: #1d1d23; --accent: #9d92ff;
+  --c-blue: #4fa8e0; --c-orange: #f0b030; --c-green: #3cc39a; --c-purple: #e08cc0;
+  --c-vermillion: #f07a3a; --c-sky: #7cc6f0; --c-grey: #9a9aa6; --c-teal: #3cc3bb;
+  --hl: rgba(157,146,255,.16); --tipbg: #24242c; --tipfg: #ececf1;
+  --sat1: 30%; --lum1: 23%; --sat2: 50%; --lum2: 36%; --acc1: 45%; --acc2: 66%;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif; overflow-x: hidden; }
+main, .hero, section.blk { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+section.blk { padding-top: 40px; scroll-margin-top: 12px; }
+h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.15; margin: .4em 0 .3em; letter-spacing: -.01em; }
+h2 { font-size: 1.45rem; margin: 0 0 .4em; letter-spacing: -.01em; }
+h3 { font-size: 1.2rem; margin: 0; }
+h4 { font-size: 1rem; margin: 18px 0 6px; }
+a { color: var(--accent); } b, strong { font-weight: 650; }
+code { font-size: .88em; background: var(--hl); padding: 0 .3em; border-radius: 4px; }
+.muted { color: var(--muted); } .lead { color: var(--muted); margin: 0 0 16px; max-width: 760px; }
+button, select, input { font: inherit; color: inherit; } button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[lang="ja"] { font-feature-settings: "palt"; }
+
+/* menu + hero */
+#menu-btn { position: fixed; top: 12px; left: 12px; z-index: 40; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); background: var(--tile); font-size: 1.15rem; box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+#menu-btn:hover { border-color: var(--accent); }
+#drawer { position: fixed; top: 0; left: 0; bottom: 0; z-index: 60; width: min(320px, 86vw); background: var(--tile); border-right: 1px solid var(--line); padding: 14px 16px 24px; overflow-y: auto; box-shadow: 4px 0 30px rgba(0,0,0,.25); display: flex; flex-direction: column; gap: 2px; }
+#drawer[hidden], #scrim[hidden] { display: none; }
+#drawer > a { color: var(--fg); text-decoration: none; padding: 7px 8px; border-radius: 8px; }
+#drawer > a:hover { background: var(--hl); }
+.dr-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.dr-head button { background: none; border: 1px solid var(--line); border-radius: 999px; width: 30px; height: 30px; }
+.dr-sub { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; margin: 10px 8px 4px; }
+#scrim { position: fixed; inset: 0; z-index: 55; background: rgba(0,0,0,.35); }
+.hero { padding-top: 16px; padding-left: 64px; padding-bottom: 20px; }
+.topbar { display: flex; justify-content: space-between; align-items: center; }
+.crumb { color: var(--muted); font-size: .85rem; letter-spacing: .06em; text-transform: uppercase; }
+#theme { background: var(--tile); border: 1px solid var(--line); border-radius: 999px; width: 36px; height: 36px; }
+.trbar { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:12px 0 0; font-size:.92rem; }
+.trbar select { font:inherit; padding:4px 8px; border:1px solid var(--line); border-radius:8px; background:var(--tile); color:var(--fg); }
+.tbl { overflow-x:auto; margin:8px 0 16px; }
+.p3t { width:100%; border-collapse:collapse; font-size:.9rem; min-width:720px; }
+.p3t th, .p3t td { text-align:left; vertical-align:top; padding:7px 9px; border-bottom:1px solid var(--line); }
+.p3t th { color:var(--muted); font-size:.78rem; font-weight:600; }
+.p3t td:first-child { white-space:nowrap; font-weight:600; }
+.p3t code { font-size:.8rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; }
+.chip { display: inline-block; background: var(--hl); border-radius: 999px; padding: 1px 12px; font-weight: 600; font-size: .92rem; }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
+.toc a { text-decoration: none; padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--tile); color: var(--fg); font-size: .9rem; }
+.toc a:hover { border-color: var(--accent); color: var(--accent); }
+
+/* source tags */
+.tag { display: inline-block; font-size: .72em; font-weight: 600; line-height: 1.5; padding: 0 .45em; border-radius: 5px; vertical-align: .08em; white-space: nowrap; border: 1px solid currentColor; }
+.tag.w { color: var(--c-blue); } .tag.s { color: var(--c-green); } .tag.i { color: var(--c-orange); } .tag.q { color: var(--c-vermillion); }
+
+/* legend */
+.legend { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+.lg { display: flex; gap: 12px; align-items: center; background: var(--tile); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px; font-size: .9rem; line-height: 1.35; }
+.lg > .ico { flex: none; width: 64px; display: flex; justify-content: center; align-items: center; min-height: 30px; }
+.lg svg { width: 64px; height: 30px; overflow: visible; }
+.tagnote { font-size: .9rem; color: var(--muted); margin-top: 14px; }
+
+/* facts */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
+.fact { background: var(--tile); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 14px; }
+.fact h4 { margin: 0 0 6px; font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+.fact ul { list-style: none; margin: 0; padding: 0; font-size: .92rem; }
+.fact li { display: flex; gap: 10px; }
+.fact li .t { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 3.2em; }
+.fact .big { font-size: 1.3rem; font-weight: 650; }
+
+/* timeline */
+.tl { margin-top: 18px; }
+.tl-bar { display: flex; height: 54px; gap: 2px; }
+.tl-seg { position: relative; min-width: 0; border-radius: 8px; padding: 6px 10px; text-decoration: none; color: var(--fg); overflow: hidden; display: flex; flex-direction: column; justify-content: center; border: 1px solid var(--line); }
+.tl-seg b { font-size: .92rem; line-height: 1.15; white-space: nowrap; } .tl-seg span { font-size: .75rem; color: var(--muted); white-space: nowrap; }
+.tl-seg:hover { border-color: var(--accent); }
+.hue-intro { --h: 220; } .hue-inter { --h: 150; } .hue-chorus { --h: 18; }
+.shade1 { background: hsl(var(--h) var(--sat1) var(--lum1)); fill: hsl(var(--h) var(--sat1) var(--lum1)); }
+.shade2 { background: hsl(var(--h) var(--sat2) var(--lum2)); fill: hsl(var(--h) var(--sat2) var(--lum2)); }
+.tl-seg.tr { background: var(--line); padding: 0; }
+.tl-seg.skip { background: repeating-linear-gradient(135deg, transparent 0 8px, var(--line) 8px 10px); border-style: dashed; color: var(--muted); }
+.tl-axis { position: relative; height: 38px; margin-top: 4px; font-size: .72rem; color: var(--muted); }
+.tl-axis i { position: absolute; top: 0; width: 1px; height: 8px; background: var(--muted); }
+.tl-axis em { position: absolute; top: 9px; transform: translateX(-50%); font-style: normal; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tl-axis .key { background: var(--accent); height: 22px; width: 2px; }
+.tl-axis .key + em { color: var(--accent); font-weight: 650; top: 24px; }
+.tl-axis .mt { background: var(--c-vermillion); height: 12px; }
+.tl-axis .rp { background: var(--accent); height: 12px; }
+.tl-axis .tp { background: var(--c-blue); height: 8px; }
+.tl-key { display: flex; gap: 16px; flex-wrap: wrap; font-size: .8rem; color: var(--muted); margin-top: 2px; }
+.tl-key span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.tl-key .k-t::before { background: var(--c-blue); } .tl-key .k-m::before { background: var(--c-vermillion); } .tl-key .k-k::before { background: var(--accent); }
+
+/* section article */
+.ex { border-top: 1px solid var(--line); padding: 28px 0 8px; scroll-margin-top: 12px; }
+.ex-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.ex-head h3 { font-size: 1.5rem; }
+.meta { margin: 0; color: var(--muted); }
+.band { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.sum { margin: 8px 0 12px; max-width: 780px; }
+.pts { margin: 6px 0 0; padding-left: 20px; max-width: 800px; } .pts li { margin: 4px 0; }
+
+.reps { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; margin: 12px 0 0; max-width: 900px; }
+.rep { background: var(--tile); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 14px; border-left: 6px solid hsl(var(--h) 60% var(--acc1)); }
+.rep.sh2 { border-left-color: hsl(var(--h) 80% var(--acc2)); }
+.rep p { margin: 4px 0 0; font-size: .92rem; }
+/* chord grid */
+.cg-wrap { overflow-x: auto; margin: 10px 0 4px; }
+.cg { display: grid; grid-template-columns: repeat(8, minmax(96px, 1fr)); gap: 4px; min-width: 780px; }
+.cg-row-h { grid-column: 1 / -1; font-size: .8rem; color: var(--muted); margin: 6px 0 -2px; }
+.bar { background: var(--tile); border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px 6px; }
+.bar .n { font-size: .7rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.bar .ch { display: flex; gap: 10px; flex-wrap: wrap; }
+.bar .c { display: flex; flex-direction: column; line-height: 1.15; }
+.bar .c b { font-size: .98rem; font-weight: 600; }
+.bar .c i { font: italic 600 .95rem Georgia, "Times New Roman", serif; color: var(--accent); }
+.bar.pedal { border-style: dashed; } .bar.span2 { grid-column: span 2; } .bar.span6 { grid-column: span 6; }
+.bar.cad { border-color: var(--c-vermillion); }
+.bar .cd { float: right; font-size: .7rem; font-weight: 700; color: var(--c-vermillion); }
+
+/* excerpt (score) */
+.fig { margin: 16px 0 6px; background: var(--tile); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px 8px; }
+.fig-head { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; margin: 0 0 4px; }
+.fig-head h4 { margin: 0; font-size: 1.02rem; }
+.ctl { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: 6px 0 4px; font-size: .88rem; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--tile); }
+.seg button { background: transparent; border: 0; padding: 5px 13px; font-size: .88rem; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--bg); font-weight: 600; }
+.layers { display: inline-flex; flex-wrap: wrap; gap: 6px 12px; border: 0; padding: 0; margin: 0; }
+.layers label { display: inline-flex; gap: 5px; align-items: center; cursor: pointer; }
+.layers input { accent-color: var(--accent); }
+.lk-rn { color: var(--accent); } .lk-ar { color: var(--c-orange); } .lk-pb { color: var(--c-sky); } .lk-df { color: #d8132f; } .lk-zp { color: var(--c-purple); } .lk-cs { color: var(--muted); } .lk-mo { color: var(--c-blue); } .lk-cd { color: var(--c-vermillion); } .lk-pt { color: var(--c-teal); } .lk-bs { color: var(--c-green); }
+.play { background: var(--tile); border: 1px solid var(--line); border-radius: 999px; padding: 5px 14px; }
+.play[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
+.tempo { display: inline-flex; gap: 6px; align-items: center; } .tempo input { width: 110px; accent-color: var(--accent); }
+.score-wrap { overflow-x: auto; background: #fff; border-radius: 8px; padding: 2px 0; }
+.score-wrap svg { display: block; width: 100%; min-width: 640px; height: auto; color: #1c1c21; }
+.score-wrap svg .note.on use { fill: #5b4bdb; } .score-wrap svg .note.on .stem path { stroke: #5b4bdb; }
+[data-staff] { transition: opacity .2s; }
+.dim-lh [data-staff="2"], .dim-rh [data-staff="1"] { opacity: .2; }
+.dim-rh .ov .bs { opacity: .2; }
+.mot-on .note.m-g use { fill: #8c564b; } .mot-on .note.m-g .stem path { stroke: #8c564b; }
+.mot-on .note.m-a use { fill: #0072b2; } .mot-on .note.m-a .stem path { stroke: #0072b2; }
+.mot-on .note.m-a2 use { fill: #2f8fc4; } .mot-on .note.m-a2 .stem path { stroke: #2f8fc4; }
+.mot-on .note.m-b use { fill: #00855f; } .mot-on .note.m-b .stem path { stroke: #00855f; }
+.mot-on .note.m-c use { fill: #c27c00; } .mot-on .note.m-c .stem path { stroke: #c27c00; }
+.mot-on .note.m-d use { fill: #c4520a; } .mot-on .note.m-d .stem path { stroke: #c4520a; }
+.mot-on .note.m-f use { fill: #b0508f; } .mot-on .note.m-f .stem path { stroke: #b0508f; }
+.ov text { font-family: Georgia, "Times New Roman", serif; stroke: none; }
+.ov .rn text.rn-t { font-style: normal; font-weight: 700; font-size: 330px; fill: #5b4bdb; }
+.ov .rn text.rn-f { font-weight: 700; font-size: 190px; fill: #5b4bdb; font-family: Georgia, 'Times New Roman', serif; }
+.ov .rn text.rn-s { font-family: system-ui, sans-serif; font-size: 200px; fill: #6b6b75; }
+.ov .mo .br { fill: none; stroke-width: 22; stroke-linecap: round; }
+.ov .mo .chipc { stroke: none; } .ov .mo text { font-style: italic; font-weight: 700; font-size: 250px; fill: #fff; text-anchor: middle; }
+.ov .cd rect { fill: #c4520a; } .ov .cd text { font-family: system-ui, sans-serif; font-weight: 700; font-size: 230px; fill: #fff; text-anchor: middle; }
+.ov .bs text { font-family: system-ui, sans-serif; font-weight: 650; font-size: 230px; fill: #00855f; text-anchor: middle; }
+.ov .bs path { fill: none; stroke: #00855f; stroke-width: 16; stroke-dasharray: 40 36; opacity: .8; }
+.ov .pt .br { fill: none; stroke: var(--c-teal) !important; stroke-width: 22; stroke-linecap: round; } .ov .pt .pill { fill: var(--c-teal); stroke: none; } .ov .pt text { font-family: system-ui, sans-serif; font-weight: 700; font-size: 200px; fill: #fff; text-anchor: middle; }
+.vol { display: inline-flex; gap: 6px; align-items: center; } .vol input { width: 90px; accent-color: var(--accent); }
+.score-wrap .note { cursor: pointer; }
+.fnbox { margin: 4px 0 18px; } .fnbox > summary { cursor: pointer; color: var(--muted); font-size: .85rem; margin-bottom: 4px; }
+.ov .pb g { cursor: pointer; }
+.sndl select { font: inherit; font-size: .9rem; color: var(--fg); background: var(--tile); border: 1px solid var(--line); border-radius: 8px; padding: 3px 6px; margin-left: 4px; }
+.zun-box { border: 1px solid var(--line); border-radius: 12px; background: var(--tile); padding: 14px 18px; }
+.zun-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.zun-head h2 { margin: 0; }
+.zun-box p { margin: 10px 0 0; line-height: 1.7; }
+.zun-q { margin: 8px 0 0; padding: 4px 16px; border-left: 3px solid var(--line); } .zun-q p { margin: 6px 0; } .zun-q .src { color: var(--muted); font-size: .85rem; }
+.bmenu { position: absolute; z-index: 20; width: 260px; background: var(--tipbg); color: var(--tipfg); border: 1px solid var(--muted); border-radius: 10px; padding: 8px; box-shadow: 0 8px 28px rgba(0,0,0,.28); display: flex; flex-direction: column; gap: 4px; }
+.bmenu[hidden] { display: none; }
+.bmenu b { font-size: .8rem; color: var(--tipfg); opacity: .8; padding: 2px 6px; }
+.bmenu button { text-align: left; border: 1px solid rgba(128,128,128,.55); background: transparent; color: var(--tipfg); border-radius: 8px; padding: 6px 10px; font-size: .95rem; cursor: pointer; font: inherit; }
+.bmenu button[aria-pressed=true] { background: var(--accent); color: #fff; border-color: var(--accent); }
+.fn { margin: 4px 0 18px; padding: 8px 14px; border-left: 3px solid var(--line); font-size: .92rem; color: var(--muted); }
+.fn b { color: var(--fg, inherit); }
+.hide-cs .ov .rn-s { display: none; }
+.ov .zp .br { fill: none; stroke: var(--c-purple) !important; stroke-width: 22; stroke-linecap: round; } .ov .zp .pill { fill: var(--c-purple); stroke: none; } .ov .zp text { font-family: system-ui, sans-serif; font-weight: 700; font-size: 200px; fill: #fff; text-anchor: middle; }
+.hide-zp .ov .zp { display: none; }
+.ov .df ellipse { fill: none; stroke: #d8132f !important; stroke-width: 26; stroke-dasharray: 60 40; }
+.hide-df .ov .df { display: none; }
+.ov .pb .br { fill: none; stroke: var(--c-sky) !important; stroke-width: 22; stroke-linecap: round; } .ov .pb .pill { fill: var(--c-sky); stroke: none; } .ov .pb text { font-family: system-ui, sans-serif; font-weight: 700; font-size: 200px; fill: #0b2a3d; text-anchor: middle; }
+.hide-pb .ov .pb { display: none; }
+.ov .ar .sl { fill: none; stroke: var(--c-orange) !important; stroke-width: 20; stroke-linecap: round; }
+.ov .ar .tn { stroke: var(--c-orange) !important; stroke-width: 34; stroke-linecap: round; }
+.ov .ar .dot { fill: var(--c-orange); stroke: none !important; }
+.ov .ar .lift { fill: var(--c-orange); font: 700 620px Georgia, serif; }
+.hide-ar .ov .ar { display: none; }
+.hide-rn .ov .rn, .hide-mo .ov .mo, .hide-cd .ov .cd, .hide-bs .ov .bs, .hide-pt .ov .pt { display: none; }
+.ov [data-tip] { cursor: help; }
+.ov rect[fill="transparent"] { stroke: none !important; }
+.ov .cd rect { stroke: none !important; }
+.doubts { font-size: .85rem; color: var(--muted); margin: 6px 0 0; } .doubts summary { cursor: pointer; } .doubts ul { margin: 4px 0 0; padding-left: 18px; }
+.cap { font-size: .88rem; color: var(--muted); margin: 6px 0 0; }
+
+/* theme + motif cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-top: 10px; }
+.card { background: var(--tile); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; }
+.card h4 { margin: 0 0 4px; font-size: 1.05rem; display: flex; gap: 8px; align-items: center; }
+.mchip { display: inline-flex; width: 26px; height: 26px; border-radius: 50%; align-items: center; justify-content: center; color: #fff; font: italic 700 .95rem Georgia, serif; flex: none; }
+.mc-g { background: #8c564b; } .mc-a { background: #0072b2; } .mc-a2 { background: #2f8fc4; } .mc-b { background: #00855f; } .mc-c { background: #c27c00; } .mc-d { background: #c4520a; } .mc-f { background: #b0508f; } .mc-e { background: #6b6b75; }
+.card .deg { font-variant-numeric: tabular-nums; color: var(--muted); font-size: .9rem; }
+.contour { width: 84px; height: 40px; flex: none; float: right; margin: 0 0 4px 8px; }
+.contour polyline { fill: none; stroke: var(--muted); stroke-width: 1.6; } .contour circle { stroke: none; }
+.card p { margin: 6px 0 0; font-size: .92rem; }
+.card ul { margin: 6px 0 0; padding-left: 18px; font-size: .92rem; }
+.where a { text-decoration: none; background: var(--hl); border-radius: 6px; padding: 0 6px; margin-right: 4px; font-variant-numeric: tabular-nums; font-size: .85rem; }
+
+/* record */
+pre.rec { background: var(--tile); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; overflow: auto; font-size: .8rem; line-height: 1.45; max-height: 520px; }
+.steps { counter-reset: s; list-style: none; padding: 0; display: grid; gap: 8px; }
+.steps li { counter-increment: s; background: var(--tile); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 14px 10px 46px; position: relative; font-size: .93rem; }
+.steps li::before { content: counter(s); position: absolute; left: 12px; top: 9px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--bg); text-align: center; font-weight: 700; line-height: 24px; font-size: .85rem; }
+details.fold { margin-top: 10px; } details.fold summary { cursor: pointer; font-weight: 600; }
+
+/* tooltip */
+#tip { position: fixed; z-index: 80; max-width: 330px; background: var(--tipbg); color: var(--tipfg); border: 1px solid var(--line); border-radius: 10px; padding: 8px 11px; font-size: .86rem; line-height: 1.4; box-shadow: 0 6px 24px rgba(0,0,0,.28); pointer-events: none; }
+#tip[hidden] { display: none; } #tip b { display: block; margin-bottom: 2px; }
+.foot { font-size: .88rem; color: var(--muted); padding: 40px 0 64px; }
+@media (max-width: 640px) { .hero { padding-left: 60px; } }
+
+.ref h3 { margin: 26px 0 4px; }
+.ref p.what { color: var(--muted); margin: 0 0 6px; font-size: .92rem; }
+.ref ul { margin: 0; padding-left: 1.2em; } .ref li { margin: 6px 0; }
+.ref a { color: var(--accent); }
+.tb-r { display: inline-flex; gap: 10px; align-items: center; } .theme { background: var(--tile); border: 1px solid var(--line); border-radius: 999px; width: 36px; height: 36px; color: var(--fg); }
+.trnote { font-size: .88rem; color: var(--muted); border-left: 3px solid var(--accent); padding: 4px 10px; margin: 8px 0 4px; }
+.flt { font: inherit; width: 100%; max-width: 360px; margin: 10px 0 4px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--tile); color: var(--fg); }
+details.game { margin: 14px 0; } details.game > summary { font-weight: 700; font-size: 1.1rem; cursor: pointer; }
+.trk { width: 100%; border-collapse: collapse; font-size: .92rem; } .trk th, .trk td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.trk th { color: var(--muted); font-weight: 600; } .trk td:first-child { width: 3em; }
+@media (max-width: 640px) { .trk th:nth-child(5), .trk td:nth-child(5) { display: none; } }
+</style></head><body><div class="lang" data-lang="en" lang="en">
+<section class="hero" id="top">
+  <div class="topbar"><span class="crumb">Touhou Project · OST analysis · <a href="/analysis/touhou/">Guide</a></span><span class="tb-r"><span class="seg" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="ja" aria-pressed="false">JP</button></span><button class="theme" type="button" title="Light / dark">◐</button></span></div>
+  <h1>References &amp; Licenses</h1>
+  
+  <nav class="toc"><a href="#tracks">Track Sources</a><a href="#form">Form and Harmony</a><a href="#schemata">Galant Schemata and Partimento</a><a href="#hip">Historical Performance</a><a href="#tools">Engraving and Sound</a><a href="#license">Licenses</a></nav>
+</section>
+<section class="blk ref" id="license">
+  <h2>Licenses</h2>
+  <p><b><span lang="ja">東方Projectの二次創作です。</span></b> These pages are a fan work (derivative work) of the Touhou Project. They are not official and not affiliated with Team Shanghai Alice.</p>
+  <h3>Touhou Project Music</h3>
+  <ul>
+    <li>The Touhou Project music, titles and ZUN’s comments are © ZUN / Team Shanghai Alice. These pages follow the <a href="https://touhou-project.news/guideline/" target="_blank" rel="noopener"><span lang="ja">東方Projectの二次創作ガイドライン</span></a> (updated May 31, 2024) and the older guidelines it keeps in force.</li>
+    <li>No game material is used: there is no original game audio on these pages. Every excerpt is re-engraved from Chiyami’s own transcription, and playback uses piano and harpsichord samples.</li>
+    <li>The pages are non-commercial. Any future sale of future works will use only the channels the guideline allows, such as doujin events, doujin shops, packaged mail order and Touhou doujin music distribution, or will ask Team Shanghai Alice first.</li>
+  </ul>
+  <h3>Chiyami’s Own Work</h3>
+  <ul>
+    <li>The analyses, transcriptions, annotations, partimento and tonal harmony material, and Chiyami’s arrangements and compositions are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>: share and adapt for non-commercial use, with credit to Chiyami, under the same license.</li>
+    <li>This license covers only Chiyami’s own contribution. It grants no rights in ZUN’s music or melodies, which stay under the Touhou guideline; any reuse must also follow that guideline, including stating that it is a Touhou derivative work.</li>
+  </ul>
+  <h3>Other Material</h3>
+  <ul>
+    <li><span lang="ja">ゆきぽ</span>’s transcription: free to modify, use and redistribute, with credit requested; commercial use needs prior notice to the author (see Track Sources).</li>
+    <li>The wiki data, the books, the sound samples and the software keep their own terms, listed with each entry below.</li>
+  </ul>
+  <p class="what">Background: <a href="http://takker6.tada-katsu.com/t-081.html" target="_blank" rel="noopener">the 2004 guideline page reviewed by ZUN</a>, which the current guideline keeps in force, and <a href="https://news.denfaminicogamer.jp/interview/181017a" target="_blank" rel="noopener">ZUN’s 2018 interview on arrangements</a>. This is a plain reading of these pages, not legal advice.</p>
+</section>
+<section class="blk ref" id="tracks">
+  <h2>Track Sources</h2>
+  <ul>
+    <li><b>Wiki:</b> Touhou Music Database wiki (atwiki), the game page: BPM, meter, keys and chord charts. Reference only.</li>
+    <li><b>ZUN’s comment:</b> the game’s Music Room.</li>
+    <li><b>Score:</b> the piano transcription of the OST that Chiyami worked from. <span lang="ja">ゆきぽ</span> (<a href="https://saki.biroudo.jp/" target="_blank" rel="noopener"><span lang="ja">夢幻譜面郷</span></a>): its terms allow free modification, use and redistribution and ask for credit; commercial use needs prior notice to the author.</li>
+    <li><b>Transcription:</b> Chiyami’s MuseScore re-transcription from that score; every note on the page comes from it.</li>
+  </ul>
+  <input type="search" class="flt" placeholder="Filter tracks" aria-label="Filter tracks">
+  <details class="game" open><summary>Th11 · <span lang="ja">東方地霊殿</span> ～ Subterranean Animism</summary><p class="what">ZUN’s comments: Music Room of <span lang="ja">東方地霊殿</span></p>
+  <table class="trk"><thead><tr><th>No.</th><th>Track</th><th>Wiki</th><th>Score</th><th>Transcription</th></tr></thead><tbody><tr id="th11-09"><td>9</td><td><a href="th11-09-satori-analysis.html"><span lang="ja">少女さとり ～ 3rd eye</span></a></td><td><a href="https://w.atwiki.jp/tohomusicdb/pages/321.html#th11" target="_blank" rel="noopener">page 321</a></td><td><a href="https://saki.biroudo.jp/th11/th1109_satori.pdf" target="_blank" rel="noopener"><span lang="ja">ゆきぽ</span></a></td><td><span lang="ja">東方地霊殿 少女さとり～3rd eye.mxl</span></td></tr><tr id="th11-10"><td>10</td><td><a href="th11-10-hartmann-analysis.html"><span lang="ja">ハルトマンの妖怪少女</span></a></td><td><a href="https://w.atwiki.jp/tohomusicdb/pages/327.html#th11" target="_blank" rel="noopener">page 327</a></td><td><a href="https://saki.biroudo.jp/th11/th1115_heartman.pdf" target="_blank" rel="noopener"><span lang="ja">ゆきぽ</span></a></td><td><span lang="ja">東方地霊殿 ハルトマンの妖怪少女 Transcription.mxl</span></td></tr></tbody></table></details>
+</section>
+<section class="blk ref" id="literature">
+  <h2>Literature and Tools</h2>
+  <h3 id="form">Form and Harmony</h3><p class="what">Phrase, sentence, period and cadence terms; Roman numerals.</p><ul><li>Edward Aldwell, Carl Schachter and Allen Cadwallader, <i>Harmony and Voice Leading</i>, 5th ed. (Boston: Cengage, 2019).</li><li>L. Poundie Burstein and Joseph N. Straus, <i>Concise Introduction to Tonal Harmony</i>, 2nd ed. (New York: Norton, 2020).</li><li>Brellochs, “Dr. B Music Theory” lesson series (YouTube), from Chiyami’s handwritten notes: the order of topics and the definitions the pages follow.</li></ul><h3 id="schemata">Galant Schemata and Partimento</h3><p class="what">Melody and bass patterns (Do-Re-Mi, Prinner, Sol-Fa-Mi, Meyer, Fonte) and the partimento bass options.</p><ul><li>Robert O. Gjerdingen, <i>Music in the Galant Style</i> (New York: Oxford University Press, 2007).</li><li>Job IJzerman, <i>Harmony, Counterpoint, Partimento</i> (New York: Oxford University Press, 2018).</li><li>Giorgio Sanguinetti, <i>The Art of Partimento: History, Theory, and Practice</i> (New York: Oxford University Press, 2012).</li><li>Essays on Music (<a href="https://essaysonmusic.com/" target="_blank" rel="noopener">essaysonmusic.com</a>): articles on the Prinner, the Do-Re-Mi, the Meyer and the Fonte.</li></ul><h3 id="hip">Historical Performance</h3><p class="what">Suggested articulations: slurs, detached notes, tenuto and breath lifts.</p><ul><li>Carl Philipp Emanuel Bach, <i>Essay on the True Art of Playing Keyboard Instruments</i>, trans. and ed. William J. Mitchell (New York: Norton, 1949). Cited as CPE.</li><li>Johann Joachim Quantz, <i>On Playing the Flute</i>, trans. Edward R. Reilly (London: Faber and Faber, 1966). Cited as Q.</li><li>Leopold Mozart, <i>A Treatise on the Fundamental Principles of Violin Playing</i>, trans. Editha Knocker, 2nd ed. (London: Oxford University Press, 1951). Cited as M.</li></ul><h3 id="tools">Engraving and Sound</h3><p class="what">Used on every page.</p><ul><li><a href="https://www.verovio.org/" target="_blank" rel="noopener">Verovio</a> 6.4.1: music engraving (LGPL-3.0).</li><li>Nice-Steinway v3.9 sound font (<a href="https://nullcrawler.uk/pages/misc/soundfonts4u_recreate/home.html" target="_blank" rel="noopener">soundfonts4u</a>, 2022, the latest version), built on Anthony Deaton’s Philharmonic piano from the <a href="https://theremin.music.uiowa.edu/MISpiano.html" target="_blank" rel="noopener">University of Iowa Electronic Music Studios</a> recordings: piano samples (CC BY-ND 3.0).</li><li><a href="https://github.com/sgossner/VCSL" target="_blank" rel="noopener">Versilian Community Sample Library</a>: Italian, Flemish and French harpsichord samples (CC0).</li></ul>
+</section>
+<div class="foot" style="text-align:center;padding:30px 16px">Touhou Project music © ZUN / Team Shanghai Alice.</div>
+</div><div class="lang" data-lang="ja" lang="ja" hidden>
+<section class="hero" id="top-ja">
+  <div class="topbar"><span class="crumb">Touhou Project · OST analysis · <a href="/analysis/touhou/">Guide</a></span><span class="tb-r"><span class="seg" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="false">EN</button><button type="button" data-l="ja" aria-pressed="true">JP</button></span><button class="theme" type="button" title="Light / dark">◐</button></span></div>
+  <h1>参考文献とライセンス</h1>
+  <p class="trnote">この日本語版は、英語版をもとに Claude（Anthropic の AI）が翻訳したものです。内容に違いがある場合は英語版が優先します。</p>
+  <nav class="toc"><a href="#tracks-ja">曲ごとの出典</a><a href="#form-ja">楽式と和声</a><a href="#schemata-ja">ギャラント・スキーマとパルティメント</a><a href="#hip-ja">歴史的演奏法</a><a href="#tools-ja">浄書と音源</a><a href="#license-ja">ライセンス</a></nav>
+</section>
+<section class="blk ref" id="license-ja">
+  <h2>ライセンス</h2>
+  <p><b>東方Projectの二次創作です。</b>これらのページは東方Projectのファン作品（二次創作）です。公式のものではなく、上海アリス幻樂団とは関係ありません。</p>
+  <h3>東方Projectの音楽</h3>
+  <ul>
+    <li>東方Projectの楽曲、曲名、ZUNのコメントの著作権は ZUN／上海アリス幻樂団にあります。これらのページは<a href="https://touhou-project.news/guideline/" target="_blank" rel="noopener"><span lang="ja">東方Projectの二次創作ガイドライン</span></a>（2024年5月31日更新）と、それが引き続き有効とする旧ガイドラインに従っています。</li>
+    <li>ゲーム素材は使っていません。原作ゲームの音声は含まれていません。譜例はすべて、ちやみ自身の採譜から浄書し直したもので、再生にはピアノとチェンバロの音源を使っています。</li>
+    <li>これらのページは非営利です。今後の作品を頒布する場合は、即売会、同人ショップ、パッケージ化した自家通販、東方同人音楽流通など、ガイドラインが認める方法に限るか、事前に上海アリス幻樂団に問い合わせます。</li>
+  </ul>
+  <h3>ちやみ自身の著作</h3>
+  <ul>
+    <li>分析、採譜、注釈、パルティメントと調性和声の教材、ちやみの編曲と作曲には <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> を適用します。クレジット（ちやみ）を表示し、非営利で、同じライセンスのもとであれば、共有と改変ができます。</li>
+    <li>このライセンスが対象とするのは、ちやみ自身の寄与分だけです。ZUNの楽曲や旋律についての権利は何も与えません。それらは東方のガイドラインのもとにあり、再利用する場合は、東方の二次創作であると明記することを含め、そのガイドラインにも従う必要があります。</li>
+  </ul>
+  <h3>その他の素材</h3>
+  <ul>
+    <li>ゆきぽさんの採譜：改変・使用・再配布は自由で、クレジットの表記をお願いしています。商用利用には作者への事前連絡が必要です（「曲ごとの出典」を参照）。</li>
+    <li>wikiのデータ、書籍、音源、ソフトウェアには、下の各項目に記したそれぞれの条件が適用されます。</li>
+  </ul>
+  <p class="what">背景：<a href="http://takker6.tada-katsu.com/t-081.html" target="_blank" rel="noopener">ZUN確認済みの2004年のガイドラインページ</a>（現行ガイドラインでも有効）と<a href="https://news.denfaminicogamer.jp/interview/181017a" target="_blank" rel="noopener">アレンジについてのZUNの2018年のインタビュー</a>。これらのページを素直に読んだもので、法的助言ではありません。</p>
+</section>
+<section class="blk ref" id="tracks-ja">
+  <h2>曲ごとの出典</h2>
+  <ul>
+    <li><b>Wiki：</b>東方Project 楽曲データベース wiki（atwiki）のゲームのページ：BPM、拍子、調、コード譜。参考のみ。</li>
+    <li><b>ZUNのコメント：</b>ゲームの Music Room。</li>
+    <li><b>楽譜：</b>ちやみが参照した原曲のピアノ採譜。<span lang="ja">ゆきぽ</span> (<a href="https://saki.biroudo.jp/" target="_blank" rel="noopener"><span lang="ja">夢幻譜面郷</span></a>)：規約により改変・使用・再配布は自由で、クレジットの表記をお願いしています。商用利用には作者への事前連絡が必要です。</li>
+    <li><b>採譜：</b>その楽譜をもとに、ちやみが MuseScore で採譜し直したもの。ページ上の音はすべてここから取っています。</li>
+  </ul>
+  <input type="search" class="flt" placeholder="曲を絞り込む" aria-label="曲を絞り込む">
+  <details class="game" open><summary>Th11 · <span lang="ja">東方地霊殿</span> ～ Subterranean Animism</summary><p class="what">ZUNのコメント：<span lang="ja">東方地霊殿</span>の Music Room</p>
+  <table class="trk"><thead><tr><th>No.</th><th>曲</th><th>Wiki</th><th>楽譜</th><th>採譜</th></tr></thead><tbody><tr id="th11-09-ja"><td>9</td><td><a href="th11-09-satori-analysis.html"><span lang="ja">少女さとり ～ 3rd eye</span></a></td><td><a href="https://w.atwiki.jp/tohomusicdb/pages/321.html#th11" target="_blank" rel="noopener">321ページ</a></td><td><a href="https://saki.biroudo.jp/th11/th1109_satori.pdf" target="_blank" rel="noopener"><span lang="ja">ゆきぽ</span></a></td><td><span lang="ja">東方地霊殿 少女さとり～3rd eye.mxl</span></td></tr><tr id="th11-10-ja"><td>10</td><td><a href="th11-10-hartmann-analysis.html"><span lang="ja">ハルトマンの妖怪少女</span></a></td><td><a href="https://w.atwiki.jp/tohomusicdb/pages/327.html#th11" target="_blank" rel="noopener">327ページ</a></td><td><a href="https://saki.biroudo.jp/th11/th1115_heartman.pdf" target="_blank" rel="noopener"><span lang="ja">ゆきぽ</span></a></td><td><span lang="ja">東方地霊殿 ハルトマンの妖怪少女 Transcription.mxl</span></td></tr></tbody></table></details>
+</section>
+<section class="blk ref" id="literature-ja">
+  <h2>文献とツール</h2>
+  <h3 id="form-ja">楽式と和声</h3><p class="what">フレーズ、センテンス、ピリオド、カデンツの用語とローマ数字。</p><ul><li>Edward Aldwell, Carl Schachter and Allen Cadwallader, <i>Harmony and Voice Leading</i>, 5th ed. (Boston: Cengage, 2019).</li><li>L. Poundie Burstein and Joseph N. Straus, <i>Concise Introduction to Tonal Harmony</i>, 2nd ed. (New York: Norton, 2020).</li><li>Brellochs「Dr. B Music Theory」講座シリーズ（YouTube）。ちやみの手書きノートより。各ページの項目の順序と定義はこれに従っています。</li></ul><h3 id="schemata-ja">ギャラント・スキーマとパルティメント</h3><p class="what">旋律とバスの型（ド・レ・ミ、プリナー、ソ・ファ・ミ、マイヤー、フォンテ）とパルティメントのバスの選択肢。</p><ul><li>Robert O. Gjerdingen, <i>Music in the Galant Style</i> (New York: Oxford University Press, 2007).</li><li>Job IJzerman, <i>Harmony, Counterpoint, Partimento</i> (New York: Oxford University Press, 2018).</li><li>Giorgio Sanguinetti, <i>The Art of Partimento: History, Theory, and Practice</i> (New York: Oxford University Press, 2012).</li><li>Essays on Music（<a href="https://essaysonmusic.com/" target="_blank" rel="noopener">essaysonmusic.com</a>）：プリナー、ド・レ・ミ、マイヤー、フォンテについての記事。</li></ul><h3 id="hip-ja">歴史的演奏法</h3><p class="what">アーティキュレーションの提案：スラー、ノン・レガート、テヌート、ブレス。</p><ul><li>Carl Philipp Emanuel Bach, <i>Essay on the True Art of Playing Keyboard Instruments</i>, trans. and ed. William J. Mitchell (New York: Norton, 1949). 略号 CPE。</li><li>Johann Joachim Quantz, <i>On Playing the Flute</i>, trans. Edward R. Reilly (London: Faber and Faber, 1966). 略号 Q。</li><li>Leopold Mozart, <i>A Treatise on the Fundamental Principles of Violin Playing</i>, trans. Editha Knocker, 2nd ed. (London: Oxford University Press, 1951). 略号 M。</li></ul><h3 id="tools-ja">浄書と音源</h3><p class="what">全ページで使用。</p><ul><li><a href="https://www.verovio.org/" target="_blank" rel="noopener">Verovio</a> 6.4.1：楽譜の浄書（LGPL-3.0）。</li><li>Nice-Steinway v3.9 サウンドフォント（<a href="https://nullcrawler.uk/pages/misc/soundfonts4u_recreate/home.html" target="_blank" rel="noopener">soundfonts4u</a>、2022年、最新版）。<a href="https://theremin.music.uiowa.edu/MISpiano.html" target="_blank" rel="noopener">University of Iowa Electronic Music Studios</a> の録音による Anthony Deaton の Philharmonic ピアノがもと：ピアノ音源（CC BY-ND 3.0）。</li><li><a href="https://github.com/sgossner/VCSL" target="_blank" rel="noopener">Versilian Community Sample Library</a>：イタリアン、フレミッシュ、フレンチ・チェンバロ音源（CC0）。</li></ul>
+</section>
+<div class="foot" style="text-align:center;padding:30px 16px">東方Projectの楽曲 © ZUN／上海アリス幻樂団</div>
+</div><script>
+document.querySelectorAll('.flt').forEach(f => f.oninput = e => { const q = e.target.value.trim().toLowerCase(); const root = e.target.closest('.lang');
+  root.querySelectorAll('details.game').forEach(g => { let any = 0; g.querySelectorAll('tbody tr').forEach(r => { const ok = !q || r.textContent.toLowerCase().includes(q); r.hidden = !ok; any += ok; }); g.hidden = !any; if (q && any) g.open = true; }); });
+function setLang(l, keepHash) {
+  document.querySelectorAll('.lang').forEach(v => v.hidden = v.dataset.lang !== l);
+  document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.l === l));
+  document.documentElement.lang = l;
+  try { localStorage.setItem('th-ref-lang', l); } catch (e) {}
+}
+document.querySelectorAll('.seg button').forEach(b => b.onclick = () => setLang(b.dataset.l));
+(() => { let l = 'en'; try { l = localStorage.getItem('th-ref-lang') || 'en'; } catch (e) {}
+  if (/-ja$/.test(location.hash)) l = 'ja'; if (l !== 'en') setLang(l);
+  if (l === 'ja' && location.hash && !/-ja$/.test(location.hash)) { const t = document.getElementById(location.hash.slice(1) + '-ja'); if (t) t.scrollIntoView(); } })();
+try { const t = localStorage.getItem('th-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+document.querySelectorAll('.theme').forEach(b => b.onclick = () => {
+  const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const nx = cur === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = nx;
+  try { localStorage.setItem('th-theme', nx); } catch (e) {}
+});
+</script></body></html>

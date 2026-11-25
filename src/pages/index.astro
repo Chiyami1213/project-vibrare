@@ -1,5 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { WHATS_NEW } from '../data/whats-new';
+
+const fmt = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+const dated = (d: string) => fmt.format(new Date(`${d}T00:00:00Z`));
 ---
 
 <Layout>
@@ -9,5 +13,22 @@ import Layout from '../layouts/Layout.astro';
       <p>“If you want to find the secrets of the universe, think in terms of energy, frequency and vibration.”</p>
       <footer>— Nikola Tesla (1856 – 1943)</footer>
     </blockquote>
+
+    <section class="whats-new" aria-labelledby="whats-new-h">
+      <h2 id="whats-new-h">What’s new</h2>
+      <ul>
+        {
+          WHATS_NEW.slice(0, 5).map((n) => (
+            <li>
+              <a href={n.href}>
+                <time datetime={n.date}>{dated(n.date)}</time>
+                <span class="wn-title">{n.title}</span>
+                <span class="wn-text">{n.text}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   </main>
 </Layout>

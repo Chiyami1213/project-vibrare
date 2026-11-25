@@ -30,7 +30,7 @@ Live site: <https://vibrare.pages.dev/>
 | Section | Contents |
 | :-- | :-- |
 | **Theory** | *Tonal Harmony* (74 topics and 154 playable scores, from the owner's notes on Dr. B's lessons), *Partimento* (96 patterns and 156 playable scores in six pages: Moti del Basso, Schemata, Cadences, Rule of the Octave, Suspension and Diminution; and *Fugue*, with Mann's theory and an analysis guide), *Counterpoint* (Fux's *Gradus ad Parnassum*, with 22 playable examples, a rule checker that marks faulty notes, 15 exercise workbenches and 7 tools), *HIP* (historically informed performance for flute and keyboard, with 17 playable examples), *Music History* (32 articles on the history of music theory after Christensen, with an era map, timeline, people, glossary and quiz; the technique that overlaps sits as "History Background" panels in the other tabs) and *Jazz* (not written yet). Each rule and guideline is badged apart. See [Status](#status). |
-| **Analysis** | *Baroque*: *Bach* lists the 48 preludes and fugues of *The Well-Tempered Clavier* (BWV 846 to 893) with keys and fugue voice counts; *Quantz* and *Blavet* are not written yet. *Touhou Project*: the numbered games Th06 to Th20 (15 games, 271 tracks), each with its OST, where every track is used, and its BPM and key where the wiki below has them. *Japanese Music*: not written yet. |
+| **Analysis** | *Baroque*: *Bach* lists the 48 preludes and fugues of *The Well-Tempered Clavier* (BWV 846 to 893) with keys and fugue voice counts; each fugue also has its own analysis page, with Roberts's method and four organ fugues, and *First Lessons in Bach*; *Quantz* has the 100 daily exercises, an articulation guide and the Flute Concerto QV 5:174; *Blavet* has the sonata "La Vibray". *Touhou Project*: the numbered games Th06 to Th20 (15 games, 271 tracks), each with its OST, where every track is used, and its BPM and key where the wiki below has them. *Japanese Music*: eleven chapters of study guides, with their resources and licenses. |
 | **Tools** | Interval and scale calculators that show the notes on a staff; a chord calculator with inversions, a piano keyboard, playback and shareable links; an interactive circle of fifths with a rainbow colour scheme that draws a chord's shape (triangle, square, and so on). Notes are spelled the way a musician would write them. |
 | **Works** | Arrangements by category: Anime, Commissions, Concert Band, Flute, Ghibli, Touhou Project, Vocaloid, VTubers, Miscellaneous. Three arrangements are listed so far. |
 | **Glossary** | Searchable music-theory terms. |
@@ -83,7 +83,7 @@ returns to the main list.
     colouring of voices;
   - search-engine setup (sitemap, `robots.txt`, descriptions).
 - **In progress:** the Works lists (three arrangements so far).
-- **Not started:** the Jazz, Quantz, Blavet and Japanese Music pages (placeholders).
+- **Not started:** the Jazz page (a placeholder).
 - **Known gaps** (details in `content/CONTENT_ISSUES.md`): HIP examples are shown as notation text, not engraved staves;
   Roman numerals are printed flat, not stacked; the fugue "Entries" colour mode and the voice-name labels at the start of
   each system are not built; `tools/validate.py` of the History pack is not run by the build.

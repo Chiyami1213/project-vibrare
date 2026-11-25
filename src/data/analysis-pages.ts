@@ -51,6 +51,27 @@ export const BLAVET: StaticPage[] = [
   { href: '/analysis/baroque/blavet/la-vibray/v-allegro.html', title: 'V. Allegro', note: '' },
 ];
 
+const JP = '/analysis/japanese-music';
+export const JAPANESE: StaticPage[] = [
+  ['Foundations', 'Scales, rhythm, notation and the instruments of Japan.'],
+  ['Gagaku and Shōmyō', 'Court music and Buddhist chant.'],
+  ['Biwa Narrative', 'Storytelling with the biwa.'],
+  ['Nō and Kyōgen', 'Noh theatre and its comic interludes.'],
+  ['Shakuhachi', 'The bamboo flute.'],
+  ['Koto', 'The zither, its tunings and its music.'],
+  ['Shamisen and Gidayū', 'The three-string lute and the narrative singing of the puppet theatre.'],
+  ['Kabuki', 'Music of the kabuki stage.'],
+  ['Folk and Popular Song', 'Min’yō, enka and the folk scales.'],
+  ['Ryukyu and Ainu', 'The music of Okinawa and of the Ainu.'],
+  ['Modern Japan', 'Composers and styles from the Meiji era on.'],
+].map(([name, note], i) => ({ href: `${JP}/chapter-${i + 1}.html`, title: `Chapter ${i + 1}: ${name}`, note }));
+
+export const JAPANESE_RESOURCES: StaticPage = {
+  href: `${JP}/resources-and-licenses.html`,
+  title: 'Resources and licenses',
+  note: 'The books, sounds and software behind the guides, with how each is used and its license.',
+};
+
 /** Touhou tracks with analysis pages: game id, then track number (as the site's track list has it). */
 const TH = '/analysis/touhou/analysis';
 export const TOUHOU_ANALYSIS: Record<string, Record<number, { label: string; href: string }[]>> = {

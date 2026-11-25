@@ -2096,3 +2096,70 @@ button.note-chip[aria-pressed='true'] {
   font-size: 0.85rem;
   font-weight: 400;
 }
+
+/* ---------- What's new, under the welcome on the home page ---------- */
+.whats-new {
+  width: 100%;
+  max-width: 56rem;
+  margin-top: 28px;
+}
+
+.whats-new h2 {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+}
+
+.whats-new ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.whats-new a {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 2px 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--tile);
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.whats-new a:hover,
+.whats-new a:focus-visible {
+  border-color: var(--accent);
+}
+
+.whats-new time {
+  grid-row: span 2;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  padding-top: 2px;
+}
+
+.wn-title {
+  font-weight: 600;
+}
+
+.wn-text {
+  grid-column: 2;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+@media (max-width: 560px) {
+  .whats-new a {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .whats-new time {
+    grid-row: auto;
+  }
+  .wn-text {
+    grid-column: 1;
+  }
+}

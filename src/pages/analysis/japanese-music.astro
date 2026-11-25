@@ -1,9 +1,17 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageList from '../../components/PageList.astro';
+import { JAPANESE, JAPANESE_RESOURCES } from '../../data/analysis-pages';
 ---
 
-<Layout title="Japanese Music">
-  <main>
+<Layout title="Japanese Music" description="Study guides to the traditional music of Japan in eleven chapters: gagaku, biwa, nō, shakuhachi, koto, shamisen, kabuki, folk song, Ryukyu and Ainu music, and modern Japan.">
+  <main class="page-block wide">
     <h1>Japanese Music</h1>
+    <p class="lead">
+      Study guides to the traditional music of Japan, in eleven chapters. They follow Tokita and Hughes, <em>The Ashgate Research
+      Companion to Japanese Music</em> (2017), with Malm, Miki and Kawase added where they say more, and every claim cited by its
+      printed page. Each chapter has engraved examples, playback and a quiz.
+    </p>
+    <PageList pages={[...JAPANESE, JAPANESE_RESOURCES]} />
   </main>
 </Layout>
