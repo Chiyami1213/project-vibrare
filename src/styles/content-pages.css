@@ -203,7 +203,7 @@
 /* the filter and the jump links under a heading need air between them */
 .field + .chapter-jump,
 .subnav + .chapter-jump,
-.lead + .chapter-jump,
+.lead:not(:where(.sp .lead)) + .chapter-jump,
 .section-title + .chapter-jump {
   margin-top: 20px;
 }
@@ -275,20 +275,20 @@
   min-height: 40px;
 }
 
-.verdict {
+.verdict:not(:where(.sp .verdict)) {
   margin: 10px 0 6px;
   font-weight: 600;
 }
 
-.verdict.good {
+.verdict:not(:where(.sp .verdict)).good {
   color: #2e9e5b;
 }
 
-.verdict.meh {
+.verdict:not(:where(.sp .verdict)).meh {
   color: #b9770f;
 }
 
-.verdict.bad {
+.verdict:not(:where(.sp .verdict)).bad {
   color: #d1432f;
 }
 
@@ -471,7 +471,7 @@
   border-color: #d1432f;
 }
 
-.pill {
+.pill:not(:where(.sp .pill)) {
   display: inline-block;
   padding: 1px 8px;
   border-radius: 999px;
@@ -480,11 +480,11 @@
   border: 1px solid currentColor;
 }
 
-.pill.ok {
+.pill:not(:where(.sp .pill)).ok {
   color: #2e9e5b;
 }
 
-.pill.no {
+.pill:not(:where(.sp .pill)).no {
   color: #d1432f;
 }
 
@@ -570,7 +570,7 @@
   margin-bottom: 4px;
 }
 
-.chip {
+.chip:not(:where(.sp .chip)) {
   display: inline-block;
   margin: 2px 4px 2px 0;
   padding: 2px 10px;
@@ -583,11 +583,11 @@
   cursor: pointer;
 }
 
-.chip.ok {
+.chip:not(:where(.sp .chip)).ok {
   border-color: #2e9e5b;
 }
 
-.chip.no {
+.chip:not(:where(.sp .chip)).no {
   border-color: #d1432f;
 }
 
@@ -736,7 +736,7 @@
   margin: 28px 0;
 }
 
-.quiz {
+.quiz:not(:where(.sp .quiz)) {
   display: grid;
   gap: 14px;
   margin: 12px 0;
@@ -862,7 +862,7 @@
   pointer-events: none;
 }
 
-.bar {
+.bar:not(:where(.sp .bar)) {
   opacity: 0.9;
 }
 
@@ -872,19 +872,19 @@
   stroke: var(--fg);
 }
 
-.bar.t0 {
+.bar:not(:where(.sp .bar)).t0 {
   fill: #5b4bdb;
 }
-.bar.t1 {
+.bar:not(:where(.sp .bar)).t1 {
   fill: #2e8b8b;
 }
-.bar.t2 {
+.bar:not(:where(.sp .bar)).t2 {
   fill: #b05a2a;
 }
-.bar.t3 {
+.bar:not(:where(.sp .bar)).t3 {
   fill: #7a4aa6;
 }
-.bar.t4 {
+.bar:not(:where(.sp .bar)).t4 {
   fill: #3b7dc4;
 }
 
@@ -1276,7 +1276,7 @@ textarea.txt {
   color: var(--muted);
 }
 
-button.syl,
+button.syl:not(:where(.sp .syl)),
 button.plan-gap {
   border: 1px solid transparent;
   border-radius: 6px;
@@ -1303,7 +1303,7 @@ button.plan-gap.on.emergency {
   color: #d98a1c;
 }
 
-button.syl:hover,
+button.syl:not(:where(.sp .syl)):hover,
 button.plan-gap:hover {
   border-color: var(--accent);
 }
@@ -1447,11 +1447,11 @@ button.plan-gap:hover {
   min-width: 90px;
 }
 
-.chip.dim {
+.chip:not(:where(.sp .chip)).dim {
   opacity: 0.55;
 }
 
-.chip.borrowed {
+.chip:not(:where(.sp .chip)).borrowed {
   border-color: #d98a1c;
 }
 
@@ -1543,67 +1543,67 @@ button.plan-gap:hover {
 }
 
 /* the notes, stems, flags, beams, ties, accidentals and rests of a voice take its colour; faulty notes keep the checker colour */
-.score.colour-voices .voice-1:not(.marked),
-.score.colour-voices .voice-1:not(.marked) * {
+.score:not(:where(.sp .score)).colour-voices .voice-1:not(.marked),
+.score:not(:where(.sp .score)).colour-voices .voice-1:not(.marked) * {
   fill: var(--voice-1);
 }
-.score.colour-voices .voice-2:not(.marked),
-.score.colour-voices .voice-2:not(.marked) * {
+.score:not(:where(.sp .score)).colour-voices .voice-2:not(.marked),
+.score:not(:where(.sp .score)).colour-voices .voice-2:not(.marked) * {
   fill: var(--voice-2);
 }
-.score.colour-voices .voice-3:not(.marked),
-.score.colour-voices .voice-3:not(.marked) * {
+.score:not(:where(.sp .score)).colour-voices .voice-3:not(.marked),
+.score:not(:where(.sp .score)).colour-voices .voice-3:not(.marked) * {
   fill: var(--voice-3);
 }
-.score.colour-voices .voice-4:not(.marked),
-.score.colour-voices .voice-4:not(.marked) * {
+.score:not(:where(.sp .score)).colour-voices .voice-4:not(.marked),
+.score:not(:where(.sp .score)).colour-voices .voice-4:not(.marked) * {
   fill: var(--voice-4);
 }
-.score.colour-voices .voice-5:not(.marked),
-.score.colour-voices .voice-5:not(.marked) * {
+.score:not(:where(.sp .score)).colour-voices .voice-5:not(.marked),
+.score:not(:where(.sp .score)).colour-voices .voice-5:not(.marked) * {
   fill: var(--voice-5);
 }
-.score.colour-voices .voice-1:not(.marked) path,
-.score.colour-voices .voice-1:not(.marked) rect,
-.score.colour-voices .voice-1:not(.marked) line {
+.score:not(:where(.sp .score)).colour-voices .voice-1:not(.marked) path,
+.score:not(:where(.sp .score)).colour-voices .voice-1:not(.marked) rect,
+.score:not(:where(.sp .score)).colour-voices .voice-1:not(.marked) line {
   stroke: var(--voice-1);
 }
-.score.colour-voices .voice-2:not(.marked) path,
-.score.colour-voices .voice-2:not(.marked) rect,
-.score.colour-voices .voice-2:not(.marked) line {
+.score:not(:where(.sp .score)).colour-voices .voice-2:not(.marked) path,
+.score:not(:where(.sp .score)).colour-voices .voice-2:not(.marked) rect,
+.score:not(:where(.sp .score)).colour-voices .voice-2:not(.marked) line {
   stroke: var(--voice-2);
 }
-.score.colour-voices .voice-3:not(.marked) path,
-.score.colour-voices .voice-3:not(.marked) rect,
-.score.colour-voices .voice-3:not(.marked) line {
+.score:not(:where(.sp .score)).colour-voices .voice-3:not(.marked) path,
+.score:not(:where(.sp .score)).colour-voices .voice-3:not(.marked) rect,
+.score:not(:where(.sp .score)).colour-voices .voice-3:not(.marked) line {
   stroke: var(--voice-3);
 }
-.score.colour-voices .voice-4:not(.marked) path,
-.score.colour-voices .voice-4:not(.marked) rect,
-.score.colour-voices .voice-4:not(.marked) line {
+.score:not(:where(.sp .score)).colour-voices .voice-4:not(.marked) path,
+.score:not(:where(.sp .score)).colour-voices .voice-4:not(.marked) rect,
+.score:not(:where(.sp .score)).colour-voices .voice-4:not(.marked) line {
   stroke: var(--voice-4);
 }
-.score.colour-voices .voice-5:not(.marked) path,
-.score.colour-voices .voice-5:not(.marked) rect,
-.score.colour-voices .voice-5:not(.marked) line {
+.score:not(:where(.sp .score)).colour-voices .voice-5:not(.marked) path,
+.score:not(:where(.sp .score)).colour-voices .voice-5:not(.marked) rect,
+.score:not(:where(.sp .score)).colour-voices .voice-5:not(.marked) line {
   stroke: var(--voice-5);
 }
 
 /* the tonal colour mode: the chordal 7th green, the leading tone red */
-.score.colour-roles .role-seventh:not(.marked),
-.score.colour-roles .role-seventh:not(.marked) * {
+.score:not(:where(.sp .score)).colour-roles .role-seventh:not(.marked),
+.score:not(:where(.sp .score)).colour-roles .role-seventh:not(.marked) * {
   fill: #2e9e5b;
 }
-.score.colour-roles .role-lt:not(.marked),
-.score.colour-roles .role-lt:not(.marked) * {
+.score:not(:where(.sp .score)).colour-roles .role-lt:not(.marked),
+.score:not(:where(.sp .score)).colour-roles .role-lt:not(.marked) * {
   fill: #d1432f;
 }
-.score.colour-roles .role-seventh:not(.marked) path,
-.score.colour-roles .role-seventh:not(.marked) rect {
+.score:not(:where(.sp .score)).colour-roles .role-seventh:not(.marked) path,
+.score:not(:where(.sp .score)).colour-roles .role-seventh:not(.marked) rect {
   stroke: #2e9e5b;
 }
-.score.colour-roles .role-lt:not(.marked) path,
-.score.colour-roles .role-lt:not(.marked) rect {
+.score:not(:where(.sp .score)).colour-roles .role-lt:not(.marked) path,
+.score:not(:where(.sp .score)).colour-roles .role-lt:not(.marked) rect {
   stroke: #d1432f;
 }
 
@@ -1612,10 +1612,10 @@ button.plan-gap:hover {
 .voice-spans {
   display: none;
 }
-.score.colour-voices.show-paths .voice-paths {
+.score:not(:where(.sp .score)).colour-voices.show-paths .voice-paths {
   display: block;
 }
-.score.colour-voices .voice-spans {
+.score:not(:where(.sp .score)).colour-voices .voice-spans {
   display: block;
 }
 .voice-path {
@@ -1665,7 +1665,7 @@ button.plan-gap:hover {
 .vspan:focus-visible .vband {
   opacity: 0.3;
 }
-.score .vspan .vlabel {
+.score:not(:where(.sp .score)) .vspan .vlabel {
   fill: var(--fg);
   stroke: none;
   font-size: 10px;
@@ -1673,19 +1673,19 @@ button.plan-gap:hover {
 }
 
 /* the sounding note glows in its own colour */
-.score.colour-voices .voice-1.sounding {
+.score:not(:where(.sp .score)).colour-voices .voice-1.sounding {
   filter: drop-shadow(0 0 3px var(--voice-1));
 }
-.score.colour-voices .voice-2.sounding {
+.score:not(:where(.sp .score)).colour-voices .voice-2.sounding {
   filter: drop-shadow(0 0 3px var(--voice-2));
 }
-.score.colour-voices .voice-3.sounding {
+.score:not(:where(.sp .score)).colour-voices .voice-3.sounding {
   filter: drop-shadow(0 0 3px var(--voice-3));
 }
-.score.colour-voices .voice-4.sounding {
+.score:not(:where(.sp .score)).colour-voices .voice-4.sounding {
   filter: drop-shadow(0 0 3px var(--voice-4));
 }
-.score.colour-voices .voice-5.sounding {
+.score:not(:where(.sp .score)).colour-voices .voice-5.sounding {
   filter: drop-shadow(0 0 3px var(--voice-5));
 }
 

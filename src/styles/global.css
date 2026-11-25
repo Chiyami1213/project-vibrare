@@ -58,14 +58,14 @@ a {
   color: var(--accent);
 }
 
-.page {
+.page:not(:where(.sp .page)) {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 48px 32px 0 calc(var(--rail-w) + 32px);
 }
 
-.page > main {
+.page:not(:where(.sp .page)) > main {
   flex: 1;
 }
 
@@ -117,7 +117,7 @@ a {
   text-align: center;
 }
 
-.page h1 {
+.page:not(:where(.sp .page)) h1 {
   margin: 0 0 16px;
   font-size: 2rem;
   line-height: 1.2;
@@ -383,7 +383,7 @@ a {
 }
 
 @media (max-width: 760px), (hover: none) {
-  .page {
+  .page:not(:where(.sp .page)) {
     padding: 72px 16px 0;
   }
   .menu-btn {
@@ -576,17 +576,17 @@ html.loading.open .panel-r {
   outline-offset: 2px;
 }
 
-.help h2 {
+.help:not(:where(.sp .help)) h2 {
   font-size: 1.1rem;
   margin: 0 0 8px;
 }
 
-.help ul {
+.help:not(:where(.sp .help)) ul {
   margin: 0;
   padding-left: 1.4em;
 }
 
-.help li {
+.help:not(:where(.sp .help)) li {
   margin-bottom: 10px;
 }
 
@@ -632,7 +632,7 @@ html.loading.open .panel-r {
   color: var(--muted);
 }
 
-.pair {
+.pair:not(:where(.sp .pair)) {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
@@ -800,20 +800,20 @@ html.loading.open .panel-r {
   fill: var(--muted);
 }
 
-.facts {
+.facts:not(:where(.sp .facts)) {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px 24px;
   margin: 0 0 8px;
 }
 
-.facts dt {
+.facts:not(:where(.sp .facts)) dt {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--muted);
 }
 
-.facts dd {
+.facts:not(:where(.sp .facts)) dd {
   margin: 2px 0 0;
 }
 
@@ -950,7 +950,7 @@ html.loading.open .panel-r {
   max-width: 1680px;
 }
 
-.crumb {
+.crumb:not(:where(.sp .crumb)) {
   margin: 0 0 16px;
 }
 
@@ -1418,7 +1418,7 @@ button.btn {
   margin: 0 0 16px;
 }
 
-.chip {
+.chip:not(:where(.sp .chip)) {
   padding: 2px 10px;
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -1550,11 +1550,11 @@ button.btn {
   white-space: pre-wrap;
 }
 
-.example {
+.example:not(:where(.sp .example)) {
   margin: 0 0 24px;
 }
 
-.example h3 {
+.example:not(:where(.sp .example)) h3 {
   margin: 0 0 8px;
   font-size: 1rem;
 }
@@ -1661,7 +1661,7 @@ button.note-chip[aria-pressed='true'] {
 }
 
 /* ---------- Music staff (VexFlow) ---------- */
-.staff {
+.staff:not(:where(.sp .staff)) {
   min-height: 200px;
   margin-bottom: 12px;
   padding: 4px 8px;
@@ -1672,7 +1672,7 @@ button.note-chip[aria-pressed='true'] {
   color: var(--fg); /* VexFlow draws in currentColor */
 }
 
-.staff svg {
+.staff:not(:where(.sp .staff)) svg {
   display: block;
   max-width: none;
 }
@@ -1703,7 +1703,7 @@ button.note-chip[aria-pressed='true'] {
 }
 
 /* ---------- Partimento example player ---------- */
-.player {
+.player:not(:where(.sp .player)) {
   min-height: 120px;
   padding: 12px;
   border: 1px solid var(--line);
@@ -1711,7 +1711,7 @@ button.note-chip[aria-pressed='true'] {
   background: var(--tile);
 }
 
-.player:focus-visible {
+.player:not(:where(.sp .player)):focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
@@ -1727,7 +1727,7 @@ button.note-chip[aria-pressed='true'] {
 }
 
 /* the SVG root carries stroke="black" from VexFlow; the labels must not inherit it */
-.score .fig {
+.score:not(:where(.sp .score)) .fig {
   font-size: 13px;
   text-anchor: middle;
   fill: currentColor;
@@ -1737,7 +1737,7 @@ button.note-chip[aria-pressed='true'] {
   font-variant-numeric: lining-nums;
 }
 
-.score .lab {
+.score:not(:where(.sp .score)) .lab {
   font-size: 14px;
   text-anchor: middle;
   fill: currentColor;
@@ -1750,7 +1750,7 @@ button.note-chip[aria-pressed='true'] {
   display: none;
 }
 
-.score .deg {
+.score:not(:where(.sp .score)) .deg {
   font-size: 15px;
   text-anchor: middle;
   fill: var(--accent);
@@ -1758,13 +1758,13 @@ button.note-chip[aria-pressed='true'] {
   font-family: system-ui, 'Segoe UI Symbol', sans-serif;
 }
 
-.score .hl {
+.score:not(:where(.sp .score)) .hl {
   fill: var(--accent);
   opacity: 0;
   transition: opacity 0.08s linear;
 }
 
-.score .hl.on {
+.score:not(:where(.sp .score)) .hl.on {
   opacity: 0.2;
 }
 
@@ -1973,7 +1973,7 @@ button.note-chip[aria-pressed='true'] {
   font-size: 0.85rem;
 }
 
-.steps {
+.steps:not(:where(.sp .steps)) {
   margin: 10px 0;
   padding-left: 1.4rem;
   display: grid;
@@ -2030,7 +2030,7 @@ button.note-chip[aria-pressed='true'] {
   margin: 0;
 }
 
-.eyebrow {
+.eyebrow:not(:where(.sp .eyebrow)) {
   margin: 0 0 4px;
   color: var(--muted);
   font-size: 0.85rem;
@@ -2074,7 +2074,7 @@ button.note-chip[aria-pressed='true'] {
   font-size: 0.9rem;
 }
 
-.score .ivl {
+.score:not(:where(.sp .score)) .ivl {
   font-size: 12px;
   text-anchor: middle;
   fill: var(--muted);
@@ -2082,7 +2082,7 @@ button.note-chip[aria-pressed='true'] {
   font-family: system-ui, sans-serif;
 }
 
-.score .ivl.perfect {
+.score:not(:where(.sp .score)) .ivl.perfect {
   fill: #4a90d9;
   font-weight: 700;
 }

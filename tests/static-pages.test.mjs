@@ -109,3 +109,38 @@ test('fixPlayback: a page without those players is left as it is', () => {
   const html = '<p>Nothing to patch here.</p>';
   assert.equal(fixPlayback(html), html);
 });
+
+
+test("the site's styles for a generic class name do not reach a delivered page that uses the same name", async () => {
+  // Verovio draws <g class="staff">; the site's own .staff (a text colour for its VexFlow boxes) once made the staff lines
+  // near-white on the white score in the dark theme. A rule that is about one class alone has to leave .sp alone, when a
+  // delivered page uses that class too.
+  const { readFileSync } = await import('node:fs');
+  const { listStaticPages, readStaticPage } = await import('../src/lib/static-pages.ts');
+  const used = new Set();
+  for (const url of listStaticPages()) for (const m of readStaticPage(url).matchAll(/class="([^"]+)"/g)) for (const c of m[1].split(/\s+/)) if (c) used.add(c);
+  const css = ['global.css', 'content-pages.css'].map((f) => readFileSync(new URL(`../src/styles/${f}`, import.meta.url), 'utf8')).join('\n').replace(/\/\*[\s\S]*?\*\//g, '');
+  const allowed = new Set(['sp', 'hero', 'theme']); // the wrapper, and the classes of the overrides for the pages themselves
+  const firstCompound = (s) => {
+    let depth = 0;
+    for (let i = 0; i < s.length; i++) {
+      if ('([' .includes(s[i])) depth++;
+      else if (')]'.includes(s[i])) depth--;
+      else if (depth === 0 && /[\s>+~]/.test(s[i])) return s.slice(0, i);
+    }
+    return s;
+  };
+  const bad = new Set();
+  for (const m of css.matchAll(/([^{}@]+)\{[^{}]*\}/g)) {
+    for (const sel of m[1].split(',')) {
+      const first = firstCompound(sel.trim());
+      const excluded = [...first.matchAll(/:not\(:where\(\.sp \.([\w-]+)\)\)/g)].map((x) => x[1]);
+      const bare = first.replace(/:not\(:where\(\.sp \.[\w-]+\)\)/g, '').replace(/::?[\w-]+(\([^)]*\))?/g, '');
+      const classes = [...bare.matchAll(/\.([A-Za-z_][\w-]*)/g)].map((x) => x[1]);
+      if (classes.length !== 1) continue; // two classes together are specific enough not to meet a page's single one
+      const c = classes[0];
+      if (used.has(c) && !allowed.has(c) && !excluded.includes(c)) bad.add(`.${c}  in  ${sel.trim().replace(/\s+/g, ' ')}`);
+    }
+  }
+  assert.deepEqual([...bad].sort(), [], 'a delivered page uses this class name: exclude it from .sp in the CSS, or rename it');
+});
