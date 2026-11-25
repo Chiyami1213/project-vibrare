@@ -21,12 +21,12 @@ export const WTC_INDEX = [
 ];
 
 export const ROBERTS: StaticPage[] = [
-  { href: `${FUGUE}/roberts/`, title: 'Roberts’s fugue analysis method', note: 'A study guide to Scott Roberts’s method (2004), with the worked examples below.' },
-  { href: `${FUGUE}/wtc-1/bwv847-fugue-analysis.html`, title: 'Fugue in C minor, BWV 847', note: 'The demonstration piece of the six steps; a rhetorical fugue.' },
-  { href: `${FUGUE}/roberts/bwv533.html`, title: 'Fugue in E minor, BWV 533', note: 'Organ fugue, literal (Roberts, chapter 5).' },
-  { href: `${FUGUE}/roberts/bwv545.html`, title: 'Fugue in C major, BWV 545', note: 'Organ fugue, rhetorical (Roberts, chapter 6).' },
-  { href: `${FUGUE}/roberts/bwv547.html`, title: 'Fugue in C major, BWV 547', note: 'Organ fugue, rhetorical (Roberts, chapter 7).' },
-  { href: `${FUGUE}/roberts/bwv578.html`, title: 'Fugue in G minor, BWV 578', note: 'The “Little” G minor organ fugue, worked through the six steps.' },
+  { href: `${FUGUE}/roberts/`, title: 'Roberts’s Fugue Analysis Method', note: 'A study guide to Scott Roberts’s method (2004), with the worked examples below.' },
+  { href: `${FUGUE}/wtc-1/bwv847-fugue-analysis.html`, title: 'Fugue in C Minor, BWV 847', note: 'The demonstration piece of the six steps; a rhetorical fugue.' },
+  { href: `${FUGUE}/roberts/bwv533.html`, title: 'Fugue in E Minor, BWV 533', note: 'Organ fugue, literal (Roberts, chapter 5).' },
+  { href: `${FUGUE}/roberts/bwv545.html`, title: 'Fugue in C Major, BWV 545', note: 'Organ fugue, rhetorical (Roberts, chapter 6).' },
+  { href: `${FUGUE}/roberts/bwv547.html`, title: 'Fugue in C Major, BWV 547', note: 'Organ fugue, rhetorical (Roberts, chapter 7).' },
+  { href: `${FUGUE}/roberts/bwv578.html`, title: 'Fugue in G Minor, BWV 578', note: 'The “Little” G minor organ fugue, worked through the six steps.' },
 ];
 
 export const FIRST_LESSONS: StaticPage = {
@@ -37,9 +37,9 @@ export const FIRST_LESSONS: StaticPage = {
 
 export const QUANTZ: StaticPage[] = [
   { href: '/analysis/baroque/quantz/exercises/', title: 'Quantz · 100 Daily Exercises', note: 'An interactive edition of the exercises in Das Flötenbuch Friedrichs des Großen, annotated by Quantz’s rules.' },
-  { href: '/analysis/baroque/quantz/articulation-guide/', title: 'Quantz on articulation, phrasing and breath', note: 'What he tells a flute player about tonguing, slurs, strokes, dots and breathing, with a page reference for every rule.' },
-  { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-i-analysis.html', title: 'Flute Concerto in G, QV 5:174 · I. Allegro assai', note: 'Form, sections, cadences, partimento patterns and the flute part.' },
-  { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-ii-analysis.html', title: 'Flute Concerto in G, QV 5:174 · II. Arioso e mesto', note: 'The slow movement.' },
+  { href: '/analysis/baroque/quantz/articulation-guide/', title: 'Quantz on Articulation, Phrasing, and Breath', note: 'What he tells a flute player about tonguing, slurs, strokes, dots and breathing, with a page reference for every rule.' },
+  { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-i-analysis.html', title: 'Flute Concerto in G, QV 5:174 · I. Allegro Assai', note: 'Form, sections, cadences, partimento patterns and the flute part.' },
+  { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-ii-analysis.html', title: 'Flute Concerto in G, QV 5:174 · II. Arioso e Mesto', note: 'The slow movement.' },
   { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-iii-analysis.html', title: 'Flute Concerto in G, QV 5:174 · III. Presto', note: 'The finale.' },
 ];
 
@@ -68,7 +68,7 @@ export const JAPANESE: StaticPage[] = [
 
 export const JAPANESE_RESOURCES: StaticPage = {
   href: `${JP}/resources-and-licenses.html`,
-  title: 'Resources and licenses',
+  title: 'Resources and Licenses',
   note: 'The books, sounds and software behind the guides, with how each is used and its license.',
 };
 
@@ -77,12 +77,12 @@ const TH = '/analysis/touhou/analysis';
 export const TOUHOU_ANALYSIS: Record<string, Record<number, { label: string; href: string }[]>> = {
   th11: {
     9: [
-      { label: 'Structure, themes, patterns', href: `${TH}/th11-09-satori-analysis.html` },
-      { label: 'Counterpoint and fugue subjects', href: `${TH}/th11-09-satori-phase4.html` },
+      { label: 'Structure, Themes, Patterns', href: `${TH}/th11-09-satori-analysis.html` },
+      { label: 'Counterpoint and Fugue Subjects', href: `${TH}/th11-09-satori-phase4.html` },
     ],
     15: [
-      { label: 'Structure, themes, patterns', href: `${TH}/th11-10-hartmann-analysis.html` },
-      { label: 'Counterpoint and fugue subjects', href: `${TH}/th11-10-hartmann-phase4.html` },
+      { label: 'Structure, Themes, Patterns', href: `${TH}/th11-10-hartmann-analysis.html` },
+      { label: 'Counterpoint and Fugue Subjects', href: `${TH}/th11-10-hartmann-phase4.html` },
     ],
   },
 };
