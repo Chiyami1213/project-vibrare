@@ -1,5 +1,6 @@
 ---
 // A list of the analysis pages kept as delivered (public/analysis/…), each opening as its own page.
+// An entry with `children` is a dropdown that opens to the pages inside it (the movements of a work).
 import type { StaticPage } from '../data/analysis-pages';
 interface Props {
   pages: StaticPage[];
@@ -11,8 +12,25 @@ const { pages } = Astro.props;
   {
     pages.map((p) => (
       <li class="res-item">
-        <a class="res-title" href={p.href}>{p.title}</a>
-        {p.note && <div class="res-note">{p.note}</div>}
+        {p.children ? (
+          <details class="res-drop">
+            <summary class="res-title">{p.title}</summary>
+            {p.note && <div class="res-note">{p.note}</div>}
+            <ul class="res-sub">
+              {p.children.map((c) => (
+                <li>
+                  <a href={c.href}>{c.title}</a>
+                  {c.note && <span class="res-note"> · {c.note}</span>}
+                </li>
+              ))}
+            </ul>
+          </details>
+        ) : (
+          <>
+            <a class="res-title" href={p.href}>{p.title}</a>
+            {p.note && <div class="res-note">{p.note}</div>}
+          </>
+        )}
       </li>
     ))
   }

@@ -6,6 +6,8 @@ export interface StaticPage {
   href: string;
   title: string;
   note: string;
+  /** a dropdown: the pages inside this one (the movements of a work) */
+  children?: StaticPage[];
 }
 
 const FUGUE = '/analysis/baroque/bach/fugue-analysis';
@@ -38,9 +40,16 @@ export const FIRST_LESSONS: StaticPage = {
 export const QUANTZ: StaticPage[] = [
   { href: '/analysis/baroque/quantz/exercises/', title: 'Quantz · 100 Daily Exercises', note: 'An interactive edition of the exercises in Das Flötenbuch Friedrichs des Großen, annotated by Quantz’s rules.' },
   { href: '/analysis/baroque/quantz/articulation-guide/', title: 'Quantz on Articulation, Phrasing, and Breath', note: 'What he tells a flute player about tonguing, slurs, strokes, dots and breathing, with a page reference for every rule.' },
-  { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-i-analysis.html', title: 'Flute Concerto in G, QV 5:174 · I. Allegro Assai', note: 'Form, sections, cadences, partimento patterns and the flute part.' },
-  { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-ii-analysis.html', title: 'Flute Concerto in G, QV 5:174 · II. Arioso e Mesto', note: 'The slow movement.' },
-  { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-iii-analysis.html', title: 'Flute Concerto in G, QV 5:174 · III. Presto', note: 'The finale.' },
+  {
+    href: '',
+    title: 'Flute Concerto in G, QV 5:174',
+    note: 'Three movements: form, sections, cadences, partimento patterns and the flute part.',
+    children: [
+      { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-i-analysis.html', title: 'I. Allegro Assai', note: 'Form, sections, cadences, partimento patterns and the flute part.' },
+      { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-ii-analysis.html', title: 'II. Arioso e Mesto', note: 'The slow movement.' },
+      { href: '/analysis/baroque/quantz/concerto-qv5-174/qv5-174-iii-analysis.html', title: 'III. Presto', note: 'The finale.' },
+    ],
+  },
 ];
 
 export const BLAVET: StaticPage[] = [

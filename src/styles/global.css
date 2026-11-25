@@ -2163,3 +2163,18 @@ button.note-chip[aria-pressed='true'] {
     grid-column: 1;
   }
 }
+
+/* a dropdown entry in a list of pages: opens to the movements of a work */
+.res-drop > summary {
+  cursor: pointer;
+}
+
+.res-sub {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0 0 0 14px;
+  border-left: 2px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
